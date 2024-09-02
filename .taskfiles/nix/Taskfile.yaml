@@ -2,7 +2,7 @@
 version: "3"
 
 tasks:
-  apply-darwin:
+  darwin-deploy:
     desc: Build and apply nix-darwin configuration
     silent: true
     summary: |
@@ -12,7 +12,7 @@ tasks:
       vars:
         - host
     cmds:
-      - task: build-darwin
+      - task: darwin-build
         vars:
           host: "{{ .host }}"
       - task: .prompt_to_continue
@@ -23,7 +23,7 @@ tasks:
       - sh: which darwin-rebuild
         msg: "darwin-rebuild not found"
 
-  build-darwin:
+  darwin-build:
     desc: Build nix-darwin configuration
     silent: true
     summary: |
@@ -41,7 +41,7 @@ tasks:
       - sh: which darwin-rebuild
         msg: "darwin-rebuild not found"
 
-  build-nixos:
+  nixos-build:
     desc: Build nixos configuration
     silent: true
     vars:
@@ -60,7 +60,7 @@ tasks:
       - sh: which nixos-rebuild
         msg: "nixos-rebuild not found"
 
-  apply-nixos:
+  nixos-deploy:
     desc: Build and apply nixos configuration
     silent: true
     vars:
