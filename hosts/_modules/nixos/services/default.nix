@@ -3,12 +3,12 @@
 }:
 {
   imports = [
-#    ./bind
-#    ./blocky
+    ./bind
+    ./blocky
     ./cfdyndns
-#    ./chrony
-#    ./dnsdist
-#    ./k3s
+    ./chrony
+    ./dnsdist
+    ./k3s
     ./minio
     ./nginx
     ./nfs

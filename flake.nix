@@ -30,6 +30,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Rust toolchain overlay
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+    };
+
     # VSCode community extensions
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
