@@ -55,6 +55,7 @@ jobs:
         run: |
           nix build \
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
+            --no-write-lock-file \
             -v \
             --log-format raw \
             --profile ./profile
@@ -64,6 +65,7 @@ jobs:
           set -o pipefail
           nix build \
             ".#ciSystems.${{ matrix.system }}" \
+            --no-write-lock-file \
             --profile ./profile \
             --fallback \
             -v \
