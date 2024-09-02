@@ -271,6 +271,33 @@
         "type": "github"
       }
     },
+    "nci": {
+      "inputs": {
+        "crane": "crane",
+        "dream2nix": "dream2nix",
+        "mk-naked-shell": "mk-naked-shell",
+        "nixpkgs": [
+          "nix-inspect",
+          "nixpkgs"
+        ],
+        "parts": "parts",
+        "rust-overlay": "rust-overlay",
+        "treefmt": "treefmt"
+      },
+      "locked": {
+        "lastModified": 1710137478,
+        "narHash": "sha256-+hbUWY1PEItyx3CBOGsHlJEDO2wRY2N1mpBhiLBblck=",
+        "owner": "yusdacra",
+        "repo": "nix-cargo-integration",
+        "rev": "f3cc8751427e16ec48c0467357b3f3979a53ae9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yusdacra",
+        "repo": "nix-cargo-integration",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -556,7 +583,42 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
+        "rust-overlay": "rust-overlay_2",
         "sops-nix": "sops-nix"
+      }
+    },
+    "rust-overlay": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710123130,
+        "narHash": "sha256-EoGL/WSM1M2L099Q91mPKO/FRV2iu2ZLOEp3y5sLfiE=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "73aca260afe5d41d3ebce932c8d896399c9d5174",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1725157860,
+        "narHash": "sha256-DhqyM7XJYKj+WAEaYwMtXaYX66tA+lOd31sd5QkxLDM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "1fd72e343c6890f695243a37b367a1e3b90a49ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "slimlock": {
