@@ -41,12 +41,12 @@ jobs:
       - name: Set up Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v7
 
-#      - name: Set up Cachix
-#        uses: cachix/cachix-action@v15
-#        if: ${{ !github.event.pull_request.head.repo.fork }}
-#        with:
-#          name: soulwhisper
-#          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Set up Cachix
+        uses: cachix/cachix-action@v15
+        if: ${{ !github.event.pull_request.head.repo.fork }}
+        with:
+          name: soulwhisper
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Garbage collect build dependencies
         run: nix-collect-garbage
