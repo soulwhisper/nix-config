@@ -25,9 +25,9 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-14
-          - system: nixos-vm
+          - system: nix-vm
             os: ubuntu-latest
-          - system: nixos-nas
+          - system: nix-nas
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:

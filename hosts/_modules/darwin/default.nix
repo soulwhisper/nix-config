@@ -5,7 +5,7 @@
     ./fonts.nix
     ./homebrew.nix
     ./nix.nix
-    ./os-defaults.nix
+#    ./os-defaults.nix
   ];
 
   system = {
