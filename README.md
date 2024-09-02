@@ -6,8 +6,6 @@ origin repo = [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
-Deployment is done using [deploy-rs][deploy-rs] and [nix-darwin][nix-darwin], see [usage](#usage).
-
 Notes: networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 
 ```
