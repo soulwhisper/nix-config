@@ -27,6 +27,8 @@ git config --global commit.gpgsign true
 ## Usage
 
 ```shell
+# install req. incl. cachix
+
 # darwin
 ## opt. build / test
 task nix:darwin-build host=soulwhisper-mba
