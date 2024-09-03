@@ -46,8 +46,12 @@ task nix:darwin-deploy host=soulwhisper-mba
 
 # nixos
 task nix:nixos-deploy host=nix-vm
+
+# install 'unstable' brews
+brew install robusta-dev/homebrew-krr/krr
 ```
 
 ## Changelog
 - modify hostname and username from origin
 - add a nix-daemon set-proxy script
+- remove 'unstable' brews, i.e. krr
