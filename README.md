@@ -6,7 +6,9 @@ origin repo = [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
-Notes: networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
+Notes: 
+networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
+change term font to "firacode-nerd-font" afterwards
 
 ```
 # init
