@@ -6,10 +6,6 @@ origin repo = [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
-Notes: 
-networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
-change term font to "firacode-nerd-font" afterwards
-
 ```
 # init
 age-keygen --output $HOME/.config/age/keys.txt
@@ -25,6 +21,9 @@ gpg --import
 git config --global user.signingkey <gpg-id>
 git config --global commit.gpgsign true
 ```
+## Notes
+- networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
+- change term font to "firacode-nerd-font" afterwards
 
 ## Usage
 
