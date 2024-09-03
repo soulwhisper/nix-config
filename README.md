@@ -27,7 +27,13 @@ git config --global commit.gpgsign true
 ## Usage
 
 ```shell
-# install req. incl. cachix
+# install req. incl. cachix & nvd
+curl -L https://nixos.org/nix/install | sh
+nix-env -iA cachix -f https://cachix.org/api/v1/install
+nix-env -iA nixpkgs.nvd
+
+# import age keys
+## darwin: /Users/<username>/Library/Application\ Support/sops/age/keys.txt
 
 # run set-proxy script if necessary
 sudo python3 scripts/darwin_set_proxy.py
