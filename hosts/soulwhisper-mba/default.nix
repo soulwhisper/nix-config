@@ -31,13 +31,14 @@
         "cidr"
       ];
       casks = [
-        "slack"
-        "discord"
+        "dropbox"
         "google-chrome"
         "obsidian"
         "orbstack"
         "transmit"
         "wireshark"
+        "slack"
+        "discord"
       ];
       masApps = {
         "Keka" = 470158793;
