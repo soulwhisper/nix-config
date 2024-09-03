@@ -23,6 +23,7 @@ git config --global commit.gpgsign true
 ```
 ## Notes
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
+- atuin-key should be base64 format
 - change term font to "firacode-nerd-font" afterwards
 
 ## Usage
