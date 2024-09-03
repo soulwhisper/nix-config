@@ -26,9 +26,11 @@
 
     homebrew = {
       taps = [
+        "robusta-dev/homebrew-krr"
       ];
       brews = [
         "cidr"
+        "krr"
       ];
       casks = [
         "dropbox"
