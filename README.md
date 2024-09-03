@@ -29,6 +29,9 @@ git config --global commit.gpgsign true
 ```shell
 # install req. incl. cachix
 
+# run set-proxy script if necessary
+python3 scripts/darwin_set_proxy.py
+
 # darwin
 ## opt. build / test
 task nix:darwin-build host=soulwhisper-mba
@@ -38,3 +41,7 @@ task nix:darwin-deploy host=soulwhisper-mba
 # nixos
 task nix:nixos-deploy host=nix-vm
 ```
+
+## Changelog
+- modify hostname and username from origin
+- add a nix-daemon set-proxy script
