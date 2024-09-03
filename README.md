@@ -25,6 +25,11 @@ git config --global commit.gpgsign true
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 - atuin-key should be base64 format
 - change term font to "firacode-nerd-font" afterwards
+```shell
+export "http_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/config.fish
+export "https_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/config.fish
+export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" >> /Users/soulwhisper/.config/fish/config.fish
+```
 
 ## Usage
 
