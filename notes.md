@@ -2,7 +2,8 @@
 
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 - atuin-key should be base64 format
-- change term font to "firacode-nerd-font" afterwards
+- change iterm2 theme to dark
+- change iterm2 font to "firacode-nerd-font" afterwards
 
 ```shell
 # install req. incl. cachix & nvd
