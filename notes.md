@@ -4,6 +4,7 @@
 - atuin-key should be base64 format
 - change iterm2 theme to dark
 - change iterm2 font to "firacode-nerd-font" afterwards
+- krr error breaks deployment, so install it afterwards if necessary
 
 ```shell
 # install req. incl. cachix & nvd
@@ -15,7 +16,7 @@ nix-env -iA nixpkgs.nvd
 ## darwin-before: /Users/<username>/Library/Application\ Support/sops/age/keys.txt
 ## darwin-after: /Users/<username>/.config/age/keys.txt
 
-# darwin run below after deploy
+# darwin run below after deploy if necessary
 export "http_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 export "https_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
