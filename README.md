@@ -30,7 +30,7 @@ git config --global commit.gpgsign true
 # install req. incl. cachix
 
 # run set-proxy script if necessary
-python3 scripts/darwin_set_proxy.py
+sudo python3 scripts/darwin_set_proxy.py
 
 # darwin
 ## opt. build / test
