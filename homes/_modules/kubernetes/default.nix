@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  cfg = config.modules.kubernetes;
+in
 {
   options.modules.kubernetes = {
     enable = lib.mkEnableOption "kubernetes";
