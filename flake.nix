@@ -68,6 +68,7 @@
     nixvim,
     nix-vscode-extensions,
     sops-nix,
+    rust-overlay,
     talhelper,
     ...
   } @inputs:
