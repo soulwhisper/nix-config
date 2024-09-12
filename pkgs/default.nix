@@ -5,7 +5,6 @@
   pkgs ? import <nixpkgs> {},
   ...
 } @_inputs:
-
 {
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc.nix {};

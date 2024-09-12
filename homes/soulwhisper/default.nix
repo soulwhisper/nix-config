@@ -10,7 +10,6 @@
 {
   imports = [
     ../_modules
-
     ./secrets
     ./hosts/${hostname}.nix
   ];
