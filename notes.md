@@ -21,6 +21,10 @@ export "http_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/con
 export "https_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 
+# nixos add below to configuration.nix before deploy if necessary
+networking.proxy.default = "http://ip:port";
+networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
 # push with gpg signed
 export GPG_TTY=$(tty)
 gpg --import privatekey

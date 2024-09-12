@@ -54,7 +54,7 @@ in
       filesystems.zfs = {
         enable = true;
         mountPoolsAtBoot = [
-          "tank"
+          "numina"
         ];
       };
 
@@ -62,10 +62,8 @@ in
         chrony = {
           enable = true;
           servers = [
-            "0.nl.pool.ntp.org"
-            "1.nl.pool.ntp.org"
-            "2.nl.pool.ntp.org"
-            "3.nl.pool.ntp.org"
+            "time.cloudflare.com"
+            "time.apple.com"
           ];
         };
 
@@ -77,8 +75,8 @@ in
         minio = {
           enable = true;
           package = pkgs.unstable.minio;
-          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;  # not planned
-          dataDir = "/tank/Apps/minio";
+          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
+          dataDir = "/numina/apps/minio";
           enableReverseProxy = true;
           minioConsoleURL = "minio.noirprime.com";
           minioS3URL = "s3.noirprime.com";
@@ -94,27 +92,23 @@ in
           enable = true;
           shares = {
             Backup = {
-              path = "/tank/Backup";
+              path = "/numina/backup";
               "read only" = "no";
             };
             Docs = {
-              path = "/tank/Docs";
+              path = "/numina/docs";
               "read only" = "no";
             };
             Media = {
-              path = "/tank/Media";
-              "read only" = "no";
-            };
-            Paperless = {
-              path = "/tank/Apps/paperless/incoming";
+              path = "/numina/media";
               "read only" = "no";
             };
             Software = {
-              path = "/tank/Software";
+              path = "/numina/software";
               "read only" = "no";
             };
             TimeMachineBackup = {
-              path = "/tank/Backup/TimeMachine";
+              path = "/numina/backup/timemachine";
               "read only" = "no";
               "fruit:aapl" = "yes";
               "fruit:time machine" = "yes";

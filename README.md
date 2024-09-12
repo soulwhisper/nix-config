@@ -27,4 +27,3 @@ brew install robusta-dev/homebrew-krr/krr
 
 ## Changelog
 - modify hostname and username from origin
-- add a nix-daemon set-proxy script

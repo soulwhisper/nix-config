@@ -29,6 +29,10 @@ in
       flake-packages.${pkgs.system}.usage
     ];
 
+    home.activation.miseInstall = ''
+      ${lib.getExe cfg.package} install -C "${config.home.homeDirectory}"
+    '';
+
     xdg.configFile = {
       "mise/config.toml" = lib.mkIf (cfg.globalConfig != { }) {
         source = tomlFormat.generate "mise-config" cfg.globalConfig;
@@ -38,7 +42,8 @@ in
           {
             experimental = true;
             python_venv_auto_create = true;
-          } //
+            disable_hints = ["*"];
+          } 
           cfg.settings
         );
       };

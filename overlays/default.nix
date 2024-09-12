@@ -6,10 +6,10 @@
   rust-overlay = inputs.rust-overlay.overlays.default;
 
   additions = final: prev: {
-    # flake = import ../pkgs {
-    #   pkgs = prev;
-    #   inherit inputs;
-    # };
+    flake = import ../pkgs {
+      pkgs = prev;
+      inherit inputs;
+    };
   };
 
   modifications = final: prev: {

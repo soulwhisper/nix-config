@@ -126,11 +126,6 @@
     }
   },
   "workbench.iconTheme": "catppuccin-perfect-mocha",
-  "codeium.enableConfig": {
-    "*": true,
-    "nix": true,
-    "helm": true
-  },
   "extensions.autoCheckUpdates": false,
   "extensions.autoUpdate": false
 }
