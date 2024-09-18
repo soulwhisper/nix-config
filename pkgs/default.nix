@@ -9,6 +9,7 @@
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc.nix {};
   kubectl-get-all = pkgs.callPackage ./kubectl-get-all.nix {};
+  kubectl-klock = pkgs.callPackage ./kubectl-klock.nix {};
   kubectl-netshoot = pkgs.callPackage ./kubectl-netshoot.nix {};
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo.nix {};
   nvim = pkgs.callPackage ./nvim.nix _inputs;
