@@ -71,7 +71,6 @@
     overlays = import ./overlays {inherit inputs;};
     mkSystemLib = import ./lib/mkSystem.nix {inherit inputs overlays;};
   in
-  {
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "aarch64-darwin"
