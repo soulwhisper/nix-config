@@ -81,12 +81,12 @@
     
     flake = {
         nixosConfigurations = {
-          nix-vm = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vm" flake-packages;
-          nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas" flake-packages;
+          nix-vm = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vm";
+          nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
         };
 
         darwinConfigurations = {
-          soulwhisper-mba = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-mba" flake-packages;
+          soulwhisper-mba = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-mba";
         };
 
         # Convenience output that aggregates the outputs for home, nixos.
