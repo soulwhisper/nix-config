@@ -9,21 +9,23 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 ## Usage
 
 ```shell
-# run set-proxy script if necessary
-sudo python3 scripts/darwin_set_proxy.py
-
 # darwin
-## opt. build / test
+## opt. run set-proxy script first
+sudo python3 scripts/darwin_set_proxy.py
+## build & diff
 task nix:darwin-build host=soulwhisper-mba
 ## deploy
 task nix:darwin-deploy host=soulwhisper-mba
 
-# nixos
-task nix:nixos-deploy host=nix-vm
+# nixos, e.g. nix-nas
+## set DNS record then test ssh connections
+## cp machineconfig
+cp /etc/nixos/hardware-configuration.nix hosts/nix-nas/hardware-configuration.nix
+## build & diff
+task nix:darwin-build host=nix-nas
+## deploy
+task nix:darwin-deploy host=nix-nas
 
 # install 'unstable' brews
 brew install robusta-dev/homebrew-krr/krr
 ```
-
-## Changelog
-- modify hostname and username from origin
