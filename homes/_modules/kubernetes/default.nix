@@ -43,7 +43,6 @@ in
       kubectl-neat
       kubectl-node-shell
       kubectl-view-secret
-      kubernetes-helm
       stern
       talosctl
     ]) ++
