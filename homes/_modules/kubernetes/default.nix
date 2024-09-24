@@ -6,6 +6,19 @@
 }:
 let
   cfg = config.modules.kubernetes;
+  # https://nixos.wiki/wiki/Helm_and_Helmfile
+  wrappedHelmPkg = (pkgs.unstable.wrapHelm pkgs.unstable.kubernetes-helm {
+    plugins = with pkgs.unstable.kubernetes-helmPlugins; [
+      helm-diff
+      helm-git
+      helm-s3
+      helm-secrets
+      helm-unittest
+    ];
+  });
+  wrappedHelmfilePkg = pkgs.unstable.helmfile-wrapped.override {
+    inherit (wrappedHelmPkg) pluginsDir;
+  };
 in
 {
   options.modules.kubernetes = {
@@ -23,7 +36,6 @@ in
     ]) ++
     (with pkgs.unstable; [
       fluxcd
-      helmfile
       krew
       kubecm
       kubeconform
@@ -34,7 +46,11 @@ in
       kubernetes-helm
       stern
       talosctl
-    ]);
+    ]) ++
+    [
+      wrappedHelmPkg
+      wrappedHelmfilePkg
+    ];
 
     programs.k9s = {
       enable = true;
