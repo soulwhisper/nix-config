@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-      - nvfetcher.toml
+      - pkgs/nvfetcher.toml
 jobs:
   update-nvfetcher:
     runs-on: ubuntu-latest
