@@ -6,7 +6,7 @@
   ...
 } @_inputs:
 {
-  talhelper = inputs.talhelper.packages.${pkgs.system}.default;
+  kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin.nix {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc.nix {};
   kubectl-get-all = pkgs.callPackage ./kubectl-get-all.nix {};
   kubectl-klock = pkgs.callPackage ./kubectl-klock.nix {};
@@ -14,5 +14,6 @@
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo.nix {};
   nvim = pkgs.callPackage ./nvim.nix _inputs;
   shcopy = pkgs.callPackage ./shcopy.nix {};
+  talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   usage = pkgs.callPackage ./usage.nix {};
 }
