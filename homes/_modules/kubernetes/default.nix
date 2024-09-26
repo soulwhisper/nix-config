@@ -56,7 +56,7 @@ in
     ];
 
     home.sessionVariables = {
-      KUBECOLOR_CONFIG = "pkgs.${kubecolor-catppuccin}/catppuccin-${catppuccinCfg.flavor}.yaml";
+      KUBECOLOR_CONFIG = "${pkgs.kubecolor-catppuccin}/catppuccin-${catppuccinCfg.flavor}.yaml";
     };
 
     programs.k9s = {
