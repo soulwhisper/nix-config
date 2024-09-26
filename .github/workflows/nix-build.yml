@@ -24,7 +24,7 @@ jobs:
       matrix:
         include:
           - system: soulwhisper-mba
-            os: macos-14
+            os: macos-l5
           - system: nix-vm
             os: ubuntu-latest
           - system: nix-nas
