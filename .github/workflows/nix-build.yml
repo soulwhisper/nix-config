@@ -25,10 +25,11 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-15
-          - system: nix-vm
-            os: ubuntu-latest
-          - system: nix-nas
-            os: ubuntu-latest
+         # remove nixos builds
+         # - system: nix-vm
+         #   os: ubuntu-latest
+         # - system: nix-nas
+         #   os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
