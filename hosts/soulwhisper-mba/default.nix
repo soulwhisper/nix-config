@@ -24,6 +24,7 @@
       sudo chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
 
+    # testing apps list
     homebrew = {
       taps = [
       ];
@@ -31,9 +32,6 @@
         "cidr"
       ];
       casks = [
-        "dropbox"
-        "google-chrome"
-        "obsidian"
         "orbstack"
         "transmit"
         "wireshark"

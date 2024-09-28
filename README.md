@@ -19,6 +19,8 @@ sudo python3 scripts/darwin_set_proxy.py
 task nix:darwin-build host=soulwhisper-mba
 ## deploy
 task nix:darwin-deploy host=soulwhisper-mba
+## opt. set default proxy after configs imported
+cp scripts/set_proxy.fish ~/.config/fish/conf.d/
 
 # nixos, e.g. nix-nas
 ## set DNS record then test ssh connections
