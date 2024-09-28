@@ -81,11 +81,13 @@
     
     flake = {
         nixosConfigurations = {
-          nix-vm = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vm";
-          nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
+          # nixos builds, vm & nas is deprecated, check README.md
+          # nix-vm = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vm";
+          # nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
         };
 
         darwinConfigurations = {
+          # darwin builds
           soulwhisper-mba = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-mba";
         };
 
