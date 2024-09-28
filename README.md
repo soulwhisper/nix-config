@@ -7,6 +7,7 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - repo structure and macbook configs, inspired by [bjw-s/nix-config](https://github.com/bjw-s/nix-config).
 - workstaion configs, inspired by [ryan4yin/nix-config](https://github.com/ryan4yin/nix-config).
 - nas configs, inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/hosts/mali).
+- renovate configs, is managed at [developer.mend.io](https://developer.mend.io/github/soulwhisper/nix-config).
 
 ## Usage
 
