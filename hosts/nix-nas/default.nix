@@ -82,7 +82,9 @@ in
           minioS3URL = "s3.noirprime.com";
         };
 
-        nfs.enable = true;
+        nfs = {
+          enable = true;
+        };
 
         node-exporter.enable = true;
 

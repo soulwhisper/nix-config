@@ -81,9 +81,9 @@
     
     flake = {
         nixosConfigurations = {
-          # nixos builds, vm & nas is deprecated, check README.md
-          # nix-vm = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vm";
-          # nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
+          # nixos builds
+          nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
+          nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
         };
 
         darwinConfigurations = {
