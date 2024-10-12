@@ -37,7 +37,7 @@ in
 
       services.gpg-agent = {
         enable = true;
-        pinentryPackage = "curses";
+        pinentryPackage = "pkgs.pinentry-curses";
       };
 
       programs = let
