@@ -51,20 +51,8 @@ in
 
     modules = {
       services = {
-        node-exporter.enable = true;
-
+        podman.enable = true;
         openssh.enable = true;
-      };
-
-      users = {
-        groups = {
-          admins = {
-            gid = 991;
-            members = [
-              "soulwhisper"
-            ];
-          };
-        };
       };
     };
 
