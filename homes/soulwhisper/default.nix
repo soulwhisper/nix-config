@@ -28,7 +28,7 @@
         in
           with vscode-marketplace; [
             # Language
-            MS-CEINTL.vscode-language-pack-zh-hans
+            ms-ceintl.vscode-language-pack-zh-hans
 
             # Themes
             catppuccin.catppuccin-vsc

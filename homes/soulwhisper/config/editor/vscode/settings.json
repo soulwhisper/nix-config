@@ -1,12 +1,4 @@
 {
-  "[go]": {
-    "editor": {
-      "defaultFormatter": "golang.go"
-    },
-    "toolsManagement": {
-      "autoUpdate": true
-    }
-  },
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },

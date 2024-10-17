@@ -1,6 +1,6 @@
 {
   "recommendations": [
-    "MS-CEINTL.vscode-language-pack-zh-hans",
+    "ms-ceintl.vscode-language-pack-zh-hans",
     "helm-ls.helm-ls",
     "jnoortheen.nix-ide",
     "savh.json5-kit",
