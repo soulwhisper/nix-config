@@ -22,7 +22,6 @@
         globalConfig = {
           tools = {
             python = "latest";
-            node = "latest";
           };
         };
       };

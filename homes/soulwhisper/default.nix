@@ -27,39 +27,46 @@
           inherit (inputs.nix-vscode-extensions.extensions.${pkgs.system}) vscode-marketplace;
         in
           with vscode-marketplace; [
+            # Language
+            MS-CEINTL.vscode-language-pack-zh-hans
+
             # Themes
             catppuccin.catppuccin-vsc
             thang-nm.catppuccin-perfect-icons
 
             # Language support
-            golang.go
-            hashicorp.terraform
+            #hashicorp.terraform
             helm-ls.helm-ls
             jnoortheen.nix-ide
-            mrmlnc.vscode-json5
+            savh.json5-kit
             ms-azuretools.vscode-docker
             ms-python.python
-            redhat.ansible
+            #redhat.ansible
             redhat.vscode-yaml
             tamasfe.even-better-toml
 
             # Formatters
             esbenp.prettier-vscode
+            shardulm94.trailing-spaces
 
             # Linters
-            davidanson.vscode-markdownlint
             fnando.linter
 
             # Remote development
             ms-vscode-remote.remote-containers
             ms-vscode-remote.remote-ssh
 
+            # Markdown
+            davidanson.vscode-markdownlint
+            shd101wyy.markdown-preview-enhanced
+            
             # Other
             eamodio.gitlens
             gruntfuggly.todo-tree
             ionutvmi.path-autocomplete
             luisfontes19.vscode-swissknife
             ms-kubernetes-tools.vscode-kubernetes-tools
+            mutantdino.resourcemonitor
             signageos.signageos-vscode-sops
           ];
       };
@@ -91,8 +98,8 @@
           "--disable-up-arrow"
         ];
         settings = {
-#          sync_address = "https://atuin.homelab.internal";
-# current, use official sync server
+          # use official sync server for now
+          #sync_address = "https://atuin.homelab.internal";
           key_path = config.sops.secrets.atuin_key.path;
           auto_sync = true;
           sync_frequency = "1m";
