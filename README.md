@@ -6,7 +6,7 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 
 - soulwhisper-mba, my macbook configs.
 - nix-dev, devops vm for corp-env.
-- nix-nas, nas vm for corp-env. Homelab ver. using TrueNAS Scale 24.10+. Inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/hosts/mali).
+- nix-nas, nas vm for corp-env. Homelab ver. using TrueNAS Scale 24.10+. Inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/HOSTs/mali).
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage
@@ -16,9 +16,9 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 ## opt. run set-proxy script first
 sudo python3 scripts/darwin_set_proxy.py
 ## build & diff
-task nix:darwin-build host=soulwhisper-mba
+task nix:darwin-build HOST=soulwhisper-mba
 ## deploy
-task nix:darwin-deploy host=soulwhisper-mba
+task nix:darwin-deploy HOST=soulwhisper-mba
 ## opt. set default proxy after configs imported
 cp scripts/set_proxy.fish ~/.config/fish/conf.d/
 
@@ -27,7 +27,7 @@ cp scripts/set_proxy.fish ~/.config/fish/conf.d/
 ## cp machineconfig
 cp /etc/nixos/hardware-configuration.nix hosts/nix-nas/hardware-configuration.nix
 ## build & diff
-task nix:nixos-build host=nix-nas
+task nix:nixos-build HOST=nix-nas
 ## deploy
-task nix:nixos-deploy host=nix-nas
+task nix:nixos-deploy HOST=nix-nas
 ```
