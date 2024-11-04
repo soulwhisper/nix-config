@@ -46,6 +46,6 @@ jobs:
             pkgs/**
           delete-branch: true
       - name: Automerge Pull Request
-        run: gh pr merge --squash --auto "1"
+        run: gh pr merge --squash --auto ${{ steps.create-pull-request.outputs.pull-request-number }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
