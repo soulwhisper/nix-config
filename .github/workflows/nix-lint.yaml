@@ -17,7 +17,7 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
         extra_nix_config: |
-          auto-optimise-store = true
+          nix.optimise.automatic = true
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
           experimental-features = nix-command flakes
     - uses: DeterminateSystems/magic-nix-cache-action@main

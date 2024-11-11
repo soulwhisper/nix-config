@@ -11,6 +11,8 @@
     };
     channel.enable = false;
 
+    optimise.automatic = true;
+
     settings = {
       # NIX_PATH is still used by many useful tools, so we set it to the same value as the one used by this flake
       # make `nix repl '<nixpkgs>'` use the same nixpkgs as the one used by this flake
@@ -51,7 +53,6 @@
       # Avoid copying unnecessary stuff over SSH
       builders-use-substitutes = true;
 
-      auto-optimise-store = true;
       keep-outputs = true;
       keep-derivations = false;
 
