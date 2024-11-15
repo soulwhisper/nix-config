@@ -20,6 +20,7 @@ pkgs.unstable.buildGo123Module {
   overrideModAttrs = _: {
     GOWORK = "off";
   };
+  GOWORK = "off";
 
   subPackages = ["cmd/talosctl"];
 
