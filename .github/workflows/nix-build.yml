@@ -56,7 +56,7 @@ jobs:
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
-            -v \
+            -v --show-trace --print-build-logs \
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
@@ -68,7 +68,7 @@ jobs:
             --profile ./profile \
             --no-write-lock-file \
             --fallback \
-            -v \
+            -v --show-trace --print-build-logs \
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
