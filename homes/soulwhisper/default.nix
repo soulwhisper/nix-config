@@ -17,7 +17,6 @@
     editor = {
       nvim = {
         enable = true;
-        package = pkgs.nvim;
         makeDefaultEditor = true;
       };
 
@@ -59,7 +58,7 @@
             # Markdown
             davidanson.vscode-markdownlint
             shd101wyy.markdown-preview-enhanced
-            
+
             # Other
             eamodio.gitlens
             gruntfuggly.todo-tree

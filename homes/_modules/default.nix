@@ -4,7 +4,6 @@
 }:
 {
   imports = [
-    ./mutability.nix
     ./deployment
     ./development
     ./editor
@@ -12,7 +11,7 @@
     ./security
     ./shell
     ./themes
-    ./virtualisation
+    ./mutability.nix
   ];
 
   config = {
