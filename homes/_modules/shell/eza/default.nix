@@ -5,7 +5,7 @@ _:
       enable = true;
       icons = "auto";
       extraOptions = [
-        "--group"
+        "--group -l -a"
       ];
       enableBashIntegration = true;
       enableFishIntegration = true;

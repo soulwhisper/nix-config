@@ -33,12 +33,14 @@ in
       kubectl-browse-pvc
       kubectl-get-all
       kubectl-klock
+      kubectl-mayastor
       kubectl-netshoot
       kubectl-pgo
       talhelper
       talosctl
     ]) ++
     (with pkgs.unstable; [
+      cilium-cli
       fluxcd
       krew
       kubecm
