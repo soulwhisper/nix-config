@@ -5,14 +5,14 @@
   ...
 }:
 let
-  sourceData = pkgs.callPackage ./_sources/generated.nix { };
+  sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.talosctl;
-  vendorHash = lib.importJSON ./_sources/vendorhash.json;
+  vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
-pkgs.unstable.buildGo123Module {
+pkgs.buildGoModule {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
-  vendorHash = vendorHash.talosctl;
+  vendorHash = vendorData.talosctl;
 
   ldflags = ["-s" "-w"];
 
@@ -33,7 +33,7 @@ pkgs.unstable.buildGo123Module {
       --zsh <($out/bin/talosctl completion zsh)
   '';
 
-  doCheck = false; # no tests
+  doCheck = false;
 
   meta = with lib; {
     description = "A CLI for out-of-band management of Kubernetes nodes created by Talos";

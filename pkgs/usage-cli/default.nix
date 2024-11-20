@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  fetchFromGitHub,
   ...
 }:
 let
@@ -11,28 +10,23 @@ let
     cargo = pkgs.rust-bin.stable.latest.minimal;
     rustc = pkgs.rust-bin.stable.latest.minimal;
   };
+  sourceData = pkgs.callPackage ../_sources/generated.nix { };
+  packageData = sourceData.usage-cli;
+  vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
 rustPlatform.buildRustPackage rec {
-  pname = "usage-cli";
-  version = "0.3.0";
-
-  src = fetchFromGitHub {
-    owner = "jdx";
-    repo = "usage";
-    rev = "v${version}";
-    hash = "sha256-zjQjFrNaFgpCCuwogbNTNMHKzDDzwRNmzUMMOREzZSk=";
-  };
-
-  cargoHash = "sha256-/T3tl20qnLrsIhL1LCwnlJOd+tJdX9WZ514u47WdwsA=";
+  inherit (packageData) pname src;
+  version = lib.strings.removePrefix "v" packageData.version;
+  cargoHash = vendorData.usage-cli;
 
   buildInputs = lib.optionals isDarwin [ Security SystemConfiguration ];
+
+  doCheck = false;
 
   meta = {
     homepage = "https://usage.jdx.dev";
     description = "A specification for CLIs";
     changelog = "https://github.com/jdx/usage/releases/tag/v${version}";
-    license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ bjw-s ];
     mainProgram = "usage";
   };
 }
