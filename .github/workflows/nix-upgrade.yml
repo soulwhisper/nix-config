@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  cleanup_runs:
+  nix-upgrade-helper:
     runs-on: ubuntu-latest
     permissions:
       actions: write
@@ -33,7 +33,6 @@ jobs:
         run: |
           nix-channel --update
           nix flake update
-          nixos-rebuild switch --upgrade
 
       - name: Generate Token
         uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1
