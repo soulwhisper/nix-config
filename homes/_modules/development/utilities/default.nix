@@ -11,14 +11,11 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.packages = (with pkgs; [
-      cue
       nixd
       nixfmt-rfc-style
-      nodePackages.prettier
       pre-commit
-      shellcheck
-      shfmt
       yamllint
+      unstable.govc
       unstable.helm-ls
       unstable.minio-client
     ]) ++
