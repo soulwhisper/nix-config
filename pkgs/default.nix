@@ -16,5 +16,5 @@
   shcopy = pkgs.callPackage ./shcopy {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};
-  usage-cli = pkgs.callPackage ./usage-cli {};
+  usage = pkgs.callPackage ./usage {};
 }
