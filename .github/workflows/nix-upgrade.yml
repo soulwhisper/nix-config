@@ -1,0 +1,56 @@
+name: Nix Upgrade helper
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cleanup_runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+      - name: Set up Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@87b14cf437d03d37989d87f0fa5ce4f5dc1a330b # v8
+      - name: Set up Cachix
+        uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
+        if: ${{ !github.event.pull_request.head.repo.fork }}
+        with:
+          name: soulwhisper
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Garbage collect build dependencies
+        run: nix-collect-garbage
+
+      - name: Upgrade current Version
+        run: |
+          nix-channel --update
+          nix flake update
+          nixos-rebuild switch --upgrade
+
+      - name: Generate Token
+        uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
+          private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
+      - name: Create Pull Request
+        id: create-pull-request
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          title: "feat(nix): Upgrade NixOS"
+          commit-message: "feat(nix): Upgrade NixOS"
+          delete-branch: true
+      - name: Automerge Pull Request
+        if: steps.create-pull-request.outputs.pull-request-operation == 'created' || steps.create-pull-request.outputs.pull-request-operation == 'updated'
+        run: gh pr merge --auto --squash --delete-branch ${{ steps.create-pull-request.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
