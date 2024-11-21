@@ -37,9 +37,12 @@ jobs:
             mv tmp.json pkgs/_sources/vendorhash.json
           }
 
-          APP_NAMES=$(jq -r 'keys[]' pkgs/_sources/vendorhash.json)
+          declare -a APP_NAMES
+          while read line; do
+            APP_NAMES+=("${line%:*}")
+          done < /tmp/nvfetcher-changes
 
-          for APP_NAME in $APP_NAMES; do
+          for APP_NAME in "${APP_NAMES[@]}"; do
             echo "Check vendorHash for ${APP_NAME}..."
             vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')
 
