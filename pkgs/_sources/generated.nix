@@ -51,7 +51,7 @@
     version = "v2.7.1";
     src = fetchFromGitHub {
       owner = "openebs";
-      repo = "mayastor";
+      repo = "mayastor-extensions";
       rev = "v2.7.1";
       fetchSubmodules = true;
       sha256 = "sha256-AZFned+K+xdm8+r3682R9sYK+Zty1cQ6D7S0YWVtQes=";

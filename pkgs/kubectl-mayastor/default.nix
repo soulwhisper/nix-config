@@ -1,3 +1,4 @@
+# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
 {
   pkgs,
   lib,
@@ -32,12 +33,10 @@ rustPlatform.buildRustPackage rec {
 
   doCheck = false;
 
-# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
-
   meta = {
     mainProgram = "kubectl-mayastor";
     description = "A kubectl plugin for OpenEBS Mayastor";
-    homepage = "https://github.com/openebs/mayastor";
-    changelog = "https://github.com/openebs/mayastor/releases/tag/v${version}";
+    homepage = "https://github.com/openebs/mayastor-extensions";
+    changelog = "https://github.com/openebs/mayastor-extensions/releases/tag/v${version}";
   };
 }

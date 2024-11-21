@@ -22,7 +22,6 @@ in
     services.chrony = {
       inherit (cfg) servers;
       enable = true;
-      # enableNTS = true;
       package = cfg.package;
       extraConfig = ''
         allow all
