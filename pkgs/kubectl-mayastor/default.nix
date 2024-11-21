@@ -10,13 +10,13 @@ let
   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
 
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
-  packageData = sourceData.usage;
+  packageData = sourceData.mayastor;
   vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
 rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
-  cargoHash = vendorData.usage;
+  cargoHash = vendorData.mayastor;
 
   passthru = {
     updateScript = nix-update-script { };
