@@ -3,6 +3,7 @@
   pkgs,
   lib,
   rustPlatform,
+  openssl,
   nix-update-script,
   ...
 }:
@@ -18,6 +19,8 @@ rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
   cargoHash = vendorData.kubectl-mayastor;
+
+  buildInputs = [ openssl ];
 
   passthru = {
     updateScript = nix-update-script { };
