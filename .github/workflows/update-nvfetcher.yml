@@ -17,16 +17,40 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
+        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
       - name: Run nvfetcher
         id: run-nvfetcher
         run: |
           cd pkgs
+          nix-shell -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
           {
             echo 'changes<<EOF'
-            nix-shell -p nvfetcher --command 'nvfetcher' | sed -n '/Changes/,/$!d/p'
+            cat /tmp/nvfetcher-changes
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
+
+      - name: Update vendorHash
+        id: update-vendorhash
+        run: |
+          setHash () {
+            jq --arg app "${1}" --arg hash "${2}" '.[$app] = $hash' pkgs/_sources/vendorhash.json > tmp.json
+            mv tmp.json pkgs/_sources/vendorhash.json
+          }
+
+          declare -a APP_NAMES
+          while read line; do
+            APP_NAMES+=("${line%:*}")
+          done < /tmp/nvfetcher-changes
+
+          for APP_NAME in "${APP_NAMES[@]}"; do
+            echo "Check vendorHash for ${APP_NAME}..."
+            vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')
+
+            if [[ -n "${vendorHash}" ]]; then
+              setHash "${APP_NAME}" "${vendorHash}"
+              echo "Updated ${APP_NAME} with vendorHash: ${vendorHash}"
+            fi
+          done
       - name: Generate Token
         uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1
         id: app-token
@@ -41,6 +65,7 @@ jobs:
           title: "chore(deps): Update packages managed by nvfetcher"
           commit-message: "chore(deps): Update packages managed by nvfetcher"
           body: |
+            ## Changes:
             ## ${{ steps.run-nvfetcher.outputs.changes }}
           add-paths: |
             pkgs/**

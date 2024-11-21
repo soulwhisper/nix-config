@@ -6,7 +6,7 @@
     ./atuin
     ./bat
     ./bash
-    ./btop
+    ./glances
     ./doggo
     ./eza
     ./fish

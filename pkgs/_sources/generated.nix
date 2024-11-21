@@ -37,13 +37,24 @@
   };
   kubectl-klock = {
     pname = "kubectl-klock";
-    version = "v0.7.0";
+    version = "v0.7.2";
     src = fetchFromGitHub {
       owner = "applejag";
       repo = "kubectl-klock";
-      rev = "v0.7.0";
+      rev = "v0.7.2";
       fetchSubmodules = false;
-      sha256 = "sha256-MmsHxB15gCz2W2QLC6E7Ao+9iLyVaYJatUgPcMuL79M=";
+      sha256 = "sha256-S7cpVRVboLkU+GgvwozJmfFAO29tKpPlk+r9mbVLxF8=";
+    };
+  };
+  kubectl-mayastor = {
+    pname = "kubectl-mayastor";
+    version = "v2.7.1";
+    src = fetchFromGitHub {
+      owner = "openebs";
+      repo = "mayastor-extensions";
+      rev = "v2.7.1";
+      fetchSubmodules = true;
+      sha256 = "sha256-53oTJkG6q+tIKxhkmMwLmfhGvp115iW3g7fETolcd6Y=";
     };
   };
   kubectl-netshoot = {
@@ -81,24 +92,24 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.8.2";
+    version = "v1.8.3";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.8.2";
+      rev = "v1.8.3";
       fetchSubmodules = false;
-      sha256 = "sha256-sD/Nn1ZLM6JIZdWQsBioKyhrAvhz749LL4xWleQ80xY=";
+      sha256 = "sha256-KC5FxNrKRcAvM9IVuj9jh2AdQ6qqqdo3GwWRHH8t9As=";
     };
   };
-  usage-cli = {
-    pname = "usage-cli";
-    version = "v1.3.0";
+  usage = {
+    pname = "usage";
+    version = "v1.3.2";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.3.0";
+      rev = "v1.3.2";
       fetchSubmodules = false;
-      sha256 = "sha256-pV37KRjPUgQVm9855sAgFhNrEWX4MC7qeMnmHoUj23k=";
+      sha256 = "sha256-W4SUfQxxxFxWAi4Iuc3ZTVpXKSxskC1OvI0nPNZcbBo=";
     };
   };
 }

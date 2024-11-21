@@ -73,11 +73,31 @@
             "name": null,
             "owner": "applejag",
             "repo": "kubectl-klock",
-            "rev": "v0.7.0",
-            "sha256": "sha256-MmsHxB15gCz2W2QLC6E7Ao+9iLyVaYJatUgPcMuL79M=",
+            "rev": "v0.7.2",
+            "sha256": "sha256-S7cpVRVboLkU+GgvwozJmfFAO29tKpPlk+r9mbVLxF8=",
             "type": "github"
         },
-        "version": "v0.7.0"
+        "version": "v0.7.2"
+    },
+    "kubectl-mayastor": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "kubectl-mayastor",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": true,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "openebs",
+            "repo": "mayastor-extensions",
+            "rev": "v2.7.1",
+            "sha256": "sha256-53oTJkG6q+tIKxhkmMwLmfhGvp115iW3g7fETolcd6Y=",
+            "type": "github"
+        },
+        "version": "v2.7.1"
     },
     "kubectl-netshoot": {
         "cargoLocks": null,
@@ -153,17 +173,17 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.8.2",
-            "sha256": "sha256-sD/Nn1ZLM6JIZdWQsBioKyhrAvhz749LL4xWleQ80xY=",
+            "rev": "v1.8.3",
+            "sha256": "sha256-KC5FxNrKRcAvM9IVuj9jh2AdQ6qqqdo3GwWRHH8t9As=",
             "type": "github"
         },
-        "version": "v1.8.2"
+        "version": "v1.8.3"
     },
-    "usage-cli": {
+    "usage": {
         "cargoLocks": null,
         "date": null,
         "extract": null,
-        "name": "usage-cli",
+        "name": "usage",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -173,10 +193,10 @@
             "name": null,
             "owner": "jdx",
             "repo": "usage",
-            "rev": "v1.3.0",
-            "sha256": "sha256-pV37KRjPUgQVm9855sAgFhNrEWX4MC7qeMnmHoUj23k=",
+            "rev": "v1.3.2",
+            "sha256": "sha256-W4SUfQxxxFxWAi4Iuc3ZTVpXKSxskC1OvI0nPNZcbBo=",
             "type": "github"
         },
-        "version": "v1.3.0"
+        "version": "v1.3.2"
     }
 }

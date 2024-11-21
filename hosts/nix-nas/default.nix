@@ -62,8 +62,9 @@ in
         chrony = {
           enable = true;
           servers = [
-            "time.cloudflare.com"
-            "time.apple.com"
+            "ntp.ntsc.ac.cn"
+            "ntp.aliyun.com"
+            "cn.pool.ntp.org"
           ];
         };
 
