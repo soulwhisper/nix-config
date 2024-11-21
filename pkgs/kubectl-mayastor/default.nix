@@ -2,7 +2,6 @@
 {
   pkgs,
   lib,
-  rustPlatform,
   openssl,
   nix-update-script,
   ...
@@ -10,6 +9,11 @@
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
+
+  rustPlatform = pkgs.makeRustPlatform {
+    cargo = pkgs.rust-bin.stable.latest.minimal;
+    rustc = pkgs.rust-bin.stable.latest.minimal;
+  };
 
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.kubectl-mayastor;
