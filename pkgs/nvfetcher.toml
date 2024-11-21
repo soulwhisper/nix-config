@@ -12,8 +12,8 @@ fetch.github = "corneliusweig/ketall"
 src.github = "applejag/kubectl-klock"
 fetch.github = "applejag/kubectl-klock"
 [kubectl-mayastor]
-src.github = "openebs/mayastor"
-fetch.github = "openebs/mayastor"
+src.github = "openebs/mayastor-extensions"
+fetch.github = "openebs/mayastor-extensions"
 git.fetchSubmodules = true
 [kubectl-netshoot]
 src.github = "nilic/kubectl-netshoot"

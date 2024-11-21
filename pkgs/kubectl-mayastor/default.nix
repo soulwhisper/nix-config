@@ -1,13 +1,19 @@
+# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
 {
   pkgs,
   lib,
-  rustPlatform,
+  openssl,
   nix-update-script,
   ...
 }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
+
+  rustPlatform = pkgs.makeRustPlatform {
+    cargo = pkgs.rust-bin.stable.latest.minimal;
+    rustc = pkgs.rust-bin.stable.latest.minimal;
+  };
 
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.kubectl-mayastor;
@@ -17,6 +23,8 @@ rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
   cargoHash = vendorData.kubectl-mayastor;
+
+  buildInputs = [ openssl ];
 
   passthru = {
     updateScript = nix-update-script { };
@@ -32,12 +40,10 @@ rustPlatform.buildRustPackage rec {
 
   doCheck = false;
 
-# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
-
   meta = {
     mainProgram = "kubectl-mayastor";
     description = "A kubectl plugin for OpenEBS Mayastor";
-    homepage = "https://github.com/openebs/mayastor";
-    changelog = "https://github.com/openebs/mayastor/releases/tag/v${version}";
+    homepage = "https://github.com/openebs/mayastor-extensions";
+    changelog = "https://github.com/openebs/mayastor-extensions/releases/tag/v${version}";
   };
 }

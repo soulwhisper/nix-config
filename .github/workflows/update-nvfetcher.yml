@@ -29,7 +29,7 @@ jobs:
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
-      - name: Update vendor hashes
+      - name: Update vendorHash
         id: update-vendorhash
         run: |
           setHash () {
@@ -43,8 +43,7 @@ jobs:
           done < /tmp/nvfetcher-changes
 
           for APP_NAME in "${APP_NAMES[@]}"; do
-            echo "Updating vendor hash for ${APP_NAME}..."
-            setHash "${APP_NAME}" ""
+            echo "Check vendorHash for ${APP_NAME}..."
             vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')
 
             if [[ -n "${vendorHash}" ]]; then
