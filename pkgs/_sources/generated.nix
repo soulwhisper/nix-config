@@ -54,7 +54,7 @@
       repo = "mayastor-extensions";
       rev = "v2.7.1";
       fetchSubmodules = true;
-      sha256 = "sha256-AZFned+K+xdm8+r3682R9sYK+Zty1cQ6D7S0YWVtQes=";
+      sha256 = "sha256-53oTJkG6q+tIKxhkmMwLmfhGvp115iW3g7fETolcd6Y=";
     };
   };
   kubectl-netshoot = {
