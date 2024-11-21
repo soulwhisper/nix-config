@@ -53,7 +53,7 @@
       owner = "openebs";
       repo = "mayastor";
       rev = "v2.7.1";
-      fetchSubmodules = false;
+      fetchSubmodules = true;
       sha256 = "sha256-pCilll0KmwBqw/6fe7oYh5T8Y/JQBoGwguyxc+efFC0=";
     };
   };

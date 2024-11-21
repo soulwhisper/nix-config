@@ -22,10 +22,6 @@ rustPlatform.buildRustPackage rec {
     updateScript = nix-update-script { };
   };
 
-  preBuild = ''
-    git submodule update --init --recursive
-  '';
-
   postInstall = ''
     cat <<EOF >$out/bin/kubectl_complete-mayastor
     #!/usr/bin/env sh
@@ -35,6 +31,8 @@ rustPlatform.buildRustPackage rec {
   '';
 
   doCheck = false;
+
+# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
 
   meta = {
     mainProgram = "kubectl-mayastor";
