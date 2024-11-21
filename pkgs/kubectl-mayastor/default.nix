@@ -22,6 +22,10 @@ rustPlatform.buildRustPackage rec {
     updateScript = nix-update-script { };
   };
 
+  preBuild = ''
+    git submodule update --init --recursive
+  '';
+
   postInstall = ''
     cat <<EOF >$out/bin/kubectl_complete-mayastor
     #!/usr/bin/env sh
