@@ -72,15 +72,6 @@ jobs:
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
-      - name: Output build failure
-        if: failure()
-        run: |
-          drv=$(grep "For full logs, run" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
-          if [ -n $drv ]; then
-            nix log $drv
-            echo $drv
-          fi
-
       - name: Diff profile
         id: diff
         run: |

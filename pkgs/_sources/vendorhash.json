@@ -2,7 +2,7 @@
   "kubectl-browse-pvc": "sha256-kalnhBWVZaStdUeTiKln0mVow4x1K2+BZPXG+5/YRVM=",
   "kubectl-get-all": "sha256-lxfWJ7t/IVhIfvDUIESakkL8idh+Q/wl8B1+vTpb5a4=",
   "kubectl-klock": "sha256-xz1I79FklKNpWdoQdzpXYAnKM+7FJcGn04lKH2E9A50=",
-  "kubectl-mayastor": "",
+  "kubectl-mayastor": "sha256-P1ik8F6P/6jQtw2Sm72UQZuJs6CTuCXkW28mzNxd6Kc=",
   "kubectl-netshoot": "sha256-x8Jvi+RX63wpyICI2GHqDTteV877evzfCxZDOnkBDWA=",
   "kubectl-pgo": "sha256-PhTDqsFhPas2mcK7Ew2TQNqnvftk/+7wo2yFE9dnSUY=",
   "shcopy": "sha256-kD73EozkeUd23pwuy71bcNmth2lEKom0CUPDUNPNB1Q=",
