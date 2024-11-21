@@ -10,13 +10,13 @@ let
   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
 
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
-  packageData = sourceData.usage;
+  packageData = sourceData.kubectl-mayastor;
   vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
 rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
-  cargoHash = vendorData.usage;
+  cargoHash = vendorData.kubectl-mayastor;
 
   passthru = {
     updateScript = nix-update-script { };
@@ -35,7 +35,7 @@ rustPlatform.buildRustPackage rec {
   meta = {
     mainProgram = "kubectl-mayastor";
     description = "A kubectl plugin for OpenEBS Mayastor";
-    homepage = "https://github.com/openebs/mayastor-extensions";
-    changelog = "https://github.com/openebs/mayastor-extensions/releases/tag/v${version}";
+    homepage = "https://github.com/openebs/mayastor";
+    changelog = "https://github.com/openebs/mayastor/releases/tag/v${version}";
   };
 }
