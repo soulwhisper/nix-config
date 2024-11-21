@@ -54,7 +54,7 @@
       repo = "mayastor";
       rev = "v2.7.1";
       fetchSubmodules = true;
-      sha256 = "sha256-pCilll0KmwBqw/6fe7oYh5T8Y/JQBoGwguyxc+efFC0=";
+      sha256 = "sha256-AZFned+K+xdm8+r3682R9sYK+Zty1cQ6D7S0YWVtQes=";
     };
   };
   kubectl-netshoot = {
