@@ -1,19 +1,26 @@
 {
   pkgs,
   lib,
+  rustPlatform,
+  nix-update-script,
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
+
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
-  packageData = sourceData.kubectl-mayastor;
+  packageData = sourceData.usage;
   vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
-pkgs.buildGoModule rec {
+rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
   version = lib.strings.removePrefix "v" packageData.version;
-  vendorHash = vendorData.kubectl-mayastor;
+  cargoHash = vendorData.usage;
 
-  doCheck = false;
+  passthru = {
+    updateScript = nix-update-script { };
+  };
 
   postInstall = ''
     cat <<EOF >$out/bin/kubectl_complete-mayastor
@@ -23,9 +30,11 @@ pkgs.buildGoModule rec {
     chmod u+x $out/bin/kubectl_complete-mayastor
   '';
 
+  doCheck = false;
+
   meta = {
-    description = "A kubectl plugin for OpenEBS Mayastor";
     mainProgram = "kubectl-mayastor";
+    description = "A kubectl plugin for OpenEBS Mayastor";
     homepage = "https://github.com/openebs/mayastor-extensions";
     changelog = "https://github.com/openebs/mayastor-extensions/releases/tag/v${version}";
   };

@@ -36,10 +36,10 @@ pkgs.buildGoModule {
   doCheck = false;
 
   meta = with lib; {
+    mainProgram = "talosctl";
     description = "A CLI for out-of-band management of Kubernetes nodes created by Talos";
     homepage = "https://www.talos.dev/";
     license = licenses.mpl20;
-    mainProgram = "talosctl";
     maintainers = with maintainers; [flokli];
   };
 }

@@ -24,8 +24,8 @@ pkgs.buildGoModule rec {
   '';
 
   meta = {
-    description = "Kubernetes CLI plugin to spin up netshoot container for network troubleshooting";
     mainProgram = "kubectl-netshoot";
+    description = "Kubernetes CLI plugin to spin up netshoot container for network troubleshooting";
     homepage = "https://github.com/nilic/kubectl-netshoot";
     changelog = "https://github.com/nilic/kubectl-netshoot/releases/tag/v${version}";
   };

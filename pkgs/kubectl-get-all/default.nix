@@ -31,8 +31,8 @@ pkgs.buildGoModule rec {
   '';
 
   meta = {
-    description = "Kubernetes CLI plugin to really get all resources";
     mainProgram = "kubectl-get-all";
+    description = "Kubernetes CLI plugin to really get all resources";
     homepage = "https://github.com/corneliusweig/ketall";
     changelog = "https://github.com/corneliusweig/ketall/releases/tag/v${version}";
   };

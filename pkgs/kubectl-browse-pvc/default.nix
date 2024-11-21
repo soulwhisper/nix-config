@@ -20,8 +20,8 @@ pkgs.buildGoModule rec {
   '';
 
   meta = {
-    description = "Kubernetes CLI plugin for browsing PVCs on the command line";
     mainProgram = "kubectl-browse-pvc";
+    description = "Kubernetes CLI plugin for browsing PVCs on the command line";
     homepage = "https://github.com/clbx/kubectl-browse-pvc";
     changelog = "https://github.com/clbx/kubectl-browse-pvc/releases/tag/v${version}";
   };

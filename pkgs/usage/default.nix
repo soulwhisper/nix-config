@@ -22,12 +22,12 @@ rustPlatform.buildRustPackage rec {
     updateScript = nix-update-script { };
   };
 
-  doCheck = false; # no tests
+  doCheck = false;
 
   meta = {
-    homepage = "https://usage.jdx.dev";
-    description = "A specification for CLIs";
-    changelog = "https://github.com/jdx/usage/releases/tag/v${version}";
     mainProgram = "usage";
+    description = "A specification for CLIs";
+    homepage = "https://usage.jdx.dev";
+    changelog = "https://github.com/jdx/usage/releases/tag/v${version}";
   };
 }

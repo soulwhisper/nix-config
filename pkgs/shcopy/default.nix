@@ -14,9 +14,9 @@ pkgs.buildGoModule rec {
   vendorHash = vendorData.shcopy;
 
   meta = {
-    homepage = "https://github.com/aymanbagabas/shcopy";
-    description = "Copy text to your system clipboard locally and remotely using ANSI OSC52 sequence";
-    changelog = "https://github.com/aymanbagabas/shcopy/releases/tag/v${version}";
     mainProgram = "shcopy";
+    description = "Copy text to your system clipboard locally and remotely using ANSI OSC52 sequence";
+    homepage = "https://github.com/aymanbagabas/shcopy";
+    changelog = "https://github.com/aymanbagabas/shcopy/releases/tag/v${version}";
   };
 }
