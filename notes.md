@@ -4,7 +4,6 @@
 - atuin-key should be base64 format
 - change iterm2 theme to dark
 - change iterm2 font to "firacode-nerd-font" afterwards
-- krr error breaks deployment, so install it afterwards if necessary
 
 ```shell
 # install req. incl. cachix & nvd

@@ -1,9 +1,0 @@
-{
-  ...
-}:
-{
-  imports = [
-    ./colima
-    ./docker-cli
-  ];
-}
