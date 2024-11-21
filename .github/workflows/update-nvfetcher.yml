@@ -29,7 +29,7 @@ jobs:
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
-      - name: Update vendor hashes
+      - name: Update vendorHash
         id: update-vendorhash
         run: |
           setHash () {
@@ -37,14 +37,10 @@ jobs:
             mv tmp.json pkgs/_sources/vendorhash.json
           }
 
-          declare -a APP_NAMES
-          while read line; do
-            APP_NAMES+=("${line%:*}")
-          done < /tmp/nvfetcher-changes
+          APP_NAMES=$(jq -r 'keys[]' pkgs/_sources/vendorhash.json)
 
-          for APP_NAME in "${APP_NAMES[@]}"; do
-            echo "Updating vendor hash for ${APP_NAME}..."
-            setHash "${APP_NAME}" ""
+          for APP_NAME in $APP_NAMES; do
+            echo "Check vendorHash for ${APP_NAME}..."
             vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')
 
             if [[ -n "${vendorHash}" ]]; then
