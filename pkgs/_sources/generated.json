@@ -79,6 +79,26 @@
         },
         "version": "v0.7.2"
     },
+    "kubectl-mayastor": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "kubectl-mayastor",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "openebs",
+            "repo": "mayastor",
+            "rev": "v2.7.1",
+            "sha256": "sha256-pCilll0KmwBqw/6fe7oYh5T8Y/JQBoGwguyxc+efFC0=",
+            "type": "github"
+        },
+        "version": "v2.7.1"
+    },
     "kubectl-netshoot": {
         "cargoLocks": null,
         "date": null,
