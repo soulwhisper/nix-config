@@ -8,7 +8,9 @@ let
   cfg = config.modules.services.dae;
 
   # remove spaces and quotes from subscription-link
-  cleanString = str: builtins.replaceStrings ["\"" " "] [""] str;
+  removeQuotes = str: builtins.replaceStrings ["\""] [""] str;
+  removeSpaces = str: builtins.replaceStrings [" "] [""] str;
+  cleanString = str: removeSpaces (removeQuotes str);
 in
 {
   options.modules.services.dae = {
