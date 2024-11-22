@@ -11,6 +11,7 @@
         "users/soulwhisper/password" = {
           neededForUsers = true;
         };
+        "networking/dae/subscription" = { };
       };
     };
   };

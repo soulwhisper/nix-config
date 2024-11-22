@@ -6,6 +6,9 @@
 }:
 let
   cfg = config.modules.services.dae;
+
+  # remove spaces and quotes from subscription-link
+  cleanString = str: builtins.replaceStrings ["\"" " "] [""] str;
 in
 {
   options.modules.services.dae = {
@@ -29,7 +32,7 @@ in
       "dae/config.dae".source = pkgs.writeText "config.dae" (builtins.readFile ./config.dae);
       "dae/config.dae".mode = "0400";
 
-      "dae/sublist".source = pkgs.writeText "sublist" ("subscription:" + cfg.subscription);
+      "dae/sublist".source = pkgs.writeText "sublist" ("subscription:" + cleanString cfg.subscription);
       "dae/sublist".mode = "0600";
 
       "dae/update-dae-subs.sh".source = pkgs.writeTextFile {
