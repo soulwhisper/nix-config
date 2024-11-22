@@ -1,0 +1,62 @@
+server:
+  host: 0.0.0.0
+  port: 8000
+
+theme:
+  # theme:catppuccin-mocha
+  background-color: 240 21 15
+  contrast-multiplier: 1.2
+  primary-color: 217 92 83
+  positive-color: 115 54 76
+  negative-color: 347 70 65
+
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: weather
+            location: Harbin, China
+          - type: calendar
+
+      - size: full
+        widgets:
+          - type: bookmarks
+            groups:
+              - title: Router
+                color: 100 100 50
+                links:
+                  - title: Proxmox
+                    url: https://10.0.0.100:8006/
+                  - title: OPNSense
+                    url: https://10.0.0.1/ui/core/dashboard
+                  - title: Unifi
+                    url: https://10.20.0.3:8443/manage/default/dashboard
+
+              - title: NAS
+                color: 200 50 50
+                links:
+                  - title: Adguard
+                    url: http://10.0.0.10:3000
+                  - title: Home-assistant
+                    url: http://10.20.0.10:8123/lovelace/home
+                  - title: Minio
+                    url: https://minio.noirprime.com
+
+              - title: K8S
+                color: 10 70 50
+                links:
+                  - title: Talos
+                    url: https://www.talos.dev/
+
+          - type: repository
+            repository: bjw-s-labs/nix-config
+            pull-requests-limit: -1
+            issues-limit: -1
+            commits-limit: 5
+
+          - type: repository
+            repository: bjw-s-labs/home-ops
+            pull-requests-limit: -1
+            issues-limit: -1
+            commits-limit: 5

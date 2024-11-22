@@ -49,10 +49,19 @@ in
       chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
 
+    programs.nix-ld = {
+      enable = true;
+      package = pkgs.unstable.nix-ld;
+    };
+
     modules = {
       services = {
         podman.enable = true;
         openssh.enable = true;
+        dae = {
+          enable = true;
+          subscription = config.sops.secrets."networking/dae/subscription".path;
+        };
       };
     };
 

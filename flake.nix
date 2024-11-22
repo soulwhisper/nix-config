@@ -41,11 +41,6 @@
       url = "github:catppuccin/nix";
     };
 
-    # Rust-overlay - nix overlay of binary distributed rust toolchains
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-    };
-
     # Nix Inspect - Interactive tui for inspecting nix configs
     nix-inspect = {
       url = "github:bluskript/nix-inspect";
