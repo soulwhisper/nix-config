@@ -11,9 +11,12 @@ fetch.github = "corneliusweig/ketall"
 [kubectl-klock]
 src.github = "applejag/kubectl-klock"
 fetch.github = "applejag/kubectl-klock"
-[kubectl-mayastor]
+[kubectl-mayastor-x86_64-linux]
 src.github = "openebs/mayastor-extensions"
-fetch.github = "openebs/mayastor-extensions"
+fetch.url = "https://github.com/openebs/mayastor-extensions/releases/download/$ver/kubectl-mayastor-x86_64-linux-musl.tar.gz"
+[kubectl-mayastor-aarch64-darwin]
+src.github = "openebs/mayastor-extensions"
+fetch.url = "https://github.com/openebs/mayastor-extensions/releases/download/$ver/kubectl-mayastor-aarch64-apple-darwin.tar.gz"
 git.fetchSubmodules = true
 [kubectl-netshoot]
 src.github = "nilic/kubectl-netshoot"

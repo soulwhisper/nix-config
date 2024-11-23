@@ -38,6 +38,8 @@ in
       };
     };
 
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
+
     security.acme = lib.mkIf cfg.enableAcme  {
       acceptTerms = true;
       defaults = {

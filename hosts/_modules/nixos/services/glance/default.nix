@@ -40,7 +40,7 @@ in
       };
     };
 
-    networking.firewall.allowedTCPPorts = [ 8000 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     environment.etc = {
         "glance/glance.yaml".source = pkgs.writeTextFile {

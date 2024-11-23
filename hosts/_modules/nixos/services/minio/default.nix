@@ -61,6 +61,8 @@ in
       };
     };
 
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
+
     services.minio = {
       enable = true;
       package = pkgs.unstable.minio;

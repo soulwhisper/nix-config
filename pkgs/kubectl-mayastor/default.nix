@@ -1,6 +1,4 @@
-# this one is too complicated to build, so fetch as unfree/proprietary binary;
-# https://nixos.wiki/wiki/Packaging/Binaries
-# use fixed versions, until wrapper finished
+# fetch pre-built binaries from github release
 {
   pkgs,
   lib,
@@ -10,21 +8,11 @@
 }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  sourceData = pkgs.callPackage ../_sources/generated.nix { };
+  if isDarwin then packageData = sourceData.kubectl-mayastor-aarch64-darwin else packageData = kubectl-mayastor-x86_64-linux;
 in
 stdenv.mkDerivation rec {
-  pname = "kubectl-mayastor";
-  version = "v2.7.1";
-
-  src = if isDarwin then
-    fetchurl {
-      url = "https://github.com/openebs/mayastor-extensions/releases/download/${version}/kubectl-mayastor-aarch64-apple-darwin.tar.gz";
-      hash = "sha256-4w/UYMmRwPmjlK8ktO6qnjPolSk0p/fFkSFk5Yp7uJg=";
-    }
-  else
-    fetchurl {
-      url = "https://github.com/openebs/mayastor-extensions/releases/download/${version}/kubectl-mayastor-x86_64-linux-musl.tar.gz";
-      hash = "sha256-kWWajtIwIXuW64FUcbY7d8So2+BvgT14Dc+QLt2gRnY=";
-    };
+  inherit (packageData) pname version src;
 
   unpackCmd = "tar -xvzf $src";
   sourceRoot = ".";
