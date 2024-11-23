@@ -3,8 +3,12 @@
 }:
 {
   imports = [
+    ./adguard
     ./cfdyndns
     ./chrony
+    ./dae
+    ./glance
+    ./home-assistant
     ./minio
     ./nginx
     ./nfs
@@ -14,5 +18,6 @@
     ./samba
     ./smartd
     ./smartctl-exporter
+    ./unifi-controller
   ];
 }

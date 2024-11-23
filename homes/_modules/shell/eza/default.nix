@@ -3,7 +3,7 @@ _:
   config = {
     programs.eza = {
       enable = true;
-      icons = "auto";
+      icons = true;
       extraOptions = [
         "--group -l -a"
       ];

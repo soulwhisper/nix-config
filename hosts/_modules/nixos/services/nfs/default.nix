@@ -16,10 +16,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.nfs.server.enable = true;
-    services.nfs.server.exports = cfg.exports;
-    networking.firewall.allowedTCPPorts = [
-      2049
-    ];
+    services.nfs.server = {
+      enable = true;
+      inherit (cfg) exports;
+    };
+
+    networking.firewall.allowedTCPPorts = [ 111 2049 ];
+    networking.firewall.allowedUDPPorts = [ 111 2049 ];
   };
 }

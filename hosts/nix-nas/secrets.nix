@@ -15,6 +15,7 @@
         "networking/cloudflare/auth" = {
           owner = config.users.users.acme.name;
         };
+        "networking/dae/subscription" = { };
         "users/soulwhisper/password" = {
           neededForUsers = true;
         };

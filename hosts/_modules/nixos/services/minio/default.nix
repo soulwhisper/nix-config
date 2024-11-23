@@ -10,7 +10,6 @@ in
 {
   options.modules.services.minio = {
     enable = lib.mkEnableOption "minio";
-    package = lib.mkPackageOption pkgs "minio" { };
     dataDir = lib.mkOption {
       type = lib.types.str;
       default = "/var/lib/minio/data";
@@ -62,9 +61,11 @@ in
       };
     };
 
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
+
     services.minio = {
       enable = true;
-      inherit (cfg) package;
+      package = pkgs.unstable.minio;
       dataDir = [
         cfg.dataDir
       ];

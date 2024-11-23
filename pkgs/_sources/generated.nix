@@ -46,17 +46,6 @@
       sha256 = "sha256-S7cpVRVboLkU+GgvwozJmfFAO29tKpPlk+r9mbVLxF8=";
     };
   };
-  kubectl-mayastor = {
-    pname = "kubectl-mayastor";
-    version = "v2.7.1";
-    src = fetchFromGitHub {
-      owner = "openebs";
-      repo = "mayastor-extensions";
-      rev = "v2.7.1";
-      fetchSubmodules = true;
-      sha256 = "sha256-53oTJkG6q+tIKxhkmMwLmfhGvp115iW3g7fETolcd6Y=";
-    };
-  };
   kubectl-netshoot = {
     pname = "kubectl-netshoot";
     version = "v0.1.0";
@@ -103,13 +92,13 @@
   };
   usage = {
     pname = "usage";
-    version = "v1.3.2";
+    version = "v1.3.3";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.3.2";
+      rev = "v1.3.3";
       fetchSubmodules = false;
-      sha256 = "sha256-W4SUfQxxxFxWAi4Iuc3ZTVpXKSxskC1OvI0nPNZcbBo=";
+      sha256 = "sha256-E6iaJo3x9PDmHGGT93JM2icN5/8zh2Jv6uheE30bD4s=";
     };
   };
 }

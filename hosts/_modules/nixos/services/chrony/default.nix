@@ -10,19 +10,17 @@ in
 {
   options.modules.services.chrony = {
     enable = lib.mkEnableOption "chrony";
-    package = lib.mkPackageOption pkgs "chrony" { };
-    servers = lib.mkOption {
-      default = config.networking.timeServers;
-      defaultText = lib.literalExpression "config.networking.timeServers";
-      type = lib.types.listOf lib.types.str;
-    };
   };
 
   config = lib.mkIf cfg.enable {
     services.chrony = {
-      inherit (cfg) servers;
       enable = true;
-      package = cfg.package;
+      package = pkgs.unstable.chrony;
+      servers = [
+            "ntp.ntsc.ac.cn"
+            "ntp.aliyun.com"
+            "cn.pool.ntp.org"
+          ];
       extraConfig = ''
         allow all
         bindaddress 0.0.0.0

@@ -1,37 +1,30 @@
-# make sure nvfetcher.toml contains "git.fetchSubmodules = true"
-# using rustc version in nix-24.05
+# fetch pre-built binaries from github release
 {
   pkgs,
   lib,
-  openssl,
-  nix-update-script,
+  fetchurl,
+  stdenv,
   ...
 }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
-  inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
-
-  rustPlatform = pkgs.makeRustPlatform {
-    cargo = pkgs.rust-bin.stable."1.77.2".minimal;
-    rustc = pkgs.rust-bin.stable."1.77.2".minimal;
-  };
-
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
-  packageData = sourceData.kubectl-mayastor;
-  vendorData = lib.importJSON ../_sources/vendorhash.json;
+  packageData = if isDarwin then sourceData.kubectl-mayastor-aarch64-darwin else sourceData.kubectl-mayastor-x86_64-linux;
 in
-rustPlatform.buildRustPackage rec {
-  inherit (packageData) pname src;
-  version = lib.strings.removePrefix "v" packageData.version;
-  cargoHash = vendorData.kubectl-mayastor;
+stdenv.mkDerivation rec {
+  inherit (packageData) pname version src;
 
-  buildInputs = [ openssl ];
+  unpackCmd = "tar -xvzf $src";
+  sourceRoot = ".";
 
-  passthru = {
-    updateScript = nix-update-script { };
-  };
+  dontConfigure = true;
+  dontBuild = true;
 
-  postInstall = ''
+  installPhase = ''
+    runHook preInstall
+    install -m755 -D kubectl-mayastor $out/bin/kubectl-mayastor
+    runHook postInstall
+
     cat <<EOF >$out/bin/kubectl_complete-mayastor
     #!/usr/bin/env sh
     kubectl mayastor __complete "\$@"
@@ -39,11 +32,10 @@ rustPlatform.buildRustPackage rec {
     chmod u+x $out/bin/kubectl_complete-mayastor
   '';
 
-  doCheck = false;
-
-  meta = {
+  meta = with lib; {
     mainProgram = "kubectl-mayastor";
-    description = "A kubectl plugin for OpenEBS Mayastor";
+    platforms = platforms.linux ++ platforms.darwin;
+    description = "A kubectl plugin for openebs mayastor";
     homepage = "https://github.com/openebs/mayastor-extensions";
     changelog = "https://github.com/openebs/mayastor-extensions/releases/tag/v${version}";
   };

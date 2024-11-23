@@ -59,23 +59,24 @@ in
       };
 
       services = {
-        chrony = {
+        adguard.enable = true;
+        chrony.enable = true;
+        dae = {
           enable = true;
-          servers = [
-            "ntp.ntsc.ac.cn"
-            "ntp.aliyun.com"
-            "cn.pool.ntp.org"
-          ];
+          subscription = config.sops.secrets."networking/dae/subscription".path;
         };
 
-        nginx = {
-          enableAcme = true;
-          acmeCloudflareAuthFile = config.sops.secrets."networking/cloudflare/auth".path;
+        glance = {
+          enable = true;
+          glanceURL = "lab.noirprime.com";
+        };
+        home-assistant = {
+          enable = true;
+          configDir = "/numina/apps/hass";
         };
 
         minio = {
           enable = true;
-          package = pkgs.unstable.minio;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
           dataDir = "/numina/apps/minio";
           enableReverseProxy = true;
@@ -85,10 +86,15 @@ in
 
         nfs = {
           enable = true;
+          exports = "/numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
+        };
+
+        nginx = {
+          enableAcme = true;
+          acmeCloudflareAuthFile = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
         node-exporter.enable = true;
-
         openssh.enable = true;
 
         samba = {
@@ -107,11 +113,11 @@ in
               "read only" = "no";
             };
             Software = {
-              path = "/numina/software";
+              path = "/numina/apps";
               "read only" = "no";
             };
-            TimeMachineBackup = {
-              path = "/numina/backup/timemachine";
+            TimeMachine = {
+              path = "/numina/timemachine";
               "read only" = "no";
               "fruit:aapl" = "yes";
               "fruit:time machine" = "yes";

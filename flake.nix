@@ -3,8 +3,10 @@
 
   inputs = {
     # Nixpkgs and unstable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixos-24.11";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixpkgs-unstable";
 
     # Flake-parts - Simplify Nix Flakes with the module system
     flake-parts = {
@@ -41,11 +43,6 @@
       url = "github:catppuccin/nix";
     };
 
-    # Rust-overlay - nix overlay of binary distributed rust toolchains
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-    };
-
     # Nix Inspect - Interactive tui for inspecting nix configs
     nix-inspect = {
       url = "github:bluskript/nix-inspect";
@@ -62,14 +59,33 @@
     ...
   } @inputs:
   let
-    overlays = import ./overlays {inherit inputs;};
-    mkSystemLib = import ./lib/mkSystem.nix {inherit inputs overlays;};
+    mkPkgsWithSystem =
+      system:
+      import inputs.nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues (import ./overlays { inherit inputs; });
+        config.allowUnfree = true;
+      };
+    mkSystemLib = import ./lib/mkSystem.nix {inherit inputs mkPkgsWithSystem;};
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "aarch64-darwin"
         "x86_64-linux"
       ];
+
+      perSystem = {
+        system,
+        inputs',
+        pkgs,
+        ...
+      }:
+      {
+        # override pkgs used by everything in `perSystem` to have my overlays
+        _module.args.pkgs = mkPkgsWithSystem system;
+        # accessible via `nix build .#<name>`
+        packages = import ./pkgs {inherit pkgs inputs;};
+      };
 
       imports = [];
 
