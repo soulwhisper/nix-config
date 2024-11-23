@@ -17,7 +17,6 @@ fetch.url = "https://github.com/openebs/mayastor-extensions/releases/download/$v
 [kubectl-mayastor-aarch64-darwin]
 src.github = "openebs/mayastor-extensions"
 fetch.url = "https://github.com/openebs/mayastor-extensions/releases/download/$ver/kubectl-mayastor-aarch64-apple-darwin.tar.gz"
-git.fetchSubmodules = true
 [kubectl-netshoot]
 src.github = "nilic/kubectl-netshoot"
 fetch.github = "nilic/kubectl-netshoot"
