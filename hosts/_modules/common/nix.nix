@@ -19,6 +19,17 @@
       nix-path = "nixpkgs=${inputs.nixpkgs.outPath}";
 
       trusted-substituters = [
+        # cache mirror located in China
+        ## status: https://mirrors.ustc.edu.cn/status/
+        # "https://mirrors.ustc.edu.cn/nix-channels/store"
+        ## status: https://mirror.sjtu.edu.cn/
+        # "https://mirror.sjtu.edu.cn/nix-channels/store"
+        ## status: https://mirrors.sustech.edu.cn/
+        # "https://mirrors.sustech.edu.cn/nix-channels/store"
+        ## status: https://mirrors.tuna.tsinghua.edu.cn/
+        # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+
+        # others
         "https://nix-community.cachix.org"
         "https://cache.garnix.io"
         "https://numtide.cachix.org"
