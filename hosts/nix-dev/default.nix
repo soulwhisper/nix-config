@@ -20,6 +20,7 @@ in
       hostId = "d16c6404";
       useDHCP = true;
       firewall.enable = false;
+      networkmanager.enable = true;
     };
 
     users.users.soulwhisper = {
@@ -35,6 +36,7 @@ in
         [
           "wheel"
           "users"
+          "networkmanager"
         ]
         ++ ifGroupsExist [
           "network"
@@ -48,11 +50,6 @@ in
       # Must match what is in /etc/shells
       chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
-
-    programs.nix-ld = {
-      enable = true;
-      package = pkgs.unstable.nix-ld;
-    };
 
     modules = {
       services = {

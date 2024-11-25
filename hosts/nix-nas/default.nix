@@ -20,6 +20,7 @@ in
       hostId = "52a88b81";
       useDHCP = true;
       firewall.enable = false;
+      networkmanager.enable = true;
     };
 
     users.users.soulwhisper = {
@@ -35,6 +36,7 @@ in
         [
           "wheel"
           "users"
+          "networkmanager"
         ]
         ++ ifGroupsExist [
           "network"
