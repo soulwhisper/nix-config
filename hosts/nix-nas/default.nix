@@ -18,9 +18,9 @@ in
     networking = {
       hostName = hostname;
       hostId = "52a88b81";
-      useDHCP = true;
-      firewall.enable = false;
+      # useDHCP = true;
       networkmanager.enable = true;
+      firewall.enable = false;
     };
 
     users.users.soulwhisper = {
