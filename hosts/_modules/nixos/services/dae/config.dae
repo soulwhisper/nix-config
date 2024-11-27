@@ -7,7 +7,9 @@ global {
 }
 
 subscription {
-	subscription: 'file://subscription.sub'
+	subscription_1: 'file://subscription_1.sub'
+	# subscription_2: 'file://subscription_2.sub'
+	# subscription_3: 'file://subscription_3.sub'
 }
 
 dns {
@@ -41,8 +43,8 @@ group {
 	proxy {
 		filter: name(keyword: 'Hong Kong')
 		filter: name(keyword: 'Singapore')
-        filter: name(keyword: 'USA')
-	    policy: min
+        	filter: name(keyword: 'USA')
+	    	policy: min
 	}
 }
 

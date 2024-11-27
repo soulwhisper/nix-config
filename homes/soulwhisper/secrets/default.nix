@@ -4,6 +4,7 @@
   ...
 }: let
   ageKeyFile = "${config.xdg.configHome}/age/keys.txt";
+  atuinKeyFile = "${config.xdg.configHome}/atuin/atuin-key";
 in {
   config = {
     home.packages = [
@@ -17,7 +18,10 @@ in {
       age.generateKey = true;
 
       secrets = {
-        atuin_key = {};
+        atuin_key = {
+          owner = "soulwhisper";
+          path = atuinKeyFile;
+        };
       };
     };
 

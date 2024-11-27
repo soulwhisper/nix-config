@@ -9,16 +9,8 @@
     kubernetes.enable = true;
     security.gnugpg.enable = true;
     security._1password-cli.enable = true;
-    shell = {
-      mise = {
-        enable = true;
-        package = pkgs.unstable.mise;
-        globalConfig = {
-          tools = {
-            python = "latest";
-          };
-        };
-      };
-    };
+
+    # disable mise in nixos, use containers instead.
+
   };
 }

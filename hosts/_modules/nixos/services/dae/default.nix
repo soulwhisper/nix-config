@@ -6,36 +6,21 @@
 }:
 let
   cfg = config.modules.services.dae;
-
-  # remove spaces and quotes from subscription-link
-  removeQuotes = str: builtins.replaceStrings ["\""] [""] str;
-  removeSpaces = str: builtins.replaceStrings [" "] [""] str;
-  cleanString = str: removeSpaces (removeQuotes str);
 in
 {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
-    subscription = lib.mkOption {
+    subscriptionFile = lib.mkOption {
       type = lib.types.str;
       default = null;
-      description = "The URL for the dae subscription, in SS style.";
+      description = "The Shadowsocks links for the dae subscription.";
     };
   };
 
   config = lib.mkIf cfg.enable {
-
-    services.dae = {
-      enable = true;
-      package = pkgs.unstable.dae;
-      configFile = "/etc/dae/config.dae";
-    };
-
     environment.etc = {
       "dae/config.dae".source = pkgs.writeText "config.dae" (builtins.readFile ./config.dae);
       "dae/config.dae".mode = "0400";
-
-      "dae/sublist".source = pkgs.writeText "sublist" ("subscription:" + cleanString cfg.subscription);
-      "dae/sublist".mode = "0600";
 
       "dae/update-dae-subs.sh".source = pkgs.writeTextFile {
         name = "update-dae-subs.sh";
@@ -44,10 +29,32 @@ in
       };
     };
 
+    systemd.services.dae = {
+      description = "Dae Service";
+      documentation = [ "https://github.com/daeuniverse/dae" ];
+      after = [ "network.target" "systemd-sysctl.service" "dbus.service" ];
+      wants = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        PIDFile = "/run/dae.pid";
+        ExecStartPre = "${pkgs.unstable.dae}/bin/dae validate -c /etc/dae/config.dae";
+        ExecStart = "${pkgs.unstable.dae}/bin/dae run --disable-timestamp -c /etc/dae/config.dae";
+        ExecReload = "${pkgs.unstable.dae}/bin/dae reload $MAINPID";
+        Restart = "always";
+      };
+    };
+
     systemd.services.update-dae-subs = {
       description = "Update DAE Subscription Service";
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
+      preStart = ''
+        if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
+          echo $(cat ${cfg.subscriptionFile}) > /etc/dae/sublist
+        else
+          echo "CHANGEME" > /etc/dae/sublist
+        fi
+      '';
       serviceConfig = {
         ExecStart = "/etc/dae/update-dae-subs.sh";
         Restart= "on-failure";

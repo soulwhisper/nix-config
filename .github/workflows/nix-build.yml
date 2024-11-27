@@ -72,6 +72,12 @@ jobs:
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
+      - name: Show last 100 lines of error log
+        if: failure()
+        run: |
+          echo "Last 100 lines of error log:"
+          tail -n 100 /tmp/nix-build-err.log
+
       - name: Diff profile
         id: diff
         run: |
@@ -99,13 +105,14 @@ jobs:
             <summary> Version changes </summary> <br>
             <pre> ${{ steps.diff.outputs.diff }} </pre>
 
-  nix-build-success:
+  nix-build-status:
     if: ${{ always() }}
     needs:
       - nix-build
-    name: Nix Build Successful
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
-        name: Check matrix status
-        run: exit 1
+      - name: Check matrix status
+        run: |
+          if echo "${{ needs.nix-build.result }}" | grep -E 'failure|cancelled'; then
+            exit 1
+          fi
