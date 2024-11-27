@@ -19,7 +19,6 @@ in {
 
       secrets = {
         atuin_key = {
-          owner = "soulwhisper";
           path = atuinKeyFile;
         };
       };
