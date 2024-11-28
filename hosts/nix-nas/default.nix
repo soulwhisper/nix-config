@@ -63,7 +63,7 @@ in
         chrony.enable = true;
         dae = {
           enable = true;
-          subscription = config.sops.secrets."networking/dae/subscription".path;
+          subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
         };
 
         glance = {

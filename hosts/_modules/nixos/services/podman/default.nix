@@ -10,10 +10,14 @@ in
 {
   options.modules.services.podman = {
     enable = lib.mkEnableOption "podman";
-    package = lib.mkPackageOption pkgs "docker-compose" { };
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      podman-compose
+      docker-compose
+    ];
+
     virtualisation = {
       podman = {
         enable = true;

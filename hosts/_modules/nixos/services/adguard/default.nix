@@ -35,7 +35,7 @@ in
       };
       serviceConfig = {
         DynamicUser = true;
-        ExecStart = "${pkgs.unstable.adguardhome}/bin/adguardhome \
+        ExecStart = "${lib.getExe pkgs.unstable.adguardhome} \
                     --no-check-update \
                     --pidfile /run/AdGuardHome/AdGuardHome.pid \
                     --work-dir /var/lib/AdGuardHome/ \

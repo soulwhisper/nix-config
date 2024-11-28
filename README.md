@@ -6,8 +6,40 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 
 - soulwhisper-mba, my macbook configs.
 - nix-dev, devops vm for corp-env.
-- nix-nas, nas vm for corp-env. Homelab ver. using TrueNAS Scale 24.10+. Inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/HOSTs/mali).
+- nix-nas, nas vm for corp-env. Homelab ver. using TrueNAS Scale 24.10+. Inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/hosts/mali).
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
+
+## About NAS
+
+- NUC / VM, ZFS disks = 2 / 4, use 2-Way Mirror, nix-nas;
+- Server, ZFS disks >= 5, use RAID-Z2, with extra slog and metadata, TrueNAS Scale 24.10+.
+- Cluster, Mayastor / Ceph.
+
+```shell
+# zfs pool creation for nix-nas, un-encrypted, 2-way mirror
+ls -l /dev/disk/by-id/
+zpool create \
+    -o ashift=12 \
+    -o autotrim=on \
+    -O compression=on \
+    -O relatime=on \
+    -O xattr=sa \
+    -O acltype=posixacl \
+    numina \
+    mirror \
+    {disk-by-id-1} \
+    {disk-by-id-2} \
+    mirror \
+    {disk-by-id-3} \
+    {disk-by-id-4}
+
+zfs create numina/backup
+zfs create numina/media
+zfs create numina/docs
+zfs create numina/apps
+zfs create numina/timemachine
+
+```
 
 ## Usage
 

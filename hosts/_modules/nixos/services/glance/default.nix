@@ -55,7 +55,7 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart ="${pkgs.unstable.glance}/bin/glance --config /etc/glance/glance.yaml";
+        ExecStart ="${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";
         WorkingDirectory = "/var/lib/glance";
         StateDirectory = "glance";
         RuntimeDirectory = "glance";

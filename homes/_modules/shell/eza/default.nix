@@ -3,9 +3,13 @@ _:
   config = {
     programs.eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
       extraOptions = [
-        "--group -l -a"
+        "--all"
+        "--long"
+        "--group"
+        "--header"
+        "--total-size"
       ];
       enableBashIntegration = true;
       enableFishIntegration = true;
