@@ -5,7 +5,11 @@ _:
       enable = true;
       icons = "auto";
       extraOptions = [
-        "-l -a"
+        "--all"
+        "--long"
+        "--group"
+        "--header"
+        "--total-size"
       ];
       enableBashIntegration = true;
       enableFishIntegration = true;
