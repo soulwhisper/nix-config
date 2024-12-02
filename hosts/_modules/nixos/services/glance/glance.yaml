@@ -41,7 +41,7 @@ pages:
                   - title: Home-assistant
                     url: http://10.20.0.10:8123/lovelace/home
                   - title: Minio
-                    url: https://minio.noirprime.com
+                    url: https://s3.noirprime.com/console/
 
               - title: K8S
                 color: 10 70 50

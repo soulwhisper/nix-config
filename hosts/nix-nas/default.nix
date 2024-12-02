@@ -63,7 +63,7 @@ in
         chrony.enable = true;
         dae = {
           enable = true;
-          subscription = config.sops.secrets."networking/dae/subscription".path;
+          subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
         };
 
         glance = {
@@ -80,8 +80,7 @@ in
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
           dataDir = "/numina/apps/minio";
           enableReverseProxy = true;
-          minioConsoleURL = "minio.noirprime.com";
-          minioS3URL = "s3.noirprime.com";
+          minioURL = "s3.noirprime.com";
         };
 
         nfs = {
@@ -131,7 +130,7 @@ in
 
       users = {
         additionalUsers = {
-          manyie = {
+          homie = {
             isNormalUser = true;
             extraGroups = ifGroupsExist [
               "samba-users"

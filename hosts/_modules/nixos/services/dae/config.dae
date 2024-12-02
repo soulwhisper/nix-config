@@ -7,7 +7,9 @@ global {
 }
 
 subscription {
-	subscription: 'file://subscription.sub'
+	subscription_1: 'file://subscription_1.sub'
+	# subscription_2: 'file://subscription_2.sub'
+	# subscription_3: 'file://subscription_3.sub'
 }
 
 dns {
@@ -47,7 +49,8 @@ group {
 }
 
 routing {
-	pname(AdGuardHome) && l4proto(udp) && dport(53) -> must_direct
+	pname(adguardhome) && l4proto(udp) && dport(53) -> must_direct
+	pname(lego) -> must_direct
 
 	pname(NetworkManager) -> direct
 	dip(224.0.0.0/3, 'ff00::/8') -> direct

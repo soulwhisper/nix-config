@@ -20,6 +20,7 @@ in
         name = "Adguard-Config";
         text = builtins.readFile ./AdGuardHome.yaml;
         };
+        "adguard/AdGuardHome.yaml".mode = "0755";
     };
 
     networking.firewall.allowedTCPPorts = [ 53 3000 ];
@@ -34,17 +35,11 @@ in
         StartLimitBurst = 10;
       };
       serviceConfig = {
-        DynamicUser = true;
-        ExecStart = "${pkgs.unstable.adguardhome}/bin/adguardhome \
-                    --no-check-update \
-                    --pidfile /run/AdGuardHome/AdGuardHome.pid \
-                    --work-dir /var/lib/AdGuardHome/ \
-                    --config /etc/adguard/AdGuardHome.yaml";
+        ExecStart = "${lib.getExe pkgs.unstable.adguardhome} --no-check-update --pidfile /run/adguard.pid --work-dir /var/lib/AdGuardHome --config /etc/adguard/AdGuardHome.yaml";
         AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
         Restart = "always";
         RestartSec = 10;
-        RuntimeDirectory = "AdGuardHome";
-        StateDirectory = "AdGuardHome";
+        WorkingDirectory = "/var/lib/AdGuardHome";
       };
     };
   };

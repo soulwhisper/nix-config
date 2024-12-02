@@ -28,7 +28,7 @@ in
 
       settings= {
         global = {
-          "workgroup" = "WORKGROUP";
+          "workgroup" = "NIX-NAS";
           "min protocol" = "SMB2";
 
           "ea support" = "yes";

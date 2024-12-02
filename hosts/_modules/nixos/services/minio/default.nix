@@ -19,11 +19,7 @@ in
       default = null;
     };
     enableReverseProxy = lib.mkEnableOption "minio-reverseProxy";
-    minioConsoleURL = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
-    minioS3URL  = lib.mkOption {
+    minioURL = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
     };
@@ -33,7 +29,7 @@ in
     modules.services.nginx = lib.mkIf cfg.enableReverseProxy {
       enable = true;
       virtualHosts = {
-        "${cfg.minioS3URL}" = {
+        "${cfg.minioURL}" = {
           enableACME = config.modules.services.nginx.enableAcme;
           acmeRoot = null;
           forceSSL = config.modules.services.nginx.enableAcme;
@@ -41,20 +37,18 @@ in
             client_max_body_size 0;
             proxy_buffering off;
             proxy_request_buffering off;
+            ignore_invalid_headers off;
+            chunked_transfer_encoding off;
           '';
           locations."/" = {
             proxyPass = "http://127.0.0.1:9000/";
           };
-        };
-        "${cfg.minioConsoleURL}" = {
-          enableACME = config.modules.services.nginx.enableAcme;
-          acmeRoot = null;
-          forceSSL = config.modules.services.nginx.enableAcme;
-          locations."/" = {
+          locations."/console/" = {
             proxyPass = "http://127.0.0.1:9001/";
+            proxyWebsockets = true;
             extraConfig = ''
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
+              rewrite ^/console/(.*) /$1 break;
+              real_ip_header X-Real-IP;
             '';
           };
         };

@@ -4,7 +4,6 @@
 {
   imports = [
     ./adguard
-    ./cfdyndns
     ./chrony
     ./dae
     ./glance

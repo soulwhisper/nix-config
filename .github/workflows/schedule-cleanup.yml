@@ -19,10 +19,31 @@ jobs:
           app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
           private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
 
-      - name: Delete workflow runs
+      - name: Cleanup workflow stale runs
         uses: Mattraks/delete-workflow-runs@4c9f24749b7996562658e3d6e10662489e22caca # v2
         with:
           token: "${{ steps.app-token.outputs.token }}"
           repository: "${{ github.repository }}"
-          retain_days: "14"
+          retain_days: "0"
+          keep_minimum_runs: "0"
+          delete_run_by_conclusion_pattern: "cancelled,skipped"
+
+      - name: Cleanup workflow success runs
+        uses: Mattraks/delete-workflow-runs@4c9f24749b7996562658e3d6e10662489e22caca # v2
+        with:
+          token: "${{ steps.app-token.outputs.token }}"
+          repository: "${{ github.repository }}"
+          retain_days: "7"
           keep_minimum_runs: "10"
+          delete_run_by_conclusion_pattern: "success"
+
+
+      - name: Clenaup workflow "update-nvfetcher" runs
+        uses: Mattraks/delete-workflow-runs@4c9f24749b7996562658e3d6e10662489e22caca # v2
+        with:
+          token: "${{ steps.app-token.outputs.token }}"
+          repository: "${{ github.repository }}"
+          retain_days: "2"
+          keep_minimum_runs: "10"
+          delete_workflow_pattern: "update-nvfetcher.yml"
+          delete_run_by_conclusion_pattern: "success"

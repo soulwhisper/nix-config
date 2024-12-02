@@ -147,8 +147,6 @@ filtering:
   rewrites:
     - domain: lab.noirprime.com
       answer: 172.19.82.10
-    - domain: minio.noirprime.com
-      answer: 172.19.82.10
     - domain: s3.noirprime.com
       answer: 172.19.82.10
   safebrowsing_cache_size: 1048576
