@@ -98,7 +98,7 @@ in
 
         samba = {
           enable = true;
-          shares = {
+          settings = {
             Backup = {
               path = "/numina/backup";
               "read only" = "no";
