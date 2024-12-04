@@ -17,7 +17,7 @@ in
 
     environment.etc = {
         "adguard/AdGuardHome.yaml".source = pkgs.writeTextFile {
-        name = "Adguard-Config";
+        name = "AdGuardHome.yaml";
         text = builtins.readFile ./AdGuardHome.yaml;
         };
         "adguard/AdGuardHome.yaml".mode = "0755";

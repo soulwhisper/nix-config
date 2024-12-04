@@ -22,7 +22,7 @@ in
 
     environment.etc = {
       "dae/config.dae".source = pkgs.writeText "config.dae" (builtins.readFile ./config.dae);
-      "dae/config.dae".mode = "0400";
+      "dae/config.dae".mode = "0600";
 
       "dae/update-dae-subs.sh".source = pkgs.writeTextFile {
         name = "update-dae-subs.sh";

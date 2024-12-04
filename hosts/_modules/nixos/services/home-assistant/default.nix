@@ -12,7 +12,7 @@ in
     enable = lib.mkEnableOption "home-assistant";
     configDir = lib.mkOption {
       type = lib.types.path;
-      default = "/var/lib/hass";
+      default = "/var/lib/home-assistant";
     };
   };
 

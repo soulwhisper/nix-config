@@ -61,6 +61,8 @@ in
       services = {
         adguard.enable = true;
         chrony.enable = true;
+        gatus.enable = true;
+
         dae = {
           enable = true;
           subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
@@ -72,9 +74,19 @@ in
         };
         home-assistant = {
           enable = true;
-          configDir = "/numina/apps/hass";
+          configDir = "/numina/apps/home-assistant";
+        };
+        music-assistant = {
+          enable = true;
+          configDir = "/numina/apps/music-assistant";
         };
 
+        homebox = {
+          enable = true;
+          dataDir = "/numina/apps/homebox";
+          enableReverseProxy = true;
+          homeboxURL = "box.noirprime.com";
+        };
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;

@@ -6,9 +6,12 @@
     ./adguard
     ./chrony
     ./dae
+    ./gatus
     ./glance
     ./home-assistant
+    ./homebox
     ./minio
+    ./music-assistant
     ./nginx
     ./nfs
     ./node-exporter

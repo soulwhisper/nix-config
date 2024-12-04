@@ -5,7 +5,6 @@
   ...
 }:
 let
-  inherit (lib) mkEnableOption mkPackageOption mkOption mkIf types;
   cfg = config.modules.services.glance;
 in
 {

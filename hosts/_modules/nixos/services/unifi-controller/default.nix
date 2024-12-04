@@ -1,4 +1,5 @@
 # visit: localhost:8443
+# data: /var/lib/unifi/data
 
 {
   lib,
@@ -16,12 +17,12 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    networking.firewall.allowedTCPPorts = [ 8080 8443 ];
-    networking.firewall.allowedUDPPorts = [ 3478 10001 ];
+    networking.firewall.allowedTCPPorts = [ 8443 ];
 
     services.unifi = {
       enable = true;
       unifiPackage = pkgs.unstable.unifi;
+      openFirewall = true;
     };
   };
 }
