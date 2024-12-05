@@ -24,7 +24,7 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-    XCADDY_SKIP_BUILD=1 TMPDIR="$PWD" ${pkgs.xcaddy}/bin/xcaddy build ${caddyCore.version} \
+    ${pkgs.xcaddy}/bin/xcaddy build ${caddyCore.version} \
       --with github.com/caddyserver/caddy/v2@${caddyCore.version}=${caddyCore.src}
       --with github.com/caddy-dns/cloudflare=${caddyPluginCloudflare.src}
     runHook postBuild
@@ -32,7 +32,8 @@ stdenv.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    mv buildenv* $out
+    mkdir -p $out/bin
+    mv caddy $out/bin/
     runHook postInstall
   '';
 
