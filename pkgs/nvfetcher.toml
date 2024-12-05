@@ -2,7 +2,7 @@
 src.github = "caddyserver/caddy"
 fetch.github = "caddyserver/caddy"
 [caddy-plugin-cloudflare]
-src.github = "caddy-dns/cloudflare"
+src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 fetch.github = "caddy-dns/cloudflare"
 [kubecolor-catppuccin]
