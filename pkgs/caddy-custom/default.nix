@@ -24,7 +24,7 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-    ${pkgs.xcaddy}/bin/xcaddy build "${caddyCore.version}" \
+    ${pkgs.xcaddy}/bin/xcaddy build \
       --with github.com/caddyserver/caddy/v2=${caddyCore.src}
       --with github.com/caddy-dns/cloudflare=${caddyPluginCloudflare.src}
     runHook postBuild
