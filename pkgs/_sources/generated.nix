@@ -8,7 +8,7 @@
       owner = "caddyserver";
       repo = "caddy";
       rev = "v2.8.4";
-      fetchSubmodules = false;
+      fetchSubmodules = true;
       sha256 = "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=";
     };
   };
