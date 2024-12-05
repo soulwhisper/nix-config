@@ -6,6 +6,7 @@
   ...
 }:
 {
+  caddy-custom = pkgs.callPackage ./caddy-custom {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};
   kubectl-get-all = pkgs.callPackage ./kubectl-get-all {};

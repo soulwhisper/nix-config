@@ -14,45 +14,35 @@ in
       type = lib.types.str;
       default = "/var/lib/homebox/data";
     };
-    enableReverseProxy = lib.mkEnableOption "homebox-reverseProxy";
-    homeboxURL = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    modules.services.nginx = lib.mkIf cfg.enableReverseProxy {
-      enable = true;
-      virtualHosts = {
-        "${cfg.homeboxURL}" = {
-          enableACME = config.modules.services.nginx.enableAcme;
-          acmeRoot = null;
-          forceSSL = config.modules.services.nginx.enableAcme;
-          extraConfig = ''
-            client_max_body_size 0;
-            proxy_buffering off;
-            proxy_request_buffering off;
-            ignore_invalid_headers off;
-            chunked_transfer_encoding off;
-          '';
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:7745/";
-          };
-        };
-      };
-    };
+    services.caddy.virtualHosts."box.noirprime.com".extraConfig = ''
+      handle {
+        reverse_proxy localhost:9803
+      }
+    '';
 
-    services.homebox = {
-      enable = true;
-      package = pkgs.unstable.homebox;
-      settings = {
+    # networking.firewall.allowedTCPPorts = [ 9803 ];
+
+    systemd.services.homebox = {
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      environment = {
 	      HBOX_STORAGE_DATA = "${cfg.dataDir}";
 	      HBOX_STORAGE_SQLITE_URL = "${cfg.dataDir}/homebox.db?_pragma=busy_timeout=999&_pragma=journal_mode=WAL&_fk=1";
+	      HBOX_WEB_PORT = "9803";
 	      HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
-        HBOX_WEB_MAX_UPLOAD_SIZE = "100";
-		    HBOX_MODE = "production";
-	    };
+	      HBOX_WEB_MAX_UPLOAD_SIZE = "100";
+	      HBOX_MODE = "production";
+      };
+      seriviceConfig = {
+        ExecStart = lib.getExe pkgs.unstable.homebox;
+        StateDirectory = "homebox";
+        WorkingDirectory = "/var/lib/homebox";
+        StateDirectoryMode = "0700";
+        Restart = "always";
+      };
     };
   };
 }

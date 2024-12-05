@@ -1,3 +1,6 @@
+[caddy-plugin-cloudflare]
+src.git = "https://github.com/caddy-dns/cloudflare.git"
+src.branch = "master"
 [kubecolor-catppuccin]
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
 src.branch = "main"

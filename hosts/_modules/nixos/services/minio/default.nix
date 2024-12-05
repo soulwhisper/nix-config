@@ -18,42 +18,19 @@ in
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
-    enableReverseProxy = lib.mkEnableOption "minio-reverseProxy";
-    minioURL = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    modules.services.nginx = lib.mkIf cfg.enableReverseProxy {
-      enable = true;
-      virtualHosts = {
-        "${cfg.minioURL}" = {
-          enableACME = config.modules.services.nginx.enableAcme;
-          acmeRoot = null;
-          forceSSL = config.modules.services.nginx.enableAcme;
-          extraConfig = ''
-            client_max_body_size 0;
-            proxy_buffering off;
-            proxy_request_buffering off;
-            ignore_invalid_headers off;
-            chunked_transfer_encoding off;
-          '';
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:9000/";
-          };
-          locations."/console/" = {
-            proxyPass = "http://127.0.0.1:9001/";
-            proxyWebsockets = true;
-            extraConfig = ''
-              rewrite ^/console/(.*) /$1 break;
-              real_ip_header X-Real-IP;
-            '';
-          };
-        };
-      };
-    };
+    services.caddy.virtualHosts."s3.noirprime.com".extraConfig = ''
+      handle_path /console/* {
+	      reverse_proxy localhost:9001
+      }
+      handle {
+	      reverse_proxy localhost:9000
+      }
+    '';
+
+    # networking.firewall.allowedTCPPorts = [ 9000 9001 ];
 
     services.minio = {
       enable = true;

@@ -16,7 +16,9 @@ sops --verbose -i -e secrets.sops.yaml
 ```shell
 networking:
     cloudflare:
-        auth: CLOUDFLARE_DNS_API_TOKEN={cf-api-token}
+        auth: |
+            CLOUDFLARE_EMAIL={cf-email}
+            CLOUDFLARE_DNS_API_TOKEN={cf-api-token}
     dae:
         subscription: |
             {sub-url-1}
