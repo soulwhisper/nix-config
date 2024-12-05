@@ -22,10 +22,9 @@ in
     services.caddy = {
       enable = true;
       package = ( pkgs.callPackage ./caddy-custom.nix {
-      plugins = [ "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece" ];
-      hash = "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=";
+        plugins = [ "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece" ];
+        hash = "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=";
       });
-    };
       globalConfig = ''
         email {$CLOUDFLARE_EMAIL}
         acme_dns cloudflare {$CLOUDFLARE_DNS_API_TOKEN}
