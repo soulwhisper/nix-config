@@ -78,6 +78,16 @@ jobs:
           echo "Last 100 lines of error log:"
           tail -n 100 /tmp/nix-build-err.log
 
+      - name: Show drv failure details
+        if: failure()
+        run: |
+          drv=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
+          if [ -n $drv ]; then
+            nix log $drv
+            echo $drv
+          fi
+          exit 1
+
       - name: Diff profile
         id: diff
         run: |

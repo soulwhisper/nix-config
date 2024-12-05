@@ -19,7 +19,7 @@ in
       hostName = hostname;
       hostId = "52a88b81";
       useDHCP = true;
-      firewall.enable = false;
+      firewall.enable = true;
     };
 
     users.users.soulwhisper = {
@@ -59,54 +59,49 @@ in
       };
 
       services = {
-        adguard.enable = true;
-        chrony.enable = true;
-        gatus.enable = true;
+        ## Mandatory ##
+        openssh.enable = true;
 
         dae = {
           enable = true;
           subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
         };
 
-        glance = {
+        caddy = {
           enable = true;
-          glanceURL = "lab.noirprime.com";
+          CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
+
+        ## Optional ##
+        adguard.enable = true;
+        chrony.enable = true;
+        gatus.enable = true;
+        glance.enable = true;
+        node-exporter.enable = true;
+        music-assistant.enable = true;
+
         home-assistant = {
           enable = true;
           configDir = "/numina/apps/home-assistant";
         };
-        music-assistant = {
-          enable = true;
-          configDir = "/numina/apps/music-assistant";
-        };
-
         homebox = {
           enable = true;
           dataDir = "/numina/apps/homebox";
-          enableReverseProxy = true;
-          homeboxURL = "box.noirprime.com";
         };
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
           dataDir = "/numina/apps/minio";
-          enableReverseProxy = true;
-          minioURL = "s3.noirprime.com";
         };
+
+        ## NAS ##
+        smartd.enable = true;
+        smartctl-exporter.enable = true;
 
         nfs = {
           enable = true;
           exports = "/numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
         };
-
-        nginx = {
-          enableAcme = true;
-          acmeCloudflareAuthFile = config.sops.secrets."networking/cloudflare/auth".path;
-        };
-
-        node-exporter.enable = true;
-        openssh.enable = true;
 
         samba = {
           enable = true;
@@ -135,9 +130,6 @@ in
             };
           };
         };
-
-        smartd.enable = true;
-        smartctl-exporter.enable = true;
       };
 
       users = {

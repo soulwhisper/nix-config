@@ -10,36 +10,16 @@ in
 {
   options.modules.services.glance = {
     enable = lib.mkEnableOption "glance";
-    enableReverseProxy = lib.mkEnableOption "glance-reverseProxy";
-    glanceURL = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    modules.services.nginx = lib.mkIf cfg.enableReverseProxy {
-      enable = true;
-      virtualHosts = {
-        "${cfg.glanceURL}" = {
-          enableACME = config.modules.services.nginx.enableAcme;
-          acmeRoot = null;
-          forceSSL = config.modules.services.nginx.enableAcme;
-          extraConfig = ''
-            client_max_body_size 0;
-            proxy_buffering off;
-            proxy_request_buffering off;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-          '';
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8000/";
-          };
-        };
-      };
-    };
+    services.caddy.virtualHosts."lab.noirprime.com".extraConfig = ''
+      handle {
+	      reverse_proxy localhost:9802
+      }
+    '';
 
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    # networking.firewall.allowedTCPPorts = [ 9802 ];
 
     environment.etc = {
         "glance/glance.yaml".source = pkgs.writeTextFile {
