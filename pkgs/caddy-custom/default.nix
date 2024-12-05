@@ -6,6 +6,7 @@
 }:
 let
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
+  caddyCore = sourceData.caddy-core;
   caddyPluginCloudflare = sourceData.caddy-plugin-cloudflare;
   vendorData = lib.importJSON ../_sources/vendorhash.json;
 in
@@ -23,7 +24,9 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-    ${pkgs.xcaddy}/bin/xcaddy build latest --with github.com/caddy-dns/cloudflare=${caddyPluginCloudflare.src}
+    ${pkgs.xcaddy}/bin/xcaddy build latest \
+      --with github.com/caddyserver/caddy/v2=${caddyCore.src}
+      --with github.com/caddy-dns/cloudflare=${caddyPluginCloudflare.src}
     runHook postBuild
   '';
 
