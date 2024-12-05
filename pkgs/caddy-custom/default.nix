@@ -12,7 +12,7 @@ let
 in
 stdenv.mkDerivation {
   pname = "caddy";
-  version = "latest";
+  version = "${caddyCore.version}";
   dontUnpack = true;
 
   nativeBuildInputs = [ pkgs.go pkgs.xcaddy ];
@@ -24,7 +24,7 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-    ${pkgs.xcaddy}/bin/xcaddy build latest \
+    ${pkgs.xcaddy}/bin/xcaddy build "${caddyCore.version}" \
       --with github.com/caddyserver/caddy/v2=${caddyCore.src}
       --with github.com/caddy-dns/cloudflare=${caddyPluginCloudflare.src}
     runHook postBuild
