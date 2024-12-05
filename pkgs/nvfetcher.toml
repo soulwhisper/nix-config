@@ -1,6 +1,7 @@
 [caddy-core]
 src.github = "caddyserver/caddy"
 fetch.github = "caddyserver/caddy"
+git.fetchSubmodules = true
 [caddy-plugin-cloudflare]
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
