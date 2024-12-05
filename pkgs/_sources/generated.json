@@ -1,4 +1,44 @@
 {
+    "caddy-core": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "caddy-core",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "caddyserver",
+            "repo": "caddy",
+            "rev": "v2.8.4",
+            "sha256": "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=",
+            "type": "github"
+        },
+        "version": "v2.8.4"
+    },
+    "caddy-plugin-cloudflare": {
+        "cargoLocks": null,
+        "date": "2024-07-03",
+        "extract": null,
+        "name": "caddy-plugin-cloudflare",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "caddy-dns",
+            "repo": "cloudflare",
+            "rev": "89f16b99c18ef49c8bb470a82f895bce01cbaece",
+            "sha256": "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=",
+            "type": "github"
+        },
+        "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
+    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",
