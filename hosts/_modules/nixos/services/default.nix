@@ -4,6 +4,7 @@
 {
   imports = [
     ./adguard
+    ./caddy
     ./chrony
     ./dae
     ./gatus
@@ -12,7 +13,6 @@
     ./homebox
     ./minio
     ./music-assistant
-    ./nginx
     ./nfs
     ./node-exporter
     ./openssh

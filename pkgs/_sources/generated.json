@@ -1,4 +1,24 @@
 {
+    "caddy-plugin-cloudflare": {
+        "cargoLocks": null,
+        "date": "2024-07-03",
+        "extract": null,
+        "name": "caddy-plugin-cloudflare",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "caddy-dns",
+            "repo": "cloudflare",
+            "rev": "89f16b99c18ef49c8bb470a82f895bce01cbaece",
+            "sha256": "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=",
+            "type": "github"
+        },
+        "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
+    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",

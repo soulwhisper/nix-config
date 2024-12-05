@@ -19,7 +19,7 @@ in
       hostName = hostname;
       hostId = "d16c6404";
       useDHCP = true;
-      firewall.enable = false;
+      firewall.enable = true;
     };
 
     users.users.soulwhisper = {
