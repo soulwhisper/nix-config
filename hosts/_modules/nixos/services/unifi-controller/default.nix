@@ -16,8 +16,17 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    services.caddy.virtualHosts."unifi.noirprime.com".extraConfig = ''
+      handle {
+	      reverse_proxy localhost:8443 {
+          transport http {
+            tls_insecure_skip_verify
+          }
+        }
+      }
+    '';
 
-    networking.firewall.allowedTCPPorts = [ 8443 ];
+    # networking.firewall.allowedTCPPorts = [ 8443 ];
 
     services.unifi = {
       enable = true;

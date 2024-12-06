@@ -1,4 +1,8 @@
 # this is an example
+web:
+  address: 0.0.0.0
+  port: 9801
+
 storage:
   type: sqlite
   path: /etc/gatus/data.db

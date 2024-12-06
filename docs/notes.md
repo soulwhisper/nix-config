@@ -4,6 +4,7 @@
 - atuin-key should be base64 format
 - change iterm2 theme to dark
 - change iterm2 font to "firacode-nerd-font" afterwards
+- caddy-custom, [ref](https://github.com/Ramblurr/nixos-caddy);
 
 ```shell
 # install req. incl. cachix & nvd
@@ -30,4 +31,33 @@ gpg --import privatekey
 gpt --import publickey
 git config --global user.signingkey <gpg-id>
 git config --global commit.gpgsign true
+```
+
+## service ports remap
+
+- unchangeable services like unifi not touched;
+- reverse proxy use 80 /443; dns & proxy ports not changed;
+- only remap duplicated ports below;
+- storage services use 9000 - 9099;
+- monitor services use 9100 - 9199;
+- web services use 9800 - 9999;
+
+```shell
+# unchangeable
+adguard-dns: 53,67,68
+unifi: 8080,8443,8880,8843,6789,3478,10001
+
+# should-not-change
+caddy: 80,443
+dae: 1080
+home-assistant: 8123
+minio: 9000,9001
+node-exporter: 9100
+
+# remap
+adguard-ui: 9800
+gatus: 9801
+glance: 9802
+homebox: 9803
+
 ```

@@ -72,11 +72,19 @@ jobs:
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
-      - name: Show last 100 lines of error log
+      - name: Show drv failure details
         if: failure()
         run: |
+          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
+          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv" | head -n 1 )
           echo "Last 100 lines of error log:"
           tail -n 100 /tmp/nix-build-err.log
+          if [ -n $failed_drv_t1]; then
+            nix log $failed_drv_t1
+          else if [ -n $failed_drv_t2]; then
+            nix log $failed_drv_t2
+          fi
+          exit 1
 
       - name: Diff profile
         id: diff
