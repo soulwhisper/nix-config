@@ -34,13 +34,11 @@
             thang-nm.catppuccin-perfect-icons
 
             # Language support
-            #hashicorp.terraform
             helm-ls.helm-ls
             jnoortheen.nix-ide
             savh.json5-kit
             ms-azuretools.vscode-docker
             ms-python.python
-            #redhat.ansible
             redhat.vscode-yaml
             tamasfe.even-better-toml
 

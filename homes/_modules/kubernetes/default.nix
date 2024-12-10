@@ -41,7 +41,6 @@ in
       kubeconform
       kubecolor
       kubectl
-      stern
     ]) ++
     [
       wrappedHelmPkg
@@ -59,13 +58,32 @@ in
         netshoot = "https://github.com/nilic/kubectl-netshoot.git";
       };
       plugins = [
+        # accessibility
         "browse-pvc"
-        "klock"
         "pv-migrate"
         "mayastor"
+        "oidc-login"
+        "view-secret"
+
+        # debug
+        "explore"
+        "klock"
         "neat"
         "netshoot/netshoot"
-        "view-secret"
+        "stern"
+
+        # optimising
+        "kubescape"
+        "popeye"
+        "resource-capacity"
+        "score"
+
+        # multi-clusters
+        "karmada"
+
+        # ml
+        "kuberay"
+
       ];
     };
 
