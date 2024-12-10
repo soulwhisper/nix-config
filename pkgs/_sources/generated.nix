@@ -36,66 +36,6 @@
     };
     date = "2024-05-24";
   };
-  kubectl-browse-pvc = {
-    pname = "kubectl-browse-pvc";
-    version = "v1.0.7";
-    src = fetchFromGitHub {
-      owner = "clbx";
-      repo = "kubectl-browse-pvc";
-      rev = "v1.0.7";
-      fetchSubmodules = false;
-      sha256 = "sha256-Ql+mMgpmcbGy5TwQrv8f9uWK9yNXfHykNDnOrp4E7+I=";
-    };
-  };
-  kubectl-get-all = {
-    pname = "kubectl-get-all";
-    version = "v1.3.8";
-    src = fetchFromGitHub {
-      owner = "corneliusweig";
-      repo = "ketall";
-      rev = "v1.3.8";
-      fetchSubmodules = false;
-      sha256 = "sha256-Mau57mXS78fHyeU0OOz3Tms0WNu7HixfAZZL3dmcj3w=";
-    };
-  };
-  kubectl-klock = {
-    pname = "kubectl-klock";
-    version = "v0.7.2";
-    src = fetchFromGitHub {
-      owner = "applejag";
-      repo = "kubectl-klock";
-      rev = "v0.7.2";
-      fetchSubmodules = false;
-      sha256 = "sha256-S7cpVRVboLkU+GgvwozJmfFAO29tKpPlk+r9mbVLxF8=";
-    };
-  };
-  kubectl-mayastor-aarch64-darwin = {
-    pname = "kubectl-mayastor-aarch64-darwin";
-    version = "v2.7.1";
-    src = fetchurl {
-      url = "https://github.com/openebs/mayastor-extensions/releases/download/v2.7.1/kubectl-mayastor-aarch64-apple-darwin.tar.gz";
-      sha256 = "sha256-4w/UYMmRwPmjlK8ktO6qnjPolSk0p/fFkSFk5Yp7uJg=";
-    };
-  };
-  kubectl-mayastor-x86_64-linux = {
-    pname = "kubectl-mayastor-x86_64-linux";
-    version = "v2.7.1";
-    src = fetchurl {
-      url = "https://github.com/openebs/mayastor-extensions/releases/download/v2.7.1/kubectl-mayastor-x86_64-linux-musl.tar.gz";
-      sha256 = "sha256-kWWajtIwIXuW64FUcbY7d8So2+BvgT14Dc+QLt2gRnY=";
-    };
-  };
-  kubectl-netshoot = {
-    pname = "kubectl-netshoot";
-    version = "v0.1.0";
-    src = fetchFromGitHub {
-      owner = "nilic";
-      repo = "kubectl-netshoot";
-      rev = "v0.1.0";
-      fetchSubmodules = false;
-      sha256 = "sha256-6IQmD2tJ1qdjeJqOnHGSpfNg6rxDRmdW9a9Eon/EdsM=";
-    };
-  };
   kubectl-pgo = {
     pname = "kubectl-pgo";
     version = "v0.5.0";

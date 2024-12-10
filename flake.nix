@@ -50,6 +50,12 @@
     talhelper = {
       url = "github:budimanjojo/talhelper";
     };
+
+    # Krewfile - Declarative krew plugin management
+    krewfile = {
+      url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
