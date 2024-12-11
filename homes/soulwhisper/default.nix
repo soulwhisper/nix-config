@@ -31,7 +31,7 @@
 
             # Themes
             catppuccin.catppuccin-vsc
-            thang-nm.catppuccin-perfect-icons
+            catppuccin.catppuccin-vsc-icons
 
             # Language support
             helm-ls.helm-ls
