@@ -13,6 +13,8 @@ pkgs.buildGoModule rec {
   version = lib.strings.removePrefix "v" packageData.version;
   vendorHash = vendorData.shcopy;
 
+  ldflags = ["-s" "-w"];
+
   meta = {
     mainProgram = "shcopy";
     description = "Copy text to your system clipboard locally and remotely using ANSI OSC52 sequence";

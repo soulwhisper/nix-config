@@ -33,6 +33,9 @@ fetch.github = "aymanbagabas/shcopy"
 [talosctl]
 src.github = "siderolabs/talos"
 fetch.github = "siderolabs/talos"
+[talos-api]
+src.github = "siderolabs/discovery-service"
+fetch.github = "siderolabs/discovery-service"
 [usage]
 src.github = "jdx/usage"
 fetch.github = "jdx/usage"

@@ -75,6 +75,7 @@ in
         ## Optional ##
         adguard.enable = true;
         chrony.enable = true;
+        talos-api.enable = true;
         gatus.enable = true;
         glance.enable = true;
         node-exporter.enable = true;

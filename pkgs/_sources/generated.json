@@ -39,6 +39,26 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
+    "talos-api": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "talos-api",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "siderolabs",
+            "repo": "discovery-service",
+            "rev": "v1.0.8",
+            "sha256": "sha256-WJ77SgMsVIkvTQRPAqNle0QWPyudk5iVvok9F4nvPp8=",
+            "type": "github"
+        },
+        "version": "v1.0.8"
+    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",
@@ -133,10 +153,10 @@
             "name": null,
             "owner": "jdx",
             "repo": "usage",
-            "rev": "v1.4.1",
-            "sha256": "sha256-IM9MF+0zaRU0rRJPAJnn3WaAri+tY6mO/vQY+f1BoyY=",
+            "rev": "v1.5.2",
+            "sha256": "sha256-+uaJGzK5JE0ZoAyryrjw2mV5zKTB77npKneYU41xETA=",
             "type": "github"
         },
-        "version": "v1.4.1"
+        "version": "v1.5.2"
     }
 }
