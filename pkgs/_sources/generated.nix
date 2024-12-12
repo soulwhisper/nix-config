@@ -24,17 +24,6 @@
     };
     date = "2024-07-03";
   };
-  talos-api = {
-    pname = "talos-api";
-    version = "v1.0.8";
-    src = fetchFromGitHub {
-      owner = "siderolabs";
-      repo = "discovery-service";
-      rev = "v1.0.8";
-      fetchSubmodules = false;
-      sha256 = "sha256-WJ77SgMsVIkvTQRPAqNle0QWPyudk5iVvok9F4nvPp8=";
-    };
-  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";
@@ -67,6 +56,17 @@
       rev = "v0.1.5";
       fetchSubmodules = false;
       sha256 = "sha256-MKlW8HrkXCYCOeO38F0S4c8mVbsG/VcZ+oGFC70amqQ=";
+    };
+  };
+  talos-api = {
+    pname = "talos-api";
+    version = "v1.0.8";
+    src = fetchFromGitHub {
+      owner = "siderolabs";
+      repo = "discovery-service";
+      rev = "v1.0.8";
+      fetchSubmodules = false;
+      sha256 = "sha256-WJ77SgMsVIkvTQRPAqNle0QWPyudk5iVvok9F4nvPp8=";
     };
   };
   talosctl = {
