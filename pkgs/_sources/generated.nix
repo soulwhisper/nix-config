@@ -24,6 +24,17 @@
     };
     date = "2024-07-03";
   };
+  discovery-api = {
+    pname = "discovery-api";
+    version = "v1.0.8";
+    src = fetchFromGitHub {
+      owner = "siderolabs";
+      repo = "discovery-service";
+      rev = "v1.0.8";
+      fetchSubmodules = false;
+      sha256 = "sha256-WJ77SgMsVIkvTQRPAqNle0QWPyudk5iVvok9F4nvPp8=";
+    };
+  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";

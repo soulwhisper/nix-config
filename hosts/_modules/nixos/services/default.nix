@@ -7,6 +7,7 @@
     ./caddy
     ./chrony
     ./dae
+    ./discovery-api
     ./gatus
     ./glance
     ./home-assistant
