@@ -5,6 +5,9 @@ fetch.github = "caddyserver/caddy"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 fetch.github = "caddy-dns/cloudflare"
+[discovery-api]
+src.github = "siderolabs/discovery-service"
+fetch.github = "siderolabs/discovery-service"
 [kubecolor-catppuccin]
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
 src.branch = "main"
