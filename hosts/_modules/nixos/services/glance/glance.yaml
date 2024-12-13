@@ -37,7 +37,7 @@ pages:
                 color: 200 50 50
                 links:
                   - title: Adguard
-                    url: http://10.0.0.10:3000
+                    url: http://10.0.0.10:9800
                   - title: Home-assistant
                     url: http://10.20.0.10:8123/lovelace/home
                   - title: Minio

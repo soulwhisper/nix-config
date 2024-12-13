@@ -20,6 +20,7 @@
     ./samba
     ./smartd
     ./smartctl-exporter
+    ./talos-api
     ./unifi-controller
   ];
 }
