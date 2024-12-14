@@ -7,6 +7,6 @@
   "kubectl-netshoot": "sha256-x8Jvi+RX63wpyICI2GHqDTteV877evzfCxZDOnkBDWA=",
   "kubectl-pgo": "sha256-PhTDqsFhPas2mcK7Ew2TQNqnvftk/+7wo2yFE9dnSUY=",
   "shcopy": "sha256-kD73EozkeUd23pwuy71bcNmth2lEKom0CUPDUNPNB1Q=",
-  "talosctl": "sha256-/Xt/WZ+5ptxsiUkm6mplilB9gqv3mz+j7tyNikzJtkA=",
-  "usage": "sha256-Y01nQTQQDl0wsagIksnqxqtKK+PoYJSIQKVuTqBOzPU="
+  "talosctl": "sha256-8mcxWIHnMFJ/jKzy2YJz+IvI3kb+waaI6Sxjrirh5zg=",
+  "usage": "sha256-5hfBMglFetEzv0nsLbqYHr15fIwctchbzqtT+0fJI6U="
 }
