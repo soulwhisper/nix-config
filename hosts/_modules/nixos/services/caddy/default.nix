@@ -22,6 +22,8 @@ in
     services.caddy = {
       enable = true;
       package = pkgs.caddy-custom;
+      user = "apps";
+      group = "apps";
       globalConfig = ''
         email {$CLOUDFLARE_EMAIL}
         acme_dns cloudflare {$CLOUDFLARE_DNS_API_TOKEN}

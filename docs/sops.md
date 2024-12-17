@@ -18,7 +18,8 @@ networking:
     cloudflare:
         auth: |
             CLOUDFLARE_EMAIL={cf-email}
-            CLOUDFLARE_DNS_API_TOKEN={cf-api-token}
+            CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
+            CLOUDFLARE_HOMELAB_DOMAIN={cf-homelab-domain}
     dae:
         subscription: |
             {sub-url-1}

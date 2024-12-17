@@ -14,7 +14,15 @@ in
       type = lib.types.path;
       default = "/var/lib/home-assistant";
     };
+    addons = lib.mkOption {
+      type = with lib.types; listOf str;
+      default = [];
+    };
   };
+
+  imports = [
+    ./sgcc
+  ];
 
   config = lib.mkIf cfg.enable {
     services.caddy.virtualHosts."hass.noirprime.com".extraConfig = ''

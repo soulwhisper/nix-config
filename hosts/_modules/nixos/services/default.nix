@@ -7,10 +7,12 @@
     ./caddy
     ./chrony
     ./dae
+    ./ddns
     ./gatus
     ./glance
     ./home-assistant
     ./homebox
+    ./kms
     ./minio
     ./music-assistant
     ./nfs
@@ -22,5 +24,6 @@
     ./smartctl-exporter
     ./talos-api
     ./unifi-controller
+    ./ups
   ];
 }
