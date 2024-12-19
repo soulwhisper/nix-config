@@ -146,14 +146,12 @@ in
           appuser = {
             isSystemUser = true;
             uid = 991;
+            group = "appuser";
           };
         };
         groups = {
           appuser = {
             gid = 991;
-            members = [
-              "appuser"
-            ];
           };
         };
       };
