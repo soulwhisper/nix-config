@@ -58,6 +58,7 @@ in
     # enable avahi service for volume:TimeMachine
     services.avahi =  lib.mkIf cfg.avahi.TimeMachine.enable {
       enable = true;
+      openFirewall = true;
       extraServiceFiles = {
         smb = ''
         <?xml version="1.0" standalone='no'?>

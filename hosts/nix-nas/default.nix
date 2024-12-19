@@ -143,18 +143,16 @@ in
 
       users = {
         additionalUsers = {
-          homie = {
-            isNormalUser = true;
-            extraGroups = ifGroupsExist [
-              "samba-users"
-            ];
+          appuser = {
+            isSystemUser = true;
+            uid = 991;
           };
         };
         groups = {
-          admins = {
+          appuser = {
             gid = 991;
             members = [
-              "soulwhisper"
+              "appuser"
             ];
           };
         };
