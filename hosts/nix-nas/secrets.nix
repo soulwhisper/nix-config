@@ -13,7 +13,7 @@
           restartUnits = [ "minio.service" ];
         };
         "networking/cloudflare/auth" = {
-          owner = "apps";
+          owner = config.users.users.caddy.name;
         };
         "networking/dae/subscription" = { };
         "users/soulwhisper/password" = {

@@ -60,5 +60,6 @@ gatus: 9801
 glance: 9802
 homebox: 9803
 talos-api: 9900
+ddns-ui: 9901
 
 ```

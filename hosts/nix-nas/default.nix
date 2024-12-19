@@ -75,6 +75,7 @@ in
         ## Optional ##
         adguard.enable = true;
         chrony.enable = true;
+        ddns.enable = true;
         talos-api.enable = true;
         gatus.enable = true;
         glance.enable = true;
@@ -82,10 +83,6 @@ in
         node-exporter.enable = true;
         music-assistant.enable = true;
 
-        ddns = {
-          enable = true;
-          CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
-        };
         home-assistant = {
           enable = true;
           configDir = "/numina/apps/home-assistant";
@@ -143,9 +140,11 @@ in
 
       users = {
         additionalUsers = {
-          apps = {
+          homie = {
             isNormalUser = true;
-            uid = 1001;
+            extraGroups = ifGroupsExist [
+              "samba-users"
+            ];
           };
         };
         groups = {

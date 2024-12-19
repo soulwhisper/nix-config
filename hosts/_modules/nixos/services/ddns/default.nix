@@ -8,30 +8,31 @@ let
   cfg = config.modules.services.ddns;
 in
 {
+  # ddns-go cant read env-file correct, config via :9901
   options.modules.services.ddns = {
     enable = lib.mkEnableOption "ddns";
-    CloudflareToken = lib.mkOption {
-      type = lib.types.nullOr lib.types.path;
-      default = null;
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers.containers.cf-ddns = {
-      image = "favonia/cloudflare-ddns:latest";
-      extraOptions = [
-        "--network=host"
-        "--read-only"
-        "--cap-drop=all"
-        "--security-opt=no-new-privileges"
-      ];
-      user = "1001:1001";
-      environment = {
-        CLOUDFLARE_API_TOKEN="{$CLOUDFLARE_DNS_API_TOKEN}";
-        DOMAINS="{$CLOUDFLARE_HOMELAB_DOMAIN}";
-        PROXIED="false";
+    networking.firewall.allowedTCPPorts = [ 9901 ];
+
+    systemd.services.ddns = {
+      wantedBy = [ "multi-user.target" ];
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
+      unitConfig = {
+        Description = "DDNS update service";
       };
-      environmentFiles = [ "${cfg.CloudflareToken}" ];
+      serviceConfig = {
+        TimeoutSec = "5min";
+        ExecStartPre =
+        [
+          "/bin/sh -c '[[ -f config.yaml ]] || touch config.yaml'"
+        ];
+        ExecStart = "${lib.getExe pkgs.unstable.ddns-go} -l :9901 -f 600 -c /var/lib/ddns/config.yaml";
+        StateDirectory = "ddns";
+        Restart = "on-failure";
+      };
     };
   };
 }
