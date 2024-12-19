@@ -24,6 +24,17 @@
     };
     date = "2024-07-03";
   };
+  hass-sgcc = {
+    pname = "hass-sgcc";
+    version = "v1.5.4";
+    src = fetchFromGitHub {
+      owner = "ARC-MX";
+      repo = "sgcc_electricity_new";
+      rev = "v1.5.4";
+      fetchSubmodules = false;
+      sha256 = "sha256-htbx5JNnAEoASmBRW8sJBiWhxMJHXi4jQ/iUKIAl8XE=";
+    };
+  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";
@@ -71,24 +82,24 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.8.4";
+    version = "v1.9.0";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.8.4";
+      rev = "v1.9.0";
       fetchSubmodules = false;
-      sha256 = "sha256-qZJN3LZfpL/uaq9H47m4qddF7ZxXLAHHVDUaRuldoBw=";
+      sha256 = "sha256-j/GqAUP3514ROf64+ouvCg//9QuGoVDgxkNFqi4r+WE=";
     };
   };
   usage = {
     pname = "usage";
-    version = "v1.6.0";
+    version = "v1.7.2";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.6.0";
+      rev = "v1.7.2";
       fetchSubmodules = false;
-      sha256 = "sha256-tKwJYVQYNh6m50Dx/s8KSS4qSU6JYnurL33RWX5g2ow=";
+      sha256 = "sha256-VeSe6WV1Tpy1PQ33EbgmFi6YWWxz3bQksW06sTHTuJU=";
     };
   };
 }

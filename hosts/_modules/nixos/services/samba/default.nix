@@ -10,6 +10,7 @@ in
 {
   options.modules.services.samba = {
     enable = lib.mkEnableOption "samba";
+    avahi.TimeMachine.enable = lib.mkEnableOption "avahi-timemachine";
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -55,7 +56,7 @@ in
     };
 
     # enable avahi service for volume:TimeMachine
-    services.avahi = {
+    services.avahi =  lib.mkIf cfg.avahi.TimeMachine.enable {
       enable = true;
       extraServiceFiles = {
         smb = ''

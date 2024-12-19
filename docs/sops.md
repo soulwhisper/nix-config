@@ -11,14 +11,14 @@ sops --verbose -i -e secrets.sops.yaml
 
 ## Template
 
-- all values should not have quotes;
+- all values should not have spaces/quotes;
 
 ```shell
 networking:
     cloudflare:
         auth: |
             CLOUDFLARE_EMAIL={cf-email}
-            CLOUDFLARE_DNS_API_TOKEN={cf-api-token}
+            CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
     dae:
         subscription: |
             {sub-url-1}
