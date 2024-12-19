@@ -26,13 +26,13 @@
   };
   hass-sgcc = {
     pname = "hass-sgcc";
-    version = "v1.5.4";
+    version = "v1.5.5";
     src = fetchFromGitHub {
       owner = "ARC-MX";
       repo = "sgcc_electricity_new";
-      rev = "v1.5.4";
+      rev = "v1.5.5";
       fetchSubmodules = false;
-      sha256 = "sha256-htbx5JNnAEoASmBRW8sJBiWhxMJHXi4jQ/iUKIAl8XE=";
+      sha256 = "sha256-HvQY6g7ElShc8YwxSswa7jINX5beB8RUm2WByex62Bg=";
     };
   };
   kubecolor-catppuccin = {
@@ -71,13 +71,13 @@
   };
   talos-api = {
     pname = "talos-api";
-    version = "v1.0.8";
+    version = "v1.0.9";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "discovery-service";
-      rev = "v1.0.8";
+      rev = "v1.0.9";
       fetchSubmodules = false;
-      sha256 = "sha256-WJ77SgMsVIkvTQRPAqNle0QWPyudk5iVvok9F4nvPp8=";
+      sha256 = "sha256-Mk0npXcSd3UmTlgAlkC/vgOJNVIHy/KV15Y3epRevYw=";
     };
   };
   talosctl = {
