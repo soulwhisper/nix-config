@@ -17,7 +17,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    hass-env = builtins.readFile ./.env;
+    sgcc-env = builtins.readFile ./.env;
 
     systemd.tmpfiles.rules = [ "d ${dataDir} 0755 root root - -" ];
 
@@ -39,7 +39,7 @@ in
     };
     systemd.services.podman-hass-sgcc.service.preStart = ''
       /bin/sh -c '[[ -f ${cfg.dataDir}/hass_sgcc.db ]] || touch ${cfg.dataDir}/hass_sgcc.db'
-      /bin/sh -c '[[ -f ${cfg.dataDir}/.env ]] || echo $(cat ${hass-env}) > ${cfg.dataDir}/.env'
+      /bin/sh -c '[[ -f ${cfg.dataDir}/.env ]] || echo $(cat ${config.sgcc-env}) > ${cfg.dataDir}/.env'
     '';
   };
 }
