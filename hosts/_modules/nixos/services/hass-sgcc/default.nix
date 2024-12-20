@@ -33,7 +33,11 @@ in
         "home-assistant/sgcc.env".mode = "0644";
     };
 
-    systemd.tmpfiles.rules = [ "d ${cfg.dataDir}/sqlite.db 0644 root root - -" ];
+    # SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0644 root root - -"
+      "f ${cfg.dataDir}/sqlite.db 0644 root root - -"
+    ];
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."hass-sgcc" = {
