@@ -14,14 +14,14 @@ in
       type = lib.types.path;
       default = "/var/lib/home-assistant/sgcc";
     };
-    env = lib.mkOption {
+    sgcc-env = lib.mkOption {
       default = "";
       type = lib.types.lines;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    cfg.env = lib.optional (cfg.env == "") (builtins.readFile ./.env);
+    sgcc-env = lib.optional (cfg.sgcc-env == "") (builtins.readFile ./.env);
 
     systemd.tmpfiles.rules = [ "d ${cfg.dataDir} 0755 root root - -" ];
 
@@ -43,7 +43,7 @@ in
     };
     systemd.services.podman-hass-sgcc.service.preStart = ''
       /bin/sh -c '[[ -f ${cfg.dataDir}/hass_sgcc.db ]] || touch ${cfg.dataDir}/hass_sgcc.db'
-      /bin/sh -c '[[ -f ${cfg.dataDir}/.env ]] || echo ${cfg.env} > ${cfg.dataDir}/.env'
+      /bin/sh -c '[[ -f ${cfg.dataDir}/.env ]] || echo ${cfg.sgcc-env} > ${cfg.dataDir}/.env'
     '';
   };
 }
