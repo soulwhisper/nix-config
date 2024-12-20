@@ -29,7 +29,7 @@ in
     virtualisation.oci-containers.containers."hass-sgcc" = {
       autoStart = true;
       image = "arcw/sgcc_electricity:latest";
-      entrypoint = "python3 main.py";
+      cmd = [ "python3 main.py" ];
       environment = {
         SET_CONTAINER_TIMEZONE="true";
         CONTAINER_TIMEZONE="Asia/Shanghai";
