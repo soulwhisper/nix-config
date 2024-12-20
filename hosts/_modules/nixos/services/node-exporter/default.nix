@@ -17,9 +17,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [ 9100 ];
+
     services.prometheus.exporters.node = {
       enable = true;
       inherit (cfg) port;
+      enabledCollectors = [ "systemd" ];
+      disabledCollectors = [ "textfile" ];
     };
   };
 }

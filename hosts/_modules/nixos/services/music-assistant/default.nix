@@ -10,6 +10,10 @@ in
 {
   options.modules.services.music-assistant = {
     enable = lib.mkEnableOption "music-assistant";
+    dataDir = lib.mkOption {
+      type = lib.types.path;
+      default = "/var/lib/music-assistant";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,10 +28,11 @@ in
       ];
       extraOptions = [
 	      "--config"
-	      "/var/lib/music-assistant"
+	      "${cfg.dataDir}"
 	      "--log-level"
 	      "DEBUG"
       ];
     };
+    systemd.services.music-assistant.serviceConfig.StateDirectory = lib.mkForce "${cfg.dataDir}";
   };
 }

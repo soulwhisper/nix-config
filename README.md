@@ -2,11 +2,11 @@
 
 [![built with nix](https://img.shields.io/badge/built_with_nix-blue?style=for-the-badge&logo=nixos&logoColor=white)](https://builtwithnix.org)
 
-This repository holds my NixOS configuration. It is fully reproducible and flakes based. Inspired by [bjw-s/nix-config](https://github.com/bjw-s/nix-config).
+This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
 - soulwhisper-mba, my macbook configs.
 - nix-dev, devops vm for corp-env.
-- nix-nas, nas vm for corp-env. Homelab ver. using TrueNAS Scale 24.10+. Inspired by [Ramblurr/nixcfg#mali](https://github.com/Ramblurr/nixcfg/tree/main/hosts/mali).
+- nix-nas, nas vm for corp-env. Was TrueNAS Scale 24.10+.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## About NAS
@@ -63,3 +63,10 @@ task nix:nixos-build HOST=nix-nas
 ## deploy
 task nix:nixos-deploy HOST=nix-nas
 ```
+
+## Inspiration
+
+I got help from some cool configs like:
+
+- [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
+- [Ramblurr/nixcfg](https://github.com/Ramblurr/nixcfg)

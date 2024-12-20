@@ -26,12 +26,12 @@ in
       }
     '';
 
-    # networking.firewall.allowedTCPPorts = [ 8443 ];
+    networking.firewall.allowedTCPPorts = [ 8080 8443 8880 8843 6789 ];
+    networking.firewall.allowedUDPPorts = [ 3478 10001 ];
 
     services.unifi = {
       enable = true;
       unifiPackage = pkgs.unstable.unifi;
-      openFirewall = true;
     };
   };
 }
