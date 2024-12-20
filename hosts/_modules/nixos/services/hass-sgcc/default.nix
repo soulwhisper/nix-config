@@ -19,7 +19,7 @@ in
   config = lib.mkIf cfg.enable {
     sgcc-env = builtins.readFile ./.env;
 
-    systemd.tmpfiles.rules = [ "d ${dataDir} 0755 root root - -" ];
+    systemd.tmpfiles.rules = [ "d ${cfg.dataDir} 0755 root root - -" ];
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."hass-sgcc" = {
