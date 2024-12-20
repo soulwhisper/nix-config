@@ -12,18 +12,14 @@ in
     enable = lib.mkEnableOption "hass-sgcc";
     dataDir = lib.mkOption {
       type = lib.types.path;
-      default = "/var/lib/hass-sgcc";
+      default = "/var/lib/home-assistant/sgcc";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc = {
-        "home-assistant/sgcc.env".source = pkgs.writeTextFile {
-        name = "sgcc-env";
-        text = builtins.readFile ./.env;
-        };
-        "home-assistant/sgcc.env".mode = "0644";
-    };
+    hass-env = builtins.readFile ./.env;
+
+    systemd.tmpfiles.rules = [ "d ${dataDir} 0755 root root - -" ];
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."hass-sgcc" = {
@@ -35,11 +31,15 @@ in
         CONTAINER_TIMEZONE="Asia/Shanghai";
       };
       volumes = [
-        "${cfg.dataDir}:/app"
+        "${cfg.dataDir}/hass_sgcc.db:/app/hass_sgcc.db"
       ];
       environmentFiles = [
-        "/etc/home-assistant/sgcc.env"
+        "${cfg.dataDir}/.env"
       ];
     };
+    systemd.services.podman-hass-sgcc.service.preStart = ''
+      /bin/sh -c '[[ -f ${cfg.dataDir}/hass_sgcc.db ]] || touch ${cfg.dataDir}/hass_sgcc.db'
+      /bin/sh -c '[[ -f ${cfg.dataDir}/.env ]] || echo $(cat ${hass-env}) > ${cfg.dataDir}/.env'
+    '';
   };
 }
