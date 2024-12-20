@@ -39,6 +39,8 @@ in
       serviceConfig = {
         ExecStart = lib.getExe pkgs.unstable.homebox;
         WorkingDirectory = "${cfg.dataDir}";
+        StateDirectory = "${cfg.dataDir}";
+        StateDirectoryMode = "0700";
         Restart = "always";
       };
     };
