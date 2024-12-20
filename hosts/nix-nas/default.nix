@@ -22,6 +22,7 @@ in
       firewall.enable = true;
     };
 
+    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";
@@ -41,9 +42,7 @@ in
           "samba-users"
         ];
     };
-    users.groups.soulwhisper = {
-      gid = 1000;
-    };
+    users.groups.soulwhisper.gid = 1000;
 
     system.activationScripts.postActivation.text = ''
       # Must match what is in /etc/shells
@@ -75,15 +74,25 @@ in
         ## Optional ##
         adguard.enable = true;
         chrony.enable = true;
+        ddns.enable = true;
         talos-api.enable = true;
         gatus.enable = true;
         glance.enable = true;
+        kms.enable = true;
         node-exporter.enable = true;
-        music-assistant.enable = true;
 
         home-assistant = {
           enable = true;
           configDir = "/numina/apps/home-assistant";
+        };
+        hass-sgcc = {
+          enable = true;
+          dataDir = "/numina/apps/hass-sgcc";
+          authFile = config.sops.secrets."hass.sgcc.auth".path;
+        };
+        music-assistant = {
+          enable = true;
+          dataDir = "/numina/apps/music-assistant";
         };
         homebox = {
           enable = true;
@@ -96,8 +105,9 @@ in
         };
 
         ## NAS ##
-        smartd.enable = true;
-        smartctl-exporter.enable = true;
+        # smartd.enable = true;
+        # smartctl-exporter.enable = true;
+        ups.enable = true;
 
         nfs = {
           enable = true;
@@ -106,6 +116,7 @@ in
 
         samba = {
           enable = true;
+          avahi.TimeMachine.enable = true;
           settings = {
             Backup = {
               path = "/numina/backup";
@@ -133,26 +144,16 @@ in
         };
       };
 
-      users = {
-        additionalUsers = {
-          homie = {
-            isNormalUser = true;
-            extraGroups = ifGroupsExist [
-              "samba-users"
-            ];
-          };
+      # additional users and groups
+      users.users = {
+        appuser = {
+          group = "appuser";
+          uid = 1001;
+          isSystemUser = true;
         };
-        groups = {
-          external-services = {
-            gid = 65542;
-          };
-          admins = {
-            gid = 991;
-            members = [
-              "soulwhisper"
-            ];
-          };
-        };
+      };
+      users.groups = {
+        appuser.gid = 1001;
       };
     };
 

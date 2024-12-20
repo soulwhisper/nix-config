@@ -39,6 +39,26 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
+    "hass-sgcc": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "hass-sgcc",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "ARC-MX",
+            "repo": "sgcc_electricity_new",
+            "rev": "v1.5.4",
+            "sha256": "sha256-htbx5JNnAEoASmBRW8sJBiWhxMJHXi4jQ/iUKIAl8XE=",
+            "type": "github"
+        },
+        "version": "v1.5.4"
+    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",
@@ -133,11 +153,11 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.8.4",
-            "sha256": "sha256-qZJN3LZfpL/uaq9H47m4qddF7ZxXLAHHVDUaRuldoBw=",
+            "rev": "v1.9.0",
+            "sha256": "sha256-j/GqAUP3514ROf64+ouvCg//9QuGoVDgxkNFqi4r+WE=",
             "type": "github"
         },
-        "version": "v1.8.4"
+        "version": "v1.9.0"
     },
     "usage": {
         "cargoLocks": null,
@@ -153,10 +173,10 @@
             "name": null,
             "owner": "jdx",
             "repo": "usage",
-            "rev": "v1.6.0",
-            "sha256": "sha256-tKwJYVQYNh6m50Dx/s8KSS4qSU6JYnurL33RWX5g2ow=",
+            "rev": "v1.7.2",
+            "sha256": "sha256-VeSe6WV1Tpy1PQ33EbgmFi6YWWxz3bQksW06sTHTuJU=",
             "type": "github"
         },
-        "version": "v1.6.0"
+        "version": "v1.7.2"
     }
 }

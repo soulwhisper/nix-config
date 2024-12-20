@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedUDPPorts = [ 323 ];
+
     services.chrony = {
       enable = true;
       package = pkgs.unstable.chrony;

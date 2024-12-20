@@ -12,11 +12,13 @@ in
     enable = lib.mkEnableOption "smartctl-exporter";
     port = lib.mkOption {
       type = lib.types.int;
-      default = 9633;
+      default = 9101;
     };
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [ 9101 ];
+
     services.prometheus.exporters.smartctl = {
       enable = true;
       inherit (cfg) port;
