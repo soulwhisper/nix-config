@@ -52,13 +52,15 @@ caddy: 80,443
 dae: 1080
 home-assistant: 8123
 minio: 9000,9001
-node-exporter: 9100
 
 # remap
+node-exporter: 9100
+smartctl-exporter: 9101
 adguard-ui: 9800
 gatus: 9801
 glance: 9802
 homebox: 9803
 talos-api: 9900
+ddns-ui: 9901
 
 ```

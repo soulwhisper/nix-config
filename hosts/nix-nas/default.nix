@@ -75,15 +75,22 @@ in
         ## Optional ##
         adguard.enable = true;
         chrony.enable = true;
+        ddns.enable = true;
         talos-api.enable = true;
         gatus.enable = true;
         glance.enable = true;
+        kms.enable = true;
         node-exporter.enable = true;
         music-assistant.enable = true;
 
         home-assistant = {
           enable = true;
           configDir = "/numina/apps/home-assistant";
+        };
+        hass-sgcc = {
+          enable = true;
+          dataDir = "/numina/apps/hass-sgcc";
+          authFile = config.sops.secrets."hass.sgcc.auth".path;
         };
         homebox = {
           enable = true;
@@ -96,8 +103,9 @@ in
         };
 
         ## NAS ##
-        smartd.enable = true;
-        smartctl-exporter.enable = true;
+        # smartd.enable = true;
+        # smartctl-exporter.enable = true;
+        ups.enable = true;
 
         nfs = {
           enable = true;
@@ -106,6 +114,7 @@ in
 
         samba = {
           enable = true;
+          avahi.TimeMachine.enable = true;
           settings = {
             Backup = {
               path = "/numina/backup";
@@ -135,22 +144,15 @@ in
 
       users = {
         additionalUsers = {
-          homie = {
-            isNormalUser = true;
-            extraGroups = ifGroupsExist [
-              "samba-users"
-            ];
+          appuser = {
+            isSystemUser = true;
+            uid = 991;
+            group = "appuser";
           };
         };
         groups = {
-          external-services = {
-            gid = 65542;
-          };
-          admins = {
+          appuser = {
             gid = 991;
-            members = [
-              "soulwhisper"
-            ];
           };
         };
       };

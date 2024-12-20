@@ -14,6 +14,8 @@ in
   config = lib.mkIf cfg.enable {
     services.openssh = {
       enable = true;
+      ports = [ 22 ];
+      openFirewall = true;
       # Don't allow home-directory authorized_keys
       authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
       settings = {
