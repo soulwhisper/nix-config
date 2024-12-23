@@ -51,10 +51,8 @@ sudo python3 scripts/darwin_set_proxy.py
 task nix:darwin-build HOST=soulwhisper-mba
 ## deploy
 task nix:darwin-deploy HOST=soulwhisper-mba
-## opt. set default proxy after configs imported
-cp scripts/set_proxy.fish ~/.config/fish/conf.d/
 
-# nixos, e.g. nix-nas
+# nixos, remote
 ## set DNS record then test ssh connections
 ## cp machineconfig
 cp /etc/nixos/hardware-configuration.nix hosts/nix-nas/hardware-configuration.nix
@@ -62,6 +60,11 @@ cp /etc/nixos/hardware-configuration.nix hosts/nix-nas/hardware-configuration.ni
 task nix:nixos-build HOST=nix-nas
 ## deploy
 task nix:nixos-deploy HOST=nix-nas
+
+# nixos, local
+git clone https://github.com/soulwhisper/nix-config
+nixos-rebuild build --flake nix-config/.#nix-nas --fast --show-trace --print-build-logs
+nixos-rebuild switch --flake nix-config/.#nix-nas
 ```
 
 ## Inspiration

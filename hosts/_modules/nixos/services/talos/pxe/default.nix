@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.modules.services.talos-pxe;
+  cfg = config.modules.services.talos.support.pxe;
 in
 {
-  options.modules.services.talos-pxe = {
+  options.modules.services.talos.support.pxe = {
     enable = lib.mkEnableOption "talos-pxe";
   };
 
@@ -23,19 +23,19 @@ in
       "/etc/talos-pxe/assets/README".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README);
       "/etc/talos-pxe/assets/README".mode = "0644";
 
-      "/etc/talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./groups/group-template.json);
+      "/etc/talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./configs/groups/group-template.json);
       "/etc/talos-pxe/configs/groups/group-template.json".mode = "0644";
 
-      "/etc/talos-pxe/configs/profiles/profile-template.json".source = pkgs.writeText "machbox-configs-profiles" (builtins.readFile ./profiles/profile-template.json);
+      "/etc/talos-pxe/configs/profiles/profile-template.json".source = pkgs.writeText "machbox-configs-profiles" (builtins.readFile ./configs/profiles/profile-template.json);
       "/etc/talos-pxe/configs/profiles/profile-template.json".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/undionly.kpxe".source = pkgs.writeText "tftpboot-undionly.kpxe" (builtins.readFile ./tftpboot/undionly.kpxe);
+      "/etc/talos-pxe/tftpboot/undionly.kpxe".source = ./tftpboot/undionly.kpxe;
       "/etc/talos-pxe/tftpboot/undionly.kpxe".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/undionly.kpxe.0".source = pkgs.writeText "tftpboot-undionly.kpxe.0" (builtins.readFile ./tftpboot/undionly.kpxe);
+      "/etc/talos-pxe/tftpboot/undionly.kpxe.0".source = ./tftpboot/undionly.kpxe;
       "/etc/talos-pxe/tftpboot/undionly.kpxe.0".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/ipxe.efi".source = pkgs.writeText "tftpboot-ipxe.efi" (builtins.readFile ./tftpboot/ipxe.efi);
+      "/etc/talos-pxe/tftpboot/ipxe.efi".source = ./tftpboot/ipxe.efi;
       "/etc/talos-pxe/tftpboot/ipxe.efi".mode = "0644";
     };
 
@@ -47,7 +47,7 @@ in
       };
     };
 
-    systemd.services.talos-api = {
+    systemd.services.matchbox-server = {
       description = "PXE bootstrap support for talos";
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];

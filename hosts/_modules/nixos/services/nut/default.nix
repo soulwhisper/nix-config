@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.modules.services.ups;
+  cfg = config.modules.services.nut;
 in
 {
-  options.modules.services.ups = {
-    enable = lib.mkEnableOption "ups";
+  options.modules.services.nut = {
+    enable = lib.mkEnableOption "nut";
   };
 
   config = lib.mkIf cfg.enable {

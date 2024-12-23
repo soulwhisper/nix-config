@@ -5,15 +5,11 @@
   ...
 }:
 let
-  cfg = config.modules.services.hass-sgcc;
+  cfg = config.modules.services.hass;
 in
 {
-  options.modules.services.hass-sgcc = {
+  options.modules.services.hass.sgcc = {
     enable = lib.mkEnableOption "hass-sgcc";
-    dataDir = lib.mkOption {
-      type = lib.types.path;
-      default = "/var/lib/home-assistant/sgcc";
-    };
     authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -22,21 +18,21 @@ in
 
   # environment
   # sops."hass.sgcc.auth": PHONE_NUMBER,PASSWORD,PUSHPLUS_TOKEN
-  # "/etc/home-assistant/sgcc.env": HASS_URL,HASS_TOKEN,RECHARGE_NOTIFY
+  # "/etc/hass/sgcc.env": HASS_URL,HASS_TOKEN,RECHARGE_NOTIFY
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.sgcc.enable {
     environment.etc = {
-        "home-assistant/sgcc.env".source = pkgs.writeTextFile {
+        "hass/sgcc.env".source = pkgs.writeTextFile {
         name = "sgcc.env";
         text = builtins.readFile ./.env;
         };
-        "home-assistant/sgcc.env".mode = "0644";
+        "hass/sgcc.env".mode = "0644";
     };
 
     # SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0644 root root - -"
-      "f ${cfg.dataDir}/sqlite.db 0644 root root - -"
+      "d ${cfg.dataDir}/sgcc 0644 root root - -"
+      "f ${cfg.dataDir}/sgcc/sqlite.db 0644 root root - -"
     ];
 
     # systemctl status podman-hass-sgcc.service
@@ -59,10 +55,10 @@ in
         BALANCE="100.0";
       };
       volumes = [
-        "${cfg.dataDir}/sqlite.db:/app/sqlite.db"
+        "${cfg.dataDir}/sgcc/sqlite.db:/app/sqlite.db"
       ];
       environmentFiles = [
-        "/etc/home-assistant/sgcc.env"
+        "/etc/hass/sgcc.env"
       ];
     };
   };

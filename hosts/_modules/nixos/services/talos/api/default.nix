@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.modules.services.talos-api;
+  cfg = config.modules.services.talos.support.api;
 in
 {
-  options.modules.services.talos-api = {
+  options.modules.services.talos.support.api = {
     enable = lib.mkEnableOption "talos-api";
   };
 

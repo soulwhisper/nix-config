@@ -83,44 +83,46 @@ in
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
-        ## Optional ##
+        ## System ##
         adguard.enable = true;
         chrony.enable = true;
         ddns.enable = true;
-        talos-api.enable = true;
-        talos-pxe.enable = true;
-        gatus.enable = true;
-        glance.enable = true;
         kms.enable = true;
-        node-exporter.enable = true;
+        smartd.enable = true;
+        nut.enable = true;
 
-        home-assistant = {
-          enable = true;
-          configDir = "/numina/apps/home-assistant";
+        ## Monitoring ##
+        gatus.enable = true;
+        exporters.node.enable = true;
+        exporters.nut.enable = true;
+        exporters.smartctl.enable = true;
+
+        ## K8S:Talos ##
+        talos.support.api.enable = true;
+        talos.support.pxe.enable = true;
+
+        ## Home-assistant ##
+        hass = {
+          dataDir = "/numina/apps/hass";
+          core.enable = true;
+          music.enable = true;
+          sgcc.enable = true;
+          sgcc.authFile = config.sops.secrets."hass.sgcc.auth".path;
         };
-        hass-sgcc = {
-          enable = true;
-          dataDir = "/numina/apps/hass-sgcc";
-          authFile = config.sops.secrets."hass.sgcc.auth".path;
-        };
-        music-assistant = {
-          enable = true;
-          dataDir = "/numina/apps/music-assistant";
-        };
+
+        ## APP ##
+        glance.enable = true;
         homebox = {
           enable = true;
           dataDir = "/numina/apps/homebox";
         };
+
+        ## Storage ##
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
           dataDir = "/numina/apps/minio";
         };
-
-        ## NAS ##
-        # smartd.enable = true;
-        # smartctl-exporter.enable = true;
-        ups.enable = true;
 
         nfs = {
           enable = true;

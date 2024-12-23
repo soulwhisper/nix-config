@@ -35,13 +35,6 @@ git config --global commit.gpgsign true
 
 ## service ports remap
 
-- unchangeable services like unifi not touched;
-- reverse proxy use 80 /443; dns & proxy ports not changed;
-- only remap duplicated ports below;
-- storage services use 9000 - 9099;
-- monitor services use 9100 - 9199;
-- web services use 9800 - 9999;
-
 ```shell
 # unchangeable
 adguard-dns: 53
