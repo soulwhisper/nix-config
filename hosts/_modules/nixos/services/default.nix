@@ -24,6 +24,7 @@
     ./smartd
     ./smartctl-exporter
     ./talos-api
+    ./talos-pxe
     ./unifi-controller
     ./ups
   ];

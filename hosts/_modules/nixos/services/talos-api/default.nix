@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9900 ];
+    networking.firewall.allowedTCPPorts = [ 9300 ];
 
     systemd.services.talos-api = {
       description = "Talos Cluster Discovery API Service";
@@ -21,7 +21,7 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart ="${lib.getExe pkgs.talos-api} -addr=:9900 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
+        ExecStart ="${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
         WorkingDirectory = "/var/lib/talos-api";
         StateDirectory = "talos-api";
         RuntimeDirectory = "talos-api";

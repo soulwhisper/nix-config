@@ -44,24 +44,34 @@ git config --global commit.gpgsign true
 
 ```shell
 # unchangeable
-adguard-dns: 53,67,68
+adguard-dns: 53
 unifi: 8080,8443,8880,8843,6789,3478,10001
 
 # should-not-change
 caddy: 80,443
 dae: 1080
 home-assistant: 8123
-minio: 9000,9001
 
 # remap
+## storage, 9000-9099
+minio: 9000,9001
+
+## monitor, 9100-9199
 node-exporter: 9100
 smartctl-exporter: 9101
-adguard-ui: 9800
+
+## system, 9200-9299
+adguard-ui: 9200
+ddns-ui: 9201
+
+## k8s, 9300-9399
+talos-api: 9300
+talos-pxe: 9301
+
+## app, 9800-9999
 gatus: 9801
 glance: 9802
 homebox: 9803
-talos-api: 9900
-ddns-ui: 9901
 
 ```
 
@@ -72,7 +82,7 @@ ddns-ui: 9901
     - rclone, backup clouds to nas;
     - syncthing, backup devices to nas;
 
-- [ ] add pxe services to nix-dev, support k8s bootstrap;
+- [x] add pxe services to nix-dev, support k8s bootstrap;
 - [ ] rewrite nix-dev to VM template;
 - [ ] add tailscale to all nix hosts;
 

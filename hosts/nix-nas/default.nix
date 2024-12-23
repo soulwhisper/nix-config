@@ -88,6 +88,7 @@ in
         chrony.enable = true;
         ddns.enable = true;
         talos-api.enable = true;
+        talos-pxe.enable = true;
         gatus.enable = true;
         glance.enable = true;
         kms.enable = true;
