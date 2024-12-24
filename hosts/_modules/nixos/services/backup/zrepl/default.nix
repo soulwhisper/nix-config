@@ -10,7 +10,7 @@ in
 {
   options.modules.services.backup.zrepl = {
     enable = lib.mkEnableOption "zrepl";
-    remoteAddr = mkOption {
+    remoteAddr = lib.mkOption {
       type = str;
       default = null;
       description = "tailscale/wireguard protected remote address";
