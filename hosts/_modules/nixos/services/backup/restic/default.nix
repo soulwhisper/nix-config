@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.modules.services.backup;
+  cfg = config.modules.services.backup.restic;
 in
 {
   options.modules.services.backup.restic = {
@@ -14,19 +14,23 @@ in
       type = with lib.types; nullOr path;
       default = null;
     };
+    dataDir = lib.mkOption {
+      type = with lib.types; nullOr str;
+      default = null;
+    };
   };
 
-  # backup remote files to local, daily
-  # this template for google drive, with client_id/client_secret in sops
+  # sync app files to b2/r2
+  # sops has account/key, not finished
 
   config = lib.mkIf cfg.restic.enable {
     services.restic.backups.remote = {
-      repository = "${cfg.dataDir}/gdrive";
+      repository = "b2:apps";
+      paths = [ "${cfg.dataDir}" ];
       rcloneConfigFile = "${cfg.restic.configFile}";
       rcloneConfig = {
-        type = "drive";
-        scope = "readonly";
-        skip-dangling-shortcuts = "true";
+        type = "b2";
+        hard-delete = "true";
       };
       rcloneOptions = {
         fast-list = "true";

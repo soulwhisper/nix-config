@@ -4,7 +4,6 @@
 {
   imports = [
     ./adguard
-    ./backup
     ./backup/restic
     ./backup/syncthing
     ./backup/zrepl

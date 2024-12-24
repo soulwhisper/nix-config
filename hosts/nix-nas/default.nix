@@ -124,10 +124,13 @@ in
 
         ## Backup ##
         backup = {
-          dataDir = "/numina/backup/remote";
-          syncthing.enable = true;
+          syncthing = {
+            enable = true;
+            dataDir = "/numina/backup/devices";
+          };
           restic = {
             enable = true;
+            dataDir = "/numina/apps";
             configFile = config.sops.secrets."backup/restic/config".path;
           };
           zrepl = {

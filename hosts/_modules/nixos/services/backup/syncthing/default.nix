@@ -5,11 +5,15 @@
   ...
 }:
 let
-  cfg = config.modules.services.backup;
+  cfg = config.modules.services.backup.syncthing;
 in
 {
   options.modules.services.backup.syncthing = {
     enable = lib.mkEnableOption "syncthing";
+    dataDir = lib.mkOption {
+      type = with lib.types; nullOr str;
+      default = null;
+    };
   };
 
   # backup devices files to local
@@ -25,7 +29,7 @@ in
     '';
 
     services.syncthing = {
-      dataDir = "${cfg.dataDir}/devices";
+      dataDir = "${cfg.dataDir}";
       openDefaultPorts = true;
       overrideFolders = true;
       overrideDevices = false;  # allow add devices by gui
