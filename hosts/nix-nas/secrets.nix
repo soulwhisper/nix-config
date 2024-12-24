@@ -24,6 +24,9 @@
           owner = config.users.users.caddy.name;
         };
         "networking/dae/subscription" = { };
+        "networking/tailscale/auth" = {
+          owner = config.users.users.tailscale.name;
+        };
         "users/soulwhisper/password" = {
           neededForUsers = true;
         };

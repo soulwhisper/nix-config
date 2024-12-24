@@ -27,6 +27,7 @@
     ./podman
     ./samba
     ./smartd
+    ./tailscale
     ./talos/api
     ./talos/pxe
     ./unifi-controller

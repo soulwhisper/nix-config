@@ -83,6 +83,11 @@ in
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
+        tailscale = {
+          enable = true;
+          authFile = config.sops.secrets."networking/tailscale/auth".path;
+        };
+
         ## System ##
         adguard.enable = true;
         chrony.enable = true;
@@ -107,7 +112,7 @@ in
           core.enable = true;
           music.enable = true;
           sgcc.enable = true;
-          sgcc.authFile = config.sops.secrets."hass.sgcc.auth".path;
+          sgcc.authFile = config.sops.secrets."hass/sgcc/auth".path;
         };
 
         ## APP ##
@@ -123,11 +128,11 @@ in
           syncthing.enable = true;
           restic = {
             enable = true;
-            configFile = config.sops.secrets."backup.restic.config".path;
+            configFile = config.sops.secrets."backup/restic/config".path;
           };
           zrepl = {
             enable = true;
-            remoteAddr = config.sops.secrets."backup.zrepl.remote".path;
+            remoteAddr = config.sops.secrets."backup/zrepl/remote".path;
           };
         };
 

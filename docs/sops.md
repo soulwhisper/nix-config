@@ -36,6 +36,8 @@ networking:
         subscription: |
             {sub-url-1}
             {sub-url-2}
+    tailscale:
+        auth: {tailscale-auth-key}
 storage:
     minio:
         root-credentials: |
