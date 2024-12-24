@@ -25,7 +25,7 @@ in
       rcloneConfigFile = "${cfg.restic.configFile}";
       rcloneConfig = {
         type = "drive";
-        scope = "drive.readonly";
+        scope = "readonly";
         skip-dangling-shortcuts = "true";
       };
       rcloneOptions = {
