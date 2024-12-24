@@ -117,6 +117,20 @@ in
           dataDir = "/numina/apps/homebox";
         };
 
+        ## Backup ##
+        backup = {
+          dataDir = "/numina/backup/remote";
+          syncthing.enable = true;
+          restic = {
+            enable = true;
+            configFile = config.sops.secrets."backup.restic.config".path;
+          };
+          zrepl = {
+            enable = true;
+            remoteAddr = config.sops.secrets."backup.zrepl.remote".path;
+          };
+        };
+
         ## Storage ##
         minio = {
           enable = true;

@@ -39,6 +39,8 @@ zfs create numina/docs
 zfs create numina/apps
 zfs create numina/timemachine
 
+zfs create numina/replication -o compression=zstd -o mountpoint=none -o canmount=off
+
 ```
 
 ## Usage

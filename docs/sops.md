@@ -14,6 +14,13 @@ sops --verbose -i -e secrets.sops.yaml
 - all values should not have spaces/quotes;
 
 ```shell
+backup:
+    restic:
+        config: |
+            client_id={gdrive-client-id}
+            client_secret={gdrive-client-secret}
+    zrepl:
+        remote: {remoteAddr-ip}
 hass:
     sgcc:
         auth: |
@@ -34,7 +41,6 @@ storage:
         root-credentials: |
             MINIO_ROOT_USER={minio_root_user}
             MINIO_ROOT_PASSWORD={minio_root_pass}
-
 users:
     soulwhisper:
         password: {hashed-password}

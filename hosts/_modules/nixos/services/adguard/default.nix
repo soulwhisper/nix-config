@@ -24,7 +24,7 @@ in
     };
 
     networking.firewall.allowedTCPPorts = [ 53 9200 ];
-    networking.firewall.allowedUDPPorts = [ 53 ];
+    networking.firewall.allowedUDPPorts = [ 53 67 ];
 
     systemd.services.adguard = {
       description = "AdGuard Home: Network-level blocker";

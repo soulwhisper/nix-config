@@ -48,14 +48,17 @@ home-assistant: 8123
 # remap
 ## storage, 9000-9099
 minio: 9000,9001
+zrepl: 9002
 
 ## monitor, 9100-9199
 node-exporter: 9100
 smartctl-exporter: 9101
+zrepl-metrics: 9102
 
 ## system, 9200-9299
 adguard-ui: 9200
 ddns-ui: 9201
+syncthing-ui: 9202
 
 ## k8s, 9300-9399
 talos-api: 9300

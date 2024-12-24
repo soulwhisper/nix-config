@@ -8,6 +8,14 @@
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
       secrets = {
+        "backup/restic/config" = {
+          owner = config.users.users.restic.name;
+          restartUnits = [ "restic.service" ];
+        };
+        "backup/zrepl/remote" = {
+          owner = config.users.users.zrepl.name;
+          restartUnits = [ "zrepl.service" ];
+        };
         "storage/minio/root-credentials" = {
           owner = config.users.users.minio.name;
           restartUnits = [ "minio.service" ];
