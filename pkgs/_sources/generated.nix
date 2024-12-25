@@ -24,6 +24,17 @@
     };
     date = "2024-07-03";
   };
+  hass-sgcc = {
+    pname = "hass-sgcc";
+    version = "v1.6.0";
+    src = fetchFromGitHub {
+      owner = "ARC-MX";
+      repo = "sgcc_electricity_new";
+      rev = "v1.6.0";
+      fetchSubmodules = false;
+      sha256 = "sha256-3mHo25V1Z8CoNijAaV1G/13fyb+QNdi/2SViJyt/ohU=";
+    };
+  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";
@@ -38,13 +49,13 @@
   };
   kubectl-pgo = {
     pname = "kubectl-pgo";
-    version = "v0.5.0";
+    version = "v0.5.1";
     src = fetchFromGitHub {
       owner = "CrunchyData";
       repo = "postgres-operator-client";
-      rev = "v0.5.0";
+      rev = "v0.5.1";
       fetchSubmodules = false;
-      sha256 = "sha256-JX+V8xYtvvzfsxjxWMB8YgF+2QgALdedHwxQ5J+a1+c=";
+      sha256 = "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=";
     };
   };
   shcopy = {
@@ -58,26 +69,37 @@
       sha256 = "sha256-MKlW8HrkXCYCOeO38F0S4c8mVbsG/VcZ+oGFC70amqQ=";
     };
   };
+  talos-api = {
+    pname = "talos-api";
+    version = "v1.0.9";
+    src = fetchFromGitHub {
+      owner = "siderolabs";
+      repo = "discovery-service";
+      rev = "v1.0.9";
+      fetchSubmodules = false;
+      sha256 = "sha256-Mk0npXcSd3UmTlgAlkC/vgOJNVIHy/KV15Y3epRevYw=";
+    };
+  };
   talosctl = {
     pname = "talosctl";
-    version = "v1.8.3";
+    version = "v1.9.0";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.8.3";
+      rev = "v1.9.0";
       fetchSubmodules = false;
-      sha256 = "sha256-KC5FxNrKRcAvM9IVuj9jh2AdQ6qqqdo3GwWRHH8t9As=";
+      sha256 = "sha256-j/GqAUP3514ROf64+ouvCg//9QuGoVDgxkNFqi4r+WE=";
     };
   };
   usage = {
     pname = "usage";
-    version = "v1.4.1";
+    version = "v1.7.4";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.4.1";
+      rev = "v1.7.4";
       fetchSubmodules = false;
-      sha256 = "sha256-IM9MF+0zaRU0rRJPAJnn3WaAri+tY6mO/vQY+f1BoyY=";
+      sha256 = "sha256-+Wt/ZOwj9LHgt0EOFF554TGf2tZyuRoXAPpCebPZfNY=";
     };
   };
 }

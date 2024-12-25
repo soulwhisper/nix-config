@@ -39,6 +39,26 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
+    "hass-sgcc": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "hass-sgcc",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "ARC-MX",
+            "repo": "sgcc_electricity_new",
+            "rev": "v1.6.0",
+            "sha256": "sha256-3mHo25V1Z8CoNijAaV1G/13fyb+QNdi/2SViJyt/ohU=",
+            "type": "github"
+        },
+        "version": "v1.6.0"
+    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",
@@ -73,11 +93,11 @@
             "name": null,
             "owner": "CrunchyData",
             "repo": "postgres-operator-client",
-            "rev": "v0.5.0",
-            "sha256": "sha256-JX+V8xYtvvzfsxjxWMB8YgF+2QgALdedHwxQ5J+a1+c=",
+            "rev": "v0.5.1",
+            "sha256": "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=",
             "type": "github"
         },
-        "version": "v0.5.0"
+        "version": "v0.5.1"
     },
     "shcopy": {
         "cargoLocks": null,
@@ -99,6 +119,26 @@
         },
         "version": "v0.1.5"
     },
+    "talos-api": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "talos-api",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "siderolabs",
+            "repo": "discovery-service",
+            "rev": "v1.0.9",
+            "sha256": "sha256-Mk0npXcSd3UmTlgAlkC/vgOJNVIHy/KV15Y3epRevYw=",
+            "type": "github"
+        },
+        "version": "v1.0.9"
+    },
     "talosctl": {
         "cargoLocks": null,
         "date": null,
@@ -113,11 +153,11 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.8.3",
-            "sha256": "sha256-KC5FxNrKRcAvM9IVuj9jh2AdQ6qqqdo3GwWRHH8t9As=",
+            "rev": "v1.9.0",
+            "sha256": "sha256-j/GqAUP3514ROf64+ouvCg//9QuGoVDgxkNFqi4r+WE=",
             "type": "github"
         },
-        "version": "v1.8.3"
+        "version": "v1.9.0"
     },
     "usage": {
         "cargoLocks": null,
@@ -133,10 +173,10 @@
             "name": null,
             "owner": "jdx",
             "repo": "usage",
-            "rev": "v1.4.1",
-            "sha256": "sha256-IM9MF+0zaRU0rRJPAJnn3WaAri+tY6mO/vQY+f1BoyY=",
+            "rev": "v1.7.4",
+            "sha256": "sha256-+Wt/ZOwj9LHgt0EOFF554TGf2tZyuRoXAPpCebPZfNY=",
             "type": "github"
         },
-        "version": "v1.4.1"
+        "version": "v1.7.4"
     }
 }

@@ -24,10 +24,7 @@ in
     inherit (info) vendorHash;
 
     # Everything past this point is from Nixpkgs
-    ldflags = [
-      "-s"
-      "-w"
-    ];
+    ldflags = ["-s" "-w"];
 
     nativeBuildInputs = [installShellFiles];
     postInstall = ''

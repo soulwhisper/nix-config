@@ -13,6 +13,8 @@ pkgs.buildGoModule rec {
   version = lib.strings.removePrefix "v" packageData.version;
   vendorHash = vendorData.kubectl-netshoot;
 
+  ldflags = ["-s" "-w"];
+
   doCheck = false;
 
   postInstall = ''

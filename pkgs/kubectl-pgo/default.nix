@@ -13,6 +13,8 @@ pkgs.buildGoModule rec {
   version = lib.strings.removePrefix "v" packageData.version;
   vendorHash = vendorData.kubectl-pgo;
 
+  ldflags = ["-s" "-w"];
+
   doCheck = false;
 
   meta = {

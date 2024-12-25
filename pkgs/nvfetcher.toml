@@ -5,6 +5,9 @@ fetch.github = "caddyserver/caddy"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 fetch.github = "caddy-dns/cloudflare"
+[hass-sgcc]
+src.github = "ARC-MX/sgcc_electricity_new"
+fetch.github = "ARC-MX/sgcc_electricity_new"
 [kubecolor-catppuccin]
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
 src.branch = "main"
@@ -33,6 +36,9 @@ fetch.github = "aymanbagabas/shcopy"
 [talosctl]
 src.github = "siderolabs/talos"
 fetch.github = "siderolabs/talos"
+[talos-api]
+src.github = "siderolabs/discovery-service"
+fetch.github = "siderolabs/discovery-service"
 [usage]
 src.github = "jdx/usage"
 fetch.github = "jdx/usage"
