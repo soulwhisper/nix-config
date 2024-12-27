@@ -18,25 +18,25 @@ in
 
     environment.etc = {
       "talos-pxe/dnsmasq.conf".source = pkgs.writeText "dnsmasq-config" (builtins.readFile ./dnsmasq.conf);
-      "/etc/talos-pxe/dnsmasq.conf".mode = "0644";
+      "talos-pxe/dnsmasq.conf".mode = "0644";
 
       "talos-pxe/assets/README.md".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README.md);
-      "/etc/talos-pxe/assets/README.md".mode = "0644";
+      "talos-pxe/assets/README.md".mode = "0644";
 
       "talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./configs/groups/group-template.json);
-      "/etc/talos-pxe/configs/groups/group-template.json".mode = "0644";
+      "talos-pxe/configs/groups/group-template.json".mode = "0644";
 
       "talos-pxe/configs/profiles/profile-template.json".source = pkgs.writeText "machbox-configs-profiles" (builtins.readFile ./configs/profiles/profile-template.json);
-      "/etc/talos-pxe/configs/profiles/profile-template.json".mode = "0644";
+      "talos-pxe/configs/profiles/profile-template.json".mode = "0644";
 
       "talos-pxe/tftpboot/undionly.kpxe".source = ./tftpboot/undionly.kpxe;
-      "/etc/talos-pxe/tftpboot/undionly.kpxe".mode = "0644";
+      "talos-pxe/tftpboot/undionly.kpxe".mode = "0644";
 
       "talos-pxe/tftpboot/undionly.kpxe.0".source = ./tftpboot/undionly.kpxe;
-      "/etc/talos-pxe/tftpboot/undionly.kpxe.0".mode = "0644";
+      "talos-pxe/tftpboot/undionly.kpxe.0".mode = "0644";
 
       "talos-pxe/tftpboot/ipxe.efi".source = ./tftpboot/ipxe.efi;
-      "/etc/talos-pxe/tftpboot/ipxe.efi".mode = "0644";
+      "talos-pxe/tftpboot/ipxe.efi".mode = "0644";
     };
 
     services.dnsmasq = {
