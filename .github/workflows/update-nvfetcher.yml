@@ -18,6 +18,11 @@ jobs:
           fetch-depth: 0
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+      - name: Set UTF-8 Locale
+        run: |
+          update-locale LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          export LANG=en_US.UTF-8
       - name: Run nvfetcher
         id: run-nvfetcher
         run: |
