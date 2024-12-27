@@ -17,6 +17,7 @@ in
   };
 
   # backup devices files to local
+  # user = root, files in zfs pool
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 22000 ];
@@ -30,6 +31,7 @@ in
 
     services.syncthing = {
       dataDir = "${cfg.dataDir}";
+      user = "root";
       openDefaultPorts = true;
       overrideFolders = true;
       overrideDevices = false;  # allow add devices by gui

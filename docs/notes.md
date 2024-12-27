@@ -72,14 +72,6 @@ homebox: 9803
 ```
 
 ## TODO
-- [ ] add more backup services to nix-nas, make it production ready;
-    - zrepl, backup zfs to remote-sites;
-    - borg, backup linux-servers to nas; and "borg compact";
-    - rclone, backup clouds to nas;
-    - syncthing, backup devices to nas;
-
-- [x] add pxe services to nix-dev, support k8s bootstrap;
-- [ ] rewrite nix-dev to VM template;
-- [ ] add tailscale to all nix hosts;
-
-- [ ] add a few more desktop services to nix-dev, and wayland, [ref](https://github.com/Ramblurr/nixcfg/blob/main/modules/default.nix);
+- add tailscale, easytier to all hosts
+- remap all app users to root / appuser
+- rewrite nix-dev to nixos-gui-llm host, add desktop services, with wayland, [ref](https://github.com/Ramblurr/nixcfg/blob/main/modules/default.nix);

@@ -83,9 +83,16 @@ in
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
-        tailscale = {
-          enable = true;
-          authFile = config.sops.secrets."networking/tailscale/auth".path;
+        vpn = {
+          easytier = {
+            enable = true;
+            dataDir = "/numina/apps/easytier";
+            authFile = config.sops.secrets."networking/easytier/auth".path;
+          };
+          tailscale = {
+            enable = true;
+            authFile = config.sops.secrets."networking/tailscale/auth".path;
+          };
         };
 
         ## System ##

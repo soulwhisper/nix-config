@@ -29,6 +29,7 @@ in
   };
 
   # sync app files to s3/r2, exclude local minio
+  # user = root, files in zfs pool
 
   config = lib.mkIf cfg.enable {
     services.restic.backups.remote = {

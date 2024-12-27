@@ -19,6 +19,7 @@ in
 
   # backup zfs pools between sites
   # this template needs tailscale / wireguard for tcp transport;
+  # user = root, files in zfs pool
 
   config = lib.mkIf cfg.zrepl.enable {
     networking.firewall.allowedTCPPorts = [ 9002 9102 ];
