@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.modules.services.backup;
+  cfg = config.modules.services.backup.zrepl;
 in
 {
   options.modules.services.backup.zrepl = {
@@ -21,7 +21,7 @@ in
   # this template needs tailscale / wireguard for tcp transport;
   # user = root, files in zfs pool
 
-  config = lib.mkIf cfg.zrepl.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 9002 9102 ];
 
     systemd.services.zrepl.serviceConfig.ExecStartPre = lib.mkForce ''
