@@ -18,9 +18,9 @@ in {
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
+      catppuccin.fish.enable = true;
       programs.fish = {
         enable = true;
-        catppuccin.enable = true;
 
         plugins = [
           { name = "done"; inherit (pkgs.fishPlugins.done) src; }

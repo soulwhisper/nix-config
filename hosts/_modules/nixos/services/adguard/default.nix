@@ -23,8 +23,8 @@ in
         "adguard/AdGuardHome.yaml".mode = "0755";
     };
 
-    networking.firewall.allowedTCPPorts = [ 53 9800 ];
-    networking.firewall.allowedUDPPorts = [ 53 67 68 ];
+    networking.firewall.allowedTCPPorts = [ 53 9200 ];
+    networking.firewall.allowedUDPPorts = [ 53 67 ];
 
     systemd.services.adguard = {
       description = "AdGuard Home: Network-level blocker";
