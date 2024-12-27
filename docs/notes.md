@@ -42,7 +42,8 @@ unifi: 8080,8443,8880,8843,6789,3478,10001
 
 # should-not-change
 caddy: 80,443
-dae: 1080
+dae-http: 1080
+easytier-socks5: 1081
 home-assistant: 8123
 
 # remap

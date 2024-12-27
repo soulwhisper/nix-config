@@ -16,6 +16,8 @@ in
     };
   };
 
+  # need manually restart if not activated at least once
+
   config = lib.mkIf cfg.enable {
     services.tailscale = {
       enable = true;

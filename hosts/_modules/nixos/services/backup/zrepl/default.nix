@@ -111,10 +111,9 @@ in
           {
             name = "remote_pull";
             type = "pull";
-            serve = {
+            connect = {
               type = "tcp";
-              listen = "${cfg.zrepl.remoteAddr}:9002";
-              listen_freebind = true;
+              address = "${cfg.zrepl.remoteAddr}:9002";
             };
             root_fs = "numina/replication";
             interval = "10m";

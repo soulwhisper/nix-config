@@ -33,6 +33,6 @@ in
 	      "DEBUG"
       ];
     };
-    systemd.services.music-assistant.serviceConfig.StateDirectory = lib.mkForce "${cfg.dataDir}/music";
+    systemd.services.music-assistant.serviceConfig.WorkingDirectory = lib.mkForce "${cfg.dataDir}/music";
   };
 }
