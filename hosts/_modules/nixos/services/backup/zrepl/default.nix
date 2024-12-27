@@ -25,10 +25,7 @@ in
     networking.firewall.allowedTCPPorts = [ 9002 9102 ];
 
     environment.etc = {
-      "zrepl/.env".source = pkgs.writeTextFile {
-        name = "zrepl.env";
-        text = builtins.readFile ${cfg.envFile};
-        };
+      "zrepl/.env".source = ${cfg.envFile};
     };
 
     services.zrepl = {
