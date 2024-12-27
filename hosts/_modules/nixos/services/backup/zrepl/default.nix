@@ -24,9 +24,9 @@ in
   config = lib.mkIf cfg.zrepl.enable {
     networking.firewall.allowedTCPPorts = [ 9002 9102 ];
 
-    environment.etc = {
-      "zrepl/.env".source = ${cfg.envFile};
-    };
+    systemd.services.zrepl.serviceConfig.ExecStartPre = lib.mkForce ''
+      ln -sf ${cfg.envFile} /etc/zrepl/.env
+    '';
 
     services.zrepl = {
       enable = true;
