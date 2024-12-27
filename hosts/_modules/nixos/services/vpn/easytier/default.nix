@@ -32,6 +32,15 @@ in
     networking.firewall.allowedTCPPorts = [ 11010 11011 11012 1081 ];
     networking.firewall.allowedUDPPorts = [ 11010 11011 ];
 
+    environment.systemPackages = [ pkgs.easytier-custom ];
+
+    security.wrappers."easytier-custom" = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_net_admin,cap_net_raw+eip";
+      source = "${pkgs.easytier-custom}/bin/easytier-core";
+    };
+
     systemd.services.easytier = {
       after = [ "network.target" "syslog.target" ];
       wants = [ "network.target" ];
@@ -42,7 +51,7 @@ in
           ];
         ExecStart = lib.concatStringsSep " " (
           [
-            "${lib.getExe pkgs.easytier-custom}"
+            "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name {$NETWORK_NAME}"
             "--network-secret {$NETWORK_SECRET}"
           ]
