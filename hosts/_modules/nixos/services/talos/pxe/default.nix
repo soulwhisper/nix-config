@@ -20,8 +20,8 @@ in
       "talos-pxe/dnsmasq.conf".source = pkgs.writeText "dnsmasq-config" (builtins.readFile ./dnsmasq.conf);
       "/etc/talos-pxe/dnsmasq.conf".mode = "0644";
 
-      "talos-pxe/assets/README".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README);
-      "/etc/talos-pxe/assets/README".mode = "0644";
+      "talos-pxe/assets/README.md".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README.md);
+      "/etc/talos-pxe/assets/README.md".mode = "0644";
 
       "talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./configs/groups/group-template.json);
       "/etc/talos-pxe/configs/groups/group-template.json".mode = "0644";
