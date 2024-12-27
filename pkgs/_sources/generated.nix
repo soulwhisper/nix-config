@@ -24,6 +24,17 @@
     };
     date = "2024-07-03";
   };
+  easytier-custom = {
+    pname = "easytier-custom";
+    version = "v2.1.1";
+    src = fetchFromGitHub {
+      owner = "EasyTier";
+      repo = "EasyTier";
+      rev = "v2.1.1";
+      fetchSubmodules = false;
+      sha256 = "sha256-qWICiY2g/wXT0Bt7lrCg7GgL1futOhelViB59UCLPro=";
+    };
+  };
   hass-sgcc = {
     pname = "hass-sgcc";
     version = "v1.6.0";
@@ -82,13 +93,13 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.9.0";
+    version = "v1.9.1";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.9.0";
+      rev = "v1.9.1";
       fetchSubmodules = false;
-      sha256 = "sha256-j/GqAUP3514ROf64+ouvCg//9QuGoVDgxkNFqi4r+WE=";
+      sha256 = "sha256-Qvt9/okT37J3ge/lb17OX4aaiXbSFU1j7drdiJDqFnA=";
     };
   };
   usage = {
