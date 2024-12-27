@@ -12,7 +12,7 @@ in
     enable = lib.mkEnableOption "homebox";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/homebox/data";
+      default = "/var/lib/homebox";
     };
   };
 
@@ -38,9 +38,7 @@ in
       };
       serviceConfig = {
         ExecStart = lib.getExe pkgs.unstable.homebox;
-        StateDirectory = "homebox";
-        WorkingDirectory = "/var/lib/homebox";
-        StateDirectoryMode = "0700";
+        WorkingDirectory = "${cfg.dataDir}";
         Restart = "always";
       };
     };

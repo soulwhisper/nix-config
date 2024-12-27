@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.modules.services.music-assistant;
+  cfg = config.modules.services.hass;
 in
 {
-  options.modules.services.music-assistant = {
-    enable = lib.mkEnableOption "music-assistant";
+  options.modules.services.hass.music = {
+    enable = lib.mkEnableOption "hass-music";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.music.enable {
     services.music-assistant = {
       enable = true;
 	    package = pkgs.unstable.music-assistant;
@@ -24,10 +24,11 @@ in
       ];
       extraOptions = [
 	      "--config"
-	      "/var/lib/music-assistant"
+	      "${cfg.dataDir}/music"
 	      "--log-level"
 	      "DEBUG"
       ];
     };
+    systemd.services.music-assistant.serviceConfig.StateDirectory = lib.mkForce "${cfg.dataDir}/music";
   };
 }

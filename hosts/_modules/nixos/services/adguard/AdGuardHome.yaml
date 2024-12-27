@@ -2,7 +2,7 @@ http:
   pprof:
     port: 6060
     enabled: false
-  address: 0.0.0.0:9800
+  address: 0.0.0.0:9200
   session_ttl: 720h
 users:
   - name: admin
@@ -146,17 +146,19 @@ filtering:
   safebrowsing_block_host: standard-block.dns.adguard.com
   rewrites:
     - domain: s3.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
     - domain: lab.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
     - domain: mon.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
     - domain: box.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
     - domain: unifi.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
     - domain: hass.noirprime.com
-      answer: 172.19.82.30
+      answer: 172.19.82.10
+    - domain: sync.noirprime.com
+      answer: 172.19.82.10
     - domain: pve.homelab.internal
       answer: 172.19.82.100
     - domain: k8s.homelab.internal
