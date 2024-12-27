@@ -143,7 +143,7 @@ in
           };
           zrepl = {
             enable = true;
-            remoteAddr = builtins.readFile config.sops.secrets."backup/zrepl/remote".path;
+            envFile = config.sops.secrets."backup/zrepl/env".path;
           };
         };
 

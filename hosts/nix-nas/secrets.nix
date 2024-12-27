@@ -17,7 +17,7 @@
         "backup/restic/encryption" = {
           restartUnits = [ "restic-backups-remote.service" ];
         };
-        "backup/zrepl/remote" = {
+        "backup/zrepl/env" = {
           restartUnits = [ "zrepl.service" ];
         };
         "storage/minio/root-credentials" = {

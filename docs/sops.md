@@ -22,7 +22,8 @@ backup:
             AWS_SECRET_ACCESS_KEY={s3-access-secret}
         encryption: {restic-encryption-password}
     zrepl:
-        remote: {remoteAddr-ip}
+        env: |
+            REMOTE_PULL_ADDRESS={remoteAddr-ip}
 hass:
     sgcc:
         auth: |

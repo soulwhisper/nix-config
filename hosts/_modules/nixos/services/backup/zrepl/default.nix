@@ -10,20 +10,26 @@ in
 {
   options.modules.services.backup.zrepl = {
     enable = lib.mkEnableOption "zrepl";
-    remoteAddr = lib.mkOption {
-      type = lib.types.str;
+    envFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
       default = null;
-      description = "tailscale/wireguard protected remote address";
+      description = "Environment file for zrepl jobs";
     };
   };
 
   # backup zfs pools between sites
   # this template needs tailscale / wireguard for tcp transport;
   # user = root, files in zfs pool
-  # .todo: current broken with settings
 
   config = lib.mkIf cfg.zrepl.enable {
     networking.firewall.allowedTCPPorts = [ 9002 9102 ];
+
+    environment.etc = {
+      "zrepl/.env".source = pkgs.writeTextFile {
+        name = "zrepl.env";
+        text = builtins.readFile ${cfg.envFile};
+        };
+    };
 
     services.zrepl = {
       enable = true;
@@ -113,7 +119,7 @@ in
             type = "pull";
             connect = {
               type = "tcp";
-              address = "${cfg.zrepl.remoteAddr}:9002";
+              address = "{$REMOTE_PULL_ADDRESS}:9002";
             };
             root_fs = "numina/replication";
             interval = "10m";
