@@ -18,6 +18,7 @@ in
     extraArgs = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
+        "--dev-name easytier0"
         "-d"
         "-n 172.16.0.0/12"
         "-n 10.0.0.0/8"
@@ -30,11 +31,19 @@ in
     networking.firewall.allowedTCPPorts = [ 11010 11011 11012 ];
     networking.firewall.allowedUDPPorts = [ 11010 11011 ];
 
+    networking.interfaces.easytier0 = {
+      virtual = true;
+      virtualType = "tun";
+    };
+
     systemd.services.easytier = {
       after = [ "network.target" "syslog.target" ];
       wants = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
+        ExecStartPre = [
+            "/bin/sh -c 'mkdir -p /var/lib/easytier'"
+          ];
         ExecStart = lib.concatStringsSep " " (
           [
             "${lib.getExe pkgs.easytier-custom}"
