@@ -96,7 +96,7 @@ in
               type = "tcp";
               listen = "0.0.0.0:9002";
               clients = {
-                "10.100.0.0/24" = "backup-*",
+                "10.100.0.0/24" = "backup-*";
               };
             };
             filesystems = {
