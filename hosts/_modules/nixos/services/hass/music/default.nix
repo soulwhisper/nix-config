@@ -13,6 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.music.enable {
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir}/music 0644 root root - -"
+    ];
+
     services.music-assistant = {
       enable = true;
 	    package = pkgs.unstable.music-assistant;

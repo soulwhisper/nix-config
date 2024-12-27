@@ -17,25 +17,25 @@ in
     networking.firewall.allowedUDPPorts = [ 67 69 4011 ];
 
     environment.etc = {
-      "/etc/talos-pxe/dnsmasq.conf".source = pkgs.writeText "dnsmasq-config" (builtins.readFile ./dnsmasq.conf);
+      "talos-pxe/dnsmasq.conf".source = pkgs.writeText "dnsmasq-config" (builtins.readFile ./dnsmasq.conf);
       "/etc/talos-pxe/dnsmasq.conf".mode = "0644";
 
-      "/etc/talos-pxe/assets/README".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README);
+      "talos-pxe/assets/README".source = pkgs.writeText "machbox-assets" (builtins.readFile ./assets/README);
       "/etc/talos-pxe/assets/README".mode = "0644";
 
-      "/etc/talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./configs/groups/group-template.json);
+      "talos-pxe/configs/groups/group-template.json".source = pkgs.writeText "machbox-configs-groups" (builtins.readFile ./configs/groups/group-template.json);
       "/etc/talos-pxe/configs/groups/group-template.json".mode = "0644";
 
-      "/etc/talos-pxe/configs/profiles/profile-template.json".source = pkgs.writeText "machbox-configs-profiles" (builtins.readFile ./configs/profiles/profile-template.json);
+      "talos-pxe/configs/profiles/profile-template.json".source = pkgs.writeText "machbox-configs-profiles" (builtins.readFile ./configs/profiles/profile-template.json);
       "/etc/talos-pxe/configs/profiles/profile-template.json".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/undionly.kpxe".source = ./tftpboot/undionly.kpxe;
+      "talos-pxe/tftpboot/undionly.kpxe".source = ./tftpboot/undionly.kpxe;
       "/etc/talos-pxe/tftpboot/undionly.kpxe".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/undionly.kpxe.0".source = ./tftpboot/undionly.kpxe;
+      "talos-pxe/tftpboot/undionly.kpxe.0".source = ./tftpboot/undionly.kpxe;
       "/etc/talos-pxe/tftpboot/undionly.kpxe.0".mode = "0644";
 
-      "/etc/talos-pxe/tftpboot/ipxe.efi".source = ./tftpboot/ipxe.efi;
+      "talos-pxe/tftpboot/ipxe.efi".source = ./tftpboot/ipxe.efi;
       "/etc/talos-pxe/tftpboot/ipxe.efi".mode = "0644";
     };
 
