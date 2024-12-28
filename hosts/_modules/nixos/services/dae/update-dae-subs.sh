@@ -73,13 +73,13 @@ fi
 
 if $fail1; then
     echo "Failed to update subscriptions."
-    exit 2
+    # exit 2
 fi
 if $fail2; then
     echo "Failed to update geoip.dat."
-    exit 2
+    # exit 2
 fi
 if $fail3; then
     echo "Failed to update geosite.dat."
-    exit 2
+    # exit 2
 fi
