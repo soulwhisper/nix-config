@@ -5,18 +5,18 @@
   ...
 }:
 let
-  cfg = config.modules.services.home-assistant;
+  cfg = config.modules.services.hass;
 in
 {
-  options.modules.services.home-assistant = {
-    enable = lib.mkEnableOption "home-assistant";
-    configDir = lib.mkOption {
+  options.modules.services.hass = {
+    dataDir = lib.mkOption {
       type = lib.types.path;
-      default = "/var/lib/home-assistant";
+      default = "/var/lib/hass";
     };
+    core.enable = lib.mkEnableOption "hass-core";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.core.enable {
     services.caddy.virtualHosts."hass.noirprime.com".extraConfig = ''
       handle {
 	      reverse_proxy localhost:8123
@@ -27,7 +27,9 @@ in
 
     services.home-assistant = {
       enable = true;
-      inherit (cfg) configDir;
+      configDir = "${cfg.dataDir}/core";
+
+      # configs not set yet
       config = null;
     };
   };

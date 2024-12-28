@@ -22,6 +22,7 @@ in
       firewall.enable = true;
     };
 
+    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";

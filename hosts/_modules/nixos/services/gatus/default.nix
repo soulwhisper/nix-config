@@ -34,11 +34,25 @@ in
         "gatus/.env".mode = "0644";
     };
 
-    services.gatus = {
-      enable = true;
-      package = pkgs.unstable.gatus;
-      configFile = "/etc/gatus/config.yaml";
-      environmentFile = "/etc/gatus/.env";
+    systemd.services.gatus = {
+      description = "Automated developer-oriented status page";
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "on-failure";
+        ExecStartPre =
+        [
+          "/bin/sh -c '[[ -f state.binpb ]] || touch state.binpb'"
+        ];
+        ExecStart = lib.getExe pkgs.unstable.gatus;
+        StateDirectory = "gatus";
+        SyslogIdentifier = "gatus";
+        EnvironmentFile = "/etc/gatus/.env";
+      };
+      environment = {
+        GATUS_CONFIG_PATH = "/etc/gatus/config.yaml";
+      };
     };
   };
 }

@@ -4,22 +4,32 @@
 {
   imports = [
     ./adguard
+    ./backup/restic
+    ./backup/syncthing
+    ./backup/zrepl
     ./caddy
     ./chrony
     ./dae
+    ./ddns
+    ./exporters
     ./gatus
     ./glance
-    ./home-assistant
+    ./hass/core
+    ./hass/music
+    ./hass/sgcc
     ./homebox
+    ./kms
     ./minio
-    ./music-assistant
     ./nfs
-    ./node-exporter
+    ./nut
     ./openssh
     ./podman
     ./samba
     ./smartd
-    ./smartctl-exporter
+    ./talos/api
+    ./talos/pxe
     ./unifi-controller
+    ./vpn/easytier
+    ./vpn/tailscale
   ];
 }
