@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.modules.services.vpn.easytier;
-  settingsFormat = pkgs.formats.yaml { };
 in
 {
   options.modules.services.vpn.easytier = {
@@ -15,9 +14,29 @@ in
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
+    routes = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+    };
+    peers = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "tcp://public.easytier.top:11010"
+      ];
+    };
+    extraArgs = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "-d"
+        "--default-protocol" "udp"
+        "--disable-ipv6"
+      ];
+    };
   };
 
-  # creating tun device by systemd is impossible
+  # creating tun device by systemd is impossible;
+  # since v2.1.0, could config via official web server;
+  # using web only needs extraArgs = [ "-w" "{username}" ], and will ignore other args;
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 11010 11011 11012 ];
@@ -34,14 +53,11 @@ in
         "--network=host"
       ];
       cmd = [
-        "-d"
         "--network-name" "$NETWORK_NAME"
         "--network-secret" "$NETWORK_SECRET"
-        "-p" "tcp://public.easytier.top:11010"
-        "-n" "172.19.80.0/24"
-        "-n" "172.19.82.0/24"
-        "--default-protocol" "udp"
-        "--disable-ipv6"
+        (lib.concatMapStringsSep " " (peer: "-p " + peer) cfg.peers)
+        (lib.concatMapStringsSep " " (route: "-n " + route) cfg.routes)
+        (lib.concatStringsSep " " cfg.extraArgs)
       ];
       environment = {
         TZ="Asia/Shanghai";

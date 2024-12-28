@@ -87,6 +87,7 @@ in
           easytier = {
             enable = true;
             authFile = config.sops.secrets."networking/easytier/auth".path;
+            routes = [ "172.19.80.0/24" "172.19.82.0/24" ];
           };
           tailscale = {
             enable = true;
