@@ -105,7 +105,7 @@ jobs:
           commit-message: "chore(deps): Update packages managed by nvfetcher"
           body: |
             ## Changes:
-            ## ${{ steps.run-nvfetcher.outputs.changes }}
+            ${{ steps.run-nvfetcher.outputs.changes }}
           add-paths: |
             pkgs/**
           delete-branch: true
