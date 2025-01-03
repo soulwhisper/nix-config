@@ -53,7 +53,7 @@ jobs:
                 echo "    hash = \"$dist_hash\";"
                 echo "  };"
                 echo '}'
-              } >"caddy-custom/src/src.nix"
+              } >"src.nix"
             }
 
             cd pkgs/caddy-custom/src
