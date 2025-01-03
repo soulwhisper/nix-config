@@ -25,7 +25,6 @@ jobs:
           export LC_ALL=en_US.UTF-8
           cd pkgs
           nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos.tar.gz -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
-          file /tmp/nvfetcher-changes
           {
             echo 'changes<<EOF'
             cat /tmp/nvfetcher-changes
@@ -57,7 +56,7 @@ jobs:
               } >"caddy-custom/src/src.nix"
             }
 
-            cd caddy-custom/src
+            cd ../caddy-custom/src
             rm go*
             go mod init caddy
             go mod tidy
