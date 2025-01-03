@@ -22,7 +22,7 @@ jobs:
         id: run-nvfetcher
         run: |
           cd pkgs
-          nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
+          nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos.tar.gz -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
           {
             echo 'changes<<EOF'
             cat /tmp/nvfetcher-changes
