@@ -51,6 +51,8 @@ in
         "--default-protocol" "udp"
         "--latency-first"
         "--disable-ipv6"
+        "--relay-network-whitelist"
+        "--relay-all-peer-rpc"
       ];
     };
   };

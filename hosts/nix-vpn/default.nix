@@ -44,23 +44,6 @@ in
     };
     users.groups.soulwhisper.gid = 1000;
 
-    # additional users and groups
-    users.users = {
-      appuser = {
-        group = "appuser";
-        uid = 1001;
-        isSystemUser = true;
-      };
-    };
-    users.groups = {
-      appuser.gid = 1001;
-    };
-
-    systemd.tmpfiles.rules = [
-      "d /home/appuser 0644 appuser appuser - -"
-      "d /home/appuser/apps 0644 appuser appuser - -"
-    ];
-
     system.activationScripts.postActivation.text = ''
       # Must match what is in /etc/shells
       chsh -s /run/current-system/sw/bin/fish soulwhisper
@@ -77,9 +60,10 @@ in
             authFile = config.sops.secrets."networking/easytier/auth".path;
             routes = [ "10.0.0.0/24" "10.10.0.0/24" ];
           };
-          tailscale = {
+          headscale = {
             enable = true;
-            authFile = config.sops.secrets."networking/tailscale/auth".path;
+            server_domain = "lab.noirprime.com";
+            base_domain = "ts.noirprime.com";
           };
         };
 

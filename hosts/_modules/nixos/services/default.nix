@@ -30,6 +30,7 @@
     ./talos/pxe
     ./unifi-controller
     ./vpn/easytier
+    ./vpn/headscale
     ./vpn/tailscale
   ];
 }
