@@ -31,6 +31,8 @@ jobs:
             os: ubuntu-latest
           - system: nix-nas
             os: ubuntu-latest
+          - system: nix-vpn
+            os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository

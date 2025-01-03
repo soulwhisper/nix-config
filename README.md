@@ -8,6 +8,7 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - nix-dev, devops vm for k8s and wayland. WIP.
 - nix-infra, production nas vm. Without ZFS.
 - nix-nas, staging nas vm. With ZFS. Was TrueNAS Scale 24.10+.
+- nix-vpn, headscale and easytier-server, with ddns support.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage
