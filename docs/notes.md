@@ -71,6 +71,10 @@ gatus: 9801
 glance: 9802
 homebox: 9803
 
+# vpn
+wireguard: 51820
+headscale: 51900
+
 ```
 
 ## TODO

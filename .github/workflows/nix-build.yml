@@ -27,6 +27,8 @@ jobs:
             os: macos-latest
           - system: nix-dev
             os: ubuntu-latest
+          - system: nix-infra
+            os: ubuntu-latest
           - system: nix-nas
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
