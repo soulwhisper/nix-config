@@ -56,7 +56,7 @@ jobs:
               } >"caddy-custom/src/src.nix"
             }
 
-            cd ../caddy-custom/src
+            cd pkgs/caddy-custom/src
             rm go*
             go mod init caddy
             go mod tidy
