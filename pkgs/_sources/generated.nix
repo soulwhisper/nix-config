@@ -3,13 +3,13 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.8.4";
+    version = "v2.9.0";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.8.4";
+      rev = "v2.9.0";
       fetchSubmodules = false;
-      sha256 = "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=";
+      sha256 = "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=";
     };
   };
   caddy-plugin-cloudflare = {
@@ -37,13 +37,13 @@
   };
   hass-sgcc = {
     pname = "hass-sgcc";
-    version = "v1.6.0";
+    version = "v1.6.1";
     src = fetchFromGitHub {
       owner = "ARC-MX";
       repo = "sgcc_electricity_new";
-      rev = "v1.6.0";
+      rev = "v1.6.1";
       fetchSubmodules = false;
-      sha256 = "sha256-3mHo25V1Z8CoNijAaV1G/13fyb+QNdi/2SViJyt/ohU=";
+      sha256 = "sha256-ZD19t+1Gf9t0y1baOZ3DlJB5h7OyeXH/lb9YoEnpN5k=";
     };
   };
   kubecolor-catppuccin = {
