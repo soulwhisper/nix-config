@@ -43,7 +43,6 @@ jobs:
         with:
           token: "${{ steps.app-token.outputs.token }}"
           repository: "${{ github.repository }}"
-          retain_days: "2"
+          retain_days: "1"
           keep_minimum_runs: "10"
           delete_workflow_pattern: "update-nvfetcher.yml"
-          delete_run_by_conclusion_pattern: "success"
