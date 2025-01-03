@@ -13,11 +13,11 @@
             "name": null,
             "owner": "caddyserver",
             "repo": "caddy",
-            "rev": "v2.8.4",
-            "sha256": "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=",
+            "rev": "v2.9.0",
+            "sha256": "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=",
             "type": "github"
         },
-        "version": "v2.8.4"
+        "version": "v2.9.0"
     },
     "caddy-plugin-cloudflare": {
         "cargoLocks": null,
@@ -73,11 +73,11 @@
             "name": null,
             "owner": "ARC-MX",
             "repo": "sgcc_electricity_new",
-            "rev": "v1.6.0",
-            "sha256": "sha256-3mHo25V1Z8CoNijAaV1G/13fyb+QNdi/2SViJyt/ohU=",
+            "rev": "v1.6.1",
+            "sha256": "sha256-ZD19t+1Gf9t0y1baOZ3DlJB5h7OyeXH/lb9YoEnpN5k=",
             "type": "github"
         },
-        "version": "v1.6.0"
+        "version": "v1.6.1"
     },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
