@@ -58,6 +58,7 @@ jobs:
 
             cd pkgs/caddy-custom/src
             rm go*
+            nix-shell -p go
             go mod init caddy
             go mod tidy
             updateInfo ""
