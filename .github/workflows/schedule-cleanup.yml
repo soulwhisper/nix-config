@@ -4,39 +4,6 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
-    inputs:
-      days:
-        description: 'Days-worth of runs to keep for each workflow'
-        required: true
-        default: '2'
-      minimum_runs:
-        description: 'Minimum runs to keep for each workflow'
-        required: true
-        default: '10'
-      delete_workflow_by_state_pattern:
-        description: 'Filter workflows by state: active, deleted, disabled_fork, disabled_inactivity, disabled_manually'
-        required: true
-        default: "ALL"
-        type: choice
-        options:
-          - "ALL"
-          - active
-          - deleted
-          - disabled_inactivity
-          - disabled_manually
-      delete_run_by_conclusion_pattern:
-        description: 'Remove runs based on conclusion: action_required, cancelled, failure, skipped, success'
-        required: true
-        default: "ALL"
-        type: choice
-        options:
-          - "ALL"
-          - "Unsuccessful: action_required,cancelled,failure,skipped"
-          - action_required
-          - cancelled
-          - failure
-          - skipped
-          - success
 
 jobs:
   cleanup_runs:
@@ -66,16 +33,15 @@ jobs:
         with:
           token: "${{ steps.app-token.outputs.token }}"
           repository: "${{ github.repository }}"
-          retain_days: "7"
-          keep_minimum_runs: "10"
+          retain_days: "0"
+          keep_minimum_runs: "5"
           delete_run_by_conclusion_pattern: "success"
 
-
-      - name: Clenaup workflow "update-nvfetcher" runs
+      - name: Clenaup workflow failure runs
         uses: Mattraks/delete-workflow-runs@4c9f24749b7996562658e3d6e10662489e22caca # v2
         with:
           token: "${{ steps.app-token.outputs.token }}"
           repository: "${{ github.repository }}"
-          retain_days: "1"
-          keep_minimum_runs: "10"
-          delete_workflow_pattern: "update-nvfetcher.yml"
+          retain_days: "0"
+          keep_minimum_runs: "3"
+          delete_run_by_conclusion_pattern: "action_required,failure"
