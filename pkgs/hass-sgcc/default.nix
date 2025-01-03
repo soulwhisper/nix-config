@@ -7,7 +7,7 @@
 let
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.hass-sgcc;
-  vendorData = lib.importJSON ../_sources/vendorhash.json;
+  vendorData = lib.importJSON ../vendorhash.json;
 in
 python3Packages.buildPythonApplication rec {
   inherit (packageData) pname src;

@@ -6,7 +6,7 @@
 let
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.kubectl-klock;
-  vendorData = lib.importJSON ../_sources/vendorhash.json;
+  vendorData = lib.importJSON ../vendorhash.json;
 in
 pkgs.buildGoModule rec {
   inherit (packageData) pname src;

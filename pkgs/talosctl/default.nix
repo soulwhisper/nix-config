@@ -7,7 +7,7 @@
 let
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.talosctl;
-  vendorData = lib.importJSON ../_sources/vendorhash.json;
+  vendorData = lib.importJSON ../vendorhash.json;
 in
 pkgs.buildGoModule {
   inherit (packageData) pname src;

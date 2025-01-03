@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ERROR_LOG="/tmp/nix-build-err.log"
-VENDOR_HASH_FILE="pkgs/_sources/vendorhash.json"
+VENDOR_HASH_FILE="pkgs/vendorhash.json"
 
 APP_NAMES=$(jq -r 'keys[]' "$VENDOR_HASH_FILE")
 
