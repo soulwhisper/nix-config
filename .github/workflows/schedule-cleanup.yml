@@ -4,6 +4,39 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+    inputs:
+      days:
+        description: 'Days-worth of runs to keep for each workflow'
+        required: true
+        default: '2'
+      minimum_runs:
+        description: 'Minimum runs to keep for each workflow'
+        required: true
+        default: '10'
+      delete_workflow_by_state_pattern:
+        description: 'Filter workflows by state: active, deleted, disabled_fork, disabled_inactivity, disabled_manually'
+        required: true
+        default: "ALL"
+        type: choice
+        options:
+          - "ALL"
+          - active
+          - deleted
+          - disabled_inactivity
+          - disabled_manually
+      delete_run_by_conclusion_pattern:
+        description: 'Remove runs based on conclusion: action_required, cancelled, failure, skipped, success'
+        required: true
+        default: "ALL"
+        type: choice
+        options:
+          - "ALL"
+          - "Unsuccessful: action_required,cancelled,failure,skipped"
+          - action_required
+          - cancelled
+          - failure
+          - skipped
+          - success
 
 jobs:
   cleanup_runs:

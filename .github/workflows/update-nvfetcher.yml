@@ -24,7 +24,7 @@ jobs:
           export LANG=en_US.UTF-8
           export LC_ALL=en_US.UTF-8
           cd pkgs
-          nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos.tar.gz -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
+          nix-shell -p nvfetcher --command 'nvfetcher -l /tmp/nvfetcher-changes'
           {
             echo 'changes<<EOF'
             cat /tmp/nvfetcher-changes
@@ -61,7 +61,7 @@ jobs:
             go mod init caddy
             go mod tidy
             updateInfo ""
-            vendor_hash="$(nix build ../../../.#caddy-custom |& sed -n 's/.*got: *//p')"
+            vendor_hash="$(nix build ../../../.#caddy-custom 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')"
             updateInfo "$vendor_hash"
             echo "... completed."
           fi
@@ -70,8 +70,8 @@ jobs:
         id: update-vendorhash
         run: |
           setHash () {
-            jq --arg app "${1}" --arg hash "${2}" '.[$app] = $hash' pkgs/_sources/vendorhash.json > tmp.json
-            mv tmp.json pkgs/_sources/vendorhash.json
+            jq --arg app "${1}" --arg hash "${2}" '.[$app] = $hash' pkgs/vendorhash.json > tmp.json
+            mv tmp.json pkgs/vendorhash.json
           }
 
           declare -a APP_NAMES

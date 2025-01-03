@@ -12,7 +12,7 @@ let
 
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
   packageData = sourceData.easytier-custom;
-  vendorData = lib.importJSON ../_sources/vendorhash.json;
+  vendorData = lib.importJSON ../vendorhash.json;
 in
 rustPlatform.buildRustPackage rec {
   inherit (packageData) pname src;
