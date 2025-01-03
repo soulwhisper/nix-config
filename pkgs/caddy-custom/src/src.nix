@@ -7,6 +7,6 @@
     owner = "caddyserver";
     repo = "dist";
     rev = "v2.9.0";
-    hash = "";
+    hash = "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=";
   };
 }
