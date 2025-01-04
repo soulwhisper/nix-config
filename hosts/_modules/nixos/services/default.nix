@@ -4,13 +4,10 @@
 {
   imports = [
     ./adguard
-    ./backup/restic
-    ./backup/syncthing
-    ./backup/zrepl
     ./caddy
     ./chrony
     ./dae
-    ./ddns
+    ./easytier
     ./exporters
     ./gatus
     ./glance
@@ -24,12 +21,11 @@
     ./nut
     ./openssh
     ./podman
+    ./restic
     ./samba
     ./smartd
     ./talos/api
     ./talos/pxe
     ./unifi-controller
-    ./vpn/easytier
-    ./vpn/tailscale
   ];
 }

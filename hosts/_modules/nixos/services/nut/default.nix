@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    modules.services.exporters.nut.enable = true;
+
     networking.firewall.allowedTCPPorts = [ 3493 ];
 
     environment.etc = {

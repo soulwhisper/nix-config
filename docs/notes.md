@@ -5,6 +5,7 @@
 - change iterm2 theme to dark
 - change iterm2 font to "firacode-nerd-font" afterwards
 - caddy-custom, [ref](https://github.com/Ramblurr/nixos-caddy);
+- tailscale for k8s nodes, easytier for everything else; when gitops stable, tailscale can be removed;
 
 ```shell
 # install req. incl. cachix & nvd
@@ -71,9 +72,12 @@ gatus: 9801
 glance: 9802
 homebox: 9803
 
+# vpn
+wireguard: 51820
+headscale: 51900
+
 ```
 
 ## TODO
-- add tailscale, easytier to all hosts
 - remap all app users to root / appuser
 - rewrite nix-dev to nixos-gui-llm host, add desktop services, with wayland, [ref](https://github.com/Ramblurr/nixcfg/blob/main/modules/default.nix);

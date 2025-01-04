@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.modules.services.vpn.easytier;
+  cfg = config.modules.services.easytier;
 in
 {
-  options.modules.services.vpn.easytier = {
+  options.modules.services.easytier = {
     enable = lib.mkEnableOption "easytier";
     authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
@@ -50,14 +50,12 @@ in
         "-d"
         "--default-protocol" "udp"
         "--latency-first"
-        "--disable-ipv6"
+        "--relay-all-peer-rpc"
       ];
     };
   };
 
   # creating tun device by systemd is impossible;
-  # since v2.1.0, could config via official web server;
-  # using web only needs extraArgs = [ "-w" "{username}" ], and will ignore other args;
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 11010 11011 11012 ];
@@ -76,6 +74,7 @@ in
       cmd = [
         "--network-name" "$NETWORK_NAME"
         "--network-secret" "$NETWORK_SECRET"
+        "--relay-network-whitelist" "$NETWORK_NAME"
         (lib.concatMapStringsSep " " (peer: "-p " + peer) cfg.peers)
         (lib.concatMapStringsSep " " (route: "-n " + route) cfg.routes)
         (lib.concatStringsSep " " cfg.extraArgs)

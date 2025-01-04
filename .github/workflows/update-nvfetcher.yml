@@ -99,7 +99,7 @@ jobs:
           title: "chore(deps): Update packages managed by nvfetcher"
           commit-message: "chore(deps): Update packages managed by nvfetcher"
           body: |
-            ## Changes:
+            ## Summary
             ${{ steps.run-nvfetcher.outputs.changes }}
           add-paths: |
             pkgs/**

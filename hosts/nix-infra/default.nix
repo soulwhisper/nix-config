@@ -17,11 +17,12 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "52a88b81";
+      hostId = "52a88b82";
       useDHCP = true;
       firewall.enable = true;
     };
 
+    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";
@@ -48,13 +49,13 @@ in
       chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
 
+    systemd.tmpfiles.rules = [
+      "d /opt/backup 0644 root root - -"
+      "d /opt/timemachine 0644 root root - -"
+    ];
+
     modules = {
-      filesystems.zfs = {
-        enable = true;
-        mountPoolsAtBoot = [
-          "numina"
-        ];
-      };
+      users.appuser.enable = true;
 
       services = {
         ## Mandatory ##
@@ -74,41 +75,21 @@ in
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [ "172.19.80.0/24" "172.19.82.0/24" ];
+          routes = [ "10.0.0.0/24" "10.10.0.0/24" ];
         };
 
         ## System ##
         adguard.enable = true;
         kms.enable = true;
-        smartd.enable = true;
-        nut.enable = true;
 
         # unifi is disabled due to https://github.com/NixOS/nixpkgs/issues/305015
         # unifi-controller.enable = true;
 
         ## Monitoring ##
-        gatus.enable = true;
         exporters.node.enable = true;
 
         ## K8S:Talos ##
         talos.support.api.enable = true;
-        talos.support.pxe.enable = true;
-
-        ## Home-assistant ##
-        hass = {
-          dataDir = "/numina/apps/hass";
-          core.enable = true;
-          music.enable = true;
-          sgcc.enable = true;
-          sgcc.authFile = config.sops.secrets."hass/sgcc/auth".path;
-        };
-
-        ## APP ##
-        glance.enable = true;
-        homebox = {
-          enable = true;
-          dataDir = "/numina/apps/homebox";
-        };
 
         ## Backup ##
         restic = {
@@ -116,19 +97,19 @@ in
           endpointFile = config.sops.secrets."backup/restic/endpoint".path;
           credentialFile = config.sops.secrets."backup/restic/auth".path;
           encryptionFile = config.sops.secrets."backup/restic/encryption".path;
-          dataDir = "/numina/apps";
+          dataDir = "/opt/apps";
         };
 
         ## Storage ##
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-          dataDir = "/numina/apps/minio";
+          dataDir = "/opt/apps/minio";
         };
 
         nfs = {
           enable = true;
-          exports = "/numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
+          exports = "/opt/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
         };
 
         samba = {
@@ -136,23 +117,15 @@ in
           avahi.TimeMachine.enable = true;
           settings = {
             Apps = {
-              path = "/numina/apps";
+              path = "/opt/apps";
               "read only" = "no";
             };
             Backup = {
-              path = "/numina/backup";
-              "read only" = "no";
-            };
-            Docs = {
-              path = "/numina/docs";
-              "read only" = "no";
-            };
-            Media = {
-              path = "/numina/media";
+              path = "/opt/backup";
               "read only" = "no";
             };
             TimeMachine = {
-              path = "/numina/timemachine";
+              path = "/opt/timemachine";
               "read only" = "no";
               "fruit:aapl" = "yes";
               "fruit:time machine" = "yes";

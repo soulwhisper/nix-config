@@ -83,6 +83,11 @@
             user = "soulwhisper";
             forwardAgent = true;
           };
+          "nix-infra.homelab.internal" = {
+            port = 22;
+            user = "soulwhisper";
+            forwardAgent = true;
+          };
         };
       };
     };

@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.modules.services.backup.restic;
+  cfg = config.modules.services.restic;
 in
 {
-  options.modules.services.backup.restic = {
+  options.modules.services.restic = {
     enable = lib.mkEnableOption "restic";
     endpointFile = lib.mkOption {
       type = with lib.types; nullOr path;

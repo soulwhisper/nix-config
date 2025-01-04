@@ -98,6 +98,7 @@
           # nixos builds
           nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
           nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
+          nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
         };
 
         darwinConfigurations = {
