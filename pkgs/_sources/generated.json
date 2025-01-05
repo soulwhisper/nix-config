@@ -73,11 +73,11 @@
             "name": null,
             "owner": "ARC-MX",
             "repo": "sgcc_electricity_new",
-            "rev": "v1.6.2",
-            "sha256": "sha256-Ig4Xlogs9XLeSK/47Ryql5spuRPlAhVhtw4oJMXcVDM=",
+            "rev": "v1.6.4",
+            "sha256": "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=",
             "type": "github"
         },
-        "version": "v1.6.2"
+        "version": "v1.6.4"
     },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
