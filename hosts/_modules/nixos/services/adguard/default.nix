@@ -54,7 +54,6 @@ in
             { domain = "lab.noirprime.com"; answer = "172.19.82.10"; }
             { domain = "mon.noirprime.com"; answer = "172.19.82.10"; }
             { domain = "box.noirprime.com"; answer = "172.19.82.10"; }
-            { domain = "unifi.noirprime.com"; answer = "172.19.82.10"; }
             { domain = "pve.homelab.internal"; answer = "172.19.82.100"; }
             { domain = "k8s.homelab.internal"; answer = "172.19.82.101"; }
             { domain = "k8s.homelab.internal"; answer = "172.19.82.102"; }

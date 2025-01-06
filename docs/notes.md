@@ -77,7 +77,3 @@ wireguard: 51820
 headscale: 51900
 
 ```
-
-## TODO
-- remap all app users to root / appuser
-- rewrite nix-dev to nixos-gui-llm host, add desktop services, with wayland, [ref](https://github.com/Ramblurr/nixcfg/blob/main/modules/default.nix);

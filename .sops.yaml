@@ -1,7 +1,7 @@
 ---
 keys:
   - &user_soulwhisper age1qlugfu60vrhgqtuw0kqqtks9p7nz9npnwa255j7w27t3gapcdv6qjptd7d
-  - &host_nix-dev age1q6t3ycz3522ddn6f57dar09psntanzdmxg5de9cpfs75wgp4ny2sqlafr5
+  - &host_nix-vpn age1q6t3ycz3522ddn6f57dar09psntanzdmxg5de9cpfs75wgp4ny2sqlafr5
   - &host_nix-nas age133aznhvkadxzat57vswv7q29qg8zthgs7gsdvd96cj3tm38xksks5ruafa
 
 creation_rules:
@@ -9,5 +9,5 @@ creation_rules:
     key_groups:
       - age:
           - *user_soulwhisper
-          - *host_nix-dev
+          - *host_nix-vpn
           - *host_nix-nas

@@ -74,7 +74,7 @@ in
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [ "10.0.0.0/24" "10.10.0.0/24" ];
+          routes = [ ];
         };
 
         ## System ##
@@ -120,10 +120,6 @@ in
           enable = true;
           avahi.TimeMachine.enable = true;
           settings = {
-            Apps = {
-              path = "/opt/apps";
-              "read only" = "no";
-            };
             Backup = {
               path = "/opt/backup";
               "read only" = "no";

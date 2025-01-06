@@ -26,19 +26,19 @@ in
     # networking.firewall.allowedTCPPorts = [ 9803 ];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0644 appuser appuser - -"
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
     ];
 
     systemd.services.homebox = {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
-	      HBOX_STORAGE_DATA = "${cfg.dataDir}";
-	      HBOX_STORAGE_SQLITE_URL = "${cfg.dataDir}/homebox.db?_pragma=busy_timeout=999&_pragma=journal_mode=WAL&_fk=1";
-	      HBOX_WEB_PORT = "9803";
-	      HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
-	      HBOX_WEB_MAX_UPLOAD_SIZE = "100";
-	      HBOX_MODE = "production";
+        HBOX_STORAGE_DATA = "${cfg.dataDir}";
+        HBOX_STORAGE_SQLITE_URL = "${cfg.dataDir}/homebox.db?_pragma=busy_timeout=999&_pragma=journal_mode=WAL&_fk=1";
+        HBOX_WEB_PORT = "9803";
+        HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
+        HBOX_WEB_MAX_UPLOAD_SIZE = "100";
+        HBOX_MODE = "production";
       };
       serviceConfig = {
         ExecStart = lib.getExe pkgs.unstable.homebox;

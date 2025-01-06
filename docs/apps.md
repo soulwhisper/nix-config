@@ -13,9 +13,10 @@
 ## Home-assistant
 
 - due to nix support for custom components,
-- haas is installed as [supervised](https://github.com/home-assistant/supervised-installer) with dae, restic and other containers. In a debian vm.
+- hass is installed as [supervised](https://github.com/home-assistant/supervised-installer) with dae, restic and other containers. In a debian vm.
 - which also means nix pkg "home-assistant" and relevant apps are removed from my nixos configs.
-- check "scripts/haas-supervised" for related scripts and compose yaml files.
+- check "scripts/hass-supervised" for related scripts and compose yaml files.
+- good examples, [ref1](https://github.com/scstraus/home-assistant-config);
 
 ## Easytier
 

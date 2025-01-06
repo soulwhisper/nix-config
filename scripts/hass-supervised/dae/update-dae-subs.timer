@@ -1,0 +1,9 @@
+[Unit]
+Description=Auto-update dae subscriptions
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=12h
+
+[Install]
+WantedBy=timers.target

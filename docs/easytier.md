@@ -25,44 +25,6 @@ network_secret = "$NETWORK_SECRET"
 
 [[peer]]
 uri = "tcp://public.easytier.top:11010"
-[[peer]]
-uri = "tcp://gz.minebg.top:11010"
-[[peer]]
-uri = "wss://gz.minebg.top:11012"
-[[peer]]
-uri = "tcp://156.231.117.80:11010"
-[[peer]]
-uri = "wss://156.231.117.80:11012"
-[[peer]]
-uri = "tcp://public.easytier.net:11010"
-[[peer]]
-uri = "wss://public.easytier.net:11012"
-[[peer]]
-uri = "tcp://public.server.soe.icu:11010"
-[[peer]]
-uri = "wss://public.server.soe.icu:11012"
-[[peer]]
-uri = "tcp://ah.nkbpal.cn:11010"
-[[peer]]
-uri = "wss://ah.nkbpal.cn:11012"
-[[peer]]
-uri = "tcp://et.gbc.moe:11011"
-[[peer]]
-uri = "wss://et.gbc.moe:11012"
-[[peer]]
-uri = "tcp://et.pub.moe.gift:11111"
-[[peer]]
-uri = "wss://et.pub.moe.gift:11111"
-[[peer]]
-uri = "tcp://et.01130328.xyz:11010"
-[[peer]]
-uri = "tcp://47.103.35.100:11010"
-[[peer]]
-uri = "tcp://et.ie12vps.xyz:11010"
-[[peer]]
-uri = "tcp://116.206.178.250:11010"
-[[peer]]
-uri = "tcp://x.cfgw.rr.nu:11010"
 
 [[proxy_network]]
 cidr = "172.19.80.0/24"
@@ -72,7 +34,6 @@ cidr = "172.19.82.0/24"
 [flags]
 default_protocol = "udp"
 enable_ipv6 = false
-latency_first = true
 relay_all_peer_rpc = true
 relay_network_whitelist = "$NETWORK_NAME"
 

@@ -33,9 +33,9 @@ in
     # networking.firewall.allowedTCPPorts = [ 9000 9001 ];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0644 appuser appuser - -"
-      "d ${cfg.dataDir}/data 0644 appuser appuser - -"
-      "d ${cfg.dataDir}/config 0644 appuser appuser - -"
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "d ${cfg.dataDir}/data 0755 appuser appuser - -"
+      "d ${cfg.dataDir}/config 0755 appuser appuser - -"
     ];
 
     services.minio = {

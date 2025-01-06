@@ -73,7 +73,7 @@
       ssh = {
         enable = true;
         matchBlocks = {
-          "nix-dev.homelab.internal" = {
+          "nix-vpn.homelab.internal" = {
             port = 22;
             user = "soulwhisper";
             forwardAgent = true;

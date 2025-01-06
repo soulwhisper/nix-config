@@ -18,30 +18,10 @@ in
       type = lib.types.listOf lib.types.str;
       default = [ ];
     };
-    # peer-status: https://easytier.gd.nkbpal.cn/status/easytier
     peers = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
         "tcp://public.easytier.top:11010"
-        "tcp://gz.minebg.top:11010"
-        "wss://gz.minebg.top:11012"
-        "tcp://156.231.117.80:11010"
-        "wss://156.231.117.80:11012"
-        "tcp://public.easytier.net:11010"
-        "wss://public.easytier.net:11012"
-        "tcp://public.server.soe.icu:11010"
-        "wss://public.server.soe.icu:11012"
-        "tcp://ah.nkbpal.cn:11010"
-        "wss://ah.nkbpal.cn:11012"
-        "tcp://et.gbc.moe:11011"
-        "wss://et.gbc.moe:11012"
-        "tcp://et.pub.moe.gift:11111"
-        "wss://et.pub.moe.gift:11111"
-        "tcp://et.01130328.xyz:11010"
-        "tcp://47.103.35.100:11010"
-        "tcp://et.ie12vps.xyz:11010"
-        "tcp://116.206.178.250:11010"
-        "tcp://x.cfgw.rr.nu:11010"
       ];
     };
     extraArgs = lib.mkOption {
@@ -49,7 +29,6 @@ in
       default = [
         "-d"
         "--default-protocol" "udp"
-        "--latency-first"
         "--relay-all-peer-rpc"
       ];
     };
@@ -71,13 +50,15 @@ in
         "--privileged"
         "--network=host"
       ];
-      cmd = [
-        "--network-name" "$NETWORK_NAME"
-        "--network-secret" "$NETWORK_SECRET"
-        "--relay-network-whitelist" "$NETWORK_NAME"
-        (lib.concatMapStringsSep " " (peer: "-p " + peer) cfg.peers)
-        (lib.concatMapStringsSep " " (route: "-n " + route) cfg.routes)
-        (lib.concatStringsSep " " cfg.extraArgs)
+      cmd = lib.concatLists [
+        [
+          "--network-name" "$NETWORK_NAME"
+          "--network-secret" "$NETWORK_SECRET"
+          "--relay-network-whitelist" "$NETWORK_NAME"
+        ]
+        (lib.concatMap (peer: [ "-p" peer ]) cfg.peers)
+        (lib.concatMap (route: [ "-n" route ]) cfg.routes)
+        cfg.extraArgs
       ];
       environment = {
         TZ="Asia/Shanghai";

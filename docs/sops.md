@@ -16,17 +16,11 @@ sops --verbose -i -e secrets.sops.yaml
 ```shell
 backup:
     restic:
+        encryption: {restic-encryption-password}
         endpoint: {restic-repository-s3}
         auth: |
             AWS_ACCESS_KEY_ID={s3-access-key}
             AWS_SECRET_ACCESS_KEY={s3-access-secret}
-        encryption: {restic-encryption-password}
-hass:
-    sgcc:
-        auth: |
-            PHONE_NUMBER={sgcc-account}
-            PASSWORD={sgcc-password}
-            PUSHPLUS_TOKEN={pushplus-token}
 networking:
     cloudflare:
         auth: |
@@ -40,8 +34,6 @@ networking:
         auth: |
             NETWORK_NAME={easytier-netwrok-name}
             NETWROK_SECRET={easytier-network-secret}
-    tailscale:
-        auth: {tailscale-auth-key}
 storage:
     minio:
         root-credentials: |

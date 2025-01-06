@@ -52,12 +52,21 @@ in
 
     modules = {
       services = {
-        podman.enable = true;
+        chrony.enable = true;
         openssh.enable = true;
-        dae = {
+        easytier = {
           enable = true;
-          subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
+          authFile = config.sops.secrets."networking/easytier/auth".path;
+          routes = [ "10.0.0.0/24" "10.10.0.0/24" ];
         };
+        restic = {
+          enable = true;
+          endpointFile = config.sops.secrets."backup/restic/endpoint".path;
+          credentialFile = config.sops.secrets."backup/restic/auth".path;
+          encryptionFile = config.sops.secrets."backup/restic/encryption".path;
+          dataDir = "/opt/apps";
+        };
+        unifi-controller.enable = true;
       };
     };
 
