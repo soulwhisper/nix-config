@@ -1,14 +1,13 @@
 # Apps
 
-- below apps have pre-defined configs, will have additonal files in /etc/appname.
+- below apps have pre-defined configs, have additonal files in /etc/appname.
     - dae
     - gatus
     - glance
+    - talos-pxe
+    - nut
 
-- below apps need persistant data, will run as 1001:1001 with custom dataDir.
-    - homebox
-    - minio
-    - unifi-controller
+- by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
 
 ## Home-assistant
 

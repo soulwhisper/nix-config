@@ -22,7 +22,8 @@
           restartUnits = [ "minio.service" ];
         };
         "networking/cloudflare/auth" = {
-          owner = config.users.users.caddy.name;
+          owner = config.users.users.appuser.name;
+          restartUnits = [ "caddy.service" ];
         };
         "networking/dae/subscription" = { };
         "networking/easytier/auth" = { };

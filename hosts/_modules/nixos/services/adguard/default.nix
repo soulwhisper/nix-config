@@ -10,6 +10,10 @@ in
 {
   options.modules.services.adguard = {
     enable = lib.mkEnableOption "adguard";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/apps/adguard";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,6 +21,10 @@ in
 
     networking.firewall.allowedTCPPorts = [ 53 9200 ];
     networking.firewall.allowedUDPPorts = [ 53 ];
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
+    ];
 
     services.adguardhome = {
       enable = true;
@@ -31,6 +39,9 @@ in
         ];
         language = "zh-cn";
         theme = "auto";
+        dhcp = {
+          enabled = false;
+        };
         dns = {
           bind_hosts = [ "0.0.0.0" ];
           port = 53;
@@ -65,5 +76,11 @@ in
         };
       };
     };
+
+    systemd.services.adguardhome.serviceConfig.DynamicUser = lib.mkForce false;
+    systemd.services.adguardhome.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.adguardhome.serviceConfig.Group = lib.mkForce "appuser";
+    systemd.services.adguardhome.serviceConfig.RuntimeDirectory = lib.mkForce "${cfg.dataDir}";
+    systemd.services.adguardhome.serviceConfig.StateDirectory = lib.mkForce "${cfg.dataDir}";
   };
 }

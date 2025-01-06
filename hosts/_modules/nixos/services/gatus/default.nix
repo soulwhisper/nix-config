@@ -10,6 +10,10 @@ in
 {
   options.modules.services.gatus = {
     enable = lib.mkEnableOption "gatus";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/apps/gatus";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,6 +38,10 @@ in
         "gatus/.env".mode = "0644";
     };
 
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
+    ];
+
     systemd.services.gatus = {
       description = "Automated developer-oriented status page";
       after = [ "network.target" ];
@@ -46,7 +54,10 @@ in
           "/bin/sh -c '[[ -f state.binpb ]] || touch state.binpb'"
         ];
         ExecStart = lib.getExe pkgs.unstable.gatus;
-        StateDirectory = "gatus";
+        StateDirectory = "${cfg.dataDir}";
+        RuntimeDirectory = "${cfg.dataDir}";
+        User = "appuser";
+        Group = "appuser";
         SyslogIdentifier = "gatus";
         EnvironmentFile = "/etc/gatus/.env";
       };

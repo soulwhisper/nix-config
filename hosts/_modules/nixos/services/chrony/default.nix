@@ -10,6 +10,10 @@ in
 {
   options.modules.services.chrony = {
     enable = lib.mkEnableOption "chrony";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/apps/chrony"; # owned by chrony:chrony
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -18,6 +22,7 @@ in
     services.chrony = {
       enable = true;
       package = pkgs.unstable.chrony;
+      directory = "${cfg.dataDir}";
       servers = [
             "ntp.ntsc.ac.cn"
             "ntp.aliyun.com"

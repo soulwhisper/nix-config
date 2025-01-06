@@ -10,10 +10,18 @@ in
 {
   options.modules.services.talos.api = {
     enable = lib.mkEnableOption "talos-api";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/apps/talos-api";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 9300 ];
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
+    ];
 
     systemd.services.talos-api = {
       description = "Talos Cluster Discovery API Service";
@@ -21,28 +29,12 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart ="${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
-        WorkingDirectory = "/var/lib/talos-api";
-        StateDirectory = "talos-api";
-        RuntimeDirectory = "talos-api";
-        RuntimeDirectoryMode = "0755";
-        PrivateTmp = true;
-        DynamicUser = true;
-        DevicePolicy = "closed";
-        LockPersonality = true;
-        MemoryDenyWriteExecute = true;
-        PrivateUsers = true;
-        ProtectHome = true;
-        ProtectHostname = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
-        ProtectKernelTunables = true;
-        ProtectControlGroups = true;
-        ProcSubset = "pid";
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        SystemCallArchitectures = "native";
-        UMask = "0077";
+        ExecStartPre = [ "/bin/sh -c '[[ -f state.binpb ]] || touch state.binpb'" ];
+        ExecStart ="${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
+        StateDirectory = "${cfg.dataDir}";
+        RuntimeDirectory = "${cfg.dataDir}";
+        User = "appuser";
+        Group = "appuser";
       };
     };
   };
