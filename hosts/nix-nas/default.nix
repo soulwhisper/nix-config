@@ -83,31 +83,22 @@ in
         smartd.enable = true;
         nut.enable = true;
 
-        # unifi is disabled due to https://github.com/NixOS/nixpkgs/issues/305015
-        # unifi-controller.enable = true;
-
         ## Monitoring ##
         gatus.enable = true;
         exporters.node.enable = true;
 
         ## K8S:Talos ##
-        talos.support.api.enable = true;
-        talos.support.pxe.enable = true;
+        talos.api.enable = true;
 
-        ## Home-assistant ##
-        hass = {
-          dataDir = "/numina/apps/hass";
-          core.enable = true;
-          music.enable = true;
-          sgcc.enable = true;
-          sgcc.authFile = config.sops.secrets."hass/sgcc/auth".path;
-        };
-
-        ## APP ##
+        ## Apps ##
         glance.enable = true;
         homebox = {
           enable = true;
           dataDir = "/numina/apps/homebox";
+        };
+        unifi-controller = {
+          enable = true;
+          dataDir = "/numina/apps/unifi-controller";
         };
 
         ## Backup ##
@@ -128,7 +119,10 @@ in
 
         nfs = {
           enable = true;
-          exports = "/numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
+          exports = ''
+            /numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)
+            /numina/media *(rw,async,insecure,no_root_squash,no_subtree_check)
+          '';
         };
 
         samba = {
@@ -141,10 +135,6 @@ in
             };
             Backup = {
               path = "/numina/backup";
-              "read only" = "no";
-            };
-            Docs = {
-              path = "/numina/docs";
               "read only" = "no";
             };
             Media = {

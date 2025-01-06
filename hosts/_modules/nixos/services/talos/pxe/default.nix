@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.modules.services.talos.support.pxe;
+  cfg = config.modules.services.talos.pxe;
 in
 {
-  options.modules.services.talos.support.pxe = {
+  options.modules.services.talos.pxe = {
     enable = lib.mkEnableOption "talos-pxe";
   };
 

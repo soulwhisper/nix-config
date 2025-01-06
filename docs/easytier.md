@@ -1,4 +1,4 @@
-# Easytier Node Config
+## Easytier Node Config
 
 - due to encryption, node config must use same format;
 

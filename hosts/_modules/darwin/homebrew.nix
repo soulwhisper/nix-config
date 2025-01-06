@@ -14,6 +14,7 @@ _:
 
     # stable apps list
     taps = [
+      "brewforge/chinese"
     ];
     brews = [
     ];
@@ -21,6 +22,7 @@ _:
       "1password"
       "clash-verge-rev"
       "dropbox"
+      "easytier"
       "google-chrome"
       "gifox"
       "iterm2"

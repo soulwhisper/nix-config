@@ -11,9 +11,6 @@
     ./exporters
     ./gatus
     ./glance
-    ./hass/core
-    ./hass/music
-    ./hass/sgcc
     ./homebox
     ./kms
     ./minio

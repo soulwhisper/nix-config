@@ -58,7 +58,6 @@ zpool create \
 
 zfs create numina/backup
 zfs create numina/media
-zfs create numina/docs
 zfs create numina/apps
 zfs create numina/timemachine
 

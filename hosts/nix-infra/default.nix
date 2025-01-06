@@ -51,12 +51,11 @@ in
 
     systemd.tmpfiles.rules = [
       "d /opt/backup 0644 root root - -"
+      "d /opt/media 0644 root root - -"
       "d /opt/timemachine 0644 root root - -"
     ];
 
     modules = {
-      users.appuser.enable = true;
-
       services = {
         ## Mandatory ##
         chrony.enable = true;
@@ -82,14 +81,17 @@ in
         adguard.enable = true;
         kms.enable = true;
 
-        # unifi is disabled due to https://github.com/NixOS/nixpkgs/issues/305015
-        # unifi-controller.enable = true;
-
         ## Monitoring ##
+        gatus.enable = true;
         exporters.node.enable = true;
 
         ## K8S:Talos ##
-        talos.support.api.enable = true;
+        talos.api.enable = true;
+
+        ## Apps ##
+        glance.enable = true;
+        homebox.enable = true;
+        unifi-controller.enable = true;
 
         ## Backup ##
         restic = {
@@ -104,12 +106,14 @@ in
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-          dataDir = "/opt/apps/minio";
         };
 
         nfs = {
           enable = true;
-          exports = "/opt/backup *(rw,async,insecure,no_root_squash,no_subtree_check)";
+          exports = ''
+            /opt/backup *(rw,async,insecure,no_root_squash,no_subtree_check)
+            /opt/media *(rw,async,insecure,no_root_squash,no_subtree_check)
+          '';
         };
 
         samba = {
@@ -122,6 +126,10 @@ in
             };
             Backup = {
               path = "/opt/backup";
+              "read only" = "no";
+            };
+            Media = {
+              path = "/numina/media";
               "read only" = "no";
             };
             TimeMachine = {

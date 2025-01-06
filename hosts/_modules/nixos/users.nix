@@ -3,31 +3,27 @@
   lib,
   ...
 }:
-let
-  cfg = config.modules.users;
-in
 {
-  options.modules.users = {
-    appuser.enable = lib.mkEnableOption "appuser";
-  };
-
   config = {
-    users.mutableUsers = false;
+    users = {
+      mutableUsers = false;
 
-    # appuser, 1001:1001
-    users.users = lib.mkIf cfg.appuser.enable {
-      appuser = {
-        group = "appuser";
-        uid = 1001;
-        isSystemUser = true;
+      # appuser, 1001:1001
+      users = {
+        appuser = {
+          group = "appuser";
+          uid = 1001;
+          isSystemUser = true;
+        };
+      };
+      groups = {
+        appuser.gid = 1001;
       };
     };
-    users.groups = lib.mkIf cfg.appuser.enable {
-        appuser.gid = 1001;
-    };
 
-    systemd.tmpfiles.rules = lib.mkIf cfg.appuser.enable [
+    systemd.tmpfiles.rules = [
       "d /opt/apps 0644 appuser appuser - -"
+      "d /opt/logs 0644 appuser appuser - -"
     ];
   };
 }

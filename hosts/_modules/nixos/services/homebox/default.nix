@@ -12,7 +12,7 @@ in
     enable = lib.mkEnableOption "homebox";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/homebox";
+      default = "/opt/apps/homebox";
     };
   };
 
@@ -24,6 +24,10 @@ in
     '';
 
     # networking.firewall.allowedTCPPorts = [ 9803 ];
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0644 appuser appuser - -"
+    ];
 
     systemd.services.homebox = {
       after = [ "network.target" ];
@@ -39,6 +43,8 @@ in
       serviceConfig = {
         ExecStart = lib.getExe pkgs.unstable.homebox;
         WorkingDirectory = "${cfg.dataDir}";
+        User = "appuser";
+        Group = "appuser";
         Restart = "always";
       };
     };
