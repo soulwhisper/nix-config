@@ -5,9 +5,9 @@
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
 - soulwhisper-mba, my macbook configs.
-- nix-vpn, easytier routing node, with unifi-controller container.
 - nix-infra, production nas vm, with k8s support. Without ZFS.
 - nix-nas, staging nas vm. With ZFS. Was TrueNAS Scale 24.10+.
+- nix-vpn, easytier routing node, with unifi-controller container.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage

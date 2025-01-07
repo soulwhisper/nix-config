@@ -33,7 +33,7 @@ in
           "min protocol" = "SMB2";
 
           "ea support" = "yes";
-          "vfs objects" = "acl_xattr catia fruit streams_xattr";
+          "vfs objects" = "acl_xattr, catia, fruit, streams_xattr";
           "fruit:metadata" = "stream";
           "fruit:model" = "MacSamba";
           "fruit:veto_appledouble" = "no";
@@ -43,10 +43,9 @@ in
           "fruit:delete_empty_adfiles" = "yes";
           "fruit:nfs_aces" = "no";
 
-          "browseable" = "yes";
-          "guest ok" = "no";
-          "guest account" = "nobody";
-          "map to guest" = "bad user";
+          "browsable" = "yes";
+          "guest only" = "no";
+          "map to guest" = "never";
           "inherit acls" = "yes";
           "map acl inherit" = "yes";
           "valid users" = "@samba-users";

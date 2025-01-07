@@ -13,8 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    modules.services.exporters.smartctl.enable = true;
-
     environment.systemPackages = [ pkgs.smartmontools ];
 
     services.smartd = {

@@ -17,7 +17,7 @@ in
   # user = root, files in zfs pool
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9002 9103 ];
+    networking.firewall.allowedTCPPorts = [ 9003 9103 ];
 
     services.zrepl = {
       enable = true;
@@ -88,7 +88,7 @@ in
             type = "source";
             serve = {
               type = "tcp";
-              listen = "0.0.0.0:9002";
+              listen = "0.0.0.0:9003";
               clients = {
                 "10.100.0.0/24" = "backup-*";
               };
@@ -108,7 +108,7 @@ in
             connect = {
               type = "tcp";
               # change this addr accordingly
-              address = "10.100.0.10:9002";
+              address = "10.100.0.10:9003";
             };
             root_fs = "numina/replication";
             interval = "10m";

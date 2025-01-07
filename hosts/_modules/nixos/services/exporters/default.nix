@@ -5,9 +5,9 @@
   ...
 }:
 let
-  cfg = config.modules.services.exporters;
+  cfg = config.modules.services;
   exporterConfigs = [
-    (lib.mkIf cfg.node.enable {
+    (lib.mkIf cfg.exporters.enable {
       networking.firewall.allowedTCPPorts = [ 9100 ];
 
       services.prometheus.exporters.node = {
@@ -27,7 +27,7 @@ let
         passwordPath = "/etc/nut/password";
       };
     })
-    (lib.mkIf cfg.smartctl.enable {
+    (lib.mkIf cfg.smartd.enable {
       networking.firewall.allowedTCPPorts = [ 9102 ];
 
       services.prometheus.exporters.smartctl = {
@@ -39,9 +39,7 @@ let
 in
 {
   options.modules.services.exporters = {
-    node.enable = lib.mkEnableOption "node-exporter";
-    nut.enable = lib.mkEnableOption "nut-exporter";
-    smartctl.enable = lib.mkEnableOption "smartctl-exporter";
+    enable = lib.mkEnableOption "node-exporter";
   };
 
   config = lib.fold lib.recursiveUpdate {} exporterConfigs;

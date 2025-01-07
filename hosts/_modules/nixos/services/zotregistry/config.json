@@ -1,0 +1,127 @@
+{
+    "distSpecVersion": "1.0.1",
+    "storage": {
+      "rootDirectory": "/zot/data",
+      "commit": false,
+      "dedupe": true,
+      "gc": true,
+      "gcDelay": "1h",
+      "gcInterval": "24h",
+      "retention": {
+        "dryRun": false,
+        "delay": "24h",
+        "policies": [
+          {
+            "repositories": ["**"],
+            "deleteReferrers": true,
+            "deleteUntagged": true,
+            "keepTags": [
+              {
+                "mostRecentlyPushedCount": 3,
+                "mostRecentlyPulledCount": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "http": {
+      "address": "0.0.0.0",
+      "port": "9002"
+    },
+    "log": {
+      "level": "info"
+    },
+    "extensions": {
+      "ui": {
+        "enable": true
+      },
+      "search": {
+        "enable": true,
+        "cve": {
+          "updateInterval": "2h"
+        }
+      },
+      "scrub": {
+        "enable": true,
+        "interval": "24h"
+      },
+      "sync": {
+        "enable": true,
+        "registries": [
+          {
+            "urls": ["https://index.docker.io"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/docker.io",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          },
+          {
+            "urls": ["https://gcr.io"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/gcr.io",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          },
+          {
+            "urls": ["https://ghcr.io"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/ghcr.io",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          },
+          {
+            "urls": ["https://quay.io"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/quay.io",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          },
+          {
+            "urls": ["https://registry.k8s.io"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/registry.k8s.io",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          },
+          {
+            "urls": ["https://public.ecr.aws"],
+            "content": [
+              {
+                "prefix": "**",
+                "destination": "/public.ecr.aws",
+                "stripPrefix": true
+              }
+            ],
+            "onDemand": true,
+            "tlsVerify": true
+          }
+        ]
+      }
+    }
+  }

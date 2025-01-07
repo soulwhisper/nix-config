@@ -56,11 +56,14 @@ zpool create \
     {disk-by-id-3} \
     {disk-by-id-4}
 
+zfs create numina/apps
 zfs create numina/backup
 zfs create numina/media
-zfs create numina/apps
 zfs create numina/timemachine
 
 zfs create numina/replication -o compression=zstd -o mountpoint=none -o canmount=off
+
+chown 0:0 /numina
+chown -R 1001:1001 /numina/apps
 
 ```

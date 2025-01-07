@@ -84,8 +84,11 @@ in
         nut.enable = true;
 
         ## Monitoring ##
-        gatus.enable = true;
-        exporters.node.enable = true;
+        exporters.enable = true;
+        uptime = {
+          enable = true;
+          dataDir = "/numina/apps/uptime-kuma";
+        };
 
         ## K8S:Talos ##
         talos.api.enable = true;
@@ -99,6 +102,10 @@ in
         unifi-controller = {
           enable = true;
           dataDir = "/numina/apps/unifi-controller";
+        };
+        zotregistry = {
+          enable = true;
+          dataDir = "/numina/apps/zot";
         };
 
         ## Backup ##

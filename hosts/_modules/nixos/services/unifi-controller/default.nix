@@ -35,7 +35,7 @@ in
       "d ${cfg.dataDir} 0755 appuser appuser - -"
       "d ${cfg.dataDir}/config 0755 appuser appuser - -"
       "d ${cfg.dataDir}/data 0755 appuser appuser - -"
-      "f+ ${cfg.dataDir}/init-mongo.js 0755 appuser appuser - ${init-mongo-file}"
+      "L+ ${cfg.dataDir}/init-mongo.js 0600 appuser appuser - ${init-mongo-file}"
     ];
 
     # systemctl status podman-unifi-controller.service

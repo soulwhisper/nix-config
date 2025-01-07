@@ -16,6 +16,8 @@ in
     };
   };
 
+  # due to caddy issues, user and dataDir remain default
+  # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 

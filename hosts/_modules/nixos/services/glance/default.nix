@@ -10,6 +10,10 @@ in
 {
   options.modules.services.glance = {
     enable = lib.mkEnableOption "glance";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/apps/glance";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -20,6 +24,10 @@ in
     '';
 
     # networking.firewall.allowedTCPPorts = [ 9802 ];
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 appuser appuser - -"
+    ];
 
     environment.etc = {
         "glance/glance.yaml".source = pkgs.writeTextFile {
@@ -36,27 +44,10 @@ in
 
       serviceConfig = {
         ExecStart ="${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";
-        WorkingDirectory = "/var/lib/glance";
-        StateDirectory = "glance";
-        RuntimeDirectory = "glance";
-        RuntimeDirectoryMode = "0755";
-        PrivateTmp = true;
-        DynamicUser = true;
-        DevicePolicy = "closed";
-        LockPersonality = true;
-        MemoryDenyWriteExecute = true;
-        PrivateUsers = true;
-        ProtectHome = true;
-        ProtectHostname = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
-        ProtectKernelTunables = true;
-        ProtectControlGroups = true;
-        ProcSubset = "pid";
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        SystemCallArchitectures = "native";
-        UMask = "0077";
+        StateDirectory = "${cfg.dataDir}";
+        RuntimeDirectory = "${cfg.dataDir}";
+        User = "appuser";
+        Group = "appuser";
       };
     };
   };

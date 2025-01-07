@@ -9,7 +9,6 @@
     ./dae
     ./easytier
     ./exporters
-    ./gatus
     ./glance
     ./homebox
     ./kms
@@ -24,5 +23,7 @@
     ./talos/api
     ./talos/pxe
     ./unifi-controller
+    ./uptime
+    ./zotregistry
   ];
 }

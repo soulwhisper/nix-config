@@ -32,48 +32,16 @@ gpg --import privatekey
 gpt --import publickey
 git config --global user.signingkey <gpg-id>
 git config --global commit.gpgsign true
-```
 
-## service ports remap
+# fix unfinished tmpfiles
+systemd-tmpfiles --tldr | grep apps
+SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
 
-```shell
-# unchangeable
-adguard-dns: 53
-unifi: 8080,8443,8880,8843,6789,3478,10001
+# list failed systemd units
+systemctl list-units | grep failed
 
-# should-not-change
-caddy: 80,443
-dae-http: 1080
-easytier-socks5: 1081
-home-assistant: 8123
-
-# remap
-## storage, 9000-9099
-minio: 9000,9001
-zrepl: 9002
-
-## monitor, 9100-9199
-node-exporter: 9100
-nut-exporter: 9101
-smartctl-exporter: 9102
-zrepl-metrics: 9103
-
-## system, 9200-9299
-adguard-ui: 9200
-ddns-ui: 9201
-syncthing-ui: 9202
-
-## k8s, 9300-9399
-talos-api: 9300
-talos-pxe: 9301
-
-## app, 9800-9999
-gatus: 9801
-glance: 9802
-homebox: 9803
-
-# vpn
-wireguard: 51820
-headscale: 51900
+# squash multi comments
+git reset --soft HEAD~3 && git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
+git push --force-with-lease
 
 ```

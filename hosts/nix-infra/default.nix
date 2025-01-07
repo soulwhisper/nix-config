@@ -82,8 +82,8 @@ in
         kms.enable = true;
 
         ## Monitoring ##
-        gatus.enable = true;
-        exporters.node.enable = true;
+        exporters.enable = true;
+        uptime.enable = true;
 
         ## K8S:Talos ##
         talos.api.enable = true;
@@ -92,6 +92,7 @@ in
         glance.enable = true;
         homebox.enable = true;
         unifi-controller.enable = true;
+        zotregistry.enable = true;
 
         ## Backup ##
         restic = {
