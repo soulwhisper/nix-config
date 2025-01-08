@@ -35,6 +35,7 @@ caddy: 80,443
 dae-http: 1080
 easytier-socks5: 1081
 home-assistant: 8123
+prometheus: 9090
 
 # remap
 ## storage, 9000-9099
@@ -42,7 +43,7 @@ minio: 9000,9001
 zot: 9002
 zrepl: 9003
 
-## monitor, 9100-9199
+## monitor, 9100-9199, internal
 node-exporter: 9100
 nut-exporter: 9101
 smartctl-exporter: 9102
@@ -58,7 +59,7 @@ talos-api: 9300
 talos-pxe: 9301
 
 ## app, 9800-9999
-uptime-kuma: 9801
+gatus: 9801
 glance: 9802
 homebox: 9803
 

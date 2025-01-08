@@ -1,0 +1,18 @@
+# this is an example
+web:
+  address: 0.0.0.0
+  port: 9801
+
+storage:
+  type: sqlite
+  path: /etc/gatus/data.db
+
+endpoints:
+  - name: node_systemd
+    group: exporters
+    url: "http://localhost:9090/api/v1/query?query=node_systemd_unit_state"
+    headers: { "Accept:application/json" }
+    interval: 5min
+    timeout: 10s
+    conditions:
+      - "[STATUS] == 200"

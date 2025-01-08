@@ -82,8 +82,8 @@ in
         kms.enable = true;
 
         ## Monitoring ##
-        exporters.enable = true;
-        uptime.enable = true;
+        monitoring.exporters.enable = true;
+        monitoring.gatus.enable = true;
 
         ## K8S:Talos ##
         talos.api.enable = true;
