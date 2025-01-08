@@ -60,6 +60,7 @@ in
         ## Mandatory ##
         chrony.enable = true;
         openssh.enable = true;
+        monitoring.enable = true;
 
         dae = {
           enable = true;
@@ -79,19 +80,15 @@ in
 
         ## System ##
         adguard.enable = true;
-        kms.enable = true;
         smartd.enable = true;
         nut.enable = true;
-
-        ## Monitoring ##
-        monitoring.exporters.enable = true;
-        monitoring.gatus.enable = true;
 
         ## K8S:Talos ##
         talos.api.enable = true;
 
         ## Apps ##
         glance.enable = true;
+        kms.enable = true;
         homebox = {
           enable = true;
           dataDir = "/numina/apps/homebox";

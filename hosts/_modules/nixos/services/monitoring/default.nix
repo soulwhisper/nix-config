@@ -8,11 +8,11 @@ let
   cfg = config.modules.services;
 in
 {
-  options.modules.services.monitoring.exporters = {
-    enable = lib.mkEnableOption "exporters";
+  options.modules.services.monitoring = {
+    enable = lib.mkEnableOption "monitoring";
   };
 
-  config = lib.mkIf cfg.monitoring.exporters.enable {
+  config = lib.mkIf cfg.monitoring.enable {
     networking.firewall.allowedTCPPorts = [ 9090 ];
 
     services.prometheus = {

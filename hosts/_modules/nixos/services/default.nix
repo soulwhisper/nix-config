@@ -12,8 +12,7 @@
     ./homebox
     ./kms
     ./minio
-    ./monitoring/exporters
-    ./monitoring/gatus
+    ./monitoring
     ./nfs
     ./nut
     ./openssh
