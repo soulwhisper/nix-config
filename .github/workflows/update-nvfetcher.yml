@@ -57,6 +57,7 @@ jobs:
             go mod tidy
             updateInfo ""
             vendor_hash="$(nix build ../../../.#caddy-custom 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')"
+            echo "New vendorhash: $vendor_hash"
             updateInfo "$vendor_hash"
             echo "... completed."
           fi
