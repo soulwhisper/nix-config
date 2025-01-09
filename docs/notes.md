@@ -33,14 +33,18 @@ gpt --import publickey
 git config --global user.signingkey <gpg-id>
 git config --global commit.gpgsign true
 
-# fix unfinished tmpfiles
+# DEBUG
+## use latest golang
+nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz -p go
+
+## fix unfinished tmpfiles
 systemd-tmpfiles --tldr | grep apps
 SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
 
-# list failed systemd units
+## list failed systemd units
 systemctl list-units | grep failed
 
-# squash multi comments
+## squash multi comments
 git reset --soft HEAD~3 && git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
 git push --force-with-lease
 
