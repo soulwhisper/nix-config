@@ -48,17 +48,16 @@ jobs:
                 echo "  version = \"$version\";"
                 echo "  cfVersion = \"$cfVersion\";"
                 echo "  vendorHash = \"$1\";"
-              } >"pkgs/caddy-custom/src/info.nix"
+              } >"info.nix"
             }
 
             cd pkgs/caddy-custom/src
             rm go*
             go mod init caddy
             go mod tidy
-            cd ../../../
             updateInfo ""
-            nix build --no-link .#caddy-custom --show-trace
-            vendor_hash="$(nix build --no-link .#caddy-custom 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')"
+            nix build --no-link ../../../.#caddy-custom --show-trace
+            vendor_hash="$(nix build --no-link ../../../.#caddy-custom 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')"
             echo "New vendorhash: $vendor_hash"
             updateInfo "$vendor_hash"
             echo "... completed."
