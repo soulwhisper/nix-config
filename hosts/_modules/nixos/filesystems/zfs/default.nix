@@ -26,8 +26,8 @@ in
       };
     };
 
-	  networking.hostId = pkgs.lib.concatStringsSep "" (pkgs.lib.take 8
-        (pkgs.lib.stringToCharacters
+	  networking.hostId = lib.concatStringsSep "" (lib.take 8
+        (lib.stringToCharacters
           (builtins.hashString "sha256" config.networking.hostName)));
 
     services.zfs = {

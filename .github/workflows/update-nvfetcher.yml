@@ -55,7 +55,6 @@ jobs:
             rm go*
             go mod init caddy
             go mod tidy
-            updateInfo ""
             nix build --no-link ../../../.#caddy-custom --show-trace
             vendor_hash="$(nix build --no-link ../../../.#caddy-custom 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')"
             echo "New vendorhash: $vendor_hash"
