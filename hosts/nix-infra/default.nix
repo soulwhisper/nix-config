@@ -17,12 +17,10 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "52a88b82";
       useDHCP = true;
       firewall.enable = true;
     };
 
-    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";
@@ -60,6 +58,7 @@ in
         ## Mandatory ##
         chrony.enable = true;
         openssh.enable = true;
+        monitoring.enable = true;
 
         dae = {
           enable = true;
@@ -79,11 +78,6 @@ in
 
         ## System ##
         adguard.enable = true;
-        kms.enable = true;
-
-        ## Monitoring ##
-        exporters.enable = true;
-        uptime.enable = true;
 
         ## K8S:Talos ##
         talos.api.enable = true;
@@ -91,6 +85,7 @@ in
         ## Apps ##
         glance.enable = true;
         homebox.enable = true;
+        kms.enable = true;
         unifi-controller.enable = true;
         zotregistry.enable = true;
 

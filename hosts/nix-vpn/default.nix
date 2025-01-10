@@ -17,12 +17,10 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "d16c6404";
       useDHCP = true;
       firewall.enable = true;
     };
 
-    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";

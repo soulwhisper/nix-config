@@ -29,14 +29,14 @@ in
   };
 
   # sync app files to s3/r2, exclude local minio
-  # user = root, files in zfs pool
+  # user = root, files in dataDir
 
   config = lib.mkIf cfg.enable {
     services.restic.backups.remote = {
       repositoryFile = "${cfg.endpointFile}";
       environmentFile = "${cfg.credentialFile}";
       passwordFile = "${cfg.encryptionFile}";
-      initialize = false;
+      initialize = true;
       paths = [ "${cfg.dataDir}" ];
       extraBackupArgs = [
         "--exclude=${cfg.dataDir}/minio"

@@ -42,3 +42,4 @@ I got help from some cool configs like:
 
 - [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 - [Ramblurr/nixcfg](https://github.com/Ramblurr/nixcfg)
+- [ckiee/nixfiles](https://github.com/ckiee/nixfiles)

@@ -33,14 +33,28 @@ gpt --import publickey
 git config --global user.signingkey <gpg-id>
 git config --global commit.gpgsign true
 
-# fix unfinished tmpfiles
+# DEBUG
+## use latest golang
+nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz -p go
+
+## local rebuild
+nixos-rebuild build --flake nix-config/.#nix-nas --show-trace
+nvd diff /run/current-system result
+
+## wipe s3 bucket
+nix-shell -p awscli
+aws configure
+aws --endpoint-url=https://<account_id>.r2.cloudflarestorage.com s3 ls s3://<bucket_name>/ --recursive
+aws --endpoint-url=https://<account_id>.r2.cloudflarestorage.com s3 rm s3://<bucket_name>/ --recursive
+
+## fix unfinished tmpfiles
 systemd-tmpfiles --tldr | grep apps
 SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
 
-# list failed systemd units
+## list failed systemd units
 systemctl list-units | grep failed
 
-# squash multi comments
+## squash multi comments
 git reset --soft HEAD~3 && git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
 git push --force-with-lease
 
