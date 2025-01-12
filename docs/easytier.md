@@ -4,7 +4,7 @@
 
 ```shell
 # example-cmd
-easytier-core -c /etc/easytier/config.toml
+easytier-core -c /etc/easytier/config.conf
 
 # /etc/easytier/config.toml
 instance_name = "default"
