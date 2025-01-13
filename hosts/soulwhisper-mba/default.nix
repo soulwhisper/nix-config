@@ -29,10 +29,12 @@
       taps = [
       ];
       brews = [
-        "cidr"
+        "lazygit"
       ];
       casks = [
         "orbstack"
+        "ghostty"
+        "tableplus"
         "transmit"
         "wireshark"
         "slack"
@@ -40,6 +42,7 @@
       ];
       masApps = {
         "Keka" = 470158793;
+# not owned # "StopTheMadness Pro" = 6471380298;
       };
     };
   };
