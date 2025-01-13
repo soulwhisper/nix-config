@@ -25,7 +25,7 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-latest
-          - system: nix-vpn
+          - system: nix-dev
             os: ubuntu-latest
           - system: nix-infra
             os: ubuntu-latest

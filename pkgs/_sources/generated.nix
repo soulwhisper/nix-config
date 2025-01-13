@@ -3,13 +3,13 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.9.0";
+    version = "v2.9.1";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.9.0";
+      rev = "v2.9.1";
       fetchSubmodules = false;
-      sha256 = "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=";
+      sha256 = "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=";
     };
   };
   caddy-plugin-cloudflare = {
@@ -93,13 +93,13 @@
   };
   usage = {
     pname = "usage";
-    version = "v1.7.4";
+    version = "v2.0.3";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.7.4";
+      rev = "v2.0.3";
       fetchSubmodules = false;
-      sha256 = "sha256-+Wt/ZOwj9LHgt0EOFF554TGf2tZyuRoXAPpCebPZfNY=";
+      sha256 = "sha256-bS8wMtmD7UPctP+8yDm8KylLIPzPuk6dt9ilWQzFvY0=";
     };
   };
 }

@@ -96,7 +96,7 @@
     flake = {
         nixosConfigurations = {
           # nixos builds
-          nix-vpn = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vpn";
+          nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
           nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
           nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
         };

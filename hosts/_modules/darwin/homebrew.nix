@@ -23,9 +23,9 @@ _:
       "clash-verge-rev"
       "dropbox"
       "easytier"
-      "google-chrome"
       "gifox"
-      "iterm2"
+      "google-chrome"
+      "iterm2"   # until ghostty tested
       "jordanbaird-ice"
       "karabiner-elements"
       "keyboard-maestro"
@@ -36,6 +36,9 @@ _:
     ];
     masApps = {
       "Caffeinated" = 1362171212;
+      "Keka" = 470158793;
+      "Numbers" = 409203825;
+      "Pages" = 409201541;
     };
   };
 }

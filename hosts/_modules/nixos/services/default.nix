@@ -8,11 +8,11 @@
     ./chrony
     ./dae
     ./easytier
-    ./exporters
     ./glance
     ./homebox
     ./kms
     ./minio
+    ./monitoring
     ./nfs
     ./nut
     ./openssh
@@ -23,7 +23,6 @@
     ./talos/api
     ./talos/pxe
     ./unifi-controller
-    ./uptime
     ./zotregistry
   ];
 }
