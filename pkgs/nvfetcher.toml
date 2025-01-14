@@ -8,6 +8,9 @@ fetch.github = "caddy-dns/cloudflare"
 [easytier-custom]
 src.github = "EasyTier/EasyTier"
 fetch.github = "EasyTier/EasyTier"
+[hass-sgcc]
+src.github = "ARC-MX/sgcc_electricity_new"
+fetch.github = "ARC-MX/sgcc_electricity_new"
 [kubecolor-catppuccin]
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
 src.branch = "main"

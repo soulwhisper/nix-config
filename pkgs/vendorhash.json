@@ -10,5 +10,6 @@
   "talosctl": "sha256-vZFXqU9tgnL8odBpOcvRig1KKVH20CM0ze0+pypaRKE=",
   "usage": "sha256-z/McKMlLvr/YBzXSCLFZk9PSIBnrweU7tIPjTwTeiuQ=",
   "easytier-custom": "sha256-SpGW/RAbQUFdxqEKRPrTp5MXng7BLiSnofoJG8NsjsU=",
-  "caddy-custom": "sha256-Z8jdMpa4BSR9zAblHM5SNDZkyw0RlEBzvK1thMtrZl8="
+  "caddy-custom": "sha256-Z8jdMpa4BSR9zAblHM5SNDZkyw0RlEBzvK1thMtrZl8=",
+  "hass-sgcc": ""
 }

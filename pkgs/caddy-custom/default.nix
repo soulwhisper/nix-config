@@ -12,7 +12,7 @@
 in
 # use latest golang to build plugins
 pkgs.unstable.buildGoModule {
-  pname = "caddy-cloudflare";
+  pname = "caddy-custom";
   version = caddy-version + "-cloudflare-" + caddy-plugin-cloudflare-version;
 
   src = ./src;
