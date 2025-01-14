@@ -85,6 +85,7 @@ in
         ## Apps ##
       #  glance.enable = true;
       #  homebox.enable = true;
+        home-assistant.enable = true;
         kms.enable = true;
         unifi-controller.enable = true;
       #  zotregistry.enable = true;

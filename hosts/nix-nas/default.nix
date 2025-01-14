@@ -92,6 +92,10 @@ in
           enable = true;
           dataDir = "/numina/apps/homebox";
         };
+        home-assistant = {
+          enable = true;
+          dataDir = "/numina/apps/home-assistant";
+        };
         unifi-controller = {
           enable = true;
           dataDir = "/numina/apps/unifi-controller";
