@@ -14,6 +14,11 @@ sops --verbose -i -e secrets.sops.yaml
 - all values should not have spaces/quotes;
 
 ```shell
+apps:
+    hass-sgcc:
+        auth: |
+            PHONE_NUMBER={sgcc-account}
+            PASSWORD={sgcc-password}
 backup:
     restic:
         encryption: {restic-encryption-password}

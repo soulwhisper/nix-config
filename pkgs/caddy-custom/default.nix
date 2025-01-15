@@ -4,21 +4,21 @@
   installShellFiles,
   ...
 }: let
-  info = import ./src/info.nix;
+  sourceData = pkgs.callPackage ../_sources/generated.nix { };
+  vendorData = lib.importJSON ../vendorhash.json;
 
-  caddy-version =  lib.removePrefix "v" info.version;
-  cloudflare-version-string = lib.splitString "-" (lib.removePrefix "v" info.cfVersion);
-  cloudflare-version = lib.elemAt cloudflare-version-string 0 + "+" + lib.elemAt cloudflare-version-string 2;
+  caddy-version =  lib.strings.removePrefix "v" sourceData.caddy-core.version;
+  caddy-plugin-cloudflare-version = sourceData.caddy-plugin-cloudflare.version;
 in
 # use latest golang to build plugins
 pkgs.unstable.buildGoModule {
-  pname = "caddy-with-plugins";
-  version = caddy-version + "-" + cloudflare-version;
+  pname = "caddy-custom";
+  version = caddy-version + "-cloudflare-" + caddy-plugin-cloudflare-version;
 
   src = ./src;
 
   runVend = true;
-  inherit (info) vendorHash;
+  vendorHash = vendorData.caddy-custom;
 
   ldflags = ["-s" "-w"];
 

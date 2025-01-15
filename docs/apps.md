@@ -1,27 +1,29 @@
 # Apps
 
-- below apps have pre-defined configs, have additonal files in /etc/appname.
-    - dae
-    - gatus
-    - glance
-    - talos-pxe
-    - nut
-
+- these apps { dae, glance, talos-pxe, nut } have pre-defined configs files in /etc/appname.
 - by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
+- system apps might still use root / specific-users.
 
 ## Exceptions
+
+### Easytier
+
+- check "easytier.md"
 
 ### Home-assistant
 
 - due to nix support for custom components,
 - hass is installed as [supervised](https://github.com/home-assistant/supervised-installer) with dae, restic and other containers. In a debian vm.
-- which also means nix pkg "home-assistant" and relevant apps are removed from my nixos configs.
-- check "scripts/hass-supervised" for related scripts and compose yaml files.
+- which also means "home-assistant" and relevant apps are fully removed from my nix-configs.
+- check "scripts/hass-supervised" for related scripts and compose files.
 - good examples, [ref1](https://github.com/scstraus/home-assistant-config);
 
-### Easytier
+### Irrelevant dataDir
 
-- check "easytier.md"
+- adguard, due to external-dns update method, mutableSettings=true is enough;
+- chrony / kms / talos-api, temp working files;
+- dae / talos-pxe, pre-defined configs;
+- easytier / glance / nut, declarative configs;
 
 ## Ports
 
@@ -35,6 +37,7 @@ caddy: 80,443
 dae-http: 1080
 easytier-socks5: 1081
 home-assistant: 8123
+prometheus: 9090
 
 # remap
 ## storage, 9000-9099
@@ -42,7 +45,7 @@ minio: 9000,9001
 zot: 9002
 zrepl: 9003
 
-## monitor, 9100-9199
+## monitor, 9100-9199, internal
 node-exporter: 9100
 nut-exporter: 9101
 smartctl-exporter: 9102
@@ -58,7 +61,7 @@ talos-api: 9300
 talos-pxe: 9301
 
 ## app, 9800-9999
-uptime-kuma: 9801
+gatus: 9801
 glance: 9802
 homebox: 9803
 

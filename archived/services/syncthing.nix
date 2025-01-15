@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.modules.services.backup.syncthing;
+  reverseProxyCaddy = config.modules.services.caddy;
 in
 {
   options.modules.services.backup.syncthing = {
@@ -23,7 +24,7 @@ in
     networking.firewall.allowedTCPPorts = [ 22000 ];
     networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
-    services.caddy.virtualHosts."sync.noirprime.com".extraConfig = ''
+    services.caddy.virtualHosts."sync.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
 	      reverse_proxy localhost:9202
       }

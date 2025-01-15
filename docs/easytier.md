@@ -4,7 +4,7 @@
 
 ```shell
 # example-cmd
-easytier-core -c /etc/easytier/config.toml
+easytier-core -c /etc/easytier/config.conf
 
 # /etc/easytier/config.toml
 instance_name = "default"
@@ -33,7 +33,6 @@ cidr = "172.19.82.0/24"
 
 [flags]
 default_protocol = "udp"
-enable_ipv6 = false
 relay_all_peer_rpc = true
 relay_network_whitelist = "$NETWORK_NAME"
 

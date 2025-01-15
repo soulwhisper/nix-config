@@ -25,7 +25,7 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-latest
-          - system: nix-vpn
+          - system: nix-dev
             os: ubuntu-latest
           - system: nix-infra
             os: ubuntu-latest
@@ -39,6 +39,8 @@ jobs:
           fetch-depth: 0
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        with:
+          source-tag: "v0.32.3"   # ref:https://github.com/DeterminateSystems/nix-installer-action/issues/133
       - name: Set up Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@87b14cf437d03d37989d87f0fa5ce4f5dc1a330b # v8
       - name: Set up Cachix
@@ -71,7 +73,7 @@ jobs:
             --fallback \
             -v --show-trace --print-build-logs \
             --log-format raw \
-             > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
+             > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2) | cachix push soulwhisper
 
       - name: Show drv failure details
         if: failure()

@@ -29,23 +29,24 @@ in
   };
 
   # sync app files to s3/r2, exclude local minio
-  # user = root, files in zfs pool
+  # user = root; if other user, add:CAP_DAC_READ_SEARCH
 
   config = lib.mkIf cfg.enable {
     services.restic.backups.remote = {
       repositoryFile = "${cfg.endpointFile}";
       environmentFile = "${cfg.credentialFile}";
       passwordFile = "${cfg.encryptionFile}";
-      initialize = false;
       paths = [ "${cfg.dataDir}" ];
       extraBackupArgs = [
-        "--exclude=${cfg.dataDir}/minio"
+        "--skip-if-unchanged"
       ];
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
       };
+      initialize = true;
       inhibitsSleep = true;
+      createWrapper = true;
       pruneOpts = [
         "--keep-daily 7"
         "--keep-weekly 5"

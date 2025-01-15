@@ -3,13 +3,13 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.9.0";
+    version = "v2.9.1";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.9.0";
+      rev = "v2.9.1";
       fetchSubmodules = false;
-      sha256 = "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=";
+      sha256 = "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=";
     };
   };
   caddy-plugin-cloudflare = {
@@ -24,15 +24,15 @@
     };
     date = "2024-07-03";
   };
-  easytier-custom = {
-    pname = "easytier-custom";
-    version = "v2.1.1";
+  hass-sgcc = {
+    pname = "hass-sgcc";
+    version = "v1.6.4";
     src = fetchFromGitHub {
-      owner = "EasyTier";
-      repo = "EasyTier";
-      rev = "v2.1.1";
+      owner = "ARC-MX";
+      repo = "sgcc_electricity_new";
+      rev = "v1.6.4";
       fetchSubmodules = false;
-      sha256 = "sha256-qWICiY2g/wXT0Bt7lrCg7GgL1futOhelViB59UCLPro=";
+      sha256 = "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=";
     };
   };
   kubecolor-catppuccin = {
@@ -93,13 +93,13 @@
   };
   usage = {
     pname = "usage";
-    version = "v1.7.4";
+    version = "v2.0.3";
     src = fetchFromGitHub {
       owner = "jdx";
       repo = "usage";
-      rev = "v1.7.4";
+      rev = "v2.0.3";
       fetchSubmodules = false;
-      sha256 = "sha256-+Wt/ZOwj9LHgt0EOFF554TGf2tZyuRoXAPpCebPZfNY=";
+      sha256 = "sha256-bS8wMtmD7UPctP+8yDm8KylLIPzPuk6dt9ilWQzFvY0=";
     };
   };
 }

@@ -13,11 +13,11 @@
             "name": null,
             "owner": "caddyserver",
             "repo": "caddy",
-            "rev": "v2.9.0",
-            "sha256": "sha256-ea1Cch0LOGVGO9CVvS61EHVwJule4HZRizpQYP1QA2w=",
+            "rev": "v2.9.1",
+            "sha256": "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=",
             "type": "github"
         },
-        "version": "v2.9.0"
+        "version": "v2.9.1"
     },
     "caddy-plugin-cloudflare": {
         "cargoLocks": null,
@@ -39,11 +39,11 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
-    "easytier-custom": {
+    "hass-sgcc": {
         "cargoLocks": null,
         "date": null,
         "extract": null,
-        "name": "easytier-custom",
+        "name": "hass-sgcc",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -51,13 +51,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "EasyTier",
-            "repo": "EasyTier",
-            "rev": "v2.1.1",
-            "sha256": "sha256-qWICiY2g/wXT0Bt7lrCg7GgL1futOhelViB59UCLPro=",
+            "owner": "ARC-MX",
+            "repo": "sgcc_electricity_new",
+            "rev": "v1.6.4",
+            "sha256": "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=",
             "type": "github"
         },
-        "version": "v2.1.1"
+        "version": "v1.6.4"
     },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
@@ -173,10 +173,10 @@
             "name": null,
             "owner": "jdx",
             "repo": "usage",
-            "rev": "v1.7.4",
-            "sha256": "sha256-+Wt/ZOwj9LHgt0EOFF554TGf2tZyuRoXAPpCebPZfNY=",
+            "rev": "v2.0.3",
+            "sha256": "sha256-bS8wMtmD7UPctP+8yDm8KylLIPzPuk6dt9ilWQzFvY0=",
             "type": "github"
         },
-        "version": "v1.7.4"
+        "version": "v2.0.3"
     }
 }

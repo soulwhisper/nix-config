@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.modules.services.zotregistry;
+  reverseProxyCaddy = config.modules.services.caddy;
 
   # to avoid json lost lines
   configFile = builtins.toFile "config.json" (builtins.readFile ./config.json);
@@ -20,7 +21,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.caddy.virtualHosts."zot.noirprime.com".extraConfig = ''
+    networking.firewall.allowedTCPPorts = [ 9002 ];
+
+    services.caddy.virtualHosts."zot.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
 	      reverse_proxy localhost:9002
       }

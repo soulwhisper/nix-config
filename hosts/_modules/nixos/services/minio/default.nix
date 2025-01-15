@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.modules.services.minio;
+  reverseProxyCaddy = config.modules.services.caddy;
 in
 {
   options.modules.services.minio = {
@@ -21,7 +22,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.caddy.virtualHosts."s3.noirprime.com".extraConfig = ''
+    networking.firewall.allowedTCPPorts = [ 9000 9001 ];
+
+    services.caddy.virtualHosts."s3.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle_path /console/* {
 	      reverse_proxy localhost:9001
       }
@@ -29,8 +32,6 @@ in
 	      reverse_proxy localhost:9000
       }
     '';
-
-    # networking.firewall.allowedTCPPorts = [ 9000 9001 ];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
