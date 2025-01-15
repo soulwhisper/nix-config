@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  installShellFiles,
   ...
 }: let
   sourceData = pkgs.callPackage ../_sources/generated.nix { };
