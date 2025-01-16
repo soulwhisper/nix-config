@@ -153,11 +153,11 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.9.1",
-            "sha256": "sha256-Qvt9/okT37J3ge/lb17OX4aaiXbSFU1j7drdiJDqFnA=",
+            "rev": "v1.9.2",
+            "sha256": "sha256-Cff++tGfKcpTaiBVTRZnNzExAHlq4UfkeiIDe3gOF3w=",
             "type": "github"
         },
-        "version": "v1.9.1"
+        "version": "v1.9.2"
     },
     "usage": {
         "cargoLocks": null,
