@@ -32,7 +32,7 @@ task nix:nixos-deploy HOST=nix-nas
 
 # nixos, local
 git clone https://github.com/soulwhisper/nix-config
-nixos-rebuild build --flake nix-config/.#nix-nas --fast --show-trace --print-build-logs
+nixos-rebuild build --flake nix-config/.#nix-nas --show-trace --print-build-logs
 nixos-rebuild switch --flake nix-config/.#nix-nas
 ```
 
