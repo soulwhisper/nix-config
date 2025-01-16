@@ -7,7 +7,7 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - soulwhisper-mba, my macbook configs.
 - nix-infra, production nas vm, with k8s support. Without ZFS.
 - nix-nas, staging nas vm. With ZFS. Was TrueNAS Scale 24.10+.
-- nix-vpn, easytier routing node, with unifi-controller container.
+- nix-dev, was devops vm. Planned as desktop notebook. Deprectaed now.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage
@@ -32,7 +32,7 @@ task nix:nixos-deploy HOST=nix-nas
 
 # nixos, local
 git clone https://github.com/soulwhisper/nix-config
-nixos-rebuild build --flake nix-config/.#nix-nas --fast --show-trace --print-build-logs
+nixos-rebuild build --flake nix-config/.#nix-nas --show-trace --print-build-logs
 nixos-rebuild switch --flake nix-config/.#nix-nas
 ```
 
@@ -42,3 +42,4 @@ I got help from some cool configs like:
 
 - [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 - [Ramblurr/nixcfg](https://github.com/Ramblurr/nixcfg)
+- [ckiee/nixfiles](https://github.com/ckiee/nixfiles)

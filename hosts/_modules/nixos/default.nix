@@ -2,11 +2,11 @@
   ...
 }: {
   imports = [
+    ./filesystems
     ./nix.nix
     ./sops.nix
-    ./users.nix
-    ./filesystems
     ./services
+    ./users.nix
   ];
 
   documentation.nixos.enable = false;

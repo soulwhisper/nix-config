@@ -40,7 +40,7 @@ in
     networking.firewall.allowedTCPPorts = [ 11010 11011 11012 ];
     networking.firewall.allowedUDPPorts = [ 11010 11011 ];
 
-    environment.systemPackages = [ pkgs.easytier-custom ];
+    environment.systemPackages = [ pkgs.unstable.easytier ];  # this only for easytier-cli
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."easytier" = {

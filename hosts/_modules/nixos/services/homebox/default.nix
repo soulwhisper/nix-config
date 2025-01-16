@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.modules.services.homebox;
+  reverseProxyCaddy = config.modules.services.caddy;
 in
 {
   options.modules.services.homebox = {
@@ -17,13 +18,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.caddy.virtualHosts."box.noirprime.com".extraConfig = ''
+    networking.firewall.allowedTCPPorts = [ 9803 ];
+
+    services.caddy.virtualHosts."box.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
         reverse_proxy localhost:9803
       }
     '';
-
-    # networking.firewall.allowedTCPPorts = [ 9803 ];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"

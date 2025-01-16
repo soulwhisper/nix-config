@@ -5,6 +5,7 @@
   ...
 }:
 {
+  # check first: https://daiderd.com/nix-darwin/manual/index.html
   config = {
     networking = {
       computerName = "soulwhisper-mba";
@@ -29,17 +30,20 @@
       taps = [
       ];
       brews = [
-        "cidr"
+        "lazygit"
       ];
       casks = [
+        "discord"
+        "ghostty"
         "orbstack"
+        "slack"
+        "tableplus"
         "transmit"
         "wireshark"
-        "slack"
-        "discord"
       ];
       masApps = {
-        "Keka" = 470158793;
+        "ReadKit" = 1615798039;
+        # "StopTheMadness Pro" = 6471380298; # not owned yet
       };
     };
   };

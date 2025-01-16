@@ -20,7 +20,7 @@
 
     # nix-darwin - nix modules for darwin (MacOS)
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -96,7 +96,7 @@
     flake = {
         nixosConfigurations = {
           # nixos builds
-          nix-vpn = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-vpn";
+          nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
           nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
           nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
         };

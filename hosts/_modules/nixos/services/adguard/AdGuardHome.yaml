@@ -149,11 +149,7 @@ filtering:
       answer: 172.19.82.10
     - domain: lab.noirprime.com
       answer: 172.19.82.10
-    - domain: mon.noirprime.com
-      answer: 172.19.82.10
     - domain: box.noirprime.com
-      answer: 172.19.82.10
-    - domain: sync.noirprime.com
       answer: 172.19.82.10
     - domain: pve.homelab.internal
       answer: 172.19.82.100

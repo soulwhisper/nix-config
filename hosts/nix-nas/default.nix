@@ -17,9 +17,9 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "52a88b81";
       useDHCP = true;
       firewall.enable = true;
+      nftables.enable = true;
     };
 
     users.users.soulwhisper = {
@@ -60,6 +60,7 @@ in
         ## Mandatory ##
         chrony.enable = true;
         openssh.enable = true;
+        monitoring.enable = true;
 
         dae = {
           enable = true;
@@ -79,25 +80,23 @@ in
 
         ## System ##
         adguard.enable = true;
-        kms.enable = true;
         smartd.enable = true;
         nut.enable = true;
-
-        ## Monitoring ##
-        exporters.enable = true;
-        uptime = {
-          enable = true;
-          dataDir = "/numina/apps/uptime-kuma";
-        };
 
         ## K8S:Talos ##
         talos.api.enable = true;
 
         ## Apps ##
         glance.enable = true;
+        kms.enable = true;
         homebox = {
           enable = true;
           dataDir = "/numina/apps/homebox";
+        };
+        home-assistant = {
+          enable = true;
+          dataDir = "/numina/apps/home-assistant";
+          sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
         unifi-controller = {
           enable = true;

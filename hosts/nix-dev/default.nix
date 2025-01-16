@@ -17,12 +17,11 @@ in
   config = {
     networking = {
       hostName = hostname;
-      hostId = "d16c6404";
       useDHCP = true;
       firewall.enable = true;
+      nftables.enable = true;
     };
 
-    users.mutableUsers = false;
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";
@@ -57,9 +56,8 @@ in
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [ "10.0.0.0/24" "10.10.0.0/24" ];
+          routes = [ ];
         };
-        unifi-controller.enable = true;
       };
     };
 
