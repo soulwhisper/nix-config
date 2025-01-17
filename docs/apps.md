@@ -9,7 +9,7 @@
 ### Easytier
 
 - check "easytier.md"
-- homebrew easytier is broken, download from github manually.
+- homebrew cask easytier-gui is broken, download easytier-cli from github manually.
 
 ### Home-assistant
 
