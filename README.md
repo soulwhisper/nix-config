@@ -14,8 +14,10 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 
 ```shell
 # darwin
-## opt. run set-proxy script first
+## opt. run set-proxy script and enable cachix
 sudo python3 scripts/darwin_set_proxy.py
+cachix authtoken xxx
+sudo cachix use soulwhisper
 ## build & diff
 task nix:darwin-build HOST=soulwhisper-mba
 ## deploy
