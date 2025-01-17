@@ -53,7 +53,6 @@ in
 
     programs.krewfile = {
       enable = true;
-      krewPackage = pkgs.unstable.krew;
       indexes = {
         netshoot = "https://github.com/nilic/kubectl-netshoot.git";
       };
