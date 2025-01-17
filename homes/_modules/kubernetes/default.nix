@@ -87,11 +87,11 @@ in
       ];
     };
 
+    catppuccin.k9s.enable = true;
     programs.k9s = {
       enable = true;
       package = pkgs.unstable.k9s;
-      catppuccin.enable = true;
-
+      
       aliases = {
         aliases = {
           dp = "deployments";
