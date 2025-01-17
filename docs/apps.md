@@ -9,6 +9,7 @@
 ### Easytier
 
 - check "easytier.md"
+- homebrew easytier is broken, download from github manually.
 
 ### Home-assistant
 
