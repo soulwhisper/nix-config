@@ -25,6 +25,8 @@
       sudo chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
 
+    devenv.homelab.enable = true;
+
     # testing apps list
     homebrew = {
       taps = [

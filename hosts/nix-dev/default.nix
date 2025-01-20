@@ -50,6 +50,7 @@ in
     '';
 
     modules = {
+      devenv.homelab.enable = true;
       services = {
         chrony.enable = true;
         openssh.enable = true;

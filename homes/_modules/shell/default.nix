@@ -6,7 +6,6 @@
     ./atuin
     ./bat
     ./bash
-    ./devenv
     ./glances
     ./doggo
     ./eza
