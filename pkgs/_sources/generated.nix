@@ -79,5 +79,5 @@
       fetchSubmodules = false;
       sha256 = "sha256-Cff++tGfKcpTaiBVTRZnNzExAHlq4UfkeiIDe3gOF3w=";
     };
-  }
+  };
 }
