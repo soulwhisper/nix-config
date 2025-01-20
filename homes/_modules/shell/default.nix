@@ -12,7 +12,6 @@
     ./fish
     ./git
     ./go-task
-    ./mise
     ./starship
     ./utilities
     ./zoxide

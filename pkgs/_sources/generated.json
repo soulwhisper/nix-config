@@ -99,26 +99,6 @@
         },
         "version": "v0.5.1"
     },
-    "shcopy": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "shcopy",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "aymanbagabas",
-            "repo": "shcopy",
-            "rev": "v0.1.5",
-            "sha256": "sha256-MKlW8HrkXCYCOeO38F0S4c8mVbsG/VcZ+oGFC70amqQ=",
-            "type": "github"
-        },
-        "version": "v0.1.5"
-    },
     "talos-api": {
         "cargoLocks": null,
         "date": null,
@@ -158,25 +138,5 @@
             "type": "github"
         },
         "version": "v1.9.2"
-    },
-    "usage": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "usage",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "jdx",
-            "repo": "usage",
-            "rev": "v2.0.3",
-            "sha256": "sha256-bS8wMtmD7UPctP+8yDm8KylLIPzPuk6dt9ilWQzFvY0=",
-            "type": "github"
-        },
-        "version": "v2.0.3"
     }
 }

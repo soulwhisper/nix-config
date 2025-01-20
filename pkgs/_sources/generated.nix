@@ -58,17 +58,6 @@
       sha256 = "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=";
     };
   };
-  shcopy = {
-    pname = "shcopy";
-    version = "v0.1.5";
-    src = fetchFromGitHub {
-      owner = "aymanbagabas";
-      repo = "shcopy";
-      rev = "v0.1.5";
-      fetchSubmodules = false;
-      sha256 = "sha256-MKlW8HrkXCYCOeO38F0S4c8mVbsG/VcZ+oGFC70amqQ=";
-    };
-  };
   talos-api = {
     pname = "talos-api";
     version = "v1.0.9";
@@ -89,17 +78,6 @@
       rev = "v1.9.2";
       fetchSubmodules = false;
       sha256 = "sha256-Cff++tGfKcpTaiBVTRZnNzExAHlq4UfkeiIDe3gOF3w=";
-    };
-  };
-  usage = {
-    pname = "usage";
-    version = "v2.0.3";
-    src = fetchFromGitHub {
-      owner = "jdx";
-      repo = "usage";
-      rev = "v2.0.3";
-      fetchSubmodules = false;
-      sha256 = "sha256-bS8wMtmD7UPctP+8yDm8KylLIPzPuk6dt9ilWQzFvY0=";
     };
   };
 }
