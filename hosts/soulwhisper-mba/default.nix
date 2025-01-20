@@ -30,7 +30,6 @@
       taps = [
       ];
       brews = [
-        "kubectx"                  # k8s contexts/ns switcher
         "derailed/popeye/popeye"   # k8s live cluster linter
       ];
       casks = [
