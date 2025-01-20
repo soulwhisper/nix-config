@@ -15,6 +15,7 @@
             "repo": "caddy",
             "rev": "v2.9.1",
             "sha256": "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "v2.9.1"
@@ -35,6 +36,7 @@
             "repo": "cloudflare",
             "rev": "89f16b99c18ef49c8bb470a82f895bce01cbaece",
             "sha256": "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
@@ -55,6 +57,7 @@
             "repo": "sgcc_electricity_new",
             "rev": "v1.6.4",
             "sha256": "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "v1.6.4"
@@ -75,6 +78,7 @@
             "repo": "kubecolor-catppuccin",
             "rev": "1d4c2888f7de077e1a837a914a1824873d16762d",
             "sha256": "sha256-gTneUh6yMcH6dVKrH00G61a+apasu9tiMyYjvNdOiOw=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "1d4c2888f7de077e1a837a914a1824873d16762d"
@@ -95,6 +99,7 @@
             "repo": "postgres-operator-client",
             "rev": "v0.5.1",
             "sha256": "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "v0.5.1"
@@ -115,6 +120,7 @@
             "repo": "discovery-service",
             "rev": "v1.0.9",
             "sha256": "sha256-Mk0npXcSd3UmTlgAlkC/vgOJNVIHy/KV15Y3epRevYw=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "v1.0.9"
@@ -135,6 +141,7 @@
             "repo": "talos",
             "rev": "v1.9.2",
             "sha256": "sha256-Cff++tGfKcpTaiBVTRZnNzExAHlq4UfkeiIDe3gOF3w=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "v1.9.2"
