@@ -70,8 +70,8 @@ in {
           "Thumbs.db"
           # asdf
           ".tool-versions"
-          # mise
-          ".mise.toml"
+          # direnv
+          ".direnv"
           # Sops
           ".decrypted~*"
           "*.decrypted.*"
