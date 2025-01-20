@@ -14,7 +14,6 @@
         gum
         jo
         jq
-        shcopy
         tmux
         vim
         wget

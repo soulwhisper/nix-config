@@ -6,13 +6,13 @@
     ./atuin
     ./bat
     ./bash
+    ./devenv
     ./glances
     ./doggo
     ./eza
     ./fish
     ./git
     ./go-task
-    ./mise
     ./starship
     ./utilities
     ./zoxide

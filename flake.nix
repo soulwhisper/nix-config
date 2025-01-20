@@ -36,6 +36,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Krewfile - Declarative krew plugin management
+    krewfile = {
+      url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Catppuccin - Soothing pastel theme for Nix
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -51,10 +57,9 @@
       url = "github:budimanjojo/talhelper";
     };
 
-    # Krewfile - Declarative krew plugin management
-    krewfile = {
-      url = "github:brumhard/krewfile";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # Devenv - Declarative, Reproducible Developer Environments
+    devenv = {
+      url = "github:cachix/devenv";
     };
   };
 
