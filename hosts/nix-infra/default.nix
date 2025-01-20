@@ -102,10 +102,10 @@ in
       #  };
 
         ## Storage ##
-      #  minio = {
-      #    enable = true;
-      #    rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-      #  };
+        minio = {
+          enable = true;
+          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
+        };
 
       #  nfs = {
       #    enable = true;
