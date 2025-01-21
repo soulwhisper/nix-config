@@ -6,14 +6,15 @@
 }: {
   # replace pre-commit and various linters
   git-hooks = {
-    exclude = "generated.*";
+    excludes = ["generated\.(json|nix)$"];
     hooks = {
-      alejandra = {
-        enable = true;
-        settings.exclude = [
-          "generated.nix"
-        ];
-      };
+      alejandra.enable = true;
+      check-added-large-files.enable = true;
+      check-merge-conflicts.enable = true;
+      check-executables-have-shebangs.enable = true;
+      end-of-file-fixer.enable = true;
+      fix-byte-order-marker.enable = true;
+      mixed-line-endings.enable = true;
       prettier = {
         enable = true;
         settings = {
@@ -64,12 +65,6 @@
         enable = true;
         files = "kubernetes/.*\.sops\.(toml|ya?ml)$";
       };
-      check-added-large-files.enable = true;
-      check-merge-conflicts.enable = true;
-      check-executables-have-shebangs.enable = true;
-      end-of-file-fixer.enable = true;
-      fix-byte-order-marker.enable = true;
-      mixed-line-endings.enable = true;
     };
   };
 
