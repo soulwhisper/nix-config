@@ -6,7 +6,7 @@
 }: {
   # replace pre-commit and various linters
   git-hooks = {
-    # exclude = "_assets\/.*";
+    exclude = "generated.*";
     hooks = {
       alejandra = {
         enable = true;
