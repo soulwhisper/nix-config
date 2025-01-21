@@ -10,8 +10,6 @@ on:
       - .github/workflows/**
       - "**.nix"
       - "flake.lock"
-    paths-ignore:
-      - "devenv.nix"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
