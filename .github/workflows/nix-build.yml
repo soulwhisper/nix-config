@@ -7,9 +7,10 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/**
-      - "**.nix"
-      - "flake.lock"
+      - 'github/workflows/**'
+      - '**.nix'
+      - '!devenv.nix'
+      - 'flake.lock'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
