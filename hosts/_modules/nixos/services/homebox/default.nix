@@ -3,12 +3,10 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.homebox;
   reverseProxyCaddy = config.modules.services.caddy;
-in
-{
+in {
   options.modules.services.homebox = {
     enable = lib.mkEnableOption "homebox";
     dataDir = lib.mkOption {
@@ -18,7 +16,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9803 ];
+    networking.firewall.allowedTCPPorts = [9803];
 
     services.caddy.virtualHosts."box.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
@@ -31,8 +29,8 @@ in
     ];
 
     systemd.services.homebox = {
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
       environment = {
         HBOX_STORAGE_DATA = "${cfg.dataDir}";
         HBOX_STORAGE_SQLITE_URL = "${cfg.dataDir}/homebox.db?_pragma=busy_timeout=999&_pragma=journal_mode=WAL&_fk=1";

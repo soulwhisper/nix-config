@@ -2,8 +2,7 @@
   inputs,
   mkPkgsWithSystem,
   ...
-}:
-{
+}: {
   mkNixosSystem = system: hostname:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;

@@ -2,11 +2,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.filesystems.zfs;
-in
-{
+in {
   options.modules.filesystems.zfs = {
     enable = lib.mkEnableOption "zfs";
     mountPoolsAtBoot = lib.mkOption {
@@ -26,9 +24,9 @@ in
       };
     };
 
-	  networking.hostId = lib.concatStringsSep "" (lib.take 8
-        (lib.stringToCharacters
-          (builtins.hashString "sha256" config.networking.hostName)));
+    networking.hostId = lib.concatStringsSep "" (lib.take 8
+      (lib.stringToCharacters
+        (builtins.hashString "sha256" config.networking.hostName)));
 
     services.zfs = {
       autoScrub.enable = true;

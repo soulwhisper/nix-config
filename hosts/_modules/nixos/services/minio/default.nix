@@ -3,12 +3,10 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.minio;
   reverseProxyCaddy = config.modules.services.caddy;
-in
-{
+in {
   options.modules.services.minio = {
     enable = lib.mkEnableOption "minio";
     dataDir = lib.mkOption {
@@ -22,14 +20,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9000 9001 ];
+    networking.firewall.allowedTCPPorts = [9000 9001];
 
     services.caddy.virtualHosts."s3.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle_path /console/* {
-	      reverse_proxy localhost:9001
+       reverse_proxy localhost:9001
       }
       handle {
-	      reverse_proxy localhost:9000
+       reverse_proxy localhost:9000
       }
     '';
 

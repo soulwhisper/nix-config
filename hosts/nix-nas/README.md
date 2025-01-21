@@ -5,6 +5,7 @@ NIX-NAS is a NixOS configuration for managing a NAS (Network Attached Storage) s
 ## Features
 
 ### 1. **Root Filesystem Management**
+
 - Leverages NixOS to manage the root filesystem for:
   - System configurations.
   - Application deployments.
@@ -12,6 +13,7 @@ NIX-NAS is a NixOS configuration for managing a NAS (Network Attached Storage) s
 - Root filesystem remains independent of the ZFS pool for simplicity and robustness.
 
 ### 2. **ZFS for Data Storage**
+
 - Application data is stored in an imported ZFS pool.
 - Benefits of ZFS include:
   - Advanced snapshot and rollback capabilities.
@@ -19,6 +21,7 @@ NIX-NAS is a NixOS configuration for managing a NAS (Network Attached Storage) s
   - Fault tolerance and data integrity through checksumming.
 
 ### 3. **Applications**
+
 The configuration includes multiple essential services:
 
 - **Core Infrastructure**:

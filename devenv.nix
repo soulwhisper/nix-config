@@ -3,16 +3,11 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   # replace pre-commit and various linters
   git-hooks = {
     # exclude = "_assets\/.*";
     hooks = {
-      actionlint = {
-        enable = true;
-        files = "github\/workflows\/.*\.(yml|yaml)$";
-      };
       alejandra = {
         enable = true;
         settings.exclude = [
@@ -48,6 +43,11 @@
             indentation: enable
         '';
       };
+      # disable this check when using ci, or exclude nix-build.yml
+      actionlint = lib.optionalAttrs (!config.devenv.isTesting) {
+        enable = true;
+        files = "github\/workflows\/.*\.(yml|yaml)$";
+      };
       # disable this check when using ci, hints only
       markdownlint = lib.optionalAttrs (!config.devenv.isTesting) {
         enable = true;
@@ -69,7 +69,6 @@
       check-executables-have-shebangs.enable = true;
       end-of-file-fixer.enable = true;
       fix-byte-order-marker.enable = true;
-      # trim-trailing-whitespace.enable = true;
       mixed-line-endings.enable = true;
     };
   };

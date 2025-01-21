@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   imports = [
     ./colorschemes/catppuccin-mocha.nix
 

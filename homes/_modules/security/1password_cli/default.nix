@@ -3,11 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.security._1password-cli;
-in
-{
+in {
   options.modules.security._1password-cli = {
     enable = lib.mkEnableOption "_1password-cli";
   };

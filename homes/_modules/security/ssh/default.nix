@@ -2,11 +2,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.security.ssh;
-in
-{
+in {
   options.modules.security.ssh = {
     enable = lib.mkEnableOption "ssh";
     matchBlocks = lib.mkOption {

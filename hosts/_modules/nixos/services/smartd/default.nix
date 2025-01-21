@@ -3,17 +3,15 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.smartd;
-in
-{
+in {
   options.modules.services.smartd = {
     enable = lib.mkEnableOption "smartd";
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.smartmontools ];
+    environment.systemPackages = [pkgs.smartmontools];
 
     services.smartd = {
       enable = true;

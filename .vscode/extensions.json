@@ -18,6 +18,6 @@
     "ionutvmi.path-autocomplete",
     "luisfontes19.vscode-swissknife",
     "ms-kubernetes-tools.vscode-kubernetes-tools",
-    "signageos.signageos-vscode-sops",
+    "signageos.signageos-vscode-sops"
   ]
 }

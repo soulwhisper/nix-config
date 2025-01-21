@@ -4,11 +4,9 @@
   config,
   hostname,
   ...
-}:
-let
+}: let
   ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   imports = [
     ./hardware-configuration.nix
     ./secrets.nix
@@ -59,22 +57,22 @@ in
         ## Mandatory ##
         chrony.enable = true;
         openssh.enable = true;
-      #  monitoring.enable = true;
+        #  monitoring.enable = true;
 
         dae = {
           enable = true;
           subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
         };
 
-      #  caddy = {
-      #    enable = true;
-      #    CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
-      #  };
+        #  caddy = {
+        #    enable = true;
+        #    CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
+        #  };
 
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [ "10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24" ];
+          routes = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
         };
 
         ## System ##
@@ -84,22 +82,22 @@ in
         talos.api.enable = true;
 
         ## Apps ##
-      #  glance.enable = true;
-      #  homebox.enable = true;
+        #  glance.enable = true;
+        #  homebox.enable = true;
         home-assistant.enable = true;
         home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;
         unifi-controller.enable = true;
-      #  zotregistry.enable = true;
+        #  zotregistry.enable = true;
 
         ## Backup ##
-      #  restic = {
-      #    enable = true;
-      #    endpointFile = config.sops.secrets."backup/restic/endpoint".path;
-      #    credentialFile = config.sops.secrets."backup/restic/auth".path;
-      #    encryptionFile = config.sops.secrets."backup/restic/encryption".path;
-      #    dataDir = "/opt/apps";
-      #  };
+        #  restic = {
+        #    enable = true;
+        #    endpointFile = config.sops.secrets."backup/restic/endpoint".path;
+        #    credentialFile = config.sops.secrets."backup/restic/auth".path;
+        #    encryptionFile = config.sops.secrets."backup/restic/encryption".path;
+        #    dataDir = "/opt/apps";
+        #  };
 
         ## Storage ##
         minio = {
@@ -107,13 +105,13 @@ in
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
         };
 
-      #  nfs = {
-      #    enable = true;
-      #    exports = ''
-      #      /opt/backup *(rw,async,insecure,no_root_squash,no_subtree_check)
-      #      /opt/media *(rw,async,insecure,no_root_squash,no_subtree_check)
-      #    '';
-      #  };
+        #  nfs = {
+        #    enable = true;
+        #    exports = ''
+        #      /opt/backup *(rw,async,insecure,no_root_squash,no_subtree_check)
+        #      /opt/media *(rw,async,insecure,no_root_squash,no_subtree_check)
+        #    '';
+        #  };
 
         samba = {
           enable = true;
@@ -123,10 +121,10 @@ in
               path = "/opt/backup";
               "read only" = "no";
             };
-        #    Media = {
-        #      path = "/numina/media";
-        #      "read only" = "no";
-        #    };
+            #    Media = {
+            #      path = "/numina/media";
+            #      "read only" = "no";
+            #    };
             TimeMachine = {
               path = "/opt/timemachine";
               "read only" = "no";

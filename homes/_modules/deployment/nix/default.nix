@@ -3,11 +3,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.deployment.nix;
-in
-{
+in {
   options.modules.deployment.nix = {
     enable = lib.mkEnableOption "nix-deployment";
   };

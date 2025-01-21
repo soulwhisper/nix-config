@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   config = {
     users = {
       mutableUsers = false;
