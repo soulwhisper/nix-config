@@ -1,3 +1,4 @@
+---
 name: Build and diff Nix systems
 
 on:

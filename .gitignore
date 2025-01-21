@@ -1,4 +1,6 @@
-result
+# Folders
+logs/
+result/
 
 # Trash
 .DS_Store
@@ -6,3 +8,12 @@ Thumbs.db
 
 # Sops
 .decrypted~*
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.lock
+.pre-commit-config.yaml
+
+# Other files
+.env
