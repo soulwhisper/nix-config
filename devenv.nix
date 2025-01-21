@@ -6,8 +6,12 @@
 }: {
   # replace pre-commit and various linters
   git-hooks = {
-    excludes = ["generated\.(json|nix)$"];
+    excludes = ["generated\.(json|nix)$" "nix-build\.ya?ml$"];
     hooks = {
+      actionlint = {
+        enable = true;
+        files = "github\/workflows\/.*\.ya?ml$";
+      };
       alejandra.enable = true;
       check-added-large-files.enable = true;
       check-merge-conflicts.enable = true;
@@ -43,11 +47,6 @@
               max-spaces-inside: 0
             indentation: enable
         '';
-      };
-      # disable this check when using ci, or exclude nix-build.yml
-      actionlint = lib.optionalAttrs (!config.devenv.isTesting) {
-        enable = true;
-        files = "github\/workflows\/.*\.(yml|yaml)$";
       };
       # disable this check when using ci, hints only
       markdownlint = lib.optionalAttrs (!config.devenv.isTesting) {
