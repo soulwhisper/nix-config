@@ -1,5 +1,4 @@
-_:
-{
+_: {
   config = {
     plugins.todo-comments = {
       enable = true;

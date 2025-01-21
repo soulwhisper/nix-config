@@ -112,7 +112,7 @@ user_rules:
 dhcp:
   enabled: false
   interface_name: eth0
-  local_domain_name: homelab.internal    # k8s auto hosts
+  local_domain_name: homelab.internal # k8s auto hosts
   dhcpv4:
     gateway_ip: 172.19.82.1
     subnet_mask: 255.255.255.0

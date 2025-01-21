@@ -2,8 +2,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   modules = {
     deployment.nix.enable = true;
     development.enable = true;

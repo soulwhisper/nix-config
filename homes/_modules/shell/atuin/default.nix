@@ -5,18 +5,17 @@
   ...
 }: let
   cfg = config.modules.shell.atuin;
-  tomlFormat = pkgs.formats.toml { };
-in
-{
+  tomlFormat = pkgs.formats.toml {};
+in {
   options.modules.shell.atuin = {
     enable = lib.mkEnableOption "atuin";
-    package = lib.mkPackageOption pkgs "atuin" { };
+    package = lib.mkPackageOption pkgs "atuin" {};
     flags = lib.mkOption {
       type = lib.types.listOf lib.types.str;
     };
     settings = lib.mkOption {
       inherit (tomlFormat) type;
-      default = { };
+      default = {};
     };
   };
 

@@ -2,11 +2,9 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   inherit (pkgs.stdenv) isDarwin;
-in
-{
+in {
   config = lib.mkIf isDarwin {
     programs.bash.enable = true;
   };

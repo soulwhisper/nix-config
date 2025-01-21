@@ -1,5 +1,4 @@
-_:
-{
+_: {
   config = {
     opts = {
       updatetime = 100; # Faster completion

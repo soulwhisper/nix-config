@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.vpn.tailscale;
-in
-{
+in {
   options.modules.services.vpn.tailscale = {
     enable = lib.mkEnableOption "tailscale";
     authFile = lib.mkOption {

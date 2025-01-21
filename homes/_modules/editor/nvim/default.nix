@@ -3,14 +3,12 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.editor.nvim;
-in
-{
+in {
   options.modules.editor.nvim = {
     enable = lib.mkEnableOption "nvim";
-    package = lib.mkPackageOption pkgs "neovim" { };
+    package = lib.mkPackageOption pkgs "neovim" {};
     makeDefaultEditor = lib.mkOption {
       type = lib.types.bool;
       default = false;

@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.caddy;
-in
-{
+in {
   options.modules.services.caddy = {
     enable = lib.mkEnableOption "caddy";
     CloudflareToken = lib.mkOption {
@@ -19,7 +17,7 @@ in
   # due to caddy issues, user and dataDir remain default
   # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [80 443];
 
     services.caddy = {
       enable = true;
@@ -30,8 +28,8 @@ in
       '';
     };
 
-    systemd.services.caddy.serviceConfig.EnvironmentFile = [ "${cfg.CloudflareToken}" ];
-    systemd.services.caddy.serviceConfig.AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-    systemd.services.caddy.serviceConfig.CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
+    systemd.services.caddy.serviceConfig.EnvironmentFile = ["${cfg.CloudflareToken}"];
+    systemd.services.caddy.serviceConfig.AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
+    systemd.services.caddy.serviceConfig.CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
   };
 }

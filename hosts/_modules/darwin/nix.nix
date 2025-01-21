@@ -1,5 +1,4 @@
-_:
-{
+_: {
   nix.gc = {
     automatic = true;
 

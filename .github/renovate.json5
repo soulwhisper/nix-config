@@ -1,13 +1,11 @@
 {
-  extends: [
-    "github>soulwhisper/renovate-config"
-  ],
-  "nix": {
-    "enabled": true
+  extends: ["github>soulwhisper/renovate-config"],
+  nix: {
+    enabled: true,
   },
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
   },
   customManagers: [
     {

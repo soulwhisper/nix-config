@@ -1,22 +1,19 @@
 # visit: localhost:8443
 # data: /var/lib/unifi/data
-
 {
   lib,
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.unifi-controller;
 
   init-mongo = ''
-      db.getSiblingDB("unifi-db").createUser({user: "unifi", pwd: "unifi", roles: [{role: "dbOwner", db: "unifi-db"}]});
-      db.getSiblingDB("unifi-db_stat").createUser({user: "unifi", pwd: "unifi", roles: [{role: "dbOwner", db: "unifi-db_stat"}]});
-    '';
+    db.getSiblingDB("unifi-db").createUser({user: "unifi", pwd: "unifi", roles: [{role: "dbOwner", db: "unifi-db"}]});
+    db.getSiblingDB("unifi-db_stat").createUser({user: "unifi", pwd: "unifi", roles: [{role: "dbOwner", db: "unifi-db_stat"}]});
+  '';
   init-mongo-file = builtins.toFile "init-mongo.js" init-mongo;
-in
-{
+in {
   options.modules.services.unifi-controller = {
     enable = lib.mkEnableOption "unifi-controller";
     dataDir = lib.mkOption {
@@ -28,8 +25,8 @@ in
   config = lib.mkIf cfg.enable {
     # use ip:8443 in case network failing.
 
-    networking.firewall.allowedTCPPorts = [ 8080 8443 ];
-    networking.firewall.allowedUDPPorts = [ 3478 10001 ];
+    networking.firewall.allowedTCPPorts = [8080 8443];
+    networking.firewall.allowedUDPPorts = [3478 10001];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
@@ -43,7 +40,7 @@ in
     virtualisation.oci-containers.containers."unifi-controller" = {
       autoStart = true;
       image = "lscr.io/linuxserver/unifi-network-application:latest";
-      dependsOn = [ "unifi-db" ];
+      dependsOn = ["unifi-db"];
       ports = [
         "8080:8080/tcp"
         "8443:8443/tcp"
@@ -51,14 +48,14 @@ in
         "10001:10001/udp"
       ];
       environment = {
-        PUID="1001";
-        PGID="1001";
-        TZ="Asia/Shanghai";
-        MONGO_HOST="host.containers.internal";
-        MONGO_PORT="27017";
-        MONGO_DBNAME="unifi-db";
-        MONGO_USER="unifi";
-        MONGO_PASS="unifi";
+        PUID = "1001";
+        PGID = "1001";
+        TZ = "Asia/Shanghai";
+        MONGO_HOST = "host.containers.internal";
+        MONGO_PORT = "27017";
+        MONGO_DBNAME = "unifi-db";
+        MONGO_USER = "unifi";
+        MONGO_PASS = "unifi";
       };
       volumes = [
         "${cfg.dataDir}/config:/config"

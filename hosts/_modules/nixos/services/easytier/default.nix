@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.easytier;
-in
-{
+in {
   options.modules.services.easytier = {
     enable = lib.mkEnableOption "easytier";
     authFile = lib.mkOption {
@@ -16,7 +14,7 @@ in
     };
     routes = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
     };
     peers = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -28,7 +26,8 @@ in
       type = lib.types.listOf lib.types.str;
       default = [
         "-d"
-        "--default-protocol" "udp"
+        "--default-protocol"
+        "udp"
         "--relay-all-peer-rpc"
       ];
     };
@@ -37,10 +36,10 @@ in
   # creating tun device by systemd is impossible;
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 11010 11011 11012 ];
-    networking.firewall.allowedUDPPorts = [ 11010 11011 ];
+    networking.firewall.allowedTCPPorts = [11010 11011 11012];
+    networking.firewall.allowedUDPPorts = [11010 11011];
 
-    environment.systemPackages = [ pkgs.unstable.easytier ];  # this only for easytier-cli
+    environment.systemPackages = [pkgs.unstable.easytier]; # this only for easytier-cli
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."easytier" = {
@@ -52,16 +51,19 @@ in
       ];
       cmd = lib.concatLists [
         [
-          "--network-name" "$NETWORK_NAME"
-          "--network-secret" "$NETWORK_SECRET"
-          "--relay-network-whitelist" "$NETWORK_NAME"
+          "--network-name"
+          "$NETWORK_NAME"
+          "--network-secret"
+          "$NETWORK_SECRET"
+          "--relay-network-whitelist"
+          "$NETWORK_NAME"
         ]
-        (lib.concatMap (peer: [ "-p" peer ]) cfg.peers)
-        (lib.concatMap (route: [ "-n" route ]) cfg.routes)
+        (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+        (lib.concatMap (route: ["-n" route]) cfg.routes)
         cfg.extraArgs
       ];
       environment = {
-        TZ="Asia/Shanghai";
+        TZ = "Asia/Shanghai";
       };
       environmentFiles = [
         "${cfg.authFile}"

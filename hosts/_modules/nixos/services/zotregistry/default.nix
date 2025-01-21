@@ -3,15 +3,13 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.zotregistry;
   reverseProxyCaddy = config.modules.services.caddy;
 
   # to avoid json lost lines
   configFile = builtins.toFile "config.json" (builtins.readFile ./config.json);
-in
-{
+in {
   options.modules.services.zotregistry = {
     enable = lib.mkEnableOption "zotregistry";
     dataDir = lib.mkOption {
@@ -21,11 +19,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9002 ];
+    networking.firewall.allowedTCPPorts = [9002];
 
     services.caddy.virtualHosts."zot.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-	      reverse_proxy localhost:9002
+       reverse_proxy localhost:9002
       }
     '';
 
@@ -44,8 +42,8 @@ in
         "9002:9002/tcp"
       ];
       environment = {
-        PUID="1001";
-        PGID="1001";
+        PUID = "1001";
+        PGID = "1001";
       };
       volumes = [
         "${cfg.dataDir}/data:/zot/data"

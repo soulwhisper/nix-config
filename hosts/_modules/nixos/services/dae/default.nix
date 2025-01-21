@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.dae;
-in
-{
+in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
     subscriptionFile = lib.mkOption {
@@ -18,7 +16,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.defaultPackages = (with pkgs.unstable; [ dae ]);
+    environment.defaultPackages = with pkgs.unstable; [dae];
 
     environment.etc = {
       "dae/config.dae".source = pkgs.writeText "config.dae" (builtins.readFile ./config.dae);
@@ -33,10 +31,10 @@ in
 
     systemd.services.dae = {
       description = "Dae Service";
-      documentation = [ "https://github.com/daeuniverse/dae" ];
-      after = [ "network.target" "systemd-sysctl.service" "dbus.service" ];
-      wants = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      documentation = ["https://github.com/daeuniverse/dae"];
+      after = ["network.target" "systemd-sysctl.service" "dbus.service"];
+      wants = ["network.target"];
+      wantedBy = ["multi-user.target"];
       serviceConfig = {
         PIDFile = "/run/dae.pid";
         ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c /etc/dae/config.dae";
@@ -48,8 +46,8 @@ in
 
     systemd.services.update-dae-subs = {
       description = "Update DAE Subscription Service";
-      wants = [ "network-online.target" ];
-      after = [ "network-online.target" ];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
           echo $(cat ${cfg.subscriptionFile}) > /etc/dae/sublist
@@ -66,19 +64,19 @@ in
         OnBootSec = "15min";
         OnUnitActiveSec = "12h";
       };
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
     };
 
-    systemd.services.dae.before = [ "update-dae-subs.timer" ];
+    systemd.services.dae.before = ["update-dae-subs.timer"];
 
     services.tinyproxy = {
       enable = true;
       settings = {
-          Port = 1080;
-          Listen = "0.0.0.0";
-        };
+        Port = 1080;
+        Listen = "0.0.0.0";
+      };
     };
 
-    networking.firewall.allowedTCPPorts = [ 1080 ];
+    networking.firewall.allowedTCPPorts = [1080];
   };
 }
