@@ -10,28 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-    - name: Install Nix
-      uses: cachix/install-nix-action@08dcb3a5e62fa31e2da3d490afc4176ef55ecd72 # v30
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-        extra_nix_config: |
-          nix.optimise.automatic = true
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Install Nix
+        uses: cachix/install-nix-action@08dcb3a5e62fa31e2da3d490afc4176ef55ecd72 # v30
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            nix.optimise.automatic = true
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: yaxitech/nix-install-pkgs-action@2877c6452aaade78b84de296d20dd67c52c17b9e # v5
+        with:
+          packages: "nixpkgs#statix"
 
-    - uses: yaxitech/nix-install-pkgs-action@2877c6452aaade78b84de296d20dd67c52c17b9e # v5
-      with:
-        packages: "nixpkgs#statix"
+      - name: Run Statix Lint
+        run: statix fix
 
-    - name: Run Statix Lint
-      run: statix fix
+      - name: Nix Flake Checker
+        uses: DeterminateSystems/flake-checker-action@078f5f7f47ee188aa6cb472527ca5984e195222d # v9
 
-    - name: Nix Flake Checker
-      uses: DeterminateSystems/flake-checker-action@078f5f7f47ee188aa6cb472527ca5984e195222d # v9
-
-    - name: Show changes
-      run: git diff
+      - name: Show changes
+        run: git diff

@@ -2,11 +2,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.nfs;
-in
-{
+in {
   options.modules.services.nfs = {
     enable = lib.mkEnableOption "nfs";
     exports = lib.mkOption {
@@ -24,7 +22,7 @@ in
       mountdPort = 4002;
     };
 
-    networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
-    networking.firewall.allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
+    networking.firewall.allowedTCPPorts = [111 2049 4000 4001 4002 20048];
+    networking.firewall.allowedUDPPorts = [111 2049 4000 4001 4002 20048];
   };
 }

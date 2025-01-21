@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.restic;
-in
-{
+in {
   options.modules.services.restic = {
     enable = lib.mkEnableOption "restic";
     endpointFile = lib.mkOption {
@@ -36,7 +34,7 @@ in
       repositoryFile = "${cfg.endpointFile}";
       environmentFile = "${cfg.credentialFile}";
       passwordFile = "${cfg.encryptionFile}";
-      paths = [ "${cfg.dataDir}" ];
+      paths = ["${cfg.dataDir}"];
       extraBackupArgs = [
         "--skip-if-unchanged"
       ];

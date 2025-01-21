@@ -3,22 +3,20 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
 
   cfg = config.modules.editor.vscode;
-  userDir = if isDarwin then
-    "Library/Application Support/Code/User"
-  else
-    "${config.xdg.configHome}/Code/User";
+  userDir =
+    if isDarwin
+    then "Library/Application Support/Code/User"
+    else "${config.xdg.configHome}/Code/User";
   configFilePath = "${userDir}/settings.json";
 
   pathsToMakeWritable = lib.flatten [
     configFilePath
   ];
-in
-{
+in {
   options.modules.editor.vscode = {
     enable = lib.mkEnableOption "vscode";
     extensions = lib.mkOption {

@@ -3,17 +3,15 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.nut;
-in
-{
+in {
   options.modules.services.nut = {
     enable = lib.mkEnableOption "nut";
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 3493 ];
+    networking.firewall.allowedTCPPorts = [3493];
 
     environment.etc = {
       "nut/password".source = pkgs.writeText "password" "pa55w0rd";
@@ -28,12 +26,12 @@ in
         driver = "usbhid-ups";
         port = "auto";
         description = "SANTAK TG-BOX 850";
-        directives = [ "default.battery.charge.low = 50" ];
+        directives = ["default.battery.charge.low = 50"];
       };
       users."upsmon" = {
         upsmon = "primary";
-        actions = [ "SET" "FSD" ];
-        instcmds = [ "ALL" ];
+        actions = ["SET" "FSD"];
+        instcmds = ["ALL"];
         passwordFile = "/etc/nut/password";
       };
       upsd.listen = [

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   config = {
     home.packages = [
       pkgs.doggo

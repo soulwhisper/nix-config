@@ -3,13 +3,12 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.modules.kubernetes;
   catppuccinCfg = config.modules.themes.catppuccin;
 
   # https://nixos.wiki/wiki/Helm_and_Helmfile
-  wrappedHelmPkg = (pkgs.unstable.wrapHelm pkgs.unstable.kubernetes-helm {
+  wrappedHelmPkg = pkgs.unstable.wrapHelm pkgs.unstable.kubernetes-helm {
     plugins = with pkgs.unstable.kubernetes-helmPlugins; [
       helm-diff
       helm-git
@@ -17,35 +16,35 @@ let
       helm-secrets
       helm-unittest
     ];
-  });
+  };
   wrappedHelmfilePkg = pkgs.unstable.helmfile-wrapped.override {
     inherit (wrappedHelmPkg) pluginsDir;
   };
-in
-{
+in {
   options.modules.kubernetes = {
     enable = lib.mkEnableOption "kubernetes";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = (with pkgs; [
-      kubecolor-catppuccin
-      kubectl-pgo
-      talhelper
-      talosctl
-    ]) ++
-    (with pkgs.unstable; [
-      cilium-cli
-      fluxcd
-      kubecm
-      kubeconform
-      kubecolor
-      kubectl
-    ]) ++
-    [
-      wrappedHelmPkg
-      wrappedHelmfilePkg
-    ];
+    home.packages =
+      (with pkgs; [
+        kubecolor-catppuccin
+        kubectl-pgo
+        talhelper
+        talosctl
+      ])
+      ++ (with pkgs.unstable; [
+        cilium-cli
+        fluxcd
+        kubecm
+        kubeconform
+        kubecolor
+        kubectl
+      ])
+      ++ [
+        wrappedHelmPkg
+        wrappedHelmfilePkg
+      ];
 
     home.sessionVariables = {
       KUBECOLOR_CONFIG = "${pkgs.kubecolor-catppuccin}/catppuccin-${catppuccinCfg.flavor}.yaml";
@@ -85,7 +84,6 @@ in
 
         # ml
         "ray"
-
       ];
     };
 

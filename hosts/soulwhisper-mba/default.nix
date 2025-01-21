@@ -3,8 +3,7 @@
   lib,
   hostname,
   ...
-}:
-{
+}: {
   # check first: https://daiderd.com/nix-darwin/manual/index.html
   config = {
     networking = {
@@ -30,7 +29,7 @@
       taps = [
       ];
       brews = [
-        "derailed/popeye/popeye"   # k8s live cluster linter
+        "derailed/popeye/popeye" # k8s live cluster linter
       ];
       casks = [
         "discord"

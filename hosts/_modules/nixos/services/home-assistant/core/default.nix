@@ -3,18 +3,16 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.home-assistant;
   reverseProxyCaddy = config.modules.services.caddy;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 8123 ];
+    networking.firewall.allowedTCPPorts = [8123];
 
     services.caddy.virtualHosts."hass.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-	      reverse_proxy localhost:8123
+       reverse_proxy localhost:8123
       }
     '';
 
@@ -23,18 +21,18 @@ in
       configDir = "${cfg.dataDir}/core";
 
       extraComponents = [
-	      "default_config"
-	      "homekit_controller"
-	      "matter"
-	      "met"
-	      "openweathermap"
+        "default_config"
+        "homekit_controller"
+        "matter"
+        "met"
+        "openweathermap"
       ];
       # extraPackages = with python3Packages; [  ];
       customComponents = with pkgs.home-assistant-custom-components; [
-	      midea_ac_lan
-	      ntfy
-	      prometheus_sensor
-	      xiaomi_miot
+        midea_ac_lan
+        ntfy
+        prometheus_sensor
+        xiaomi_miot
       ];
       customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
         atomic-calendar-revive
@@ -48,18 +46,18 @@ in
 
       configWritable = true;
       config = {
-	      default_config = { };
-	      frontend = {
-	        themes = "!include_dir_merge_named themes";
-	      };
-	      homeassistant = {
-	        name = "Home";
-	        latitude = "45.8";
-	        longitude = "126.4";
-	        unit_system = "metric";
-	        time_zone = "Asia/Shanghai";
-	        temperature_unit = "C";
-	      };
+        default_config = {};
+        frontend = {
+          themes = "!include_dir_merge_named themes";
+        };
+        homeassistant = {
+          name = "Home";
+          latitude = "45.8";
+          longitude = "126.4";
+          unit_system = "metric";
+          time_zone = "Asia/Shanghai";
+          temperature_unit = "C";
+        };
         template = [
           {
             trigger = [
@@ -67,7 +65,7 @@ in
                 platform = "event";
                 event_type = "state_changed";
                 event_data = {
-                  entity_id = "sensor.electricity_charge_balance_xxxx";  # todo, correct xxx after hass-sgcc deployment
+                  entity_id = "sensor.electricity_charge_balance_xxxx"; # todo, correct xxx after hass-sgcc deployment
                 };
               }
             ];
@@ -130,7 +128,7 @@ in
                 platform = "event";
                 event_type = "state_changed";
                 event_data = {
-                entity_id = "sensor.month_electricity_charge_xxxx";
+                  entity_id = "sensor.month_electricity_charge_xxxx";
                 };
               }
             ];
@@ -220,13 +218,13 @@ in
                       {
                         type = "entities";
                         entities = [
-                          { entity = "cover.curtain"; }
-                          { entity = "switch.wall_switch_switch1_2"; }
-                          { entity = "switch.wall_switch_switch2"; }
-                          { entity = "switch.wall_switch_switch3"; }
-                          { entity = "switch.wall_switch_switch2_2"; }
-                          { entity = "switch.wall_switch_2"; }
-                          { entity = "switch.wall_switch"; }
+                          {entity = "cover.curtain";}
+                          {entity = "switch.wall_switch_switch1_2";}
+                          {entity = "switch.wall_switch_switch2";}
+                          {entity = "switch.wall_switch_switch3";}
+                          {entity = "switch.wall_switch_switch2_2";}
+                          {entity = "switch.wall_switch_2";}
+                          {entity = "switch.wall_switch";}
                         ];
                         title = "客厅";
                         show_header_toggle = true;
@@ -267,9 +265,9 @@ in
                     entity = "sensor.month_electricity_charge";
                     icon = "mdi:home";
                     name = "上月国网电费";
-                    tap_action = { action = "none"; };
-                    hold_action = { action = "none"; };
-                    double_tap_action = { action = "none"; };
+                    tap_action = {action = "none";};
+                    hold_action = {action = "none";};
+                    double_tap_action = {action = "none";};
                     icon_type = "icon";
                     fill_container = false;
                     layout_options = {
@@ -286,9 +284,9 @@ in
                       grid_columns = 2;
                       grid_rows = 1;
                     };
-                    tap_action = { action = "none"; };
-                    hold_action = { action = "none"; };
-                    double_tap_action = { action = "none"; };
+                    tap_action = {action = "none";};
+                    hold_action = {action = "none";};
+                    double_tap_action = {action = "none";};
                     fill_container = true;
                   }
                   {
@@ -296,9 +294,9 @@ in
                     entity = "sensor.yearly_electricity_usage";
                     name = "今年国网总电量";
                     icon = "mdi:lightning-bolt";
-                    tap_action = { action = "none"; };
-                    hold_action = { action = "none"; };
-                    double_tap_action = { action = "none"; };
+                    tap_action = {action = "none";};
+                    hold_action = {action = "none";};
+                    double_tap_action = {action = "none";};
                   }
                   {
                     type = "tile";
@@ -308,7 +306,7 @@ in
                       grid_rows = 1;
                     };
                     features = [
-                      { type = "climate-hvac-modes"; }
+                      {type = "climate-hvac-modes";}
                     ];
                   }
                   {
@@ -349,13 +347,13 @@ in
                   {
                     type = "entities";
                     entities = [
-                      { entity = "cover.curtain"; }
-                      { entity = "switch.wall_switch_switch1_2"; }
-                      { entity = "switch.wall_switch_switch2"; }
-                      { entity = "switch.wall_switch_switch3"; }
-                      { entity = "switch.wall_switch_switch2_2"; }
-                      { entity = "switch.wall_switch_2"; }
-                      { entity = "switch.wall_switch"; }
+                      {entity = "cover.curtain";}
+                      {entity = "switch.wall_switch_switch1_2";}
+                      {entity = "switch.wall_switch_switch2";}
+                      {entity = "switch.wall_switch_switch3";}
+                      {entity = "switch.wall_switch_switch2_2";}
+                      {entity = "switch.wall_switch_2";}
+                      {entity = "switch.wall_switch";}
                     ];
                     title = "客厅";
                   }

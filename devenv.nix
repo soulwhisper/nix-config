@@ -3,8 +3,7 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   # replace pre-commit and various linters
   git-hooks = {
     # exclude = "_assets\/.*";

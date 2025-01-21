@@ -3,12 +3,10 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.backup.syncthing;
   reverseProxyCaddy = config.modules.services.caddy;
-in
-{
+in {
   options.modules.services.backup.syncthing = {
     enable = lib.mkEnableOption "syncthing";
     dataDir = lib.mkOption {
@@ -21,12 +19,12 @@ in
   # user = root, files in zfs pool
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 22000 ];
-    networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+    networking.firewall.allowedTCPPorts = [22000];
+    networking.firewall.allowedUDPPorts = [22000 21027];
 
     services.caddy.virtualHosts."sync.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-	      reverse_proxy localhost:9202
+       reverse_proxy localhost:9202
       }
     '';
 
@@ -35,7 +33,7 @@ in
       user = "root";
       openDefaultPorts = true;
       overrideFolders = true;
-      overrideDevices = false;  # allow add devices by gui
+      overrideDevices = false; # allow add devices by gui
       guiAddress = "127.0.0.1:9202";
       settings = {
         options = {

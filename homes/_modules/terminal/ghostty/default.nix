@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.terminal.ghostty;
-in
-{
+in {
   options.modules.terminal.ghostty = {
     enable = lib.mkEnableOption "ghostty";
   };

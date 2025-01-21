@@ -4,11 +4,9 @@
   config,
   hostname,
   ...
-}:
-let
+}: let
   ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   imports = [
     ./hardware-configuration.nix
     ./secrets.nix
@@ -75,7 +73,7 @@ in
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [ ];
+          routes = [];
         };
 
         ## System ##
