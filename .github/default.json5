@@ -1,5 +1,8 @@
 {
-  extends: ["github>soulwhisper/renovate-config"],
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "github>soulwhisper/renovate-config",
+  ],
   nix: {
     enabled: true,
   },
