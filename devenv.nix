@@ -6,7 +6,7 @@
 }: {
   # replace pre-commit and various linters
   git-hooks = {
-    excludes = ["generated\.(json|nix)$" "nix-build\.ya?ml$" "update-nvfetcher\.ya?ml$"];
+    excludes = ["\.json5$" "generated\.(json|nix)$" "nix-build\.ya?ml$" "update-nvfetcher\.ya?ml$"];
     hooks = {
       actionlint = {
         enable = true;
