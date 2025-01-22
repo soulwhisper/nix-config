@@ -2,8 +2,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   modules = {
     development.enable = true;
     kubernetes.enable = true;

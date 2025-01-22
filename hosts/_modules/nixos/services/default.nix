@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   imports = [
     ./adguard
     ./caddy
@@ -21,8 +18,7 @@
     ./restic
     ./samba
     ./smartd
-    ./talos/api
-    ./talos/pxe
+    ./talos-api
     ./unifi-controller
     ./zotregistry
   ];

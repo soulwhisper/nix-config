@@ -2,8 +2,7 @@
   inputs,
   lib,
   ...
-}:
-{
+}: {
   nix = {
     registry = {
       stable.flake = inputs.nixpkgs;

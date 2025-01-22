@@ -4,6 +4,12 @@
 - by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
 - system apps might still use root / specific-users.
 
+## K8S
+
+- service:minio for k8s offsite backups, i.e. volsync
+- service:nfs and service:restic is disabled
+- service:samba for windows / macos backups
+
 ## Exceptions
 
 ### Easytier

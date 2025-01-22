@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.backup.zrepl;
-in
-{
+in {
   options.modules.services.backup.zrepl = {
     enable = lib.mkEnableOption "zrepl";
   };
@@ -17,7 +15,7 @@ in
   # user = root, files in zfs pool
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9003 9103 ];
+    networking.firewall.allowedTCPPorts = [9003 9103];
 
     services.zrepl = {
       enable = true;

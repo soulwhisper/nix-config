@@ -1,3 +1,4 @@
+---
 server:
   host: 0.0.0.0
   port: 9802
@@ -37,7 +38,7 @@ pages:
                 color: 200 50 50
                 links:
                   - title: Adguard
-                    url: http://10.0.0.10:9800
+                    url: http://10.10.0.10:9200
                   - title: Home-assistant
                     url: http://10.20.0.10:8123/lovelace/home
                   - title: Minio
@@ -48,12 +49,6 @@ pages:
                 links:
                   - title: Talos
                     url: https://www.talos.dev/
-
-          - type: repository
-            repository: bjw-s-labs/nix-config
-            pull-requests-limit: -1
-            issues-limit: -1
-            commits-limit: 5
 
           - type: repository
             repository: bjw-s-labs/home-ops

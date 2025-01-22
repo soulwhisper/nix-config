@@ -3,12 +3,10 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.glance;
   reverseProxyCaddy = config.modules.services.caddy;
-in
-{
+in {
   options.modules.services.glance = {
     enable = lib.mkEnableOption "glance";
     dataDir = lib.mkOption {
@@ -18,11 +16,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9802 ];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9802];
 
     services.caddy.virtualHosts."lab.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-	      reverse_proxy localhost:9802
+       reverse_proxy localhost:9802
       }
     '';
 
@@ -31,20 +29,20 @@ in
     ];
 
     environment.etc = {
-        "glance/glance.yaml".source = pkgs.writeTextFile {
+      "glance/glance.yaml".source = pkgs.writeTextFile {
         name = "glance.yaml";
         text = builtins.readFile ./glance.yaml;
-        };
-        "glance/glance.yaml".mode = "0755";
+      };
+      "glance/glance.yaml".mode = "0755";
     };
 
     systemd.services.glance = {
       description = "Glance feed dashboard server";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
 
       serviceConfig = {
-        ExecStart ="${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";
+        ExecStart = "${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";
         StateDirectory = "${cfg.dataDir}";
         RuntimeDirectory = "${cfg.dataDir}";
         User = "appuser";

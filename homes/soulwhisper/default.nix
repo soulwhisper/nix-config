@@ -5,8 +5,7 @@
   inputs,
   hostname,
   ...
-}:
-{
+}: {
   imports = [
     ../_modules
     ./secrets

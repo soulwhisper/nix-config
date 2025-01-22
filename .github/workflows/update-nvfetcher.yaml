@@ -1,3 +1,4 @@
+---
 name: Update nvfetcher
 on:
   workflow_dispatch: {}
@@ -92,8 +93,3 @@ jobs:
           add-paths: |
             pkgs/**
           delete-branch: true
-      # - name: Automerge Pull Request
-      #   if: steps.create-pull-request.outputs.pull-request-operation == 'created' || steps.create-pull-request.outputs.pull-request-operation == 'updated'
-      #   run: gh pr merge --auto --squash --delete-branch ${{ steps.create-pull-request.outputs.pull-request-number }}
-      #   env:
-      #     GH_TOKEN: ${{ steps.app-token.outputs.token }}

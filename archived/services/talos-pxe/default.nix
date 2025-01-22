@@ -3,18 +3,16 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.talos.pxe;
-in
-{
+in {
   options.modules.services.talos.pxe = {
     enable = lib.mkEnableOption "talos-pxe";
   };
 
   config = lib.mkIf cfg.enable {
     # networking.firewall.allowedTCPPorts = [ 9301 ];
-    networking.firewall.allowedUDPPorts = [ 67 69 4011 ];
+    networking.firewall.allowedUDPPorts = [67 69 4011];
 
     environment.etc = {
       "talos-pxe/dnsmasq.conf".source = pkgs.writeText "dnsmasq-config" (builtins.readFile ./dnsmasq.conf);
@@ -49,10 +47,10 @@ in
 
     systemd.services.matchbox-server = {
       description = "PXE bootstrap support for talos";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
       serviceConfig = {
-        ExecStart ="${lib.getExe pkgs.matchbox-server} -address=0.0.0.0:9301 -assets-path=/etc/talos-pxe/assets -data-path=/etc/talos-pxe -log-level=debug";
+        ExecStart = "${lib.getExe pkgs.matchbox-server} -address=0.0.0.0:9301 -assets-path=/etc/talos-pxe/assets -data-path=/etc/talos-pxe -log-level=debug";
         WorkingDirectory = "/etc/talos-pxe";
         Restart = "always";
       };

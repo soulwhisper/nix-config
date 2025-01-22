@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
   cfg = config.modules.security.gnugpg;
-in
-{
+in {
   options.modules.security.gnugpg = {
     enable = lib.mkEnableOption "gnugpg";
   };

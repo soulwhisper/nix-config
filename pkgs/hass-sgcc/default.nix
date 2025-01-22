@@ -5,62 +5,62 @@
   python3,
   makeWrapper,
   ...
-}:
-let
-  sourceData = pkgs.callPackage ../_sources/generated.nix { };
+}: let
+  sourceData = pkgs.callPackage ../_sources/generated.nix {};
   packageData = sourceData.hass-sgcc;
   vendorData = lib.importJSON ../vendorhash.json;
 
   python = python3.withPackages (
-    ps: with ps; [
-      onnxruntime
-      pillow
-      python-dateutil
-      python-dotenv
-      numpy
-      requests
-      schedule
-      selenium
-      sympy
-      undetected-chromedriver
-    ]
+    ps:
+      with ps; [
+        onnxruntime
+        pillow
+        python-dateutil
+        python-dotenv
+        numpy
+        requests
+        schedule
+        selenium
+        sympy
+        undetected-chromedriver
+      ]
   );
-  binPath = lib.makeBinPath ([
+  binPath = lib.makeBinPath [
     pkgs.chromium
-  ]);
+  ];
 in
-stdenvNoCC.mkDerivation {
-  inherit (packageData) pname src;
-  version = lib.strings.removePrefix "v" packageData.version;
-  vendorHash = vendorData.hass-sgcc;
+  stdenvNoCC.mkDerivation {
+    inherit (packageData) pname src;
+    version = lib.strings.removePrefix "v" packageData.version;
+    vendorHash = vendorData.hass-sgcc;
 
-  dontBuild = true;
-  doCheck = true;
+    dontBuild = true;
+    doCheck = true;
 
-  nativeBuildInputs = [ makeWrapper ];
+    nativeBuildInputs = [makeWrapper];
 
-  installPhase = ''
-    runHook preInstall
+    installPhase = ''
+      runHook preInstall
 
-    mkdir -p $out/share
-    cp -r scripts $out/share/hass-sgcc
+      mkdir -p $out/share
+      cp -r scripts $out/share/hass-sgcc
 
-    # src is designed for container, needs to replace '/usr/bin/' and '/data/'
-    substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/usr/bin/chromedriver" "${lib.getExe pkgs.undetected-chromedriver}"
-    substituteInPlace $out/share/hass-sgcc/main.py --replace-fail "/data/" "./"
-    substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/data/" "./"
+      # src is designed for container, needs to replace '/usr/bin/' and '/data/'
+      substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/usr/bin/chromedriver" "${lib.getExe pkgs.undetected-chromedriver}"
+      substituteInPlace $out/share/hass-sgcc/main.py --replace-fail "/data/" "./"
+      substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/data/" "./"
 
-    makeWrapper ${python.interpreter} "$out/bin/sgcc_fetcher" \
-        --add-flags "$out/share/hass-sgcc/main.py" \
-        --prefix PATH : "${binPath}"
+      makeWrapper ${python.interpreter} "$out/bin/sgcc_fetcher" \
+          --add-flags "$out/share/hass-sgcc/main.py" \
+          --prefix PATH : "${binPath}"
 
-    runHook postInstall
-  '';
+      runHook postInstall
+    '';
 
-  meta = with lib; {
-    mainProgram = "sgcc_fetcher";
-    description = "HomeAssistant sgcc_electricity data fetcher";
-    homepage = "https://github.com/ARC-MX/sgcc_electricity_new";
-    maintainers = with maintainers; [soulwhisper];
-  };
-}
+    meta = with lib; {
+      mainProgram = "sgcc_fetcher";
+      description = "HomeAssistant sgcc_electricity data fetcher";
+      homepage = "https://github.com/ARC-MX/sgcc_electricity_new";
+      maintainers = with maintainers; [soulwhisper];
+    };
+  }

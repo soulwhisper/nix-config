@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.shell.git;
   inherit (pkgs.stdenv) isDarwin;
 in {

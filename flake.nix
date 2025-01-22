@@ -63,16 +63,11 @@
     };
   };
 
-  outputs = {
-    flake-parts,
-    ...
-  } @inputs:
-  let
-    mkPkgsWithSystem =
-      system:
+  outputs = {flake-parts, ...} @ inputs: let
+    mkPkgsWithSystem = system:
       import inputs.nixpkgs {
         inherit system;
-        overlays = builtins.attrValues (import ./overlays { inherit inputs; });
+        overlays = builtins.attrValues (import ./overlays {inherit inputs;});
         config.allowUnfree = true;
       };
     mkSystemLib = import ./lib/mkSystem.nix {inherit inputs mkPkgsWithSystem;};
@@ -88,8 +83,7 @@
         inputs',
         pkgs,
         ...
-      }:
-      {
+      }: {
         # override pkgs used by everything in `perSystem` to have my overlays
         _module.args.pkgs = mkPkgsWithSystem system;
         # accessible via `nix build .#<name>`
@@ -98,7 +92,7 @@
 
       imports = [];
 
-    flake = {
+      flake = {
         nixosConfigurations = {
           # nixos builds
           nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
@@ -113,18 +107,17 @@
 
         # Convenience output that aggregates the outputs for home, nixos.
         # Also used in ci to build targets generally.
-        ciSystems =
-          let
-            nixos =
-              inputs.nixpkgs.lib.genAttrs
-              (builtins.attrNames inputs.self.nixosConfigurations)
-              (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
-            darwin =
-              inputs.nixpkgs.lib.genAttrs
-              (builtins.attrNames inputs.self.darwinConfigurations)
-              (attr: inputs.self.darwinConfigurations.${attr}.system);
-          in
-            nixos // darwin;
+        ciSystems = let
+          nixos =
+            inputs.nixpkgs.lib.genAttrs
+            (builtins.attrNames inputs.self.nixosConfigurations)
+            (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
+          darwin =
+            inputs.nixpkgs.lib.genAttrs
+            (builtins.attrNames inputs.self.darwinConfigurations)
+            (attr: inputs.self.darwinConfigurations.${attr}.system);
+        in
+          nixos // darwin;
+      };
     };
-  };
 }

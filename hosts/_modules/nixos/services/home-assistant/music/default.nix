@@ -3,11 +3,9 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.home-assistant;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir}/music 0644 root root - -"
@@ -15,11 +13,11 @@ in
 
     services.music-assistant = {
       enable = true;
-	    providers = [
-	      "filesystem_local"
-	      "filesystem_smb"
-	      "hass"
-	      "hass_players"
+      providers = [
+        "filesystem_local"
+        "filesystem_smb"
+        "hass"
+        "hass_players"
       ];
     };
     systemd.services.music-assistant.serviceConfig = lib.mkForce {

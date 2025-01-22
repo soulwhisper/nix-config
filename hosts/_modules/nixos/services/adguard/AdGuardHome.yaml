@@ -1,3 +1,4 @@
+---
 http:
   pprof:
     port: 6060
@@ -111,12 +112,12 @@ user_rules:
 dhcp:
   enabled: false
   interface_name: eth0
-  local_domain_name: homelab.internal    # k8s auto hosts
+  local_domain_name: homelab.internal # k8s auto hosts
   dhcpv4:
-    gateway_ip: 172.19.82.1
+    gateway_ip: 10.10.0.1
     subnet_mask: 255.255.255.0
-    range_start: 172.19.82.100
-    range_end: 172.19.82.200
+    range_start: 10.10.0.101
+    range_end: 10.10.0.200
     lease_duration: 86400
     icmp_timeout_msec: 1000
     options: []
@@ -146,25 +147,19 @@ filtering:
   safebrowsing_block_host: standard-block.dns.adguard.com
   rewrites:
     - domain: s3.noirprime.com
-      answer: 172.19.82.10
+      answer: 10.10.0.10
     - domain: lab.noirprime.com
-      answer: 172.19.82.10
+      answer: 10.10.0.10
     - domain: box.noirprime.com
-      answer: 172.19.82.10
-    - domain: pve.homelab.internal
-      answer: 172.19.82.100
+      answer: 10.10.0.10
     - domain: k8s.homelab.internal
-      answer: 172.19.82.101
-    - domain: k8s.homelab.internal
-      answer: 172.19.82.102
-    - domain: k8s.homelab.internal
-      answer: 172.19.82.103
+      answer: 10.10.0.100
     - domain: postgres.noirprime.com
-      answer: 172.19.82.201
+      answer: 10.10.0.201
     - domain: ingress-int.noirprime.com
-      answer: 172.19.82.202
+      answer: 10.10.0.202
     - domain: ingress-ext.noirprime.com
-      answer: 172.19.82.203
+      answer: 10.10.0.203
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576

@@ -3,17 +3,15 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.services.gatus;
-in
-{
+in {
   options.modules.services.gatus = {
     enable = lib.mkEnableOption "gatus";
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 9801 ];
+    networking.firewall.allowedTCPPorts = [9801];
 
     services.gatus = {
       enable = true;

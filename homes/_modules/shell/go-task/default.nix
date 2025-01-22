@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.shell.go-task;
 in {
   options.modules.shell.go-task = {

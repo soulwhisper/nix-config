@@ -1,11 +1,8 @@
-{
-  ...
-}:
-{
+{...}: {
   imports = [
-    ./devenv.nix
     ./locale.nix
     ./nix.nix
+    ./pkgs.nix
     ./shells.nix
   ];
 }
