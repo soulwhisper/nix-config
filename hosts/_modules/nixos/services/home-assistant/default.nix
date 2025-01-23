@@ -1,7 +1,6 @@
 {lib, ...}: {
   imports = [
     ./core
-    ./music
     ./sgcc
   ];
 

@@ -88,7 +88,7 @@ in {
         home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;
         unifi-controller.enable = true;
-        #  zotregistry.enable = true;
+        zotregistry.enable = true;
 
         ## Backup ##
         #  restic = {
