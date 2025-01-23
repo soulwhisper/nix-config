@@ -63,19 +63,23 @@ in {
           co = "checkout";
         };
         ignores = [
+          # Temp
+          "result/"
           # Mac OS X hidden files
           ".DS_Store"
           # Windows files
           "Thumbs.db"
-          # asdf
-          ".tool-versions"
-          # direnv
-          ".direnv"
           # Sops
           ".decrypted~*"
-          "*.decrypted.*"
-          # Python virtualenvs
-          ".venv"
+          # Devenv
+          ".devenv*"
+          "devenv.local.nix"
+          "devenv.lock"
+          # Others
+          ".direnv"
+          ".env"
+          ".envrc"
+          ".pre-commit-config.yaml"
         ];
         signing = {
           signByDefault = true;

@@ -5,12 +5,12 @@
   ...
 }: {
   config = {
-    # This will enable devenv at all hosts,
-    # use "devenv init", ref: https://devenv.sh/basics/
+    # This will enable devenv and uv at all hosts
     environment.systemPackages = [
       pkgs.bashInteractive
       pkgs.devenv
       pkgs.direnv
+      pkgs.unstable.uv
     ];
   };
 }

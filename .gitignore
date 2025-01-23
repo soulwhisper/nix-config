@@ -1,5 +1,4 @@
-# Folders
-logs/
+# Temp
 result/
 
 # Trash
@@ -13,7 +12,9 @@ Thumbs.db
 .devenv*
 devenv.local.nix
 devenv.lock
-.pre-commit-config.yaml
 
 # Other files
+.direnv
 .env
+.envrc
+.pre-commit-config.yaml
