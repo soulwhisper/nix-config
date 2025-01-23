@@ -67,15 +67,15 @@ in {
           ".DS_Store"
           # Windows files
           "Thumbs.db"
-          # asdf
-          ".tool-versions"
-          # direnv
-          ".direnv"
           # Sops
           ".decrypted~*"
-          "*.decrypted.*"
-          # Python virtualenvs
-          ".venv"
+          # Devenv
+          ".devenv*"
+          "devenv.local.nix"
+          "devenv.lock"
+          # Others
+          ".env"
+          ".pre-commit-config.yaml"
         ];
         signing = {
           signByDefault = true;

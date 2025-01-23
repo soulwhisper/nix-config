@@ -172,6 +172,7 @@ in {
         };
       };
       shellAliases = {
+        flux-local = "uvx flux-local";
         kubectl = "kubecolor";
         k = "kubectl";
         kc = "kubecm";

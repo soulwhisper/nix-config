@@ -3,6 +3,7 @@
 - these apps { dae, glance, talos-pxe, nut } have pre-defined configs files in /etc/appname.
 - by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
 - system apps might still use root / specific-users.
+- all pip3 packages is now rendered with "pkgs.unstable.uv".
 
 ## K8S
 

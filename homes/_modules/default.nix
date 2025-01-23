@@ -12,7 +12,6 @@
     ./kubernetes
     ./security
     ./shell
-    ./terminal
     ./themes
     ./mutability.nix
   ];
