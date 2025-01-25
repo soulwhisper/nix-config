@@ -16,13 +16,9 @@
       check-added-large-files.enable = true;
       check-merge-conflicts.enable = true;
       check-executables-have-shebangs.enable = true;
-      end-of-file-fixer.enable = true;
-      fix-byte-order-marker.enable = true;
-      mixed-line-endings.enable = true;
       prettier = {
         enable = true;
         settings = {
-          end-of-line = "lf";
           tab-width = 2;
           trailing-comma = "es5";
           use-tabs = false;

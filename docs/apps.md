@@ -18,14 +18,6 @@
 - check "easytier.md"
 - homebrew cask easytier-gui is broken, download easytier-cli from github manually.
 
-### Home-assistant
-
-- due to nix support for custom components,
-- hass is installed as [supervised](https://github.com/home-assistant/supervised-installer) with dae, restic and other containers. In a debian vm.
-- which also means "home-assistant" and relevant apps are fully removed from my nix-configs.
-- check "scripts/hass-supervised" for related scripts and compose files.
-- good examples, [ref1](https://github.com/scstraus/home-assistant-config);
-
 ### Irrelevant dataDir
 
 - adguard, due to external-dns update method, mutableSettings=true is enough;
