@@ -15,9 +15,22 @@ in {
   config = {
     networking = {
       hostName = hostname;
-      useDHCP = true;
       firewall.enable = true;
       nftables.enable = true;
+      interfaces = {
+        enp6s18.ipv4.addresses = [{
+          address = "10.0.0.10";   # LAN, vmbr2
+          prefixLength = 24;
+        }];
+        enp6s19.ipv4.addresses = [{
+          address = "10.20.0.10";  # unifi-ap, vmbr0
+          prefixLength = 24;
+        }];
+        defaultGateway4 = {
+          address = "10.0.0.1";
+          interface = "enp6s18";
+        };
+      };
     };
 
     users.users.soulwhisper = {
