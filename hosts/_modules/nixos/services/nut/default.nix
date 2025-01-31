@@ -14,7 +14,7 @@ in {
     networking.firewall.allowedTCPPorts = [3493];
 
     environment.etc = {
-      "nut/password".source = pkgs.writeText "password" "pa55w0rd";
+      "nut/password".source = pkgs.writeText "password" "sEcr3T!";
     };
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

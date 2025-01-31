@@ -1,7 +1,7 @@
 {
   "talos-api": "sha256-T/a+ZxcWtztQuPhHrwgF3wMhqEjd0+ZLGHNbwvIpVFQ=",
   "kubectl-pgo": "sha256-PhTDqsFhPas2mcK7Ew2TQNqnvftk/+7wo2yFE9dnSUY=",
-  "talosctl": "sha256-L0lmTKj1gUFT1bVoCxMXnEpv2LUo/bl1eeOJmeeixhw=",
+  "talosctl": "sha256-o/PYWR7KOWCVXUhzdPY0bxRhCROXzp/UAXgFkWpggC8=",
   "caddy-custom": "sha256-Z8jdMpa4BSR9zAblHM5SNDZkyw0RlEBzvK1thMtrZl8=",
   "hass-sgcc": ""
 }
