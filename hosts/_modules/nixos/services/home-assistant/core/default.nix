@@ -5,16 +5,15 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [8123];
+    networking.firewall.allowedTCPPorts = [8123]; # use ip:port in case network fails
 
-    services.caddy.virtualHosts."hass.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-       reverse_proxy localhost:8123
-      }
-    '';
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir}/core 0755 appuser appuser - -"
+    ];
+    systemd.services.home-assistant.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.home-assistant.serviceConfig.Group = lib.mkForce "appuser";
 
     services.home-assistant = {
       enable = true;
@@ -27,7 +26,11 @@ in {
         "met"
         "openweathermap"
       ];
-      # extraPackages = with python3Packages; [  ];
+      extraPackages = python3Packages: with python3Packages; [
+        isal
+        pyatv
+        zlib-ng
+      ];
       customComponents = with pkgs.home-assistant-custom-components; [
         midea_ac_lan
         ntfy

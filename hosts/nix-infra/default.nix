@@ -15,9 +15,30 @@ in {
   config = {
     networking = {
       hostName = hostname;
-      useDHCP = true;
       firewall.enable = true;
       nftables.enable = true;
+      nameservers = ["127.0.0.1"]; # use adguard
+      interfaces = {
+        enp6s18.ipv4.addresses = [
+          {
+            address = "10.0.0.10"; # LAN, vmbr2
+            prefixLength = 24;
+          }
+        ];
+        enp6s18.ipv4.routes = [
+          {
+            address = "0.0.0.0";
+            prefixLength = 0;
+            via = "10.0.0.1";
+          }
+        ];
+        enp6s19.ipv4.addresses = [
+          {
+            address = "10.20.0.10"; # unifi-ap, vmbr0
+            prefixLength = 24;
+          }
+        ];
+      };
     };
 
     users.users.soulwhisper = {
@@ -51,6 +72,8 @@ in {
       "d /opt/media 0644 root root - -"
       "d /opt/timemachine 0644 root root - -"
     ];
+
+    services.qemuGuest.enable = true; # for proxmox
 
     modules = {
       services = {
