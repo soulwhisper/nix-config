@@ -147,11 +147,9 @@ filtering:
   safebrowsing_block_host: standard-block.dns.adguard.com
   rewrites:
     - domain: s3.noirprime.com
-      answer: 10.10.0.10
+      answer: 10.0.0.10
     - domain: lab.noirprime.com
-      answer: 10.10.0.10
-    - domain: box.noirprime.com
-      answer: 10.10.0.10
+      answer: 10.0.0.10
     - domain: k8s.homelab.internal
       answer: 10.10.0.100
     - domain: postgres.noirprime.com

@@ -28,8 +28,8 @@ in {
 
     # SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/sgcc 0644 root root - -"
-      "f ${cfg.dataDir}/sgcc/sqlite.db 0644 root root - -"
+      "d ${cfg.dataDir}/sgcc 0644 appuser appuser - -"
+      "f ${cfg.dataDir}/sgcc/sqlite.db 0644 appuser appuser - -"
     ];
 
     # systemctl status podman-hass-sgcc.service
@@ -38,6 +38,7 @@ in {
       autoStart = true;
       image = "arcw/sgcc_electricity:latest";
       cmd = ["python3" "main.py"];
+      # user = "1001:1001"; # container not support
       environment = {
         SET_CONTAINER_TIMEZONE = "true";
         CONTAINER_TIMEZONE = "Asia/Shanghai";

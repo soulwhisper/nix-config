@@ -32,15 +32,15 @@ pages:
                   - title: OPNSense
                     url: https://10.0.0.1/ui/core/dashboard
                   - title: Unifi
-                    url: https://10.20.0.3:8443/manage/default/dashboard
+                    url: https://10.0.0.10:8443/manage/default/dashboard
 
-              - title: NAS
+              - title: Nix-Infra
                 color: 200 50 50
                 links:
                   - title: Adguard
-                    url: http://10.10.0.10:9200
+                    url: http://10.0.0.10:9200
                   - title: Home-assistant
-                    url: http://10.20.0.10:8123/lovelace/home
+                    url: http://10.0.0.10:8123/lovelace/home
                   - title: Minio
                     url: https://s3.noirprime.com/console/
 

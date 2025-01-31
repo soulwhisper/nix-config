@@ -18,7 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     users.groups.samba-users = {};
 
-    networking.firewall.allowedTCPPorts = [445];
+    networking.firewall.allowedTCPPorts = [445 548]; # 548 for AFP-over-TCP
     networking.firewall.allowedUDPPorts = [5353];
 
     services.samba = {
@@ -59,6 +59,10 @@ in {
     # enable avahi service for volume:TimeMachine
     services.avahi = lib.mkIf cfg.avahi.TimeMachine.enable {
       enable = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
       extraServiceFiles = {
         smb = ''
           <?xml version="1.0" standalone='no'?>

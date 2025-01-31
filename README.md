@@ -5,7 +5,7 @@
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
 - soulwhisper-mba, my macbook configs.
-- nix-infra, production nas vm, with k8s support. Without ZFS.
+- nix-infra, production infra vm, for talos. Without ZFS.
 - nix-nas, staging nas vm. With ZFS. Was TrueNAS Scale 24.10+.
 - nix-dev, was devops vm. Planned as desktop notebook. Deprectaed now.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
