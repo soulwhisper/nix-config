@@ -34,7 +34,9 @@ in {
         "openweathermap"
       ];
       extraPackages = python3Packages: with python3Packages; [
+        isal
         pyatv
+        zlib-ng
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
         midea_ac_lan
