@@ -38,7 +38,7 @@ in {
       autoStart = true;
       image = "arcw/sgcc_electricity:latest";
       cmd = ["python3" "main.py"];
-      user = "1001:1001";
+      # user = "1001:1001"; # container not support
       environment = {
         SET_CONTAINER_TIMEZONE = "true";
         CONTAINER_TIMEZONE = "Asia/Shanghai";
