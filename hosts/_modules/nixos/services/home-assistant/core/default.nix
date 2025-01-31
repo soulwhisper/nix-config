@@ -5,16 +5,9 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [8123];
-
-    services.caddy.virtualHosts."hass.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-       reverse_proxy localhost:8123
-      }
-    '';
+    networking.firewall.allowedTCPPorts = [8123]; # use ip:port in case network fails
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir}/core 0755 appuser appuser - -"
