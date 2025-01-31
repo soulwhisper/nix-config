@@ -19,6 +19,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "f ${cfg.dataDir}/state.binpb 0755 appuser appuser - -"
     ];
 
     systemd.services.talos-api = {
@@ -27,7 +28,6 @@ in {
       after = ["network.target"];
 
       serviceConfig = {
-        ExecStartPre = ["/bin/sh -c '[[ -f state.binpb ]] || touch state.binpb'"];
         ExecStart = "${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
         StateDirectory = "${cfg.dataDir}";
         RuntimeDirectory = "${cfg.dataDir}";
