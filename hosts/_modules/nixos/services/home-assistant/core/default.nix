@@ -33,7 +33,9 @@ in {
         "met"
         "openweathermap"
       ];
-      # extraPackages = with python3Packages; [  ];
+      extraPackages = with python3Packages; [
+        pyatv
+      ];
       customComponents = with pkgs.home-assistant-custom-components; [
         midea_ac_lan
         ntfy
