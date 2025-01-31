@@ -17,6 +17,7 @@ in {
       hostName = hostname;
       firewall.enable = true;
       nftables.enable = true;
+      nameservers = ["127.0.0.1"]; # use adguard
       interfaces = {
         enp6s18.ipv4.addresses = [
           {
