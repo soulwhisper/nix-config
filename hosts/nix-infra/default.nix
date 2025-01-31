@@ -66,6 +66,8 @@ in {
       "d /opt/timemachine 0644 root root - -"
     ];
 
+    services.qemuGuest.enable = true; # for proxmox
+
     modules = {
       services = {
         ## Mandatory ##
