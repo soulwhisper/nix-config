@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl_cmd=/root/.nix-profile/bin/curl
+curl_cmd=/run/current-system/sw/bin/curl
 dae_cmd=/run/current-system/sw/bin/dae
 
 cd /etc/dae || { echo "/etc/dae does not exist."; exit 1; }
