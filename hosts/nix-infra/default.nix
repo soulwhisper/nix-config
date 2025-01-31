@@ -27,8 +27,8 @@ in {
         ];
         enp6s18.ipv4.routes = [
           {
-            address = "10.0.0.0";
-            prefixLength = 24;
+            address = "0.0.0.0";
+            prefixLength = 0;
             via = "10.0.0.1";
           }
         ];
