@@ -33,7 +33,7 @@ in {
         "met"
         "openweathermap"
       ];
-      extraPackages = with pkgs.python3Packages; [
+      extraPackages = python3Packages: with python3Packages; [
         pyatv
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
