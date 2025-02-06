@@ -23,6 +23,7 @@ in {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9000 9001];
 
     services.caddy.virtualHosts."s3.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+      redir /console /console/
       handle_path /console/* {
        reverse_proxy localhost:9001
       }
@@ -30,6 +31,10 @@ in {
        reverse_proxy localhost:9000
       }
     '';
+
+    systemd.services.minio.environment = {
+      MINIO_BROWSER_REDIRECT_URL = "https://s3.noirprime.com/console/";
+    };
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"

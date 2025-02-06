@@ -7,9 +7,10 @@
 
 ## K8S
 
-- service:minio for k8s offsite backups, i.e. volsync
-- service:nfs and service:restic is disabled
-- service:samba for windows / macos backups
+- service:adguard is not deprecated until opnsense plugin `os-bind` is stable, [ref1](https://github.com/kubernetes-sigs/external-dns/issues/3721), [ref2](https://github.com/opnsense/plugins/pull/4177);
+- service:minio for k8s offsite backups, i.e. volsync;
+- service:nfs and service:restic is disabled;
+- service:samba for windows / macos backups;
 
 ## Exceptions
 

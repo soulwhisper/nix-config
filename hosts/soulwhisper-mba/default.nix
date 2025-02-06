@@ -40,6 +40,7 @@
         "wireshark"
       ];
       masApps = {
+        "Passepartout" = 1433648537;
         "ReadKit" = 1615798039;
         # "StopTheMadness Pro" = 6471380298; # not owned yet
       };

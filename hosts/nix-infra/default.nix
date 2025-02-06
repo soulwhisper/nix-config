@@ -143,6 +143,7 @@ in {
         #      Backup = {
         #        path = "/opt/backup";
         #        "read only" = "no";
+        #      };
         #      TimeMachine = {
         #        path = "/opt/timemachine";
         #        "read only" = "no";

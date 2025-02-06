@@ -14,6 +14,7 @@ in {
     ];
     systemd.services.home-assistant.serviceConfig.User = lib.mkForce "appuser";
     systemd.services.home-assistant.serviceConfig.Group = lib.mkForce "appuser";
+    users.users.hass.createHome = lib.mkForce false;
 
     services.home-assistant = {
       enable = true;
@@ -53,14 +54,6 @@ in {
         default_config = {};
         frontend = {
           themes = "!include_dir_merge_named themes";
-        };
-        homeassistant = {
-          name = "Home";
-          latitude = "45.8";
-          longitude = "126.4";
-          unit_system = "metric";
-          time_zone = "Asia/Shanghai";
-          temperature_unit = "C";
         };
         template = [
           {
