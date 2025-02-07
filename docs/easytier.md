@@ -32,9 +32,9 @@ cidr = "172.19.80.0/24"
 cidr = "172.19.82.0/24"
 
 [flags]
-default_protocol = "udp"
-relay_all_peer_rpc = true
-relay_network_whitelist = "$NETWORK_NAME"
+enable_kcp_proxy = true
+latency_first = true
+multi_thread = true
 
 # /etc/easytier/.env
 NETWORK_NAME=

@@ -10,8 +10,6 @@ _: {
         "--header"
         "--total-size"
       ];
-      enableBashIntegration = true;
-      enableFishIntegration = true;
     };
   };
 }

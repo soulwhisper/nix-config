@@ -18,6 +18,7 @@
 
 - check "easytier.md"
 - homebrew cask easytier-gui is broken, download easytier-cli from github manually.
+- conflict with firewall and auto-proxy tools.
 
 ### Irrelevant dataDir
 
