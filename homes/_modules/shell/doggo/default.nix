@@ -4,10 +4,8 @@
       pkgs.doggo
     ];
 
-    programs.fish = {
-      shellAliases = {
-        dig = "doggo";
-      };
+    programs.fish.shellAliases = {
+      dig = "doggo";
     };
   };
 }

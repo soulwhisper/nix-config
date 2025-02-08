@@ -105,7 +105,6 @@ in {
 
         ## Apps ##
         glance.enable = true;
-        #  homebox.enable = true;
         home-assistant.enable = true;
         home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;

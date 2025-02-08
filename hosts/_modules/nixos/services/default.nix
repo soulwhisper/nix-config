@@ -6,7 +6,6 @@
     ./dae
     ./easytier
     ./glance
-    ./homebox
     ./home-assistant
     ./kms
     ./minio
