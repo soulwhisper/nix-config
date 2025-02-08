@@ -24,7 +24,6 @@
     systemd.tmpfiles.rules = [
       "d /opt 0700 appuser appuser - -"
       "d /opt/apps 0700 appuser appuser - -"
-      "d /opt/logs 0700 appuser appuser - -"
     ];
   };
 }

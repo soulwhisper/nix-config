@@ -36,8 +36,7 @@ in {
       };
 
       serviceConfig = {
-        User = "appuser";
-        Group = "appuser";
+        DynamicUser = true;
         ExecStart = "${lib.getExe pkgs.adguardhome} --no-check-update --pidfile ${cfg.dataDir}/AdGuardHome.pid --work-dir ${cfg.dataDir} --config ${cfg.dataDir}/AdGuardHome.yaml";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
