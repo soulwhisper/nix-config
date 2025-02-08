@@ -66,5 +66,4 @@ in {
   #     source = "/opt/apps/appname";
   #     dest = "/var/lib/appname";
   #   };
-
 }
