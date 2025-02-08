@@ -1,5 +1,3 @@
-# mater.nix
-
 {
   lib,
   pkgs,
@@ -35,6 +33,7 @@ in {
         BindPaths = "${cfg.dataDir}/matter:/data";
         User = appuser;
         Group = appuser;
+      };
     };
   };
 }
