@@ -20,10 +20,10 @@ in {
     ];
 
     systemd.services.matter-server = {
-      after = [ "network-online.target" ];
-      before = [ "home-assistant.service" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-online.target"];
+      before = ["home-assistant.service"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
       description = "Matter Server";
       environment.HOME = "${cfg.dataDir}/matter";
       serviceConfig = {
