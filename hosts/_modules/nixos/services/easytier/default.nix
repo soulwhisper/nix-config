@@ -26,9 +26,9 @@ in {
       type = lib.types.listOf lib.types.str;
       default = [
         "-d"
-        "--default-protocol"
-        "udp"
-        "--relay-all-peer-rpc"
+        "--enable-kcp-proxy"
+        "--latency-first"
+        "--multi-thread"
       ];
     };
   };
@@ -55,8 +55,6 @@ in {
           "$NETWORK_NAME"
           "--network-secret"
           "$NETWORK_SECRET"
-          "--relay-network-whitelist"
-          "$NETWORK_NAME"
         ]
         (lib.concatMap (peer: ["-p" peer]) cfg.peers)
         (lib.concatMap (route: ["-n" route]) cfg.routes)

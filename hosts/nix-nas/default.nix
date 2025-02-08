@@ -87,10 +87,6 @@ in {
         ## Apps ##
         glance.enable = true;
         kms.enable = true;
-        homebox = {
-          enable = true;
-          dataDir = "/numina/apps/homebox";
-        };
         home-assistant = {
           enable = true;
           dataDir = "/numina/apps/home-assistant";

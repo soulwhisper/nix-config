@@ -7,6 +7,7 @@
 in {
   imports = [
     ./core
+    ./matter
     ./sgcc
   ];
   options.modules.services.home-assistant = {

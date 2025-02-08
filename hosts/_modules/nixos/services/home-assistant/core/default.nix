@@ -22,6 +22,8 @@ in {
 
       extraComponents = [
         "default_config"
+        "ffmpeg"
+        "homekit"
         "homekit_controller"
         "matter"
         "met"

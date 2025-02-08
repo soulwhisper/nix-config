@@ -4,10 +4,8 @@
       pkgs.unstable.glances
     ];
 
-    programs.fish = {
-      shellAliases = {
-        top = "glances";
-      };
+    programs.fish.shellAliases = {
+      top = "glances";
     };
   };
 }
