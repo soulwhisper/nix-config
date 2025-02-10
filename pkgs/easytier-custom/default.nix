@@ -12,7 +12,7 @@ in
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     cargoHash = vendorHash.easytier-custom;
-    useFetchCargoVendor = true
+    useFetchCargoVendor = true;
 
     nativeBuildInputs = [pkgs.protobuf];
 
