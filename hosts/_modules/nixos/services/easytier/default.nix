@@ -47,8 +47,10 @@ in {
           { address = 10.126.126.0; prefixLength = 24; }
         ];
         routes = [
-          address = "10.126.126.1";
-          prefixLength = 24;
+          {
+            address = "10.126.126.1";
+            prefixLength = 24;
+          }
         ];
       };
       ipv6 = {
@@ -56,8 +58,10 @@ in {
           { address = fe80:72fb:b0d7:37a9::; prefixLength = 64; }
         ];
         routes = [
-          address = "fe80:72fb:b0d7:37a9::1";
-          prefixLength = 64;
+          {
+            address = "fe80:72fb:b0d7:37a9::1";
+            prefixLength = 64;
+          }
         ];
       };
     };
