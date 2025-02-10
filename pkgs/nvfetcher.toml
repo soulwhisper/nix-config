@@ -5,6 +5,9 @@ fetch.github = "caddyserver/caddy"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 fetch.github = "caddy-dns/cloudflare"
+[easytier-custom]
+src.github = "EasyTier/EasyTier"
+fetch.github = "EasyTier/EasyTier"
 [hass-sgcc]
 src.github = "ARC-MX/sgcc_electricity_new"
 fetch.github = "ARC-MX/sgcc_electricity_new"

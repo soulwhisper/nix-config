@@ -33,24 +33,43 @@ in {
     };
   };
 
-  # creating tun device by systemd is impossible;
-
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [11010 11011 11012];
     networking.firewall.allowedUDPPorts = [11010 11011];
 
-    environment.systemPackages = [pkgs.unstable.easytier]; # this only for easytier-cli
+    environment.systemPackages = [pkgs.easytier-custom];
 
-    modules.services.podman.enable = true;
-    virtualisation.oci-containers.containers."easytier" = {
-      autoStart = true;
-      image = "easytier/easytier:latest";
-      extraOptions = [
-        "--privileged"
-        "--network=host"
-      ];
-      cmd = lib.concatLists [
+    networking.interfaces."easytier0" = {
+      virtual = true;
+      virtualType = "tun";
+      ipv4 = {
+        addresses = [
+          { address = 10.126.126.0; prefixLength = 24; }
+        ];
+        routes = [
+          address = "10.126.126.1";
+          prefixLength = 24;
+        ];
+      };
+      ipv6 = {
+        addresses = [
+          { address = fe80:72fb:b0d7:37a9::; prefixLength = 64; }
+        ];
+        routes = [
+          address = "fe80:72fb:b0d7:37a9::1";
+          prefixLength = 64;
+        ];
+      };
+    };
+
+    systemd.services.easytier = {
+      description = "Simple, decentralized mesh VPN with WireGuard support";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        ExecStart = lib.concatLists [
         [
+          "${pkgs.easytier-custom}/bin/easytier-core"
           "--network-name"
           "$NETWORK_NAME"
           "--network-secret"
@@ -59,13 +78,41 @@ in {
         (lib.concatMap (peer: ["-p" peer]) cfg.peers)
         (lib.concatMap (route: ["-n" route]) cfg.routes)
         cfg.extraArgs
-      ];
-      environment = {
-        TZ = "Asia/Shanghai";
+        ];
+        Restart = "always";
+        AmbientCapabilities = [
+          "CAP_NET_ADMIN"
+        ];
+        User = "appuser";
+        Group = "appuser";
+        EnvironmentFile = ["${cfg.authFile}"];
       };
-      environmentFiles = [
-        "${cfg.authFile}"
-      ];
-    };
+
+    # modules.services.podman.enable = true;
+    # virtualisation.oci-containers.containers."easytier" = {
+    #   autoStart = true;
+    #   image = "easytier/easytier:latest";
+    #   extraOptions = [
+    #     "--privileged"
+    #     "--network=host"
+    #   ];
+    #   cmd = lib.concatLists [
+    #     [
+    #       "--network-name"
+    #       "$NETWORK_NAME"
+    #       "--network-secret"
+    #       "$NETWORK_SECRET"
+    #     ]
+    #     (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+    #     (lib.concatMap (route: ["-n" route]) cfg.routes)
+    #     cfg.extraArgs
+    #   ];
+    #   environment = {
+    #     TZ = "Asia/Shanghai";
+    #   };
+    #   environmentFiles = [
+    #     "${cfg.authFile}"
+    #   ];
+    # };
   };
 }
