@@ -26,13 +26,13 @@
   };
   easytier-custom = {
     pname = "easytier-custom";
-    version = "v2.2.1";
+    version = "v2.1.2";
     src = fetchFromGitHub {
       owner = "EasyTier";
       repo = "EasyTier";
-      rev = "v2.2.1";
+      rev = "v2.1.2";
       fetchSubmodules = false;
-      sha256 = "sha256-xRZ7Pz9sK/YzYB9wH5yYKB9Jgd91ci3NSSy/85HYJMg=";
+      sha256 = "sha256-iY4HluL5TlYuKDBrz0fvLwJg/aX9lKiCyFs4V5WhQZs=";
     };
   };
   hass-sgcc = {
