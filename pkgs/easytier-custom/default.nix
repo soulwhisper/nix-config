@@ -1,14 +1,13 @@
 {
   pkgs,
   lib,
-  rustPlatform,
   ...
 }: let
   sourceData = pkgs.callPackage ../_sources/generated.nix {};
   vendorHash = lib.importJSON ../vendorhash.json;
   packageData = sourceData.easytier-custom;
 in
-  rustPlatform.buildRustPackage rec {
+  pkgs.unstable.rustPlatform.buildRustPackage rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     cargoHash = vendorHash.easytier-custom;
