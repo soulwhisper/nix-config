@@ -26,20 +26,40 @@ in {
       type = lib.types.listOf lib.types.str;
       default = [
         "-d"
-        "--enable-kcp-proxy"
+        "--enable-kcp-proxy"  # until pkgs.rustc=1.84, easytier=2.2.0+
         "--latency-first"
         "--multi-thread"
       ];
     };
   };
 
-  # creating tun device by systemd is impossible;
-
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [11010 11011 11012];
+    networking.firewall.allowedTCPPorts = [11010];
     networking.firewall.allowedUDPPorts = [11010 11011];
 
-    environment.systemPackages = [pkgs.unstable.easytier]; # this only for easytier-cli
+    environment.systemPackages = [pkgs.easytier-custom];
+
+    # binary package build on nix or not,
+    # cant create tun on nix itself, or manage tun on nix with pre-creation
+    # systemd.services.easytier = {
+    #   description = "Simple, decentralized mesh VPN with WireGuard support";
+    #   wantedBy = ["multi-user.target"];
+    #   after = ["network.target"];
+    #   serviceConfig = {
+    #     ExecStart = lib.concatStringsSep " " (builtins.concatLists [
+    #       [
+    #         "${pkgs.easytier-custom}/bin/easytier-core"
+    #         "--network-name $NETWORK_NAME"
+    #         "--network-secret $NETWORK_SECRET"
+    #       ]
+    #       (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+    #       (lib.concatMap (route: ["-n" route]) cfg.routes)
+    #       cfg.extraArgs
+    #     ]);
+    #     Restart = "always";
+    #     EnvironmentFile = ["${cfg.authFile}"];
+    #   };
+    # };
 
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."easytier" = {
