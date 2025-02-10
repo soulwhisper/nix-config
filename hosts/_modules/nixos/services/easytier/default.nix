@@ -49,7 +49,7 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
-        ExecStart = lib.concatStringsSep " " builtins.concatLists [
+        ExecStart = lib.concatStringsSep " " (builtins.concatLists [
           [
             "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name $NETWORK_NAME"
@@ -59,7 +59,7 @@ in {
           (lib.concatMap (peer: ["-p" peer]) cfg.peers)
           (lib.concatMap (route: ["-n" route]) cfg.routes)
           cfg.extraArgs
-        ];
+        ]);
         Restart = "always";
         AmbientCapabilities = [
           "CAP_NET_ADMIN"
