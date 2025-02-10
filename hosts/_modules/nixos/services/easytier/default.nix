@@ -49,7 +49,8 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
-        ExecStart = lib.concatStringsSep " "
+        ExecStart =
+          lib.concatStringsSep " "
           [
             "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name $NETWORK_NAME"
