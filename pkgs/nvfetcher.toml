@@ -3,7 +3,8 @@ fetch.github = "caddyserver/caddy"
 src.github = "caddyserver/caddy"
 [caddy-plugin-cloudflare]
 fetch.github = "caddy-dns/cloudflare"
-src.github = "caddy-dns/cloudflare"
+src.git = "https://github.com/caddy-dns/cloudflare.git"
+src.branch = "master"
 [easytier-custom]
 fetch.github = "EasyTier/EasyTier"
 src.github_tag = "EasyTier/EasyTier"
