@@ -1,25 +1,24 @@
-["caddy-core"]
-source = "github"
-github = "caddyserver/caddy"
-["caddy-plugin-cloudflare"]
-source = "github"
-github = "caddy-dns/cloudflare"
-["easytier-custom"]
-source = "github"
-github = "EasyTier/EasyTier"
-manual = "2.1.2"
-["hass-sgcc"]
-source = "github"
-github = "ARC-MX/sgcc_electricity_new"
-["kubecolor-catppuccin"]
-source = "github"
-github = "vkhitrin/kubecolor-catppuccin"
-["kubectl-pgo"]
-source = "github"
-github = "CrunchyData/postgres-operator-client"
-["talosctl"]
-source = "github"
-github = "siderolabs/talos"
-["talos-api"]
-source = "github"
-github = "siderolabs/discovery-service"
+[caddy-core]
+fetch.github = "caddyserver/caddy"
+src.github = "caddyserver/caddy"
+[caddy-plugin-cloudflare]
+fetch.github = "caddy-dns/cloudflare"
+src.github = "caddy-dns/cloudflare"
+[easytier-custom]
+fetch.github = "EasyTier/EasyTier"
+src.manual = "2.1.2"
+[hass-sgcc]
+fetch.github = "ARC-MX/sgcc_electricity_new"
+src.github = "ARC-MX/sgcc_electricity_new"
+[kubecolor-catppuccin]
+fetch.github = "vkhitrin/kubecolor-catppuccin"
+src.github = "vkhitrin/kubecolor-catppuccin"
+[kubectl-pgo]
+fetch.github = "CrunchyData/postgres-operator-client"
+src.github = "CrunchyData/postgres-operator-client"
+[talosctl]
+fetch.github = "siderolabs/talos"
+src.github = "siderolabs/talos"
+[talos-api]
+fetch.github = "siderolabs/discovery-service"
+src.github = "siderolabs/discovery-service"
