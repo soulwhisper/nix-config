@@ -1,25 +1,25 @@
-[caddy-core]
+["caddy-core"]
 source = "github"
 github = "caddyserver/caddy"
-[caddy-plugin-cloudflare]
+["caddy-plugin-cloudflare"]
 source = "github"
 github = "caddy-dns/cloudflare"
-[easytier-custom]
+["easytier-custom"]
 source = "github"
 github = "EasyTier/EasyTier"
 manual = "2.1.2"
-[hass-sgcc]
+["hass-sgcc"]
 source = "github"
 github = "ARC-MX/sgcc_electricity_new"
-[kubecolor-catppuccin]
+["kubecolor-catppuccin"]
 source = "github"
 github = "vkhitrin/kubecolor-catppuccin"
-[kubectl-pgo]
+["kubectl-pgo"]
 source = "github"
 github = "CrunchyData/postgres-operator-client"
-[talosctl]
+["talosctl"]
 source = "github"
 github = "siderolabs/talos"
-[talos-api]
+["talos-api"]
 source = "github"
 github = "siderolabs/discovery-service"
