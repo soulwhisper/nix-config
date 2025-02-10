@@ -13,7 +13,8 @@ fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
 [kubecolor-catppuccin]
 fetch.github = "vkhitrin/kubecolor-catppuccin"
-src.github = "vkhitrin/kubecolor-catppuccin"
+src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
+src.branch = "main"
 [kubectl-pgo]
 fetch.github = "CrunchyData/postgres-operator-client"
 src.github = "CrunchyData/postgres-operator-client"
