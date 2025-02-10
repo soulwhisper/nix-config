@@ -55,7 +55,7 @@ in {
             "--network-name $NETWORK_NAME"
             "--network-secret $NETWORK_SECRET"
             "--dev-name easytier0"
-          ];
+          ]
           (lib.concatMap (peer: ["-p" peer]) cfg.peers)
           (lib.concatMap (route: ["-n" route]) cfg.routes)
           cfg.extraArgs
