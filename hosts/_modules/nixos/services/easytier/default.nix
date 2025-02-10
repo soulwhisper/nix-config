@@ -26,7 +26,7 @@ in {
       type = lib.types.listOf lib.types.str;
       default = [
         "-d"
-        "--enable-kcp-proxy"
+        # "--enable-kcp-proxy"  # until pkgs.rustc=1.84, easytier=2.2.0+
         "--latency-first"
         "--multi-thread"
       ];

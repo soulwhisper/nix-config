@@ -7,7 +7,7 @@
   vendorHash = lib.importJSON ../vendorhash.json;
   packageData = sourceData.easytier-custom;
 in
-  pkgs.unstable.rustPlatform.buildRustPackage rec {
+  pkgs.rustPlatform.buildRustPackage rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     cargoHash = vendorHash.easytier-custom;
