@@ -41,6 +41,27 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
+    "easytier-custom": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "easytier-custom",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "EasyTier",
+            "repo": "EasyTier",
+            "rev": "v2.2.1",
+            "sha256": "sha256-xRZ7Pz9sK/YzYB9wH5yYKB9Jgd91ci3NSSy/85HYJMg=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v2.2.1"
+    },
     "hass-sgcc": {
         "cargoLocks": null,
         "date": null,

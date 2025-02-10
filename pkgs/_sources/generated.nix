@@ -24,6 +24,17 @@
     };
     date = "2024-07-03";
   };
+  easytier-custom = {
+    pname = "easytier-custom";
+    version = "v2.2.1";
+    src = fetchFromGitHub {
+      owner = "EasyTier";
+      repo = "EasyTier";
+      rev = "v2.2.1";
+      fetchSubmodules = false;
+      sha256 = "sha256-xRZ7Pz9sK/YzYB9wH5yYKB9Jgd91ci3NSSy/85HYJMg=";
+    };
+  };
   hass-sgcc = {
     pname = "hass-sgcc";
     version = "v1.6.4";
