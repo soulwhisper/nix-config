@@ -39,11 +39,6 @@ in {
 
     environment.systemPackages = [pkgs.easytier-custom];
 
-    networking.interfaces."easytier0" = {
-      virtual = true;
-      virtualType = "tun";
-    };
-
     systemd.services.easytier = {
       description = "Simple, decentralized mesh VPN with WireGuard support";
       wantedBy = ["multi-user.target"];
@@ -54,18 +49,12 @@ in {
             "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name $NETWORK_NAME"
             "--network-secret $NETWORK_SECRET"
-            "--dev-name easytier0"
           ]
           (lib.concatMap (peer: ["-p" peer]) cfg.peers)
           (lib.concatMap (route: ["-n" route]) cfg.routes)
           cfg.extraArgs
         ]);
         Restart = "always";
-        AmbientCapabilities = [
-          "CAP_NET_ADMIN"
-        ];
-        User = "appuser";
-        Group = "appuser";
         EnvironmentFile = ["${cfg.authFile}"];
       };
     };
