@@ -28,8 +28,6 @@ in {
       environment.HOME = "${cfg.dataDir}/matter";
       serviceConfig = {
         ExecStart = "${pkgs.python-matter-server}/bin/matter-server --port 5580 --vendorid 4939 --storage-path ${cfg.dataDir}/matter --log-level info";
-        TemporaryFileSystem = "/";
-        ReadOnlyPaths = "/nix/store /run/dbus";
         BindPaths = "${cfg.dataDir}/matter:/data";
         User = "appuser";
         Group = "appuser";
