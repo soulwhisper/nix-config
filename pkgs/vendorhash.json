@@ -3,6 +3,6 @@
   "kubectl-pgo": "sha256-PhTDqsFhPas2mcK7Ew2TQNqnvftk/+7wo2yFE9dnSUY=",
   "talosctl": "sha256-o/PYWR7KOWCVXUhzdPY0bxRhCROXzp/UAXgFkWpggC8=",
   "caddy-custom": "sha256-Z8jdMpa4BSR9zAblHM5SNDZkyw0RlEBzvK1thMtrZl8=",
-  "easytier-custom": "",
+  "easytier-custom": "sha256-W3DfWsRxfL94N21wEX2yhaU9YLPJqylsSt4ZSDnJgwc=",
   "hass-sgcc": ""
 }
