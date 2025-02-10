@@ -5,12 +5,10 @@ src.github = "caddyserver/caddy"
 fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
-[easytier-x86_64-linux]
-src.github = "EasyTier/EasyTier"
-fetch.url = "https://github.com/EasyTier/EasyTier/releases/download/$ver/easytier-linux-x86_64-$ver.zip"
-[easytier-aarch64-darwin]
-src.github = "EasyTier/EasyTier"
-fetch.url = "https://github.com/EasyTier/EasyTier/releases/download/$ver/easytier-macos-aarch64-$ver.zip"
+[easytier-custom]
+fetch.github = "EasyTier/EasyTier"
+src.github_tag = "EasyTier/EasyTier"
+src.include_regex = "v2\\.1\\..*"  # until rustc=v1.8.4
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
