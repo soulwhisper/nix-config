@@ -42,34 +42,6 @@ in {
     networking.interfaces."easytier0" = {
       virtual = true;
       virtualType = "tun";
-      ipv4 = {
-        addresses = [
-          {
-            address = "10.126.126.0";
-            prefixLength = 24;
-          }
-        ];
-        routes = [
-          {
-            address = "10.126.126.1";
-            prefixLength = 24;
-          }
-        ];
-      };
-      ipv6 = {
-        addresses = [
-          {
-            address = "fe80:72fb:b0d7:37a9::";
-            prefixLength = 64;
-          }
-        ];
-        routes = [
-          {
-            address = "fe80:72fb:b0d7:37a9::1";
-            prefixLength = 64;
-          }
-        ];
-      };
     };
 
     systemd.services.easytier = {
@@ -77,20 +49,16 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
-        ExecStart = lib.concatLists [
+        ExecStart = lib.concatStringsSep " "
           [
             "${pkgs.easytier-custom}/bin/easytier-core"
-            "--network-name"
-            "$NETWORK_NAME"
-            "--network-secret"
-            "$NETWORK_SECRET"
-            "--dev-name"
-            "easytier0"
-          ]
-          (lib.concatMap (peer: ["-p" peer]) cfg.peers)
-          (lib.concatMap (route: ["-n" route]) cfg.routes)
-          cfg.extraArgs
-        ];
+            "--network-name $NETWORK_NAME"
+            "--network-secret $NETWORK_SECRET"
+            "--dev-name easytier0"
+            (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+            (lib.concatMap (route: ["-n" route]) cfg.routes)
+            cfg.extraArgs
+          ];
         Restart = "always";
         AmbientCapabilities = [
           "CAP_NET_ADMIN"
