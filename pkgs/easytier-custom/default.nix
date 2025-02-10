@@ -2,9 +2,6 @@
   pkgs,
   lib,
   rustPlatform,
-  protobuf,
-  nix-update-script,
-  darwin,
   ...
 }: let
   sourceData = pkgs.callPackage ../_sources/generated.nix {};
@@ -16,15 +13,14 @@ in
     version = lib.strings.removePrefix "v" packageData.version;
     cargoHash = vendorHash.easytier-custom;
 
-    nativeBuildInputs = [protobuf];
+    nativeBuildInputs = [pkgs.protobuf];
 
-    buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [
-      darwin.apple_sdk.frameworks.Security
+    buildInputs = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      pkgs.darwin.apple_sdk.frameworks.Security
+      pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
     ];
 
     doCheck = false; # no tests
-
-    passthru.updateScript = nix-update-script {};
 
     meta = {
       homepage = "https://github.com/EasyTier/EasyTier";
