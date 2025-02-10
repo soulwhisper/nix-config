@@ -91,6 +91,7 @@ in {
         Group = "appuser";
         EnvironmentFile = ["${cfg.authFile}"];
       };
+    };
 
     # modules.services.podman.enable = true;
     # virtualisation.oci-containers.containers."easytier" = {
