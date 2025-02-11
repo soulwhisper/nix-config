@@ -51,9 +51,7 @@ in {
         ExecStart = "${pkgs.pkgs.pm2}/bin/pm2-runtime app.js";
         WorkingDirectory = "/etc/hass/sgcc";
         Restart = "always";
-        EnvironmentFile = {
-          "${cfg.sgcc.authFile}";
-        };
+        EnvironmentFile = "${cfg.sgcc.authFile}";
       };
     };
 
