@@ -46,7 +46,7 @@ in {
       serviceConfig = {
         ExecStartPre = "npm install mqtt pm2";
         ExecStart = "pm2-runtime app.js";
-        Path = [ pkgs.nodejs ];
+        Path = [pkgs.nodejs];
         WorkingDirectory = "/etc/hass/sgcc";
         Restart = "always";
         EnvironmentFile = "${cfg.sgcc.authFile}";
