@@ -39,17 +39,14 @@ in {
       "hass/sgcc/state-grid.js".mode = "0644";
     };
 
-    environment.systemPackages = [
-      pkgs.nodejs_20
-    ];
-
     systemd.services.hass-sgcc = {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       description = "Home-assistant SGCC powered by PM2";
       serviceConfig = {
-        ExecStartPre = "${pkgs.pkgs.nodejs_20}/bin/npm install mqtt --save";
-        ExecStart = "${pkgs.pkgs.pm2}/bin/pm2-runtime app.js";
+        ExecStartPre = "npm install mqtt pm2";
+        ExecStart = "pm2-runtime app.js";
+        Path = [ pkgs.nodejs ];
         WorkingDirectory = "/etc/hass/sgcc";
         Restart = "always";
         EnvironmentFile = "${cfg.sgcc.authFile}";
