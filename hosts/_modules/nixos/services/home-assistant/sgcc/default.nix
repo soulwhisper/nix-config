@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
+  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.home-assistant.sgcc = {
     authFile = lib.mkOption {
