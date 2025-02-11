@@ -1,3 +1,4 @@
+---
 - sensor:
   - device_class: monetary
     name: electricity_charge_balance_xxxx
