@@ -66,7 +66,7 @@ in {
         EMQX_DASHBOARD__DEFAULT_PASSWORD = "sEcr3T!";
       };
       volumes = [
-        "${cfg.dataDir}/mqtt:/opt/emqx"
+        "${cfg.dataDir}/mqtt:/opt/emqx/data"
       ];
     };
   };
