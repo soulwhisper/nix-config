@@ -23,7 +23,7 @@ in {
 
     services.caddy.virtualHosts."zot.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-       reverse_proxy localhost:9002
+        reverse_proxy localhost:9002
       }
     '';
 

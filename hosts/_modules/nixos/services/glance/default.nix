@@ -20,7 +20,7 @@ in {
 
     services.caddy.virtualHosts."lab.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-       reverse_proxy localhost:9802
+        reverse_proxy localhost:9802
       }
     '';
 

@@ -13,53 +13,64 @@ in {
     };
   };
 
-  # environment
-  # sops."hass.sgcc.auth": PHONE_NUMBER,PASSWORD,PUSHPLUS_TOKEN
-  # "/etc/hass/sgcc.env": HASS_TOKEN
-
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9202];
+
+    services.caddy.virtualHosts."mqtt.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+      handle {
+        reverse_proxy localhost:9202
+      }
+    '';
+
+    services.home-assistant.extraComponents = [
+      "mqtt"
+    ];
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir}/mqtt 0755 1000 1000 - -" # emqx user
+    ];
+
     environment.etc = {
-      "hass/sgcc.env".source = pkgs.writeTextFile {
-        name = "sgcc.env";
-        text = builtins.readFile ./.env;
-      };
-      "hass/sgcc.env".mode = "0644";
+      "hass/sgcc/app.js".source = ./app.js;
+      "hass/sgcc/app.js".mode = "0644";
+
+      "hass/sgcc/state-grid.js".source = ./state-grid.js;
+      "hass/sgcc/state-grid.js".mode = "0644";
     };
 
-    # SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/sgcc 0644 appuser appuser - -"
-      "f ${cfg.dataDir}/sgcc/sqlite.db 0644 appuser appuser - -"
+    environment.systemPackages = [
+      pkgs.nodejs_20
     ];
+
+    systemd.services.hass-sgcc = {
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      description = "Home-assistant SGCC powered by PM2";
+      serviceConfig = {
+        ExecStartPre = "${pkgs.pkgs.nodejs_20}/bin/npm install mqtt --save";
+        ExecStart = "${pkgs.pkgs.pm2}/bin/pm2-runtime app.js";
+        WorkingDirectory = "/etc/hass/sgcc";
+        Restart = "always";
+        EnvironmentFile = {
+          "${cfg.sgcc.authFile}"
+        };
+      };
+    };
 
     # systemctl status podman-hass-sgcc.service
     modules.services.podman.enable = true;
-    virtualisation.oci-containers.containers."hass-sgcc" = {
+    virtualisation.oci-containers.containers."hass-mqtt" = {
       autoStart = true;
-      image = "arcw/sgcc_electricity:latest";
-      cmd = ["python3" "main.py"];
-      # user = "1001:1001"; # container not support
+      image = "emqx/emqx:5.8.4";
+      ports = [
+        "1883:1883/tcp"
+        "9202:18083/tcp"
+      ];
       environment = {
-        SET_CONTAINER_TIMEZONE = "true";
-        CONTAINER_TIMEZONE = "Asia/Shanghai";
-        JOB_START_TIME = "05:00";
-        DRIVER_IMPLICITY_WAIT_TIME = "60";
-        RETRY_TIMES_LIMIT = "5";
-        LOGIN_EXPECTED_TIME = "60";
-        RETRY_WAIT_TIME_OFFSET_UNIT = "10";
-        DATA_RETENTION_DAYS = "7";
-        ENABLE_DATABASE_STORAGE = "true";
-        DB_NAME = "sqlite.db";
-        BALANCE = "100.0";
-        HASS_URL = "host.containers.internal:8123/";
-        RECHARGE_NOTIFY = "false"; # until tested
+        EMQX_DASHBOARD__DEFAULT_PASSWORD = "sEcr3T!";
       };
       volumes = [
-        "${cfg.dataDir}/sgcc/sqlite.db:/app/sqlite.db"
-      ];
-      environmentFiles = [
-        "${cfg.sgcc.authFile}"
-        "/etc/hass/sgcc.env"
+        "${cfg.dataDir}/mqtt:/opt/emqx"
       ];
     };
   };

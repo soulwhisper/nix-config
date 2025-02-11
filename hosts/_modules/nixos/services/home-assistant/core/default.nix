@@ -25,12 +25,11 @@ in {
         "ffmpeg"
         "homekit"
         "homekit_controller"
-        "matter"
         "met"
-        "openweathermap"
       ];
       extraPackages = python3Packages:
         with python3Packages; [
+          gtts
           isal
           pyatv
           zlib-ng

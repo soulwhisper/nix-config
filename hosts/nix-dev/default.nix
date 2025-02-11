@@ -15,9 +15,9 @@ in {
   config = {
     networking = {
       hostName = hostname;
-      useDHCP = true;
       firewall.enable = true;
       nftables.enable = true;
+      useDHCP = true;
     };
 
     users.users.soulwhisper = {

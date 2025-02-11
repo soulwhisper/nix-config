@@ -25,10 +25,10 @@ in {
     services.caddy.virtualHosts."s3.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       redir /console /console/
       handle_path /console/* {
-       reverse_proxy localhost:9001
+        reverse_proxy localhost:9001
       }
       handle {
-       reverse_proxy localhost:9000
+        reverse_proxy localhost:9000
       }
     '';
 

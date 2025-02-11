@@ -56,7 +56,8 @@ zrepl-metrics: 9103
 ## system, 9200-9299
 adguard-ui: 9200
 ddns-ui: 9201
-syncthing-ui: 9202
+mqtt-ui: 9202
+syncthing-ui: 9203
 
 ## k8s, 9300-9399
 talos-api: 9300
