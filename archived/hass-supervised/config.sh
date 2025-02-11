@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEFAULT_DIR="/opt/apps/hass"
+
 # Function to check if the script is run as root
 check_root() {
     if [[ "$EUID" -ne 0 ]]; then
@@ -90,7 +92,6 @@ configure_restic() {
     echo "Configuring restic for Cloudflare R2..."
 
     # Create default sync directory
-    DEFAULT_DIR="/opt/apps/hass"
     mkdir -p "$DEFAULT_DIR"
 
     # Initialize restic repository on Cloudflare R2 if not already configured
