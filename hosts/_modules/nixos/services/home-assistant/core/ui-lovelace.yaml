@@ -1,0 +1,150 @@
+---
+views:
+- cards: []
+  max_columns: 2
+  path: home
+  sections:
+  - cards:
+    - entity: weather.forecast_wo_de_jia
+      forecast_type: daily
+      show_current: true
+      show_forecast: true
+      type: weather-forecast
+    - content: '- 标题开关仅控制开关，不含窗帘'
+      type: markdown
+    - cards:
+      - entities:
+        - entity: cover.curtain
+        - entity: switch.wall_switch_switch1_2
+        - entity: switch.wall_switch_switch2
+        - entity: switch.wall_switch_switch3
+        - entity: switch.wall_switch_switch2_2
+        - entity: switch.wall_switch_2
+        - entity: switch.wall_switch
+        show_header_toggle: true
+        title: 客厅
+        type: entities
+      columns: 1
+      square: false
+      type: grid
+    - entities:
+      - switch.wall_switch_switch1_3
+      - switch.wall_switch_switch2_3
+      show_header_toggle: true
+      title: 厨房
+      type: entities
+    type: grid
+  - cards:
+    - entities:
+      - aggregate_func: first
+        entity: sensor.last_electricity_usage
+        name: 国网七天用电曲线
+        show_points: true
+        show_state: true
+      group_by: date
+      hour24: true
+      hours_to_show: 240
+      type: custom:mini-graph-card
+    - double_tap_action:
+        action: none
+      entity: sensor.month_electricity_charge
+      fill_container: false
+      hold_action:
+        action: none
+      icon: mdi:home
+      icon_type: icon
+      layout_options:
+        grid_columns: 4
+        grid_rows: 1
+      name: 上月国网电费
+      tap_action:
+        action: none
+      type: custom:mushroom-entity-card
+    - double_tap_action:
+        action: none
+      entity: sensor.yearly_electricity_charge
+      fill_container: true
+      hold_action:
+        action: none
+      icon: mdi:currency-cny
+      layout_options:
+        grid_columns: 2
+        grid_rows: 1
+      name: 今年国网总电费
+      tap_action:
+        action: none
+      type: custom:mushroom-entity-card
+    - double_tap_action:
+        action: none
+      entity: sensor.yearly_electricity_usage
+      hold_action:
+        action: none
+      icon: mdi:lightning-bolt
+      name: 今年国网总电量
+      tap_action:
+        action: none
+      type: custom:mushroom-entity-card
+    - entity: climate.211106241676463_climate
+      features:
+      - type: climate-hvac-modes
+      layout_options:
+        grid_columns: 4
+        grid_rows: 1
+      type: tile
+    - entities:
+      - switch.wall_switch_switch2_4
+      - switch.wall_switch_switch3_2
+      - switch.wall_switch_switch1_4
+      show_header_toggle: true
+      title: 书房
+      type: entities
+    - entities:
+      - cover.curtain_2
+      - switch.wall_switch_switch1_5
+      - switch.wall_switch_switch2_5
+      show_header_toggle: true
+      title: 卧室
+      type: entities
+    type: grid
+  title: Home
+  type: sections
+- cards:
+  - cards:
+    - entities:
+      - entity: cover.curtain
+      - entity: switch.wall_switch_switch1_2
+      - entity: switch.wall_switch_switch2
+      - entity: switch.wall_switch_switch3
+      - entity: switch.wall_switch_switch2_2
+      - entity: switch.wall_switch_2
+      - entity: switch.wall_switch
+      title: 客厅
+      type: entities
+    columns: 1
+    square: false
+    type: grid
+  - entities:
+    - switch.wall_switch_switch1_3
+    - switch.wall_switch_switch2_3
+    title: 厨房
+    type: entities
+  - entities:
+    - cover.curtain_2
+    - switch.wall_switch_switch1_5
+    - switch.wall_switch_switch2_5
+    title: 卧室
+    type: entities
+  - entities:
+    - switch.wall_switch_switch2_4
+    - switch.wall_switch_switch3_2
+    - switch.wall_switch_switch1_4
+    title: 书房
+    type: entities
+  - entity: weather.forecast_wo_de_jia
+    forecast_type: daily
+    show_current: true
+    show_forecast: true
+    type: weather-forecast
+  path: default_view
+  title: Default
+  visible: []
