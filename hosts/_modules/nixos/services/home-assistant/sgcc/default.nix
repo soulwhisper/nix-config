@@ -52,7 +52,7 @@ in {
         WorkingDirectory = "/etc/hass/sgcc";
         Restart = "always";
         EnvironmentFile = {
-          "${cfg.sgcc.authFile}"
+          "${cfg.sgcc.authFile}";
         };
       };
     };
