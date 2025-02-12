@@ -40,10 +40,11 @@ in {
     environment.systemPackages = [pkgs.easytier-custom];
 
     # boot.kernelModules = ["tun"];
-    # networking.interfaces."easytier0" = {
-    #   virtual = true;
-    #   virtualType = "tun";
-    # };
+    networking.interfaces."easytier0" = {
+      mtu = 1360;
+      virtual = true;
+      virtualType = "tun";
+    };
 
     systemd.services.easytier = {
       description = "Simple, decentralized mesh VPN with WireGuard support";
