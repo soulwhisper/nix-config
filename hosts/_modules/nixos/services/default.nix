@@ -17,6 +17,7 @@
     ./restic
     ./samba
     ./smartd
+    ./tailscale
     ./talos-api
     ./unifi-controller
     ./zotregistry

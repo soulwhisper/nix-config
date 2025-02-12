@@ -76,6 +76,12 @@ in {
           routes = [];
         };
 
+        tailscale = {
+          enable = true;
+          authFile = config.sops.secrets."networking/tailscale/auth".path;
+          routes = [];
+        };
+
         ## System ##
         adguard.enable = true;
         smartd.enable = true;
