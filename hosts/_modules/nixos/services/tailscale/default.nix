@@ -19,10 +19,12 @@ in {
     };
   };
 
-  # need manually restart if not activated at least once
+  # run `systemctl restart tailscaled-set.service` after rebuild
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    networking.firewall.trustedInterfaces = ["tailscale0"];
+
+    systemd.services.tailscaled-set.after = lib.mkForce ["tailscaled.service" "tailscaled-autoconnect.service"];
 
     services.tailscale = {
       enable = true;

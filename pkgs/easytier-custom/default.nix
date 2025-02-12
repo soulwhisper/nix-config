@@ -7,6 +7,7 @@
   vendorHash = lib.importJSON ../vendorhash.json;
   packageData = sourceData.easytier-custom;
 in
+  # use latest rust to build this app
   pkgs.unstable.rustPlatform.buildRustPackage rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
