@@ -40,7 +40,6 @@ in {
     environment.systemPackages = [pkgs.easytier-custom];
 
     # boot.kernelModules = ["tun"];
-    systemd.network.enable = true;
     # networking.interfaces."easytier0" = {
     #   virtual = true;
     #   virtualType = "tun";
