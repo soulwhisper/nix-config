@@ -43,6 +43,7 @@ in {
     networking.interfaces."easytier0" = {
       mtu = 1360;
       virtual = true;
+      virtualOwner = "appuser";
       virtualType = "tun";
     };
 
