@@ -61,22 +61,16 @@ in {
           (lib.concatMap (route: ["-n" route]) cfg.routes)
           cfg.extraArgs
         ]);
+        Path = [pkgs.iproute2];
         Restart = "always";
         EnvironmentFile = ["${cfg.authFile}"];
-        DevicePolicy = "closed";
-        DeviceAllow = ["/dev/net/tun"];
+        DeviceAllow = ["/dev/net/tun rw"];
         ReadWritePaths = ["/dev/net"];
-        PrivateDevices = false;
-        PrivateUsers = false;
-        NoNewPrivileges = true;
         CapabilityBoundingSet = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
         AmbientCapabilities = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
         RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
-        SystemCallArchitectures = "native";
-        SystemCallFilter = ["@system-service" "~@resources" "~@privileged"];
         User = "appuser";
         Group = "appuser";
-        UMask = "0077";
       };
     };
 
