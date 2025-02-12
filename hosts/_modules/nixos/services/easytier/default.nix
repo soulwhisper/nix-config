@@ -45,7 +45,10 @@ in {
       virtualType = "tun";
       ipv4 = {
         addresses = [
-          { address = "10.126.126.1"; prefixLength = 24; }
+          {
+            address = "10.126.126.1";
+            prefixLength = 24;
+          }
         ];
       };
     };
