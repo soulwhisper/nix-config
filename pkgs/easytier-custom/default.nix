@@ -14,7 +14,10 @@ in
     cargoHash = vendorHash.easytier-custom;
     useFetchCargoVendor = true;
 
-    nativeBuildInputs = [pkgs.protobuf];
+    nativeBuildInputs = with pkgs; [
+      protobuf
+      rustPlatform.bindgenHook
+    ];
 
     buildInputs = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       pkgs.darwin.apple_sdk.frameworks.Security
