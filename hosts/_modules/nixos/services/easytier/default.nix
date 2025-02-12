@@ -40,19 +40,16 @@ in {
     environment.systemPackages = [pkgs.easytier-custom];
 
     # boot.kernelModules = ["tun"];
-    networking.interfaces."easytier0" = {
-      mtu = 1360;
-      virtual = true;
-      virtualOwner = "appuser";
-      virtualType = "tun";
-    };
+    # networking.interfaces."easytier0" = {
+    #   virtual = true;
+    #   virtualType = "tun";
+    # };
 
     systemd.services.easytier = {
       description = "Simple, decentralized mesh VPN with WireGuard support";
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
-      serviceConfig = {
-        ExecStart = lib.concatStringsSep " " (builtins.concatLists [
+      script = lib.concatStringsSep " " (builtins.concatLists [
           [
             "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name $NETWORK_NAME"
@@ -62,14 +59,13 @@ in {
           (lib.concatMap (peer: ["-p" peer]) cfg.peers)
           (lib.concatMap (route: ["-n" route]) cfg.routes)
           cfg.extraArgs
-        ]);
-        Path = [pkgs.iproute2];
+      ]);
+      serviceConfig = {
         Restart = "always";
         EnvironmentFile = ["${cfg.authFile}"];
-        DeviceAllow = ["/dev/net/tun rw"];
-        ReadWritePaths = ["/dev/net"];
-        CapabilityBoundingSet = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
-        AmbientCapabilities = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
+        DeviceAllow = ["/dev/net/tun rwm"];
+        CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+        AmbientCapabilities = ["CAP_NET_ADMIN"];
         RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
         User = "appuser";
         Group = "appuser";
