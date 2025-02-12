@@ -22,9 +22,12 @@ in {
   # need manually restart if not activated at least once
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
     services.tailscale = {
       enable = true;
       package = pkgs.unstable.tailscale;
+      interfaceName = "tailscale0";
       openFirewall = true;
       useRoutingFeatures = "both";
       extraSetFlags = [
