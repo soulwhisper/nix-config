@@ -24,7 +24,7 @@ in {
 
     services.caddy.virtualHosts."sync.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-       reverse_proxy localhost:9202
+        reverse_proxy localhost:9203
       }
     '';
 
@@ -34,7 +34,7 @@ in {
       openDefaultPorts = true;
       overrideFolders = true;
       overrideDevices = false; # allow add devices by gui
-      guiAddress = "127.0.0.1:9202";
+      guiAddress = "127.0.0.1:9203";
       settings = {
         options = {
           globalAnnounceEnabled = false; # only sync locally or over vpn

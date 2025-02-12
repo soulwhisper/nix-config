@@ -39,8 +39,9 @@ in {
 
     environment.systemPackages = [pkgs.easytier-custom];
 
-    # binary package build on nix or not,
-    # cant create tun on nix itself, or manage tun on nix with pre-creation
+    # based on tun permissions missing for easytier services, and wireguard-alike configs,
+    # use privileged container is a cleaner way
+
     # systemd.services.easytier = {
     #   description = "Simple, decentralized mesh VPN with WireGuard support";
     #   wantedBy = ["multi-user.target"];
@@ -58,6 +59,12 @@ in {
     #     ]);
     #     Restart = "always";
     #     EnvironmentFile = ["${cfg.authFile}"];
+    #     DeviceAllow = ["/dev/net/tun rwm"];
+    #     CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+    #     AmbientCapabilities = ["CAP_NET_ADMIN"];
+    #     RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
+    #     User = "appuser";
+    #     Group = "appuser";
     #   };
     # };
 
@@ -72,7 +79,7 @@ in {
       cmd = lib.concatLists [
         [
           "--network-name"
-          "$NETWORK_NAME"
+        "$NETWORK_NAME"
           "--network-secret"
           "$NETWORK_SECRET"
         ]
