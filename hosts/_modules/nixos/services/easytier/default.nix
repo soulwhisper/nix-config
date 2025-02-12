@@ -39,11 +39,12 @@ in {
 
     environment.systemPackages = [pkgs.easytier-custom];
 
-    boot.kernelModules = ["tun"];
-    networking.interfaces."easytier0" = {
-      virtual = true;
-      virtualType = "tun";
-    };
+    # boot.kernelModules = ["tun"];
+    systemd.network.enable = true;
+    # networking.interfaces."easytier0" = {
+    #   virtual = true;
+    #   virtualType = "tun";
+    # };
 
     systemd.services.easytier = {
       description = "Simple, decentralized mesh VPN with WireGuard support";
@@ -55,7 +56,7 @@ in {
             "${pkgs.easytier-custom}/bin/easytier-core"
             "--network-name $NETWORK_NAME"
             "--network-secret $NETWORK_SECRET"
-            "--dev-name easytier0"
+          #  "--dev-name easytier0"
           ]
           (lib.concatMap (peer: ["-p" peer]) cfg.peers)
           (lib.concatMap (route: ["-n" route]) cfg.routes)
