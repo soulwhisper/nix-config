@@ -50,15 +50,15 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       script = lib.concatStringsSep " " (builtins.concatLists [
-          [
-            "${pkgs.easytier-custom}/bin/easytier-core"
-            "--network-name $NETWORK_NAME"
-            "--network-secret $NETWORK_SECRET"
+        [
+          "${pkgs.easytier-custom}/bin/easytier-core"
+          "--network-name $NETWORK_NAME"
+          "--network-secret $NETWORK_SECRET"
           #  "--dev-name easytier0"
-          ]
-          (lib.concatMap (peer: ["-p" peer]) cfg.peers)
-          (lib.concatMap (route: ["-n" route]) cfg.routes)
-          cfg.extraArgs
+        ]
+        (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+        (lib.concatMap (route: ["-n" route]) cfg.routes)
+        cfg.extraArgs
       ]);
       serviceConfig = {
         Restart = "always";
