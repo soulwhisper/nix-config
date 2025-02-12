@@ -4,10 +4,15 @@
   config,
   ...
 }: let
-  cfg = config.modules.services.vpn.tailscale;
+  cfg = config.modules.services.tailscale;
+  routeString = lib.strings.concatStringsSep "," cfg.routes;
 in {
-  options.modules.services.vpn.tailscale = {
+  options.modules.services.tailscale = {
     enable = lib.mkEnableOption "tailscale";
+    routes = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+    };
     authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -19,11 +24,11 @@ in {
   config = lib.mkIf cfg.enable {
     services.tailscale = {
       enable = true;
+      package = pkgs.unstable.tailscale;
       openFirewall = true;
       useRoutingFeatures = "both";
-      interfaceName = "tailscale0";
       extraSetFlags = [
-        "--advertise-routes=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+        "--advertise-routes=${routeString}"
         "--accept-routes"
       ];
       authKeyFile = "${cfg.authFile}";
