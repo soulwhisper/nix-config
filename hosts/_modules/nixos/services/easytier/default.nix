@@ -43,69 +43,62 @@ in {
     networking.interfaces."easytier0" = {
       virtual = true;
       virtualType = "tun";
-      ipv4 = {
-        addresses = [
-          { address = "10.126.126.1"; prefixLength = 24; }
-        ];
+    };
+
+    systemd.services.easytier = {
+      description = "Simple, decentralized mesh VPN with WireGuard support";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      serviceConfig = {
+        ExecStart = lib.concatStringsSep " " (builtins.concatLists [
+          [
+            "${pkgs.easytier-custom}/bin/easytier-core"
+            "--network-name $NETWORK_NAME"
+            "--network-secret $NETWORK_SECRET"
+            "--dev-name easytier0"
+          ]
+          (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+          (lib.concatMap (route: ["-n" route]) cfg.routes)
+          cfg.extraArgs
+        ]);
+        Restart = "always";
+        EnvironmentFile = ["${cfg.authFile}"];
+        DeviceAllow = "/dev/net/tun rw";
+        PrivateDevices = false;
+        PrivateUsers = false;
+        CapabilityBoundingSet = "CAP_NET_ADMIN";
+        AmbientCapabilities = "CAP_NET_ADMIN";
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
+        User = "appuser";
+        Group = "appuser";
       };
     };
 
-    # binary package build on nix or not,
-    # cant create tun on nix itself, or manage tun on nix with pre-creation
-    # systemd.services.easytier = {
-    #   description = "Simple, decentralized mesh VPN with WireGuard support";
-    #   wantedBy = ["multi-user.target"];
-    #   after = ["network.target"];
-    #   serviceConfig = {
-    #     ExecStart = lib.concatStringsSep " " (builtins.concatLists [
-    #       [
-    #         "${pkgs.easytier-custom}/bin/easytier-core"
-    #         "--network-name $NETWORK_NAME"
-    #         "--network-secret $NETWORK_SECRET"
-    #         "--dev-name easytier0"
-    #       ]
-    #       (lib.concatMap (peer: ["-p" peer]) cfg.peers)
-    #       (lib.concatMap (route: ["-n" route]) cfg.routes)
-    #       cfg.extraArgs
-    #     ]);
-    #     Restart = "always";
-    #     EnvironmentFile = ["${cfg.authFile}"];
-    #     DeviceAllow = "/dev/net/tun rw";
-    #     PrivateDevices = false;
-    #     PrivateUsers = false;
-    #     CapabilityBoundingSet = "CAP_NET_ADMIN";
-    #     AmbientCapabilities = "CAP_NET_ADMIN";
-    #     RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
-    #     User = "appuser";
-    #     Group = "appuser";
+    # modules.services.podman.enable = true;
+    # virtualisation.oci-containers.containers."easytier" = {
+    #   autoStart = true;
+    #   image = "easytier/easytier:latest";
+    #   extraOptions = [
+    #     "--privileged"
+    #     "--network=host"
+    #   ];
+    #   cmd = lib.concatLists [
+    #     [
+    #       "--network-name"
+    #       "$NETWORK_NAME"
+    #       "--network-secret"
+    #       "$NETWORK_SECRET"
+    #     ]
+    #     (lib.concatMap (peer: ["-p" peer]) cfg.peers)
+    #     (lib.concatMap (route: ["-n" route]) cfg.routes)
+    #     cfg.extraArgs
+    #   ];
+    #   environment = {
+    #     TZ = "Asia/Shanghai";
     #   };
+    #   environmentFiles = [
+    #     "${cfg.authFile}"
+    #   ];
     # };
-
-    modules.services.podman.enable = true;
-    virtualisation.oci-containers.containers."easytier" = {
-      autoStart = true;
-      image = "easytier/easytier:latest";
-      extraOptions = [
-        "--privileged"
-        "--network=host"
-      ];
-      cmd = lib.concatLists [
-        [
-          "--network-name"
-          "$NETWORK_NAME"
-          "--network-secret"
-          "$NETWORK_SECRET"
-        ]
-        (lib.concatMap (peer: ["-p" peer]) cfg.peers)
-        (lib.concatMap (route: ["-n" route]) cfg.routes)
-        cfg.extraArgs
-      ];
-      environment = {
-        TZ = "Asia/Shanghai";
-      };
-      environmentFiles = [
-        "${cfg.authFile}"
-      ];
-    };
   };
 }
