@@ -22,7 +22,7 @@ in {
   # need manually restart if not activated at least once
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    networking.firewall.trustedInterfaces = ["tailscale0"];
 
     services.tailscale = {
       enable = true;
