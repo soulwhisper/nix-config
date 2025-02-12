@@ -63,14 +63,20 @@ in {
         ]);
         Restart = "always";
         EnvironmentFile = ["${cfg.authFile}"];
-        DeviceAllow = "/dev/net/tun rw";
+        DevicePolicy = "closed";
+        DeviceAllow = ["/dev/net/tun"];
+        ReadWritePaths = ["/dev/net"];
         PrivateDevices = false;
         PrivateUsers = false;
-        CapabilityBoundingSet = "CAP_NET_ADMIN";
-        AmbientCapabilities = "CAP_NET_ADMIN";
-        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
+        NoNewPrivileges = true;
+        CapabilityBoundingSet = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
+        AmbientCapabilities = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
+        RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
+        SystemCallArchitectures = "native";
+        SystemCallFilter = ["@system-service" "~@resources" "~@privileged"];
         User = "appuser";
         Group = "appuser";
+        UMask = "0077";
       };
     };
 
