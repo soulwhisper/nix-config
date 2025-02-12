@@ -29,6 +29,7 @@
         };
         "networking/dae/subscription" = {};
         "networking/easytier/auth" = {};
+        "networking/tailscale/auth" = {};
         "users/soulwhisper/password" = {
           neededForUsers = true;
         };
