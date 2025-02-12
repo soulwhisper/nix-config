@@ -79,7 +79,7 @@ in {
       cmd = lib.concatLists [
         [
           "--network-name"
-        "$NETWORK_NAME"
+          "$NETWORK_NAME"
           "--network-secret"
           "$NETWORK_SECRET"
         ]
