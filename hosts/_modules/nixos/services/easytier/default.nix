@@ -31,6 +31,8 @@ in {
         "--enable-kcp-proxy"
         "--latency-first"
         "--multi-thread"
+        "--relay-all-peer-rpc"
+        "--relay-network-whitelist"
       ];
     };
   };
