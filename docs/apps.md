@@ -16,9 +16,10 @@
 
 ### Easytier
 
-- check "easytier.md"
-- homebrew cask easytier-gui is broken, download easytier-cli from github manually.
 - servers use userspace-networking(no-tun), clients use gui.
+- with systemd-service, dont need config.toml anymore;
+- homebrew cask easytier-gui is broken, download easytier-cli from github manually.
+- OPNSense: firewall/nat/port-forward, Interface=WAN, Protocol=TCP/UDP, Dest=WAN net, Port=11010, Redirect={Server}, Port=11010; client use `-p tcp://{domain}:11010`;
 - alternatives: tailscale(>=2000ms).
 
 ### Irrelevant dataDir

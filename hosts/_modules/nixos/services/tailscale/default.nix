@@ -32,9 +32,10 @@ in {
       interfaceName = "tailscale0";
       openFirewall = true;
       useRoutingFeatures = "both";
-      extraSetFlags = 
+      extraSetFlags =
         [
           "--accept-routes"
+          "--accept-dns=false"
         ]
         ++ (lib.optional (cfg.routes != []) "--advertise-routes=${routeString}");
       authKeyFile = "${cfg.authFile}";

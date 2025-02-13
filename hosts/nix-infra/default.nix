@@ -17,7 +17,7 @@ in {
       hostName = hostname;
       firewall.enable = false;
       nftables.enable = true;
-      nameservers = ["127.0.0.1"]; # use adguard
+      nameservers = lib.mkForce ["127.0.0.1"]; # use adguard
       useDHCP = true;
     };
 

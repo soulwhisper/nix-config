@@ -31,12 +31,15 @@ in {
         "--enable-kcp-proxy"
         "--latency-first"
         "--multi-thread"
+        "--relay-all-peer-rpc"
+        "--relay-network-whitelist"
       ];
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # use userspace networking instead of tun, like tailscale, with socks5:1081
+    # use userspace networking instead of tun, like tailscale, with socks5:1081;
+    # with opnsense nat passthrough, direct connect is faster than public peers.
 
     networking.firewall.allowedTCPPorts = [11010];
     networking.firewall.allowedUDPPorts = [11010 11011];
@@ -60,40 +63,7 @@ in {
         ]);
         Restart = "always";
         EnvironmentFile = ["${cfg.authFile}"];
-    #     DeviceAllow = ["/dev/net/tun rwm"];
-    #     CapabilityBoundingSet = ["CAP_NET_ADMIN"];
-    #     AmbientCapabilities = ["CAP_NET_ADMIN"];
-    #     RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
-    #     User = "appuser";
-    #     Group = "appuser";
       };
     };
-
-    # modules.services.podman.enable = true;
-    # virtualisation.oci-containers.containers."easytier" = {
-    #   autoStart = true;
-    #   image = "easytier/easytier:latest";
-    #   extraOptions = [
-    #     "--privileged"
-    #     "--network=host"
-    #   ];
-    #   cmd = lib.concatLists [
-    #     [
-    #       "--network-name"
-    #       "$NETWORK_NAME"
-    #       "--network-secret"
-    #       "$NETWORK_SECRET"
-    #     ]
-    #     (lib.concatMap (peer: ["-p" peer]) cfg.peers)
-    #     (lib.concatMap (route: ["-n" route]) cfg.routes)
-    #     cfg.extraArgs
-    #   ];
-    #   environment = {
-    #     TZ = "Asia/Shanghai";
-    #   };
-    #   environmentFiles = [
-    #     "${cfg.authFile}"
-    #   ];
-    # };
   };
 }
