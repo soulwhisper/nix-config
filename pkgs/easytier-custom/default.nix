@@ -7,13 +7,17 @@
   vendorHash = lib.importJSON ../vendorhash.json;
   packageData = sourceData.easytier-custom;
 in
-  pkgs.rustPlatform.buildRustPackage rec {
+  # use latest rust to build this app
+  pkgs.unstable.rustPlatform.buildRustPackage rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     cargoHash = vendorHash.easytier-custom;
     useFetchCargoVendor = true;
 
-    nativeBuildInputs = [pkgs.protobuf];
+    nativeBuildInputs = with pkgs; [
+      protobuf
+      rustPlatform.bindgenHook
+    ];
 
     buildInputs = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       pkgs.darwin.apple_sdk.frameworks.Security

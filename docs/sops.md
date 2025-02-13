@@ -39,6 +39,8 @@ networking:
         auth: |
             NETWORK_NAME={easytier-netwrok-name}
             NETWROK_SECRET={easytier-network-secret}
+    tailscale:
+        auth: {tskey-xxxx}
 storage:
     minio:
         root-credentials: |

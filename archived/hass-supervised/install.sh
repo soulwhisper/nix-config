@@ -102,8 +102,11 @@ install_docker() {
 # Function to install Home Assistant Supervised
 install_home_assistant_supervised() {
     echo "Installing Home Assistant Supervised to /opt/apps/hass ..."
+    wget -O os-agent.deb https://github.com/home-assistant/os-agent/releases/latest/download/os-agent_1.6.0_linux_x86_64.deb
     wget -O homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
     mkdir -p /opt/apps/hass
+    dpkg -i os-agent.deb
+    apt-get install -y libevent-core-2.1-7 libnfsidmap1 nfs-common rpcbind
     DATA_SHARE=/opt/apps/hass dpkg --force-confdef --force-confold -i homeassistant-supervised.deb
     echo "Home Assistant Supervised installation completed."
 }

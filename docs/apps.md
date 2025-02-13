@@ -18,7 +18,8 @@
 
 - check "easytier.md"
 - homebrew cask easytier-gui is broken, download easytier-cli from github manually.
-- conflict with firewall and auto-proxy tools.
+- servers use userspace-networking(no-tun), clients use gui.
+- alternatives: tailscale(>=2000ms).
 
 ### Irrelevant dataDir
 

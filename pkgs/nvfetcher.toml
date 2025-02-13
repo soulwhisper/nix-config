@@ -8,7 +8,6 @@ src.branch = "master"
 [easytier-custom]
 fetch.github = "EasyTier/EasyTier"
 src.github_tag = "EasyTier/EasyTier"
-src.include_regex = "v2\\.1\\..*"  # until rustc=v1.8.4
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
