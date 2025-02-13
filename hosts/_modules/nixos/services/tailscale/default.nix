@@ -32,7 +32,7 @@ in {
       interfaceName = "tailscale0";
       openFirewall = true;
       useRoutingFeatures = "both";
-      extraSetFlags = 
+      extraSetFlags =
         [
           "--accept-routes"
         ]
