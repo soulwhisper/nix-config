@@ -62,12 +62,12 @@ in {
         ]);
         Restart = "always";
         EnvironmentFile = ["${cfg.authFile}"];
-    #     DeviceAllow = ["/dev/net/tun rwm"];
-    #     CapabilityBoundingSet = ["CAP_NET_ADMIN"];
-    #     AmbientCapabilities = ["CAP_NET_ADMIN"];
-    #     RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
-    #     User = "appuser";
-    #     Group = "appuser";
+        #     DeviceAllow = ["/dev/net/tun rwm"];
+        #     CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+        #     AmbientCapabilities = ["CAP_NET_ADMIN"];
+        #     RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_NETLINK"];
+        #     User = "appuser";
+        #     Group = "appuser";
       };
     };
 
