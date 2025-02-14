@@ -1,6 +1,6 @@
 global {
 	wan_interface: auto
-
+	# lan_interface: enp6s19 # remove comment if use as tproxy
 	log_level: info
 	dial_mode: domain
 	auto_config_kernel_parameter: true
