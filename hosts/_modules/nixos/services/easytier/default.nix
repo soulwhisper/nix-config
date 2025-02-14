@@ -62,6 +62,9 @@ in {
           cfg.extraArgs
         ]);
         Restart = "always";
+        RestartMaxDelaySec = "10";
+        RestartSec = "1";
+        RestartSteps = "3";
         EnvironmentFile = ["${cfg.authFile}"];
       };
     };
