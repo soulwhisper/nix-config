@@ -27,12 +27,14 @@
     # testing apps list
     homebrew = {
       taps = [
+        "brewforge/chinese"
       ];
       brews = [
         "derailed/popeye/popeye" # k8s live cluster linter
       ];
       casks = [
         "discord"
+        "easytier"
         "orbstack"
         "slack"
         "tableplus"
