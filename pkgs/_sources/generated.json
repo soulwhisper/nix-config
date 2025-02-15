@@ -22,7 +22,7 @@
     },
     "caddy-plugin-cloudflare": {
         "cargoLocks": null,
-        "date": "2024-07-03",
+        "date": "2025-02-14",
         "extract": null,
         "name": "caddy-plugin-cloudflare",
         "passthru": null,
@@ -34,12 +34,12 @@
             "name": null,
             "owner": "caddy-dns",
             "repo": "cloudflare",
-            "rev": "89f16b99c18ef49c8bb470a82f895bce01cbaece",
-            "sha256": "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=",
+            "rev": "188b4850c0f2f5565a6310810c936ea960e2210f",
+            "sha256": "sha256-lyPmRuNqbR4uIQahAizow7Ect44yPYDhdXVay1R34Ck=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
+        "version": "188b4850c0f2f5565a6310810c936ea960e2210f"
     },
     "easytier-custom": {
         "cargoLocks": null,

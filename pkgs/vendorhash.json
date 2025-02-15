@@ -4,5 +4,6 @@
   "talosctl": "sha256-ECTR1U2RlatLK3c3UP/aHzYMkN6WxPsHuwoXUzIYsAA=",
   "caddy-custom": "sha256-Z8jdMpa4BSR9zAblHM5SNDZkyw0RlEBzvK1thMtrZl8=",
   "easytier-custom": "sha256-U2ZK9GlfTjXsA7Fjd288YDlqSZNl3vHryLG1FE/GH5c=",
-  "hass-sgcc": ""
+  "hass-sgcc": "",
+  "caddy-plugin-cloudflare": ""
 }
