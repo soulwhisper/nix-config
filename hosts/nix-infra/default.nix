@@ -74,7 +74,7 @@ in {
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
+          proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
         };
 
         ## System ##
