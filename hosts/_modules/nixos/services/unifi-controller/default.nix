@@ -35,7 +35,9 @@ in {
       "L+ ${cfg.dataDir}/init-mongo.js 0600 appuser appuser - ${init-mongo-file}"
     ];
 
-    # systemctl status podman-unifi-controller.service
+    systemd.services.podman-unifi-controller.serviceConfig.RestartSec = 5;
+    systemd.services.podman-unifi-db.serviceConfig.RestartSec = 5;
+
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."unifi-controller" = {
       autoStart = true;
