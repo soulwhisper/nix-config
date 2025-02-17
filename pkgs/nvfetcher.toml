@@ -5,6 +5,7 @@ src.github = "caddyserver/caddy"
 fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
+src.include_regex = "89f16b99c18ef49c8bb470a82f895bce01cbaece"  # pin until go v1.23.6
 [easytier-custom]
 fetch.github = "EasyTier/EasyTier"
 src.github_tag = "EasyTier/EasyTier"
