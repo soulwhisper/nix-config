@@ -54,7 +54,7 @@ in {
         easytier = {
           enable = true;
           authFile = config.sops.secrets."networking/easytier/auth".path;
-          routes = [];
+          proxy_networks = [];
         };
       };
     };

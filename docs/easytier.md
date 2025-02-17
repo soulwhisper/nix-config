@@ -17,7 +17,6 @@ listeners = [
      "ws://0.0.0.0:11011/",
      "wss://0.0.0.0:11012/",
 ]
-exit_nodes = []
 rpc_portal = "0.0.0.0:15888"
 
 [network_identity]
