@@ -37,8 +37,9 @@ networking:
             {sub-url-2}
     easytier:
         auth: |
-            NETWORK_NAME={easytier-netwrok-name}
-            NETWROK_SECRET={easytier-network-secret}
+            [network_identity]
+            network_name = "{easytier-network-name}"
+            network_secret = "{easytier-network-secret}"
     tailscale:
         auth: {tskey-xxxx}
 storage:
