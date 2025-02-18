@@ -34,7 +34,7 @@ in {
           gtts
           isal
           pyatv
-          python_otbr_api
+          python-otbr-api
           radios
           zlib-ng
       ];
