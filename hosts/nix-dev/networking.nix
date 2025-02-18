@@ -1,7 +1,4 @@
-{
-  hostname,
-  ...
-}: {
+{hostname, ...}: {
   config = {
     networking = {
       hostName = hostname;

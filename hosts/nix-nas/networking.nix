@@ -1,7 +1,4 @@
-{
-  hostname,
-  ...
-}: {
+{hostname, ...}: {
   config = {
     networking = {
       hostName = hostname;
@@ -20,9 +17,9 @@
       ];
       routes = [
         {
-	        Gateway = "172.19.82.1";
-	        GatewayOnLink = true;
-	      }
+          Gateway = "172.19.82.1";
+          GatewayOnLink = true;
+        }
       ];
       dns = ["127.0.0.1"];
       linkConfig.RequiredForOnline = "routable";
