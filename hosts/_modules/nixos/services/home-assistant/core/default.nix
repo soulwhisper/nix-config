@@ -29,9 +29,11 @@ in {
       };
       extraPackages = python3Packages:
         with python3Packages; [
+          aiohomekit
           gtts
           isal
           pyatv
+          radios
           zlib-ng
       ];
       customComponents = with pkgs.unstable.home-assistant-custom-components; [
