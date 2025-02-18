@@ -13,10 +13,6 @@ in {
   ];
 
   config = {
-    networking = {
-      nameservers = lib.mkForce ["127.0.0.1"]; # use adguard
-    };
-
     users.users.soulwhisper = {
       uid = 1000;
       name = "soulwhisper";

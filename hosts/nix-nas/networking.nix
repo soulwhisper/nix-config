@@ -24,6 +24,7 @@
 	        GatewayOnLink = true;
 	      }
       ];
+      dns = ["127.0.0.1"];
       linkConfig.RequiredForOnline = "routable";
     };
   };
