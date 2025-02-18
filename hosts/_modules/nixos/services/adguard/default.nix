@@ -17,6 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
+    services.resolved.enable = lib.mkForce false;
 
     networking.firewall.allowedTCPPorts = [53 9200];
     networking.firewall.allowedUDPPorts = [53];
