@@ -26,14 +26,14 @@ in {
           "homekit"
           "met"
         ];
-        extraPackages = pkgs:
-          with pkgs.unstable.python3Packages; [
-            gtts
-            isal
-            pyatv
-            zlib-ng
-          ];
       };
+      extraPackages = python3Packages:
+        with python3Packages; [
+          gtts
+          isal
+          pyatv
+          zlib-ng
+      ];
       customComponents = with pkgs.unstable.home-assistant-custom-components; [
         midea_ac_lan
         ntfy
