@@ -37,7 +37,7 @@ in {
           python-otbr-api
           radios
           zlib-ng
-      ];
+        ];
       customComponents = with pkgs.unstable.home-assistant-custom-components; [
         midea_ac_lan
         ntfy
