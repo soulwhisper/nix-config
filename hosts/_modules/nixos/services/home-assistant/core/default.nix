@@ -50,7 +50,6 @@ in {
         multiple-entity-row
       ];
 
-      lovelace.mode = "storage";
       configWritable = true;
       config = {
         default_config = {};
