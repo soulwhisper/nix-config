@@ -2,23 +2,19 @@
   pkgs,
   lib,
   config,
-  hostname,
   ...
 }: let
   ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   imports = [
     ./hardware-configuration.nix
+    ./networking.nix
     ./secrets.nix
   ];
 
   config = {
     networking = {
-      hostName = hostname;
-      firewall.enable = false;
-      nftables.enable = true;
       nameservers = lib.mkForce ["127.0.0.1"]; # use adguard
-      useDHCP = true;
     };
 
     users.users.soulwhisper = {
