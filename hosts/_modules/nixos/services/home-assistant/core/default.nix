@@ -33,7 +33,7 @@ in {
           isal
           pyatv
           zlib-ng
-      ];
+        ];
       customComponents = with pkgs.unstable.home-assistant-custom-components; [
         midea_ac_lan
         ntfy
