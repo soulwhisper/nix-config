@@ -21,9 +21,9 @@
       ];
       routes = [
         {
-	        Gateway = "172.19.82.1";
-	        GatewayOnLink = true;
-	      }
+          Gateway = "172.19.82.1";
+          GatewayOnLink = true;
+        }
       ];
       linkConfig.RequiredForOnline = "routable";
     };
