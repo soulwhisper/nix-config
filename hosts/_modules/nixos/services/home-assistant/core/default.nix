@@ -26,7 +26,7 @@ in {
           "homekit"
           "met"
         ];
-        extraPackages = pkgs.unstable.python3Packages: with pkgs.unstable.python3Packages; [
+        extraPackages = pkgs: with pkgs.unstable.python3Packages; [
           gtts
           isal
           pyatv
