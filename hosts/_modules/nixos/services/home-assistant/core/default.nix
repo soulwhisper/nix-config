@@ -24,6 +24,7 @@ in {
           "default_config"
           "ffmpeg"
           "homekit"
+          "homekit_controller"
           "met"
         ];
       };
@@ -33,6 +34,7 @@ in {
           gtts
           isal
           pyatv
+          python_otbr_api
           radios
           zlib-ng
       ];
