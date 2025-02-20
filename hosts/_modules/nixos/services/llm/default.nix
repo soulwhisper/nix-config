@@ -23,15 +23,12 @@ in {
       "d ${cfg.dataDir}/chatbot 0755 appuser appuser - -"
     ];
 
-    hardware.nvidia.nvidiaPersistenced = true;
-    hardware.nvidia-container-toolkit.enable = true;
-
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."llm-xinference" = {
       autoStart = true;
       image = "xprobe/xinference:v0.12.3";
       cmd = ["xinference-local" "-H" "0.0.0.0"];
-      extraOptions = ["--device" "nvidia.com/gpu=all"];
+      extraOptions = ["--device=nvidia.com/gpu=all"];
       ports = [
         "9997:9997/tcp"
       ];

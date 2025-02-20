@@ -8,6 +8,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
+    ./nvidia.nix
     ./networking.nix
     ./secrets.nix
   ];
