@@ -8,6 +8,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
+    ./nvidia.nix
     ./networking.nix
     ./secrets.nix
   ];
@@ -49,6 +50,7 @@ in {
           authFile = config.sops.secrets."networking/easytier/auth".path;
           proxy_networks = [];
         };
+        llm.enable = true;
       };
     };
 

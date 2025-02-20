@@ -7,7 +7,7 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - soulwhisper-mba, my macbook configs.
 - nix-infra, production infra vm, for talos. Without ZFS.
 - nix-nas, staging nas vm. With ZFS. Was TrueNAS Scale 24.10+.
-- nix-dev, was devops vm. Planned as desktop notebook. Deprectaed now.
+- nix-dev, llm dev workstation. Must have Nvidia GPU.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage
@@ -50,3 +50,4 @@ I got help from some cool configs like:
 - [bjw-s/nix-config](https://github.com/bjw-s/nix-config)
 - [Ramblurr/nixcfg](https://github.com/Ramblurr/nixcfg)
 - [ckiee/nixfiles](https://github.com/ckiee/nixfiles)
+- [NixOS/nixos-hardware](https://github.com/NixOS/nixos-hardware)

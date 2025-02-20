@@ -8,6 +8,7 @@
     ./glance
     ./home-assistant
     ./kms
+    ./llm
     ./minio
     ./monitoring
     ./nfs

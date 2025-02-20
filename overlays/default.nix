@@ -11,6 +11,7 @@
     unstable = import inputs.nixpkgs-unstable {
       inherit (final) system;
       config.allowUnfree = true;
+      config.cudaSupport = true;
       overlays = [
         # overlays of unstable packages are declared here
         (final: prev: {
