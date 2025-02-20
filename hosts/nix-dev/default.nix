@@ -49,6 +49,7 @@ in {
           authFile = config.sops.secrets."networking/easytier/auth".path;
           proxy_networks = [];
         };
+        llm.enable = true;
       };
     };
 
