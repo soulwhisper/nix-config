@@ -68,7 +68,7 @@ talos-pxe: 9301
 ## app, 9800-9999
 gatus: 9801
 glance: 9802
-homebox: 9803
+chatbot: 9803
 
 # vpn
 wireguard: 51820

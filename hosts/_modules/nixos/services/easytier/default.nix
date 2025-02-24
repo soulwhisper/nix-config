@@ -86,7 +86,7 @@ in {
     networking.firewall.allowedTCPPorts = [11010];
     networking.firewall.allowedUDPPorts = [11010 11011];
 
-    environment.systemPackages = [pkgs.easytier-custom];
+    environment.systemPackages = [pkgs.easytier-latest];
 
     systemd.services.easytier = {
       requires = ["network.target"];
@@ -101,7 +101,7 @@ in {
           ${lib.getExe py-toml-merge} '${mkConfig}' '${cfg.authFile}' |
           install -m 600 /dev/stdin /var/lib/easytier/config.toml
         '';
-        ExecStart = "${lib.getExe pkgs.easytier-custom} -c /var/lib/easytier/config.toml --multi-thread";
+        ExecStart = "${lib.getExe pkgs.easytier-latest} -c /var/lib/easytier/config.toml --multi-thread";
       };
     };
   };

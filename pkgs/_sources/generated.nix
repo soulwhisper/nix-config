@@ -24,8 +24,8 @@
     };
     date = "2024-07-03";
   };
-  easytier-custom = {
-    pname = "easytier-custom";
+  easytier-latest = {
+    pname = "easytier-latest";
     version = "v2.2.2";
     src = fetchFromGitHub {
       owner = "EasyTier";

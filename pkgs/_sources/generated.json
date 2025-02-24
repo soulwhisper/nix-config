@@ -41,11 +41,11 @@
         },
         "version": "89f16b99c18ef49c8bb470a82f895bce01cbaece"
     },
-    "easytier-custom": {
+    "easytier-latest": {
         "cargoLocks": null,
         "date": null,
         "extract": null,
-        "name": "easytier-custom",
+        "name": "easytier-latest",
         "passthru": null,
         "pinned": false,
         "src": {

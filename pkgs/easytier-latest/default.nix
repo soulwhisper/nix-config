@@ -5,13 +5,13 @@
 }: let
   sourceData = pkgs.callPackage ../_sources/generated.nix {};
   vendorHash = lib.importJSON ../vendorhash.json;
-  packageData = sourceData.easytier-custom;
+  packageData = sourceData.easytier-latest;
 in
   # use latest rust to build this app
   pkgs.unstable.rustPlatform.buildRustPackage rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
-    cargoHash = vendorHash.easytier-custom;
+    cargoHash = vendorHash.easytier-latest;
     useFetchCargoVendor = true;
 
     nativeBuildInputs = with pkgs; [

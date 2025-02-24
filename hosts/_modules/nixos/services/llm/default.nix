@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.modules.services.llm;
+  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.llm = {
     enable = lib.mkEnableOption "llm";
@@ -15,38 +16,38 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [7861 8501 9997];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9803];
+
+    services.caddy.virtualHosts."chat.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+      handle {
+        reverse_proxy localhost:9803
+      }
+    '';
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/xinference 0755 appuser appuser - -"
       "d ${cfg.dataDir}/chatbot 0755 appuser appuser - -"
+      "d ${cfg.dataDir}/models 0755 appuser appuser - -"
+      "d ${cfg.dataDir}/ollama 0755 appuser appuser - -"
     ];
 
-    modules.services.podman.enable = true;
-    virtualisation.oci-containers.containers."llm-xinference" = {
-      autoStart = true;
-      image = "xprobe/xinference:v0.12.3";
-      cmd = ["xinference-local" "-H" "0.0.0.0"];
-      extraOptions = ["--device=nvidia.com/gpu=all"];
-      ports = [
-        "9997:9997/tcp"
-      ];
-      environment = {
-        PUID = "1001";
-        PGID = "1001";
-        TZ = "Asia/Shanghai";
-      };
-      volumes = [
-        "${cfg.dataDir}/xinference:/config"
-      ];
+    services.ollama = {
+      enable = true;
+      package = pkgs.unstable.ollama;
+      models = "${cfg.dataDir}/models";
+      home = "${cfg.dataDir}/ollama";
+      user = "appuser";
+      group = "appuser";
+      loadModels = ["deepseek-r1:8b"];
     };
+
+    modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."llm-chatbot" = {
       autoStart = true;
       image = "chatimage/chatchat:0.3.1.3-93e2c87-20240829";
       ports = [
-        "7861:7861/tcp"
-        "8501:8501/tcp"
+        "7861:7861/tcp" # api
+        "9803:8501/tcp" # web
       ];
       environment = {
         PUID = "1001";

@@ -1,9 +1,14 @@
 {...}: {
   imports = [
+    ## folder ##
+    ./hardware
     ./filesystems
+    ./services
+
+    ## files ##
+    ./desktop.nix
     ./nix.nix
     ./sops.nix
-    ./services
     ./users.nix
   ];
 

@@ -8,7 +8,6 @@
 in {
   imports = [
     ./hardware-configuration.nix
-    ./nvidia.nix
     ./networking.nix
     ./secrets.nix
   ];
@@ -42,7 +41,14 @@ in {
     '';
 
     modules = {
+      desktop.enable = true; # enable KDE desktop
+
+      hardware = {
+        nvidia.enable = true; # llm support
+      };
+
       services = {
+        ## Mandatory ##
         chrony.enable = true;
         openssh.enable = true;
         easytier = {
@@ -50,6 +56,8 @@ in {
           authFile = config.sops.secrets."networking/easytier/auth".path;
           proxy_networks = [];
         };
+
+        ## Apps ##
         llm.enable = true;
       };
     };
