@@ -59,7 +59,7 @@ in {
         };
 
         caddy = {
-          enable = true;
+          enable = false;
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 

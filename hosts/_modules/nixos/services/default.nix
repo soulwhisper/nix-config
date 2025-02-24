@@ -11,6 +11,7 @@
     ./llm
     ./minio
     ./monitoring
+    ./netbox
     ./nfs
     ./nut
     ./openssh
