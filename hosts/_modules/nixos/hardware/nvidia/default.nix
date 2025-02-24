@@ -2,11 +2,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.modules.hardware.nvidia;
-in
-{
+in {
   options.modules.hardware.nvidia = {
     enable = lib.mkEnableOption "nvidia";
     driverType = lib.mkOption {
