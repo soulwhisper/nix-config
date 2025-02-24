@@ -19,14 +19,14 @@ in
   ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
   config = {
     # if desktop
-    services.xserver.videoDrivers = lib.mkIf (cfg.enable && cfg.driverType = "desktop") ["nvidia"];
+    services.xserver.videoDrivers = lib.mkIf (cfg.enable && cfg.driverType == "desktop") ["nvidia"];
 
     hardware = lib.mkIf cfg.enable {
       graphics.enable = true;
       nvidia-container-toolkit.enable = true;
       nvidia = {
         # if datacenter
-        datacenter.enable = lib.mkIf (cfg.driverType = "datacenter") true;
+        datacenter.enable = lib.mkIf (cfg.driverType == "datacenter") true;
 
         # Modesetting is required.
         modesetting.enable = true;

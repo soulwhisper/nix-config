@@ -59,7 +59,7 @@ in {
         };
 
         caddy = {
-          enable = true;
+          enable = false;
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
@@ -84,6 +84,10 @@ in {
           enable = true;
           dataDir = "/numina/apps/home-assistant";
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
+        };
+        netbox = {
+          enable = true;
+          dataDir = "/numina/apps/netbox";
         };
         unifi-controller = {
           enable = true;
