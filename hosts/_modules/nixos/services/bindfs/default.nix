@@ -4,20 +4,20 @@
   config,
   ...
 }: let
-  bindfsConfig = types.submodule {
+  bindfsConfig = lib.types.submodule {
     options = {
       source = mkOption {
-        type = types.str;
+        type = lib.types.str;
         description = "the source path";
       };
 
       dest = mkOption {
-        type = types.str;
+        type = lib.types.str;
         description = "the mount path";
       };
 
       extraArgs = mkOption {
-        type = types.str;
+        type = lib.types.str;
         default = "";
         description = ''
           bindfs extra arguments,
