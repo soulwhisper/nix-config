@@ -48,9 +48,10 @@ in {
   };
 
   config = {
-    systemd.services = lib.mapAttrs
-    (name: cfg: mkbindfsService name cfg)
-    config.modules.services.bindfs;
+    systemd.services =
+      lib.mapAttrs
+      (name: cfg: mkbindfsService name cfg)
+      config.modules.services.bindfs;
   };
 
   # Example usage:
