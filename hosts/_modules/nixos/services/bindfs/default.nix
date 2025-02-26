@@ -17,12 +17,11 @@
       };
 
       extraArgs = lib.mkOption {
-        type = lib.types.str;
-        default = "";
+        type = lib.types.listOf lib.types.str;
+        default = [];
         description = ''
-          bindfs extra arguments,
-          use `--perms=0000:u=rD` to mount readonly,
-          use `--mirror-only=joe,@wheel` to share files.
+          Bindfs extra arguments as a list of strings.
+          Example: ["--perms=0000:u=rD", "--mirror-only=joe,@wheel"]
         '';
       };
     };
@@ -31,7 +30,7 @@
   mkbindfsService = name: {
     source,
     dest,
-    args,
+    extraArgs,
     ...
   }: {
     description = "mount bindfs for ${name}";
@@ -39,12 +38,13 @@
     wantedBy = ["local-fs.target"];
     serviceConfig.Type = "forking";
     preStart = "${pkgs.coreutils}/bin/mkdir -p ${source} ${dest}";
-    script = "${pkgs.bindfs}/bin/bindfs ${extraArgs} ${source} ${dest}";
+    script = "${pkgs.bindfs}/bin/bindfs ${lib.concatStringsSep " " extraArgs} ${source} ${dest}";
   };
+
 in {
   options.modules.services.bindfs = mkOption {
     type = types.attrsOf bindfsConfig;
-    description = "bindfs configuration";
+    description = "Configuration for bindfs mounts, specifying source, destination, and extra arguments.";
     default = {};
   };
 
@@ -55,15 +55,15 @@ in {
           name = "${name}-bindfs";
           value = mkbindfsService name info;
         })
-        cfg;
+        config.modules.services.bindfs;
     in
       units;
   };
 
-  # usage example, source owned by root, dest owned by app;
-  #
-  #   modules.services.bindfs.appname = {
-  #     source = "/opt/apps/appname";
-  #     dest = "/var/lib/appname";
-  #   };
+  # Example usage:
+  # modules.services.bindfs.appname = {
+  #   source = "/opt/apps/appname";
+  #   dest = "/var/lib/appname";
+  #   extraArgs = ["--perms=0000:u=rD", "--mirror-only=joe,@wheel"];
+  # };
 }
