@@ -24,9 +24,7 @@ in {
       };
     };
 
-    networking.hostId = lib.concatStringsSep "" (lib.take 8
-      (lib.stringToCharacters
-        (builtins.hashString "sha256" config.networking.hostName)));
+    networking.hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
 
     services.zfs = {
       autoScrub.enable = true;

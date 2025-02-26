@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./adguard
+    ./bindfs
     ./caddy
     ./chrony
     ./dae
@@ -11,6 +12,7 @@
     ./llm
     ./minio
     ./monitoring
+    ./netbox
     ./nfs
     ./nut
     ./openssh
