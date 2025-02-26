@@ -49,11 +49,13 @@ in {
 
   # lib.mapAttrs' (name: value: { name = newName; value = newValue; }) attrs
   config = {
-    systemd.services = lib.mapAttrs'
+    systemd.services =
+      lib.mapAttrs'
       (name: cfg: {
         name = "${name}-bindfs";
         value = mkbindfsService name cfg;
-      }) config.modules.services.bindfs;
+      })
+      config.modules.services.bindfs;
   };
 
   # Example usage:
