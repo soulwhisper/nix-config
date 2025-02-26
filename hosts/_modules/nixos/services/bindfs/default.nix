@@ -43,20 +43,14 @@
 in {
   options.modules.services.bindfs = lib.mkOption {
     type = lib.types.attrsOf bindfsConfig;
-    description = "Configuration for bindfs mounts, specifying source, destination, and extra arguments.";
+    description = "Configuration for bindfs mounts.";
     default = {};
   };
 
   config = {
-    systemd.services = let
-      units =
-        lib.mapAttrs (name: info: {
-          name = "${name}-bindfs";
-          value = mkbindfsService name info;
-        })
-        config.modules.services.bindfs;
-    in
-      units;
+    systemd.services = lib.mapAttrs
+    (name: cfg: mkbindfsService name cfg)
+    config.modules.services.bindfs;
   };
 
   # Example usage:
