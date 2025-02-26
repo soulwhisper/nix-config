@@ -49,7 +49,7 @@ in {
       extraArgs = ["--mirror-only=postgres"];
     };
     # for caddy file_server
-    users.users.caddy.extraGroups = [ "netbox" ];
+    users.users.caddy.extraGroups = ["netbox"];
 
     services.netbox = {
       enable = true;
