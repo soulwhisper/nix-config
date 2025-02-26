@@ -49,9 +49,10 @@ in {
 
   config = {
     systemd.services = lib.mapAttrs
-    (name: cfg: mkbindfsService name cfg)
-    config.modules.services.bindfs;
-  };
+      (name: cfg: {
+        name = "${name}-bindfs";
+        value = mkbindfsService name cfg;
+      }) config.modules.services.bindfs;
 
   # Example usage:
   # modules.services.bindfs.appname = {
