@@ -34,10 +34,10 @@ in {
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0700 root root - -"
     ];
-    modules.services.bindfs.appname = {
+    modules.services.bindfs.netbox = {
       source = "${cfg.dataDir}";
       dest = "/var/backup/postgresql";
-      extraArgs = "--mirror-only=postgres";
+      extraArgs = ["--mirror-only=postgres"];
     };
     services.postgresqlBackup = {
       enable = true;
