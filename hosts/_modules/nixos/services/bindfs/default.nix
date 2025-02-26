@@ -40,7 +40,6 @@
     preStart = "${pkgs.coreutils}/bin/mkdir -p ${source} ${dest}";
     script = "${pkgs.bindfs}/bin/bindfs ${lib.concatStringsSep " " extraArgs} ${source} ${dest}";
   };
-
 in {
   options.modules.services.bindfs = lib.mkOption {
     type = lib.types.attrsOf bindfsConfig;
