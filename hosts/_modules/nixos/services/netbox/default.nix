@@ -50,18 +50,19 @@ in {
       dataDir = "${cfg.dataDir}";
       listenAddress = "[0.0.0.0]";
       secretKeyFile = saltFile;
-      plugins = python3Packages: with python3Packages; [
-        netbox-bgp
-        netbox-dns
-        netbox-documents
-        netbox-floorplan-plugin
-        netbox-interface-synchronization
-        netbox-napalm-plugin
-        netbox-plugin-prometheus-sd
-        netbox-qrcode
-        netbox-reorder-rack
-        netbox-topology-views
-      ];
+      plugins = python3Packages:
+        with python3Packages; [
+          netbox-bgp
+          netbox-dns
+          netbox-documents
+          netbox-floorplan-plugin
+          netbox-interface-synchronization
+          netbox-napalm-plugin
+          netbox-plugin-prometheus-sd
+          netbox-qrcode
+          netbox-reorder-rack
+          netbox-topology-views
+        ];
     };
   };
 }
