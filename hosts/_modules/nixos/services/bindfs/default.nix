@@ -6,17 +6,17 @@
 }: let
   bindfsConfig = lib.types.submodule {
     options = {
-      source = mkOption {
+      source = lib.mkOption {
         type = lib.types.str;
         description = "the source path";
       };
 
-      dest = mkOption {
+      dest = lib.mkOption {
         type = lib.types.str;
         description = "the mount path";
       };
 
-      extraArgs = mkOption {
+      extraArgs = lib.mkOption {
         type = lib.types.str;
         default = "";
         description = ''
