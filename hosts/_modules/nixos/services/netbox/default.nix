@@ -47,6 +47,7 @@ in {
     services.netbox = {
       enable = true;
       port = 9203;
+      dataDir = "${cfg.dataDir}";
       listenAddress = [0.0.0.0];
       secretKeyFile = saltFile;
       plugins = python3Packages: with python3Packages; [
