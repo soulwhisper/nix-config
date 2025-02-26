@@ -32,15 +32,35 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "d ${cfg.dataDir}/db 0755 appuser appuser - -"
     ];
 
-    users.users.netbox.createHome = lib.mkForce false;
+    services.postgresql.dataDir = "${cfg.dataDir}/db";
+    systemd.services.postgresql.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.postgresql.serviceConfig.User = lib.mkForce "appuser";
+
+    systemd.services.netbox.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.netbox.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.netbox-rq.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.netbox-rq.serviceConfig.User = lib.mkForce "appuser";
 
     services.netbox = {
       enable = true;
-      dataDir = "${cfg.dataDir}";
       port = 9203;
+      listenAddress = [0.0.0.0];
       secretKeyFile = saltFile;
+      plugins = python3Packages: with python3Packages; [
+        netbox-bgp
+        netbox-dns
+        netbox-documents
+        netbox-floorplan-plugin
+        netbox-interface-synchronization
+        netbox-napalm-plugin
+        netbox-plugin-prometheus-sd
+        netbox-qrcode
+        netbox-reorder-rack
+        netbox-topology-views
+      ];
     };
   };
 }
