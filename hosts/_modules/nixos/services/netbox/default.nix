@@ -37,12 +37,12 @@ in {
 
     services.postgresql.dataDir = "${cfg.dataDir}/db";
     systemd.services.postgresql.serviceConfig.User = lib.mkForce "appuser";
-    systemd.services.postgresql.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.postgresql.serviceConfig.Group = lib.mkForce "appuser";
 
     systemd.services.netbox.serviceConfig.User = lib.mkForce "appuser";
-    systemd.services.netbox.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.netbox.serviceConfig.Group = lib.mkForce "appuser";
     systemd.services.netbox-rq.serviceConfig.User = lib.mkForce "appuser";
-    systemd.services.netbox-rq.serviceConfig.User = lib.mkForce "appuser";
+    systemd.services.netbox-rq.serviceConfig.Group = lib.mkForce "appuser";
 
     services.netbox = {
       enable = true;
