@@ -47,6 +47,7 @@ in {
     default = {};
   };
 
+  # lib.mapAttrs' (name: value: { name = newName; value = newValue; }) attrs
   config = {
     systemd.services = lib.mapAttrs'
       (name: cfg: {
