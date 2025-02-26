@@ -85,6 +85,10 @@ in {
           dataDir = "/numina/apps/home-assistant";
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
+        netbox = {
+          enable = true;
+          dataDir = "/numina/backup/netbox";
+        };
         unifi-controller = {
           enable = true;
           dataDir = "/numina/apps/unifi-controller";
