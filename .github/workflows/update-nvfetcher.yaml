@@ -3,7 +3,7 @@ name: Update nvfetcher
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: 0 * * * *
+    - cron: 0 1 * * *
   push:
     branches:
       - main
