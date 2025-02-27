@@ -133,7 +133,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
-          ref: main
+          ref: stable
           fetch-depth: 0
       - name: Generate Token
         uses: actions/create-github-app-token@0d564482f06ca65fa9e77e2510873638c82206f2 # v1
@@ -141,10 +141,11 @@ jobs:
         with:
           app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
           private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
-      - name: Sync stable
-        uses: devmasx/merge-branch@master
-        with:
-          github_token: ${{ steps.app-token.outputs.token }}
-          type: now
-          from_branch: main
-          target_branch: stable
+      - name: Rebase merge from main to stable
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git pull origin main --rebase
+          git push origin HEAD:stable
