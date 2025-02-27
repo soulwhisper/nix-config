@@ -33,7 +33,7 @@ jobs:
       - name: Run devenv tests
         run: devenv test
       - name: Auto commit
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5
         with:
           commit_message: "chore(lint): fix linting issues"
           commit_user_name: "repo-butler[bot]"
