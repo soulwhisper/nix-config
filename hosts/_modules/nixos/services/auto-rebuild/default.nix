@@ -33,8 +33,8 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.auto-rebuild = {
       description = "Auto nix-rebuild Service";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
       serviceConfig = {
         Type = "oneshot";
         User = "root";
@@ -50,7 +50,7 @@ in {
         Persistent = true;
         Unit = "auto-rebuild.service";
       };
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
     };
 
     environment.etc."auto-rebuild/auto-rebuild.sh" = {
