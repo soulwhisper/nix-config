@@ -1,6 +1,6 @@
 {
-  pkgs,
   config,
+  pkgs,
   ...
 }: let
   ageKeyFile = "${config.xdg.configHome}/age/keys.txt";

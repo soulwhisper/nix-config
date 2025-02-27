@@ -2,8 +2,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Auto-Lint-Fixer
 
-# this action will trigger PR for fix, if lint fails
-
 on:
   workflow_dispatch: {}
   push:
@@ -13,6 +11,8 @@ on:
 jobs:
   auto-lint-fixer:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@0d564482f06ca65fa9e77e2510873638c82206f2 # v1
@@ -21,6 +21,9 @@ jobs:
           app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
           private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: cachix/install-nix-action@08dcb3a5e62fa31e2da3d490afc4176ef55ecd72 # v30
       - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
@@ -28,14 +31,12 @@ jobs:
       - name: Install devenv.sh
         run: nix profile install nixpkgs#devenv
       - name: Run devenv tests
-        id: devenv-test
         continue-on-error: true
-        run: devenv test
-      - name: Create Pull
-        id: create-pull-request
-        uses: peter-evans/create-pull-request@dd2324fc52d5d43c699a5636bcf19fceaa70c284 # v7
+        run: devenv test --verbose
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5
         with:
-          token: ${{ steps.app-token.outputs.token }}
-          title: "chore(lint): fix linting issues"
-          commit-message: "chore(lint): fix linting issues"
-          delete-branch: true
+          commit_message: "chore(lint): fix linting issues"
+          commit_user_name: "repo-butler[bot]"
+          commit_user_email: "repo-butler[bot]@users.noreply.github.com"
+          commit_author: "repo-butler[bot]"

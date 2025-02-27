@@ -1,7 +1,7 @@
 {
-  pkgs,
-  lib,
   hostname,
+  lib,
+  pkgs,
   ...
 }: {
   # check first: https://daiderd.com/nix-darwin/manual/index.html

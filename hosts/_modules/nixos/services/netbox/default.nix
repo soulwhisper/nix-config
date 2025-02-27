@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   pkgs,
-  config,
   ...
 }: let
   cfg = config.modules.services.netbox;
@@ -59,7 +59,7 @@ in {
           (netbox-documents.overridePythonAttrs {
             dependencies = [
               (drf-extra-fields.overridePythonAttrs (previous: {
-                dependencies = previous.dependencies ++ [ pytz ];
+                dependencies = previous.dependencies ++ [pytz];
                 disabledTests = [
                   "test_create"
                   "test_create_with_base64_prefix"

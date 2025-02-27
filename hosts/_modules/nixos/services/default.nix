@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./adguard
+    ./auto-rebuild
     ./bindfs
     ./caddy
     ./chrony
