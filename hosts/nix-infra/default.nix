@@ -80,6 +80,7 @@ in {
         home-assistant.enable = true;
         home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;
+        netbox.enable = true;
         unifi-controller.enable = true;
         #  zotregistry.enable = true;
 

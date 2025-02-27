@@ -58,4 +58,8 @@ systemctl list-units | grep failed
 git reset --soft HEAD~3 && git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
 git push --force-with-lease
 
+## remove unknown services
+rm -f /run/systemd/transient/*.timer
+rm -f /run/systemd/transient/*.service
+
 ```

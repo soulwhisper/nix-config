@@ -8,6 +8,8 @@
 in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [5580];
+    networking.firewall.allowedUDPPorts = [5353];
+    # udp 32768-65535 is enabled at core;
 
     networking.enableIPv6 = true;
 
@@ -19,19 +21,16 @@ in {
       "d ${cfg.dataDir}/matter 0755 appuser appuser - -"
     ];
 
-    systemd.services.matter-server = {
-      after = ["network-online.target"];
-      before = ["home-assistant.service"];
-      wants = ["network-online.target"];
-      wantedBy = ["multi-user.target"];
-      description = "Matter Server";
-      environment.HOME = "${cfg.dataDir}/matter";
-      serviceConfig = {
-        ExecStart = "${pkgs.python-matter-server}/bin/matter-server --port 5580 --vendorid 4939 --storage-path ${cfg.dataDir}/matter --log-level info";
-        BindPaths = "${cfg.dataDir}/matter:/data";
-        User = "appuser";
-        Group = "appuser";
-      };
+    # systemctl status podman-hass-matter-server.service
+    ## https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
+    modules.services.podman.enable = true;
+    virtualisation.oci-containers.containers."hass-matter-server" = {
+      autoStart = true;
+      image = "ghcr.io/home-assistant-libs/python-matter-server:stable";
+      extraOptions = ["--network=host"];
+      volumes = [
+        "${cfg.dataDir}/matter:/data"
+      ];
     };
   };
 }
