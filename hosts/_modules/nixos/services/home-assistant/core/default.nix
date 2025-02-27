@@ -9,7 +9,12 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [8123 40000]; # 40000-40100 for upnp
     networking.firewall.allowedUDPPorts = [1900 5353];
-    networking.firewall.allowedUDPPortRanges = [{ from = 32768; to = 65535; }];
+    networking.firewall.allowedUDPPortRanges = [
+      {
+        from = 32768;
+        to = 65535;
+      }
+    ];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir}/core 0755 appuser appuser - -"
