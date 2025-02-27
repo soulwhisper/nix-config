@@ -38,6 +38,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
+          ref: main
           fetch-depth: 0
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
@@ -118,14 +119,30 @@ jobs:
             <summary> Version changes </summary> <br>
             <pre> ${{ steps.diff.outputs.diff }} </pre>
 
-  nix-build-status:
+  sync-stable:
     if: ${{ always() }}
     needs:
       - nix-build
     runs-on: ubuntu-latest
     steps:
-      - name: Check matrix status
-        run: |
-          if echo "${{ needs.nix-build.result }}" | grep -E 'failure|cancelled'; then
-            exit 1
-          fi
+      - name: Check build matrix status
+        if: ${{ needs.nix-build.result != 'success' }}
+        run: exit 1
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Generate Token
+        uses: actions/create-github-app-token@0d564482f06ca65fa9e77e2510873638c82206f2 # v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
+          private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
+      - name: Sync stable
+        uses: devmasx/merge-branch@master
+        with:
+          github_token: ${{ steps.app-token.outputs.token }}
+          type: now
+          from_branch: main
+          target_branch: stable
