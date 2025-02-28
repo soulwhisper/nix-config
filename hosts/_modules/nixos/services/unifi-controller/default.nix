@@ -1,9 +1,7 @@
-# visit: localhost:8443
-# data: /var/lib/unifi/data
 {
+  config,
   lib,
   pkgs,
-  config,
   ...
 }: let
   cfg = config.modules.services.unifi-controller;

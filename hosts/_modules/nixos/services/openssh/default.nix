@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: let
   cfg = config.modules.services.openssh;

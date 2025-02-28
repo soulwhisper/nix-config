@@ -1,6 +1,6 @@
 {
-  pkgs,
   config,
+  pkgs,
   ...
 }: {
   config = {
@@ -26,12 +26,6 @@
         "networking/cloudflare/auth" = {
           owner = config.users.users.appuser.name;
           restartUnits = ["caddy.service"];
-        };
-        "networking/dae/subscription" = {};
-        "networking/easytier/auth" = {};
-        "networking/tailscale/auth" = {};
-        "users/soulwhisper/password" = {
-          neededForUsers = true;
         };
       };
     };

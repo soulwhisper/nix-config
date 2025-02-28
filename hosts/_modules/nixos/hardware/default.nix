@@ -3,5 +3,5 @@
     ./nvidia
   ];
 
-  hardware.bluetooth.enable = true;
+  config.hardware.bluetooth.enable = true;
 }
