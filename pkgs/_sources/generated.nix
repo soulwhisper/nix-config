@@ -14,15 +14,15 @@
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "89f16b99c18ef49c8bb470a82f895bce01cbaece";
+    version = "1fb64108d4debf196b19d7398e763cb78c8a0f41";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "89f16b99c18ef49c8bb470a82f895bce01cbaece";
+      rev = "1fb64108d4debf196b19d7398e763cb78c8a0f41";
       fetchSubmodules = false;
-      sha256 = "sha256-XTNt2QfbKmt+Dryce8FRVhLrHdPkxhj0PPjCDijMuEs=";
+      sha256 = "sha256-nLpiXMHTKTfmc5TBkPErkvXf/d2tWBlv2h4A+ELrraU=";
     };
-    date = "2024-07-03";
+    date = "2025-02-28";
   };
   easytier-latest = {
     pname = "easytier-latest";
