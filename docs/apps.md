@@ -16,7 +16,7 @@
 - main program use nixos version, integrations using podman containers for compatibliaty;
 - integrations using mDNS/avahi have random ports >32768;
 - during tests, ui-lovelace use storage mode;
-- homebridge use avahi-daemon for mdns, without random high ports, so cant use with haas-stack and local-avahi;
+- homebridge/samba-avahi dont have random high ports, so cant use with hass-stack;
 
 ## K8S-related
 
@@ -28,6 +28,7 @@
 ## Netbox
 
 - add group `netbox` to caddy-user, disable `ProtectHome` from caddy;
+- run `netbox-manage migrate` after plugins enable / disable, netbox upgrade;
 - run `netbox-manage createsuperuser` to create superuser;
 
 ## Ports

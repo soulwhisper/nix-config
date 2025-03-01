@@ -1,6 +1,6 @@
 {
-  pkgs,
   config,
+  pkgs,
   ...
 }: let
   ageKeyFile = "${config.xdg.configHome}/age/keys.txt";
@@ -12,13 +12,10 @@ in {
     ];
 
     sops = {
-      defaultSopsFile = ./secrets.sops.yaml;
       age.keyFile = ageKeyFile;
       age.generateKey = true;
 
-      secrets = {
-        atuin_key = {};
-      };
+      secrets.atuin_key.sopsFile = ./secrets.sops.yaml;
     };
 
     home.sessionVariables = {

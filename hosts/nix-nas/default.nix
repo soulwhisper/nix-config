@@ -1,11 +1,9 @@
 {
-  pkgs,
-  lib,
   config,
+  lib,
+  pkgs,
   ...
-}: let
-  ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -13,32 +11,6 @@ in {
   ];
 
   config = {
-    users.users.soulwhisper = {
-      uid = 1000;
-      name = "soulwhisper";
-      home = "/home/soulwhisper";
-      group = "soulwhisper";
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = lib.strings.splitString "\n" (builtins.readFile ../../homes/soulwhisper/config/ssh/ssh.pub);
-      hashedPasswordFile = config.sops.secrets."users/soulwhisper/password".path;
-      isNormalUser = true;
-      extraGroups =
-        [
-          "wheel"
-          "users"
-        ]
-        ++ ifGroupsExist [
-          "network"
-          "samba-users"
-        ];
-    };
-    users.groups.soulwhisper.gid = 1000;
-
-    system.activationScripts.postActivation.text = ''
-      # Must match what is in /etc/shells
-      chsh -s /run/current-system/sw/bin/fish soulwhisper
-    '';
-
     modules = {
       filesystems.zfs = {
         enable = true;
@@ -48,29 +20,13 @@ in {
       };
 
       services = {
-        ## Mandatory ##
-        chrony.enable = true;
-        openssh.enable = true;
-        monitoring.enable = true;
-
-        dae = {
-          enable = true;
-          subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
-        };
-
+        adguard.enable = true;
         caddy = {
           enable = true;
           CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
-        easytier = {
-          enable = true;
-          authFile = config.sops.secrets."networking/easytier/auth".path;
-          proxy_networks = [];
-        };
-
         ## System ##
-        adguard.enable = true;
         smartd.enable = true;
         nut.enable = true;
 
@@ -122,6 +78,7 @@ in {
           '';
         };
 
+        # nix-nas only
         samba = {
           enable = true;
           avahi.TimeMachine.enable = true;
@@ -143,12 +100,6 @@ in {
           };
         };
       };
-    };
-
-    # Use the systemd-boot EFI boot loader.
-    boot.loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
     };
   };
 }

@@ -1,7 +1,7 @@
 {
-  pkgs,
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.modules.security._1password-cli;

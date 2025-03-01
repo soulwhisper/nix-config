@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./adguard
+    ./auto-rebuild
     ./bindfs
     ./caddy
     ./chrony
@@ -8,7 +9,6 @@
     ./easytier
     ./glance
     ./home-assistant
-    ./homebridge
     ./kms
     ./llm
     ./minio

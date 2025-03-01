@@ -7,6 +7,7 @@ require (
 	github.com/caddyserver/caddy/v2 v2.9.1
 )
 
+
 require (
 	dario.cat/mergo v1.0.1 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
@@ -67,8 +68,8 @@ require (
 	github.com/jackc/pgx/v4 v4.18.3 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
-	github.com/libdns/cloudflare v0.1.2-0.20240604123710-0549667a10ab // indirect
-	github.com/libdns/libdns v0.2.2 // indirect
+	github.com/libdns/cloudflare v0.1.3 // indirect
+	github.com/libdns/libdns v0.2.3 // indirect
 	github.com/manifoldco/promptui v0.9.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect

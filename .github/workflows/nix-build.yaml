@@ -18,7 +18,11 @@ concurrency:
 
 jobs:
   nix-build:
-    if: github.event.pull_request.draft == false
+    if: |
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'push' &&
+       !(github.event.head_commit.committer.username == 'web-flow' &&
+         github.event.head_commit.author.username == 'web-flow'))
     permissions:
       pull-requests: write
     strategy:
@@ -38,6 +42,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
+          ref: main
           fetch-depth: 0
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
@@ -118,14 +123,12 @@ jobs:
             <summary> Version changes </summary> <br>
             <pre> ${{ steps.diff.outputs.diff }} </pre>
 
-  nix-build-status:
-    if: ${{ always() }}
+  matrix-status:
+    if: ${{ !cancelled() }}
     needs:
       - nix-build
     runs-on: ubuntu-latest
     steps:
-      - name: Check matrix status
-        run: |
-          if echo "${{ needs.nix-build.result }}" | grep -E 'failure|cancelled'; then
-            exit 1
-          fi
+      - name: Check build matrix status
+        if: ${{ needs.nix-build.result != 'success' }}
+        run: exit 1
