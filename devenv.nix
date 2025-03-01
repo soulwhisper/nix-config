@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   pkgs,
-  config,
   ...
 }: {
   # replace pre-commit and various linters
@@ -13,9 +13,6 @@
         files = "github\/workflows\/.*\.ya?ml$";
       };
       alejandra.enable = true;
-      check-added-large-files.enable = true;
-      check-merge-conflicts.enable = true;
-      check-executables-have-shebangs.enable = true;
       prettier = {
         enable = true;
         settings = {

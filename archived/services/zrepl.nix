@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   pkgs,
-  config,
   ...
 }: let
   cfg = config.modules.services.backup.zrepl;

@@ -4,8 +4,7 @@
 - atuin-key should be base64 format
 - change iterm2/ghostty theme to "catppuccin-mocha"
 - change iterm2/ghostty font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
-- caddy-custom, [ref](https://github.com/Ramblurr/nixos-caddy);
-- tailscale for k8s nodes, easytier for everything else; when gitops stable, tailscale can be removed;
+- auto rebuild nixos by service "auto-rebuild";
 
 ```shell
 # install req. incl. cachix & nvd

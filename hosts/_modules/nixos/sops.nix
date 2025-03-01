@@ -1,6 +1,6 @@
 {
-  pkgs,
   config,
+  pkgs,
   ...
 }: let
   ageKeyFile = "${config.users.users.soulwhisper.home}/.config/age/keys.txt";
