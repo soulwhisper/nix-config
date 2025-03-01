@@ -1,11 +1,12 @@
 module caddy
 
-go 1.23.6
+go 1.23.4
 
 require (
-	github.com/caddy-dns/cloudflare v0.0.0-20250228175314-1fb64108d4de
+	github.com/caddy-dns/cloudflare v0.0.0-20240703190432-89f16b99c18e
 	github.com/caddyserver/caddy/v2 v2.9.1
 )
+
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
