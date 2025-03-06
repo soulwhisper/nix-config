@@ -65,6 +65,7 @@ in {
         "view-secret"
 
         # debug
+        "df-pv"
         "explore"
         "klock"
         "neat"

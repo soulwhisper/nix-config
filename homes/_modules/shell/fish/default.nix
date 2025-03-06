@@ -20,11 +20,14 @@ in {
       catppuccin.fish.enable = true;
       programs.fish = {
         enable = true;
-
         plugins = [
           {
             name = "done";
             inherit (pkgs.fishPlugins.done) src;
+          }
+          {
+            name = "fzf";
+            inherit (pkgs.fishPlugins.fzf-fish) src;
           }
           {
             name = "puffer";

@@ -4,60 +4,70 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.services.samba;
+  cfg = config.modules.services.timemachine;
 in {
-  options.modules.services.samba = {
-    enable = lib.mkEnableOption "samba";
-    avahi.TimeMachine.enable = lib.mkEnableOption "avahi-timemachine";
-    settings = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
+  options.modules.services.timemachine = {
+    enable = lib.mkEnableOption "timemachine";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/opt/backup/timemachine";
+    };
+    maxSize = lib.mkOption {
+      type = lib.types.str;
+      default = "200G";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    # this module for MacOS TimeMachine only;
+    # http://gwiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0700 root root - -"
+    ];
+
     users.groups.samba-users = {};
 
-    networking.firewall.allowedTCPPorts = [445 548]; # 548 for AFP-over-TCP
+    networking.firewall.allowedTCPPorts = [445];
     networking.firewall.allowedUDPPorts = [5353];
+    networking.firewall.allowedUDPPortRanges = [
+      {
+        from = 32768;
+        to = 65535;
+      }
+    ]; # add random high ports for avahi
 
     services.samba = {
       enable = true;
-      package = pkgs.samba;
+      nmbd.enable = false;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "valid users" = "@samba-users";
+          "writeable" = "yes";
 
-      settings =
-        {
-          global = {
-            "workgroup" = "HOMELAB";
-            "min protocol" = "SMB2";
+          "vfs objects" = "fruit, streams_xattr";
+          # defaults in vfs_fruit, https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html
+          # "fruit:model" = "MacSamba";
+          # "fruit:posix_rename" = "yes";
+          "fruit:metadata" = "stream";
+          "fruit:veto_appledouble" = "no";
+          "fruit:wipe_intentionally_left_blank_rfork" = "yes";
+          "fruit:delete_empty_adfiles" = "yes";
+          "fruit:nfs_aces" = "no";
 
-            "ea support" = "yes";
-            "vfs objects" = "acl_xattr, catia, fruit, streams_xattr";
-            "fruit:metadata" = "stream";
-            "fruit:model" = "MacSamba";
-            "fruit:veto_appledouble" = "no";
-            "fruit:posix_rename" = "yes";
-            "fruit:zero_file_id" = "yes";
-            "fruit:wipe_intentionally_left_blank_rfork" = "yes";
-            "fruit:delete_empty_adfiles" = "yes";
-            "fruit:nfs_aces" = "no";
-
-            "browsable" = "yes";
-            "guest only" = "no";
-            "map to guest" = "never";
-            "inherit acls" = "yes";
-            "map acl inherit" = "yes";
-            "valid users" = "@samba-users";
-
-            "veto files" = "/._*/.DS_Store/";
-            "delete veto files" = "yes";
-          };
-        }
-        // cfg.settings;
+          "veto files" = "/._*/.DS_Store/";
+          "delete veto files" = "yes";
+        };
+        TimeMachine = {
+          path = "${cfg.dataDir}";
+          "fruit:time machine" = "yes";
+          "fruit:time machine max size" = "${cfg.maxSize}";
+        };
+      };
     };
 
-    # enable avahi service for volume:TimeMachine
-    services.avahi = lib.mkIf cfg.avahi.TimeMachine.enable {
+    services.avahi = {
       enable = true;
       publish = {
         enable = true;
@@ -76,7 +86,7 @@ in {
             <service>
               <type>_device-info._tcp</type>
               <port>0</port>
-              <txt-record>model=TimeCapsule8,119</txt-record>
+              <txt-record>model=RackMac</txt-record>
             </service>
             <service>
               <type>_adisk._tcp</type>

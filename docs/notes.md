@@ -5,6 +5,7 @@
 - change iterm2/ghostty theme to "catppuccin-mocha"
 - change iterm2/ghostty font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
 - auto rebuild nixos by service "auto-rebuild";
+- if nix-cache not hit, stop dae during rebuild;
 
 ```shell
 # install req. incl. cachix & nvd

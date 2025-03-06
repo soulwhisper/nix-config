@@ -24,8 +24,8 @@ in {
 
     systemd.services.talos-api = {
       description = "Talos Cluster Discovery API Service";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
 
       serviceConfig = {
         ExecStart = "${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";

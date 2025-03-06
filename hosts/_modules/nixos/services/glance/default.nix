@@ -38,8 +38,8 @@ in {
 
     systemd.services.glance = {
       description = "Glance feed dashboard server";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
 
       serviceConfig = {
         ExecStart = "${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";

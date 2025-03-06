@@ -40,9 +40,9 @@ in {
     };
 
     systemd.services.hass-sgcc = {
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
       description = "Home-assistant SGCC powered by PM2";
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
       serviceConfig = {
         ExecStartPre = "npm install mqtt pm2";
         ExecStart = "pm2-runtime app.js";

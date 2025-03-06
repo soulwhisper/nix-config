@@ -47,8 +47,8 @@ in {
 
     systemd.services.matchbox-server = {
       description = "PXE bootstrap support for talos";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
       serviceConfig = {
         ExecStart = "${lib.getExe pkgs.matchbox-server} -address=0.0.0.0:9301 -assets-path=/etc/talos-pxe/assets -data-path=/etc/talos-pxe -log-level=debug";
         WorkingDirectory = "/etc/talos-pxe";

@@ -20,7 +20,7 @@
         adguard.enable = true;
         caddy = {
           enable = true;
-          CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
+          cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
         ## K8S:Talos ##

@@ -29,8 +29,8 @@ in {
 
     systemd.services.adguardhome = {
       description = "AdGuard Home: Network-level blocker";
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
       unitConfig = {
         StartLimitIntervalSec = 5;
         StartLimitBurst = 10;

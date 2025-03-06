@@ -32,9 +32,8 @@ in {
     systemd.services.dae = {
       description = "Dae Service";
       documentation = ["https://github.com/daeuniverse/dae"];
-      after = ["network.target" "systemd-sysctl.service" "dbus.service"];
-      wants = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      wants = ["network-online.target"];
+      after = ["network-online.target" "systemd-sysctl.service" "dbus.service"];
       serviceConfig = {
         PIDFile = "/run/dae.pid";
         ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c /etc/dae/config.dae";

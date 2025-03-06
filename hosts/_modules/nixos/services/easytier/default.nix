@@ -89,9 +89,9 @@ in {
     environment.systemPackages = [pkgs.easytier-latest];
 
     systemd.services.easytier = {
-      requires = ["network.target"];
-      wantedBy = ["multi-user.target"];
       description = "Simple, decentralized mesh VPN with WireGuard support";
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
       serviceConfig = {
         Type = "simple";
         Restart = "on-failure";

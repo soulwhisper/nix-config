@@ -23,7 +23,7 @@
         adguard.enable = true;
         caddy = {
           enable = true;
-          CloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
+          cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
         ## System ##
@@ -36,6 +36,7 @@
         ## Apps ##
         glance.enable = true;
         kms.enable = true;
+        unifi-controller.enable = true;
         home-assistant = {
           enable = true;
           dataDir = "/numina/apps/home-assistant";
@@ -44,10 +45,6 @@
         netbox = {
           enable = true;
           dataDir = "/numina/backup/netbox";
-        };
-        unifi-controller = {
-          enable = true;
-          dataDir = "/numina/apps/unifi-controller";
         };
         zotregistry = {
           enable = true;
@@ -70,34 +67,16 @@
           dataDir = "/numina/apps/minio";
         };
 
-        nfs = {
+        nfs4 = {
           enable = true;
           exports = ''
-            /numina/backup *(rw,async,insecure,no_root_squash,no_subtree_check)
-            /numina/media *(rw,async,insecure,no_root_squash,no_subtree_check)
+            /numina/backup/apps 172.19.82.0/24(rw,async,anonuid=1001,anongid=1001)
           '';
         };
 
-        # nix-nas only
-        samba = {
+        timemachine = {
           enable = true;
-          avahi.TimeMachine.enable = true;
-          settings = {
-            Backup = {
-              path = "/numina/backup";
-              "read only" = "no";
-            };
-            Media = {
-              path = "/numina/media";
-              "read only" = "no";
-            };
-            TimeMachine = {
-              path = "/numina/timemachine";
-              "read only" = "no";
-              "fruit:aapl" = "yes";
-              "fruit:time machine" = "yes";
-            };
-          };
+          dataDir = "/numina/backup/timemachine";
         };
       };
     };

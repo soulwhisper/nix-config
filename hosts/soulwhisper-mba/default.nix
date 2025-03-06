@@ -27,16 +27,21 @@
     # testing apps list
     homebrew = {
       taps = [
-        "brewforge/chinese"
       ];
       brews = [
         "derailed/popeye/popeye" # k8s live cluster linter
+        "goreleaser/tap/goreleaser"
       ];
       casks = [
         "discord"
-        "easytier"
+        "brewforge/chinese/easytier"
+        "halloy"
+        "lazygit"
+        "maccy"
         "orbstack"
+        "rectangle-pro"
         "slack"
+        "swiftbar"
         "tableplus"
         "transmit"
         "wireshark"
@@ -44,6 +49,7 @@
       masApps = {
         "Passepartout" = 1433648537;
         "ReadKit" = 1615798039;
+        # "Windows App" = 1295203466;
         # "StopTheMadness Pro" = 6471380298; # not owned yet
       };
     };

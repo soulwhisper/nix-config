@@ -31,7 +31,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.timers.auto-upgrade = {
+    systemd.timers.auto-rebuild = {
       description = "Auto nix-rebuild Timer";
       timerConfig = {
         OnCalendar = "${cfg.schedule}";
@@ -43,8 +43,8 @@ in {
 
     systemd.services.auto-rebuild = {
       description = "Auto nix-rebuild Service";
-      after = ["network-online.target"];
       wants = ["network-online.target"];
+      after = ["network-online.target"];
       path = [pkgs.flock pkgs.git pkgs.nixos-rebuild pkgs.systemd];
       serviceConfig = {
         Type = "oneshot";
@@ -67,14 +67,18 @@ in {
           exit 1
         }
 
-        rm -rf nix-config 2>> "$ERROR_LOG"
+        rm -rf nix-config
         if ! git clone -b ${cfg.branch} ${cfg.repoUrl} nix-config; then
           echo "❌ Repository clone failed"
           exit 1
         fi
 
-        systemctl stop nixos-rebuild-switch-to-configuration.service
-        cd nix-config && nixos-rebuild switch --flake .#${cfg.hostname} || :
+        if systemctl is-active --quiet nixos-rebuild-switch-to-configuration.service; then
+          systemctl stop nixos-rebuild-switch-to-configuration.service
+        fi
+
+        set +e
+        cd nix-config && nixos-rebuild switch --flake .#${cfg.hostname}
         echo "✅ Update COMPLETED [$(date '+%Y-%m-%d %H:%M:%S')]"
       '';
     };

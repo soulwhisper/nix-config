@@ -22,11 +22,10 @@ in {
     ];
 
     systemd.services.matter-server = {
-      after = ["network-online.target"];
+      description = "Matter Server";
       before = ["home-assistant.service"];
       wants = ["network-online.target"];
-      wantedBy = ["multi-user.target"];
-      description = "Matter Server";
+      after = ["network-online.target"];
       environment.HOME = "${cfg.dataDir}/matter";
       serviceConfig = {
         ExecStart = "${pkgs.python-matter-server}/bin/matter-server --port 5580 --vendorid 4939 --storage-path ${cfg.dataDir}/matter --log-level info";

@@ -6,6 +6,7 @@
     ./glances
     ./doggo
     ./eza
+    ./fd
     ./fish
     ./git
     ./go-task

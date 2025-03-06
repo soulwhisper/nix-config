@@ -18,18 +18,19 @@ _: {
     ];
     casks = [
       "1password"
+      "1password-cli"
       "clash-verge-rev"
       "dropbox"
+      "ghostty"
       "gifox"
       "google-chrome"
-      "iterm2"
       "jordanbaird-ice"
       "karabiner-elements"
       "keyboard-maestro"
-      "notunes"
       "obsidian"
       "raycast"
       "shottr"
+      "vmware-fusion"
     ];
     masApps = {
       "Caffeinated" = 1362171212;

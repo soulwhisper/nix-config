@@ -7,6 +7,6 @@
   ];
 
   system = {
-    stateVersion = 4; # nix-darwin stateVersion
+    stateVersion = 5; # nix-darwin stateVersion 24.11
   };
 }

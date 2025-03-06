@@ -14,8 +14,11 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 
 ```shell
 # darwin
-## opt. run set-proxy script
+## opt1. run set-proxy script
 sudo python3 scripts/darwin_set_proxy.py
+## opt2. or, change source
+curl https://chsrc.run/posix | sudo bash
+sudo chsrc set brew | nix
 ## build & diff
 task nix:darwin-build HOST=soulwhisper-mba
 ## deploy

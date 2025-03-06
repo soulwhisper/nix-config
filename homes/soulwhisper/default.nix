@@ -33,11 +33,14 @@
             catppuccin.catppuccin-vsc-icons
 
             # Language support
+            golang.go
+            jinliming2.vscode-go-template
             helm-ls.helm-ls
             jnoortheen.nix-ide
             savh.json5-kit
             ms-azuretools.vscode-docker
             ms-python.python
+            ms-python.vscode-pylance
             redhat.vscode-yaml
             tamasfe.even-better-toml
 
@@ -62,7 +65,6 @@
             ionutvmi.path-autocomplete
             luisfontes19.vscode-swissknife
             ms-kubernetes-tools.vscode-kubernetes-tools
-            mutantdino.resourcemonitor
             signageos.signageos-vscode-sops
           ];
       };
