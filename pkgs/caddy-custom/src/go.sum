@@ -91,6 +91,8 @@ github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625/go.mod h1:HYsPBT
 github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23/go.mod h1:bbYlZJ7hK1yFx9hf58LP0zeX7UjIGs20ufpu3evjr+s=
 github.com/caddy-dns/cloudflare v0.0.0-20240703190432-89f16b99c18e h1:POEJXMmSOMJP/73oM/riQTDMg0yjQYlA7nVjyt1+5p8=
 github.com/caddy-dns/cloudflare v0.0.0-20240703190432-89f16b99c18e/go.mod h1:Osdy4yUAPsR2u4cN1+n/AQ1kleviUcOBZlNB0Dt28gI=
+github.com/caddy-dns/cloudflare v0.0.0-20250228175314-1fb64108d4de h1:F7OQ7AtH6X3gmsHU4dhVsoheMuDe4jNUp2R9paAxDgw=
+github.com/caddy-dns/cloudflare v0.0.0-20250228175314-1fb64108d4de/go.mod h1:9Wfv+TILWL7RIQigpD+2kFwzTzYjiye6hUDxnPKW6N8=
 github.com/caddyserver/caddy/v2 v2.9.1 h1:OEYiZ7DbCzAWVb6TNEkjRcSCRGHVoZsJinoDR/n9oaY=
 github.com/caddyserver/caddy/v2 v2.9.1/go.mod h1:ImUELya2el1FDVp3ahnSO2iH1or1aHxlQEQxd/spP68=
 github.com/caddyserver/certmagic v0.21.6 h1:1th6GfprVfsAtFNOu4StNMF5IxK5XiaI0yZhAHlZFPE=
