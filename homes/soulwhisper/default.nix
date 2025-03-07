@@ -22,9 +22,17 @@
       vscode = {
         userSettings = lib.importJSON ./config/editor/vscode/settings.json;
         extensions = let
-          inherit (inputs.nix-vscode-extensions.extensions.${pkgs.system}) vscode-marketplace;
+          # inherit (inputs.nix-vscode-extensions.extensions.${pkgs.system}) vscode-marketplace;
+          # allowUnfree fix: https://github.com/nix-community/nix-vscode-extensions/issues/99#issuecomment-2703326753
+          pkgs-ext = import inputs.nixpkgs {
+            inherit (pkgs) system;
+            config.allowUnfree = true;
+            overlays = [inputs.nix-vscode-extensions.overlays.default];
+          };
+          marketplace = pkgs-ext.vscode-marketplace;
         in
-          with vscode-marketplace; [
+          # with vscode-marketplace; [
+          with marketplace; [
             # Language
             ms-ceintl.vscode-language-pack-zh-hans
 
@@ -40,7 +48,6 @@
             savh.json5-kit
             ms-azuretools.vscode-docker
             ms-python.python
-            ms-python.vscode-pylance
             redhat.vscode-yaml
             tamasfe.even-better-toml
 

@@ -17,6 +17,12 @@
       # make `nix repl '<nixpkgs>'` use the same nixpkgs as the one used by this flake
       nix-path = "nixpkgs=${inputs.nixpkgs.outPath}";
 
+      # Fastly CDN (cache.nixos.org) blocks some of my proxy servers, so add another cache here
+      substituters = [
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://cache.nixos.org/"
+      ];
+
       trusted-substituters = [
         "https://nix-community.cachix.org"
         "https://cache.garnix.io"

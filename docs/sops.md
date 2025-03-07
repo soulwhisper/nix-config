@@ -19,6 +19,12 @@ apps:
         auth: |
             PHONE_NUMBER={sgcc-account}
             PASSWORD={sgcc-password}
+    lobechat:
+        auth: |
+            S3_ACCESS_KEY_ID={minio-bucket-access-key}
+            S3_SECRET_ACCESS_KEY={minio-bucket-secret-key}
+            AUTH_GITHUB_ID={github-app-client-id}
+            AUTH_GITHUB_SECRET={github-app-client-secret}
 backup:
     restic:
         encryption: {restic-encryption-password}

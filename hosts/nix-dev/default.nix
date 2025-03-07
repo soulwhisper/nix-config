@@ -19,8 +19,17 @@
       };
 
       services = {
+        ## LLM ##
+        ollama = {
+          enable = true;
+          models = ["deepseek-r1:8b"];
+        };
+
         ## Apps ##
-        llm.enable = true;
+        lobechat = {
+          enable = true;
+          authFile = config.sops.secrets."apps/lobechat/auth".path;
+        };
       };
     };
   };

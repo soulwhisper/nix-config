@@ -7,7 +7,9 @@
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
       secrets = {
-        # placeholder
+        "apps/lobechat/auth" = {
+          restartUnits = ["minio.service" "podman-lobechat.service"];
+        };
       };
     };
   };

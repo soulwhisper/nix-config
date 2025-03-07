@@ -60,10 +60,13 @@ netbox-ui: 9201
 talos-api: 9300
 talos-pxe: 9301
 
+## llm, 9400-9499
+ollama: 9400
+
 ## app, 9800-9999
 gatus: 9801
 glance: 9802
-chatbot: 9803
+lobechat: 9803
 
 # vpn
 wireguard: 51820

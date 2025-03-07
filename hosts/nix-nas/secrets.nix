@@ -10,6 +10,9 @@
         "apps/hass-sgcc/auth" = {
           restartUnits = ["podman-hass-sgcc.service"];
         };
+        "apps/lobechat/auth" = {
+          restartUnits = ["minio.service" "podman-lobechat.service"];
+        };
         "backup/restic/endpoint" = {
           restartUnits = ["restic-backups-remote.service"];
         };

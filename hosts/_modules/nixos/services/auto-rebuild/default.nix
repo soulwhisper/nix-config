@@ -77,8 +77,9 @@ in {
           systemctl stop nixos-rebuild-switch-to-configuration.service
         fi
 
+        nixos-rebuild build --flake nix-config/.#${cfg.hostname}
         set +e
-        cd nix-config && nixos-rebuild switch --flake .#${cfg.hostname}
+        nixos-rebuild switch --flake nix-config/.#${cfg.hostname}
         echo "✅ Update COMPLETED [$(date '+%Y-%m-%d %H:%M:%S')]"
       '';
     };

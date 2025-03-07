@@ -1,5 +1,5 @@
 _: {
   nix.gc = {
-    dates = "weekly";
+    dates = "03:00"; # after auto-rebuild
   };
 }

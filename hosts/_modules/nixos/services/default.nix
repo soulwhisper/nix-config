@@ -10,13 +10,15 @@
     ./glance
     ./home-assistant
     ./kms
-    ./llm
+    ./lobechat
     ./minio
     ./monitoring
     ./netbox
     ./nfs
     ./nut
+    ./ollama
     ./openssh
+    ./postgres
     ./podman
     ./restic
     ./samba

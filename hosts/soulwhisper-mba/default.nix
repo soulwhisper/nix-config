@@ -27,10 +27,11 @@
     # testing apps list
     homebrew = {
       taps = [
+        "goreleaser/tap"
       ];
       brews = [
         "derailed/popeye/popeye" # k8s live cluster linter
-        "goreleaser/tap/goreleaser"
+        "goreleaser"
       ];
       casks = [
         "discord"
@@ -47,9 +48,9 @@
         "wireshark"
       ];
       masApps = {
-        "Passepartout" = 1433648537;
         "ReadKit" = 1615798039;
-        # "Windows App" = 1295203466;
+        "Windows App" = 1295203466;
+        # "Passepartout" = 1433648537;
         # "StopTheMadness Pro" = 6471380298; # not owned yet
       };
     };

@@ -1,0 +1,24 @@
+---
+name: Flake update
+
+# this workflow enabled until flake-parts fix renovate
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: 0 2 * * *
+
+jobs:
+  update-flakes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+      - name: Update flakes
+        run: nix flake update
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5
+        with:
+         commit_message: "chore(deps): lock file maintenance"

@@ -7,6 +7,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Flake-parts - Simplify Nix Flakes with the module system
+    ## note: nixpkgs-lib is tarball, will break renovate
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";

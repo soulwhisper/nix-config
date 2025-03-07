@@ -17,7 +17,7 @@ in {
     enable = lib.mkEnableOption "netbox";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/backup/netbox";
+      default = "/opt/apps/netbox";
     };
   };
 
@@ -36,11 +36,7 @@ in {
     '';
 
     # backup postgres database
-    services.postgresqlBackup = {
-      enable = true;
-      databases = ["netbox"];
-      location = "${cfg.dataDir}";
-    };
+    services.postgresqlBackup.databases = ["netbox"];
 
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];

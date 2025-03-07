@@ -5,13 +5,10 @@
   ...
 }: {
   # replace pre-commit and various linters
+  # action cant modify actions without PAT
   git-hooks = {
-    excludes = ["\.json5$" "generated\.(json|nix)$" "nix-build\.ya?ml$" "update-nvfetcher\.ya?ml$" "flake.lock" "\.sops\.ya?ml$"];
+    excludes = ["\.json5$" "generated\.(json|nix)$" "nix-build\.ya?ml$" "update-nvfetcher\.ya?ml$" "flake.lock" "\.sops\.ya?ml$" "\.github"];
     hooks = {
-      actionlint = {
-        enable = true;
-        files = "github\/workflows\/.*\.ya?ml$";
-      };
       alejandra.enable = true;
       prettier = {
         enable = true;

@@ -42,9 +42,14 @@
           dataDir = "/numina/apps/home-assistant";
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
+        lobechat = {
+          enable = true;
+          dataDir = "/numina/apps/lobechat";
+          authFile = config.sops.secrets."apps/lobechat/auth".path;
+        };
         netbox = {
           enable = true;
-          dataDir = "/numina/backup/netbox";
+          dataDir = "/numina/apps/netbox";
         };
         zotregistry = {
           enable = true;
@@ -59,6 +64,7 @@
           encryptionFile = config.sops.secrets."backup/restic/encryption".path;
           dataDir = "/numina/apps";
         };
+        postgresql.dataDir = "/numnia/apps/postgres";
 
         ## Storage ##
         minio = {
