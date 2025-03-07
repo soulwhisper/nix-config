@@ -2,11 +2,10 @@
 name: Flake update
 
 # this workflow enabled until flake-parts fix renovate
+# ref: https://github.com/hercules-ci/flake-parts/issues/277
 
 on:
   workflow_dispatch: {}
-  schedule:
-    - cron: 0 2 * * *
 
 jobs:
   update-flakes:

@@ -1,5 +1,5 @@
 {
-  description = "soulwhisper Nix Flake";
+  description = "soulwhisper's Nix Flake";
 
   inputs = {
     # Nixpkgs and unstable
@@ -7,9 +7,9 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Flake-parts - Simplify Nix Flakes with the module system
-    ## note: nixpkgs-lib is tarball, will break renovate
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
