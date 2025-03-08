@@ -18,22 +18,21 @@ dns {
 
     upstream {
         alidns: 'udp://dns.alidns.com:53'
-        googledns: 'tcp+udp://dns.google:53'
+        cfdns: 'https://cloudflare-dns.com/dns-query'
         internal: 'udp://127.0.0.1:53'
     }
     routing {
         request {
-            qname(geosite:category-ads-all) -> reject
             qname(geosite:google@cn) -> alidns
             qname(geosite:cn) -> alidns
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
-            fallback: googledns
+            fallback: cfdns
         }
         response {
             upstream(internal) -> accept
-            upstream(googledns) -> accept
-            !qname(geosite:cn) && ip(geoip:private) -> googledns
+            upstream(cfdns) -> accept
+            !qname(geosite:cn) && ip(geoip:private) -> cfdns
             fallback: accept
         }
     }
@@ -57,8 +56,6 @@ routing {
     pname(NetworkManager) -> direct
     dip(224.0.0.0/3, 'ff00::/8') -> direct
     dip(geoip:private) -> direct
-
-    l4proto(udp) && dport(443) -> block
 
     dip(geoip:cn) -> direct
     domain(geosite:cn) -> direct
