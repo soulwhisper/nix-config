@@ -6,9 +6,6 @@ fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 pinned = true  # pin until go stable = v1.23.6
-[easytier-latest]
-fetch.github = "EasyTier/EasyTier"
-src.github_tag = "EasyTier/EasyTier"
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"

@@ -3,9 +3,12 @@ name: Flake update
 
 # this workflow enabled until flake-parts fix renovate
 # ref: https://github.com/hercules-ci/flake-parts/issues/277
+# renovate also seems broken
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: 0 1 * * *
 
 jobs:
   update-flakes:
@@ -16,8 +19,24 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
       - name: Update flakes
-        run: nix flake update
-      - name: Auto commit
-        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5
+        id: update-flakes
+        run: |
+          nix flake update
+      - name: Generate Token
+        uses: actions/create-github-app-token@21cfef2b496dd8ef5b904c159339626a10ad380e # v1
+        id: app-token
         with:
-         commit_message: "chore(deps): lock file maintenance"
+          app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
+          private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          title: "chore(deps): Update nix flakes"
+          commit-message: "chore(deps): Update nix flakes"
+          body: |
+            ## Summary
+            ${{ steps.update-flakes.outputs }}
+          add-paths: |
+            flake.lock
+          delete-branch: true
