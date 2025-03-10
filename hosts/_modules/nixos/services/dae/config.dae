@@ -1,8 +1,8 @@
 global {
     wan_interface: auto
     # lan_interface: enp6s19 # remove comment if use as tproxy
-    log_level: info
-    dial_mode: domain
+    log_level: trace
+    dial_mode: domain # domain+ will fix timeout issues
     auto_config_kernel_parameter: true
 }
 
@@ -24,9 +24,9 @@ dns {
     routing {
         request {
             qname(geosite:google@cn) -> alidns
-            qname(geosite:cn) -> alidns
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
+            qtype(https) -> reject
             fallback: googledns
         }
         response {
@@ -58,6 +58,7 @@ routing {
     dip(geoip:private) -> direct
 
     l4proto(udp) && dport(443) -> block
+    dscp(0x4) -> direct
 
     dip(geoip:cn) -> direct
     domain(geosite:cn) -> direct
