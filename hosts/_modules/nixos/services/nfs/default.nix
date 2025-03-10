@@ -9,7 +9,7 @@ in {
     enable = lib.mkEnableOption "nfs4";
     exports = lib.mkOption {
       type = lib.types.attrsOf (
-        lib.types.submodule ( { name, ... }: {
+        lib.types.submodule ({name, ...}: {
           options.path = lib.mkOption {
             type = lib.types.str;
             description = "The path to export, cant be empty";
@@ -51,9 +51,11 @@ in {
       }
     ];
 
-    systemd.tmpfiles.rules = lib.mapAttrsToList (name: cfg:
-      "d ${cfg.path} 0700 root root - -"
-    ) cfg.exports;
+    systemd.tmpfiles.rules =
+      lib.mapAttrsToList (
+        name: cfg: "d ${cfg.path} 0700 root root - -"
+      )
+      cfg.exports;
 
     # NFSv4 only
     services.nfs = {
@@ -63,11 +65,13 @@ in {
         lockdPort = 4001;
         mountdPort = 4002;
         exports = let
-            exportLines = lib.mapAttrsToList (name: cfg:
-              "${cfg.path} ${cfg.subnet}(${cfg.args})"
-            ) cfg.exports;
-          in
-            lib.concatStringsSep "\n" exportLines;
+          exportLines =
+            lib.mapAttrsToList (
+              name: cfg: "${cfg.path} ${cfg.subnet}(${cfg.args})"
+            )
+            cfg.exports;
+        in
+          lib.concatStringsSep "\n" exportLines;
       };
       settings = {
         nfsd.udp = false;
