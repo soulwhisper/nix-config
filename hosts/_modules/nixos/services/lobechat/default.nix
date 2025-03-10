@@ -51,9 +51,9 @@ in {
         POSTGRES_USER = "lobechat";
         POSTGRES_PASSWORD = "lobechat";
       };
-      volumes = {
-        "${cfg.dataDir}:/var/lib/postgresql/data";
-      };
+      volumes = [
+        "${cfg.dataDir}:/var/lib/postgresql/data"
+      ];
     };
     virtualisation.oci-containers.containers."lobechat" = {
       autoStart = true;
