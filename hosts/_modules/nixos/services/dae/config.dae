@@ -17,8 +17,8 @@ dns {
     ipversion_prefer: 4
 
     upstream {
-        # googledns: 'tcp+udp://dns.google:53'
-        alidns: 'https://dns.alidns.com/dns-query'
+        googledns: 'tcp+udp://dns.google:53'
+        alidns: 'udp://dns.alidns.com:53'
         internal: 'udp://127.0.0.1:53'
     }
     routing {
@@ -27,13 +27,12 @@ dns {
             qname(geosite:cn) -> alidns
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
-            # fallback: googledns
-            fallback: alidns
+            fallback: googledns
         }
         response {
             upstream(internal) -> accept
-            # upstream(googledns) -> accept
-            # !qname(geosite:cn) && ip(geoip:private) -> googledns
+            upstream(googledns) -> accept
+            !qname(geosite:cn) && ip(geoip:private) -> googledns
             fallback: accept
         }
     }

@@ -76,7 +76,7 @@ in {
         sed -e 's/^ *//g' -e 's/ *$//g' -e 's/"//g' sublist > sublist.tmp
 
         version="$(dae --version | head -n 1 | sed 's/dae version //')"
-        UA="dae/${version} (like v2rayA/1.0 WebRequestHelper) (like v2rayN/1.0 WebRequestHelper)"
+        UA="dae/$version (like v2rayA/1.0 WebRequestHelper) (like v2rayN/1.0 WebRequestHelper)"
         line_number=1
 
         while IFS= read -r url
@@ -85,14 +85,14 @@ in {
             continue
           fi
 
-          file_name="subscription_${line_number}.sub"
+          file_name="subscription_$line_number.sub"
 
-          if curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "${file_name}.new"; then
-            mv "${file_name}.new" "$file_name"
+          if curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "$file_name.new"; then
+            mv "$file_name.new" "$file_name"
             chmod 0600 "$file_name"
             echo "Downloaded $file_name from $url"
           else
-            rm -f "${file_name}.new"
+            rm -f "$file_name.new"
             echo "Failed to download $file_name from $url"
           fi
 
