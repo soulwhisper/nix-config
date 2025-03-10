@@ -28,20 +28,6 @@ in {
       }
     '';
 
-    # backup postgres database
-    services.postgresqlBackup.databases = ["lobe"];
-    services.postgresql = {
-      enable = true;
-      ensureUsers = [
-        {
-          name = "lobe";
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = ["lobe"];
-      extensions = ps: with ps; [pgvector];
-    };
-
     # s3 storage, init with bucket, access_key, secret_key and readwritePolicy later
     modules.services.minio.enable = true;
 
@@ -49,7 +35,26 @@ in {
     modules.services.ollama.enable = true;
     modules.services.ollama.models = ["nomic-embed-text"];
 
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 root root - -"
+    ];
+
     modules.services.podman.enable = true;
+    virtualisation.oci-containers.containers."pgvector" = {
+      autoStart = true;
+      image = "pgvector/pgvector:pg17";
+      ports = [
+        "5433:5432/tcp"
+      ];
+      environment = {
+        POSTGRES_DB = "lobechat";
+        POSTGRES_USER = "lobechat";
+        POSTGRES_PASSWORD = "lobechat";
+      };
+      volumes = {
+        "${cfg.dataDir}:/var/lib/postgresql/data";
+      };
+    };
     virtualisation.oci-containers.containers."lobechat" = {
       autoStart = true;
       image = "lobehub/lobe-chat-database";
@@ -58,7 +63,7 @@ in {
       ];
       environment = {
         APP_URL = "https://chat.noirprime.com";
-        DATABASE_URL = "postgres://lobe@host.containers.internal:5432/lobe";
+        DATABASE_URL = "postgres://lobechat:lobechat@host.containers.internal:5433/lobechat";
         NEXTAUTH_URL = "https://chat.noirprime.com/api/auth";
         # knowledgebase
         OLLAMA_PROXY_URL = "http://host.containers.internal:9400";
