@@ -35,16 +35,14 @@ jobs:
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
-      - name: Update caddy-custom src files
+      - name: Update caddy-custom
         id: update-caddy-custom
         run: |
-          if grep -q "caddy" "/tmp/nvfetcher-changes"; then
-            echo "Updating caddy-custom ..."
-            cd pkgs/caddy-custom/src
-            rm go*
-            go mod init caddy
-            go mod tidy
-          fi
+          echo "Updating caddy-custom ..."
+          cd pkgs/caddy-custom/src
+          rm go*
+          go mod init caddy
+          go mod tidy
 
       - name: Update vendorHash
         id: update-vendorhash
@@ -53,6 +51,9 @@ jobs:
             jq --arg app "${1}" --arg hash "${2}" '.[$app] = $hash' pkgs/vendorhash.json > tmp.json
             mv tmp.json pkgs/vendorhash.json
           }
+
+          # check caddy-custom everytime
+          echo "caddy-custom:" >> /tmp/nvfetcher-changes
 
           declare -a APP_NAMES
           while read line; do
