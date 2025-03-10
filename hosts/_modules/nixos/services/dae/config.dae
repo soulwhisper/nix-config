@@ -17,8 +17,8 @@ dns {
     ipversion_prefer: 4
 
     upstream {
-        alidns: 'udp://dns.alidns.com:53'
-        cfdns: 'https://cloudflare-dns.com/dns-query'
+        # googledns: 'tcp+udp://dns.google:53'
+        alidns: 'https://dns.alidns.com/dns-query'
         internal: 'udp://127.0.0.1:53'
     }
     routing {
@@ -27,12 +27,13 @@ dns {
             qname(geosite:cn) -> alidns
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
-            fallback: cfdns
+            # fallback: googledns
+            fallback: alidns
         }
         response {
             upstream(internal) -> accept
-            upstream(cfdns) -> accept
-            !qname(geosite:cn) && ip(geoip:private) -> cfdns
+            # upstream(googledns) -> accept
+            # !qname(geosite:cn) && ip(geoip:private) -> googledns
             fallback: accept
         }
     }
@@ -52,7 +53,6 @@ routing {
     pname(lego) -> must_direct
     pname(caddy) -> must_direct
     pname(easytier-core) -> must_direct
-    domain(full: cloudflare-dns.com) -> must_direct
 
     pname(NetworkManager) -> direct
     dip(224.0.0.0/3, 'ff00::/8') -> direct

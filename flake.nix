@@ -70,7 +70,6 @@
         inherit system;
         overlays = builtins.attrValues (import ./overlays {inherit inputs;});
         config.allowUnfree = true;
-        config.cudaSupport = true;
       };
     mkSystemLib = import ./lib/mkSystem.nix {inherit inputs mkPkgsWithSystem;};
   in

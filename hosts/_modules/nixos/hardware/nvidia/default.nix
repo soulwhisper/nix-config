@@ -16,6 +16,9 @@ in {
   ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
   ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
   config = {
+    # make rebuild painfully slow. like 2-3 hours.
+    nixpkgs.config.cudaSupport = lib.mkIf cfg.enable true;
+
     # if desktop
     services.xserver.videoDrivers = lib.mkIf (cfg.enable && cfg.driverType == "desktop") ["nvidia"];
 
