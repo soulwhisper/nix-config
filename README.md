@@ -44,6 +44,9 @@ sudo python3 nix-config/scripts/darwin_set_proxy.py
 sudo darwin-build build --flake nix-config/.#soulwhisper-mba --show-trace
 sudo nvd diff /run/current-system result
 sudo darwin-rebuild switch --flake nix-config/.#soulwhisper-mba
+
+# use mirror temporarily, might build a lot but no errors
+nixos-rebuild build --flake nix-config/.#nix-nas --option substituters "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
 ```
 
 ## Inspiration

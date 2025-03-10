@@ -13,13 +13,24 @@ in {
     };
   };
 
+  # note:
+  # nixpkgs.config.cudaSupport = true; would build all packages that offer cuda with CUDA support
+  # Unfortunately, this would have some big drawbacks:
+  # - CUDA stuff is not in cache.nixos.org (since unfree)
+  # - would have to build everything from source, or from 'nix-community', take 2-3 hours
+  # - CUDA stuff is not build by Hydra -> builds tend to fail more often since it's not tested
+  # - packages like webkitgtk receive a lot of updates, and take a long time to build
+  # -> CUDA support enabled for the whole system is neither practical nor necessary
+  # -> we should enable CUDA support for specific packages only
+  # example: pkgs.cuda-app.override { cudaSupport = true; };
+
   ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
   ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
-  config = {
+  config = lib.mkIf cfg.enable {
     # if desktop
-    services.xserver.videoDrivers = lib.mkIf (cfg.enable && cfg.driverType == "desktop") ["nvidia"];
+    services.xserver.videoDrivers = lib.mkIf (cfg.driverType == "desktop") ["nvidia"];
 
-    hardware = lib.mkIf cfg.enable {
+    hardware = {
       graphics.enable = true;
       nvidia-container-toolkit.enable = true;
       nvidia = {

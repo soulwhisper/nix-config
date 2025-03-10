@@ -2,10 +2,15 @@
 
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 - atuin-key should be base64 format
-- change iterm2/ghostty theme to "catppuccin-mocha"
-- change iterm2/ghostty font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
+- change terminal theme to "catppuccin-mocha"
+- change terminal font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
 - auto rebuild nixos by service "auto-rebuild";
-- if nix-cache not hit, stop dae during rebuild;
+
+## Bug tracker
+
+- dae, dns stuck, [ref](https://github.com/daeuniverse/dae/issues/767); tmp-solution: disable dae, use clash;
+
+## Useful commands
 
 ```shell
 # install req. incl. cachix & nvd

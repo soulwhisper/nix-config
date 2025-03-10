@@ -10,6 +10,7 @@
       pkgs.bashInteractive
       pkgs.devenv
       pkgs.direnv
+      pkgs.git
       pkgs.unstable.uv
     ];
   };

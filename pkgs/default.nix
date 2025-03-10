@@ -6,7 +6,6 @@
   ...
 }: {
   caddy-custom = pkgs.callPackage ./caddy-custom {};
-  easytier-latest = pkgs.callPackage ./easytier-latest {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo {};
