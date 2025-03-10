@@ -16,7 +16,7 @@
 - main program use nixos version, integrations using podman containers for compatibliaty;
 - integrations using mDNS/avahi have random ports >32768;
 - during tests, ui-lovelace use storage mode;
-- homebridge/samba-avahi dont have random high ports, so cant use with hass-stack;
+- homebridge dont have random high ports, so cant use with hass-stack;
 
 ## K8S-related
 

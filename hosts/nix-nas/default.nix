@@ -75,9 +75,10 @@
 
         nfs4 = {
           enable = true;
-          exports = ''
-            /numina/backup/apps 172.19.82.0/24(rw,async,anonuid=1001,anongid=1001)
-          '';
+          exports.app-backup = {
+            path = "/numina/backup/apps";
+            subnet = "172.19.82.0/24";
+          };
         };
 
         timemachine = {

@@ -31,13 +31,25 @@
         home-assistant.enable = true;
         home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;
-        netbox.enable = true;
         unifi-controller.enable = true;
 
         ## Storage ##
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
+        };
+
+        nfs4 = {
+          enable = true;
+          exports.app-backup = {
+            path = "/opt/backup/apps";
+            subnet = "10.10.0.0/24";
+          };
+        };
+
+        timemachine = {
+          enable = true;
+          dataDir = "/opt/backup/timemachine";
         };
       };
     };
