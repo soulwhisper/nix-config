@@ -27,10 +27,6 @@ in {
         reverse_proxy localhost:9803
       }
     '';
-
-    # s3 storage, init with bucket, access_key, secret_key and readwritePolicy later
-    modules.services.minio.enable = true;
-
     # app
     modules.services.ollama.enable = true;
     modules.services.ollama.models = ["nomic-embed-text"];
@@ -65,16 +61,14 @@ in {
         APP_URL = "https://chat.noirprime.com";
         DATABASE_URL = "postgres://lobechat:lobechat@host.containers.internal:5433/lobechat";
         NEXTAUTH_URL = "https://chat.noirprime.com/api/auth";
-        # knowledgebase
+        # knowledgebase, use ollama instead of openai
         OLLAMA_PROXY_URL = "http://host.containers.internal:9400";
         DEFAULT_FILES_CONFIG = "embedding_model=ollama/nomic-embed-text";
-        # s3 storage
-        S3_ENDPOINT = "https://s3.noirprime.com";
-        S3_BUCKET = "lobechat";
-        S3_PUBLIC_DOMAIN = "https://s3.noirprime.com/lobechat";
         # encryption salt, via `openssl rand -base64 32`
         NEXT_AUTH_SECRET = "uOl5uiCgy9x/H2atftZJY8z7XulbQMxbXjA+QNq2Fks=";
         KEY_VAULTS_SECRET = "gCNEJ044+M4Rj2TDPraaHcupvC3kqkaZMk44j6KzNJk=";
+        # s3 storage
+        S3_BUCKET = "lobechat";
         # auth
         NEXT_AUTH_SSO_PROVIDERS = "github";
       };

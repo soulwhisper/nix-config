@@ -8,7 +8,7 @@
 
 ## Bug tracker
 
-- dae, dns stuck, [ref](https://github.com/daeuniverse/dae/issues/767); tmp-solution: disable dae, use clash;
+- dae, domain timeout; solution issue, [ref](https://github.com/daeuniverse/dae/issues/776#issuecomment-2709345478);
 
 ## Useful commands
 

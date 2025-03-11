@@ -27,8 +27,8 @@
         };
 
         ## System ##
-        smartd.enable = true;
-        nut.enable = true;
+        smartd.enable = false;
+        nut.enable = false;
 
         ## K8S:Talos ##
         talos.api.enable = true;
@@ -42,18 +42,9 @@
           dataDir = "/numina/apps/home-assistant";
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
-        lobechat = {
-          enable = true;
-          dataDir = "/numina/apps/lobechat";
-          authFile = config.sops.secrets."apps/lobechat/auth".path;
-        };
         netbox = {
           enable = true;
           dataDir = "/numina/apps/netbox";
-        };
-        zotregistry = {
-          enable = true;
-          dataDir = "/numina/apps/zot";
         };
 
         ## Backup ##

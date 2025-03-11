@@ -1,0 +1,17 @@
+$TTL 3600
+@       IN SOA  ns1.homelab.internal. admin.homelab.internal. (
+                2024052001 ; Serial
+                3600       ; Refresh
+                900        ; Retry
+                604800     ; Expire
+                86400 )    ; Minimum
+
+@       IN NS   ns1.homelab.internal.
+
+; basic
+ns1     IN A    10.0.0.1
+
+; sub
+k8s     IN A    10.10.0.101
+k8s     IN A    10.10.0.102
+k8s     IN A    10.10.0.103

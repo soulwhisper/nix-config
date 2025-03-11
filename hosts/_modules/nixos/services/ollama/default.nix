@@ -24,16 +24,16 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/models 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/ollama 0755 appuser appuser - -"
+      "d /opt/models 0755 appuser appuser - -"
     ];
 
     services.ollama = {
       enable = true;
       package = pkgs.unstable.ollama;
+      host = "0.0.0.0";
       port = 9400;
-      models = "${cfg.dataDir}/models";
-      home = "${cfg.dataDir}/ollama";
+      models = "/opt/models";
+      home = "${cfg.dataDir}";
       user = "appuser";
       group = "appuser";
       loadModels = cfg.models;

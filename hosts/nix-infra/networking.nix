@@ -8,7 +8,7 @@
       hostName = hostname;
       firewall.enable = true;
       nftables.enable = true;
-      nameservers = lib.mkForce ["127.0.0.1"]; # adguard
+      nameservers = lib.mkForce ["127.0.0.1"]; # local-dns
       useNetworkd = false; # experimental
       useDHCP = false; # cause conflict
     };

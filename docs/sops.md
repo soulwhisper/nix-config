@@ -21,10 +21,13 @@ apps:
             PASSWORD={sgcc-password}
     lobechat:
         auth: |
-            S3_ACCESS_KEY_ID={minio-bucket-access-key}
-            S3_SECRET_ACCESS_KEY={minio-bucket-secret-key}
+            S3_ENDPOINT={cf-r2-endpoint}
+            S3_PUBLIC_DOMAIN={cf-bucket-public-domain}
+            S3_ACCESS_KEY_ID={cf-bucket-access-key}
+            S3_SECRET_ACCESS_KEY={cf-bucket-secret-key}
             AUTH_GITHUB_ID={github-app-client-id}
             AUTH_GITHUB_SECRET={github-app-client-secret}
+            DEEPSEEK_API_KEY={deepseek-api-token}
 backup:
     restic:
         encryption: {restic-encryption-password}
