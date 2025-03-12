@@ -54,7 +54,8 @@ smartctl-exporter: 9102
 
 ## system, 9200-9299
 adguard-ui: 9200
-netbox-ui: 9201
+powerdns-ui: 9201
+powerdns-api: 9202
 
 ## k8s, 9300-9399
 talos-api: 9300
@@ -66,7 +67,8 @@ ollama: 9400
 ## app, 9800-9999
 gatus: 9801
 glance: 9802
-lobechat: 9803
+netbox: 9803
+lobechat: 9804
 
 # vpn
 wireguard: 51820
