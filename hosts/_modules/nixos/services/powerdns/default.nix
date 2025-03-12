@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.modules.services.powerdns;
+  hashKeyFile = pkgs.writeTextFile "pdns-hash" (builtins.substring 0 50 (builtins.hashString "sha256" "powerdns"));
 in {
   options.modules.services.powerdns = {
     enable = lib.mkEnableOption "powerdns";
@@ -71,6 +72,8 @@ in {
 
     services.powerdns-admin = {
       enable = true;
+      secretKeyFile = hashKeyFile;
+      saltFile = hashKeyFile;
       config = ''
         BIND_ADDRESS = '0.0.0.0'
         PORT = 9201
