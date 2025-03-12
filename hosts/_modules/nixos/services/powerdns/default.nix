@@ -6,8 +6,8 @@
 }: let
   cfg = config.modules.services.powerdns;
   hashKeyFile = pkgs.writeTextFile {
-     name = "pdns-hash";
-     text = builtins.substring 0 50 (builtins.hashString "sha256" "powerdns");
+    name = "pdns-hash";
+    text = builtins.substring 0 50 (builtins.hashString "sha256" "powerdns");
   };
 in {
   options.modules.services.powerdns = {
