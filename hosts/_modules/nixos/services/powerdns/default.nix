@@ -59,8 +59,8 @@ in {
         User = "appuser";
         Group = "appuser";
         ExecStartPre = pkgs.writeShellScript "pdns-pre-start" ''
-            test -f "/etc/pdns/pdns.sqlite3" || ${pkgs.sqlite}/bin/sqlite3 /etc/pdns/pdns.sqlite3 < ${pkgs.pdns}/share/doc/pdns/schema.sqlite3.sql
-          '';
+          test -f "/etc/pdns/pdns.sqlite3" || ${pkgs.sqlite}/bin/sqlite3 /etc/pdns/pdns.sqlite3 < ${pkgs.pdns}/share/doc/pdns/schema.sqlite3.sql
+        '';
         ExecStart = "${pkgs.pdns}/bin/pdns_server --config-dir=/etc/pdns --guardian=no --daemon=no --disable-syslog --log-timestamp=no --write-pid=no";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
