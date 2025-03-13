@@ -70,8 +70,8 @@ in {
       };
     };
 
-    systemd.services.powerdns-admin.serviceConfig.User = "appuser";
-    systemd.services.powerdns-admin.serviceConfig.Group = "appuser";
+    systemd.services.powerdns-admin.serviceConfig.User = lib.mkDefault "appuser";
+    systemd.services.powerdns-admin.serviceConfig.Group = lib.mkDefault "appuser";
     services.powerdns-admin = {
       enable = true;
       secretKeyFile = null;
