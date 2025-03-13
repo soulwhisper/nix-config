@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}: let 
+}: let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in {
   nix = {
