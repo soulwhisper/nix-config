@@ -5,10 +5,7 @@
   ...
 }: let
   cfg = config.modules.services.powerdns;
-  hashKeyFile = pkgs.writeTextFile {
-    name = "pdns-hash";
-    text = builtins.substring 0 50 (builtins.hashString "sha256" "powerdns");
-  };
+  pdnsHash = builtins.substring 0 50 (builtins.hashString "sha256" "powerdns");
 in {
   options.modules.services.powerdns = {
     enable = lib.mkEnableOption "powerdns";
@@ -30,6 +27,7 @@ in {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 
+    # use pure ip:port in case network failing
     networking.firewall.allowedTCPPorts = [53 9201 9202];
     networking.firewall.allowedUDPPorts = [53];
 
@@ -52,7 +50,6 @@ in {
     };
 
     systemd.services.powerdns = {
-      description = "powerdns Home: Network-level blocker";
       wants = ["network-online.target"];
       after = ["network-online.target"];
       unitConfig = {
@@ -75,12 +72,15 @@ in {
 
     services.powerdns-admin = {
       enable = true;
-      secretKeyFile = hashKeyFile;
-      saltFile = hashKeyFile;
       config = ''
         BIND_ADDRESS = '0.0.0.0'
         PORT = 9201
         SQLALCHEMY_DATABASE_URI = 'sqlite:////etc/pdns/pdns.sqlite3'
+        SQLALCHEMY_TRACK_MODIFICATIONS = True
+        SALT = ${pdnsHash}
+        SECRET_KEY = ${pdnsHash}
+        CAPTCHA_ENABLE = False
+        SAML_ENABLED = False
       '';
     };
   };
