@@ -70,8 +70,12 @@ in {
       };
     };
 
+    systemd.services.powerdns-admin.serviceConfig.User = "appuser";
+    systemd.services.powerdns-admin.serviceConfig.Group = "appuser";
     services.powerdns-admin = {
       enable = true;
+      secretKeyFile = null;
+      saltFile = null;
       config = ''
         BIND_ADDRESS = '0.0.0.0'
         PORT = 9201
