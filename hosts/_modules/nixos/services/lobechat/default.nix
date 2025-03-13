@@ -20,11 +20,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9803];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9804];
 
     services.caddy.virtualHosts."chat.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
-        reverse_proxy localhost:9803
+        reverse_proxy localhost:9804
       }
     '';
     # app
@@ -55,7 +55,7 @@ in {
       autoStart = true;
       image = "lobehub/lobe-chat-database";
       ports = [
-        "9803:3210/tcp"
+        "9804:3210/tcp"
       ];
       environment = {
         APP_URL = "https://chat.noirprime.com";

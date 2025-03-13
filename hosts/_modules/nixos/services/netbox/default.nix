@@ -22,7 +22,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9201];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9803];
 
     services.caddy.virtualHosts."box.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle_path /static/* {
@@ -31,12 +31,16 @@ in {
         file_server
       }
       handle {
-        reverse_proxy localhost:9201
+        reverse_proxy localhost:9803
       }
     '';
 
     # backup postgres database
-    services.postgresqlBackup.databases = ["netbox"];
+    services.postgresqlBackup = {
+      enable = true;
+      databases = ["netbox"];
+      location = "${cfg.dataDir}/backup";
+    };
 
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];
@@ -45,7 +49,7 @@ in {
     ## https://github.com/NixOS/nixpkgs/issues/385193; before fixed
     services.netbox = {
       enable = true;
-      port = 9201;
+      port = 9803;
       listenAddress = "[::]";
       secretKeyFile = saltFile;
       plugins = python3Packages:

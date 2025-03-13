@@ -18,7 +18,7 @@
     ./nut
     ./ollama
     ./openssh
-    ./postgres
+    ./powerdns
     ./podman
     ./restic
     ./samba
