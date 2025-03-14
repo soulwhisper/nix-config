@@ -1,8 +1,11 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
-}: {
+}: let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in {
   nix = {
     registry = {
       stable.flake = inputs.nixpkgs;
@@ -17,23 +20,18 @@
       # make `nix repl '<nixpkgs>'` use the same nixpkgs as the one used by this flake
       nix-path = "nixpkgs=${inputs.nixpkgs.outPath}";
 
-      trusted-substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.garnix.io"
-        "https://numtide.cachix.org"
+      substituters = lib.mkIf isLinux [
         "https://soulwhisper.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://numtide.cachix.org"
+        "https://cache.garnix.io"
       ];
 
       trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
         "soulwhisper.cachix.org-1:GWSDjQwU45RQZwMmxiHKT/IDXsCoadlig+7CNCeocT4="
-      ];
-
-      trusted-users = [
-        "root"
-        "@wheel"
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
 
       # Fallback quickly if substituters are not available.
