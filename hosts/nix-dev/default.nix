@@ -26,10 +26,6 @@
         };
 
         ## Apps ##
-        lobechat = {
-          enable = true;
-          authFile = config.sops.secrets."apps/lobechat/auth".path;
-        };
       };
     };
   };
