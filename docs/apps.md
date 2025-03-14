@@ -1,6 +1,6 @@
 # Apps
 
-- these apps { dae, glance, talos-pxe, nut } have pre-defined configs files in /etc/appname.
+- these apps { dae, glance, hass-sgcc, nut } have pre-defined configs files in /etc/appname.
 - by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
 - system apps might still use root / specific-users.
 - all pip3 packages is now rendered with "pkgs.unstable.uv".
@@ -9,7 +9,7 @@
 
 - servers use systemd and config file, clients use gui.
 - OPNSense: firewall/nat/port-forward, Interface=WAN, Protocol=TCP/UDP, Dest=WAN net, Port=11010, Redirect={Server}, Port=11010; clients use `-p tcp://{domain}:11010`;
-- alternatives: tailscale(>=2000ms).
+- alternatives: tailscale(>2000ms).
 
 ## Home-assistant
 
@@ -21,15 +21,15 @@
 ## K8S-related
 
 - service:adguard is not deprecated until opnsense plugin `os-bind` is stable, [ref1](https://github.com/kubernetes-sigs/external-dns/issues/3721), [ref2](https://github.com/opnsense/plugins/pull/4177);
-- service:minio for k8s offsite backups, i.e. volsync;
-- service:nfs and service:restic is disabled;
-- service:samba for windows / macos backups;
+- service:minio and service:nfs4 for k8s offsite backups, i.e. volsync;
+- service:samba for macos backups;
 
 ## Netbox
 
 - add group `netbox` to caddy-user, disable `ProtectHome` from caddy;
 - run `netbox-manage migrate` after plugins enable / disable, netbox upgrade;
 - run `netbox-manage createsuperuser` to create superuser;
+- todo: move into k8s-cluster;
 
 ## Ports
 
@@ -54,7 +54,6 @@ smartctl-exporter: 9102
 
 ## system, 9200-9299
 adguard-ui: 9200
-netbox-ui: 9201
 
 ## k8s, 9300-9399
 talos-api: 9300
@@ -66,7 +65,7 @@ ollama: 9400
 ## app, 9800-9999
 gatus: 9801
 glance: 9802
-lobechat: 9803
+netbox: 9803
 
 # vpn
 wireguard: 51820

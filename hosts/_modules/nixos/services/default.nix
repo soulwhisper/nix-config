@@ -10,7 +10,6 @@
     ./glance
     ./home-assistant
     ./kms
-    ./lobechat
     ./minio
     ./monitoring
     ./netbox
@@ -18,7 +17,6 @@
     ./nut
     ./ollama
     ./openssh
-    ./postgres
     ./podman
     ./restic
     ./samba

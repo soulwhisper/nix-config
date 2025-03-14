@@ -1,9 +1,0 @@
-[Unit]
-Description=Update dae subscriptions
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=oneshot
-ExecStart=/etc/dae/update-dae-subs.sh
-Restart=on-failure

@@ -139,11 +139,11 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.9.4",
-            "sha256": "sha256-gD9fIBILqSFExTIziNx6Hy6TpsBC90yHSfSDB9fhKwA=",
+            "rev": "v1.9.5",
+            "sha256": "sha256-2YKZfW62yOA8uV3bn6at/9YV3OHjiMuqA1SUupyAAx4=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.9.4"
+        "version": "v1.9.5"
     }
 }

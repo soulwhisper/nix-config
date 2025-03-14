@@ -38,11 +38,13 @@ jobs:
       - name: Update caddy-custom
         id: update-caddy-custom
         run: |
-          echo "Updating caddy-custom ..."
-          cd pkgs/caddy-custom/src
-          rm go*
-          go mod init caddy
-          go mod tidy
+          if grep -q "caddy" "/tmp/nvfetcher-changes"; then
+             echo "Updating caddy-custom ..."
+             cd pkgs/caddy-custom/src
+             rm go*
+             go mod init caddy
+             go mod tidy
+           fi
 
       - name: Update vendorHash
         id: update-vendorhash
@@ -61,6 +63,10 @@ jobs:
           done < /tmp/nvfetcher-changes
 
           for APP_NAME in "${APP_NAMES[@]}"; do
+            if [[ "${APP_NAME}" == "caddy-core" ]]; then
+               APP_NAME="caddy-custom"
+            fi
+
             echo "Check vendorHash for ${APP_NAME}..."
             setHash "${APP_NAME}" ""
             vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')

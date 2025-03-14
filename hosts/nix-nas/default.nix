@@ -55,7 +55,6 @@
           encryptionFile = config.sops.secrets."backup/restic/encryption".path;
           dataDir = "/numina/apps";
         };
-        postgresql.dataDir = "/numnia/apps/postgres";
 
         ## Storage ##
         minio = {
