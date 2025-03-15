@@ -118,12 +118,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "discovery-service",
-            "rev": "v1.0.9",
-            "sha256": "sha256-Mk0npXcSd3UmTlgAlkC/vgOJNVIHy/KV15Y3epRevYw=",
+            "rev": "v1.0.10",
+            "sha256": "sha256-d0aSBtjfSctXn7repf0FwC53zG/9aSnvHRMZpiXCwuA=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.0.9"
+        "version": "v1.0.10"
     },
     "talosctl": {
         "cargoLocks": null,
