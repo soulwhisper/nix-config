@@ -32,14 +32,14 @@ in {
       enable = true;
       user = "appuser";
       group = "appuser";
-      stateDir = "${dataDir}";
+      stateDir = "${cfg.dataDir}";
       lfs.enable = true;
       settings = {
         server = {
           DOMAIN = "git.noirprime.com";
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
-          STATIC_ROOT_PATH = "${dataDir}/data";
+          STATIC_ROOT_PATH = "${cfg.dataDir}/data";
         };
       };
     };
