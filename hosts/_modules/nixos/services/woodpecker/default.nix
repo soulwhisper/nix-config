@@ -14,7 +14,7 @@ in {
       default = "/opt/apps/woodpecker";
     };
     forgejoURL = lib.mkOption {
-      type = lib.types.nullOr lib.types.path;
+      type = lib.types.str;
       default = "http://git.noirprime.com";
     };
     authFile = lib.mkOption {
