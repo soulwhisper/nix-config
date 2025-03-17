@@ -69,7 +69,7 @@ in {
       };
       # environmentFile = ["${cfg.authFile}"];
     };
-    services.woodpecker-agents."local" = {
+    services.woodpecker-agents.agents."local" = {
       enable = true;
       extraGroups = ["podman"];
       environment = {
