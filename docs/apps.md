@@ -46,6 +46,7 @@ unifi: 8080,8443,8880,8843,6789,3478,10001
 ## storage, 9000-9099
 minio: 9000,9001
 zot: 9002
+forgejo: 9003,9004
 
 ## monitor, 9100-9199, internal
 node-exporter: 9100
@@ -54,6 +55,7 @@ smartctl-exporter: 9102
 
 ## system, 9200-9299
 adguard-ui: 9200
+woodpecker: 9201
 
 ## k8s, 9300-9399
 talos-api: 9300
