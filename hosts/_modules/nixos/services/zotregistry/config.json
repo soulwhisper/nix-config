@@ -17,8 +17,8 @@
           "deleteUntagged": true,
           "keepTags": [
             {
-              "mostRecentlyPushedCount": 3,
-              "mostRecentlyPulledCount": 3
+              "mostRecentlyPushedCount": 10,
+              "mostRecentlyPulledCount": 5
             }
           ]
         }

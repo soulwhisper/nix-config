@@ -46,6 +46,18 @@
           enable = true;
           dataDir = "/numina/apps/netbox";
         };
+        zotregistry = {
+          enable = true;
+          dataDir = "/numina/apps/zot";
+        };
+        forgejo = {
+          enable = true;
+          dataDir = "/numina/apps/forgejo";
+        };
+        woodpecker = {
+          enable = true;
+          dataDir = "/numnia/apps/woodpecker";
+        };
 
         ## Backup ##
         restic = {

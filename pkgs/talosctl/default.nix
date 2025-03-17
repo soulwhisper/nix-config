@@ -8,7 +8,7 @@
   packageData = sourceData.talosctl;
   vendorData = lib.importJSON ../vendorhash.json;
 in
-  pkgs.buildGoModule {
+  pkgs.unstable.buildGoModule {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.talosctl;

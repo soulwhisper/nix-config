@@ -7,6 +7,7 @@
     ./chrony
     ./dae
     ./easytier
+    ./forgejo
     ./glance
     ./home-assistant
     ./kms
@@ -23,6 +24,7 @@
     ./smartd
     ./talos-api
     ./unifi-controller
+    ./woodpecker
     ./zotregistry
   ];
 }

@@ -7,7 +7,7 @@
   packageData = sourceData.kubectl-pgo;
   vendorData = lib.importJSON ../vendorhash.json;
 in
-  pkgs.buildGoModule rec {
+  pkgs.unstable.buildGoModule rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.kubectl-pgo;
