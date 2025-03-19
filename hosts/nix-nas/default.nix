@@ -56,7 +56,7 @@
         };
         woodpecker = {
           enable = true;
-          dataDir = "/numnia/apps/woodpecker";
+          dataDir = "/numina/apps/woodpecker";
         };
 
         ## Backup ##

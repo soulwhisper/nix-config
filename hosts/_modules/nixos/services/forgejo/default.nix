@@ -24,10 +24,6 @@ in {
       }
     '';
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-    ];
-
     services.forgejo = {
       enable = true;
       user = "appuser";
@@ -39,7 +35,6 @@ in {
           DOMAIN = "git.noirprime.com";
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
-          STATIC_ROOT_PATH = "${cfg.dataDir}/data";
         };
       };
     };
