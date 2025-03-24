@@ -16,7 +16,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = ["umask=0077"];
               };
             };
             zfs = {
@@ -36,15 +36,15 @@
         rootFsOptions = {
           # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
           acltype = "posixacl";
-	      atime = "off";
-	      compression = "zstd";
+          atime = "off";
+          compression = "zstd";
           mountpoint = "none";
           xattr = "sa";
         };
         options.ashift = "12";
         datasets = {
           "root" = {
-	        type = "zfs_fs";
+            type = "zfs_fs";
             mountpoint = "/";
             # Used by services.zfs.autoSnapshot options.
             options."com.sun:auto-snapshot" = "false";

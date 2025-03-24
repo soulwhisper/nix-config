@@ -28,9 +28,9 @@ in {
       zfs = {
         devNodes = "/dev/disk/by-id";
         extraPools = cfg.mountPoolsAtBoot;
-        forceImportRoot = true;  # not recommended, but stable; todo: disable after tests
+        forceImportRoot = true; # not recommended, but stable; todo: disable after tests
       };
-      kernelParams = ["zfs.zfs_arc_max=4294967296"];  # 4GB
+      kernelParams = ["zfs.zfs_arc_max=4294967296"]; # 4GB
       initrd.postDeviceCommands = lib.mkAfter ''
         zfs rollback -r rpool/root@blank
       '';

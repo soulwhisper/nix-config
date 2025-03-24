@@ -43,8 +43,8 @@ in {
         ExecStart = "${pkgs.adguardhome}/bin/adguardhome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config ${cfg.dataDir}/AdGuardHome.yaml";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
-        RuntimeDirectory="AdGuardHome";
-        StateDirectory="AdGuardHome";
+        RuntimeDirectory = "AdGuardHome";
+        StateDirectory = "AdGuardHome";
         Restart = "always";
         RestartSec = 10;
       };
