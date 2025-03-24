@@ -151,14 +151,14 @@ filtering:
       answer: 10.0.0.10
     - domain: lab.noirprime.com
       answer: 10.0.0.10
-    - domain: k8s.homelab.internal
-      answer: 10.10.0.100
-    - domain: postgres.noirprime.com
-      answer: 10.10.0.201
-    - domain: ingress-int.noirprime.com
-      answer: 10.10.0.202
-    - domain: ingress-ext.noirprime.com
-      answer: 10.10.0.203
+    - domain: box.noirprime.com
+      answer: 10.0.0.10
+    - domain: zot.noirprime.com
+      answer: 10.0.0.10
+    - domain: git.noirprime.com
+      answer: 10.0.0.10
+    - domain: ci.noirprime.com
+      answer: 10.0.0.10
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576

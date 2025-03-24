@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./disko.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./secrets.nix
@@ -41,16 +42,13 @@
 
         nfs4 = {
           enable = true;
-          exports.app-backup = {
-            path = "/opt/backup/apps";
+          exports.default = {
+            path = "/persist/shared/nfs";
             subnet = "10.10.0.0/24";
           };
         };
 
-        timemachine = {
-          enable = true;
-          dataDir = "/opt/backup/timemachine";
-        };
+        timemachine.enable = true;
       };
     };
   };

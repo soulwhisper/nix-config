@@ -5,9 +5,14 @@
   ...
 }: let
   cfg = config.modules.services.dae;
+  configFile = ./config.dae;
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/persist/apps/dae";
+    };
     subscriptionFile = lib.mkOption {
       type = lib.types.str;
       default = null;
@@ -20,10 +25,10 @@ in {
 
     environment.defaultPackages = with pkgs.unstable; [dae];
 
-    environment.etc = {
-      "dae/config.dae".source = pkgs.writeText "config.dae" (builtins.readFile ./config.dae);
-      "dae/config.dae".mode = "0600";
-    };
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0755 root root - -"
+      "C+ ${cfg.dataDir}/config.dae 0600 root root - ${configFile}"
+    ];
 
     services.tinyproxy = {
       enable = true;
@@ -41,8 +46,8 @@ in {
       before = ["update-dae-subs.timer"];
       serviceConfig = {
         PIDFile = "/run/dae.pid";
-        ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c /etc/dae/config.dae";
-        ExecStart = "${lib.getExe pkgs.unstable.dae} run --disable-timestamp -c /etc/dae/config.dae";
+        ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c ${cfg.dataDir}/config.dae";
+        ExecStart = "${lib.getExe pkgs.unstable.dae} run --disable-timestamp -c ${cfg.dataDir}/config.dae";
         ExecReload = "${lib.getExe pkgs.unstable.dae} reload $MAINPID";
         Restart = "always";
       };
@@ -65,13 +70,13 @@ in {
       path = [pkgs.curl pkgs.dae pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
-          echo $(cat ${cfg.subscriptionFile}) > /etc/dae/sublist
+          echo $(cat ${cfg.subscriptionFile}) > ${cfg.dataDir}/sublist
         else
-          echo "CHANGEME" > /etc/dae/sublist
+          echo "CHANGEME" > ${cfg.dataDir}/sublist
         fi
       '';
       script = ''
-        cd /etc/dae
+        cd ${cfg.dataDir}
 
         sed -e 's/^ *//g' -e 's/ *$//g' -e 's/"//g' sublist > sublist.tmp
 

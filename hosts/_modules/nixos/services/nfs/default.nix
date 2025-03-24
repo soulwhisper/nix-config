@@ -21,8 +21,8 @@ in {
           };
           options.args = lib.mkOption {
             type = lib.types.str;
-            default = "rw,async,anonuid=1001,anongid=1001";
-            description = "Export arguments, cant be empty";
+            default = "rw,sync,all_squash,anonuid=1001,anongid=1001";
+            description = "Export arguments, cant be empty, add 'mountpoint' if using zfs dataset";
           };
         })
       );

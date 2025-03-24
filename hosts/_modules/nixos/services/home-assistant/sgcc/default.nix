@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
+  configFile = ./sgcc.env;
 in {
   options.modules.services.home-assistant.sgcc = {
     authFile = lib.mkOption {
@@ -15,20 +16,12 @@ in {
 
   # environment
   # sops."hass.sgcc.auth": PHONE_NUMBER,PASSWORD,PUSHPLUS_TOKEN
-  # "/etc/hass/sgcc.env": HASS_TOKEN
+  # "${cfg.dataDir}/sgcc/sgcc.env": HASS_TOKEN
 
   config = lib.mkIf cfg.enable {
-    environment.etc = {
-      "hass/sgcc.env".source = pkgs.writeTextFile {
-        name = "sgcc.env";
-        text = builtins.readFile ./.env;
-      };
-      "hass/sgcc.env".mode = "0644";
-    };
-
-    # SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/sgcc 0644 appuser appuser - -"
+      "d ${cfg.dataDir}/sgcc 0755 appuser appuser - -"
+      "C+ ${cfg.dataDir}/sgcc/sgcc.env 0644 appuser appuser - ${configFile}"
       "f ${cfg.dataDir}/sgcc/sqlite.db 0644 appuser appuser - -"
     ];
 
@@ -59,7 +52,7 @@ in {
       ];
       environmentFiles = [
         "${cfg.sgcc.authFile}"
-        "/etc/hass/sgcc.env"
+        "${cfg.dataDir}/sgcc/sgcc.env"
       ];
     };
   };

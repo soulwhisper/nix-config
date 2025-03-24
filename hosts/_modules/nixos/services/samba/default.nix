@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "timemachine";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/backup/timemachine";
+      default = "/persist/shared/timemachine";
     };
     maxSize = lib.mkOption {
       type = lib.types.str;

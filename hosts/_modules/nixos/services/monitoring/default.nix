@@ -24,15 +24,19 @@ in {
           enabledCollectors = ["systemd"];
           disabledCollectors = ["textfile"];
         };
-        nut = lib.mkIf cfg.nut.enable {
+        zfs = lib.mkIf config.modules.filesystems.zfs.enable {
           enable = true;
           port = 9101;
+        };
+        nut = lib.mkIf cfg.nut.enable {
+          enable = true;
+          port = 9102;
           nutUser = "upsmon";
           passwordPath = "/etc/nut/password";
         };
         smartctl = lib.mkIf cfg.smartd.enable {
           enable = true;
-          port = 9102;
+          port = 9103;
         };
       };
       scrapeConfigs =
@@ -45,10 +49,18 @@ in {
           }
         ]
         ++ (
+          lib.optional config.modules.filesystems.zfs.enable {
+            job_name = "node-zfs";
+            static_configs = [
+              {targets = ["localhost:9101"];}
+            ];
+          }
+        )
+        ++ (
           lib.optional cfg.nut.enable {
             job_name = "node-nut";
             static_configs = [
-              {targets = ["localhost:9101"];}
+              {targets = ["localhost:9102"];}
             ];
           }
         )
@@ -56,7 +68,15 @@ in {
           lib.optional cfg.smartd.enable {
             job_name = "node-smartd";
             static_configs = [
-              {targets = ["localhost:9102"];}
+              {targets = ["localhost:9103"];}
+            ];
+          }
+        )
+        ++ (
+          lib.optional cfg.zrepl.enable {
+            job_name = "node-zrepl";
+            static_configs = [
+              {targets = ["localhost:9104"];}
             ];
           }
         );

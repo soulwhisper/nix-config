@@ -19,8 +19,5 @@ in {
         unstable.helm-ls
         unstable.minio-client
       ])
-      ++ [
-        inputs.nix-inspect.packages.${pkgs.system}.default
-      ];
   };
 }

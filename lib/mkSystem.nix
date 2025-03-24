@@ -65,6 +65,7 @@
             users.soulwhisper = ../. + "/homes/soulwhisper";
           };
         }
+        disko.nixosModules.disko
         ../hosts/_modules/common
         ../hosts/_modules/darwin
         ../hosts/${hostname}

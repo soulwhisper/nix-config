@@ -26,5 +26,6 @@
     ./unifi-controller
     ./woodpecker
     ./zotregistry
+    ./zrepl
   ];
 }
