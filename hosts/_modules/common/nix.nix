@@ -21,6 +21,7 @@
       substituters =
         [
           "https://soulwhisper.cachix.org"
+          "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
         ]
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
           "https://nix-community.cachix.org"
