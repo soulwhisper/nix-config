@@ -6,7 +6,7 @@
 - change terminal font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
 - auto rebuild nixos by service "auto-rebuild";
 - all nixos system migrate from linux-on-legacy to linux-on-zfs;
-- zfs-impermanence template is "hosts/_modules/nixos/filesystems/zfs/disk-config.nix";
+- zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
 
 ## Bug tracker
 
