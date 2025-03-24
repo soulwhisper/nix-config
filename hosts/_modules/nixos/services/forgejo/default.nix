@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "forgejo";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/forgejo";
+      default = "/persist/apps/forgejo";
     };
   };
 
@@ -23,6 +23,10 @@ in {
         reverse_proxy localhost:9003
       }
     '';
+
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir} 0700 appuser appuser - -"
+    ];
 
     services.forgejo = {
       enable = true;

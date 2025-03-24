@@ -5,13 +5,14 @@
   ...
 }: let
   cfg = config.modules.services.glance;
+  configFile = ./glance.yaml;
   reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.glance = {
     enable = lib.mkEnableOption "glance";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/glance";
+      default = "/persist/apps/glance";
     };
   };
 
@@ -26,15 +27,8 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "C+ ${cfg.dataDir}/glance.yaml 0755 appuser appuser - ${configFile}"
     ];
-
-    environment.etc = {
-      "glance/glance.yaml".source = pkgs.writeTextFile {
-        name = "glance.yaml";
-        text = builtins.readFile ./glance.yaml;
-      };
-      "glance/glance.yaml".mode = "0755";
-    };
 
     systemd.services.glance = {
       description = "Glance feed dashboard server";
@@ -42,9 +36,9 @@ in {
       after = ["network-online.target"];
 
       serviceConfig = {
-        ExecStart = "${lib.getExe pkgs.unstable.glance} --config /etc/glance/glance.yaml";
-        StateDirectory = "${cfg.dataDir}";
-        RuntimeDirectory = "${cfg.dataDir}";
+        ExecStart = "${pkgs.unstable.glance}/bin/glance --config ${cfg.dataDir}/glance.yaml";
+        StateDirectory = "glance";
+        RuntimeDirectory = "glance";
         User = "appuser";
         Group = "appuser";
       };

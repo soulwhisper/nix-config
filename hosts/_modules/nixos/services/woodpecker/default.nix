@@ -9,19 +9,20 @@
 in {
   options.modules.services.woodpecker = {
     enable = lib.mkEnableOption "woodpecker";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/opt/apps/woodpecker";
-    };
     forgejoURL = lib.mkOption {
       type = lib.types.str;
       default = "http://git.noirprime.com";
     };
-    authFile = lib.mkOption {
-      type = lib.types.nullOr lib.types.path;
-      default = null;
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      default = "/persist/apps/woodpecker";
     };
   };
+
+  # update variables in "{cfg.dataDir}/woodpecker.env"
+  # WOODPECKER_FORGEJO_CLIENT
+  # WOODPECKER_FORGEJO_SECRET
+  # WOODPECKER_AGENT_SECRET
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9201];
@@ -34,25 +35,12 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "f ${cfg.dataDir}/woodpecker.env 0644 appuser appuser - -"
     ];
 
     environment.systemPackages = [
       pkgs.woodpecker-cli
     ];
-
-    environment.etc."woodpecker/server.env" = {
-      mode = "0644";
-      text = ''
-        WOODPECKER_FORGEJO_CLIENT=
-        WOODPECKER_FORGEJO_SECRET=
-      '';
-    };
-    environment.etc."woodpecker/agent.env" = {
-      mode = "0644";
-      text = ''
-        WOODPECKER_AGENT_SECRET=
-      '';
-    };
 
     services.woodpecker-server = {
       enable = true;
@@ -64,10 +52,8 @@ in {
         WOODPECKER_SERVER_ADDR = ":9201";
         WOODPECKER_FORGEJO = "true";
         WOODPECKER_FORGEJO_URL = "${cfg.forgejoURL}";
-        WOODPECKER_FORGEJO_CLIENT_FILE = "/etc/woodpecker/server.env";
-        WOODPECKER_FORGEJO_SECRET_FILE = "/etc/woodpecker/server.env";
       };
-      # environmentFile = ["${cfg.authFile}"];
+      environmentFile = ["${cfg.dataDir}/woodpecker.env"];
     };
     services.woodpecker-agents.agents."local" = {
       enable = true;
@@ -77,9 +63,8 @@ in {
         WOODPECKER_BACKEND = "docker";
         DOCKER_HOST = "unix:///run/podman/podman.sock";
         WOODPECKER_BACKEND_DOCKER_VOLUMES = "/etc/timezone:/etc/timezone";
-        WOODPECKER_AGENT_SECRET_FILE = "/etc/woodpecker/agent.env";
       };
-      # environmentFile = ["${cfg.authFile}"];
+      environmentFile = ["${cfg.dataDir}/woodpecker.env"];
     };
   };
 }

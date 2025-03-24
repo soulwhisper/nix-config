@@ -22,11 +22,11 @@ in {
     };
     dataDir = lib.mkOption {
       type = with lib.types; nullOr str;
-      default = null;
+      default = "/persist/apps";
     };
   };
 
-  # sync app files to s3/r2, exclude local minio
+  # sync apps files to s3/r2
   # user = root; if other user, add:CAP_DAC_READ_SEARCH
 
   config = lib.mkIf cfg.enable {

@@ -31,6 +31,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # disko - declarative disk partitioning and formatting
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # VSCode community extensions
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
@@ -46,11 +52,6 @@
     # Catppuccin - Soothing pastel theme for Nix
     catppuccin = {
       url = "github:catppuccin/nix";
-    };
-
-    # Nix Inspect - Interactive tui for inspecting nix configs
-    nix-inspect = {
-      url = "github:bluskript/nix-inspect";
     };
 
     # Talhelper - A tool to help create Talos Kubernetes clusters

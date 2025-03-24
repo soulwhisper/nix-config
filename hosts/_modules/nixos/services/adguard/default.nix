@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "adguard";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/adguard";
+      default = "/persist/apps/adguard";
     };
   };
 
@@ -21,6 +21,8 @@ in {
 
     networking.firewall.allowedTCPPorts = [53 9200];
     networking.firewall.allowedUDPPorts = [53];
+
+    # official service is not working
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0700 appuser appuser - -"
@@ -35,13 +37,14 @@ in {
         StartLimitIntervalSec = 5;
         StartLimitBurst = 10;
       };
-
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${lib.getExe pkgs.adguardhome} --no-check-update --pidfile ${cfg.dataDir}/AdGuardHome.pid --work-dir ${cfg.dataDir} --config ${cfg.dataDir}/AdGuardHome.yaml";
+        ExecStart = "${pkgs.adguardhome}/bin/adguardhome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config ${cfg.dataDir}/AdGuardHome.yaml";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
+        RuntimeDirectory = "AdGuardHome";
+        StateDirectory = "AdGuardHome";
         Restart = "always";
         RestartSec = 10;
       };

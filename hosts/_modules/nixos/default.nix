@@ -8,6 +8,7 @@
 
     ## files ##
     ./desktop.nix
+    ./disk-config.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
@@ -36,9 +37,11 @@
       efi.canTouchEfiVariables = true;
     };
 
+    # linux-on-zfs, using disko.nix
+    modules.filesystems.zfs.enable = true;
+
     # default services for all host
     modules.services = {
-      auto-rebuild.enable = true;
       chrony.enable = true;
       dae.enable = true;
       dae.subscriptionFile = config.sops.secrets."networking/dae/subscription".path;

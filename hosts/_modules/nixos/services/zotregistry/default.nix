@@ -14,7 +14,7 @@ in {
     enable = lib.mkEnableOption "zotregistry";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/zot";
+      default = "/persist/apps/zot";
     };
   };
 

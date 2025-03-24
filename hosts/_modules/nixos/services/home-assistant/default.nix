@@ -14,7 +14,7 @@ in {
     enable = lib.mkEnableOption "home-assistant";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/hass";
+      default = "/persist/apps/hass";
     };
   };
   config = {

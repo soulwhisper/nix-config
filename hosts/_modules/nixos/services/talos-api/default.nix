@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "talos-api";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/talos-api";
+      default = "/persist/apps/talos-api";
     };
   };
 
@@ -28,9 +28,9 @@ in {
       after = ["network-online.target"];
 
       serviceConfig = {
-        ExecStart = "${lib.getExe pkgs.talos-api} -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
-        StateDirectory = "${cfg.dataDir}";
-        RuntimeDirectory = "${cfg.dataDir}";
+        ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
+        StateDirectory = "talos-api";
+        RuntimeDirectory = "talos-api";
         User = "appuser";
         Group = "appuser";
       };

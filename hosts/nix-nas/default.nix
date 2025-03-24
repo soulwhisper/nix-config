@@ -12,13 +12,6 @@
 
   config = {
     modules = {
-      filesystems.zfs = {
-        enable = true;
-        mountPoolsAtBoot = [
-          "numina"
-        ];
-      };
-
       services = {
         adguard.enable = true;
         caddy = {
@@ -39,54 +32,36 @@
         unifi-controller.enable = true;
         home-assistant = {
           enable = true;
-          dataDir = "/numina/apps/home-assistant";
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
-        netbox = {
-          enable = true;
-          dataDir = "/numina/apps/netbox";
-        };
-        zotregistry = {
-          enable = true;
-          dataDir = "/numina/apps/zot";
-        };
-        forgejo = {
-          enable = true;
-          dataDir = "/numina/apps/forgejo";
-        };
-        woodpecker = {
-          enable = true;
-          dataDir = "/numina/apps/woodpecker";
-        };
+        netbox.enable = true;
+        zotregistry.enable = true;
+        forgejo.enable = true;
+        woodpecker.enable = true;
 
         ## Backup ##
         restic = {
-          enable = true;
+          enable = false;
           endpointFile = config.sops.secrets."backup/restic/endpoint".path;
           credentialFile = config.sops.secrets."backup/restic/auth".path;
           encryptionFile = config.sops.secrets."backup/restic/encryption".path;
-          dataDir = "/numina/apps";
         };
 
         ## Storage ##
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-          dataDir = "/numina/apps/minio";
         };
 
         nfs4 = {
           enable = true;
-          exports.app-backup = {
-            path = "/numina/backup/apps";
+          exports.default = {
+            path = "/persist/shared/nfs";
             subnet = "172.19.82.0/24";
           };
         };
 
-        timemachine = {
-          enable = true;
-          dataDir = "/numina/backup/timemachine";
-        };
+        timemachine.enable = true;
       };
     };
   };

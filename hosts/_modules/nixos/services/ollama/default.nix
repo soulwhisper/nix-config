@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "ollama";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/ollama";
+      default = "/persist/apps/ollama";
     };
     models = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -24,7 +24,6 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d /opt/models 0755 appuser appuser - -"
     ];
 
     services.ollama = {
@@ -32,8 +31,7 @@ in {
       package = pkgs.unstable.ollama;
       host = "0.0.0.0";
       port = 9400;
-      models = "/opt/models";
-      home = "${cfg.dataDir}";
+      models = "${cfg.dataDir}";
       user = "appuser";
       group = "appuser";
       loadModels = cfg.models;

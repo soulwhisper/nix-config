@@ -15,10 +15,6 @@
 in {
   options.modules.services.netbox = {
     enable = lib.mkEnableOption "netbox";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/opt/apps/netbox";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,12 +31,10 @@ in {
       }
     '';
 
-    # backup postgres database
-    services.postgresqlBackup = {
-      enable = true;
-      databases = ["netbox"];
-      location = "${cfg.dataDir}/backup";
-    };
+    systemd.tmpfiles.rules = [
+      "d /persist/apps/postgresql 0755 postgres postgres - -"
+      "L /var/lib/postgresql - - - - /persist/apps/postgresql"
+    ];
 
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];

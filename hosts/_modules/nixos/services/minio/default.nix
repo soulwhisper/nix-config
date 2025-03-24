@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "minio";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/opt/apps/minio";
+      default = "/persist/apps/minio";
     };
     rootCredentialsFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;

@@ -1,8 +1,5 @@
 # Apps
 
-- these apps { dae, glance, hass-sgcc, nut } have pre-defined configs files in /etc/appname.
-- by default, all apps will run as 1001:1001 with dataDir "/opt/apps/appname".
-- system apps might still use root / specific-users.
 - all pip3 packages is now rendered with "pkgs.unstable.uv".
 
 ## Easytier
@@ -50,8 +47,10 @@ forgejo: 9003,9004
 
 ## monitor, 9100-9199, internal
 node-exporter: 9100
-nut-exporter: 9101
-smartctl-exporter: 9102
+zfs-exporter: 9101
+nut-exporter: 9102
+smartctl-exporter: 9103
+zrepl-mon: 9104
 
 ## system, 9200-9299
 adguard-ui: 9200
