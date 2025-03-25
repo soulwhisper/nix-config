@@ -27,16 +27,18 @@
         talos.api.enable = true;
 
         ## Apps ##
-        glance.enable = true;
-        kms.enable = true;
-        unifi-controller.enable = true;
         home-assistant = {
           enable = true;
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
+        kms.enable = true;
         netbox.enable = true;
+        unifi-controller.enable = true;
         zotregistry.enable = true;
+
+        ## Apps:Testing ##
         forgejo.enable = true;
+        mattermost.enable = true;
         woodpecker.enable = true;
 
         ## Backup ##

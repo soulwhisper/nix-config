@@ -38,6 +38,7 @@ dae-http: 1080
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
+matterircd: 6667
 
 # remap
 ## storage, 9000-9099
@@ -51,6 +52,7 @@ zfs-exporter: 9101
 nut-exporter: 9102
 smartctl-exporter: 9103
 zrepl-mon: 9104
+netbird-mon: 9105,9106
 
 ## system, 9200-9299
 adguard-ui: 9200
@@ -64,9 +66,9 @@ talos-pxe: 9301
 ollama: 9400
 
 ## app, 9800-9999
-gatus: 9801
-glance: 9802
-netbox: 9803
+mattermost: 9801
+netbird: 9802,9803
+netbox: 9804
 
 # vpn
 wireguard: 51820

@@ -8,9 +8,9 @@
     ./dae
     ./easytier
     ./forgejo
-    ./glance
     ./home-assistant
     ./kms
+    ./mattermost
     ./minio
     ./monitoring
     ./netbox
@@ -19,6 +19,7 @@
     ./ollama
     ./openssh
     ./podman
+    ./postgres
     ./restic
     ./samba
     ./smartd

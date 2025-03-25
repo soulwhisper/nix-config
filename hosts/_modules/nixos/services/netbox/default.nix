@@ -18,7 +18,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9803];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9804];
 
     services.caddy.virtualHosts."box.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle_path /static/* {
@@ -27,14 +27,12 @@ in {
         file_server
       }
       handle {
-        reverse_proxy localhost:9803
+        reverse_proxy localhost:9804
       }
     '';
 
-    systemd.tmpfiles.rules = [
-      "d /persist/apps/postgresql 0755 postgres postgres - -"
-      "L /var/lib/postgresql - - - - /persist/apps/postgresql"
-    ];
+    # persist postgres data
+    modules.services.postgresql.enable = true;
 
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];
@@ -43,7 +41,7 @@ in {
     ## https://github.com/NixOS/nixpkgs/issues/385193; before fixed
     services.netbox = {
       enable = true;
-      port = 9803;
+      port = 9804;
       listenAddress = "[::]";
       secretKeyFile = saltFile;
       plugins = python3Packages:
