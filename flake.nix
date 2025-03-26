@@ -58,6 +58,8 @@
     # Talhelper - A tool to help create Talos Kubernetes clusters
     talhelper = {
       url = "github:budimanjojo/talhelper";
+      # temp fix for flake-parts
+      inputs.flake-parts.inputs.nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     };
 
     # Devenv - Declarative, Reproducible Developer Environments
