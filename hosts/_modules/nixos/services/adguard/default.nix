@@ -29,13 +29,23 @@ in {
       "C+ ${cfg.dataDir}/AdGuardHome.yaml 0700 appuser appuser - ${configFile}"
     ];
 
+    # Avoiding the trap: the start limit
+    # [Unit]
+    # StartLimitBurst=5
+    # StartLimitIntervalSec=10
+    # with `Restart=always`, systemd gives up restarting your service 
+    # if it fails to start more than 5 times within a 10 seconds interval. Forever.
+    # fix:
+    # [Unit]
+    # StartLimitIntervalSec=0
+
     systemd.services.adguardhome = {
       description = "AdGuard Home: Network-level blocker";
       wants = ["network-online.target"];
       after = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
       unitConfig = {
-        StartLimitIntervalSec = 5;
-        StartLimitBurst = 10;
+        StartLimitIntervalSec = 0;
       };
       serviceConfig = {
         User = "appuser";
@@ -46,7 +56,7 @@ in {
         RuntimeDirectory = "AdGuardHome";
         StateDirectory = "AdGuardHome";
         Restart = "always";
-        RestartSec = 10;
+        RestartSec = 5;
       };
     };
   };
