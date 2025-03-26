@@ -9,6 +9,7 @@
     ./easytier
     ./forgejo
     ./home-assistant
+    ./keycloak
     ./kms
     ./mattermost
     ./minio

@@ -70,6 +70,7 @@ talos-pxe: 9301
 ollama: 9400
 
 ## app, 9800-9999
+keycloak: 9800
 mattermost: 9801
 netbird: 9802,9803
 netbox: 9804
