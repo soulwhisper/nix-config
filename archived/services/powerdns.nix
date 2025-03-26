@@ -52,8 +52,7 @@ in {
       wants = ["network-online.target"];
       after = ["network-online.target"];
       unitConfig = {
-        StartLimitIntervalSec = 5;
-        StartLimitBurst = 10;
+        StartLimitIntervalSec = 0;
       };
       serviceConfig = {
         ExecStartPre = pkgs.writeShellScript "pdns-pre-start" ''

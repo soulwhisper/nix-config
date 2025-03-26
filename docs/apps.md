@@ -28,6 +28,10 @@
 - run `netbox-manage createsuperuser` to create superuser;
 - todo: move into k8s-cluster;
 
+## Systemd
+
+- avoid the start limit, set `StartLimitIntervalSec=0` under `unitConfig`;
+
 ## Ports
 
 ```shell
