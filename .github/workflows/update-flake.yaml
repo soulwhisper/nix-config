@@ -30,7 +30,7 @@ jobs:
           private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
       - name: Update flakes
         id: update-flakes
-        uses: DeterminateSystems/update-flake-lock@v24
+        uses: DeterminateSystems/update-flake-lock@a2bbe0274e3a0c4194390a1e445f734c597ebc37 # v24
         with:
           token: ${{ steps.app-token.outputs.token }}
           pr-title: "chore(deps): Update flakes lockfile"
