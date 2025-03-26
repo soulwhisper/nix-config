@@ -33,7 +33,7 @@ in {
     # [Unit]
     # StartLimitBurst=5
     # StartLimitIntervalSec=10
-    # with `Restart=always`, systemd gives up restarting your service 
+    # with `Restart=always`, systemd gives up restarting your service
     # if it fails to start more than 5 times within a 10 seconds interval. Forever.
     # fix:
     # [Unit]
