@@ -62,6 +62,7 @@ in {
         "pv-migrate"
         "mayastor"
         "oidc-login"
+        "rook-ceph"
         "view-secret"
 
         # debug
