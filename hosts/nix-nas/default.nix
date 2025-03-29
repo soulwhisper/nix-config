@@ -11,6 +11,8 @@
   ];
 
   config = {
+    virtualisation.vmware.guest.enable = true; # for vmware
+
     modules = {
       services = {
         adguard.enable = true;

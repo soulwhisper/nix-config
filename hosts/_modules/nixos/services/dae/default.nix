@@ -43,7 +43,9 @@ in {
       documentation = ["https://github.com/daeuniverse/dae"];
       wants = ["network-online.target"];
       after = ["network-online.target" "systemd-sysctl.service" "dbus.service"];
-      before = ["update-dae-subs.timer"];
+      unitConfig = {
+        StartLimitIntervalSec = 0;
+      };
       serviceConfig = {
         PIDFile = "/run/dae.pid";
         ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c ${cfg.dataDir}/config.dae";
