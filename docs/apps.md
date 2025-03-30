@@ -60,7 +60,7 @@ netbird-mon: 9105,9106
 
 ## system, 9200-9299
 adguard-ui: 9200
-woodpecker: 9201
+woodpecker: 9201,9202
 
 ## k8s, 9300-9399
 talos-api: 9300

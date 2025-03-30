@@ -15,12 +15,20 @@
 in {
   options.modules.services.netbox = {
     enable = lib.mkEnableOption "netbox";
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "box.noirprime.com";
+    };
+    internal = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9804];
 
-    services.caddy.virtualHosts."box.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle_path /static/* {
         root * /var/lib/netbox/static
         encode gzip zstd
@@ -29,7 +37,13 @@ in {
       handle {
         reverse_proxy localhost:9804
       }
-    '';
+    '' + (
+      if cfg.internal
+      then ''
+        tls internal
+      ''
+      else ""
+    );
 
     # persist postgres data
     modules.services.postgresql.enable = true;

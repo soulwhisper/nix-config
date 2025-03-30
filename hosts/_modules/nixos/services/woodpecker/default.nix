@@ -50,6 +50,7 @@ in {
         WOODPECKER_ADMIN = "admin";
         WOODPECKER_DISABLE_USER_AGENT_REGISTRATION = "true";
         WOODPECKER_SERVER_ADDR = ":9201";
+        WOODPECKER_GRPC_ADDR = ":9202";
         WOODPECKER_FORGEJO = "true";
         WOODPECKER_FORGEJO_URL = "${cfg.forgejoURL}";
       };
@@ -59,7 +60,7 @@ in {
       enable = true;
       extraGroups = ["podman"];
       environment = {
-        WOODPECKER_SERVER = "localhost:9201";
+        WOODPECKER_SERVER = "localhost:9202";
         WOODPECKER_BACKEND = "docker";
         DOCKER_HOST = "unix:///run/podman/podman.sock";
         WOODPECKER_BACKEND_DOCKER_VOLUMES = "/etc/timezone:/etc/timezone";

@@ -34,7 +34,11 @@
           sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         };
         kms.enable = true;
-        netbox.enable = true;
+        netbox = {
+          enable = true;
+          domain = "box.htkrail.com";
+          internal = true;
+        };
         unifi-controller.enable = true;
         zotregistry.enable = true;
 
