@@ -24,8 +24,8 @@ in {
       }
     '';
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0700 appuser appuser - -"
+    environment.systemPackages = [
+      pkgs.forgejo-cli
     ];
 
     services.forgejo = {
@@ -37,6 +37,7 @@ in {
       settings = {
         server = {
           DOMAIN = "git.noirprime.com";
+          ROOT_URL = "http://git.noirprime.com/";
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
         };

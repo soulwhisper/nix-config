@@ -28,8 +28,9 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9804];
 
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig =
-      lib.mkIf reverseProxyCaddy.enable ''
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable (
+      (lib.optionalString cfg.internal "tls internal\n")
+      + ''
         handle_path /static/* {
           root * /var/lib/netbox/static
           encode gzip zstd
@@ -39,13 +40,7 @@ in {
           reverse_proxy localhost:9804
         }
       ''
-      + (
-        if cfg.internal
-        then ''
-          tls internal
-        ''
-        else ""
-      );
+    );
 
     # persist postgres data
     modules.services.postgresql.enable = true;

@@ -25,16 +25,9 @@ in {
 
     services.mattermost = {
       enable = true;
-      listenAddress = "[::]:9801";
+      listenAddress = ":9801";
       siteName = "Homelab";
       siteUrl = "http://lab.noirprime.com";
-      matterircd = {
-        enable = true;
-        parameters = [
-          "-mmserver lab.noirprime.com"
-          "-bind [::]:6667"
-        ];
-      };
     };
   };
 }
