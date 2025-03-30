@@ -28,22 +28,24 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9804];
 
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle_path /static/* {
-        root * /var/lib/netbox/static
-        encode gzip zstd
-        file_server
-      }
-      handle {
-        reverse_proxy localhost:9804
-      }
-    '' + (
-      if cfg.internal
-      then ''
-        tls internal
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig =
+      lib.mkIf reverseProxyCaddy.enable ''
+        handle_path /static/* {
+          root * /var/lib/netbox/static
+          encode gzip zstd
+          file_server
+        }
+        handle {
+          reverse_proxy localhost:9804
+        }
       ''
-      else ""
-    );
+      + (
+        if cfg.internal
+        then ''
+          tls internal
+        ''
+        else ""
+      );
 
     # persist postgres data
     modules.services.postgresql.enable = true;
