@@ -10,6 +10,7 @@ git clone -b main https://github.com/soulwhisper/nix-config /tmp/nix-config
 
 cp /tmp/config/etc/nixos/hardware-configuration.nix /tmp/nix-config/bootstrap/
 
+### set hostname in /tmp/nix-config/bootstrap/configuration.nix
 nix --extra-experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake '/tmp/nix-config/bootstrap#nixos' --disk main /dev/sda
 
 zfs list

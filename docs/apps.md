@@ -38,7 +38,7 @@
 # should-not-change
 adguard-dns: 53
 caddy: 80,443
-dae-http: 1080
+http-proxy: 1080
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
@@ -60,7 +60,8 @@ netbird-mon: 9105,9106
 
 ## system, 9200-9299
 adguard-ui: 9200
-woodpecker: 9201
+mihomo-ui: 9201
+woodpecker: 9210,9211
 
 ## k8s, 9300-9399
 talos-api: 9300

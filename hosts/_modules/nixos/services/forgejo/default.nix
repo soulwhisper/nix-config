@@ -13,19 +13,23 @@ in {
       type = lib.types.str;
       default = "/persist/apps/forgejo";
     };
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "git.noirprime.com";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9003 9004];
 
-    services.caddy.virtualHosts."git.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
         reverse_proxy localhost:9003
       }
     '';
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0700 appuser appuser - -"
+    environment.systemPackages = [
+      pkgs.forgejo-cli
     ];
 
     services.forgejo = {
@@ -37,6 +41,7 @@ in {
       settings = {
         server = {
           DOMAIN = "git.noirprime.com";
+          ROOT_URL = "http://git.noirprime.com/";
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
         };
