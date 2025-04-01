@@ -46,6 +46,7 @@
 
         ## Apps:Testing ##
         forgejo.enable = true;
+        # harbor.enable = true;
         matterbridge.enable = false;
         mattermost.enable = false; # use discord instead
         woodpecker.enable = true;

@@ -28,6 +28,28 @@
 - run `netbox-manage createsuperuser` to create superuser;
 - todo: move into k8s-cluster;
 
+## Goharbor
+
+- due to the complexity, goharbor remains containers
+- to update goharbor version, run command below
+- this service also follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
+
+```shell
+## full command
+docker run --rm --privileged \
+    -v ${dataDir}/harbor.yml:/input/harbor.yml \
+    -v ${dataDir}/data:/data \
+    -v ${dataDir}/compose:/compose_location \
+    -v ${dataDir}/config:/config \
+    -v /:/hostfs/ \
+    goharbor/prepare:${harbor-version} prepare --with-trivy
+## only update docker-compose.yml
+docker run --rm --privileged \
+    -v ${dataDir}/harbor.yml:/input/harbor.yml \
+    -v ${dataDir}/compose:/compose_location \
+    goharbor/prepare:${harbor-version} prepare --with-trivy
+```
+
 ## Systemd
 
 - avoid the start limit, set `StartLimitIntervalSec=0` under `unitConfig`;
