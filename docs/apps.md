@@ -43,11 +43,12 @@ docker run --rm --privileged \
     -v ${dataDir}/config:/config \
     -v /:/hostfs/ \
     goharbor/prepare:${harbor-version} prepare --with-trivy
-## only update docker-compose.yml
+## only update config and compose files
 docker run --rm --privileged \
-    -v ${dataDir}/harbor.yml:/input/harbor.yml \
-    -v ${dataDir}/compose:/compose_location \
-    goharbor/prepare:${harbor-version} prepare --with-trivy
+    -v "$PWD/harbor.yml:/input/harbor.yml" \
+    -v "$PWD/compose:/compose_location" \
+    -v "$PWD/config:/config" \
+    goharbor/prepare:v2.12.2 prepare --with-trivy
 ```
 
 ## Systemd
