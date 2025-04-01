@@ -26,9 +26,9 @@ in {
         "zfs"
       ];
       zfs = {
-        devNodes = "/dev/disk/by-id";
+        devNodes = "/dev/disk/by-uuid";
         extraPools = cfg.mountPoolsAtBoot;
-        forceImportRoot = true; # not recommended, but stable; todo: disable after tests
+        forceImportRoot = true; # not recommended, but stable;
       };
       kernelParams = ["zfs.zfs_arc_max=4294967296"]; # 4GB
       initrd.postDeviceCommands = lib.mkAfter ''

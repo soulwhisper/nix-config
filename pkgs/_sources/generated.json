@@ -41,27 +41,6 @@
         },
         "version": "1fb64108d4debf196b19d7398e763cb78c8a0f41"
     },
-    "hass-sgcc": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "hass-sgcc",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "ARC-MX",
-            "repo": "sgcc_electricity_new",
-            "rev": "v1.6.4",
-            "sha256": "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=",
-            "sparseCheckout": [],
-            "type": "github"
-        },
-        "version": "v1.6.4"
-    },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
         "date": "2024-05-24",

@@ -16,12 +16,16 @@ in {
       type = lib.types.str;
       default = "/persist/apps/zot";
     };
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "zot.noirprime.com";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9002];
 
-    services.caddy.virtualHosts."zot.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
         reverse_proxy localhost:9002
       }

@@ -14,10 +14,6 @@
     optimise.automatic = true;
 
     settings = {
-      # NIX_PATH is still used by many useful tools, so we set it to the same value as the one used by this flake
-      # make `nix repl '<nixpkgs>'` use the same nixpkgs as the one used by this flake
-      nix-path = "nixpkgs=${inputs.nixpkgs.outPath}";
-
       substituters =
         [
           "https://soulwhisper.cachix.org"
@@ -37,11 +33,17 @@
       # Fallback quickly if substituters are not available.
       connect-timeout = 5;
 
-      # Enable flakes
+      # Enable features
       experimental-features = [
+        "configurable-impure-env"
         "nix-command"
         "flakes"
       ];
+
+      # Enable goproxy
+      impure-env = ''
+        "GOPROXY=https://goproxy.cn,direct"
+      '';
 
       # The default at 10 is rarely enough.
       log-lines = lib.mkDefault 25;

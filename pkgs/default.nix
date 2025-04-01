@@ -6,7 +6,7 @@
   ...
 }: {
   caddy-custom = pkgs.callPackage ./caddy-custom {};
-  hass-sgcc = pkgs.callPackage ./hass-sgcc {};
+  # hass-sgcc = pkgs.callPackage ./hass-sgcc {}; # deprecated, always use container
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;

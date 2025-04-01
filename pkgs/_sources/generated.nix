@@ -24,17 +24,6 @@
     };
     date = "2025-02-28";
   };
-  hass-sgcc = {
-    pname = "hass-sgcc";
-    version = "v1.6.4";
-    src = fetchFromGitHub {
-      owner = "ARC-MX";
-      repo = "sgcc_electricity_new";
-      rev = "v1.6.4";
-      fetchSubmodules = false;
-      sha256 = "sha256-AYkvEWmDIGS1iYmBLeL8woVf5KcE2ypwcoeCVRQYeTY=";
-    };
-  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";

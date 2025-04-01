@@ -13,6 +13,10 @@ in {
       type = lib.types.str;
       default = "/persist/apps/minio";
     };
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "s3.noirprime.com";
+    };
     rootCredentialsFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -22,7 +26,7 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9000 9001];
 
-    services.caddy.virtualHosts."s3.noirprime.com".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       redir /console /console/
       handle_path /console/* {
         reverse_proxy localhost:9001

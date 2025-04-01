@@ -32,6 +32,7 @@ in {
       image = "arcw/sgcc_electricity:latest";
       cmd = ["python3" "main.py"];
       # user = "1001:1001"; # container not support
+      extraOptions = ["--pull=newer"]; # always pull newer latest image
       environment = {
         SET_CONTAINER_TIMEZONE = "true";
         CONTAINER_TIMEZONE = "Asia/Shanghai";

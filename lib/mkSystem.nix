@@ -23,7 +23,7 @@
             useGlobalPkgs = true;
             sharedModules = [
               inputs.sops-nix.homeManagerModules.sops
-              inputs.catppuccin.homeManagerModules.catppuccin
+              inputs.catppuccin.homeModules.catppuccin
             ];
             extraSpecialArgs = {
               inherit inputs hostname system;
@@ -58,7 +58,7 @@
             useGlobalPkgs = true;
             sharedModules = [
               inputs.sops-nix.homeManagerModules.sops
-              inputs.catppuccin.homeManagerModules.catppuccin
+              inputs.catppuccin.homeModules.catppuccin
             ];
             extraSpecialArgs = {
               inherit inputs hostname system;
