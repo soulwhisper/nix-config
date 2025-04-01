@@ -35,13 +35,13 @@
 - this service also follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
 
 ```shell
-## full command
+## full command based on installer
 docker run --rm --privileged \
-    -v ${dataDir}/harbor.yml:/input/harbor.yml \
-    -v ${dataDir}/data:/data \
-    -v ${dataDir}/compose:/compose_location \
-    -v ${dataDir}/config:/config \
-    -v /:/hostfs/ \
+    -v "$PWD/harbor.yml:/input/harbor.yml" \
+    -v "$PWD/data:/data" \
+    -v "$PWD/compose:/compose_location" \
+    -v "$PWD/config:/config" \
+    -v "/:/hostfs/" \
     goharbor/prepare:${harbor-version} prepare --with-trivy
 ## only update config and compose files
 docker run --rm --privileged \
