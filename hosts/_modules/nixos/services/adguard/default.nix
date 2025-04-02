@@ -19,8 +19,8 @@ in {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 
-    networking.firewall.allowedTCPPorts = [5300 9200];
-    networking.firewall.allowedUDPPorts = [5300];
+    networking.firewall.allowedTCPPorts = [53 9200];
+    networking.firewall.allowedUDPPorts = [53];
 
     # official service is not working
 

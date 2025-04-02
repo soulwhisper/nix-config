@@ -44,13 +44,17 @@ docker run --rm --privileged \
     goharbor/prepare:v2.12.2 prepare --with-trivy
 ```
 
-## Podman-network
+## Podman
 
-- requirement: remap local dns service to other port, like `5300`;
-- use one-shot service to create certain network, example below;
-- related services use `extraOptions = [ "--network={networkName}" ];`;
+- with `virtualisation.podman.defaultNetwork.settings.dns_enabled = true;`, default network could resolve containerName;
+- no longer need to create custom networks, or using `host.containers.internal:{port}`, reduce complexity;
+- req: bind local dns service to physical interface and `127.0.0.1`, instead of `0.0.0.0`;
 
 ```shell
+# old days with `networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];`
+# related services use `extraOptions = [ "--network={networkName}" ];`;
+# script could also be `podman network create {networkName} --ignore`;
+# after script add `--internal` if network is internal;
   systemd.services.podman-create-network-{networkName} = {
     serviceConfig.Type = "oneshot";
     wantedBy = [ "{podman-containerName}.service" ];
@@ -58,10 +62,6 @@ docker run --rm --privileged \
       podman network exists {networkName} || podman network create {networkName}
     '';
   };
-
-  # script options
-  # script could also be `podman network create {networkName} --ignore`;
-  # add `--internal` if network is internal;
 ```
 
 ## Systemd
@@ -74,6 +74,7 @@ docker run --rm --privileged \
 
 ```shell
 # should-not-change
+adguard-dns: 53
 caddy: 80,443
 http-proxy: 1080
 home-assistant: 8123
@@ -82,9 +83,6 @@ unifi: 8080,8443,8880,8843,6789,3478,10001
 wireguard: 51820
 
 # remap
-## special
-adguard-dns: 5300
-
 ## storage, 9000-9099
 minio: 9000,9001
 zot: 9002
