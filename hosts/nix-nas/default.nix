@@ -15,6 +15,11 @@
   config = {
     virtualisation.vmware.guest.enable = true;
 
+    # for test
+    environment.systemPackages = [
+      pkgs.zotregistry
+    ];
+
     modules = {
       services = {
         adguard.enable = true;
