@@ -44,23 +44,47 @@ docker run --rm --privileged \
     goharbor/prepare:v2.12.2 prepare --with-trivy
 ```
 
+## Podman-network
+
+- requirement: remap local dns service to other port, like `5300`;
+- use one-shot service to create certain network, example below;
+- related services use `extraOptions = [ "--network={networkName}" ];`;
+
+```shell
+  systemd.services.podman-create-network-{networkName} = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "{podman-containerName}.service" ];
+    script = ''
+      podman network exists {networkName} || podman network create {networkName}
+    '';
+  };
+
+  # script options
+  # script could also be `podman network create {networkName} --ignore`;
+  # add `--internal` if network is internal;
+```
+
 ## Systemd
 
-- avoid the start limit, set `StartLimitIntervalSec=0` under `unitConfig`;
+- avoid the start limit;
+- if service fails to start more than 5 times within a 10 seconds interval, systemd gives up restarting your service. Forever.
+- set `StartLimitIntervalSec=0` under `unitConfig`;
 
 ## Ports
 
 ```shell
 # should-not-change
-adguard-dns: 53
 caddy: 80,443
 http-proxy: 1080
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
-matterircd: 6667
+wireguard: 51820
 
 # remap
+## special
+adguard-dns: 5300
+
 ## storage, 9000-9099
 minio: 9000,9001
 zot: 9002
@@ -91,8 +115,5 @@ keycloak: 9800
 mattermost: 9801
 netbird: 9802,9803
 netbox: 9804
-
-# vpn
-wireguard: 51820
 
 ```

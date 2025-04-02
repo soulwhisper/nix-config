@@ -8,7 +8,6 @@
     ./dae
     ./easytier
     ./forgejo
-    # ./harbor
     ./home-assistant
     ./keycloak
     ./kms
