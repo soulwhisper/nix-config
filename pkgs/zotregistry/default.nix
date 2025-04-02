@@ -34,7 +34,14 @@ in
         --replace-fail "dario.cat/mergo" "github.com/imdario/mergo"
       substituteInPlace go.mod \
         --replace-fail "filippo.io/edwards25519" "github.com/FiloSottile/edwards25519"
+      substituteInPlace Makefile \
+        --replace-fail "$(shell which stacker)" ""
     '';
+
+    nativeBuildInputs = with pkgs; [
+      git
+      nodejs
+    ];
 
     # default = linux-amd64
     buildPhase = ''
