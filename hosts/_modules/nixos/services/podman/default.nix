@@ -35,7 +35,7 @@ in {
         autoPrune = {
           enable = true; # Periodically prune Podman Images not in use.
           dates = "weekly";
-          flags = [ "--all" ];
+          flags = ["--all"];
         };
         defaultNetwork.settings = {
           dns_enabled = true; # Enable DNS resolution in the podman network.
