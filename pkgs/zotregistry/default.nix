@@ -13,14 +13,32 @@ in
     vendorHash = vendorData.zotregistry;
 
     # fix: module lookup disabled by GOPROXY=off
-    proxyVendor = true;
+    # proxyVendor = true;
+
+    configurePhase = ''
+      export GOCACHE="$TMPDIR/go-cache"
+      export GOPATH="$TMPDIR/go"
+      export GOPROXY="https://goproxy.cn,direct"
+    '';
+
+    postPatch = ''
+      substituteInPlace go.mod \
+        --replace-fail "cel.dev/expr" "github.com/google/cel-spec"
+      substituteInPlace go.mod \
+        --replace-fail "cloud.google.com/go" "github.com/googleapis/google-cloud-go"
+      substituteInPlace go.mod \
+        --replace-fail "cuelabs.dev/go/oci/ociregistry" "github.com/cue-labs/oci"
+      substituteInPlace go.mod \
+        --replace-fail "cuelang.org/go" "github.com/cue-lang/cue"
+      substituteInPlace go.mod \
+        --replace-fail "dario.cat/mergo" "github.com/imdario/mergo"
+      substituteInPlace go.mod \
+        --replace-fail "filippo.io/edwards25519" "github.com/FiloSottile/edwards25519"
+    '';
 
     # default = linux-amd64
     buildPhase = ''
-      runHook preBuild
-      go mod download
       make OS=linux ARCH=amd64 binary cli
-      runHook postBuild
     '';
 
     doCheck = false;
