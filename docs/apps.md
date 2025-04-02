@@ -26,24 +26,17 @@
 - add group `netbox` to caddy-user, disable `ProtectHome` from caddy;
 - run `netbox-manage migrate` after plugins enable / disable, netbox upgrade;
 - run `netbox-manage createsuperuser` to create superuser;
-- todo: move into k8s-cluster;
 
 ## Goharbor
 
-- due to the complexity, goharbor remains containers
-- to update goharbor version, run command below
-- this service also follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
+- due to the complexity, goharbor could only be containers;
+- the implementation follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
+- official installer create nine services, with headless podman it needs 6 ports on localhost;
+- however bitnami sunseted its compose configs, it is hard to follow both official environments and bitnami simplicities now;
+- deprecated, use zotregistry instead;
 
 ```shell
-## full command based on installer
-docker run --rm --privileged \
-    -v "$PWD/harbor.yml:/input/harbor.yml" \
-    -v "$PWD/data:/data" \
-    -v "$PWD/compose:/compose_location" \
-    -v "$PWD/config:/config" \
-    -v "/:/hostfs/" \
-    goharbor/prepare:${harbor-version} prepare --with-trivy
-## only update config and compose files
+## create/update config and compose files based on installer
 docker run --rm --privileged \
     -v "$PWD/harbor.yml:/input/harbor.yml" \
     -v "$PWD/compose:/compose_location" \
