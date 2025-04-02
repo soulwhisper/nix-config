@@ -12,6 +12,9 @@ in
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.zotregistry;
 
+    # fix: module lookup disabled by GOPROXY=off
+    proxyVendor = true;
+
     # default = linux-amd64
     buildPhase = ''
       runHook preBuild
