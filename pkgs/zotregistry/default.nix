@@ -18,6 +18,7 @@ in
     # default = linux-amd64
     buildPhase = ''
       runHook preBuild
+      go mod download
       make OS=linux ARCH=amd64 binary cli
       runHook postBuild
     '';

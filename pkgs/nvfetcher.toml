@@ -1,4 +1,4 @@
-[caddy]
+[caddy-core]
 fetch.github = "caddyserver/caddy"
 src.github = "caddyserver/caddy"
 [caddy-plugin-cloudflare]
