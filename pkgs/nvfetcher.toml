@@ -1,4 +1,4 @@
-[caddy-core]
+[caddy]
 fetch.github = "caddyserver/caddy"
 src.github = "caddyserver/caddy"
 [caddy-plugin-cloudflare]
@@ -22,3 +22,6 @@ src.github = "siderolabs/talos"
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"
+[zotregistry]
+fetch.github = "project-zot/zot"
+src.github = "project-zot/zot"

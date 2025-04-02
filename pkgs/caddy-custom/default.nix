@@ -9,7 +9,6 @@
   caddy-version = lib.strings.removePrefix "v" sourceData.caddy-core.version;
   caddy-plugin-cloudflare-version = sourceData.caddy-plugin-cloudflare.version;
 in
-  # use latest golang to build plugins
   pkgs.unstable.buildGoModule {
     pname = "caddy-custom";
     version = caddy-version + "-cloudflare-" + caddy-plugin-cloudflare-version;

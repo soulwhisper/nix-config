@@ -19,8 +19,6 @@
       };
 
       services = {
-        adguard.enable = true;
-
         ## LLM ##
         ollama = {
           enable = true;

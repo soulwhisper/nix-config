@@ -52,19 +52,12 @@ jobs:
             mv tmp.json pkgs/vendorhash.json
           }
 
-          # check caddy-custom everytime
-          echo "caddy-custom:" >> /tmp/nvfetcher-changes
-
           declare -a APP_NAMES
           while read line; do
             APP_NAMES+=("${line%:*}")
           done < /tmp/nvfetcher-changes
 
           for APP_NAME in "${APP_NAMES[@]}"; do
-            if [[ "${APP_NAME}" == "caddy-core" ]]; then
-               APP_NAME="caddy-custom"
-            fi
-
             echo "Check vendorHash for ${APP_NAME}..."
             setHash "${APP_NAME}" ""
             vendorHash=$(nix build --no-link .#${APP_NAME} 2>&1 >/dev/null | grep "got:" | cut -d':' -f2 | sed 's| ||g')

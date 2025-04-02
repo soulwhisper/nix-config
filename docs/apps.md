@@ -26,11 +26,49 @@
 - add group `netbox` to caddy-user, disable `ProtectHome` from caddy;
 - run `netbox-manage migrate` after plugins enable / disable, netbox upgrade;
 - run `netbox-manage createsuperuser` to create superuser;
-- todo: move into k8s-cluster;
+
+## Goharbor
+
+- due to the complexity, goharbor could only be containers;
+- the implementation follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
+- official installer create nine services, with headless podman it needs 6 ports on localhost;
+- however bitnami sunseted its compose configs, it is hard to follow both official environments and bitnami simplicities now;
+- deprecated, use zotregistry instead;
+
+```shell
+## create/update config and compose files based on installer
+docker run --rm --privileged \
+    -v "$PWD/harbor.yml:/input/harbor.yml" \
+    -v "$PWD/compose:/compose_location" \
+    -v "$PWD/config:/config" \
+    goharbor/prepare:v2.12.2 prepare --with-trivy
+```
+
+## Podman
+
+- with `virtualisation.podman.defaultNetwork.settings.dns_enabled = true;`, default network could resolve containerName;
+- no longer need to create custom networks, or using `host.containers.internal:{port}`, reduce complexity;
+- req: bind local dns service to physical interface and `127.0.0.1`, instead of `0.0.0.0`;
+
+```shell
+# old days with `networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];`
+# related services use `extraOptions = [ "--network={networkName}" ];`;
+# script could also be `podman network create {networkName} --ignore`;
+# after script add `--internal` if network is internal;
+  systemd.services.podman-create-network-{networkName} = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "{podman-containerName}.service" ];
+    script = ''
+      podman network exists {networkName} || podman network create {networkName}
+    '';
+  };
+```
 
 ## Systemd
 
-- avoid the start limit, set `StartLimitIntervalSec=0` under `unitConfig`;
+- avoid the start limit;
+- if service fails to start more than 5 times within a 10 seconds interval, systemd gives up restarting your service. Forever.
+- set `StartLimitIntervalSec=0` under `unitConfig`;
 
 ## Ports
 
@@ -42,7 +80,7 @@ http-proxy: 1080
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
-matterircd: 6667
+wireguard: 51820
 
 # remap
 ## storage, 9000-9099
@@ -75,8 +113,5 @@ keycloak: 9800
 mattermost: 9801
 netbird: 9802,9803
 netbox: 9804
-
-# vpn
-wireguard: 51820
 
 ```

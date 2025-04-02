@@ -48,8 +48,7 @@ group {
 }
 
 routing {
-    pname(adguardhome) && l4proto(udp) && dport(53) -> must_direct
-    pname(bind) && l4proto(udp) && dport(53) -> must_direct
+    pname(adguardhome) && l4proto(udp) && dport(5300) -> must_direct
     pname(lego) -> must_direct
     pname(caddy) -> must_direct
     pname(easytier-core) -> must_direct

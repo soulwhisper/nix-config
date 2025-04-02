@@ -42,6 +42,7 @@ in {
     virtualisation.oci-containers.containers."zotregistry" = {
       autoStart = true;
       image = "ghcr.io/project-zot/zot-linux-amd64:latest";
+      extraOptions = ["--pull=newer"];
       ports = [
         "9002:9002/tcp"
       ];
