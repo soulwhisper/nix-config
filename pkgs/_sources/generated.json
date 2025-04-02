@@ -1,9 +1,9 @@
 {
-    "caddy-core": {
+    "caddy": {
         "cargoLocks": null,
         "date": null,
         "extract": null,
-        "name": "caddy-core",
+        "name": "caddy",
         "passthru": null,
         "pinned": false,
         "src": {

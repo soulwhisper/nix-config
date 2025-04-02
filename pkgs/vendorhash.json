@@ -4,5 +4,7 @@
   "talosctl": "sha256-f2hOAF746nMAZe1KEopdpFHfRMEZQdy4VoVUi49CBJo=",
   "caddy-custom": "sha256-3bZJsoRAtnB86mq0uf+o+qvbjZ1rFlv94idU+MRjxwc=",
   "caddy-plugin-cloudflare": "",
-  "zotregistry": "sha256-q74nyQE8ELP54QiebCyLqepHty0kGMcJywo6N72eYDA="
+  "zotregistry": "sha256-q74nyQE8ELP54QiebCyLqepHty0kGMcJywo6N72eYDA=",
+  "caddy": "",
+  "caddy-core": ""
 }
