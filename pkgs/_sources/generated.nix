@@ -69,4 +69,27 @@
       sha256 = "sha256-2YKZfW62yOA8uV3bn6at/9YV3OHjiMuqA1SUupyAAx4=";
     };
   };
+  zotregistry = {
+    pname = "zotregistry";
+    version = "v2.1.2";
+    src = fetchFromGitHub {
+      owner = "project-zot";
+      repo = "zot";
+      rev = "v2.1.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-tVvqNA7imLmVQoO7giEtktJkgQTaaWjkB/aYM+or6kg=";
+    };
+  };
+  zotregistry-ui = {
+    pname = "zotregistry-ui";
+    version = "303dfb3253172babb179a2752f146d9e93081897";
+    src = fetchFromGitHub {
+      owner = "project-zot";
+      repo = "zui";
+      rev = "303dfb3253172babb179a2752f146d9e93081897";
+      fetchSubmodules = false;
+      sha256 = "sha256-J0c/kkM8hkSkzVWXhUCxKKz2zujkuGLrOMb4kpygpkY=";
+    };
+    date = "2025-03-24";
+  };
 }

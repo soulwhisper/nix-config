@@ -39,6 +39,7 @@ in {
     virtualisation.oci-containers.containers."pgvector" = {
       autoStart = true;
       image = "pgvector/pgvector:pg17";
+      extraOptions = ["--pull=newer"];
       ports = [
         "5433:5432/tcp"
       ];
@@ -54,6 +55,7 @@ in {
     virtualisation.oci-containers.containers."lobechat" = {
       autoStart = true;
       image = "lobehub/lobe-chat-database";
+      extraOptions = ["--pull=newer"];
       ports = [
         "9804:3210/tcp"
       ];

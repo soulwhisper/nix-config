@@ -16,12 +16,23 @@ in {
       docker-compose
     ];
 
+    # use `extraOptions = ["--pull=newer"];` to keep image new;
+    # podman new network-stack `aardvark` only use `53/tcp_udp` on `podman*`;
+    # dns-resolving ref: https://github.com/NixOS/nixpkgs/issues/226365
+
     virtualisation = {
       podman = {
         enable = true;
-        dockerCompat = true;
-        dockerSocket.enable = true;
-        autoPrune.enable = true;
+        dockerCompat = true; # Create a `docker` alias for podman
+        dockerSocket.enable = true; # docker compose support
+        autoPrune = {
+          enable = true; # Periodically prune Podman Images not in use.
+          dates = "weekly";
+          flags = ["--all"];
+        };
+        defaultNetwork.settings = {
+          dns_enabled = true; # Enable DNS resolution in the podman default network
+        };
       };
       oci-containers.backend = "podman";
     };

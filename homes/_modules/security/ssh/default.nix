@@ -19,7 +19,7 @@ in {
       inherit (cfg) matchBlocks;
 
       controlMaster = "auto";
-      controlPath = "~/.ssh/control/%C";
+      controlPath = "/home/soulwhisper/.ssh/control/%C";
 
       includes = [
         "config.d/*"

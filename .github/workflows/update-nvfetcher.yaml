@@ -52,9 +52,6 @@ jobs:
             mv tmp.json pkgs/vendorhash.json
           }
 
-          # check caddy-custom everytime
-          echo "caddy-custom:" >> /tmp/nvfetcher-changes
-
           declare -a APP_NAMES
           while read line; do
             APP_NAMES+=("${line%:*}")
