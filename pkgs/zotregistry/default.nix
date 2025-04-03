@@ -12,7 +12,6 @@
     inherit (sourceData.zotregistry-ui) pname src version;
     npmDepsHash = "sha256-5f9D+DmX4I14wx5mNScero1xWQRtuLwhfDXfHM0mbB4=";
 
-    npmRoot = ".";
     npmFlags = ["--legacy-peer-deps"];
 
     installPhase = ''
@@ -41,7 +40,7 @@ in
     ];
 
     preBuild = ''
-      ln -s ${zotregistry-ui}/build pkg/extensions/build
+      cp -r ${zotregistry-ui}/build pkg/extensions/
     '';
 
     tags = [
