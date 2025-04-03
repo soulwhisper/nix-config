@@ -31,6 +31,10 @@
       }
     ];
 
+    # disable unnecessary services
+    systemd.network.wait-online.enable = false;
+    boot.initrd.systemd.network.wait-online.enable = false;
+
     # Use the systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;
