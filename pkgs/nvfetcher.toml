@@ -25,3 +25,7 @@ src.github = "siderolabs/discovery-service"
 [zotregistry]
 fetch.github = "project-zot/zot"
 src.github = "project-zot/zot"
+[zotregistry-ui]
+fetch.tarball = "https://github.com/project-zot/zui/releases/download/$ver/zui.tgz"
+src.github = "project-zot/zui"
+src.use_max_release = true
