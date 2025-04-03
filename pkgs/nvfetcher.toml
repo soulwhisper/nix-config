@@ -29,3 +29,4 @@ src.github = "project-zot/zot"
 fetch.tarball = "https://github.com/project-zot/zui/releases/download/$ver/zui.tgz"
 src.github = "project-zot/zui"
 src.use_max_release = true
+src.include_prereleases = true
