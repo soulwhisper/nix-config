@@ -14,7 +14,7 @@ in
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.zotregistry;
-    
+
     # proxyVendor = true;
 
     nativeBuildInputs = [installShellFiles];
@@ -34,8 +34,8 @@ in
 
     ldflags = [
       "-X zotregistry.dev/zot/pkg/api/config.Commit=v${version}"
-		  "-X zotregistry.dev/zot/pkg/api/config.BinaryType=-imagetrust-lint-metrics-mgmt-profile-scrub-search-sync-ui-userprefs"
-		  "-X zotregistry.dev/zot/pkg/api/config.GoVersion=${lib.getVersion go}"
+      "-X zotregistry.dev/zot/pkg/api/config.BinaryType=-imagetrust-lint-metrics-mgmt-profile-scrub-search-sync-ui-userprefs"
+      "-X zotregistry.dev/zot/pkg/api/config.GoVersion=${lib.getVersion go}"
       "-s"
       "-w"
     ];
