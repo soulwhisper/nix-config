@@ -1,7 +1,7 @@
 {
-  "distSpecVersion": "1.0.1",
+  "distSpecVersion": "1.1.0",
   "storage": {
-    "rootDirectory": "/zot/data",
+    "rootDirectory": "/persist/apps/zot",
     "commit": false,
     "dedupe": true,
     "gc": true,
@@ -30,7 +30,7 @@
     "port": "9002"
   },
   "log": {
-    "level": "info"
+    "level": "debug"
   },
   "extensions": {
     "ui": {

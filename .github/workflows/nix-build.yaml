@@ -86,8 +86,8 @@ jobs:
       - name: Show drv failure details
         if: failure()
         run: |
-          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
-          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv" | head -n 1 )
+          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv")
+          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv" | head -n 1 )
           echo "Last 100 lines of error log:"
           tail -n 100 /tmp/nix-build-err.log
           if [ -n $failed_drv_t1]; then

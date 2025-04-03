@@ -40,6 +40,7 @@ in {
     virtualisation.oci-containers.containers."unifi-controller" = {
       autoStart = true;
       image = "lscr.io/linuxserver/unifi-network-application:latest";
+      extraOptions = ["--pull=newer"];
       dependsOn = ["unifi-db"];
       ports = [
         "8080:8080/tcp"
@@ -64,6 +65,7 @@ in {
     virtualisation.oci-containers.containers."unifi-db" = {
       autoStart = true;
       image = "bitnami/mongodb:7.0";
+      extraOptions = ["--pull=newer"];
       ports = [
         "27017:27017/tcp"
       ];

@@ -22,3 +22,10 @@ src.github = "siderolabs/talos"
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"
+[zotregistry]
+fetch.github = "project-zot/zot"
+src.github = "project-zot/zot"
+[zotregistry-ui]
+fetch.github = "project-zot/zui"
+src.git = "https://github.com/project-zot/zui.git"
+src.branch = "main"

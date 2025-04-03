@@ -124,5 +124,47 @@
             "type": "github"
         },
         "version": "v1.9.5"
+    },
+    "zotregistry": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "zotregistry",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "project-zot",
+            "repo": "zot",
+            "rev": "v2.1.2",
+            "sha256": "sha256-tVvqNA7imLmVQoO7giEtktJkgQTaaWjkB/aYM+or6kg=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v2.1.2"
+    },
+    "zotregistry-ui": {
+        "cargoLocks": null,
+        "date": "2025-03-24",
+        "extract": null,
+        "name": "zotregistry-ui",
+        "passthru": null,
+        "pinned": true,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "project-zot",
+            "repo": "zui",
+            "rev": "303dfb3253172babb179a2752f146d9e93081897",
+            "sha256": "sha256-J0c/kkM8hkSkzVWXhUCxKKz2zujkuGLrOMb4kpygpkY=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "303dfb3253172babb179a2752f146d9e93081897"
     }
 }
