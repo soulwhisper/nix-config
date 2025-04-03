@@ -9,7 +9,7 @@
   vendorData = lib.importJSON ../vendorhash.json;
 
   zotregistry-ui = pkgs.buildNpmPackage rec {
-    inherit (packageData.zotregistry-ui) pname src version;
+    inherit (sourceData.zotregistry-ui) pname src version;
     vendorHash = vendorData.zotregistry-ui;
 
     installPhase = ''
