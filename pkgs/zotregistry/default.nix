@@ -59,8 +59,8 @@ in
 
     installPhase = ''
       runHook preInstall
-      install -Dm755 bin/zli-* -t $out/bin/zli
-      install -Dm755 bin/zot-* -t $out/bin/zot
+      install -Dm755 "$GOPATH"/bin/zli-* -t $out/bin/zli
+      install -Dm755 "$GOPATH"/bin/zot-* -t $out/bin/zot
       runHook postInstall
     '';
 
