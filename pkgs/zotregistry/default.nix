@@ -12,7 +12,7 @@
     inherit (sourceData.zotregistry-ui) pname src version;
     npmDepsHash = "sha256-5f9D+DmX4I14wx5mNScero1xWQRtuLwhfDXfHM0mbB4=";
 
-    npmFlags = [ "--legacy-peer-deps" ];
+    npmFlags = ["--legacy-peer-deps"];
 
     installPhase = ''
       runHook preInstall
