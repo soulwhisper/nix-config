@@ -80,4 +80,16 @@
       sha256 = "sha256-tVvqNA7imLmVQoO7giEtktJkgQTaaWjkB/aYM+or6kg=";
     };
   };
+  zotregistry-ui = {
+    pname = "zotregistry-ui";
+    version = "303dfb3253172babb179a2752f146d9e93081897";
+    src = fetchFromGitHub {
+      owner = "project-zot";
+      repo = "zui";
+      rev = "303dfb3253172babb179a2752f146d9e93081897";
+      fetchSubmodules = false;
+      sha256 = "sha256-J0c/kkM8hkSkzVWXhUCxKKz2zujkuGLrOMb4kpygpkY=";
+    };
+    date = "2025-03-24";
+  };
 }
