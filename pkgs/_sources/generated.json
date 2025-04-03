@@ -152,7 +152,7 @@
         "extract": null,
         "name": "zotregistry-ui",
         "passthru": null,
-        "pinned": true,
+        "pinned": false,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
