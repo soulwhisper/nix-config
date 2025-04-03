@@ -29,3 +29,4 @@ src.github = "project-zot/zot"
 fetch.github = "project-zot/zui"
 src.git = "https://github.com/project-zot/zui.git"
 src.branch = "main"
+pinned = true # dont need auto-update
