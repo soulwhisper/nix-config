@@ -26,7 +26,7 @@ in {
     virtualisation.oci-containers.containers."homebridge" = {
       autoStart = true;
       image = "homebridge/homebridge:latest";
-      extraOptions = ["--network=host"];
+      extraOptions = ["--pull=newer" "--network=host"];
       volumes = [
         "${cfg.dataDir}:/homebridge"
       ];

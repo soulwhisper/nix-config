@@ -14,7 +14,7 @@ in {
     enable = lib.mkEnableOption "zotregistry";
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/persist/apps/zot";
+      default = "/persist/apps/zot"; # "rootDirectory" in config.json
     };
     domain = lib.mkOption {
       type = lib.types.str;
@@ -23,7 +23,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9002];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9002]; # "port" in config.json
 
     services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
@@ -33,26 +33,46 @@ in {
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/data 0755 appuser appuser - -"
+      # "d ${cfg.dataDir}/data 0755 appuser appuser - -"
       "C+ ${cfg.dataDir}/config.json 0600 appuser appuser - ${configFile}"
     ];
 
-    # systemctl status podman-zotregistry.service
-    modules.services.podman.enable = true;
-    virtualisation.oci-containers.containers."zotregistry" = {
-      autoStart = true;
-      image = "ghcr.io/project-zot/zot-linux-amd64:latest";
-      ports = [
-        "9002:9002/tcp"
-      ];
-      environment = {
-        PUID = "1001";
-        PGID = "1001";
+    systemd.services.zotregistry = {
+      description = "OCI Distribution Registry";
+      documentation = ["https://zotregistry.dev/"];
+      wants = ["network-online.target"];
+      after = ["network-online.target" "local-fs.target"];
+      wantedBy = ["multi-user.target"];
+      unitConfig = {
+        StartLimitIntervalSec = 0;
       };
-      volumes = [
-        "${cfg.dataDir}/data:/zot/data"
-        "${cfg.dataDir}/config.json:/etc/zot/config.json"
-      ];
+      serviceConfig = {
+        User = "appuser";
+        Group = "appuser";
+        ExecStartPre = "${pkgs.zotregistry}/bin/zot verify ${cfg.dataDir}/config.json";
+        ExecStart = "${pkgs.zotregistry}/bin/zot serve ${cfg.dataDir}/config.json";
+        Restart = "always";
+        LimitNOFILE = "500000";
+      };
     };
+
+    # systemctl status podman-zotregistry.service
+    # modules.services.podman.enable = true;
+    # virtualisation.oci-containers.containers."zotregistry" = {
+    #   autoStart = true;
+    #   image = "ghcr.io/project-zot/zot-linux-amd64:latest";
+    #   extraOptions = ["--pull=newer"];
+    #   ports = [
+    #     "9002:9002/tcp"
+    #   ];
+    #   environment = {
+    #     PUID = "1001";
+    #     PGID = "1001";
+    #   };
+    #   volumes = [
+    #    "${cfg.dataDir}/data:/zot/data"
+    #     "${cfg.dataDir}/config.json:/etc/zot/config.json"
+    #   ];
+    # };
   };
 }
