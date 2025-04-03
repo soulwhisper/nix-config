@@ -13,4 +13,5 @@
   talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};
   zotregistry = pkgs.callPackage ./zotregistry {};
+  zotregistry-ui = pkgs.callPackage ./zotregistry-ui {};
 }
