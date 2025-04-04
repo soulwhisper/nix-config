@@ -30,11 +30,13 @@ in
 
     postPatch = ''
       # patch hardcored path
-      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/chromedriver" "undetected-chromedriver"
+      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/chromedriver" "$out/share/lib/chromedriver"
       substituteInPlace scripts/main.py --replace-warn "../assets/" ""
       # patch hardcored workdir
       substituteInPlace scripts/data_fetcher.py --replace-warn "/data/" "$out/share/data/"
       substituteInPlace scripts/main.py --replace-warn "/data/" "$out/share/data/"
+      substituteInPlace scripts/data_fetcher.py --replace-warn "./captcha.onnx" "$out/share/lib/captcha.onnx"
+      substituteInPlace scripts/onnx.py --replace-warn "./captcha.onnx" "$out/share/lib/captcha.onnx"
     '';
 
     installPhase = ''
@@ -44,9 +46,12 @@ in
       cp -r scripts $out/share/lib
       cp assets/background.png $out/share/lib/
 
+      # todo, put /data/ and chromedriver at writeable folder
+      cp ${pkgs.chromedriver}/bin/chromedriver $out/share/lib/
+
       makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
         --add-flags "$out/share/lib/main.py" \
-        --prefix PATH : ${lib.makeBinPath [pkgs.chromium pkgs.undetected-chromedriver]} \
+        --prefix PATH : ${lib.makeBinPath [pkgs.chromium]} \
         --prefix PYTHONPATH : "$PYTHONPATH"
 
       runHook postInstall
