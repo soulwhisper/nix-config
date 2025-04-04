@@ -57,10 +57,10 @@ in
       runHook postInstall
     '';
 
-    meta = with lib; {
+    meta = {
       mainProgram = "sgcc_fetcher";
       description = "HomeAssistant sgcc_electricity data fetcher";
       homepage = "https://github.com/ARC-MX/sgcc_electricity_new";
-      maintainers = with maintainers; [soulwhisper];
+      changelog = "https://github.com/project-zot/zot/releases/tag/v${version}";
     };
   }

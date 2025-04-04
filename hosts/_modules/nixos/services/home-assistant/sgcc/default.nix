@@ -25,6 +25,8 @@ in {
       "f ${cfg.dataDir}/sgcc/sqlite.db 0644 appuser appuser - -"
     ];
 
+    environment.systemPackages = with pkgs; [hass-sgcc]; # for test
+
     # systemctl status podman-hass-sgcc.service
     modules.services.podman.enable = true;
     virtualisation.oci-containers.containers."hass-sgcc" = {
