@@ -46,6 +46,7 @@ in
       makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
         --add-flags "$out/share/lib/main.py" \
         --prefix PATH : ${lib.makeBinPath [pkgs.chromium pkgs.undetected-chromedriver]} \
+        --prefix PYTHONPATH : "$PYTHONPATH"
 
       runHook postInstall
     '';
