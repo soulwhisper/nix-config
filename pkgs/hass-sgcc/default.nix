@@ -15,6 +15,7 @@ in
     pythonPath = with pkgs.python3Packages; [
       onnxruntime
       pillow
+      python-dotenv
       numpy
       requests
       schedule
