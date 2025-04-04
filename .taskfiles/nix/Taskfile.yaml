@@ -2,59 +2,73 @@
 version: "3"
 
 tasks:
-  darwin-deploy:
-    desc: Build and apply nix-darwin configuration [HOST=required]
-    silent: true
+  "darwin-*":
+    desc: Build/Deploy nix-darwin configuration [HOST=required]
+    silent: false
     preconditions:
-      - which nix darwin-rebuild
+      - '[[ "{{.OPERATION}}" == "build" || "{{.OPERATION}}" == "switch" ]]'
+      - which nix darwin-rebuild nvd
     requires:
       vars:
         - HOST
     cmds:
-      - task: darwin-build
-        vars:
-          HOST: "{{ .HOST }}"
-      - task: _prompt_to_continue
-      - darwin-rebuild switch --flake "{{.ROOT_DIR}}/#{{.HOST}}"
+      - |
+        darwin-rebuild build --flake "{{.ROOT_DIR}}/#{{.HOST}}"
+        nvd diff /run/current-system result
+        if [[ "{{.OPERATION}}" == "switch" ]]; then
+          read -p "🚨 Apply configuration? (y/N) " -n 1 -r
+          echo
+          [[ $REPLY =~ ^[Yy]$ ]] || exit 1
+          darwin-rebuild switch --flake "{{.ROOT_DIR}}/#{{.HOST}}"
+        fi
 
-  darwin-build:
-    desc: Build nix-darwin configuration [HOST=required]
-    silent: true
+  "nixos-*":
+    desc: Build/Deploy nixos configuration with multi-mode (local-to-local/local-to-remote/remote-to-local/remote-to-remote) support
+    silent: false
     preconditions:
-      - which nix darwin-rebuild
-    requires:
-      vars:
-        - HOST
-    cmds:
-      - darwin-rebuild build --flake "{{.ROOT_DIR}}/#{{.HOST}}"
-      - nvd diff /run/current-system result
-
-  nixos-build:
-    desc: Build nixos configuration [HOST=required]
-    silent: true
-    preconditions:
-      - which nix nixos-rebuild
-    requires:
-      vars:
-        - HOST
+      - '[[ "{{.OPERATION}}" == "build" || "{{.OPERATION}}" == "switch" ]]'
+      # check mode
+      - sh: |
+          case "{{.mode | default local-to-local}}" in
+            local-to-local|local-to-remote|remote-to-local|remote-to-remote) exit 0 ;;
+            *) echo "Invalid mode: {{.mode}}"; exit 1 ;;
+          esac
+      # check vars
+      - sh: |
+          case "{{.mode}}" in
+            "local-to-remote")
+              [ -n "{{.HOST}}" ] || { echo "HOST required in local-to-remote mode"; exit 1; }
+              [ -n "{{.DOMAIN}}" ] || { echo "DOMAIN required in local-to-remote mode"; exit 1; } ;;
+            "remote-to-local")
+              [ -n "{{.HOST}}" ] || { echo "HOST required in remote-to-local mode"; exit 1; }
+              [ -n "{{.DOMAIN}}" ] || { echo "DOMAIN required in remote-to-local mode"; exit 1; } ;;
+            "remote-to-remote")
+              [ -n "{{.SOURCE_HOST}}" ] || { echo "SOURCE_HOST required in remote-to-remote mode"; exit 1; }
+              [ -n "{{.SOURCE_DOMAIN}}" ] || { echo "SOURCE_DOMAIN required in remote-to-remote mode"; exit 1; }
+              [ -n "{{.TARGET_HOST}}" ] || { echo "TARGET_HOST required in remote-to-remote mode"; exit 1; }
+              [ -n "{{.TARGET_DOMAIN}}" ] || { echo "TARGET_DOMAIN required in remote-to-remote mode"; exit 1; } ;;
+          esac
+          exit 0
     vars:
+      OPERATION: "{{index .MATCH 0}}"
       SSH_USER: soulwhisper
+      MODE: "{{.mode | default local-to-local}}"
+      SOURCE_HOST: >-
+        {{- if eq .mode local-to-remote -}}localhost
+        {{- else if eq .mode remote-to-local -}}{{.SSH_USER}}@{{.HOST}}.{{.DOMAIN}}
+        {{- else if eq .mode remote-to-remote -}}{{.SSH_USER}}@{{.SOURCE_HOST}}.{{.SOURCE_DOMAIN}}
+        {{- else -}}localhost{{end -}}
+      TARGET_HOST: >-
+        {{- if eq .mode local-to-remote -}}{{.SSH_USER}}@{{.HOST}}.{{.DOMAIN}}
+        {{- else if eq .mode remote-to-local -}}localhost
+        {{- else if eq .mode remote-to-remote -}}{{.SSH_USER}}@{{.TARGET_HOST}}.{{.TARGET_DOMAIN}}
+        {{- else -}}localhost{{end -}}
+      FLAKE_TARGET: >-
+        {{- if eq .mode "remote-to-remote" -}}{{.TARGET_HOST | replace (printf "%s@" .SSH_USER) "" | split "." | first }}
+        {{- else if .HOST -}}{{.HOST}}
+        {{- else -}}{{ sh "hostname" }}{{end -}}
     cmds:
-      - nix-shell -p nixos-rebuild --run 'nixos-rebuild build --flake .#{{.HOST}} --fast --use-remote-sudo --build-HOST "{{.SSH_USER}}@{{.HOST}}.homelab.internal" --target-HOST "{{.SSH_USER}}@{{.HOST}}.homelab.internal"'
-
-  nixos-deploy:
-    desc: Build and apply nixos configuration [HOST=required]
-    silent: true
-    preconditions:
-      - which nix nixos-rebuild
-    requires:
-      vars:
-        - HOST
-    vars:
-      SSH_USER: soulwhisper
-    cmds:
-      - nix-shell -p nixos-rebuild --run 'nixos-rebuild switch --flake .#{{.HOST}} --fast --use-remote-sudo --build-HOST "{{.SSH_USER}}@{{.HOST}}.homelab.internal" --target-HOST "{{.SSH_USER}}@{{.HOST}}.homelab.internal"'
-
-  _prompt_to_continue:
-    internal: true
-    prompt: Do you want to continue applying this configuration?
+      - nixos-rebuild {{.OPERATION}} --flake {{.ROOT_DIR}}/.#{{.FLAKE_TARGET}} --fast
+        --build-host "{{.BUILD_HOST}}"
+        --target-host "{{.TARGET_HOST}}"
+        --use-remote-sudo

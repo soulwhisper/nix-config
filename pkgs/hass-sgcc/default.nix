@@ -1,66 +1,59 @@
 {
-  pkgs,
   lib,
-  stdenvNoCC,
-  python3,
-  makeWrapper,
+  pkgs,
   ...
 }: let
   sourceData = pkgs.callPackage ../_sources/generated.nix {};
   packageData = sourceData.hass-sgcc;
   vendorData = lib.importJSON ../vendorhash.json;
-
-  python = python3.withPackages (
-    ps:
-      with ps; [
-        onnxruntime
-        pillow
-        python-dateutil
-        python-dotenv
-        numpy
-        requests
-        schedule
-        selenium
-        sympy
-        undetected-chromedriver
-      ]
-  );
-  binPath = lib.makeBinPath [
-    pkgs.chromium
-  ];
 in
-  stdenvNoCC.mkDerivation {
+  pkgs.python3Packages.buildPythonApplication rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.hass-sgcc;
 
-    dontBuild = true;
-    doCheck = true;
+    pythonPath = with pkgs.python3Packages; [
+      onnxruntime
+      pillow
+      numpy
+      requests
+      schedule
+      selenium
+      sympy
+      undetected-chromedriver
+    ];
 
-    nativeBuildInputs = [makeWrapper];
+    format = "other";
+    dontBuild = true;
+    doCheck = false;
+
+    postPatch = ''
+      # patch hardcored path
+      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/chromedriver" "undetected-chromedriver"
+      substituteInPlace scripts/main.py --replace-warn "../assets/" ""
+      # patch hardcored workdir
+      substituteInPlace scripts/data_fetcher.py --replace-warn "/data/" "$out/share/data/"
+      substituteInPlace scripts/main.py --replace-warn "/data/" "$out/share/data/"
+    '';
 
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/share
-      cp -r scripts $out/share/hass-sgcc
+      mkdir -p "$out"/{bin,share/data}
+      cp -r scripts $out/share/lib
+      cp assets/background.png $out/share/lib/
 
-      # src is designed for container, needs to replace '/usr/bin/' and '/data/'
-      substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/usr/bin/chromedriver" "${lib.getExe pkgs.undetected-chromedriver}"
-      substituteInPlace $out/share/hass-sgcc/main.py --replace-fail "/data/" "./"
-      substituteInPlace $out/share/hass-sgcc/data_fetcher.py --replace-fail "/data/" "./"
-
-      makeWrapper ${python.interpreter} "$out/bin/sgcc_fetcher" \
-          --add-flags "$out/share/hass-sgcc/main.py" \
-          --prefix PATH : "${binPath}"
+      makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
+        --add-flags "$out/share/lib/main.py" \
+        --prefix PATH : ${lib.makeBinPath [pkgs.chromium pkgs.undetected-chromedriver]} \
 
       runHook postInstall
     '';
 
-    meta = with lib; {
+    meta = {
       mainProgram = "sgcc_fetcher";
       description = "HomeAssistant sgcc_electricity data fetcher";
       homepage = "https://github.com/ARC-MX/sgcc_electricity_new";
-      maintainers = with maintainers; [soulwhisper];
+      changelog = "https://github.com/project-zot/zot/releases/tag/${packageData.version}";
     };
   }

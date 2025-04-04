@@ -6,9 +6,9 @@ fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 # pinned = true  # pin until go stable = v1.23.6
-# [hass-sgcc]
-# fetch.github = "ARC-MX/sgcc_electricity_new"
-# src.github = "ARC-MX/sgcc_electricity_new"
+[hass-sgcc]
+fetch.github = "ARC-MX/sgcc_electricity_new"
+src.github = "ARC-MX/sgcc_electricity_new"
 [kubecolor-catppuccin]
 fetch.github = "vkhitrin/kubecolor-catppuccin"
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"

@@ -13,40 +13,32 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 ## Usage
 
 ```shell
+git clone https://github.com/soulwhisper/nix-config
+
 # darwin
-## opt1. run set-proxy script
+## opt. run set-proxy script
 sudo python3 scripts/darwin_set_proxy.py
-## opt2. or, change source
-curl https://chsrc.run/posix | sudo bash
-sudo chsrc set brew | nix
 ## build & diff
 task nix:darwin-build HOST=soulwhisper-mba
-## deploy
-task nix:darwin-deploy HOST=soulwhisper-mba
+## switch
+task nix:darwin-switch HOST=soulwhisper-mba
+
+# nixos, local
+## build
+task nix:nixos-build HOST=nix-nas
+## switch
+task nix:nixos-switch HOST=nix-nas
 
 # nixos, remote
 ## set DNS record then test ssh connections
-## cp machineconfig
-cp /etc/nixos/hardware-configuration.nix hosts/nix-nas/hardware-configuration.nix
-## build & diff
-task nix:nixos-build HOST=nix-nas
-## deploy
-task nix:nixos-deploy HOST=nix-nas
+## copy machineconfig to "hosts/{HOST}/hardware-configuration.nix"
+## build
+task nix:nixos-build MODE=remote-to-remote SOURCE_HOST=nix-dev SOURCE_DOMAIN=homelab.internal TARGET_HOST=nix-nas TARGET_DOMAIN=homelab.internal
+## switch
+task nix:nixos-switch MODE=local-to-remote HOST=nix-nas DOMAIN=homelab.internal
 
-# nixos, local
-git clone https://github.com/soulwhisper/nix-config
-nixos-rebuild build --flake nix-config/.#nix-nas --show-trace --print-build-logs
-nixos-rebuild switch --flake nix-config/.#nix-nas
-
-# darwin, local
-git clone https://github.com/soulwhisper/nix-config
-sudo python3 nix-config/scripts/darwin_set_proxy.py
-sudo darwin-build build --flake nix-config/.#soulwhisper-mba --show-trace
-sudo nvd diff /run/current-system result
-sudo darwin-rebuild switch --flake nix-config/.#soulwhisper-mba
-
-# use mirror temporarily, might build a lot but no errors
-nixos-rebuild build --flake nix-config/.#nix-nas --option substituters "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+# build and try pkgs
+nix build nix-config/.#zotregistry --print-out-paths
 ```
 
 ## Inspiration

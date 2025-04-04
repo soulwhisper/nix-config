@@ -37,6 +37,8 @@ in {
       "C+ ${cfg.dataDir}/config.json 0600 appuser appuser - ${configFile}"
     ];
 
+    environment.systemPackages = with pkgs; [zotregistry]; # provide zotregistry-cli: zli
+
     systemd.services.zotregistry = {
       description = "OCI Distribution Registry";
       documentation = ["https://zotregistry.dev/"];

@@ -3,6 +3,7 @@
 name: Build and diff Nix systems
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -20,6 +21,7 @@ concurrency:
 jobs:
   nix-build:
     if: |
+      github.event_name == 'workflow_dispatch' ||
       github.event_name == 'pull_request' ||
       (github.event_name == 'push' &&
        !(github.event.head_commit.committer.username == 'web-flow' &&
@@ -86,14 +88,18 @@ jobs:
       - name: Show drv failure details
         if: failure()
         run: |
-          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv")
-          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv" | head -n 1 )
+          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
+          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
           echo "Last 100 lines of error log:"
           tail -n 100 /tmp/nix-build-err.log
-          if [ -n $failed_drv_t1]; then
-            nix log $failed_drv_t1
-          else if [ -n $failed_drv_t2]; then
-            nix log $failed_drv_t2
+          if [ -n "$failed_drv_t1" ]; then
+            echo "Showing logs for $failed_drv_t1"
+            nix log "$failed_drv_t1"
+          elif [ -n "$failed_drv_t2" ]; then
+            echo "Showing logs for $failed_drv_t2"
+            nix log "$failed_drv_t2"
+          else
+            echo "No derivation files found in error log."
           fi
           exit 1
 
