@@ -29,7 +29,6 @@
 
         ## Apps:Home ##
         home-assistant.enable = true;
-        home-assistant.sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
         kms.enable = true;
         unifi-controller.enable = true;
 

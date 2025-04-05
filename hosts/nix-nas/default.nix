@@ -15,11 +15,6 @@
   config = {
     virtualisation.vmware.guest.enable = true;
 
-    # for test
-    environment.systemPackages = [
-      pkgs.zotregistry
-    ];
-
     modules = {
       services = {
         adguard.enable = true;
@@ -36,10 +31,7 @@
         talos.api.enable = true;
 
         ## Apps ##
-        home-assistant = {
-          enable = true;
-          sgcc.authFile = config.sops.secrets."apps/hass-sgcc/auth".path;
-        };
+        home-assistant.enable = true;
         kms.enable = true;
         netbox = {
           enable = true;
@@ -51,8 +43,6 @@
 
         ## Apps:Testing ##
         forgejo.enable = true;
-        matterbridge.enable = false;
-        mattermost.enable = false; # use discord instead
         woodpecker.enable = true;
 
         ## Backup ##

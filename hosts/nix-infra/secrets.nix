@@ -7,9 +7,6 @@
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
       secrets = {
-        "apps/hass-sgcc/auth" = {
-          restartUnits = ["podman-hass-sgcc.service"];
-        };
         "backup/restic/endpoint" = {
           restartUnits = ["restic-backups-remote.service"];
         };
