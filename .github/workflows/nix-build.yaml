@@ -3,6 +3,7 @@
 name: Build and diff Nix systems
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -20,6 +21,7 @@ concurrency:
 jobs:
   nix-build:
     if: |
+      github.event_name == 'workflow_dispatch' ||
       github.event_name == 'pull_request' ||
       (github.event_name == 'push' &&
        !(github.event.head_commit.committer.username == 'web-flow' &&
@@ -42,15 +44,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          ref: main
-          fetch-depth: 0
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
         # with:
         #   source-tag: "v0.32.3"   # bugfixed
-      # - name: Set up Magic Nix Cache # deprecated since 20250201
-      #  uses: DeterminateSystems/magic-nix-cache-action@6221693898146dc97e38ad0e013488a16477a4c4 # v9
       - name: Set up Cachix
         uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad # v16
         if: ${{ !github.event.pull_request.head.repo.fork }}
@@ -86,14 +83,18 @@ jobs:
       - name: Show drv failure details
         if: failure()
         run: |
-          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv")
-          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE "/nix/store/*.drv" | head -n 1 )
+          failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
+          failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
           echo "Last 100 lines of error log:"
-          tail -n 100 /tmp/nix-build-err.log
-          if [ -n $failed_drv_t1]; then
-            nix log $failed_drv_t1
-          else if [ -n $failed_drv_t2]; then
-            nix log $failed_drv_t2
+          tail -n 20 /tmp/nix-build-err.log
+          if [ -n "$failed_drv_t1" ]; then
+            echo "Showing logs for $failed_drv_t1"
+            nix log "$failed_drv_t1"
+          elif [ -n "$failed_drv_t2" ]; then
+            echo "Showing logs for $failed_drv_t2"
+            nix log "$failed_drv_t2"
+          else
+            echo "No derivation files found in error log."
           fi
           exit 1
 

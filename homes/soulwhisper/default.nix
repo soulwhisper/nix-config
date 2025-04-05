@@ -13,6 +13,7 @@
   ];
 
   modules = {
+    deployment.nix.enable = true;
     editor = {
       nvim = {
         enable = true;

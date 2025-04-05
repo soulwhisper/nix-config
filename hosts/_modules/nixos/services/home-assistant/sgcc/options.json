@@ -1,0 +1,16 @@
+{
+  "PHONE_NUMBER": "",
+  "PASSWORD": "",
+
+  "JOB_START_TIME": "07:00",
+  "HASS_URL": "http://localhost:8123/",
+  "HASS_TOKEN": "eyxxx",
+
+  "ENABLE_DATABASE_STORAGE": "true",
+  "DB_NAME": "sqlite3.db",
+  "DATA_RETENTION_DAYS": "7",
+
+  "RECHARGE_NOTIFY": "false",
+  "BALANCE": "5.0",
+  "PUSHPLUS_TOKEN": ""
+}
