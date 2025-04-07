@@ -14,6 +14,8 @@ in {
     ];
 
     # service has to be root, or specific user has homeDir;
+    # update configs in "${cfg.dataDir}/sgcc/options.json" after init;
+
     systemd.services.hass-sgcc = {
       description = "Home-assistant SGCC fetcher";
       wants = ["network-online.target"];

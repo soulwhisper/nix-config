@@ -42,6 +42,7 @@
         "orbstack"
         "rectangle-pro"
         "slack"
+        "steam"
         "swiftbar"
         "tableplus"
         "transmit"

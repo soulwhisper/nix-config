@@ -7,7 +7,7 @@
   "HASS_TOKEN": "eyxxx",
 
   "ENABLE_DATABASE_STORAGE": "true",
-  "DB_NAME": "sqlite3.db",
+  "DB_NAME": "sqlite.db",
   "DATA_RETENTION_DAYS": "7",
 
   "RECHARGE_NOTIFY": "false",
