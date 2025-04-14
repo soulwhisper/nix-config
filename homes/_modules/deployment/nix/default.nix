@@ -11,10 +11,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages =
-      [
-        pkgs.nvd
-      ]
-      ++ (lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.nixos-rebuild);
+    home.packages = [
+      pkgs.nixos-rebuild
+      pkgs.nvd
+    ];
   };
 }

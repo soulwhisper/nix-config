@@ -9,8 +9,6 @@
     # Flake-parts - Simplify Nix Flakes with the module system
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      # fix has pushed to upstream
-      # inputs.nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 

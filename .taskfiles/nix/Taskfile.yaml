@@ -68,7 +68,8 @@ tasks:
         {{- else if .HOST -}}{{.HOST}}
         {{- else -}}{{ sh "hostname" }}{{end -}}
     cmds:
-      - nixos-rebuild {{.OPERATION}} --flake {{.ROOT_DIR}}/.#{{.FLAKE_TARGET}} --fast
+      - nix-shell -p nixos-rebuild --run 'nixos-rebuild {{.OPERATION}}
+        --flake {{.ROOT_DIR}}/.#{{.FLAKE_TARGET}}
         --build-host "{{.BUILD_HOST}}"
         --target-host "{{.TARGET_HOST}}"
-        --use-remote-sudo
+        --use-remote-sudo --fast'
