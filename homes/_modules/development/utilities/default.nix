@@ -19,5 +19,10 @@ in {
       unstable.mise
       unstable.minio-client
     ];
+    programs.fish = {
+      interactiveShellInit = ''
+        ${lib.getExe pkgs.unstable.mise} activate fish | source
+      '';
+    };
   };
 }
