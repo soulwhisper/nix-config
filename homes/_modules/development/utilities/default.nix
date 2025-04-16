@@ -16,6 +16,7 @@ in {
       yamllint
       unstable.govc
       unstable.helm-ls
+      unstable.mise
       unstable.minio-client
     ];
   };

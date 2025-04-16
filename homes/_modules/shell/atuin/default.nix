@@ -23,6 +23,7 @@ in {
     programs.atuin = {
       enable = true;
       package = cfg.package;
+      # daemon.enable = true; # ref:https://github.com/atuinsh/atuin/issues/952, until unstable merged
       flags = cfg.flags;
       settings = cfg.settings;
     };
