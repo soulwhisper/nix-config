@@ -26,9 +26,11 @@ in {
     services.home-assistant = {
       enable = true;
       configDir = "${cfg.dataDir}/core";
-      package = (pkgs.unstable.home-assistant.overrideAttrs (old: {
-        doInstallCheck = false;
-        })).override {
+      package =
+        (pkgs.unstable.home-assistant.overrideAttrs (old: {
+          doInstallCheck = false;
+        }))
+        .override {
           extraComponents = [
             "default_config"
             "ffmpeg"
