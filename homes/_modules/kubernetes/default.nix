@@ -54,13 +54,13 @@ in {
       enable = true;
       krewPackage = pkgs.unstable.krew;
       indexes = {
+        default = "https://github.com/kubernetes-sigs/krew-index.git";
         netshoot = "https://github.com/nilic/kubectl-netshoot.git";
       };
       plugins = [
         # accessibility
         "browse-pvc"
         "pv-migrate"
-        "mayastor"
         "oidc-login"
         "rook-ceph"
         "view-secret"
@@ -83,9 +83,6 @@ in {
 
         # multi-clusters
         "karmada"
-
-        # ml
-        "ray"
       ];
     };
 

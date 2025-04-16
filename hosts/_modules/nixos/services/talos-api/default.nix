@@ -26,13 +26,15 @@ in {
       description = "Talos Cluster Discovery API Service";
       wants = ["network-online.target"];
       after = ["network-online.target"];
-
+      unitConfig = {
+        StartLimitIntervalSec = 0;
+      };
       serviceConfig = {
         ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
-        StateDirectory = "talos-api";
-        RuntimeDirectory = "talos-api";
         User = "appuser";
         Group = "appuser";
+        Restart = "always";
+        RestartSec = 5;
       };
     };
   };

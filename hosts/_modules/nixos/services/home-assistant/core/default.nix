@@ -26,15 +26,17 @@ in {
     services.home-assistant = {
       enable = true;
       configDir = "${cfg.dataDir}/core";
-      package = pkgs.unstable.home-assistant.override {
-        extraComponents = [
-          "default_config"
-          "ffmpeg"
-          "homekit"
-          "homekit_controller"
-          "met"
-        ];
-      };
+      package = (pkgs.unstable.home-assistant.overrideAttrs (old: {
+        doInstallCheck = false;
+        })).override {
+          extraComponents = [
+            "default_config"
+            "ffmpeg"
+            "homekit"
+            "homekit_controller"
+            "met"
+          ];
+        };
       extraPackages = python3Packages:
         with python3Packages; [
           aiohomekit
