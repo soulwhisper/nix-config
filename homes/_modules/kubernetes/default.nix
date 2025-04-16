@@ -172,7 +172,9 @@ in {
         };
       };
       shellAliases = {
-        flux-local = "uvx flux-local -p ${pkgs.python3}/bin/python3";
+        uvx = "uvx -p ${pkgs.python3}/bin/python3";
+        flux-local = "uvx flux-local";
+
         kubectl = "kubecolor";
         k = "kubectl";
         kc = "kubecm";
