@@ -9,7 +9,6 @@
     ./fd
     ./fish
     ./git
-    ./go-task
     ./starship
     ./utilities
     ./zoxide

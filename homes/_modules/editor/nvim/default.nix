@@ -7,37 +7,24 @@
   cfg = config.modules.editor.nvim;
 in {
   options.modules.editor.nvim = {
-    enable = lib.mkEnableOption "nvim";
-    package = lib.mkPackageOption pkgs "neovim" {};
-    makeDefaultEditor = lib.mkOption {
+    defaultEditor = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = true;
     };
   };
 
-  config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      home.packages = [
-        cfg.package
-      ];
-    })
+  config = {
+    programs.neovim = {
+      enable = true;
+      defaultEditor = cfg.defaultEditor;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
 
-    (lib.mkIf (cfg.enable && cfg.makeDefaultEditor) {
-      # Use Neovim as the editor for git commit messages
-      programs.git.extraConfig.core.editor = "nvim";
-
-      # Set Neovim as the default app for text editing and manual pages
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        MANPAGER = "nvim +Man!";
-      };
-
-      programs.fish = {
-        shellAliases = {
-          vi = "nvim";
-          vim = "nvim";
-        };
-      };
-    })
-  ];
+    # Use Neovim as the editor for git commit messages
+    programs.git.extraConfig.core.editor = "nvim";
+    # Set Neovim as the default app for manual pages
+    home.sessionVariables.MANPAGER = "nvim +Man!";
+  };
 }
