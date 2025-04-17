@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   config = {
     catppuccin.starship.enable = true;
     programs.starship = {
