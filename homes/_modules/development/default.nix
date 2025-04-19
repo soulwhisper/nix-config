@@ -13,15 +13,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      minijinja
-      nixd
-      nixfmt-rfc-style
-      unstable.go-task
-      unstable.minio-client
-    ] ++ lib.optionals cfg.vmware.enable [
-      unstable.govc
-    ];
+    home.packages = with pkgs;
+      [
+        minijinja
+        nixd
+        nixfmt-rfc-style
+        unstable.go-task
+        unstable.minio-client
+      ]
+      ++ lib.optionals cfg.vmware.enable [
+        unstable.govc
+      ];
 
     programs.direnv.enable = lib.mkIf (!config.mise.enable) true;
     programs.mise.enable = lib.mkIf cfg.mise.enable true;
