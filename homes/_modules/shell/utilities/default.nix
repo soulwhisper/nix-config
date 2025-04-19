@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   config = {
     home.packages = with pkgs; [
       any-nix-shell
