@@ -9,9 +9,9 @@ in {
   options.modules.shell.git = {
     enable = lib.mkEnableOption "git";
     config = lib.mkOption {
-       type = lib.types.attrs;
-       default = {};
-     };
+      type = lib.types.attrs;
+      default = {};
+    };
     username = lib.mkOption {
       type = lib.types.str;
     };
