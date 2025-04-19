@@ -1,16 +1,20 @@
-{...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./atuin
-    ./bat
-    ./bash
-    ./glances
-    ./doggo
-    ./eza
-    ./fd
     ./fish
     ./git
     ./starship
     ./utilities
-    ./zoxide
   ];
+  config = {
+    programs.bash.enable = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin true;
+
+
+
+  };
 }

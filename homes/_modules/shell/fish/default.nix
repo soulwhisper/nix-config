@@ -5,14 +5,17 @@
   ...
 }: let
   inherit (config.home) username homeDirectory;
-  hasPackage = pname:
-    lib.any (p: p ? pname && p.pname == pname) config.home.packages;
-  hasAnyNixShell = hasPackage "any-nix-shell";
 in {
   config = {
     catppuccin.fish.enable = true;
     programs.fish = {
       enable = true;
+      functions =  {
+        flushdns = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+          description = "Flush MacOS DNS cache";
+          body = builtins.readFile ./functions/flushdns.fish;
+        };
+      };
       plugins = [
         {
           name = "done";
@@ -26,8 +29,16 @@ in {
           name = "puffer";
           inherit (pkgs.fishPlugins.puffer) src;
         }
+        {
+          name = "zoxide";
+          src = pkgs.fetchFromGitHub {
+            owner = "kidonng";
+            repo = "zoxide.fish";
+            rev = "bfd5947bcc7cd01beb23c6a40ca9807c174bba0e";
+            sha256 = "Hq9UXB99kmbWKUVFDeJL790P8ek+xZR5LDvS+Qih+N4=";
+          };
+        }
       ];
-
       interactiveShellInit =
         ''
           function remove_path
@@ -54,24 +65,12 @@ in {
           update_path ${homeDirectory}/go/bin
           update_path ${homeDirectory}/.cargo/bin
           update_path ${homeDirectory}/.local/bin
-        ''
-        + (
-          if hasAnyNixShell
-          then ''
-            any-nix-shell fish --info-right | source
-          ''
-          else ""
-        );
+
+          any-nix-shell fish --info-right | source
+        '';
     };
     home.sessionVariables.fish_greeting = "";
     programs.nix-index.enable = true;
-    programs.fish = {
-      functions = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-        flushdns = {
-          description = "Flush DNS cache";
-          body = builtins.readFile ./functions/flushdns.fish;
-        };
-      };
-    };
+    programs.zoxide.enable = true;
   };
 }

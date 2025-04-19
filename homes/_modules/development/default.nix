@@ -8,6 +8,8 @@
 in {
   options.modules.development = {
     enable = lib.mkEnableOption "development";
+    mise.enable = lib.mkEnableOption "development-mise";
+    vmware.enable = lib.mkEnableOption "development-vmware";
   };
 
   config = lib.mkIf cfg.enable {
@@ -15,13 +17,13 @@ in {
       minijinja
       nixd
       nixfmt-rfc-style
-      pre-commit
-      yamllint
       unstable.go-task
-      unstable.govc
-      unstable.helm-ls
       unstable.minio-client
+    ] ++ lib.optionals cfg.vmware.enable [
+      unstable.govc
     ];
-    programs.mise.enable = true;
+
+    programs.direnv.enable = lib.mkIf !cfg.mise.enable true;
+    programs.mise.enable = lib.mkIf cfg.mise.enable true;
   };
 }
