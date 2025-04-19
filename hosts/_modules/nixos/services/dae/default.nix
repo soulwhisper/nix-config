@@ -31,7 +31,7 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [1080];
 
-    environment.defaultPackages = daePackage;
+    environment.defaultPackages = [daePackage];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 root root - -"
