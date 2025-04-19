@@ -87,10 +87,10 @@ in {
         };
       };
 
-    #  home.packages = [
-    #    pkgs.git-filter-repo
-    #    pkgs.tig
-    #  ];
+      #  home.packages = [
+      #    pkgs.git-filter-repo
+      #    pkgs.tig
+      #  ];
     })
     (lib.mkIf (cfg.enable && isDarwin) {
       programs.git = {
