@@ -6,6 +6,12 @@
 }: let
   cfg = config.modules.services.dae;
   configFile = ./config.dae;
+  daePackage = pkgs.unstable.dae.overrideAttrs (oldAttrs: {
+    postPatch = (oldAttrs.postPatch or "") + ''
+      substituteInPlace common/netutils/dns.go \
+        --replace-warn "208.67.222.222:5353" "8.8.8.8:53"
+    '';
+  });
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
@@ -23,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [1080];
 
-    environment.defaultPackages = with pkgs.unstable; [dae];
+    environment.defaultPackages = daePackage;
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 root root - -"
@@ -48,9 +54,9 @@ in {
       };
       serviceConfig = {
         PIDFile = "/run/dae.pid";
-        ExecStartPre = "${lib.getExe pkgs.unstable.dae} validate -c ${cfg.dataDir}/config.dae";
-        ExecStart = "${lib.getExe pkgs.unstable.dae} run --disable-timestamp -c ${cfg.dataDir}/config.dae";
-        ExecReload = "${lib.getExe pkgs.unstable.dae} reload $MAINPID";
+        ExecStartPre = "${daePackage}/bin/dae validate -c ${cfg.dataDir}/config.dae";
+        ExecStart = "${daePackage}/bin/dae run --disable-timestamp -c ${cfg.dataDir}/config.dae";
+        ExecReload = "${daePackage}/bin/dae reload $MAINPID";
         Restart = "always";
       };
     };
@@ -69,7 +75,7 @@ in {
       description = "Update DAE Subscription Service";
       wants = ["network-online.target"];
       after = ["network-online.target"];
-      path = [pkgs.curl pkgs.dae pkgs.systemd];
+      path = [daePackage pkgs.curl pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
           echo $(cat ${cfg.subscriptionFile}) > ${cfg.dataDir}/sublist
