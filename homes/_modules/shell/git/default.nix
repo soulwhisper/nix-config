@@ -36,20 +36,12 @@ in {
       extraConfig = lib.mkMerge [
         cfg.config
         {
-          core = {
-            autocrlf = "input";
-          };
-          init = {
-            defaultBranch = "main";
-          };
-          pull = {
-            rebase = true;
-          };
-          rebase = {
-            autoStash = true;
-          };
+          core.autocrlf = "input";
+          init.defaultBranch = "main";
+          pull.rebase = true;
+          rebase.autoStash = true;
         }
-        (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {helper = "osxkeychain";})
+        (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {credential.helper = "osxkeychain";})
       ];
     };
   };
