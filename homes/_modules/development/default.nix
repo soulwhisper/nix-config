@@ -25,7 +25,7 @@ in {
         unstable.govc
       ];
 
-    programs.direnv.enable = lib.mkIf (!config.mise.enable) true;
+    programs.direnv.enable = lib.mkIf (!cfg.mise.enable) true;
     programs.mise.enable = lib.mkIf cfg.mise.enable true;
   };
 }
