@@ -49,7 +49,7 @@ in {
             autoStash = true;
           };
         }
-        (lib.optionals pkgs.stdenv.hostPlatform.isDarwin {helper = "osxkeychain";})
+        (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {helper = "osxkeychain";})
       ];
     };
   };
