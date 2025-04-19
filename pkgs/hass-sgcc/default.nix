@@ -32,7 +32,7 @@ in
       # patch hardcoded path
       substituteInPlace scripts/data_fetcher.py --replace-warn "./captcha.onnx" "$out/lib/captcha.onnx"
       substituteInPlace scripts/onnx.py --replace-warn "./captcha.onnx" "$out/lib/captcha.onnx"
-      substituteInPlace scripts/onnx.py --replace-warn "../assets/" "$out/share/assets/"
+      substituteInPlace scripts/onnx.py --replace-warn "../assets/" "$out/lib/"
       # patch hardcoded workdir
       substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/chromedriver" "/tmp/chromedriver"
       substituteInPlace scripts/data_fetcher.py --replace-warn "/data/" ""
@@ -42,9 +42,9 @@ in
     installPhase = ''
       runHook preInstall
 
-      mkdir -p "$out"/{bin,share/assets,share/bin}
+      mkdir -p $out/bin
       cp -r scripts $out/lib
-      cp assets/background.png $out/share/assets/
+      cp assets/background.png $out/lib/
 
       makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
         --add-flags "$out/lib/main.py" \
@@ -56,8 +56,8 @@ in
 
     meta = {
       mainProgram = "sgcc_fetcher";
-      description = "HomeAssistant sgcc_electricity data fetcher";
+      description = "Home-assistant sgcc_electricity data fetcher";
       homepage = "https://github.com/ARC-MX/sgcc_electricity_new";
-      changelog = "https://github.com/project-zot/zot/releases/tag/${packageData.version}";
+      changelog = "https://github.com/ARC-MX/sgcc_electricity_new/tag/${packageData.version}";
     };
   }
