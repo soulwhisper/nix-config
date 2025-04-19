@@ -7,10 +7,12 @@
   cfg = config.modules.services.dae;
   configFile = ./config.dae;
   daePackage = pkgs.unstable.dae.overrideAttrs (oldAttrs: {
-    postPatch = (oldAttrs.postPatch or "") + ''
-      substituteInPlace common/netutils/dns.go \
-        --replace-warn "208.67.222.222:5353" "8.8.8.8:53"
-    '';
+    postPatch =
+      (oldAttrs.postPatch or "")
+      + ''
+        substituteInPlace common/netutils/dns.go \
+          --replace-warn "208.67.222.222:5353" "8.8.8.8:53"
+      '';
   });
 in {
   options.modules.services.dae = {
