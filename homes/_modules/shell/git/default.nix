@@ -5,10 +5,13 @@
   ...
 }: let
   cfg = config.modules.shell.git;
-  inherit (pkgs.stdenv) isDarwin;
 in {
   options.modules.shell.git = {
     enable = lib.mkEnableOption "git";
+    config = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+    };
     username = lib.mkOption {
       type = lib.types.str;
     };
@@ -18,86 +21,28 @@ in {
     signingKey = lib.mkOption {
       type = lib.types.str;
     };
-    config = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
-    };
-    includes = lib.mkOption {
-      type = lib.types.listOf lib.types.attrs;
-      default = [];
-    };
   };
 
-  config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      programs.gh.enable = true;
-      programs.gpg.enable = true;
-
-      programs.git = {
-        enable = true;
-
-        userName = cfg.username;
-        userEmail = cfg.email;
-
-        extraConfig = lib.mkMerge [
-          {
-            core = {
-              autocrlf = "input";
-            };
-            init = {
-              defaultBranch = "main";
-            };
-            pull = {
-              rebase = true;
-            };
-            rebase = {
-              autoStash = true;
-            };
-          }
-          cfg.config
-        ];
-
-        includes = cfg.includes;
-
-        aliases = {
-          co = "checkout";
-        };
-        ignores = [
-          # Temp
-          "result/"
-          # Mac OS X hidden files
-          ".DS_Store"
-          # Windows files
-          "Thumbs.db"
-          # Sops
-          ".decrypted~*"
-          # Devenv
-          ".devenv*"
-          "devenv.local.nix"
-          "devenv.lock"
-          # Others
-          ".direnv"
-          ".env"
-          ".envrc"
-          ".pre-commit-config.yaml"
-        ];
-        signing = {
-          signByDefault = true;
-          key = cfg.signingKey;
-        };
+  config = lib.mkIf cfg.enable {
+    programs.gh.enable = true;
+    programs.git = {
+      enable = true;
+      userName = cfg.username;
+      userEmail = cfg.email;
+      signing = {
+        signByDefault = true;
+        key = cfg.signingKey;
       };
-
-      home.packages = [
-        pkgs.git-filter-repo
-        pkgs.tig
+      extraConfig = lib.mkMerge [
+        cfg.config
+        {
+          core.autocrlf = "input";
+          init.defaultBranch = "main";
+          pull.rebase = true;
+          rebase.autoStash = true;
+        }
+        (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {credential.helper = "osxkeychain";})
       ];
-    })
-    (lib.mkIf (cfg.enable && isDarwin) {
-      programs.git = {
-        extraConfig = {
-          credential = {helper = "osxkeychain";};
-        };
-      };
-    })
-  ];
+    };
+  };
 }

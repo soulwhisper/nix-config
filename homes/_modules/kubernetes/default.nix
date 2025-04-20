@@ -40,6 +40,7 @@ in {
         kubeconform
         kubecolor
         kubectl
+        kustomize
       ])
       ++ [
         wrappedHelmPkg

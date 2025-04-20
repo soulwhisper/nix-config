@@ -7,6 +7,7 @@
 - auto rebuild nixos by service "auto-rebuild";
 - all nixos system migrate from linux-on-legacy to linux-on-zfs;
 - zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
+- since git-operations using vscode and workspace, remove gnupg and git-auth from configs;
 
 ## Bug tracker
 
@@ -15,11 +16,6 @@
 ## Useful commands
 
 ```shell
-# install req. incl. cachix & nvd
-curl -L https://nixos.org/nix/install | sh
-nix-env -iA cachix -f https://cachix.org/api/v1/install
-nix-env -iA nixpkgs.nvd
-
 # import age keys
 ## darwin-before: /Users/<username>/Library/Application\ Support/sops/age/keys.txt
 ## darwin-after: /Users/<username>/.config/age/keys.txt
@@ -32,27 +28,6 @@ export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.
 # nixos add below to configuration.nix before deploy if necessary
 networking.proxy.default = "http://ip:port";
 networking.proxy.noProxy = "127.0.0.1,localhost,.homelab.internal";
-
-# push with gpg signed
-export GPG_TTY=$(tty)
-gpg --import privatekey
-gpt --import publickey
-git config --global user.signingkey <gpg-id>
-git config --global commit.gpgsign true
-
-# DEBUG
-## use latest golang
-nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz -p go
-
-## local rebuild
-nixos-rebuild build --flake nix-config/.#nix-nas --show-trace
-nvd diff /run/current-system result
-
-## wipe s3 bucket
-nix-shell -p awscli
-aws configure
-aws --endpoint-url=https://<account_id>.r2.cloudflarestorage.com s3 ls s3://<bucket_name>/ --recursive
-aws --endpoint-url=https://<account_id>.r2.cloudflarestorage.com s3 rm s3://<bucket_name>/ --recursive
 
 ## fix unfinished tmpfiles
 systemd-tmpfiles --tldr | grep apps
