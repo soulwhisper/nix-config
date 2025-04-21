@@ -41,6 +41,9 @@
       efi.canTouchEfiVariables = true;
     };
 
+    # Use polymouth to prettify boot
+    boot.plymouth.enable = true;
+
     # linux-on-zfs, using disko.nix
     modules.filesystems.zfs.enable = true;
 

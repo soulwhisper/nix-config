@@ -7,7 +7,6 @@
   inherit (config.home) username homeDirectory;
 in {
   config = {
-    catppuccin.fish.enable = true;
     programs.fish = {
       enable = true;
       functions = {
@@ -16,29 +15,6 @@ in {
           body = builtins.readFile ./functions/flushdns.fish;
         };
       };
-      plugins = [
-        {
-          name = "done";
-          inherit (pkgs.fishPlugins.done) src;
-        }
-        {
-          name = "fzf";
-          inherit (pkgs.fishPlugins.fzf-fish) src;
-        }
-        {
-          name = "puffer";
-          inherit (pkgs.fishPlugins.puffer) src;
-        }
-        {
-          name = "zoxide";
-          src = pkgs.fetchFromGitHub {
-            owner = "kidonng";
-            repo = "zoxide.fish";
-            rev = "bfd5947bcc7cd01beb23c6a40ca9807c174bba0e";
-            sha256 = "Hq9UXB99kmbWKUVFDeJL790P8ek+xZR5LDvS+Qih+N4=";
-          };
-        }
-      ];
       interactiveShellInit = ''
         function remove_path
           if set -l index (contains -i $argv[1] $PATH)
@@ -69,7 +45,5 @@ in {
       '';
     };
     home.sessionVariables.fish_greeting = "";
-    programs.nix-index.enable = true;
-    programs.zoxide.enable = true;
   };
 }

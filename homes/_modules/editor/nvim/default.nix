@@ -20,10 +20,6 @@ in {
       viAlias = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
-        # {
-        #   plugin = catppuccin-nvim;
-        #   config = "colorscheme catppuccin-mocha";
-        # }
         indent-blankline-nvim
         nerdtree
         vim-airline
@@ -35,8 +31,6 @@ in {
         set nocompatible            " disable compatibility to old-time vi
         set mouse=v                 " middle-click paste with
         set mouse=a                 " enable mouse click
-
-        colorscheme jellybeans
 
         set encoding=utf-8
         set scrolloff=3

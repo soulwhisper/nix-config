@@ -14,6 +14,8 @@ in {
   };
 
   config = {
+    # enable catppuccin globally
+    catppuccin.enable = true;
     catppuccin.flavor = cfg.flavor;
   };
 }

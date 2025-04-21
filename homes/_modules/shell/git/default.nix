@@ -25,8 +25,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.gh.enable = true;
+    programs.gh-dash.enable = true;
+    programs.lazygit.enable = true;
     programs.git = {
       enable = true;
+      delta.enable = true;
       userName = cfg.username;
       userEmail = cfg.email;
       signing = {
