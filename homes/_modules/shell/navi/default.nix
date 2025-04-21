@@ -9,13 +9,6 @@
     if pkgs.stdenv.hostPlatform.isDarwin
     then "Library/Application Support"
     else config.xdg.configHome;
-  naviPackage = pkgs.unstable.navi.overrideAttrs (oldAttrs: {
-    postInstall = ''
-      wrapProgram $out/bin/navi \
-        --prefix PATH : "$out/bin" \
-        --prefix PATH : ${lib.makeBinPath [pkgs.wget pkgs.unstable.fzf]}
-    '';
-  });
 in {
   options.modules.shell.navi = {
     enable = lib.mkEnableOption "navi";
@@ -24,12 +17,16 @@ in {
   config = lib.mkIf cfg.enable {
     programs.navi = {
       enable = true;
-      package = naviPackage;
+      package = pkgs.unstable.navi;
       settings = {
         cheats = {
           paths = [
             "${configDir}/navi/cheats"
           ];
+        };
+        finder = {
+          command = "fzf";
+          overrides = "--height=40% --with-nth=2 --no-select-1"
         };
       };
     };

@@ -8,14 +8,7 @@
     ./ghostty
   ];
   config = {
-    programs.tmux = {
-      enable = true;
-      clock24 = true;
-      newSession = true;
-      terminal = "xterm-256color";
-    };
-
-    # zellij use tmux inside, conflict with native tmux
+    # zellij use tmux inside, conflict with native tmux; also dont set xterm in tmux
     programs.zellij.enable = true;
   };
 }
