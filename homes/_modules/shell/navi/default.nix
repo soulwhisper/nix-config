@@ -26,7 +26,7 @@ in {
         };
         finder = {
           command = "fzf";
-          overrides = "--height=40% --with-nth=2 --no-select-1"
+          overrides = "--height=40% --with-nth=2 --no-select-1";
         };
       };
     };

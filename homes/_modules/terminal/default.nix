@@ -3,12 +3,20 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  tmuxTerm = lib.mkIf pkgs.;
+in {
   imports = [
     ./ghostty
   ];
   config = {
-    # zellij use tmux inside, conflict with native tmux; also dont set xterm in tmux
-    programs.zellij.enable = true;
+    programs.tmux = {
+      enable = true;
+      clock24 = true;
+      newSession = true;
+      terminal = if pkgs.stdenv.hostPlatform.isDarwin then "ghostty" else "xterm-256color";
+    };
+
+    # zellij still have bugs and conflict with tmux, backspace bug: https://github.com/zellij-org/zellij/issues/4024
   };
 }
