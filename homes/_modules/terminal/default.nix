@@ -18,8 +18,9 @@
     programs.zellij = {
       enable = true;
       enableFishIntegration = true;
-      attachExistingSession = true;
-      exitShellOnExit = false;
+      # until unstable merged
+      # attachExistingSession = true;
+      # exitShellOnExit = false;
     };
   };
 }
