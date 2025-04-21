@@ -1,0 +1,48 @@
+; https://github.com/denisidoro/navi/blob/master/docs/cheatsheet_syntax.md
+
+% terminal
+
+# tmux attach default, powered by nix-configs
+tmux attach
+
+# tmux split horizontal; Ctrl+b → %; switch use Ctrl+b → ←/→/↑/↓
+tmux split-window -h
+
+# tmux split vertical; Ctrl+b → "; switch use Ctrl+b → ←/→/↑/↓
+tmux split-window -v
+
+# zellij attach default, powered by nix-configs
+zellij
+
+% shell
+
+# fzf search folder, alt+c
+cd
+
+# fzf search file, ctrl+t, default
+vim
+
+% 1password-cli
+
+# keep login
+eval $(op signin)
+
+% git
+
+# gh dashboard
+gh-dash
+
+# lazygit
+lazygit
+
+% kubenetes
+
+# list installed plugins
+kubectl plugin list --name-only
+
+# k9s
+k9s
+
+# stern
+stern
+TERM=xterm-256color tmux

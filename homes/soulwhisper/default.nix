@@ -99,6 +99,7 @@
         email = "soulwhisper@outlook.com";
         signingKey = "DF405879732AE5F2";
       };
+      navi.enable = true;
     };
   };
 }

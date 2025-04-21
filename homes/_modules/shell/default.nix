@@ -8,6 +8,7 @@
     ./atuin
     ./fish
     ./git
+    ./navi
     ./starship
     ./utilities
   ];

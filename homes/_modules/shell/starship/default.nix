@@ -50,9 +50,9 @@
 
         kubernetes = {
           disabled = false;
-          symbol = "☸️ ";
+          symbol = "☸️";
           style = "bg:green fg:base";
-          format = "[ $symbol$context \\($namespace\\) [](fg:green bg:base)]($style)";
+          format = "[ $symbol $context \\($namespace\\) [](fg:green bg:base)]($style)";
         };
 
         python = {

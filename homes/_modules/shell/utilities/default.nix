@@ -40,19 +40,21 @@
     programs.fzf = {
       enable = true;
       package = pkgs.unstable.fzf;
-      changeDirWidgetCommand = "fd --type d";
+      changeDirWidgetCommand = "fd --type d"; # alt + c
       changeDirWidgetOptions = [
-        "--preview 'eza --follow-symlinks --tree {} | head -200'"
+        "--height=40%"
+        "--preview 'eza --color=always --follow-symlinks --tree {} | head -200'"
       ];
       defaultCommand = "fd --type f";
       defaultOptions = [
-        "--border"
-        "--height 40%"
         "--layout=reverse"
+        "--height=100%"
         "--style=full"
+        "--preview 'bat --color=always {}'"
       ];
-      fileWidgetCommand = "fd --type f";
+      fileWidgetCommand = "fd --type f"; # ctrl + t
       fileWidgetOptions = [
+        "--height=40%"
         "--preview 'bat --color=always {}'"
       ];
     };
