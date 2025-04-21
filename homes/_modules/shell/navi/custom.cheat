@@ -45,4 +45,3 @@ k9s
 
 # stern
 stern
-TERM=xterm-256color tmux

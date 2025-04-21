@@ -15,12 +15,7 @@
       terminal = "xterm-256color";
     };
 
-    programs.zellij = {
-      enable = true;
-      enableFishIntegration = true;
-      # until unstable merged
-      # attachExistingSession = true;
-      # exitShellOnExit = false;
-    };
+    # zellij use tmux inside, conflict with native tmux
+    programs.zellij.enable = true;
   };
 }

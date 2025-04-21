@@ -36,16 +36,16 @@
 
         hostname = {
           disabled = false;
-          ssh_only = false;
+          ssh_only = true;
           ssh_symbol = "🌏";
           style = "bg:maroon fg:base bold";
           format = "[ $ssh_symbol $hostname [](fg:maroon bg:base)]($style)";
         };
 
         git_branch = {
-          symbol = "  ";
+          symbol = " ";
           style = " bg:yellow fg:base";
-          format = "[ $symbol$branch(:$remote_branch) [](fg:yellow bg:base)]($style)";
+          format = "[ $symbol $branch(:$remote_branch) [](fg:yellow bg:base)]($style)";
         };
 
         kubernetes = {
@@ -56,21 +56,21 @@
         };
 
         python = {
-          symbol = "🐍 ";
+          symbol = "🐍";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol$pyenv_prefix($version )(\\($virtualenv\\)) [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol $pyenv_prefix($version )(\\($virtualenv\\)) [](fg:flamingo bg:base)]($style)";
         };
 
         golang = {
-          symbol = "🐹 ";
+          symbol = "🐹";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol($version) [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol ($version) [](fg:flamingo bg:base)]($style)";
         };
 
         terraform = {
-          symbol = "🛠️ ";
+          symbol = "🛠️";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol$version [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol $version [](fg:flamingo bg:base)]($style)";
         };
 
         directory = {
