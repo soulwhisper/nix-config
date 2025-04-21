@@ -10,12 +10,11 @@
     then "Library/Application Support"
     else config.xdg.configHome;
   naviPackage = pkgs.unstable.navi.overrideAttrs (oldAttrs: {
-    postInstall =
-      ''
-        wrapProgram $out/bin/navi \
-          --prefix PATH : "$out/bin" \
-          --prefix PATH : ${lib.makeBinPath [pkgs.wget pkgs.unstable.fzf]}
-      '';
+    postInstall = ''
+      wrapProgram $out/bin/navi \
+        --prefix PATH : "$out/bin" \
+        --prefix PATH : ${lib.makeBinPath [pkgs.wget pkgs.unstable.fzf]}
+    '';
   });
 in {
   options.modules.shell.navi = {
