@@ -22,7 +22,6 @@
     # C-x n      copy-mode
     # C-x p      paste-buffer
 
-
     # zellij still have bugs and conflict with tmux, ref:https://github.com/zellij-org/zellij/issues/4024
   };
 }
