@@ -37,7 +37,6 @@
         "discord"
         "brewforge/chinese/easytier"
         "halloy"
-        "lazygit"
         "maccy"
         "orbstack"
         "rectangle-pro"

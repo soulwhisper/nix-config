@@ -20,14 +20,7 @@
   config = {
     home.stateVersion = "24.11";
 
-    programs = {
-      home-manager.enable = true;
-    };
-
+    programs.home-manager.enable = true;
     xdg.enable = true;
-
-    home.packages = [
-      pkgs.home-manager
-    ];
   };
 }
