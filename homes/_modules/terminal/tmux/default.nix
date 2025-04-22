@@ -12,15 +12,22 @@
     # Prefix = ctrl + x
     # C-x c      new window
     # C-x b      turn current pane to window
-    # C-x w      show window tree
-    # alt + =/-  pre/nxt session
-    # alt + ,/.  pre/nxt window
+    # C-x w      open window tree
+    # Alt + =/-  pre/nxt session
+    # Alt + ,/.  pre/nxt window
+    # Alt + </>  left/right window swap
     # C-x v      horizontal split (keep path)
     # C-x s      vertical split (keep path)
-    # C-x V      horizontal merge
-    # C-x S      vertical merge
+    # C-x V      horizontal merge with pane tree
+    # C-x S      vertical merge with pane tree
     # C-x n      copy-mode
     # C-x p      paste-buffer
+    ## copy mode:
+    # n          default style
+    # v          vim style
+    # y          copy
+    # K/J        up/down scroll
+    # ESC/i      exit
 
     # zellij still have bugs and conflict with tmux, ref:https://github.com/zellij-org/zellij/issues/4024
   };
