@@ -38,9 +38,11 @@ dns {
 
 group {
     proxy {
-        # filter: name(keyword: 'Hong Kong')
-        # filter: name(keyword: 'Singapore')
-        # filter: name(keyword: 'USA')
+        filter: name(keyword: 'Hong Kong')
+        filter: name(keyword: 'Singapore')
+        filter: name(keyword: 'USA')
+        filter: name(keyword: 'Taiwan')
+        filter: name(keyword: 'Japan')
         policy: min_moving_avg
     }
 }
