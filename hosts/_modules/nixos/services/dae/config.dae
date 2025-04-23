@@ -13,9 +13,7 @@ subscription {
 }
 
 dns {
-
     ipversion_prefer: 4
-
     upstream {
         googledns: 'tcp+udp://dns.google:53'
         alidns: 'udp://dns.alidns.com:53'
@@ -40,10 +38,10 @@ dns {
 
 group {
     proxy {
-        filter: name(keyword: 'Hong Kong')
-        filter: name(keyword: 'Singapore')
-        filter: name(keyword: 'USA')
-        policy: min
+        # filter: name(keyword: 'Hong Kong')
+        # filter: name(keyword: 'Singapore')
+        # filter: name(keyword: 'USA')
+        policy: min_moving_avg
     }
 }
 
