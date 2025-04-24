@@ -9,8 +9,8 @@
     environment.systemPackages = [
       pkgs.bashInteractive
       pkgs.devenv
-      pkgs.direnv
       pkgs.git
+      pkgs.python3
       pkgs.unstable.uv
     ];
   };

@@ -1,0 +1,36 @@
+; https://github.com/denisidoro/navi/blob/master/docs/cheatsheet_syntax.md
+
+% cheatsheet
+
+# [1password-cli:sigin] keep login
+eval $(op signin)
+
+# [tmux:attach] attach default
+tmux attach
+
+# [tmux:window] split horizontal; Ctrl+b → %; switch use Ctrl+b → ←/→/↑/↓
+tmux split-window -h
+
+# [tmux:window] split vertical; Ctrl+b → "; switch use Ctrl+b → ←/→/↑/↓
+tmux split-window -v
+
+# [fzf:file] search file, ctrl+t
+vim
+
+# [fzf:folder] search folder, alt+c
+cd
+
+# [git:dashboard] gh-dash
+gh-dash
+
+# [git:ui] lazygit
+lazygit
+
+# [kubectl:k9s] k9s
+k9s
+
+# [kubectl:plugins] list installed plugins
+kubectl plugin list --name-only
+
+# [kubectl:stern] read logs with fzf and vim support
+stern

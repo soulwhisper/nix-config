@@ -7,26 +7,23 @@
 
       settings = {
         format = ''
-          $os$time$username($hostname)($kubernetes)($git_branch)($python)($terraform)($golang)
+          $os$time$username($hostname)($kubernetes)($git_branch)($python)($golang)($terraform)
           $directory$character
         '';
 
         os = {
           disabled = false;
-          symbols.Ubuntu = "";
-          symbols.Windows = "";
           symbols.Macos = "";
-          symbols.Debian = "\uf306";
           symbols.NixOS = "";
           style = "bg:blue fg:base";
-          format = "[ $symbol ]($style)";
+          format = "[ $symbol]($style)";
         };
 
         time = {
           disabled = false;
           time_format = "%R"; # Hour:Minute Format
           style = "bg:blue fg:base bold";
-          format = "[ 󱑍 $time [](fg:blue bg:peach)]($style)";
+          format = "[  $time [](fg:blue bg:peach)]($style)";
         };
 
         username = {
@@ -40,47 +37,47 @@
         hostname = {
           disabled = false;
           ssh_only = true;
-          ssh_symbol = "🌐";
+          ssh_symbol = "🌏";
           style = "bg:maroon fg:base bold";
           format = "[ $ssh_symbol $hostname [](fg:maroon bg:base)]($style)";
         };
 
         git_branch = {
-          symbol = "  ";
+          symbol = " ";
           style = " bg:yellow fg:base";
-          format = "[ $symbol$branch(:$remote_branch) [](fg:yellow bg:base)]($style)";
+          format = "[ $symbol $branch(:$remote_branch) [](fg:yellow bg:base)]($style)";
         };
 
         kubernetes = {
           disabled = false;
-          symbol = "󱃾 ";
+          symbol = "☸️";
           style = "bg:green fg:base";
-          format = "[ $symbol$context \\($namespace\\) [](fg:green bg:base)]($style)";
+          format = "[ $symbol $context \\($namespace\\) [](fg:green bg:base)]($style)";
         };
 
         python = {
-          symbol = " ";
+          symbol = "🐍";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol$pyenv_prefix($version )(\\($virtualenv\\)) [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol $pyenv_prefix($version )(\\($virtualenv\\)) [](fg:flamingo bg:base)]($style)";
         };
 
         golang = {
-          symbol = " ";
+          symbol = "🐹";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol($version) [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol ($version) [](fg:flamingo bg:base)]($style)";
         };
 
         terraform = {
-          symbol = "󱁢 ";
+          symbol = "🛠️";
           style = "bg:flamingo fg:base";
-          format = "[ $symbol$version [](fg:flamingo bg:base)]($style)";
+          format = "[ $symbol $version [](fg:flamingo bg:base)]($style)";
         };
 
         directory = {
           truncation_length = 4;
           truncation_symbol = "…/";
           style = "fg:lavender";
-          format = "[   $path]($style)";
+          format = "[  $path]($style)";
         };
 
         character = {

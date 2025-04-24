@@ -13,18 +13,9 @@
   ];
 
   modules = {
-    deployment.nix.enable = true;
     editor = {
-      nvim = {
-        enable = true;
-        makeDefaultEditor = true;
-      };
-
       vscode = {
-        userSettings = lib.importJSON ./config/editor/vscode/settings.json;
         extensions = let
-          # inherit (inputs.nix-vscode-extensions.extensions.${pkgs.system}) vscode-marketplace;
-          # allowUnfree fix: https://github.com/nix-community/nix-vscode-extensions/issues/99#issuecomment-2703326753
           pkgs-ext = import inputs.nixpkgs {
             inherit (pkgs) system;
             config.allowUnfree = true;
@@ -32,7 +23,6 @@
           };
           marketplace = pkgs-ext.vscode-marketplace;
         in
-          # with vscode-marketplace; [
           with marketplace; [
             # Language
             ms-ceintl.vscode-language-pack-zh-hans
@@ -78,66 +68,38 @@
       };
     };
 
-    security = {
-      ssh = {
-        enable = true;
-        matchBlocks = {
-          "nix-dev.homelab.internal" = {
-            port = 22;
-            user = "soulwhisper";
-            forwardAgent = true;
-          };
-          "nix-nas.homelab.internal" = {
-            port = 22;
-            user = "soulwhisper";
-            forwardAgent = true;
-          };
-          "nix-infra.homelab.internal" = {
-            port = 22;
-            user = "soulwhisper";
-            forwardAgent = true;
-          };
-        };
+    security.ssh.matchBlocks = {
+      "nix-dev.homelab.internal" = {
+        port = 22;
+        user = "soulwhisper";
+        forwardAgent = true;
+      };
+      "nix-nas.homelab.internal" = {
+        port = 22;
+        user = "soulwhisper";
+        forwardAgent = true;
+      };
+      "nix-infra.homelab.internal" = {
+        port = 22;
+        user = "soulwhisper";
+        forwardAgent = true;
       };
     };
 
     shell = {
       atuin = {
         enable = true;
-        package = pkgs.unstable.atuin;
-        flags = [
-          "--disable-up-arrow"
-        ];
-        settings = {
-          # use official sync server for now
-          #sync_address = "https://atuin.homelab.internal";
-          key_path = config.sops.secrets.atuin_key.path;
-          auto_sync = true;
-          sync_frequency = "1m";
-          search_mode = "fuzzy";
-          sync = {
-            records = true;
-          };
-        };
+        # use official sync server for now
+        # sync_address = "https://atuin.homelab.internal";
+        key_path = config.sops.secrets.atuin_key.path;
       };
-
-      fish.enable = true;
-
       git = {
         enable = true;
         username = "Hekatos Noir";
         email = "soulwhisper@outlook.com";
         signingKey = "DF405879732AE5F2";
       };
-
-      go-task.enable = true;
-    };
-
-    themes = {
-      catppuccin = {
-        enable = true;
-        flavor = "mocha";
-      };
+      navi.enable = true;
     };
   };
 }

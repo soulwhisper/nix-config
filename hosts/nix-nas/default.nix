@@ -42,8 +42,8 @@
         zotregistry.enable = true;
 
         ## Apps:Testing ##
-        forgejo.enable = true;
-        woodpecker.enable = true;
+        forgejo.enable = false;
+        woodpecker.enable = false;
 
         ## Backup ##
         restic = {
