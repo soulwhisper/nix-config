@@ -79,9 +79,6 @@ in {
         "resource-capacity"
         "score"
 
-        # security
-        "kyverno"
-
         # multi-clusters
         "karmada"
       ];
