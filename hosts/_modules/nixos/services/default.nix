@@ -11,6 +11,7 @@
     ./home-assistant
     ./keycloak
     ./kms
+    ./mihomo
     ./minio
     ./monitoring
     ./netbox

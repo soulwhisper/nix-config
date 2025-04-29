@@ -38,7 +38,7 @@ in {
       "C+ ${cfg.dataDir}/config.dae 0600 root root - ${configFile}"
     ];
 
-    services.tinyproxy = {
+    services.tinyproxy = lib.mkIf (!config.modules.services.mihomo.enable) {
       enable = true;
       settings = {
         Port = 1080;

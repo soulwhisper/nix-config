@@ -29,6 +29,7 @@
 
         ## K8S:Talos ##
         talos.api.enable = true;
+        mihomo.enable = true;
 
         ## Apps ##
         home-assistant.enable = true;
@@ -42,7 +43,7 @@
         zotregistry.enable = true;
 
         ## Apps:Testing ##
-        forgejo.enable = false;
+        forgejo.enable = true;
         woodpecker.enable = false;
 
         ## Backup ##

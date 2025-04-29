@@ -26,6 +26,7 @@
 
         ## K8S:Talos ##
         talos.api.enable = true;
+        mihomo.enable = true;
 
         ## Apps:Home ##
         home-assistant.enable = true;
@@ -33,7 +34,7 @@
         unifi-controller.enable = true;
 
         ## Apps:DevOps ##
-        netbox.enable = true;
+        netbox.enable = false;
       };
     };
   };
