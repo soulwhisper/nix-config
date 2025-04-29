@@ -173,11 +173,7 @@ in {
         k = "kubectl";
         kc = "kubecm";
         # https://junegunn.github.io/fzf/tips/browsing-log-streams/#browsing-kubernetes-logs-using-stern
-        stern = "kubectl stern . --color always 2>&1 |
-          fzf --ansi --tail 100000 --tac --no-sort --exact --wrap \
-          --bind 'ctrl-o:execute:vim -n <(kubectl logs {1})' \
-          --bind 'enter:execute:kubectl exec -it {1} -- bash' \
-          --header 'Enter (kubectl exec); CTRL-O (open log in vim);'";
+        stern = "kubectl stern";
       };
     };
   };
