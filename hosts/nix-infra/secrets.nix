@@ -24,6 +24,10 @@
           owner = config.users.users.appuser.name;
           restartUnits = ["caddy.service"];
         };
+        "networking/mihomo/auth" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["mihomo.service"];
+        };
       };
     };
   };

@@ -1,0 +1,149 @@
+---
+# need sync-provider, then speedtest nodes in ui first
+proxy-providers:
+  provider1:
+    url: "$MIHOMO_SUB"
+    type: http
+    interval: 86400
+    health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
+    override:
+      additional-prefix: "[provider1]"
+
+# port
+mixed-port: 1080
+
+# ipv6
+ipv6: true
+
+# lan
+allow-lan: true
+bind-address: "*"
+lan-allowed-ips:
+  - 0.0.0.0/0
+  - ::/0
+
+skip-auth-prefixes:
+  - 127.0.0.1/8
+  - ::1/128
+
+# defaults
+mode: rule
+find-process-mode: strict
+global-client-fingerprint: chrome
+tcp-concurrent: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+## ui = http://{{external-controller}}/ui
+external-controller: 0.0.0.0:9201
+
+# geodata
+geodata-mode: true
+geo-auto-update: false
+geo-update-interval: 24
+geox-url:
+  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+
+# tun
+tun:
+  enable: false
+  stack: mixed
+  dns-hijack:
+    - "any:5300"
+  auto-route: true
+  auto-detect-interface: true
+
+# sniffer
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+
+# dns
+dns:
+  enable: true
+  listen: :5300
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "geosite:private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    "geosite:geolocation-!cn":
+      - "https://dns.cloudflare.com/dns-query#dns"
+      - "https://dns.google/dns-query#dns"
+
+# proxy ruleset
+proxies:
+  - name: "Direct"
+    type: direct
+    udp: true
+
+proxy-groups:
+  - {name: Default, type: select, proxies: [Auto,Direct,HK,TW,JP,SG,USA,Other,All]}
+  - {name: DNS, type: select, proxies: [Auto,Default,HK,TW,JP,SG,USA,Other,All]}
+  - {name: Google, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Telegram, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Twitter, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Pixiv, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Ehentai, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Bilibili, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Bilibili-ntl, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Bahamut, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: YouTube, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: NETFLIX, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Spotify, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: Github, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: CN, type: select, proxies: [Direct,Default,HK,TW,JP,SG,USA,Other,All,Auto]}
+  - {name: Other, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
+  - {name: HK, type: select , include-all-providers: true, filter: "(?i)港|hk|hongkong|hong kong"}
+  - {name: TW, type: select , include-all-providers: true, filter: "(?i)台|tw|taiwan"}
+  - {name: JP, type: select , include-all-providers: true, filter: "(?i)日|jp|japan"}
+  - {name: USA, type: select , include-all-providers: true, filter: "(?i)美|us|unitedstates|united states"}
+  - {name: SG, type: select , include-all-providers: true, filter: "(?i)(新|sg|singapore)"}
+  - {name: Other, type: select , include-all-providers: true, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"}
+  - {name: All, type: select , include-all-providers: true}
+  - {name: Auto, type: url-test, include-all-providers: true, tolerance: 10}
+
+rules:
+  - GEOIP,lan,Direct,no-resolve
+  - GEOSITE,biliintl,Bilibili-ntl
+  - GEOSITE,ehentai,Ehentai
+  - GEOSITE,github,Github
+  - GEOSITE,twitter,Twitter
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,google,Google
+  - GEOSITE,telegram,Telegram
+  - GEOSITE,netflix,NETFLIX
+  - GEOSITE,bilibili,Bilibili
+  - GEOSITE,bahamut,Bahamut
+  - GEOSITE,spotify,Spotify
+  - GEOSITE,pixiv,Pixiv
+  - GEOSITE,geolocation-!cn,Other
+  - GEOIP,google,Google
+  - GEOIP,netflix,NETFLIX
+  - GEOIP,telegram,Telegram
+  - GEOIP,twitter,Twitter
+  - GEOSITE,CN,CN
+  - GEOIP,CN,CN
+  - MATCH,Other

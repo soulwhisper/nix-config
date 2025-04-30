@@ -49,6 +49,9 @@ networking:
             [network_identity]
             network_name = "{easytier-network-name}"
             network_secret = "{easytier-network-secret}"
+    mihomo:
+        auth: |
+            MIHOMO_SUB={mohomo-sub-url}
     tailscale:
         auth: {tskey-xxxx}
 storage:
