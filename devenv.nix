@@ -7,7 +7,7 @@
   # replace pre-commit and various linters
   # action/markdown/sops/yaml checks are disabled
   git-hooks = {
-    excludes = [ "generated\.(json|nix)$" "flake.lock" "\.github" "\.json5$"];
+    excludes = ["generated\.(json|nix)$" "flake.lock" "\.github" "\.json5$"];
     hooks = {
       alejandra.enable = true;
       prettier = {

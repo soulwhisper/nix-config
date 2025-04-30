@@ -5,7 +5,12 @@ proxy-providers:
     url: "$MIHOMO_SUB"
     type: http
     interval: 86400
-    health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
+    health-check:
+      {
+        enable: true,
+        url: "https://www.gstatic.com/generate_204",
+        interval: 300,
+      }
     override:
       additional-prefix: "[provider1]"
 
@@ -100,30 +105,124 @@ proxies:
     udp: true
 
 proxy-groups:
-  - {name: Default, type: select, proxies: [Auto,Direct,HK,TW,JP,SG,USA,Other,All]}
-  - {name: DNS, type: select, proxies: [Auto,Default,HK,TW,JP,SG,USA,Other,All]}
-  - {name: Google, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Telegram, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Twitter, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Pixiv, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Ehentai, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Bilibili, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Bilibili-ntl, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Bahamut, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: YouTube, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: NETFLIX, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Spotify, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: Github, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: CN, type: select, proxies: [Direct,Default,HK,TW,JP,SG,USA,Other,All,Auto]}
-  - {name: Other, type: select, proxies: [Default,HK,TW,JP,SG,USA,Other,All,Auto,Direct]}
-  - {name: HK, type: select , include-all-providers: true, filter: "(?i)港|hk|hongkong|hong kong"}
-  - {name: TW, type: select , include-all-providers: true, filter: "(?i)台|tw|taiwan"}
-  - {name: JP, type: select , include-all-providers: true, filter: "(?i)日|jp|japan"}
-  - {name: USA, type: select , include-all-providers: true, filter: "(?i)美|us|unitedstates|united states"}
-  - {name: SG, type: select , include-all-providers: true, filter: "(?i)(新|sg|singapore)"}
-  - {name: Other, type: select , include-all-providers: true, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"}
-  - {name: All, type: select , include-all-providers: true}
-  - {name: Auto, type: url-test, include-all-providers: true, tolerance: 10}
+  - {
+      name: Default,
+      type: select,
+      proxies: [Auto, Direct, HK, TW, JP, SG, USA, Other, All],
+    }
+  - {
+      name: DNS,
+      type: select,
+      proxies: [Auto, Default, HK, TW, JP, SG, USA, Other, All],
+    }
+  - {
+      name: Google,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Telegram,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Twitter,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Pixiv,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Ehentai,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Bilibili,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Bilibili-ntl,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Bahamut,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: YouTube,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: NETFLIX,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Spotify,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: Github,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: CN,
+      type: select,
+      proxies: [Direct, Default, HK, TW, JP, SG, USA, Other, All, Auto],
+    }
+  - {
+      name: Other,
+      type: select,
+      proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
+    }
+  - {
+      name: HK,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)港|hk|hongkong|hong kong",
+    }
+  - {
+      name: TW,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)台|tw|taiwan",
+    }
+  - {
+      name: JP,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)日|jp|japan",
+    }
+  - {
+      name: USA,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)美|us|unitedstates|united states",
+    }
+  - {
+      name: SG,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)(新|sg|singapore)",
+    }
+  - {
+      name: Other,
+      type: select,
+      include-all-providers: true,
+      filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*",
+    }
+  - { name: All, type: select, include-all-providers: true }
+  - { name: Auto, type: url-test, include-all-providers: true, tolerance: 10 }
 
 rules:
   - GEOIP,lan,Direct,no-resolve
