@@ -21,7 +21,7 @@ in {
           };
           options.args = lib.mkOption {
             type = lib.types.str;
-            default = "rw,sync,all_squash,anonuid=1001,anongid=1001";
+            default = "rw,sync,all_squash,anonuid=2000,anongid=2000";
             description = "Export arguments, cant be empty, add 'mountpoint' if using zfs dataset";
           };
         })
@@ -34,7 +34,7 @@ in {
         full = {
           path = "/my/full/share";
           subnet = "10.10.0.0/24";
-          args = "rw,async,anonuid=1001,anongid=1001";
+          args = "rw,async,anonuid=2000,anongid=2000";
         };
       };
       description = "NFS export configuration";

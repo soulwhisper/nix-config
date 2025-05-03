@@ -1,15 +1,12 @@
 {...}: {
   imports = [
     ./adguard
-    ./auto-rebuild
-    ./bindfs
     ./caddy
     ./chrony
     ./dae
     ./easytier
     ./forgejo
     ./home-assistant
-    ./keycloak
     ./kms
     ./mihomo
     ./minio
@@ -26,7 +23,6 @@
     ./smartd
     ./talos-api
     ./unifi-controller
-    ./woodpecker
     ./zotregistry
     ./zrepl
   ];
