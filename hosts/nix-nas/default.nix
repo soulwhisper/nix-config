@@ -45,7 +45,6 @@
 
         ## Apps:Testing ##
         forgejo.enable = true;
-        woodpecker.enable = false;
 
         ## Backup ##
         restic = {
