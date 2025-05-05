@@ -13,7 +13,7 @@ in {
 
     sops = {
       age.keyFile = ageKeyFile;
-      age.generateKey = true;
+      age.generateKey = false;
 
       secrets.atuin_key.sopsFile = ./secrets.sops.yaml;
     };

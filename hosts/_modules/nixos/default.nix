@@ -35,6 +35,12 @@
     systemd.network.wait-online.enable = false;
     boot.initrd.systemd.network.wait-online.enable = false;
 
+    # sysctl
+    boot.kernel.sysctl = {
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;

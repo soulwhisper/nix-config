@@ -11,6 +11,8 @@ in {
       pkgs.age
     ];
 
+    fileSystems."/home".neededForBoot = true;
+
     sops = {
       age.keyFile = ageKeyFile;
       age.generateKey = false;
