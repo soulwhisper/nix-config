@@ -181,7 +181,7 @@ proxy-groups:
       proxies: [Direct, Default, HK, TW, JP, SG, USA, Other, All, Auto],
     }
   - {
-      name: Other,
+      name: Others,
       type: select,
       proxies: [Default, HK, TW, JP, SG, USA, Other, All, Auto, Direct],
     }
