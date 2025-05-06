@@ -15,8 +15,7 @@ language: zh-cn
 theme: auto
 dns:
   bind_hosts:
-    - 127.0.0.1
-    - 10.0.0.10
+    - 0.0.0.0
   port: 53
   anonymize_client_ip: false
   ratelimit: 20
