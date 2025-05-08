@@ -51,6 +51,7 @@ in {
       documentation = ["https://github.com/daeuniverse/dae"];
       wants = ["network-online.target"];
       after = ["network-online.target" "systemd-sysctl.service" "dbus.service"];
+      wantedBy = ["multi-user.target"];
       unitConfig = {
         StartLimitIntervalSec = 0;
       };

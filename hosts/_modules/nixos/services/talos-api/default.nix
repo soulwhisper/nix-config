@@ -26,6 +26,7 @@ in {
       description = "Talos Cluster Discovery API Service";
       wants = ["network-online.target"];
       after = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
       unitConfig = {
         StartLimitIntervalSec = 0;
       };

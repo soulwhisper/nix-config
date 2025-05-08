@@ -96,6 +96,7 @@ in {
       description = "Simple, decentralized mesh VPN with WireGuard support";
       wants = ["network-online.target"];
       after = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "simple";
         Restart = "on-failure";
