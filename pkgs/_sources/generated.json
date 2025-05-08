@@ -139,12 +139,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.10.0",
-            "sha256": "sha256-T/iFzMl3+tZu3EFNyof+QIywJA7ZTLm1asvy/q97Dus=",
+            "rev": "v1.10.1",
+            "sha256": "sha256-szu/tr97T9pBFmw/D9muh3KAP/yN9rk7DvyscAw3gIQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.10.0"
+        "version": "v1.10.1"
     },
     "zotregistry": {
         "cargoLocks": null,
