@@ -22,14 +22,12 @@ _: {
       "clash-verge-rev"
       "dropbox"
       "ghostty"
-      "gifox"
       "google-chrome"
       "jordanbaird-ice"
       "karabiner-elements"
       "keyboard-maestro"
       "obsidian"
       "raycast"
-      "shottr"
       "vmware-fusion"
     ];
     masApps = {
