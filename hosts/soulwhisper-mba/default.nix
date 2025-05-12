@@ -36,11 +36,9 @@
       casks = [
         "discord"
         "brewforge/chinese/easytier"
-        "halloy"
         "maccy"
         "orbstack"
         "rectangle-pro"
-        "slack"
         "steam"
         "swiftbar"
         "tableplus"
@@ -51,7 +49,7 @@
         "ReadKit" = 1615798039;
         "Windows App" = 1295203466;
         # "Passepartout" = 1433648537;
-        # "StopTheMadness Pro" = 6471380298; # not owned yet
+        # "StopTheMadness Pro" = 6471380298;
       };
     };
   };

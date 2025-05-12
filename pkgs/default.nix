@@ -8,6 +8,7 @@
   caddy-custom = pkgs.callPackage ./caddy-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
+  kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};

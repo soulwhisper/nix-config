@@ -83,6 +83,27 @@
         },
         "version": "1d4c2888f7de077e1a837a914a1824873d16762d"
     },
+    "kubectl-browse-pvc": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "kubectl-browse-pvc",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "clbx",
+            "repo": "kubectl-browse-pvc",
+            "rev": "v1.3.0",
+            "sha256": "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v1.3.0"
+    },
     "kubectl-pgo": {
         "cargoLocks": null,
         "date": null,
