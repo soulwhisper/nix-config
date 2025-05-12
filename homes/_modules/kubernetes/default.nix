@@ -172,6 +172,7 @@ in {
         kubectl = "kubecolor";
         k = "kubectl";
         kc = "kubecm";
+        ks = "kubescape";
       };
     };
   };
