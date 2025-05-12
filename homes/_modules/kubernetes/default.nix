@@ -29,6 +29,7 @@ in {
     home.packages =
       (with pkgs; [
         kubecolor-catppuccin
+        kubectl-browse-pvc
         kubectl-pgo
         talhelper
         talosctl
@@ -40,6 +41,7 @@ in {
         kubeconform
         kubecolor
         kubectl
+        kubescape
         kustomize
       ])
       ++ [
@@ -60,7 +62,6 @@ in {
       };
       plugins = [
         # accessibility
-        "browse-pvc"
         "pv-migrate"
         "oidc-login"
         "rook-ceph"
@@ -75,7 +76,6 @@ in {
         "stern"
 
         # optimising
-        "kubescape"
         "resource-capacity"
         "score"
 
@@ -172,8 +172,6 @@ in {
         kubectl = "kubecolor";
         k = "kubectl";
         kc = "kubecm";
-        # https://junegunn.github.io/fzf/tips/browsing-log-streams/#browsing-kubernetes-logs-using-stern
-        stern = "kubectl stern";
       };
     };
   };
