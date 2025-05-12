@@ -47,6 +47,17 @@
     };
     date = "2024-05-24";
   };
+  kubectl-browse-pvc = {
+    pname = "kubectl-browse-pvc";
+    version = "v1.3.0";
+    src = fetchFromGitHub {
+      owner = "clbx";
+      repo = "kubectl-browse-pvc";
+      rev = "v1.3.0";
+      fetchSubmodules = false;
+      sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
+    };
+  };
   kubectl-pgo = {
     pname = "kubectl-pgo";
     version = "v0.5.1";

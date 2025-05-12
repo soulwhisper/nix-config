@@ -6,5 +6,6 @@
   "caddy-plugin-cloudflare": "",
   "zotregistry": "sha256-q74nyQE8ELP54QiebCyLqepHty0kGMcJywo6N72eYDA=",
   "zotregistry-ui": "sha256-5f9D+DmX4I14wx5mNScero1xWQRtuLwhfDXfHM0mbB4=",
-  "hass-sgcc": ""
+  "hass-sgcc": "",
+  "kubectl-browse-pvc": ""
 }
