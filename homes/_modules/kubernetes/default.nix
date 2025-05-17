@@ -63,7 +63,6 @@ in {
       plugins = [
         # accessibility
         "pv-migrate"
-        "oidc-login"
         "rook-ceph"
         "view-secret"
 
@@ -77,10 +76,6 @@ in {
 
         # optimising
         "resource-capacity"
-        "score"
-
-        # multi-clusters
-        "karmada"
       ];
     };
 
