@@ -27,11 +27,8 @@
     # testing apps list
     homebrew = {
       taps = [
-        "goreleaser/tap"
       ];
       brews = [
-        "derailed/popeye/popeye" # k8s live cluster linter
-        "goreleaser"
       ];
       casks = [
         "discord"
