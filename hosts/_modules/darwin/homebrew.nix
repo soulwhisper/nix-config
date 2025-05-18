@@ -1,6 +1,7 @@
 _: {
   homebrew = {
     enable = true;
+    caskArgs.no_quarantine = true; # fix signature verification failed error
     onActivation = {
       autoUpdate = false; # Don't update during rebuild
       cleanup = "zap"; # Uninstall all programs not declared
@@ -13,6 +14,7 @@ _: {
 
     # stable apps list
     taps = [
+      "th-ch/youtube-music"
     ];
     brews = [
     ];
@@ -29,6 +31,7 @@ _: {
       "keyboard-maestro"
       "obsidian"
       "raycast"
+      "youtube-music"
       "vmware-fusion"
     ];
     masApps = {
