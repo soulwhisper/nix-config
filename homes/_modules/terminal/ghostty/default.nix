@@ -11,7 +11,7 @@
         theme = catppuccin-mocha
         # Fonts
         font-size = 10
-        font-family = FiraCode Nerd Font Mono Light
+        font-family = Jetbrains Nerd Font Mono Light
         font-thicken = false
         # macOS specific
         macos-auto-secure-input = true

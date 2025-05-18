@@ -21,7 +21,7 @@ _: {
       "1password-cli"
       "clash-verge-rev"
       "dropbox"
-      "font-fira-code-nerd-font"
+      "font-jetbrains-mono-nerd-font"
       "ghostty"
       "google-chrome"
       "jordanbaird-ice"

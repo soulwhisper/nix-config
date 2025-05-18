@@ -7,7 +7,7 @@
       "enabled": true
     },
     "defaultFormatter": "esbenp.prettier-vscode",
-    "fontFamily": "'FiraCode Nerd Font Mono Light'",
+    "fontFamily": "'Jetbrains Nerd Font Mono Light'",
     "guides": {
       "bracketPairs": true,
       "bracketPairsHorizontal": true,
