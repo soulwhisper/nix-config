@@ -43,6 +43,7 @@ in {
         kubectl
         kubescape
         kustomize
+        popeye
       ])
       ++ [
         wrappedHelmPkg
