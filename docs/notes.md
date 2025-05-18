@@ -3,8 +3,7 @@
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 - atuin-key should be base64 format
 - change terminal theme to "catppuccin-mocha"
-- change terminal font to "MonaspiceKr Nerd Font Mono", size=12, thicken=true
-- auto rebuild nixos by service "auto-rebuild";
+- change terminal font to "FiraCode Nerd Font Mono Light"
 - all nixos system migrate from linux-on-legacy to linux-on-zfs;
 - zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
 - since git-operations using vscode and workspace, remove gnupg and git-auth from configs;

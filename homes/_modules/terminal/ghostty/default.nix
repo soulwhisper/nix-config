@@ -11,12 +11,8 @@
         theme = catppuccin-mocha
         # Fonts
         font-size = 10
-        font-family = MonaspiceKr Nerd Font Mono
-        font-family-bold = MonaspiceKr Nerd Font Bold
-        font-family-italic = MonaspiceKr Nerd Font Italic
-        font-family-bold-italic = MonaspiceKr Nerd Font Bold Italic
-        font-size = 12
-        font-thicken = true
+        font-family = FiraCode Nerd Font Mono Light
+        font-thicken = false
         # macOS specific
         macos-auto-secure-input = true
         macos-secure-input-indication = true

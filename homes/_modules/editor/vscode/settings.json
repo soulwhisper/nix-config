@@ -7,8 +7,7 @@
       "enabled": true
     },
     "defaultFormatter": "esbenp.prettier-vscode",
-    "fontFamily": "'Monaspace Krypton','Font Awesome 6 Free Solid'",
-    "fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss06'",
+    "fontFamily": "'FiraCode Nerd Font Mono Light'",
     "guides": {
       "bracketPairs": true,
       "bracketPairsHorizontal": true,
