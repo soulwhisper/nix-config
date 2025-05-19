@@ -41,6 +41,7 @@ in {
         kubeconform
         kubecolor
         kubectl
+        kubefwd
         kubescape
         kustomize
         popeye
