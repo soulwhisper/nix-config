@@ -26,8 +26,6 @@
 
         ## K8S:Talos ##
         talos.api.enable = true;
-        mihomo.enable = true;
-        mihomo.authFile = config.sops.secrets."networking/mihomo/auth".path;
 
         ## Apps:Home ##
         home-assistant.enable = true;

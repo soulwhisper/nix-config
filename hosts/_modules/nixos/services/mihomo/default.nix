@@ -13,13 +13,21 @@ in {
       type = lib.types.str;
       default = "/persist/apps/mihomo";
     };
-    authFile = lib.mkOption {
+    subscriptionFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
+      description = "The Shadowsocks links for the mihomo subscription.";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = !config.modules.services.dae.enable;
+        message = "mihomo TUN conflicts with dae";
+      }
+    ];
+
     networking.firewall.allowedTCPPorts = [1080 9201];
 
     systemd.tmpfiles.rules = [
@@ -39,16 +47,19 @@ in {
         User = "appuser";
         Group = "appuser";
         ExecStart = "${pkgs.unstable.mihomo}/bin/mihomo -d /var/lib/mihomo -f ${cfg.dataDir}/config.yaml -ext-ui ${pkgs.metacubexd}";
-        # below for tun
-        # AmbientCapabilities = ["CAP_NET_ADMIN"];
-        # CapabilityBoundingSet = ["CAP_NET_ADMIN"];
         RuntimeDirectory = "mihomo";
         StateDirectory = "mihomo";
         Restart = "always";
         RestartSec = 5;
         EnvironmentFile = [
-          "${cfg.authFile}"
+          "${cfg.subscriptionFile}"
         ];
+        # tun configs
+        AmbientCapabilities = ["CAP_NET_ADMIN"];
+        CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+        PrivateDevices = false;
+        PrivateUsers = false;
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
       };
     };
   };

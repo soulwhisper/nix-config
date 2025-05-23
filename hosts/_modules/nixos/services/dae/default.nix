@@ -29,6 +29,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = !config.modules.services.mihomo.enable;
+        message = "dae conflicts with mihomo TUN";
+      }
+    ];
+
     networking.firewall.allowedTCPPorts = [1080];
 
     environment.defaultPackages = [daePackage];
@@ -38,7 +45,7 @@ in {
       "C+ ${cfg.dataDir}/config.dae 0600 root root - ${configFile}"
     ];
 
-    services.tinyproxy = lib.mkIf (!config.modules.services.mihomo.enable) {
+    services.tinyproxy = {
       enable = true;
       settings = {
         Port = 1080;
@@ -81,7 +88,7 @@ in {
       path = [daePackage pkgs.curl pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
-          echo $(cat ${cfg.subscriptionFile}) > ${cfg.dataDir}/sublist
+          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > ${cfg.dataDir}/sublist
         else
           echo "CHANGEME" > ${cfg.dataDir}/sublist
         fi

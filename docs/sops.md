@@ -19,15 +19,6 @@ apps:
         auth: |
             PHONE_NUMBER={sgcc-account}
             PASSWORD={sgcc-password}
-    lobechat:
-        auth: |
-            S3_ENDPOINT={cf-r2-endpoint}
-            S3_PUBLIC_DOMAIN={cf-bucket-public-domain}
-            S3_ACCESS_KEY_ID={cf-bucket-access-key}
-            S3_SECRET_ACCESS_KEY={cf-bucket-secret-key}
-            AUTH_GITHUB_ID={github-app-client-id}
-            AUTH_GITHUB_SECRET={github-app-client-secret}
-            DEEPSEEK_API_KEY={deepseek-api-token}
 backup:
     restic:
         encryption: {restic-encryption-password}
@@ -40,20 +31,15 @@ networking:
         auth: |
             CLOUDFLARE_EMAIL={cf-email}
             CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
-    dae:
+    proxy:
         subscription: |
-            {sub-url-1}
-            {sub-url-2}
+            SUB_1={sub-url-1}
+            SUB_2={sub-url-2}
     easytier:
         auth: |
             [network_identity]
             network_name = "{easytier-network-name}"
             network_secret = "{easytier-network-secret}"
-    mihomo:
-        auth: |
-            MIHOMO_SUB={mohomo-sub-url}
-    tailscale:
-        auth: {tskey-xxxx}
 storage:
     minio:
         root-credentials: |

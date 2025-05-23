@@ -1,8 +1,9 @@
 ---
 # need sync-provider, then speedtest nodes in ui first
+# use ss provider link for compatibility
 proxy-providers:
   provider1:
-    url: "$MIHOMO_SUB"
+    url: "$SUB_1"
     type: http
     interval: 86400
     health-check:
@@ -54,7 +55,7 @@ geox-url:
 
 # tun
 tun:
-  enable: false
+  enable: true
   stack: mixed
   dns-hijack:
     - "any:5300"
@@ -85,9 +86,12 @@ dns:
     - "*"
     - "+.lan"
     - "+.local"
+    - "+.internal"
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+  fallback:
+    - 127.0.0.1 # fallback to adguard
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
