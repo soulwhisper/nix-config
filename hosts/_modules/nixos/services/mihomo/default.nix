@@ -13,9 +13,10 @@ in {
       type = lib.types.str;
       default = "/persist/apps/mihomo";
     };
-    authFile = lib.mkOption {
+    subscriptionFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
+      description = "The Shadowsocks links for the mihomo subscription.";
     };
   };
 
@@ -51,7 +52,7 @@ in {
         Restart = "always";
         RestartSec = 5;
         EnvironmentFile = [
-          "${cfg.authFile}"
+          "${cfg.subscriptionFile}"
         ];
         # tun configs
         AmbientCapabilities = ["CAP_NET_ADMIN"];
