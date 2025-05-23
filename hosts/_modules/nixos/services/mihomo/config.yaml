@@ -91,7 +91,7 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   fallback:
-    - 127.0.0.1  # fallback to adguard
+    - 127.0.0.1 # fallback to adguard
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
