@@ -19,6 +19,8 @@
       };
 
       services = {
+        mihomo.enable = true;
+
         ## LLM ##
         ollama = {
           enable = true;

@@ -53,10 +53,10 @@
     # default services for all host
     modules.services = {
       chrony.enable = true;
-      dae.enable = true;
-      dae.subscriptionFile = config.sops.secrets."networking/dae/subscription".path;
+      dae.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
+      mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;
       openssh.enable = true;
     };
