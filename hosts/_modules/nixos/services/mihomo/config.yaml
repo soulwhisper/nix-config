@@ -55,7 +55,7 @@ geox-url:
 
 # tun
 tun:
-  enable: false
+  enable: true
   stack: mixed
   dns-hijack:
     - "any:5300"
@@ -90,6 +90,8 @@ dns:
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+  fallback:
+    - 127.0.0.1 # fallback to adguard
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
