@@ -3,7 +3,7 @@
 # use ss provider link for compatibility
 proxy-providers:
   provider1:
-    url: "$MIHOMO_SUB"
+    url: "$SUB_1"
     type: http
     interval: 86400
     health-check:

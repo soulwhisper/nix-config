@@ -88,7 +88,7 @@ in {
       path = [daePackage pkgs.curl pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
-          echo $(cat ${cfg.subscriptionFile}) > ${cfg.dataDir}/sublist
+          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > ${cfg.dataDir}/sublist
         else
           echo "CHANGEME" > ${cfg.dataDir}/sublist
         fi
