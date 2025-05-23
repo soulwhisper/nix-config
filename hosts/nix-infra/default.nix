@@ -23,7 +23,6 @@
           cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
-        mihomo.enable = true;
 
         ## K8S:Talos ##
         talos.api.enable = true;

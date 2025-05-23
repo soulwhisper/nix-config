@@ -22,7 +22,6 @@
           enable = true;
           cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
-        mihomo.enable = true;
 
         ## System ##
         smartd.enable = false;
