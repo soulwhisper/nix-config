@@ -60,7 +60,7 @@ jobs:
 
       - name: Build previous ${{ matrix.system }} system
         run: |
-          nix build \
+          sudo nix build \
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
@@ -71,7 +71,7 @@ jobs:
       - name: Build new ${{ matrix.system }} system
         run: |
           set -o pipefail
-          nix build \
+          sudo nix build \
             ".#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
