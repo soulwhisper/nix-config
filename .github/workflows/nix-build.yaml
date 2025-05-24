@@ -14,6 +14,11 @@ on:
       - '!devenv.nix'
       - 'flake.lock'
 
+# Notice: nix-darwin needs sudo since 25.05
+# current work around with:
+# sudo $(which nix) build ...
+# sudo $(which darwin-rebuild) build ...
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
@@ -60,7 +65,7 @@ jobs:
 
       - name: Build previous ${{ matrix.system }} system
         run: |
-          sudo nix build \
+          sudo $(which nix) build \
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
@@ -71,7 +76,7 @@ jobs:
       - name: Build new ${{ matrix.system }} system
         run: |
           set -o pipefail
-          sudo nix build \
+          sudo $(which nix) build \
             ".#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
@@ -89,10 +94,10 @@ jobs:
           tail -n 20 /tmp/nix-build-err.log
           if [ -n "$failed_drv_t1" ]; then
             echo "Showing logs for $failed_drv_t1"
-            nix log "$failed_drv_t1"
+            sudo $(which nix) log "$failed_drv_t1"
           elif [ -n "$failed_drv_t2" ]; then
             echo "Showing logs for $failed_drv_t2"
-            nix log "$failed_drv_t2"
+            sudo $(which nix) log "$failed_drv_t2"
           else
             echo "No derivation files found in error log."
           fi
@@ -101,10 +106,10 @@ jobs:
       - name: Diff profile
         id: diff
         run: |
-          nix profile diff-closures --profile ./profile
+          sudo $(which nix) profile diff-closures --profile ./profile
           delimiter="$(openssl rand -hex 16)"
           echo "diff<<${delimiter}" >> "${GITHUB_OUTPUT}"
-          nix profile diff-closures --profile ./profile | perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' >> "${GITHUB_OUTPUT}"
+          sudo $(which nix) profile diff-closures --profile ./profile | perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' >> "${GITHUB_OUTPUT}"
           echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
       - name: Generate Token

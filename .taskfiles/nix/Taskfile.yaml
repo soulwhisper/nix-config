@@ -2,6 +2,7 @@
 version: "3"
 
 tasks:
+  # Notice: nix-darwin needs sudo since 25.05
   "darwin-*":
     desc: Build/Deploy nix-darwin configuration [HOST=required]
     silent: false
@@ -13,13 +14,13 @@ tasks:
         - HOST
     cmds:
       - |
-        darwin-rebuild build --flake "{{.ROOT_DIR}}/#{{.HOST}}"
-        nvd diff /run/current-system result
+        sudo darwin-rebuild build --flake "{{.ROOT_DIR}}/#{{.HOST}}"
+        sudo nvd diff /run/current-system result
         if [[ "{{.OPERATION}}" == "switch" ]]; then
           read -p "🚨 Apply configuration? (y/N) " -n 1 -r
           echo
           [[ $REPLY =~ ^[Yy]$ ]] || exit 1
-          darwin-rebuild switch --flake "{{.ROOT_DIR}}/#{{.HOST}}"
+          sudo darwin-rebuild switch --flake "{{.ROOT_DIR}}/#{{.HOST}}"
         fi
 
   "nixos-*":
