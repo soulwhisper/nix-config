@@ -64,6 +64,7 @@ in {
       };
       plugins = [
         # accessibility
+        "cnpg"
         "pv-migrate"
         "rook-ceph"
         "view-secret"

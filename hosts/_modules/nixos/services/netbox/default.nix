@@ -48,8 +48,7 @@ in {
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];
 
-    # nixos-24.11 => 4.1.x
-    ## https://github.com/NixOS/nixpkgs/issues/385193; before fixed
+    # ref:https://github.com/NixOS/nixpkgs/issues/385193
     services.netbox = {
       enable = true;
       port = 9804;

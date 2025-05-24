@@ -24,8 +24,8 @@ in {
   # -> we should enable CUDA support for specific packages only
   # example: pkgs.cuda-app.override { cudaSupport = true; };
 
-  ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
-  ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
+  ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
+  ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
   config = lib.mkIf cfg.enable {
     # if desktop
     services.xserver.videoDrivers = lib.mkIf (cfg.driverType == "desktop") ["nvidia"];
