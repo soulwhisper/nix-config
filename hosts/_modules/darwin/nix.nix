@@ -6,6 +6,4 @@ _: {
       Minute = 0;
     };
   };
-
-  services.nix-daemon.enable = true;
 }
