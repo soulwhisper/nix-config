@@ -3,26 +3,26 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.9.1";
+    version = "v2.10.0";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.9.1";
+      rev = "v2.10.0";
       fetchSubmodules = false;
-      sha256 = "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=";
+      sha256 = "sha256-hzDd2BNTZzjwqhc/STbSAHnNlP7g1cFuMehqU1LumQE=";
     };
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "1fb64108d4debf196b19d7398e763cb78c8a0f41";
+    version = "35fb8474f57d7476329f75d63eebafb95a93022f";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "1fb64108d4debf196b19d7398e763cb78c8a0f41";
+      rev = "35fb8474f57d7476329f75d63eebafb95a93022f";
       fetchSubmodules = false;
-      sha256 = "sha256-nLpiXMHTKTfmc5TBkPErkvXf/d2tWBlv2h4A+ELrraU=";
+      sha256 = "sha256-6Od+Ho2Tpn8dsm6fH5SxrGBND9Hfly2uZkTltgXzPE8=";
     };
-    date = "2025-02-28";
+    date = "2025-05-06";
   };
   hass-sgcc = {
     pname = "hass-sgcc";

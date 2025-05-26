@@ -5,7 +5,7 @@
         "extract": null,
         "name": "caddy-core",
         "passthru": null,
-        "pinned": true,
+        "pinned": false,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
@@ -13,20 +13,20 @@
             "name": null,
             "owner": "caddyserver",
             "repo": "caddy",
-            "rev": "v2.9.1",
-            "sha256": "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=",
+            "rev": "v2.10.0",
+            "sha256": "sha256-hzDd2BNTZzjwqhc/STbSAHnNlP7g1cFuMehqU1LumQE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.9.1"
+        "version": "v2.10.0"
     },
     "caddy-plugin-cloudflare": {
         "cargoLocks": null,
-        "date": "2025-02-28",
+        "date": "2025-05-06",
         "extract": null,
         "name": "caddy-plugin-cloudflare",
         "passthru": null,
-        "pinned": true,
+        "pinned": false,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
@@ -34,12 +34,12 @@
             "name": null,
             "owner": "caddy-dns",
             "repo": "cloudflare",
-            "rev": "1fb64108d4debf196b19d7398e763cb78c8a0f41",
-            "sha256": "sha256-nLpiXMHTKTfmc5TBkPErkvXf/d2tWBlv2h4A+ELrraU=",
+            "rev": "35fb8474f57d7476329f75d63eebafb95a93022f",
+            "sha256": "sha256-6Od+Ho2Tpn8dsm6fH5SxrGBND9Hfly2uZkTltgXzPE8=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1fb64108d4debf196b19d7398e763cb78c8a0f41"
+        "version": "35fb8474f57d7476329f75d63eebafb95a93022f"
     },
     "hass-sgcc": {
         "cargoLocks": null,
