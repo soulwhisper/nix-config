@@ -9,10 +9,6 @@
 in {
   options.modules.services.mihomo = {
     enable = lib.mkEnableOption "mihomo";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/mihomo";
-    };
     subscriptionFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -37,8 +33,8 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "C ${cfg.dataDir}/config.yaml 0644 appuser appuser - ${configFile}"
+      "d /var/lib/mihomo 0755 appuser appuser - -"
+      "C /var/lib/mihomo/config.yaml 0644 appuser appuser - ${configFile}"
     ];
 
     systemd.services.mihomo = {
@@ -52,7 +48,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${pkgs.unstable.mihomo}/bin/mihomo -d /var/lib/mihomo -f ${cfg.dataDir}/config.yaml -ext-ui ${pkgs.metacubexd}";
+        ExecStart = "${pkgs.unstable.mihomo}/bin/mihomo -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml -ext-ui ${pkgs.metacubexd}";
         RuntimeDirectory = "mihomo";
         StateDirectory = "mihomo";
         Restart = "always";

@@ -42,9 +42,6 @@ in {
       ''
     );
 
-    # persist postgres data
-    modules.services.postgresql.enable = true;
-
     # for caddy file_server
     users.users.caddy.extraGroups = ["netbox"];
 
@@ -58,26 +55,8 @@ in {
         with python3Packages; [
           netbox-bgp
           netbox-dns
-          (netbox-documents.overridePythonAttrs {
-            dependencies = [
-              (drf-extra-fields.overridePythonAttrs (previous: {
-                dependencies = previous.dependencies ++ [pytz];
-                disabledTests = [
-                  "test_create"
-                  "test_create_with_base64_prefix"
-                  "test_create_with_webp_image"
-                  "test_remove_with_empty_string"
-                ];
-              }))
-            ];
-          })
-          (netbox-floorplan-plugin.overridePythonAttrs (previous: {
-            version = "0.5.0";
-            src = previous.src.override {
-              tag = "0.5.0";
-              hash = "sha256-tN07cZKNBPraGnvKZlPEg0t8fusDkBc2S41M3f5q3kc=";
-            };
-          }))
+          netbox-documents
+          netbox-floorplan-plugin
           netbox-interface-synchronization
           netbox-plugin-prometheus-sd
           netbox-qrcode

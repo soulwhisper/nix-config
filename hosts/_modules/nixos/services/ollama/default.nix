@@ -9,10 +9,6 @@
 in {
   options.modules.services.ollama = {
     enable = lib.mkEnableOption "ollama";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/ollama";
-    };
     models = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -23,7 +19,7 @@ in {
     networking.firewall.allowedTCPPorts = [9400];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
+      "d /var/lib/ollama 0755 appuser appuser - -"
     ];
 
     services.ollama = {
@@ -31,7 +27,7 @@ in {
       package = pkgs.unstable.ollama;
       host = "0.0.0.0";
       port = 9400;
-      models = "${cfg.dataDir}";
+      models = "/var/lib/ollama";
       user = "appuser";
       group = "appuser";
       loadModels = cfg.models;

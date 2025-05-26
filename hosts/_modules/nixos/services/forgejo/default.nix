@@ -9,10 +9,6 @@
 in {
   options.modules.services.forgejo = {
     enable = lib.mkEnableOption "forgejo";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/forgejo";
-    };
     domain = lib.mkOption {
       type = lib.types.str;
       default = "git.noirprime.com";
@@ -36,7 +32,7 @@ in {
       enable = true;
       user = "appuser";
       group = "appuser";
-      stateDir = "${cfg.dataDir}";
+      stateDir = "/var/lib/forgejo";
       lfs.enable = true;
       settings = {
         server = {

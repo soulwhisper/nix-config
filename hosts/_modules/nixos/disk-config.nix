@@ -69,17 +69,17 @@
           };
           "persist/apps" = {
             type = "zfs_fs";
-            mountpoint = "/persist/apps";
+            mountpoint = "/var/lib";
             options."com.sun:auto-snapshot" = "true";
           };
           "persist/cfgs" = {
             type = "zfs_fs";
-            mountpoint = "/persist/cfgs";
+            mountpoint = "/etc/cfgs";
             options."com.sun:auto-snapshot" = "false";
           };
           "persist/shared" = {
             type = "zfs_fs";
-            mountpoint = "/persist/shared";
+            mountpoint = "/mnt/shared";
             options."com.sun:auto-snapshot" = "false";
           };
         };

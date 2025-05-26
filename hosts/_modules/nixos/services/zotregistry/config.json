@@ -1,7 +1,7 @@
 {
   "distSpecVersion": "1.1.0",
   "storage": {
-    "rootDirectory": "/persist/apps/zot",
+    "rootDirectory": "/var/lib/zotregistry",
     "commit": false,
     "dedupe": true,
     "gc": true,

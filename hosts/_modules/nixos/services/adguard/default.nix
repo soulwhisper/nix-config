@@ -9,10 +9,6 @@
 in {
   options.modules.services.adguard = {
     enable = lib.mkEnableOption "adguard";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/adguard";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -25,8 +21,8 @@ in {
     # official service is not working
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0700 appuser appuser - -"
-      "C+ ${cfg.dataDir}/AdGuardHome.yaml 0700 appuser appuser - ${configFile}"
+      "d /var/lib/AdGuardHome 0700 appuser appuser - -"
+      "C /var/lib/AdGuardHome/AdGuardHome.yaml 0700 appuser appuser - ${configFile}"
     ];
 
     systemd.services.adguardhome = {
@@ -40,7 +36,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${pkgs.adguardhome}/bin/adguardhome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config ${cfg.dataDir}/AdGuardHome.yaml";
+        ExecStart = "${pkgs.adguardhome}/bin/adguardhome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config /var/lib/AdGuardHome/AdGuardHome.yaml";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         RuntimeDirectory = "AdGuardHome";

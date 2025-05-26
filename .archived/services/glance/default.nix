@@ -10,10 +10,6 @@
 in {
   options.modules.services.glance = {
     enable = lib.mkEnableOption "glance";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/glance";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -26,8 +22,8 @@ in {
     '';
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "C+ ${cfg.dataDir}/glance.yaml 0755 appuser appuser - ${configFile}"
+      "d /var/lib/glance 0755 appuser appuser - -"
+      "C /var/lib/glance/glance.yaml 0755 appuser appuser - ${configFile}"
     ];
 
     systemd.services.glance = {
@@ -36,7 +32,7 @@ in {
       after = ["network-online.target"];
 
       serviceConfig = {
-        ExecStart = "${pkgs.unstable.glance}/bin/glance --config ${cfg.dataDir}/glance.yaml";
+        ExecStart = "${pkgs.unstable.glance}/bin/glance --config /var/lib/glance/glance.yaml";
         StateDirectory = "glance";
         RuntimeDirectory = "glance";
         User = "appuser";

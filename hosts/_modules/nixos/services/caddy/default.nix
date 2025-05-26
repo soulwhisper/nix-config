@@ -12,10 +12,6 @@ in {
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/caddy";
-    };
   };
 
   # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
@@ -24,17 +20,17 @@ in {
     networking.firewall.allowedTCPPorts = [80 443];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 caddy caddy - -"
+      "d /var/lib/caddy 0755 caddy caddy - -"
     ];
 
     services.caddy = {
       enable = true;
       package = pkgs.caddy-custom;
-      dataDir = cfg.dataDir;
+      dataDir = "/var/lib/caddy";
       globalConfig = ''
         email {$CLOUDFLARE_EMAIL}
         acme_dns cloudflare {$CLOUDFLARE_DNS_API_TOKEN}
-        storage file_system ${cfg.dataDir}
+        storage file_system /var/lib/caddy
       '';
       extraConfig = ''
         (security_headers) {

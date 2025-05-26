@@ -14,10 +14,6 @@
 in {
   options.modules.services.unifi-controller = {
     enable = lib.mkEnableOption "unifi-controller";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/opt/apps/unifi-controller";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,10 +23,9 @@ in {
     networking.firewall.allowedUDPPorts = [3478 10001];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/config 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/data 0755 appuser appuser - -"
-      "L+ ${cfg.dataDir}/init-mongo.js 0600 appuser appuser - ${init-mongo-file}"
+      "d /var/lib/unifi 0755 appuser appuser - -"
+      "d /var/lib/unifi/config 0755 appuser appuser - -"
+      "d /var/lib/unifi/data 0755 appuser appuser - -"
     ];
 
     systemd.services.podman-unifi-controller.serviceConfig.RestartSec = 5;
@@ -59,7 +54,7 @@ in {
         MONGO_PASS = "unifi";
       };
       volumes = [
-        "${cfg.dataDir}/config:/config"
+        "/var/lib/unifi/config:/config"
       ];
     };
     virtualisation.oci-containers.containers."unifi-db" = {
@@ -70,8 +65,8 @@ in {
         "27017:27017/tcp"
       ];
       volumes = [
-        "${cfg.dataDir}/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js"
-        "${cfg.dataDir}/data:/bitnami/mongodb"
+        "${init-mongo-file}":/docker-entrypoint-initdb.d/init-mongo.js"
+        "/var/lib/unifi/data:/bitnami/mongodb"
       ];
     };
   };

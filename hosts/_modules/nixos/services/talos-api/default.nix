@@ -8,18 +8,14 @@
 in {
   options.modules.services.talos.api = {
     enable = lib.mkEnableOption "talos-api";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/talos-api";
-    };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [9300];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "f ${cfg.dataDir}/state.binpb 0755 appuser appuser - -"
+      "d /var/lib/talos-api 0755 appuser appuser - -"
+      "f /var/lib/talos-api/state.binpb 0755 appuser appuser - -"
     ];
 
     systemd.services.talos-api = {
@@ -31,7 +27,7 @@ in {
         StartLimitIntervalSec = 0;
       };
       serviceConfig = {
-        ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=${cfg.dataDir}/state.binpb";
+        ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
         User = "appuser";
         Group = "appuser";
         Restart = "always";

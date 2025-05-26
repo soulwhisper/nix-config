@@ -9,10 +9,6 @@
 in {
   options.modules.services.backup.syncthing = {
     enable = lib.mkEnableOption "syncthing";
-    dataDir = lib.mkOption {
-      type = with lib.types; nullOr str;
-      default = null;
-    };
   };
 
   # backup devices files to local
@@ -29,7 +25,7 @@ in {
     '';
 
     services.syncthing = {
-      dataDir = "${cfg.dataDir}";
+      dataDir = "/var/lib/syncthing";
       user = "root";
       openDefaultPorts = true;
       overrideFolders = true;

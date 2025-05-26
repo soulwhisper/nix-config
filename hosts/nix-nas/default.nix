@@ -61,7 +61,7 @@
         nfs4 = {
           enable = false;
           exports.default = {
-            path = "/persist/shared/nfs";
+            path = "/mnt/shared/nfs";
             subnet = "172.19.82.0/24";
           };
         };

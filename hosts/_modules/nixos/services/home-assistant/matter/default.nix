@@ -18,7 +18,7 @@ in {
     ];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/matter 0755 appuser appuser - -"
+      "d /var/lib/hass/matter 0755 appuser appuser - -"
     ];
 
     systemd.services.matter-server = {
@@ -26,10 +26,10 @@ in {
       before = ["home-assistant.service"];
       wants = ["network-online.target"];
       after = ["network-online.target"];
-      environment.HOME = "${cfg.dataDir}/matter";
+      environment.HOME = "/var/lib/hass/matter";
       serviceConfig = {
-        ExecStart = "${pkgs.python-matter-server}/bin/matter-server --port 5580 --vendorid 4939 --storage-path ${cfg.dataDir}/matter --log-level info";
-        BindPaths = "${cfg.dataDir}/matter:/data";
+        ExecStart = "${pkgs.python-matter-server}/bin/matter-server --port 5580 --vendorid 4939 --storage-path /var/lib/hass/matter --log-level info";
+        BindPaths = "/var/lib/hass/matter:/data";
         ReadOnlyPaths = "/nix/store /run/dbus";
         User = "appuser";
         Group = "appuser";

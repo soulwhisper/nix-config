@@ -17,7 +17,7 @@ in {
     ];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/core 0755 appuser appuser - -"
+      "d /var/lib/hass/core 0755 appuser appuser - -"
     ];
     systemd.services.home-assistant.serviceConfig.User = lib.mkForce "appuser";
     systemd.services.home-assistant.serviceConfig.Group = lib.mkForce "appuser";
@@ -25,7 +25,7 @@ in {
 
     services.home-assistant = {
       enable = true;
-      configDir = "${cfg.dataDir}/core";
+      configDir = "/var/lib/hass/core";
       package =
         (pkgs.unstable.home-assistant.overrideAttrs (old: {
           doInstallCheck = false;

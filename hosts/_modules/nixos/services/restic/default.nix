@@ -20,10 +20,6 @@ in {
       type = with lib.types; nullOr path;
       default = null;
     };
-    dataDir = lib.mkOption {
-      type = with lib.types; nullOr str;
-      default = "/persist/apps";
-    };
   };
 
   # sync apps files to s3/r2
@@ -34,7 +30,7 @@ in {
       repositoryFile = "${cfg.endpointFile}";
       environmentFile = "${cfg.credentialFile}";
       passwordFile = "${cfg.encryptionFile}";
-      paths = ["${cfg.dataDir}"];
+      paths = ["/var/lib"];
       extraBackupArgs = [
         "--skip-if-unchanged"
       ];

@@ -17,10 +17,6 @@
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/dae";
-    };
     subscriptionFile = lib.mkOption {
       type = lib.types.str;
       default = null;
@@ -41,8 +37,8 @@ in {
     environment.defaultPackages = [daePackage];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 root root - -"
-      "C+ ${cfg.dataDir}/config.dae 0600 root root - ${configFile}"
+      "d /var/lib/dae 0755 root root - -"
+      "C /var/lib/dae/config.dae 0600 root root - ${configFile}"
     ];
 
     services.tinyproxy = {
@@ -64,8 +60,8 @@ in {
       };
       serviceConfig = {
         PIDFile = "/run/dae.pid";
-        ExecStartPre = "${daePackage}/bin/dae validate -c ${cfg.dataDir}/config.dae";
-        ExecStart = "${daePackage}/bin/dae run --disable-timestamp -c ${cfg.dataDir}/config.dae";
+        ExecStartPre = "${daePackage}/bin/dae validate -c /var/lib/dae/config.dae";
+        ExecStart = "${daePackage}/bin/dae run --disable-timestamp -c /var/lib/dae/config.dae";
         ExecReload = "${daePackage}/bin/dae reload $MAINPID";
         Restart = "always";
       };
@@ -88,13 +84,13 @@ in {
       path = [daePackage pkgs.curl pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
-          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > ${cfg.dataDir}/sublist
+          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > /var/lib/dae/sublist
         else
-          echo "CHANGEME" > ${cfg.dataDir}/sublist
+          echo "CHANGEME" > /var/lib/daesublist
         fi
       '';
       script = ''
-        cd ${cfg.dataDir}
+        cd /var/lib/dae
 
         sed -e 's/^ *//g' -e 's/ *$//g' -e 's/"//g' sublist > sublist.tmp
 

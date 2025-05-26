@@ -17,7 +17,6 @@
     ./ollama
     ./openssh
     ./podman
-    ./postgres
     ./restic
     ./samba
     ./smartd

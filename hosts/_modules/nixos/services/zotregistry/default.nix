@@ -12,10 +12,6 @@
 in {
   options.modules.services.zotregistry = {
     enable = lib.mkEnableOption "zotregistry";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/zot"; # "rootDirectory" in config.json
-    };
     domain = lib.mkOption {
       type = lib.types.str;
       default = "zot.noirprime.com";
@@ -32,9 +28,8 @@ in {
     '';
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      # "d ${cfg.dataDir}/data 0755 appuser appuser - -"
-      "C+ ${cfg.dataDir}/config.json 0600 appuser appuser - ${configFile}"
+      "d /var/lib/zotregistry 0755 appuser appuser - -"
+      "C /var/lib/zotregistry/config.json 0600 appuser appuser - ${configFile}"
     ];
 
     environment.systemPackages = with pkgs; [zotregistry]; # provide zotregistry-cli: zli
@@ -51,30 +46,11 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStartPre = "${pkgs.zotregistry}/bin/zot verify ${cfg.dataDir}/config.json";
-        ExecStart = "${pkgs.zotregistry}/bin/zot serve ${cfg.dataDir}/config.json";
+        ExecStartPre = "${pkgs.zotregistry}/bin/zot verify /var/lib/zotregistry/config.json";
+        ExecStart = "${pkgs.zotregistry}/bin/zot serve /var/lib/zotregistry/config.json";
         Restart = "always";
         LimitNOFILE = "500000";
       };
     };
-
-    # systemctl status podman-zotregistry.service
-    # modules.services.podman.enable = true;
-    # virtualisation.oci-containers.containers."zotregistry" = {
-    #   autoStart = true;
-    #   image = "ghcr.io/project-zot/zot-linux-amd64:latest";
-    #   extraOptions = ["--pull=newer"];
-    #   ports = [
-    #     "9002:9002/tcp"
-    #   ];
-    #   environment = {
-    #     PUID = "1001";
-    #     PGID = "1001";
-    #   };
-    #   volumes = [
-    #    "${cfg.dataDir}/data:/zot/data"
-    #     "${cfg.dataDir}/config.json:/etc/zot/config.json"
-    #   ];
-    # };
   };
 }

@@ -8,10 +8,6 @@
 in {
   options.modules.services.timemachine = {
     enable = lib.mkEnableOption "timemachine";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/shared/timemachine";
-    };
     maxSize = lib.mkOption {
       type = lib.types.str;
       default = "200G";
@@ -23,7 +19,7 @@ in {
     # http://gwiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0700 root root - -"
+      "d /mnt/shared/timemachine 0700 root root - -"
     ];
 
     users.groups.samba-users = {};
@@ -60,7 +56,7 @@ in {
           "delete veto files" = "yes";
         };
         TimeMachine = {
-          path = "${cfg.dataDir}";
+          path = "/mnt/shared/timemachine";
           "fruit:time machine" = "yes";
           "fruit:time machine max size" = "${cfg.maxSize}";
         };

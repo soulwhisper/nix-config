@@ -15,10 +15,11 @@ in {
 
   # linux-on-zfs and zfs-impermanence as base
   # unlike traditional FHS, nixos can boot with only "/boot" and "/nix";
-  # static data in "/nix", state data in "/persist";
+  # static data in "/nix", state data in "/persist" and "/home";
   # default root zpool => rpool;
   # dataset "/persist/apps", "%s/appname" => "/var/lib/appname";
-  # dataset "/persist/cfgs", "%s/appname" => "/etc/appname";
+  # dataset "/persist/cfgs", "%s/appname" => "/etc/cfgs/appname";
+  # dataset "/persist/shared", "%s/nfs" => "/mnt/shared/nfs";
 
   config = lib.mkIf cfg.enable {
     boot = {

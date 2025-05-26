@@ -9,10 +9,6 @@
 in {
   options.modules.services.minio = {
     enable = lib.mkEnableOption "minio";
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/persist/apps/minio";
-    };
     domain = lib.mkOption {
       type = lib.types.str;
       default = "s3.noirprime.com";
@@ -41,18 +37,18 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/data 0755 appuser appuser - -"
-      "d ${cfg.dataDir}/config 0755 appuser appuser - -"
+      "d /var/lib/minio 0755 appuser appuser - -"
+      "d /var/lib/minio/data 0755 appuser appuser - -"
+      "d /var/lib/minio/config 0755 appuser appuser - -"
     ];
 
     services.minio = {
       enable = true;
       package = pkgs.unstable.minio;
       dataDir = [
-        "${cfg.dataDir}/data"
+        "/var/lib/minio/data"
       ];
-      configDir = "${cfg.dataDir}/config";
+      configDir = "/var/lib/minio/config";
       inherit (cfg) rootCredentialsFile;
     };
     systemd.services.minio.serviceConfig.User = lib.mkForce "appuser";
