@@ -22,7 +22,7 @@ in {
     programs.atuin = {
       enable = true;
       package = pkgs.unstable.atuin;
-      # daemon.enable = true; # ref:https://github.com/atuinsh/atuin/issues/952, until unstable merged
+      daemon.enable = true; # fix zfs sync
       flags = [
         "--disable-up-arrow"
       ];
