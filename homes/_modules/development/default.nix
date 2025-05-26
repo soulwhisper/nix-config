@@ -20,6 +20,7 @@ in {
         nixfmt-rfc-style
         unstable.go-task
         unstable.terraform
+        unstable.minio-client
       ]
       ++ lib.optionals cfg.vmware.enable [
         unstable.govc
