@@ -41,6 +41,14 @@ in {
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
         };
+        proxy = {
+          PROXY_ENABLED = "true";
+          PROXY_URL = "http://127.0.0.1:1080";
+          PROXY_HOSTS = "*.github.com,github.com,raw.githubusercontent.com";
+        };
+        migrations = {
+          ALLOW_LOCALNETWORKS = "true";
+        };
       };
     };
   };
