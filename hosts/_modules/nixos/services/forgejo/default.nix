@@ -37,7 +37,7 @@ in {
       settings = {
         server = {
           DOMAIN = "git.noirprime.com";
-          ROOT_URL = "http://git.noirprime.com/";
+          ROOT_URL = "https://git.noirprime.com/";
           HTTP_PORT = 9003;
           SSH_PORT = 9004;
         };
