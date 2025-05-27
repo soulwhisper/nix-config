@@ -55,7 +55,13 @@ in {
         with python3Packages; [
           netbox-bgp
           netbox-dns
-          netbox-documents
+          (netbox-documents.overridePythonAttrs {
+            dependencies = [
+              (drf-extra-fields.overridePythonAttrs {
+                doCheck = false;
+              })
+            ];
+          })
           netbox-floorplan-plugin
           netbox-interface-synchronization
           netbox-plugin-prometheus-sd
