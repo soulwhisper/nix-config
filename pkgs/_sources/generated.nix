@@ -69,6 +69,17 @@
       sha256 = "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=";
     };
   };
+  poweradmin = {
+    pname = "poweradmin";
+    version = "v3.9.2";
+    src = fetchFromGitHub {
+      owner = "poweradmin";
+      repo = "poweradmin";
+      rev = "v3.9.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-TysTx0gkuofuvwpHiztmoE21d3U48iBfZZ6pV3Iwpn4=";
+    };
+  };
   talos-api = {
     pname = "talos-api";
     version = "v1.0.10";
@@ -82,13 +93,13 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.10.2";
+    version = "v1.10.3";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.10.2";
+      rev = "v1.10.3";
       fetchSubmodules = false;
-      sha256 = "sha256-8qruYf59oFvLO892T89GbayTpq9V1J+Tu08jgIaod18=";
+      sha256 = "sha256-smqQBFm33uTgK4RGtiu9wlgbHkt8jw7zeiVGWsHG/8s=";
     };
   };
   zotregistry = {
