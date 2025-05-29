@@ -99,6 +99,7 @@ netbird-mon: 9105,9106
 ## system, 9200-9299
 adguard-ui: 9200
 mihomo-ui: 9201
+powerdns-ui: 9202,9203
 woodpecker: 9210,9211
 
 ## k8s, 9300-9399

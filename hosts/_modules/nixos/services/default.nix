@@ -17,6 +17,7 @@
     ./ollama
     ./openssh
     ./podman
+    ./powerdns
     ./restic
     ./samba
     ./smartd

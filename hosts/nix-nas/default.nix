@@ -22,6 +22,7 @@
           enable = true;
           cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
+        powerdns.enable = true;
 
         ## System ##
         smartd.enable = false;
