@@ -5,6 +5,11 @@
   ...
 }: let
   cfg = config.modules.services.powerdns;
+  salt = builtins.substring 0 50 (builtins.hashString "sha256" config.networking.hostName);
+  saltFile = pkgs.writeTextFile {
+    name = "powerdns_admin_salt";
+    text = salt;
+  };
 in {
   options.modules.services.powerdns = {
     enable = lib.mkEnableOption "powerdns";
@@ -55,6 +60,8 @@ in {
     };
     services.powerdns-admin = {
       enable = true;
+      secretKeyFile = saltFile;
+      saltFile = saltFile;
       config = ''
         BIND_ADDRESS = '0.0.0.0'
         PORT = 9202
