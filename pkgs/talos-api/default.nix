@@ -24,6 +24,6 @@ in
       mainProgram = "talos-api";
       description = "Discovery Service provides cluster membership and KubeSpan peer information for Talos Linux clusters.";
       homepage = "https://github.com/siderolabs/discovery-service";
-      changelog = "https://github.com/siderolabs/discovery-service/releases/tag/v${version}";
+      changelog = "https://github.com/siderolabs/discovery-service/releases/tag/${packageData.version}";
     };
   }

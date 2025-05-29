@@ -25,7 +25,7 @@ in
     meta = {
       homepage = "https://github.com/user/repo";
       description = "description";
-      changelog = "https://github.com/user/repo/releases/tag/v${version}";
+      changelog = "https://github.com/user/repo/releases/tag/${packageData.version}";
       mainProgram = "appname";
     };
   }

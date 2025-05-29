@@ -52,6 +52,6 @@ in
       mainProgram = "zot";
       description = "A scale-out production-ready vendor-neutral OCI-native container image/artifact registry.";
       homepage = "https://github.com/project-zot/zot";
-      changelog = "https://github.com/project-zot/zot/releases/tag/v${version}";
+      changelog = "https://github.com/project-zot/zot/releases/tag/${packageData.version}";
     };
   }

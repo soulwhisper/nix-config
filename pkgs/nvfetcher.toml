@@ -20,6 +20,10 @@ src.github = "clbx/kubectl-browse-pvc"
 [kubectl-pgo]
 fetch.github = "CrunchyData/postgres-operator-client"
 src.github = "CrunchyData/postgres-operator-client"
+[poweradmin]
+fetch.github = "poweradmin/poweradmin"
+src.github_tag = "poweradmin/poweradmin"
+src.include_regex = "v3.9.*"
 [talosctl]
 fetch.github = "siderolabs/talos"
 src.github = "siderolabs/talos"

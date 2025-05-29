@@ -29,7 +29,7 @@ in
     meta = {
       homepage = "https://github.com/EasyTier/EasyTier";
       description = "Simple, decentralized mesh VPN with WireGuard support";
-      changelog = "https://github.com/EasyTier/EasyTier/releases/tag/v${version}";
+      changelog = "https://github.com/EasyTier/EasyTier/releases/tag/${packageData.version}";
       mainProgram = "easytier-core";
     };
   }

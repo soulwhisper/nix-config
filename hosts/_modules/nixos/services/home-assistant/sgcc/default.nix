@@ -30,7 +30,7 @@ in {
         '';
         ExecStart = pkgs.writeShellScript "hass-sgcc-start" ''
           cd /var/lib/hass/sgcc
-          /var/lib/hass/bin/sgcc_fetcher
+          ${pkgs.hass-sgcc}/bin/sgcc_fetcher
         '';
         Restart = "always";
         RestartSec = 5;

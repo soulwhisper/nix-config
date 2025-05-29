@@ -20,6 +20,6 @@ in
       mainProgram = "kubectl-pgo";
       description = "Kubernetes CLI plugin to manage Crunchy PostgreSQL Operator resources.";
       homepage = "https://github.com/CrunchyData/postgres-operator-client";
-      changelog = "https://github.com/CrunchyData/postgres-operator-client/releases/tag/v${version}";
+      changelog = "https://github.com/CrunchyData/postgres-operator-client/releases/tag/${packageData.version}";
     };
   }
