@@ -31,7 +31,8 @@ in {
           flags = ["--all"];
         };
         defaultNetwork.settings = {
-          dns_enabled = true; # Enable DNS resolution in the podman default network
+          # Enable DNS resolution in the podman default network
+          dns_enabled = true;
         };
       };
       oci-containers.backend = "podman";

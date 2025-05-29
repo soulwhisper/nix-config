@@ -10,6 +10,7 @@
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};
   kubectl-pgo = pkgs.callPackage ./kubectl-pgo {};
+  poweradmin = pkgs.callPackage ./poweradmin {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};

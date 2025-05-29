@@ -148,15 +148,11 @@ filtering:
   rewrites:
     - domain: s3.noirprime.com
       answer: 10.0.0.10
-    - domain: lab.noirprime.com
-      answer: 10.0.0.10
     - domain: box.noirprime.com
       answer: 10.0.0.10
     - domain: zot.noirprime.com
       answer: 10.0.0.10
     - domain: git.noirprime.com
-      answer: 10.0.0.10
-    - domain: ci.noirprime.com
       answer: 10.0.0.10
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576

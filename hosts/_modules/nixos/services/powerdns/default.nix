@@ -5,27 +5,25 @@
   ...
 }: let
   cfg = config.modules.services.powerdns;
-  salt = builtins.substring 0 50 (builtins.hashString "sha256" config.networking.hostName);
-  saltFile = pkgs.writeTextFile {
-    name = "powerdns_admin_salt";
-    text = salt;
-  };
 in {
   options.modules.services.powerdns = {
     enable = lib.mkEnableOption "powerdns";
-    api = {
-      subnets = lib.mkOption {
+    threads = {
+      backend = lib.mkOption {
         type = lib.types.str;
-        default = "0.0.0.0";
+        default = "1";
+        description = "Backend threads, sqlite=1, pgsql/mysql = 4.";
       };
-      port = lib.mkOption {
-        type = lib.types.port;
-        default = 9203;
-      };
-      key = lib.mkOption {
+      receiver = lib.mkOption {
         type = lib.types.str;
-        default = "powerdns";
+        default = "4";
+        description = "Listener threads, equal to CPU cores.";
       };
+    };
+    authFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = "set webserver-allow-from and api-key";
     };
   };
 
@@ -34,39 +32,144 @@ in {
     services.resolved.enable = lib.mkForce false;
 
     # use pure ip:port in case network failing
-    networking.firewall.allowedTCPPorts = [5301 9202 cfg.api.port];
-    networking.firewall.allowedUDPPorts = [5301];
+    networking.firewall.allowedTCPPorts = [53 9202 9203];
+    networking.firewall.allowedUDPPorts = [53];
 
-    systemd.tmpfiles.rules = [
-      "d /var/lib/powerdns 0755 pdns pdns - -"
-    ];
+    # socket-auth dont need password
+    services.mysql = {
+      enable = true;
+      dataDir = "/var/lib/mysql";
+      package = pkgs.mysql84;
+      ensureUsers = [
+        {
+          name = "powerdns";
+          ensurePermissions = {
+            "powerdns.*" = "ALL PRIVILEGES";
+          };
+        }
+      ];
+      initialDatabases = [
+        {
+          name = "powerdns";
+          schema = "${pkgs.unstable.pdns}/share/doc/pdns/schema.mysql.sql";
+        }
+      ];
+    };
 
     services.powerdns = {
       enable = true;
+      secretFile = authFile;
       extraConfig = ''
-        launch=gsqlite3
-        gsqlite3-database=/var/lib/powerdns/pdns.sqlite3
-        gsqlite3-dnssec=false
+        launch=gmysql
+        gmysql-socket=/run/mysqld/mysqld.sock
+        gmysql-dbname=powerdns
+        gmysql-user=powerdns
         webserver=yes
         webserver-address=0.0.0.0
-        webserver-port=${builtins.toString cfg.api.port}
-        webserver-allow-from=${cfg.api.subnets}
+        webserver-port=9203
+        webserver-allow-from=0.0.0.0/0
         api=yes
-        api-key=${cfg.api.key}
+        api-key=powerdns
         enable-lua-records=true
         security-poll-suffix=
         version-string=anonymous
+        max-tcp-connections=512
+        receiver-threads=${cfg.threads.receiver}
+        distributor-threads=${cfg.threads.backend}
+        reuseport=yes
+        cache-ttl=60
       '';
     };
-    services.powerdns-admin = {
+
+    # poweradmin: 'php -S 0.0.0.0:80 -t poweradmin/'
+    # POWERADMIN_SKIP_INSTALL='rm -rf poweradmin/install'
+
+  };
+}
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.modules.services.powerdns;
+in {
+  options.modules.services.powerdns = {
+    enable = lib.mkEnableOption "powerdns";
+    threads = {
+      backend = lib.mkOption {
+        type = lib.types.str;
+        default = "1";
+        description = "Backend threads, sqlite=1, pgsql/mysql = 4.";
+      };
+      receiver = lib.mkOption {
+        type = lib.types.str;
+        default = "4";
+        description = "Listener threads, equal to CPU cores.";
+      };
+    };
+    authFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = "set webserver-allow-from and api-key";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    networking.resolvconf.useLocalResolver = lib.mkForce false;
+    services.resolved.enable = lib.mkForce false;
+
+    # use pure ip:port in case network failing
+    networking.firewall.allowedTCPPorts = [53 9202 9203];
+    networking.firewall.allowedUDPPorts = [53];
+
+    # socket-auth dont need password
+    services.mysql = {
       enable = true;
-      secretKeyFile = saltFile;
-      saltFile = saltFile;
-      config = ''
-        BIND_ADDRESS = '0.0.0.0'
-        PORT = 9202
-        SQLALCHEMY_DATABASE_URI = 'sqlite:////var/lib/powerdns/pdns.sqlite3'
+      dataDir = "/var/lib/mysql";
+      package = pkgs.mysql84;
+      ensureUsers = [
+        {
+          name = "powerdns";
+          ensurePermissions = {
+            "powerdns.*" = "ALL PRIVILEGES";
+          };
+        }
+      ];
+      initialDatabases = [
+        {
+          name = "powerdns";
+          schema = "${pkgs.unstable.pdns}/share/doc/pdns/schema.mysql.sql";
+        }
+      ];
+    };
+
+    services.powerdns = {
+      enable = true;
+      secretFile = authFile;
+      extraConfig = ''
+        launch=gmysql
+        gmysql-socket=/run/mysqld/mysqld.sock
+        gmysql-dbname=powerdns
+        gmysql-user=powerdns
+        webserver=yes
+        webserver-address=0.0.0.0
+        webserver-port=9203
+        webserver-allow-from=0.0.0.0/0
+        api=yes
+        api-key=powerdns
+        enable-lua-records=true
+        security-poll-suffix=
+        version-string=anonymous
+        max-tcp-connections=512
+        receiver-threads=${cfg.threads.receiver}
+        distributor-threads=${cfg.threads.backend}
+        reuseport=yes
+        cache-ttl=60
       '';
     };
+
+    # poweradmin: 'php -S 0.0.0.0:80 -t poweradmin/'
+    # POWERADMIN_SKIP_INSTALL='rm -rf poweradmin/install'
   };
 }
