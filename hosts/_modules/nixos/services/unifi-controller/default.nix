@@ -21,7 +21,7 @@ in {
       enable = true;
       mongodbPackage = pkgs.mongodb-ce;
       initialJavaHeapSize = 1024;
-      maximumJavaHeapSize = 1024;
+      maximumJavaHeapSize = 4096;
       extraJvmOptions = [
         "-Dlog4j2.formatMsgNoLookups=true"
         "-Dfile.encoding=UTF-8"
