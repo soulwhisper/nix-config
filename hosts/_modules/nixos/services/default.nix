@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./adguard
+    ./bind
     ./caddy
     ./chrony
     ./dae

@@ -1,0 +1,11 @@
+$TTL 1h
+noirprime.com. IN SOA . . (
+                1          ; Serial
+                28800      ; Refresh
+                7200       ; Retry
+                604800     ; Expire
+                86400 )    ; Minimum
+
+noirprime.com. IN NS ns1.noirprime.com.
+
+; sub

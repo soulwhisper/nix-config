@@ -10,28 +10,30 @@ in {
     enable = lib.mkEnableOption "bind";
   };
 
+  # this service act as internal authoritative server
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [53];
-    networking.firewall.allowedUDPPorts = [53];
+    networking.firewall.allowedTCPPorts = [5300 9202];
+    networking.firewall.allowedUDPPorts = [5300];
 
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 
+    # if need dynamics, check:https://github.com/11notes/docker-bind
     environment.etc = {
-      "bind/namd.conf" = {
+      "cfgs/bind/namd.conf" = {
         source = ./named.conf;
         user = "named";
         group = "named";
         mode = "0640";
       };
-      "bind/homelab.internal.zone" = {
-        source = ./homelab.internal.zone;
+      "cfgs/bind/homelab.internal.db" = {
+        source = ./homelab.internal.db;
         user = "named";
         group = "named";
         mode = "0640";
       };
-      "bind/noirprime.com.zone" = {
-        source = ./noirprime.com.zone;
+      "cfgs/bind/noirprime.com.db" = {
+        source = ./noirprime.com.db;
         user = "named";
         group = "named";
         mode = "0640";
@@ -40,8 +42,8 @@ in {
 
     services.bind = {
       enable = true;
-      directory = "/etc/bind";
-      configFile = "/etc/bind/namd.conf";
+      directory = "/etc/cfgs/bind";
+      configFile = "/etc/cfgs/bind/namd.conf";
     };
 
     # Clean up journal files

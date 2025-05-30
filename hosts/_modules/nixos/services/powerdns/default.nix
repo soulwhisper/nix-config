@@ -27,13 +27,14 @@ in {
     };
   };
 
+  # this service act as internal authoritative server
   config = lib.mkIf cfg.enable {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 
     # use pure ip:port in case network failing
-    networking.firewall.allowedTCPPorts = [53 9202 9203];
-    networking.firewall.allowedUDPPorts = [53];
+    networking.firewall.allowedTCPPorts = [5301 9203 9204];
+    networking.firewall.allowedUDPPorts = [5301];
 
     # socket-auth dont need password, use `pdns` user
     services.mysql = {
@@ -60,14 +61,15 @@ in {
       enable = true;
       secretFile = cfg.authFile;
       extraConfig = ''
+        local-port=5301
         launch=gmysql
         gmysql-host=localhost
         gmysql-dbname=powerdns
         gmysql-user=pdns
         webserver=yes
         webserver-address=0.0.0.0
-        webserver-port=9203
-        webserver-allow-from=0.0.0.0/0
+        webserver-port=9204
+        webserver-allow-from=127.0.0.1
         api=yes
         api-key=powerdns
         enable-lua-records=true
@@ -110,7 +112,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${pkgs.php}/bin/php -S 0.0.0.0:9202 -t /var/lib/poweradmin";
+        ExecStart = "${pkgs.php}/bin/php -S 0.0.0.0:9203 -t /var/lib/poweradmin";
         StateDirectory = "poweradmin";
         RuntimeDirectory = "poweradmin";
         Restart = "always";

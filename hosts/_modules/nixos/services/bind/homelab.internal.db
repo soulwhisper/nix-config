@@ -1,0 +1,19 @@
+$TTL 1h
+homelab.internal. IN SOA . . (
+                1          ; Serial
+                28800      ; Refresh
+                7200       ; Retry
+                604800     ; Expire
+                86400 )    ; Minimum
+
+homelab.internal. IN NS ns1.homelab.internal.
+
+;sub
+nas               IN A    10.10.0.10
+s3                IN A    10.10.0.10
+exarch-01         IN A    10.10.0.101
+exarch-02         IN A    10.10.0.102
+exarch-03         IN A    10.10.0.103
+k8s               IN A    10.10.0.101
+k8s               IN A    10.10.0.102
+k8s               IN A    10.10.0.103

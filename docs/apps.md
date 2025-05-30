@@ -74,7 +74,6 @@ docker run --rm --privileged \
 
 ```shell
 # should-not-change
-adguard-dns: 53
 caddy: 80,443
 http-proxy: 1080
 home-assistant: 8123
@@ -83,6 +82,11 @@ unifi: 8080,8443,8880,8843,6789,3478,10001
 wireguard: 51820
 
 # remap
+## dns-stack
+adguard: 53
+bind9: 5300
+powerdns: 5301
+
 ## storage, 9000-9099
 minio: 9000,9001
 zot: 9002
@@ -99,7 +103,8 @@ netbird-mon: 9105,9106
 ## system, 9200-9299
 adguard-ui: 9200
 mihomo-ui: 9201
-powerdns-ui: 9202,9203
+bind-stats: 9202
+powerdns-ui: 9203,9204
 woodpecker: 9210,9211
 
 ## k8s, 9300-9399
