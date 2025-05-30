@@ -24,8 +24,10 @@ dns:
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
-    - tls://223.5.5.5
-    - tls://223.6.6.6
+    - tls://223.5.5.5:853
+    - tls://223.6.6.6:853
+    - quic://223.5.5.5:853
+    - quic://223.6.6.6:853
     - [/homelab.internal/noirprime.com/]127.0.0.1:5300 127.0.0.1:5301
     - [/opn.noirprime.com/]#
   upstream_dns_file: ""
