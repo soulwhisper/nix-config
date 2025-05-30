@@ -18,7 +18,7 @@ dns:
     - 0.0.0.0
   port: 53
   anonymize_client_ip: false
-  ratelimit: 20
+  ratelimit: 0
   ratelimit_subnet_len_ipv4: 24
   ratelimit_subnet_len_ipv6: 56
   ratelimit_whitelist: []
@@ -26,8 +26,8 @@ dns:
   upstream_dns:
     - tls://223.5.5.5
     - tls://223.6.6.6
-    - 127.0.0.1:5300
-    - 127.0.0.1:5301
+    - [/homelab.internal/noirprime.com/]127.0.0.1:5300 127.0.0.1:5301
+    - [/opn.noirprime.com/]#
   upstream_dns_file: ""
   bootstrap_dns:
     - 9.9.9.10
@@ -47,9 +47,9 @@ dns:
     - 127.0.0.0/8
     - ::1/128
   cache_size: 4194304
-  cache_ttl_min: 0
-  cache_ttl_max: 0
-  cache_optimistic: false
+  cache_ttl_min: 3600
+  cache_ttl_max: 84600
+  cache_optimistic: true
   bogus_nxdomain: []
   aaaa_disabled: false
   enable_dnssec: true
@@ -71,13 +71,15 @@ dns:
   serve_http3: false
   use_http3_upstreams: false
   serve_plain_dns: true
-  hostsfile_enabled: true
+  hostsfile_enabled: false
+  pending_requests:
+    enabled: true
 tls:
   enabled: false
 querylog:
   dir_path: ""
   ignored: []
-  interval: 2160h
+  interval: 24h
   size_memory: 1000
   enabled: true
   file_enabled: true
@@ -120,6 +122,8 @@ filtering:
       answer: 10.0.0.10
     - domain: git.noirprime.com
       answer: 10.0.0.10
+  safe_fs_patterns:
+    - /var/lib/AdGuardHome/data/userfilters/*
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
@@ -150,4 +154,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 0
-schema_version: 28
+schema_version: 29
