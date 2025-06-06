@@ -202,12 +202,12 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zot",
-            "rev": "v2.1.3",
-            "sha256": "sha256-8c9+1jKL3XfnJj/WVKhWfXOaArpx41XqWiW6FOOlkyY=",
+            "rev": "v2.1.4",
+            "sha256": "sha256-bAqmBDgbJPtZbhRbZM9qi6+H52FFbrxhn00LYEeMu+I=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.1.3"
+        "version": "v2.1.4"
     },
     "zotregistry-ui": {
         "cargoLocks": null,
