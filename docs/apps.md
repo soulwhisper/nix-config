@@ -76,6 +76,7 @@ docker run --rm --privileged \
 # should-not-change
 caddy: 80,443
 http-proxy: 1080
+postgres: 5432
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
@@ -113,6 +114,9 @@ talos-pxe: 9301
 
 ## llm, 9400-9499
 ollama: 9400
+
+## app-dev, 9500-9799
+postgrest: 9500
 
 ## app, 9800-9999
 keycloak: 9800

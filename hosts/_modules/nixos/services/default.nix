@@ -18,6 +18,7 @@
     ./ollama
     ./openssh
     ./podman
+    ./postgres
     ./powerdns
     ./restic
     ./samba

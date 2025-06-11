@@ -30,7 +30,7 @@ in {
       (with pkgs; [
         kubecolor-catppuccin
         kubectl-browse-pvc
-        kubectl-pgo
+        # kubectl-pgo # archived
         talhelper
         talosctl
       ])

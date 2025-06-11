@@ -34,6 +34,7 @@
 
         ## Apps:DevOps ##
         netbox.enable = false;
+        postgres.enable = true;
       };
     };
   };
