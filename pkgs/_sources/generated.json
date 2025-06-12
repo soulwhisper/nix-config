@@ -173,7 +173,7 @@
         "extract": null,
         "name": "talosctl",
         "passthru": null,
-        "pinned": false,
+        "pinned": true,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
