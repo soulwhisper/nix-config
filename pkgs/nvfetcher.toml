@@ -27,6 +27,7 @@ src.include_regex = "v3.9.*"
 [talosctl]
 fetch.github = "siderolabs/talos"
 src.github = "siderolabs/talos"
+pinned = true # until unstable.go >= 1.24.4
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"
