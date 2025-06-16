@@ -18,14 +18,6 @@
 in {
   options.modules.editor.vscode = {
     enable = lib.mkEnableOption "vscode";
-    extensions = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      default = [];
-    };
-    userSettings = lib.mkOption {
-      type = lib.types.attrs;
-      default = settingsFile;
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -33,9 +25,61 @@ in {
       enable = true;
       package = pkgs.unstable.vscode;
       mutableExtensionsDir = true;
+      extensions = let
+          pkgs-ext = import inputs.nixpkgs {
+            inherit (pkgs) system;
+            config.allowUnfree = true;
+            overlays = [inputs.nix-vscode-extensions.overlays.default];
+          };
+          marketplace = pkgs-ext.vscode-marketplace;
+        in
+          with marketplace; [
+            # : based on sync
 
-      inherit (cfg) extensions;
-      inherit (cfg) userSettings;
+            ## Formatters & Linters
+            christian-kohler.path-intellisense
+            esbenp.prettier-vscode
+            fnando.linter
+            shardulm94.trailing-spaces
+            sonarsource.sonarlint-vscode
+            streetsidesoftware.code-spell-checker
+
+            ## Git
+            eamodio.gitlens
+            github.remotehub
+
+            ## Localization
+            ms-ceintl.vscode-language-pack-zh-hans
+
+            ## Programming support
+            dbaeumer.vscode-eslint
+            jnoortheen.nix-ide
+            ms-python.python
+            redhat.vscode-yaml
+            samuelcolvin.jinjahtml
+            savh.json5-kit
+
+            ## Remote development
+            ms-vscode-remote.remote-containers
+            ms-vscode-remote.remote-ssh
+            ms-vscode-remote.remote-ssh-edit
+            ms-vscode.remote-explorer
+
+            ## Theme, Color prefer `modern dark`
+            pkief.material-icon-theme
+
+            ## Tools
+            gitHub.copilot
+            ms-azuretools.vscode-containers
+            ms-kubernetes-tools.vscode-kubernetes-tools
+            signageos.signageos-vscode-sops
+
+            ## Other
+            aaron-bond.better-comments
+            gruntfuggly.todo-tree
+            johnpapa.vscode-peacock
+            mutantdino.resourcemonitor
+          ];
     };
 
     home.file = lib.genAttrs pathsToMakeWritable (_: {

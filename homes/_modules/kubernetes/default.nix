@@ -25,12 +25,16 @@ in {
     enable = lib.mkEnableOption "kubernetes";
   };
 
+  # : archived packages
+  # kubefwd,
+  # : archived krew plugins
+  # cnpg,explore,kyverno,mayastor,neat,oidc-login,openebs,pgo,pv-migrate,score,
+
   config = lib.mkIf cfg.enable {
     home.packages =
       (with pkgs; [
         kubecolor-catppuccin
         kubectl-browse-pvc
-        # kubectl-pgo # archived
         talhelper
         talosctl
       ])
@@ -41,7 +45,6 @@ in {
         kubeconform
         kubecolor
         kubectl
-        kubefwd
         kubescape
         kustomize
         popeye
@@ -64,17 +67,15 @@ in {
       };
       plugins = [
         # accessibility
-        "cnpg"
-        "pv-migrate"
         "rook-ceph"
         "view-secret"
+        "virt"
 
         # debug
         "df-pv"
-        "explore"
         "klock"
-        "neat"
         "netshoot/netshoot"
+        "rbac-tool"
         "stern"
 
         # optimising
