@@ -1,6 +1,5 @@
 {
   "talos-api": "sha256-TKLqFgPUT1OoSf+IzCHBIyqCjhOcHgWLKF202RHqxQM=",
-  "kubectl-pgo": "sha256-PhTDqsFhPas2mcK7Ew2TQNqnvftk/+7wo2yFE9dnSUY=",
   "talosctl": "sha256-fDKCozvQ1dPM0DFS7DysZ1DHryj3se1bmaLb+3B0kxo=",
   "caddy-custom": "sha256-x/6nDUO8h0KLWpNfWdGd9MYcHV2ZZjONWds8+Jc9Nxc=",
   "caddy-plugin-cloudflare": "",

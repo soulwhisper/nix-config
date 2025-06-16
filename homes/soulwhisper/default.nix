@@ -24,46 +24,45 @@
           marketplace = pkgs-ext.vscode-marketplace;
         in
           with marketplace; [
-            # Language
-            ms-ceintl.vscode-language-pack-zh-hans
+            # : based on sync
 
-            # Themes
-            catppuccin.catppuccin-vsc
-            catppuccin.catppuccin-vsc-icons
-
-            # Language support
-            golang.go
-            jinliming2.vscode-go-template
-            helm-ls.helm-ls
-            jnoortheen.nix-ide
-            savh.json5-kit
-            ms-azuretools.vscode-docker
-            ms-python.python
-            redhat.vscode-yaml
-            tamasfe.even-better-toml
-
-            # Formatters
+            ## Formatters & Linters
             esbenp.prettier-vscode
+            fnando.linter
+            ionutvmi.path-autocomplete
             shardulm94.trailing-spaces
 
-            # Linters
-            fnando.linter
+            ## Git
+            eamodio.gitlens
+            github.remotehub
 
-            # Remote development
+            ## Localization
+            ms-ceintl.vscode-language-pack-zh-hans
+
+            ## Programming support
+            jnoortheen.nix-ide
+            ms-python.python
+            redhat.vscode-yaml
+            samuelcolvin.jinjahtml
+            savh.json5-kit
+
+            ## Remote development
             ms-vscode-remote.remote-containers
             ms-vscode-remote.remote-ssh
+            ms-vscode-remote.remote-ssh-edit
+            ms-vscode.remote-explorer
 
-            # Markdown
-            davidanson.vscode-markdownlint
-            shd101wyy.markdown-preview-enhanced
+            ## Theme, Color prefer `modern dark`
+            pkief.material-icon-theme
 
-            # Other
-            eamodio.gitlens
-            gruntfuggly.todo-tree
-            ionutvmi.path-autocomplete
-            luisfontes19.vscode-swissknife
+            ## Tools
+            ms-azuretools.vscode-containers
             ms-kubernetes-tools.vscode-kubernetes-tools
             signageos.signageos-vscode-sops
+
+            ## Other
+            gruntfuggly.todo-tree
+            mutantdino.resourcemonitor
           ];
       };
     };
