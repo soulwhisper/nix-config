@@ -58,26 +58,15 @@
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
     };
   };
-  kubectl-pgo = {
-    pname = "kubectl-pgo";
-    version = "v0.5.1";
-    src = fetchFromGitHub {
-      owner = "CrunchyData";
-      repo = "postgres-operator-client";
-      rev = "v0.5.1";
-      fetchSubmodules = false;
-      sha256 = "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=";
-    };
-  };
   poweradmin = {
     pname = "poweradmin";
-    version = "v3.9.2";
+    version = "v3.9.3";
     src = fetchFromGitHub {
       owner = "poweradmin";
       repo = "poweradmin";
-      rev = "v3.9.2";
+      rev = "v3.9.3";
       fetchSubmodules = false;
-      sha256 = "sha256-TysTx0gkuofuvwpHiztmoE21d3U48iBfZZ6pV3Iwpn4=";
+      sha256 = "sha256-FtfnNin1kWqfLymn7ayZRLkbZXotovuOpCID0NfjiJQ=";
     };
   };
   talos-api = {

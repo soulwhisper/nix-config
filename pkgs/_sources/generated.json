@@ -104,27 +104,6 @@
         },
         "version": "v1.3.0"
     },
-    "kubectl-pgo": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "kubectl-pgo",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "CrunchyData",
-            "repo": "postgres-operator-client",
-            "rev": "v0.5.1",
-            "sha256": "sha256-0y1+goq9xFZYfHelUBJD/ZcEiDvRFx0sEweF1Q6N2uk=",
-            "sparseCheckout": [],
-            "type": "github"
-        },
-        "version": "v0.5.1"
-    },
     "poweradmin": {
         "cargoLocks": null,
         "date": null,
@@ -139,12 +118,12 @@
             "name": null,
             "owner": "poweradmin",
             "repo": "poweradmin",
-            "rev": "v3.9.2",
-            "sha256": "sha256-TysTx0gkuofuvwpHiztmoE21d3U48iBfZZ6pV3Iwpn4=",
+            "rev": "v3.9.3",
+            "sha256": "sha256-FtfnNin1kWqfLymn7ayZRLkbZXotovuOpCID0NfjiJQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v3.9.2"
+        "version": "v3.9.3"
     },
     "talos-api": {
         "cargoLocks": null,
