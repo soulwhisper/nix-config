@@ -30,6 +30,7 @@ _: {
 
       # :: storage
       "dropbox"
+      "transmission"
       "transmit"
 
       # :: development
@@ -46,6 +47,8 @@ _: {
 
       # :: productivity
       "obsidian"
+      "thunderbird"
+      "ticktick"
       "vmware-fusion"
 
       # :: utilities
@@ -53,7 +56,6 @@ _: {
     ];
     masApps = {
       "Caffeinated" = 1362171212;
-      "Dida" = 966085870;
       "Keka" = 470158793;
       "Numbers" = 409203825;
       "Pages" = 409201541;

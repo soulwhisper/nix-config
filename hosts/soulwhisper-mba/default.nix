@@ -47,6 +47,7 @@
         "orbstack"
 
         # :: productivity
+        "alfred"
         "discord"
         "raycast" # test extensions
         "wireshark"
