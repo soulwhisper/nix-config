@@ -9,15 +9,15 @@ on:
     branches:
       - main
     paths:
-      - 'github/workflows/**'
-      - '**.nix'
-      - '!devenv.nix'
-      - 'flake.lock'
+      - "github/workflows/**"
+      - "**.nix"
+      - "!devenv.nix"
+      - "flake.lock"
 
 # Notice: nix-darwin needs sudo since 25.05
 # current work around with:
-# sudo $(which nix) build ...
-# sudo $(which darwin-rebuild) build ...
+# ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) build ...
+# ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which darwin-rebuild) build ...
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -93,13 +93,13 @@ jobs:
           failed_drv_t1=$(grep "For full logs" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
           failed_drv_t2=$(grep "failed to build" /tmp/nix-build-err.log | grep -oE '/nix/store/[a-z0-9]{32}-[^ ]+\.drv' | head -n1)
           echo "Last 100 lines of error log:"
-          tail -n 20 /tmp/nix-build-err.log
+          tail -n 100 /tmp/nix-build-err.log
           if [ -n "$failed_drv_t1" ]; then
             echo "Showing logs for $failed_drv_t1"
-            sudo $(which nix) log "$failed_drv_t1"
+            ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) log "$failed_drv_t1"
           elif [ -n "$failed_drv_t2" ]; then
             echo "Showing logs for $failed_drv_t2"
-            sudo $(which nix) log "$failed_drv_t2"
+            ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) log "$failed_drv_t2"
           else
             echo "No derivation files found in error log."
           fi
@@ -111,7 +111,7 @@ jobs:
           ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) profile diff-closures --profile ./profile
           delimiter="$(openssl rand -hex 16)"
           echo "diff<<${delimiter}" >> "${GITHUB_OUTPUT}"
-          sudo $(which nix) profile diff-closures --profile ./profile | perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' >> "${GITHUB_OUTPUT}"
+          ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) profile diff-closures --profile ./profile | perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' >> "${GITHUB_OUTPUT}"
           echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
       - name: Generate Token

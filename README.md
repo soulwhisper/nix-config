@@ -15,29 +15,36 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 ```shell
 git clone https://github.com/soulwhisper/nix-config
 
-# darwin
-## opt. run set-proxy script
+# deps: nix,go-task
+curl -L https://nixos.org/nix/install | sh
+brew install go-task
+nix-shell -p go-task
+
+# : darwin
+## :: opt. run set-proxy script
 sudo python3 scripts/darwin_set_proxy.py
-## build & diff
-task nix:darwin-build HOST=soulwhisper-mba
-## switch
-task nix:darwin-switch HOST=soulwhisper-mba
+## :: init, if darwin-rebuild not exist
+task darwin:init
+## :: build & diff
+task darwin:build
+## :: switch
+task darwin:switch
 
-# nixos, local
-## build
-task nix:nixos-build HOST=nix-nas
-## switch
-task nix:nixos-switch HOST=nix-nas
+# : nixos, local
+## :: build
+task nixos:build HOST=nix-nas
+## :: switch
+task nixos:switch HOST=nix-nas
 
-# nixos, remote
-## set DNS record then test ssh connections
-## copy machineconfig to "hosts/{HOST}/hardware-configuration.nix"
-## build
-task nix:nixos-build MODE=remote-to-remote SOURCE_HOST=nix-dev SOURCE_DOMAIN=homelab.internal TARGET_HOST=nix-nas TARGET_DOMAIN=homelab.internal
-## switch
-task nix:nixos-switch MODE=local-to-remote HOST=nix-nas DOMAIN=homelab.internal
+# : nixos, remote
+# set DNS record then test ssh connections
+# copy machineconfig to "hosts/{HOST}/hardware-configuration.nix"
+## :: build
+task nixos:build BUILDER=nix-dev HOST=nix-nas
+## :: switch
+task nixos:switch BUILDER=nix-dev HOST=nix-nas
 
-# build and try pkgs
+# : build and try pkgs
 nix build nix-config/.#zotregistry --print-out-paths
 ```
 

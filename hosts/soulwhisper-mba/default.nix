@@ -26,25 +26,32 @@
       sudo chsh -s /run/current-system/sw/bin/fish soulwhisper
     '';
 
-    # testing apps list
+    # : test/temp apps list
+    # :: not support brew yet
+    # animeko: https://myani.org/downloads
+    # :: todo
+    # MS Office (365)
     homebrew = {
       taps = [
       ];
       brews = [
       ];
       casks = [
+        # :: storage
+        "transmission"
+
+        # :: productivity
         "discord"
-        "brewforge/chinese/easytier"
-        "maccy"
-        "orbstack"
-        "rectangle-pro"
-        "steam"
-        "swiftbar"
-        "tableplus"
-        "transmit"
         "wireshark"
+
+        # :: utilities
+        "folx"
+        "maccy"
+        "raycast"
+        "swish"
       ];
       masApps = {
+        "DevHub" = 6476452351;
         "ReadKit" = 1615798039;
         "Windows App" = 1295203466;
         # "Passepartout" = 1433648537;

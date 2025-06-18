@@ -3,36 +3,37 @@ _: {
 
   system = {
     defaults = {
+      # : comment value is default now
       NSGlobalDomain = {
         # Whether to automatically switch between light and dark mode.
-        AppleInterfaceStyleSwitchesAutomatically = false;
-        # Configures the keyboard control behavior.  Mode 3 enables full keyboard control
-        AppleKeyboardUIMode = 3;
+        # AppleInterfaceStyleSwitchesAutomatically = false;
         # Whether to show all file extensions in Finder
         AppleShowAllExtensions = true;
-        # Whether to enable automatic capitalization.  The default is true
+        # Whether to enable automatic capitalization.
         NSAutomaticCapitalizationEnabled = false;
-        # Whether to enable smart dash substitution.  The default is true
+        # Whether to enable smart dash substitution.
         NSAutomaticDashSubstitutionEnabled = false;
-        # Whether to enable smart period substitution.  The default is true
+        # Whether to enable smart period substitution.
         NSAutomaticPeriodSubstitutionEnabled = false;
-        # Whether to enable smart quote substitution.  The default is true
+        # Whether to enable smart quote substitution.
         NSAutomaticQuoteSubstitutionEnabled = false;
-        # Whether to enable automatic spelling correction.  The default is true
+        # Whether to enable automatic spelling correction.
         NSAutomaticSpellingCorrectionEnabled = false;
-        # Sets the size of the finder sidebar icons: 1 (small), 2 (medium) or 3 (large). The default is 3.
+        # Sets the size of the finder sidebar icons.
         NSTableViewDefaultSizeMode = 1;
         # Configures the trackpad tap behavior.  Mode 1 enables tap to click.
         "com.apple.mouse.tapBehavior" = 1;
         # Whether to enable trackpad secondary click.
-        "com.apple.trackpad.enableSecondaryClick" = true;
+        # "com.apple.trackpad.enableSecondaryClick" = true;
         # Whether to autohide the menu bar.
-        _HIHideMenuBar = false;
+        # _HIHideMenuBar = false;
       };
+
+      # turn off wallpaper tinting
 
       dock = {
         # Show appswitcher on all displays
-        appswitcher-all-displays = false;
+        # appswitcher-all-displays = false;
         # Automatically show and hide the dock
         autohide = true;
         # Position of the dock on screen.

@@ -3,20 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
-  cfg = config.modules.editor.nvim;
-in {
-  options.modules.editor.nvim = {
-    defaultEditor = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-    };
-  };
-
+}: {
   config = {
     programs.neovim = {
       enable = true;
-      defaultEditor = cfg.defaultEditor;
+      defaultEditor = true;
       viAlias = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
