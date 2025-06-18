@@ -15,7 +15,7 @@
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.atuin = {
       enable = true;
       package = pkgs.unstable.atuin;
