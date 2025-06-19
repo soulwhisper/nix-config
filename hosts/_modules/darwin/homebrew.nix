@@ -37,7 +37,6 @@ _: {
       "font-jetbrains-mono-nerd-font"
       "ghostty"
       "orbstack"
-      "tableplus"
       "visual-studio-code"
 
       # :: web

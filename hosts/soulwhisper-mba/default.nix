@@ -41,6 +41,7 @@
         "transmission"
 
         # :: productivity
+        "calibre"
         "discord"
         "wireshark"
       ];
