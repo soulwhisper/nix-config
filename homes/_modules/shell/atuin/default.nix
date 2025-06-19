@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  cfg = config.modules.shell.atuin;
+in {
   options.modules.shell.atuin = {
     sync_address = lib.mkOption {
       type = lib.types.str;
