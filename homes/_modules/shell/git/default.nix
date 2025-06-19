@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  cfg = config.modules.shell.git;
+in {
   options.modules.shell.git = {
     config = lib.mkOption {
       type = lib.types.attrs;
