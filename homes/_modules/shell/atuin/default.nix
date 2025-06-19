@@ -7,7 +7,6 @@
   cfg = config.modules.shell.atuin;
 in {
   options.modules.shell.atuin = {
-    enable = lib.mkEnableOption "atuin";
     sync_address = lib.mkOption {
       type = lib.types.str;
       default = "https://api.atuin.sh";
@@ -18,7 +17,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.atuin = {
       enable = true;
       package = pkgs.unstable.atuin;

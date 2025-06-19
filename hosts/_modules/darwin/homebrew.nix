@@ -12,33 +12,61 @@ _: {
       lockfiles = false; # Don't save lockfile (since running from anywhere)
     };
 
-    # stable apps list
+    # : stable apps list
+    # * fix damaged error: `/usr/bin/xattr -cr /Applications/appname.app`
     taps = [
       "th-ch/youtube-music"
     ];
     brews = [
     ];
     casks = [
+      # :: password management
       "1password"
       "1password-cli"
+
+      # :: networking
+      "brewforge/chinese/easytier"
       "clash-verge-rev"
+      "switchhosts" # replace adguard container
+
+      # :: storage
       "dropbox"
+      "transmit"
+
+      # :: development
       "font-jetbrains-mono-nerd-font"
       "ghostty"
+      "orbstack"
+      "tableplus"
+      "visual-studio-code"
+
+      # :: web
       "google-chrome"
-      "jordanbaird-ice"
+
+      # :: media
+      "iina"
+      "youtube-music"
+
+      # :: productivity
+      "alfred"
+      "obsidian"
+      "thunderbird"
+      "ticktick"
+      "vmware-fusion"
+
+      # :: utilities
+      "jordanbaird-ice" # bartender replacement
       "karabiner-elements"
       "keyboard-maestro"
-      "obsidian"
-      "raycast"
-      "youtube-music"
-      "vmware-fusion"
+      "pixpin"
+      "swish"
     ];
     masApps = {
       "Caffeinated" = 1362171212;
       "Keka" = 470158793;
       "Numbers" = 409203825;
       "Pages" = 409201541;
+      "Keynote" = 409183694;
     };
   };
 }

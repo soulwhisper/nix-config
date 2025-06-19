@@ -6,7 +6,7 @@ nixos-generate-config --no-filesystems --root /tmp/config
 
 export https_proxy=
 
-git clone -b main https://github.com/soulwhisper/nix-config /tmp/nix-config
+git clone https://github.com/soulwhisper/nix-config /tmp/nix-config
 
 cp /tmp/config/etc/nixos/hardware-configuration.nix /tmp/nix-config/bootstrap/
 
@@ -22,7 +22,7 @@ mkdir -p /home/soulwhisper/.config/age
 nano /home/soulwhisper/.config/age/keys.txt
 
 ## deploy host
-git clone -b main https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
+git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
 sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-nas/hardware-configuration.nix
 sudo nixos-rebuild build --flake nix-config/.#nix-nas --show-trace --print-build-logs
 sudo nixos-rebuild switch --flake nix-config/.#nix-nas

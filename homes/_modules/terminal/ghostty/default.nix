@@ -1,10 +1,19 @@
-{...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  userDir =
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then "Library/Application Support/com.mitchellh.ghostty"
+    else "${config.xdg.configHome}/ghostty";
+in {
   config = {
     # install ghostty via homebrew, macos only;
-
     # https://github.com/catppuccin/ghostty
 
-    xdg.configFile."ghostty/config" = {
+    xdg.configFile."${userDir}/config" = {
       enable = true;
       text = ''
         # Theme config

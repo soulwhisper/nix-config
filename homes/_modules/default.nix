@@ -8,13 +8,11 @@
 
     ./deployment
     ./development
-    ./editor
     ./kubernetes
     ./security
     ./shell
     ./terminal
     ./themes
-    ./mutability.nix
   ];
 
   config = {

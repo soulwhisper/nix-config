@@ -7,7 +7,6 @@
   cfg = config.modules.shell.git;
 in {
   options.modules.shell.git = {
-    enable = lib.mkEnableOption "git";
     config = lib.mkOption {
       type = lib.types.attrs;
       default = {};
@@ -23,7 +22,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.gh.enable = true;
     programs.gh-dash.enable = true;
     programs.lazygit.enable = true;

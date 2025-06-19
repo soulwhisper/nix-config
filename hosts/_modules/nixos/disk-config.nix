@@ -6,7 +6,7 @@
     disk = {
       main = {
         type = "disk";
-        # when using disko-install, this value will be overwritten
+        # when using disko-install, device value will be overwritten
         device = "/dev/sda";
         content = {
           type = "gpt";

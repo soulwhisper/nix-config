@@ -8,6 +8,7 @@
     ./atuin
     ./fish
     ./git
+    ./nvim
     ./starship
     ./utilities
   ];

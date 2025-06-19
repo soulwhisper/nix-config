@@ -1,13 +1,14 @@
 ---
 version: "3"
+set:
+  - pipefail
+shopt:
+  - globstar
 
 includes:
-  sops:
-    taskfile: ".taskfiles/sops"
-    dir: .taskfiles/sops
-  nix:
-    taskfile: ".taskfiles/nix"
-    dir: "{{.ROOT_DIR}}"
+  darwin: .taskfiles/darwin/Taskfile.yaml
+  nixos: .taskfiles/nixos/Taskfile.yaml
+  sops: .taskfiles/sops/Taskfile.yaml
 
 tasks:
   default:
