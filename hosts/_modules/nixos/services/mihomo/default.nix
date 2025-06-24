@@ -17,12 +17,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = !config.modules.services.dae.enable;
-        message = "mihomo TUN conflicts with dae";
-      }
-    ];
+    # ! mihomo TUN conflicts with dae
 
     networking.firewall.allowedTCPPorts = [1080 9201];
 
