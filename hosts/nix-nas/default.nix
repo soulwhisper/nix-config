@@ -33,6 +33,7 @@
         ## Apps ##
         home-assistant.enable = true;
         kms.enable = true;
+        meshcentral.enable = true;
         netbox = {
           enable = true;
           domain = "box.htkrail.com";

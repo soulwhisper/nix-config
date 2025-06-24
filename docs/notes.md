@@ -8,10 +8,6 @@
 - zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
 - since git-operations using vscode and workspace, remove gnupg and git-auth from configs;
 
-## Bug tracker
-
-- dae, domain timeout; solution issue, [ref](https://github.com/daeuniverse/dae/issues/776#issuecomment-2709345478);
-
 ## Useful commands
 
 ```shell

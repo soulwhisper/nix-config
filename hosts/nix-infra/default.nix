@@ -30,6 +30,7 @@
         ## Apps:Home ##
         home-assistant.enable = true;
         kms.enable = true;
+        meshcentral.enable = true;
         unifi-controller.enable = true;
 
         ## Apps:DevOps ##
