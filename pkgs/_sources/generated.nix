@@ -66,7 +66,7 @@
       repo = "poweradmin";
       rev = "v3.9.3";
       fetchSubmodules = false;
-      sha256 = "sha256-FtfnNin1kWqfLymn7ayZRLkbZXotovuOpCID0NfjiJQ=";
+      sha256 = "sha256-dXAEE8OLGxRbMj+3ICvoq9s9yB6v1oIjoYAOFXqF51o=";
     };
   };
   talos-api = {
