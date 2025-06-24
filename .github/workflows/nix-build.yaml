@@ -51,13 +51,13 @@ jobs:
         if: runner.os == 'Linux'
         uses: jlumbroso/free-disk-space@main
       - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: DeterminateSystems/nix-installer-action@v17
         # with:
         #   source-tag: "v0.32.3"   # bugfixed
       - name: Set up Cachix
-        uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad # v16
+        uses: cachix/cachix-action@v16
         if: ${{ !github.event.pull_request.head.repo.fork }}
         with:
           name: soulwhisper
@@ -122,7 +122,7 @@ jobs:
           private-key: ${{ secrets.PRIVATE_APP_KEY }}
 
       - name: Comment report in pr
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2
+        uses: marocchino/sticky-pull-request-comment@v2
         continue-on-error: true
         with:
           GITHUB_TOKEN: "${{ steps.app-token.outputs.token }}"
