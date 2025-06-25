@@ -17,7 +17,7 @@
     virtualisation.vmware.guest.enable = true;
 
     modules = {
-      filesystems.zfs.enable = true;    # linux-on-zfs
+      filesystems.zfs.enable = true; # linux-on-zfs
       services = {
         adguard.enable = true;
         caddy = {
