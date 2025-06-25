@@ -23,15 +23,18 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot = {
-      supportedFilesystems = [
-        "zfs"
-      ];
+      supportedFilesystems = {
+        zfs = true;
+      };
       zfs = {
         devNodes = "/dev/disk/by-uuid";
         extraPools = cfg.mountPoolsAtBoot;
         forceImportRoot = true; # not recommended, but stable;
       };
       kernelParams = ["zfs.zfs_arc_max=4294967296"]; # 4GB
+      initrd.supportedFilesystems = {
+        zfs = true;
+      };
       initrd.postDeviceCommands = lib.mkAfter ''
         zfs rollback -r rpool/root@blank
       '';

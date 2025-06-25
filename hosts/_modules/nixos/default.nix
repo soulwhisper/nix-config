@@ -1,14 +1,13 @@
 {config, ...}: {
   imports = [
-    ## folder ##
+    # : folder
     ./hardware
     ./filesystems
     ./secrets
     ./services
 
-    ## files ##
+    # : files
     ./desktop.nix
-    ./disk-config.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
@@ -46,9 +45,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    # linux-on-zfs, using disko.nix
-    modules.filesystems.zfs.enable = true;
 
     # default services for all host
     modules.services = {

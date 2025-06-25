@@ -5,17 +5,20 @@
   ...
 }: {
   imports = [
+    ./disko.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./secrets.nix
   ];
 
-  # spec: 4C8G, 100GB, proxmox VM;
+  # spec: 4C8G, 100GB, ESXi VM;
 
   config = {
-    services.qemuGuest.enable = true;
+    # services.qemuGuest.enable = true;
+    virtualisation.vmware.guest.enable = true;
 
     modules = {
+      filesystems.xfs.enable = true;
       services = {
         adguard.enable = true;
         caddy = {
@@ -24,18 +27,17 @@
         };
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
-        ## K8S:Talos ##
+        # : K8S Talos
         talos.api.enable = true;
 
-        ## Apps:Home ##
-        home-assistant.enable = true;
+        # : Apps
         kms.enable = true;
         meshcentral.enable = true;
+        minio = {
+          enable = true;
+          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
+        };
         unifi-controller.enable = true;
-
-        ## Apps:DevOps ##
-        netbox.enable = false;
-        postgres.enable = true;
       };
     };
   };

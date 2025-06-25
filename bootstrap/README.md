@@ -1,5 +1,8 @@
 ## Bootstrap NixOS
 
+- 1, change `networking.hostName`
+- 2, overwrite `disko.nix`, comment `zfs support part` if not needed;
+
 ```shell
 ## install nixos with iso and disko
 nixos-generate-config --no-filesystems --root /tmp/config

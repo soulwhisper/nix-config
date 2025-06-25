@@ -1,12 +1,12 @@
 # https://github.com/nix-community/disko-templates/blob/main/zfs-impermanence/disko-config.nix
 # https://grahamc.com/blog/erase-your-darlings/
-# This file is the general template for zfs impermanence disk config. Also in bootstrap.
+# This file is the general template for zfs impermanence disk config.
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        # when using disko-install, this value will be overwritten
+        # when using disko-install, device value will be overwritten
         device = "/dev/sda";
         content = {
           type = "gpt";
@@ -69,17 +69,17 @@
           };
           "persist/apps" = {
             type = "zfs_fs";
-            mountpoint = "/persist/apps";
+            mountpoint = "/var/lib";
             options."com.sun:auto-snapshot" = "true";
           };
           "persist/cfgs" = {
             type = "zfs_fs";
-            mountpoint = "/persist/cfgs";
+            mountpoint = "/etc/cfgs";
             options."com.sun:auto-snapshot" = "false";
           };
           "persist/shared" = {
             type = "zfs_fs";
-            mountpoint = "/persist/shared";
+            mountpoint = "/mnt/shared";
             options."com.sun:auto-snapshot" = "false";
           };
         };

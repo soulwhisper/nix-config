@@ -5,11 +5,11 @@
   ...
 }: {
   imports = [
+    ./disko.nix
     ./hardware-configuration.nix
-    ./disk-config.nix
   ];
   config = {
-    networking.hostName = "nix-nas"; # change this to fit host
+    networking.hostName = "bootstrap"; # change this to fit host
 
     services.openssh = {
       enable = true;
@@ -39,11 +39,11 @@
 
     system.stateVersion = "25.05";
 
-    # zfs support
+    # : zfs support part start
     boot = {
-      supportedFilesystems = [
-        "zfs"
-      ];
+      supportedFilesystems = {
+        zfs = true;
+      };
       zfs = {
         devNodes = "/dev/disk/by-uuid";
         extraPools = ["rpool"];
@@ -59,5 +59,6 @@
       autoScrub.enable = true;
       trim.enable = true;
     };
+    # : zfs support part end
   };
 }

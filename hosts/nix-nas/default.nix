@@ -5,17 +5,19 @@
   ...
 }: {
   imports = [
+    ./disko.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./secrets.nix
   ];
 
-  # spec: 8C16G, 1TB, vsphere VM;
+  # spec: 8C16G, 1TB, ESXi VM;
 
   config = {
     virtualisation.vmware.guest.enable = true;
 
     modules = {
+      filesystems.zfs.enable = true;    # linux-on-zfs
       services = {
         adguard.enable = true;
         caddy = {
@@ -23,14 +25,15 @@
           cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
         };
 
-        ## System ##
+        # : System
         smartd.enable = false;
         nut.enable = false;
 
-        ## K8S:Talos ##
+        # : K8S Talos
         talos.api.enable = true;
 
-        ## Apps ##
+        # : Apps
+        forgejo.enable = true;
         home-assistant.enable = true;
         kms.enable = true;
         meshcentral.enable = true;
@@ -42,10 +45,7 @@
         unifi-controller.enable = true;
         zotregistry.enable = true;
 
-        ## Apps:Testing ##
-        forgejo.enable = true;
-
-        ## Backup ##
+        # : Backup
         restic = {
           enable = false;
           endpointFile = config.sops.secrets."backup/restic/endpoint".path;
@@ -53,7 +53,7 @@
           encryptionFile = config.sops.secrets."backup/restic/encryption".path;
         };
 
-        ## Storage ##
+        # : Storage
         minio = {
           enable = false;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
