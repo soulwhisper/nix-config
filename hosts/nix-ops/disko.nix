@@ -1,16 +1,12 @@
 # This file is the general template for lvm-thin-xfs and tmpfs-root disk config.
-{
-  ...
-}:
-let
+{...}: let
   xfsMountOptions = [
     "defaults"
     "noatime"
     "ikeep" # become defaults after 2025.09
     "pquota"
   ];
-in
-{
+in {
   disko.devices = {
     disk = {
       main = {

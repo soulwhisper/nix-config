@@ -1,8 +1,5 @@
 # This file is the general template for xfs disk config.
-{
-  ...
-}:
-let
+{...}: let
   xfsMountOptions = [
     "defaults"
     "noatime"
