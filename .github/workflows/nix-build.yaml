@@ -43,7 +43,7 @@ jobs:
             os: ubuntu-latest
           - system: nix-infra
             os: ubuntu-latest
-          - system: nix-nas
+          - system: nix-ops
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:

@@ -14,10 +14,14 @@
   # spec: 8C16G, 1TB, ESXi VM;
 
   config = {
+    # This is a must if "/home" is isolated from "/", for sops.
+    fileSystems."/home".neededForBoot = true;
+
+    # services.qemuGuest.enable = true;
     virtualisation.vmware.guest.enable = true;
 
     modules = {
-      filesystems.zfs.enable = true; # linux-on-zfs
+      filesystems.xfs.enable = true;
       services = {
         adguard.enable = true;
         caddy = {
@@ -62,7 +66,7 @@
         nfs4 = {
           enable = false;
           exports.default = {
-            path = "/mnt/shared/nfs";
+            path = "/var/lib/backup/nfs";
             subnet = "172.19.82.0/24";
           };
         };

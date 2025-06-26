@@ -18,7 +18,7 @@
         user = "soulwhisper";
         forwardAgent = true;
       };
-      "nix-nas.homelab.internal" = {
+      "nix-ops.homelab.internal" = {
         port = 22;
         user = "soulwhisper";
         forwardAgent = true;

@@ -14,9 +14,6 @@ in {
       supportedFilesystems = {
         xfs = true;
       };
-      initrd.supportedFilesystems = {
-        xfs = true;
-      };
     };
   };
 }

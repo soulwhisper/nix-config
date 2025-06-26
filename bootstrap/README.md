@@ -26,9 +26,9 @@ nano /home/soulwhisper/.config/age/keys.txt
 
 ## deploy host
 git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
-sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-nas/hardware-configuration.nix
-sudo nixos-rebuild build --flake nix-config/.#nix-nas --show-trace --print-build-logs
-sudo nixos-rebuild switch --flake nix-config/.#nix-nas
+sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-ops/hardware-configuration.nix
+sudo nixos-rebuild build --flake nix-config/.#nix-ops --show-trace --print-build-logs
+sudo nixos-rebuild switch --flake nix-config/.#nix-ops
 
 ## if goproxy fails
 sudo systemctl edit --runtime nix-daemon.service

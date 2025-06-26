@@ -12,15 +12,21 @@
   ];
 
   config = {
+    # This is a must if "/home" is isolated from "/", for sops.
+    fileSystems."/home".neededForBoot = true;
+
     modules = {
-      desktop.enable = true; # enable KDE desktop
       filesystems.zfs.enable = true; # linux-on-zfs
+      desktop.enable = true; # enable KDE desktop
 
       hardware = {
         nvidia.enable = true; # llm support
       };
 
       services = {
+        # : System
+        smartd.enable = true;
+
         # : LLM
         ollama = {
           enable = true;

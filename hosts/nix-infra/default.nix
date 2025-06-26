@@ -27,16 +27,17 @@
         };
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
-        # : K8S Talos
-        talos.api.enable = true;
-
-        # : Apps
-        kms.enable = true;
+        # : K8S related
         meshcentral.enable = true;
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
         };
+        talos.api.enable = true;
+
+        # : Others
+        kms.enable = true;
+        timemachine.enable = false;
         unifi-controller.enable = true;
       };
     };

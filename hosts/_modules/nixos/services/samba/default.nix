@@ -19,7 +19,7 @@ in {
     # http://gwiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X
 
     systemd.tmpfiles.rules = [
-      "d /mnt/shared/timemachine 0700 root root - -"
+      "d /var/lib/backup/timemachine 0700 root root - -"
     ];
 
     users.groups.samba-users = {};
@@ -56,7 +56,7 @@ in {
           "delete veto files" = "yes";
         };
         TimeMachine = {
-          path = "/mnt/shared/timemachine";
+          path = "/var/lib/backup/timemachine";
           "fruit:time machine" = "yes";
           "fruit:time machine max size" = "${cfg.maxSize}";
         };

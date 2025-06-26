@@ -13,13 +13,11 @@ in {
     };
   };
 
-  # linux-on-zfs and zfs-impermanence as base
   # unlike traditional FHS, nixos can boot with only "/boot" and "/nix";
-  # static data in "/nix", state data in "/persist" and "/home";
-  # default root zpool => rpool;
-  # dataset "/persist/apps", "%s/appname" => "/var/lib/appname";
-  # dataset "/persist/cfgs", "%s/appname" => "/etc/cfgs/appname";
-  # dataset "/persist/shared", "%s/nfs" => "/mnt/shared/nfs";
+  # static data in "/nix", state data in "/persist";
+  # default root pool => rpool;
+  # dataset "/persist/apps" => "/var/lib";
+  # dataset "/persist/home" => "/home";
 
   config = lib.mkIf cfg.enable {
     boot = {
@@ -32,9 +30,6 @@ in {
         forceImportRoot = true; # not recommended, but stable;
       };
       kernelParams = ["zfs.zfs_arc_max=4294967296"]; # 4GB
-      initrd.supportedFilesystems = {
-        zfs = true;
-      };
       initrd.postDeviceCommands = lib.mkAfter ''
         zfs rollback -r rpool/root@blank
       '';

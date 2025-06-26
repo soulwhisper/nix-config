@@ -57,11 +57,6 @@
             mountpoint = "/nix";
             options."com.sun:auto-snapshot" = "false";
           };
-          "home" = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-            options."com.sun:auto-snapshot" = "true";
-          };
           "persist" = {
             type = "zfs_fs";
             options.mountpoint = "none";
@@ -72,15 +67,10 @@
             mountpoint = "/var/lib";
             options."com.sun:auto-snapshot" = "true";
           };
-          "persist/cfgs" = {
+          "persist/home" = {
             type = "zfs_fs";
-            mountpoint = "/etc/cfgs";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          "persist/shared" = {
-            type = "zfs_fs";
-            mountpoint = "/mnt/shared";
-            options."com.sun:auto-snapshot" = "false";
+            mountpoint = "/home";
+            options."com.sun:auto-snapshot" = "true";
           };
         };
       };

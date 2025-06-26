@@ -1,5 +1,15 @@
 # This file is the general template for xfs disk config.
 {
+  ...
+}:
+let
+  xfsMountOptions = [
+    "defaults"
+    "noatime"
+    "ikeep" # become defaults after 2025.09
+    "pquota"
+  ];
+in {
   disko.devices = {
     disk = {
       main = {
@@ -19,18 +29,13 @@
                 mountOptions = ["umask=0077"];
               };
             };
-            root = {
+            primary = {
               size = "100%";
               content = {
                 type = "filesystem";
                 format = "xfs";
                 mountpoint = "/";
-                mountOptions = [
-                  "defaults"
-                  "ikeep" # become defaults after 2025.09
-                  "pquota"
-                  "noatime"
-                ];
+                mountOptions = xfsMountOptions;
               };
             };
           };
