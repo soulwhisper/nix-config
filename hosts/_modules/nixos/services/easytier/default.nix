@@ -47,20 +47,14 @@
     listeners = [
       "tcp://0.0.0.0:11010"
       "udp://0.0.0.0:11010"
-      "wg://0.0.0.0:11011"
     ];
     rpc_portal = "0.0.0.0:15888";
     peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.public_nodes);
     proxy_network = map (proxy_network: {cidr = proxy_network;}) cfg.proxy_networks;
-    vpn_portal_config = {
-      client_cidr = "10.100.100.0/24";
-      wireguard_listen = "0.0.0.0:11011";
-    };
     flags = {
       enable_kcp_proxy = true;
       latency_first = true;
-      relay_all_peer_rpc = true;
-      relay_network_whitelist = "";
+      private_mode = true;
     };
   };
 in {
