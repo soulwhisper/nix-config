@@ -59,7 +59,7 @@ in {
             pool = "thinpool";
             content = {
               type = "filesystem";
-              fsType = "xfs";
+              format = "xfs";
               mountpoint = "/var/lib";
               mountOptions = xfsMountOptions ++ ["logbsize=64k"];
             };
@@ -70,7 +70,7 @@ in {
             pool = "thinpool";
             content = {
               type = "filesystem";
-              fsType = "xfs";
+              format = "xfs";
               mountpoint = "/home";
               mountOptions = xfsMountOptions;
             };
@@ -81,7 +81,7 @@ in {
             pool = "thinpool";
             content = {
               type = "filesystem";
-              fsType = "xfs";
+              format = "xfs";
               mountpoint = "/nix";
               mountOptions = xfsMountOptions;
             };
