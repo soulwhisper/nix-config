@@ -37,7 +37,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${pkgs.adguardhome}/bin/adguardhome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config /var/lib/AdGuardHome/AdGuardHome.yaml";
+        ExecStart = "${pkgs.adguardhome}/bin/AdGuardHome --no-check-update --pidfile /run/AdGuardHome/AdGuardHome.pid --work-dir /var/lib/AdGuardHome --config /var/lib/AdGuardHome/AdGuardHome.yaml";
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE" "CAP_NET_RAW"];
         RuntimeDirectory = "AdGuardHome";
