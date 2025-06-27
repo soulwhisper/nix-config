@@ -50,7 +50,7 @@ in {
         type = "lvm_vg";
         lvs = {
           thinpool = {
-            size = "20G";
+            size = "100M";
             lvm_type = "thin-pool";
           };
           app = {
