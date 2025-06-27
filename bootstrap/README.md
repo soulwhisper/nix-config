@@ -43,15 +43,17 @@ mkdir -p /home/soulwhisper/.config/age
 nano /home/soulwhisper/.config/age/keys.txt
 
 # : deploy host
+export https_proxy=
+export GOPROXY=https://goproxy.cn,direct
+
 git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
 sudo nixos-generate-config --no-filesystems
 sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-ops/
-sudo nixos-rebuild switch --flake nix-config/.#nix-ops
+sudo -E nixos-rebuild switch --flake nix-config/.#nix-ops
 
-# :: if goproxy fails
-sudo systemctl edit --runtime nix-daemon.service
-[Service]
-Environment="GOPROXY=https://goproxy.cn,direct"
-sudo systemctl restart nix-daemon.service
-
+# :: nix-ops, disk space too small
+sudo mount -o remount,size=30G /
+# :: nix-ops, expand lv
+sudo lvresize -L +10G main/nix
+sudo xfs_growfs /nix
 ```

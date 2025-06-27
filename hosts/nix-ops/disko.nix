@@ -40,7 +40,7 @@ in {
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = [
-        "size=4G"
+        "size=10G"
         "defaults"
         "mode=755"
       ];
@@ -50,7 +50,7 @@ in {
         type = "lvm_vg";
         lvs = {
           thinpool = {
-            size = "40G";
+            size = "100G";
             lvm_type = "thin-pool";
           };
           app = {
@@ -65,7 +65,7 @@ in {
             };
           };
           home = {
-            size = "5G";
+            size = "10G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
@@ -76,7 +76,7 @@ in {
             };
           };
           nix = {
-            size = "20G";
+            size = "30G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
