@@ -30,7 +30,7 @@ in {
               size = "100%";
               content = {
                 type = "lvm_pv";
-                vg = "mainpool";
+                vg = "main";
               };
             };
           };
@@ -46,15 +46,15 @@ in {
       ];
     };
     lvm_vg = {
-      mainpool = {
+      main = {
         type = "lvm_vg";
         lvs = {
           thinpool = {
-            size = "100M";
+            size = "40G";
             lvm_type = "thin-pool";
           };
           app = {
-            size = "10M";
+            size = "10G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
@@ -65,7 +65,7 @@ in {
             };
           };
           home = {
-            size = "10M";
+            size = "5G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
@@ -76,7 +76,7 @@ in {
             };
           };
           nix = {
-            size = "10M";
+            size = "20G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {

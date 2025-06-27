@@ -11,7 +11,7 @@
   ];
   config = {
     networking.hostName = "nixos";
-
+    system.stateVersion = "25.05";
     services.openssh = {
       enable = true;
       settings = {
@@ -40,6 +40,6 @@
       efi.canTouchEfiVariables = true;
     };
 
-    system.stateVersion = "25.05";
+    fileSystems."/home".neededForBoot = true;
   };
 }

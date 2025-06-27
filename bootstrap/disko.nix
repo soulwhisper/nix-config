@@ -1,12 +1,17 @@
-# https://github.com/nix-community/disko-templates/blob/main/zfs-impermanence/disko-config.nix
-# https://grahamc.com/blog/erase-your-darlings/
-# This file is the general template for zfs impermanence disk config.
-{
+# This file is the general template for lvm-thin-xfs and tmpfs-root disk config.
+{...}: let
+  xfsMountOptions = [
+    "defaults"
+    "noatime"
+    "ikeep" # become defaults after 2025.09
+    "pquota"
+  ];
+in {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        # when using disko-install, this value will be overwritten
+        # when using disko-install, device value will be overwritten
         device = "/dev/sda";
         content = {
           type = "gpt";
@@ -21,66 +26,65 @@
                 mountOptions = ["umask=0077"];
               };
             };
-            zfs = {
+            primary = {
               size = "100%";
               content = {
-                type = "zfs";
-                pool = "rpool";
+                type = "lvm_pv";
+                vg = "main";
               };
             };
           };
         };
       };
     };
-    zpool = {
-      rpool = {
-        type = "zpool";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "zstd";
-          mountpoint = "none";
-          xattr = "sa";
-        };
-        options.ashift = "12";
-        datasets = {
-          "root" = {
-            type = "zfs_fs";
-            mountpoint = "/";
-            # Used by services.zfs.autoSnapshot options.
-            options."com.sun:auto-snapshot" = "false";
-            postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^rpool/root@blank$' || zfs snapshot rpool/root@blank";
+    nodev."/" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=4G"
+        "defaults"
+        "mode=755"
+      ];
+    };
+    lvm_vg = {
+      main = {
+        type = "lvm_vg";
+        lvs = {
+          thinpool = {
+            size = "40G";
+            lvm_type = "thin-pool";
           };
-          "nix" = {
-            type = "zfs_fs";
-            mountpoint = "/nix";
-            options."com.sun:auto-snapshot" = "false";
+          app = {
+            size = "10G";
+            lvm_type = "thinlv";
+            pool = "thinpool";
+            content = {
+              type = "filesystem";
+              format = "xfs";
+              mountpoint = "/var/lib";
+              mountOptions = xfsMountOptions ++ ["logbsize=64k"];
+            };
           };
-          "home" = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-            options."com.sun:auto-snapshot" = "true";
+          home = {
+            size = "5G";
+            lvm_type = "thinlv";
+            pool = "thinpool";
+            content = {
+              type = "filesystem";
+              format = "xfs";
+              mountpoint = "/home";
+              mountOptions = xfsMountOptions;
+            };
           };
-          "persist" = {
-            type = "zfs_fs";
-            options.mountpoint = "none";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          "persist/apps" = {
-            type = "zfs_fs";
-            mountpoint = "/persist/apps";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "persist/cfgs" = {
-            type = "zfs_fs";
-            mountpoint = "/persist/cfgs";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          "persist/shared" = {
-            type = "zfs_fs";
-            mountpoint = "/persist/shared";
-            options."com.sun:auto-snapshot" = "false";
+          nix = {
+            size = "20G";
+            lvm_type = "thinlv";
+            pool = "thinpool";
+            content = {
+              type = "filesystem";
+              format = "xfs";
+              mountpoint = "/nix";
+              mountOptions = xfsMountOptions;
+            };
           };
         };
       };
