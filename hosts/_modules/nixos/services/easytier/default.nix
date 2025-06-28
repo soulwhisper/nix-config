@@ -91,16 +91,28 @@ in {
       wants = ["network-online.target"];
       after = ["network-online.target"];
       wantedBy = ["multi-user.target"];
+      unitConfig = {
+        StartLimitIntervalSec = 0;
+      };
       serviceConfig = {
-        Type = "simple";
-        Restart = "on-failure";
-        RestartSec = 5;
+        User = "appuser";
+        Group = "appuser";
         ExecStartPre = pkgs.writeShellScript "easytier-prestart" ''
           mkdir -p /var/lib/easytier
           ${lib.getExe py-toml-merge} '${mkConfig}' '${cfg.authFile}' |
           install -m 600 /dev/stdin /var/lib/easytier/config.toml
         '';
         ExecStart = "${lib.getExe pkgs.unstable.easytier} -c /var/lib/easytier/config.toml --multi-thread";
+        RuntimeDirectory = "easytier";
+        StateDirectory = "easytier";
+        Restart = "always";
+        RestartSec = 5;
+        # tun configs
+        AmbientCapabilities = ["CAP_NET_ADMIN"];
+        CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+        PrivateDevices = false;
+        PrivateUsers = false;
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
       };
     };
   };
