@@ -52,11 +52,6 @@
     talhelper = {
       url = "github:budimanjojo/talhelper";
     };
-
-    # Devenv - Declarative, Reproducible Developer Environments
-    devenv = {
-      url = "github:cachix/devenv";
-    };
   };
 
   outputs = {flake-parts, ...} @ inputs: let
