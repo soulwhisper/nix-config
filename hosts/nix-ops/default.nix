@@ -34,18 +34,10 @@
         nut.enable = false;
 
         # : K8S related
-        forgejo.enable = true;
         meshcentral.enable = true;
         minio = {
           enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-        };
-        nfs4 = {
-          enable = true;
-          exports.default = {
-            path = "/var/lib/backup/nfs";
-            subnet = "172.19.82.0/24";
-          };
         };
         talos.api.enable = true;
         zotregistry.enable = true;
@@ -59,6 +51,15 @@
           internal = true;
         };
         unifi-controller.enable = false;
+
+        # : Others
+        nfs4 = {
+          enable = true;
+          exports.default = {
+            path = "/var/lib/backup/nfs";
+            subnet = "172.19.82.0/24";
+          };
+        };
       };
     };
   };

@@ -34,11 +34,14 @@
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
         };
         talos.api.enable = true;
+        zotregistry.enable = true;
+
+        # : LAB
+        kms.enable = true;
+        unifi-controller.enable = true;
 
         # : Others
-        kms.enable = true;
         timemachine.enable = false;
-        unifi-controller.enable = true;
       };
     };
   };

@@ -51,14 +51,5 @@ in {
         };
       };
     };
-    services.gitea-actions-runner = {
-      package = pkgs.unstable.gitea-actions-runner;
-      instances.default = {
-        enable = true;
-        name = "forgejo-default-runner";
-        url = "https://git.noirprime.com";
-        token = "forgejo-default-runner";
-      };
-    };
   };
 }
