@@ -48,6 +48,7 @@ in {
         StateDirectory = "mihomo";
         Restart = "always";
         RestartSec = 5;
+        # env injection not supported, this file serve as a reminder
         EnvironmentFile = [
           "${cfg.subscriptionFile}"
         ];

@@ -1,6 +1,5 @@
 ---
-# need sync-provider, then speedtest nodes in ui first
-# use ss provider link for compatibility
+# This file serve as rules template, replace $SUB_1 if used
 proxy-providers:
   provider1:
     url: "$SUB_1"
