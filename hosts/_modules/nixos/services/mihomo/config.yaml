@@ -52,7 +52,7 @@ geox-url:
   geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
-# tun
+# tun; disabled
 tun:
   enable: false
   stack: mixed
@@ -78,7 +78,7 @@ sniffer:
     - "+.local"
     - "+.internal"
 
-# dns
+# dns; disabled
 dns:
   enable: false
   listen: :5300

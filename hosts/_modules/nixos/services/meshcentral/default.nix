@@ -32,14 +32,15 @@ in {
       package = pkgs.unstable.meshcentral;
       settings = {
         settings = {
+          agentTimeStampServer = "false";
+          aliasPort = 443;
           cert = "${cfg.domain}";
           port = 9203;
-          aliasPort = 443;
           tlsOffload = "127.0.0.1,::1";
         };
         domains = {
           "" = {
-            certUrl = "https://${cfg.domain}";
+            certUrl = "https://${cfg.domain}/";
           };
         };
       };
