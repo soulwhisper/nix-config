@@ -57,7 +57,7 @@ tun:
   enable: true
   stack: mixed
   dns-hijack:
-    - "any:5300"
+    - "any:53"
   auto-route: true
   auto-detect-interface: true
 
@@ -80,7 +80,7 @@ sniffer:
 
 # dns
 dns:
-  enable: false
+  enable: true
   listen: :5300
   ipv6: true
   enhanced-mode: fake-ip
@@ -92,14 +92,11 @@ dns:
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-  fallback:
-    - 127.0.0.1 # fallback to adguard
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
-    "geosite:private":
-      - https://doh.pub/dns-query
-      - https://dns.alidns.com/dns-query
+    "geosite:private": # private to local adguard
+      - 127.0.0.1
     "geosite:geolocation-!cn":
       - "https://dns.cloudflare.com/dns-query#dns"
       - "https://dns.google/dns-query#dns"

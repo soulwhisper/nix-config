@@ -34,31 +34,31 @@
         nut.enable = false;
 
         # : K8S related
-        forgejo.enable = false;
+        forgejo.enable = true;
         meshcentral.enable = true;
         minio = {
-          enable = false;
+          enable = true;
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
         };
         nfs4 = {
-          enable = false;
+          enable = true;
           exports.default = {
             path = "/var/lib/backup/nfs";
             subnet = "172.19.82.0/24";
           };
         };
         talos.api.enable = true;
-        zotregistry.enable = false;
+        zotregistry.enable = true;
 
         # : LAB
         home-assistant.enable = false;
-        kms.enable = true;
+        kms.enable = false;
         netbox = {
-          enable = true;
+          enable = false;
           domain = "box.htkrail.com";
           internal = true;
         };
-        unifi-controller.enable = true;
+        unifi-controller.enable = false;
       };
     };
   };
