@@ -16,7 +16,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9203];
+    networking.firewall.allowedTCPPorts = [
+      4433
+      (lib.mkIf (!reverseProxyCaddy.enable) 9203)
+    ];
 
     services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {

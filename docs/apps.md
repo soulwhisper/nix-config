@@ -76,6 +76,7 @@ docker run --rm --privileged \
 # should-not-change
 caddy: 80,443
 http-proxy: 1080
+AMT-server: 4433
 postgres: 5432
 home-assistant: 8123
 prometheus: 9090
