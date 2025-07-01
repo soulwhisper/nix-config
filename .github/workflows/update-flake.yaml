@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: DeterminateSystems/nix-installer-action@v17
       - name: Generate Token
         uses: actions/create-github-app-token@v2
         id: app-token
@@ -30,12 +30,12 @@ jobs:
           private-key: ${{ secrets.PRIVATE_APP_KEY }}
       - name: Update flakes
         id: update-flakes
-        uses: DeterminateSystems/update-flake-lock@a2bbe0274e3a0c4194390a1e445f734c597ebc37 # v24
+        uses: DeterminateSystems/update-flake-lock@v25
         with:
           token: ${{ steps.app-token.outputs.token }}
           pr-title: "chore(deps): Update flakes lockfile"
           commit-msg: "chore(deps): Update flakes lockfile"
-          git-author-name: '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git-author-email: '${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
-          git-committer-name: '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git-committer-email: '${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
+          git-author-name: "${{ steps.app-token.outputs.app-slug }}[bot]"
+          git-author-email: "${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com"
+          git-committer-name: "${{ steps.app-token.outputs.app-slug }}[bot]"
+          git-committer-email: "${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com"

@@ -98,7 +98,7 @@ in {
 
     services.postgresqlBackup = {
       enable = true;
-      location = "/mnt/shared/backup/postgres";
+      location = "/var/lib/backup/postgres";
     };
   };
 }

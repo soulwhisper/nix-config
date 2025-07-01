@@ -8,7 +8,7 @@ global {
 
 subscription {
     # use ss provider link for compatibility
-    subscription_1: 'file://subscription_1.sub'
+    default: 'file://subscription_1.sub'
 }
 
 dns {
@@ -47,10 +47,10 @@ group {
 }
 
 routing {
-    pname(adguardhome) && l4proto(udp) && dport(53) -> must_direct
-    pname(lego) -> must_direct
+    pname(AdGuardHome) -> must_direct
     pname(caddy) -> must_direct
     pname(easytier-core) -> must_direct
+    pname(lego) -> must_direct
     pname(mihomo) -> must_direct
 
     pname(NetworkManager) -> direct

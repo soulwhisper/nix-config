@@ -2,31 +2,15 @@
   config,
   lib,
   ...
-}: let
-  cfg = config.modules.filesystems.zfs;
-in {
-  options.modules.filesystems.zfs = {
-    enable = lib.mkEnableOption "zfs";
-    mountPoolsAtBoot = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = ["rpool"];
-    };
-  };
-
-  # unlike traditional FHS, nixos can boot with only "/boot" and "/nix";
-  # static data in "/nix", state data in "/persist";
-  # default root pool => rpool;
-  # dataset "/persist/apps" => "/var/lib";
-  # dataset "/persist/home" => "/home";
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = {
     boot = {
       supportedFilesystems = {
         zfs = true;
       };
       zfs = {
         devNodes = "/dev/disk/by-uuid";
-        extraPools = cfg.mountPoolsAtBoot;
+        extraPools = ["rpool"];
         forceImportRoot = true; # not recommended, but stable;
       };
       kernelParams = ["zfs.zfs_arc_max=4294967296"]; # 4GB

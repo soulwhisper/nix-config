@@ -7,8 +7,10 @@ tasks:
     silent: true
     vars:
       OPERATION: "{{index .MATCH 0}}"
-      HOST: "{{.HOST}}"
       BUILDER: '{{.BUILDER | default "disabled"}}'
+    requires:
+      vars:
+        - HOST
     preconditions:
       - '[[ "{{.OPERATION}}" == "build" || "{{.OPERATION}}" == "switch" ]]'
       - which nix

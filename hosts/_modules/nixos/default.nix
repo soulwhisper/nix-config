@@ -1,14 +1,13 @@
 {config, ...}: {
   imports = [
-    ## folder ##
+    # : folder
     ./hardware
     ./filesystems
     ./secrets
     ./services
 
-    ## files ##
+    # : files
     ./desktop.nix
-    ./disk-config.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
@@ -47,16 +46,13 @@
       efi.canTouchEfiVariables = true;
     };
 
-    # linux-on-zfs, using disko.nix
-    modules.filesystems.zfs.enable = true;
-
     # default services for all host
     modules.services = {
       chrony.enable = true;
-      # dae.enable = true;
-      # dae.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
+      dae.enable = true;
+      dae.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       mihomo.enable = true;
       mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;

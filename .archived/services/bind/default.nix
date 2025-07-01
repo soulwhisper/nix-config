@@ -5,6 +5,9 @@
   ...
 }: let
   cfg = config.modules.services.bind;
+  configFile = ./named.conf;
+  homeZoneFile = ./homelab.internal.db;
+  labZoneFile = ./noirprime.com.db;
 in {
   options.modules.services.bind = {
     enable = lib.mkEnableOption "bind";
@@ -18,32 +21,18 @@ in {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 
-    # if need dynamics, check:https://github.com/11notes/docker-bind
-    environment.etc = {
-      "cfgs/bind/namd.conf" = {
-        source = ./named.conf;
-        user = "named";
-        group = "named";
-        mode = "0640";
-      };
-      "cfgs/bind/homelab.internal.db" = {
-        source = ./homelab.internal.db;
-        user = "named";
-        group = "named";
-        mode = "0640";
-      };
-      "cfgs/bind/noirprime.com.db" = {
-        source = ./noirprime.com.db;
-        user = "named";
-        group = "named";
-        mode = "0640";
-      };
-    };
+    systemd.tmpfiles.rules = [
+      "d /var/lib/bind 0755 named named - -"
+      "C /var/lib/bind/named.conf 0640 named named - ${configFile}"
+      "d /var/lib/bind/zones 0755 named named - -"
+      "C /var/lib/bind/zones/homelab.internal.db 0640 named named - ${homeZoneFile}"
+      "C /var/lib/bind/zones/noirprime.com.db 0640 named named - ${labZoneFile}"
+    ];
 
     services.bind = {
       enable = true;
-      directory = "/etc/cfgs/bind";
-      configFile = "/etc/cfgs/bind/namd.conf";
+      directory = "/var/lib/bind";
+      configFile = "/var/lib/bind/named.conf";
     };
 
     # Clean up journal files

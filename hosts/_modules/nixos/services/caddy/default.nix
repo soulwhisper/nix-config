@@ -27,6 +27,7 @@ in {
       enable = true;
       package = pkgs.caddy-custom;
       dataDir = "/var/lib/caddy";
+      acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
       globalConfig = ''
         email {$CLOUDFLARE_EMAIL}
         acme_dns cloudflare {$CLOUDFLARE_DNS_API_TOKEN}

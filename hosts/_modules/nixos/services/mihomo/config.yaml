@@ -1,9 +1,8 @@
 ---
-# need sync-provider, then speedtest nodes in ui first
-# use ss provider link for compatibility
+# This file serve as rules template, replace $SUBSCRIPTION if used
 proxy-providers:
   provider1:
-    url: "$SUB_1"
+    url: "$SUBSCRIPTION"
     type: http
     interval: 86400
     health-check:
@@ -53,12 +52,12 @@ geox-url:
   geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
-# tun
+# tun; disabled
 tun:
-  enable: true
+  enable: false
   stack: mixed
   dns-hijack:
-    - "any:5300"
+    - "any:53"
   auto-route: true
   auto-detect-interface: true
 
@@ -79,7 +78,7 @@ sniffer:
     - "+.local"
     - "+.internal"
 
-# dns
+# dns; disabled
 dns:
   enable: false
   listen: :5300
@@ -93,14 +92,11 @@ dns:
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-  fallback:
-    - 127.0.0.1 # fallback to adguard
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
-    "geosite:private":
-      - https://doh.pub/dns-query
-      - https://dns.alidns.com/dns-query
+    "geosite:private": # private to local adguard
+      - 127.0.0.1
     "geosite:geolocation-!cn":
       - "https://dns.cloudflare.com/dns-query#dns"
       - "https://dns.google/dns-query#dns"

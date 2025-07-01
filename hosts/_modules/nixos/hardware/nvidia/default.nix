@@ -27,6 +27,9 @@ in {
   ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
   ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
   config = lib.mkIf cfg.enable {
+    # LACT for Nvidia GPU, until 25.11
+    # services.lact.enable = true;
+
     # if desktop
     services.xserver.videoDrivers = lib.mkIf (cfg.driverType == "desktop") ["nvidia"];
 

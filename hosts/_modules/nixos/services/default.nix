@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./adguard
-    ./bind
     ./caddy
     ./chrony
     ./dae
@@ -9,6 +8,7 @@
     ./forgejo
     ./home-assistant
     ./kms
+    ./meshcentral
     ./mihomo
     ./minio
     ./monitoring
@@ -19,7 +19,6 @@
     ./openssh
     ./podman
     ./postgres
-    ./powerdns
     ./restic
     ./samba
     ./smartd

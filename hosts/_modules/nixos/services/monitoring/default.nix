@@ -11,10 +11,16 @@ in {
   };
 
   config = lib.mkIf cfg.monitoring.enable {
-    networking.firewall.allowedTCPPorts = [9090];
+    networking.firewall.allowedTCPPorts = [
+      9090
+      (lib.mkIf config.modules.filesystems.zfs.enable 9101)
+      (lib.mkIf cfg.nut.enable 9102)
+      (lib.mkIf cfg.smartd.enable 9103)
+    ];
 
     services.prometheus = {
       enable = true;
+      enableReload = true;
       port = 9090;
 
       exporters = {

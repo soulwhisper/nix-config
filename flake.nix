@@ -52,11 +52,6 @@
     talhelper = {
       url = "github:budimanjojo/talhelper";
     };
-
-    # Devenv - Declarative, Reproducible Developer Environments
-    devenv = {
-      url = "github:cachix/devenv";
-    };
   };
 
   outputs = {flake-parts, ...} @ inputs: let
@@ -92,7 +87,7 @@
         nixosConfigurations = {
           # nixos builds
           nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
-          nix-nas = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-nas";
+          nix-ops = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-ops";
           nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
         };
 

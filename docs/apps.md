@@ -76,6 +76,7 @@ docker run --rm --privileged \
 # should-not-change
 caddy: 80,443
 http-proxy: 1080
+AMT-server: 4433
 postgres: 5432
 home-assistant: 8123
 prometheus: 9090
@@ -104,9 +105,7 @@ netbird-mon: 9105,9106
 ## system, 9200-9299
 adguard-ui: 9200
 mihomo-ui: 9201
-bind-stats: 9202
-powerdns-ui: 9203,9204
-woodpecker: 9210,9211
+meshcentral: 9203
 
 ## k8s, 9300-9399
 talos-api: 9300
