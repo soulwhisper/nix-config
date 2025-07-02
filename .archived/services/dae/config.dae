@@ -4,11 +4,12 @@ global {
     log_level: trace
     dial_mode: domain
     auto_config_kernel_parameter: true
+    # fallback_resolver: '8.8.8.8:53'
 }
 
 subscription {
     # use ss provider link for compatibility
-    subscription_1: 'file://subscription_1.sub'
+    default: 'file://subscription_1.sub'
 }
 
 dns {
@@ -47,10 +48,10 @@ group {
 }
 
 routing {
-    pname(adguardhome) && l4proto(udp) && dport(53) -> must_direct
-    pname(lego) -> must_direct
+    pname(AdGuardHome) -> must_direct
     pname(caddy) -> must_direct
     pname(easytier-core) -> must_direct
+    pname(lego) -> must_direct
     pname(mihomo) -> must_direct
 
     pname(NetworkManager) -> direct
@@ -66,6 +67,9 @@ routing {
     domain(geosite:geolocation-cn) -> direct
     domain(geosite:private) -> direct
 
+    domain(full:mirrors.tuna.tsinghua.edu.cn) -> direct
+    domain(suffix:cachix.org) -> direct
+    domain(suffix:nixos.org) -> direct
     domain(suffix:icloud.com) -> direct
     domain(suffix:icloud-content.com) -> direct
     domain(suffix:cdn-apple.com) -> direct

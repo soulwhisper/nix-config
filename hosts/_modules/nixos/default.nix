@@ -1,21 +1,20 @@
 {config, ...}: {
   imports = [
-    ## folder ##
+    # : folder
     ./hardware
     ./filesystems
     ./secrets
     ./services
 
-    ## files ##
+    # : files
     ./desktop.nix
-    ./disk-config.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
   ];
 
   config = {
-    # Increase open file limit for sudoers
+    # : increase open file limit for sudoers
     security.pam.loginLimits = [
       {
         domain = "@wheel";
@@ -31,30 +30,25 @@
       }
     ];
 
-    # disable unnecessary services
+    # : disable unnecessary services
     systemd.network.wait-online.enable = false;
     boot.initrd.systemd.network.wait-online.enable = false;
 
-    # sysctl
+    # : sysctl
     boot.kernel.sysctl = {
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
     };
 
-    # Use the systemd-boot EFI boot loader.
+    # : systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
-    # linux-on-zfs, using disko.nix
-    modules.filesystems.zfs.enable = true;
-
-    # default services for all host
+    # : default services for all host
     modules.services = {
       chrony.enable = true;
-      # dae.enable = true;
-      # dae.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
       mihomo.enable = true;

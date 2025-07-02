@@ -17,19 +17,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = !config.modules.services.dae.enable;
-        message = "mihomo TUN conflicts with dae";
-      }
-    ];
+    # : mihomo TUN conflicts with dae
 
     networking.firewall.allowedTCPPorts = [1080 9201];
 
+    # fix tun not working
+    networking.firewall.checkReversePath = "loose";
+    # tun still broken
     networking.proxy = {
       httpProxy = "http://127.0.0.1:1080";
       httpsProxy = "http://127.0.0.1:1080";
-      noProxy = ".homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
+      noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
     };
 
     systemd.tmpfiles.rules = [
@@ -53,6 +51,7 @@ in {
         StateDirectory = "mihomo";
         Restart = "always";
         RestartSec = 5;
+        # env injection not supported, this file serve as a reminder
         EnvironmentFile = [
           "${cfg.subscriptionFile}"
         ];

@@ -5,12 +5,12 @@
   ...
 }: {
   config = {
-    # This will enable devenv and uv at all hosts
+    # This will enable mise and uv at all hosts
     environment.systemPackages = [
       pkgs.bashInteractive
-      pkgs.devenv
       pkgs.git
       pkgs.python3
+      pkgs.mise
       pkgs.unstable.uv
     ];
   };

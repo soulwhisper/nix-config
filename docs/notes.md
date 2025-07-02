@@ -8,10 +8,6 @@
 - zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
 - since git-operations using vscode and workspace, remove gnupg and git-auth from configs;
 
-## Bug tracker
-
-- dae, domain timeout; solution issue, [ref](https://github.com/daeuniverse/dae/issues/776#issuecomment-2709345478);
-
 ## Useful commands
 
 ```shell
@@ -20,8 +16,8 @@
 ## darwin-after: /Users/<username>/.config/age/keys.txt
 
 # darwin run below after deploy if necessary
-export "http_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
-export "https_proxy=http://127.0.0.1:7890" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
+export "http_proxy=http://127.0.0.1:1080" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
+export "https_proxy=http://127.0.0.1:1080" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" >> /Users/soulwhisper/.config/fish/conf.d/set_proxy.fish
 
 # nixos add below to configuration.nix before deploy if necessary

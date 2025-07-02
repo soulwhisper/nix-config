@@ -5,14 +5,15 @@
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
 - soulwhisper-mba, my macbook configs.
-- nix-infra, production infra vm, for talos. ZFS-Impermanence.
-- nix-nas, staging nas vm. ZFS-Impermanence. Was TrueNAS Scale 24.10+.
-- nix-dev, llm dev workstation. Must have Nvidia GPU.
+- nix-infra, production vm, for homelab infrastructure.
+- nix-ops, staging vm, for tests and various operations.
+- nix-dev, laptop llm workstation, with Nvidia GPU. ZFS-Impermanence.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage
 
 ```shell
+# if bootstrap, check 'bootstrap/README.md'
 git clone https://github.com/soulwhisper/nix-config
 
 # deps: nix,go-task
@@ -21,28 +22,28 @@ brew install go-task
 nix-shell -p go-task
 
 # : darwin
-## :: opt. run set-proxy script
+# :: opt. run set-proxy script
 sudo python3 scripts/darwin_set_proxy.py
-## :: init, if darwin-rebuild not exist
+# :: init, if darwin-rebuild not exist
 task darwin:init
-## :: build & diff
+# :: build & diff
 task darwin:build
-## :: switch
+# :: switch
 task darwin:switch
 
 # : nixos, local
-## :: build
-task nixos:build HOST=nix-nas
-## :: switch
-task nixos:switch HOST=nix-nas
+# :: build
+task nixos:build HOST=nix-ops
+# :: switch
+task nixos:switch HOST=nix-ops
 
 # : nixos, remote
 # set DNS record then test ssh connections
 # copy machineconfig to "hosts/{HOST}/hardware-configuration.nix"
-## :: build
-task nixos:build BUILDER=nix-dev HOST=nix-nas
-## :: switch
-task nixos:switch BUILDER=nix-dev HOST=nix-nas
+# :: build
+task nixos:build BUILDER=nix-dev HOST=nix-ops
+# :: switch
+task nixos:switch BUILDER=nix-dev HOST=nix-ops
 
 # : build and try pkgs
 nix build nix-config/.#zotregistry --print-out-paths

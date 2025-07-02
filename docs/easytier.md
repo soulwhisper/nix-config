@@ -5,9 +5,9 @@
 
 ```shell
 # example-cmd
-easytier-core -c /etc/easytier/config.toml
+easytier-core -c /var/lib/easytier/config.toml
 
-# /etc/easytier/config.toml
+# /var/lib/easytier/config.toml
 instance_name = "default"
 dhcp = true
 listeners = [

@@ -53,15 +53,9 @@ in {
       secretKeyFile = saltFile;
       plugins = python3Packages:
         with python3Packages; [
+          netbox-attachments
           netbox-bgp
           netbox-dns
-          (netbox-documents.overridePythonAttrs {
-            dependencies = [
-              (drf-extra-fields.overridePythonAttrs {
-                doCheck = false;
-              })
-            ];
-          })
           netbox-floorplan-plugin
           netbox-interface-synchronization
           netbox-plugin-prometheus-sd
@@ -71,9 +65,9 @@ in {
         ];
       settings = {
         PLUGINS = [
+          "netbox_attachments"
           "netbox_bgp"
           "netbox_dns"
-          "netbox_documents"
           "netbox_floorplan"
           "netbox_interface_synchronization"
           "netbox_prometheus_sd"

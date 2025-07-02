@@ -47,20 +47,14 @@
     listeners = [
       "tcp://0.0.0.0:11010"
       "udp://0.0.0.0:11010"
-      "wg://0.0.0.0:11011"
     ];
     rpc_portal = "0.0.0.0:15888";
     peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.public_nodes);
     proxy_network = map (proxy_network: {cidr = proxy_network;}) cfg.proxy_networks;
-    vpn_portal_config = {
-      client_cidr = "10.100.100.0/24";
-      wireguard_listen = "0.0.0.0:11011";
-    };
     flags = {
       enable_kcp_proxy = true;
       latency_first = true;
-      relay_all_peer_rpc = true;
-      relay_network_whitelist = "";
+      private_mode = true;
     };
   };
 in {
@@ -97,16 +91,28 @@ in {
       wants = ["network-online.target"];
       after = ["network-online.target"];
       wantedBy = ["multi-user.target"];
+      unitConfig = {
+        StartLimitIntervalSec = 0;
+      };
       serviceConfig = {
-        Type = "simple";
-        Restart = "on-failure";
-        RestartSec = 5;
+        User = "appuser";
+        Group = "appuser";
         ExecStartPre = pkgs.writeShellScript "easytier-prestart" ''
           mkdir -p /var/lib/easytier
           ${lib.getExe py-toml-merge} '${mkConfig}' '${cfg.authFile}' |
           install -m 600 /dev/stdin /var/lib/easytier/config.toml
         '';
-        ExecStart = "${lib.getExe pkgs.unstable.easytier} -c /var/lib/easytier/config.toml --multi-thread";
+        ExecStart = "${pkgs.unstable.easytier}/bin/easytier-core -c /var/lib/easytier/config.toml --multi-thread";
+        RuntimeDirectory = "easytier";
+        StateDirectory = "easytier";
+        Restart = "always";
+        RestartSec = 5;
+        # tun configs; tun needs 'CAP_NET_ADMIN', app needs 'CAP_NET_RAW';
+        AmbientCapabilities = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
+        CapabilityBoundingSet = ["CAP_NET_ADMIN" "CAP_NET_RAW"];
+        PrivateDevices = false;
+        PrivateUsers = false;
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
       };
     };
   };

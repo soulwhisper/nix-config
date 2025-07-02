@@ -1,8 +1,0 @@
-{
-  "id": "talos-master-01",
-  "name": "talos-master-01",
-  "profile": "talos-master-01",
-  "selector": {
-    "mac": "set-mac-here"
-  }
-}

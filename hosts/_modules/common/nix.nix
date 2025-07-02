@@ -17,7 +17,6 @@
       substituters =
         [
           "https://soulwhisper.cachix.org"
-          "https://devenv.cachix.org"
           "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
         ]
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
@@ -27,7 +26,6 @@
 
       trusted-public-keys = [
         "soulwhisper.cachix.org-1:GWSDjQwU45RQZwMmxiHKT/IDXsCoadlig+7CNCeocT4="
-        "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       ];
