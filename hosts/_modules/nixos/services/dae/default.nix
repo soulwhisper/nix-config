@@ -16,14 +16,23 @@ in {
     };
   };
 
-  # dae is used for local proxy, mihomo for lan;
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [1080];
+
     environment.systemPackages = [pkgs.unstable.dae];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/dae 0755 root root - -"
       "C /var/lib/dae/config.dae 0600 root root - ${configFile}"
     ];
+
+    services.tinyproxy = {
+      enable = true;
+      settings = {
+        Port = 1080;
+        Listen = "0.0.0.0";
+      };
+    };
 
     systemd.services.dae = {
       description = "Dae Service";

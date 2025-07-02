@@ -14,7 +14,7 @@
   ];
 
   config = {
-    # Increase open file limit for sudoers
+    # : increase open file limit for sudoers
     security.pam.loginLimits = [
       {
         domain = "@wheel";
@@ -30,31 +30,33 @@
       }
     ];
 
-    # disable unnecessary services
+    # : disable unnecessary services
     systemd.network.wait-online.enable = false;
     boot.initrd.systemd.network.wait-online.enable = false;
 
-    # sysctl
+    # : sysctl
     boot.kernel.sysctl = {
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
     };
 
-    # Use the systemd-boot EFI boot loader.
+    # : systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
-    # default services for all host
+    # : default services for all host
+    # :: dae as default proxy
+    # :: mihomo as fallback proxy
     modules.services = {
       chrony.enable = true;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
       dae.enable = true;
       dae.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
-      mihomo.enable = true;
-      mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
+      # mihomo.enable = true;
+      # mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;
       openssh.enable = true;
     };

@@ -4,6 +4,7 @@ global {
     log_level: trace
     dial_mode: domain
     auto_config_kernel_parameter: true
+    # fallback_resolver: '8.8.8.8:53'
 }
 
 subscription {
