@@ -118,12 +118,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "discovery-service",
-            "rev": "v1.0.10",
-            "sha256": "sha256-d0aSBtjfSctXn7repf0FwC53zG/9aSnvHRMZpiXCwuA=",
+            "rev": "v1.0.11",
+            "sha256": "sha256-IM+YRMEDDTWuYeYclIJhsqLmYSR1HZ6dXguc9sXmoDw=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.0.10"
+        "version": "v1.0.11"
     },
     "talosctl": {
         "cargoLocks": null,
@@ -139,12 +139,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.10.4",
-            "sha256": "sha256-TWaORaR+3PTc+KqWuZiR5HpsuY7ox5BjQ72F8uYRzWQ=",
+            "rev": "v1.10.5",
+            "sha256": "sha256-s+vRJ0qFhsgLiRpQfUnf/p6bcjQq40ISTB042iE7eBQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.10.4"
+        "version": "v1.10.5"
     },
     "zotregistry": {
         "cargoLocks": null,
