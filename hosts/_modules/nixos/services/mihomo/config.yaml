@@ -53,6 +53,7 @@ dns:
     - "+.lan"
     - "+.local"
     - "+.internal"
+    - "+.argotunnel.com" # Cloudflare Tunnel
   nameserver:
     - system
     - https://doh.pub/dns-query
@@ -82,6 +83,7 @@ sniffer:
     - "+.lan"
     - "+.local"
     - "+.internal"
+    - "+.argotunnel.com" # Cloudflare Tunnel
 
 # : tun; disabled
 tun:
