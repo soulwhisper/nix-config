@@ -23,12 +23,12 @@ in {
 
     # fix tun not working
     networking.firewall.checkReversePath = "loose";
-    # tun still broken
-    networking.proxy = {
-      httpProxy = "http://127.0.0.1:1080";
-      httpsProxy = "http://127.0.0.1:1080";
-      noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
-    };
+    # if tun still broken
+    # networking.proxy = {
+    #   httpProxy = "http://127.0.0.1:1080";
+    #   httpsProxy = "http://127.0.0.1:1080";
+    #   noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
+    # };
 
     systemd.tmpfiles.rules = [
       "d /var/lib/mihomo 0755 appuser appuser - -"
