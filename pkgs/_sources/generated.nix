@@ -26,13 +26,13 @@
   };
   hass-sgcc = {
     pname = "hass-sgcc";
-    version = "v1.6.6";
+    version = "v1.6.7";
     src = fetchFromGitHub {
       owner = "ARC-MX";
       repo = "sgcc_electricity_new";
-      rev = "v1.6.6";
+      rev = "v1.6.7";
       fetchSubmodules = false;
-      sha256 = "sha256-U4gGVjq13GKPfBzz+dTe9a/p6ZGCApIlox9vYogtMxA=";
+      sha256 = "sha256-+mNvKQxbCUNP9xZ4582tRTmtXWYCOioUMFLTkPb6XZk=";
     };
   };
   kubecolor-catppuccin = {
