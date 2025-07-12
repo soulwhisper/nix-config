@@ -40,9 +40,9 @@ profile:
 # ui = http://{{external-controller}}/ui
 external-controller: 0.0.0.0:9201
 
-# : dns; disabled
+# : dns
 dns:
-  enable: false
+  enable: true
   prefer-h3: true
   listen: :5300
   ipv6: false
