@@ -55,12 +55,12 @@
             "name": null,
             "owner": "ARC-MX",
             "repo": "sgcc_electricity_new",
-            "rev": "v1.6.7",
-            "sha256": "sha256-+mNvKQxbCUNP9xZ4582tRTmtXWYCOioUMFLTkPb6XZk=",
+            "rev": "v1.6.8",
+            "sha256": "sha256-UdlFI+txh4GRldjbUUBRPfJsd95Dv/GaB6te07vQe0Y=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.6.7"
+        "version": "v1.6.8"
     },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
