@@ -34,6 +34,7 @@ _: {
       "transmit"
 
       # :: development
+      "cursor"
       "font-jetbrains-mono-nerd-font"
       "ghostty"
       "orbstack"
