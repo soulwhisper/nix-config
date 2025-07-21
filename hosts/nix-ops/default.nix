@@ -35,29 +35,33 @@
         nut.enable = false;
 
         # : K8S related
-        meshcentral.enable = true;
+        meshcentral.enable = true; # sub=mesh
         minio = {
-          enable = false;
+          enable = false; # sub=s3
           rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
         };
         talos.api.enable = true;
-        zotregistry.enable = false;
+        zotregistry.enable = false; # sub=zot
 
         # : LAB
-        home-assistant.enable = false;
-        kms.enable = false;
-        netbox = {
-          enable = false;
-          domain = "box.htkrail.com";
-          internal = true;
-        };
-        unifi-controller.enable = false;
+        emby.enable = true; # sub=movie
+        freshrss.enable = true; # sub=rss
+        freshrss.authFile = config.sops.secrets."apps/default/auth".path;
+        home-assistant.enable = true; # sub=hass
+        immich.enable = true; # sub=photo
+        karakeep.enable = true; # sub=bookmarks
+        kms.enable = true;
+        moviepilot.enable = true; # sub=pilot
+        n8n.enable = true; # sub=n8n
+        netbox.enable = true; # sub=box
+        qbittorrent.enable = true; # sub=bt
+        unifi-controller.enable = true; # sub=unifi
 
         # : Others
         nfs4 = {
-          enable = false;
+          enable = true;
           exports.default = {
-            path = "/var/lib/backup/nfs";
+            path = "/var/lib/shared";
             subnet = "172.19.82.0/24";
           };
         };

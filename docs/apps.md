@@ -11,7 +11,7 @@
 ## Home-assistant
 
 - main program use nixos version, integrations using podman containers for compatibliaty;
-- integrations using mDNS/avahi have random ports >32768;
+- integrations using mDNS/avahi have shared random ports 64001-65000;
 - during tests, ui-lovelace use storage mode;
 - homebridge dont have random high ports, so cant use with hass-stack;
 
@@ -82,6 +82,7 @@ home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
 wireguard: 51820
+avahi: 64001-65000
 
 # remap
 ## dns-stack
@@ -100,7 +101,6 @@ zfs-exporter: 9101
 nut-exporter: 9102
 smartctl-exporter: 9103
 zrepl-mon: 9104
-netbird-mon: 9105,9106
 
 ## system, 9200-9299
 adguard-ui: 9200
@@ -118,9 +118,12 @@ ollama: 9400
 postgrest: 9500
 
 ## app, 9800-9999
-keycloak: 9800
-mattermost: 9801
-netbird: 9802,9803
-netbox: 9804
+n8n: 9800
+netbox: 9801
+karakeep: 9802
+immich: 9803
+moviepilot: 9804,9805
+emby: 9806
+qbittorrent: 9807,65000
 
 ```

@@ -26,7 +26,7 @@ in {
       };
       serviceConfig = {
         ExecStartPre = pkgs.writeShellScript "hass-sgcc-prestart" ''
-          test -f "/tmp/chromedriver" || cp ${pkgs.chromedriver}/bin/chromedriver /tmp/chromedriver
+          test -f "/tmp/geckodriver" || cp ${pkgs.geckodriver}/bin/geckodriver /tmp/geckodriver
         '';
         ExecStart = pkgs.writeShellScript "hass-sgcc-start" ''
           cd /var/lib/hass/sgcc

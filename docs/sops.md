@@ -20,6 +20,8 @@ cat -p secrets.sops.yaml
 
 ```yaml
 apps:
+  default:
+    auth: { default-password }
   hass-sgcc:
     auth: |
       PHONE_NUMBER={sgcc-account}

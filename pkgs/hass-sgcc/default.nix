@@ -12,6 +12,7 @@ in
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.hass-sgcc;
 
+    # https://github.com/ARC-MX/sgcc_electricity_new/blob/master/requirements.txt
     pythonPath = with pkgs.python3Packages; [
       onnxruntime
       pillow
@@ -21,7 +22,7 @@ in
       schedule
       selenium
       sympy
-      undetected-chromedriver
+      webdriver-manager
     ];
 
     format = "other";
@@ -34,7 +35,7 @@ in
       substituteInPlace scripts/onnx.py --replace-warn "./captcha.onnx" "$out/lib/captcha.onnx"
       substituteInPlace scripts/onnx.py --replace-warn "../assets/" "$out/lib/"
       # patch hardcoded workdir
-      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/chromedriver" "/tmp/chromedriver"
+      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/geckodriver" "/tmp/geckodriver"
       substituteInPlace scripts/data_fetcher.py --replace-warn "/data/" ""
       substituteInPlace scripts/main.py --replace-warn "/data/" ""
     '';
@@ -48,7 +49,7 @@ in
 
       makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
         --add-flags "$out/lib/main.py" \
-        --prefix PATH : ${lib.makeBinPath [pkgs.chromium]} \
+        --prefix PATH : ${lib.makeBinPath [pkgs.firefox-esr pkgs.geckodriver]} \
         --prefix PYTHONPATH : "$PYTHONPATH"
 
       runHook postInstall

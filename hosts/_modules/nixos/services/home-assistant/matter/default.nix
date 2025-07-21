@@ -9,7 +9,12 @@ in {
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [5580];
     networking.firewall.allowedUDPPorts = [5353];
-    # udp 32768-65535 is enabled at core;
+    networking.firewall.allowedUDPPortRanges = [
+      {
+        from = 64001;
+        to = 65000;
+      }
+    ]; # shared high ports for avahi
 
     networking.enableIPv6 = true;
 
