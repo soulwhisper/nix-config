@@ -27,9 +27,9 @@ in {
     services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
         reverse_proxy https://localhost:9808 {
-		      transport http {
-			      tls_insecure_skip_verify
-		      }
+        transport http {
+         tls_insecure_skip_verify
+        }
         }
       }
     '';
