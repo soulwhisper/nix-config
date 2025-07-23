@@ -3,6 +3,7 @@
     ./adguard
     ./caddy
     ./chrony
+    ./crafty
     ./easytier
     ./emby
     ./forgejo

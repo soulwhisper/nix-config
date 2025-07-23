@@ -124,5 +124,6 @@ immich: 9803
 moviepilot: 9804,9805
 emby: 9806
 qbittorrent: 9807,65000
+crafty: 9808,25500-25600
 
 ```

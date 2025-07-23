@@ -58,6 +58,9 @@
         qbittorrent.enable = true; # sub=bt
         unifi-controller.enable = true; # sub=unifi
 
+        # : Tests
+        crafty.enable = true; # sub=mc
+
         # : Others
         nfs4 = {
           enable = false;
