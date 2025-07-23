@@ -4,20 +4,26 @@
     ./caddy
     ./chrony
     ./easytier
+    ./emby
     ./forgejo
+    ./freshrss
     ./home-assistant
+    ./immich
+    ./karakeep
     ./kms
     ./meshcentral
     ./mihomo
     ./minio
     ./monitoring
+    ./moviepilot
+    ./n8n
     ./netbox
     ./nfs
     ./nut
     ./ollama
     ./openssh
     ./podman
-    ./postgres
+    ./qbittorrent
     ./restic
     ./samba
     ./smartd

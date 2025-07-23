@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "postgres";
   };
 
-  # this service will add support for app development
+  # this service will add support for app development; deprecated
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [5432 9500];
 

@@ -54,6 +54,7 @@ dns:
     - "+.local"
     - "+.internal"
     - "+.argotunnel.com" # Cloudflare Tunnel
+    - "+.api.letsencrypt.org" # ACME
   nameserver:
     - system
     - https://doh.pub/dns-query
@@ -84,6 +85,7 @@ sniffer:
     - "+.local"
     - "+.internal"
     - "+.argotunnel.com" # Cloudflare Tunnel
+    - "+.api.letsencrypt.org" # ACME
 
 # : tun; disabled
 tun:

@@ -20,10 +20,18 @@ cat -p secrets.sops.yaml
 
 ```yaml
 apps:
+  default:
+    auth: { default-password }
   hass-sgcc:
     auth: |
       PHONE_NUMBER={sgcc-account}
       PASSWORD={sgcc-password}
+  moviepilot:
+    auth: |
+      AUTH_SITE="iyuu,haidan"
+      IYUU_SIGN=""
+      HAIDAN_ID=""
+      HAIDAN_PASSKEY=""
 backup:
   restic:
     encryption: { restic-encryption-password }

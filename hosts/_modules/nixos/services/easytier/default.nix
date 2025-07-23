@@ -52,7 +52,7 @@
     peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.public_nodes);
     proxy_network = map (proxy_network: {cidr = proxy_network;}) cfg.proxy_networks;
     flags = {
-      enable_kcp_proxy = true;
+      enable_quic_proxy = true;
       latency_first = true;
       private_mode = true;
     };
@@ -75,14 +75,14 @@ in {
     public_nodes = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
-        "tcp://public.easytier.top:11010"
+        "tcp://opn.noirprime.com:11010"
       ];
     };
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [11010];
-    networking.firewall.allowedUDPPorts = [11010 11011];
+    networking.firewall.allowedUDPPorts = [11010];
 
     environment.systemPackages = [pkgs.unstable.easytier];
 

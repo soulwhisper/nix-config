@@ -11,7 +11,7 @@
     ./secrets.nix
   ];
 
-  # spec: 4C8G, 100GB, ESXi VM;
+  # spec: 4C8G, 500GB, ESXi VM;
 
   config = {
     # services.qemuGuest.enable = true;
@@ -28,20 +28,23 @@
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
         # : K8S related
-        meshcentral.enable = true;
-        minio = {
-          enable = false;
-          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-        };
-        talos.api.enable = true;
-        zotregistry.enable = false;
+        meshcentral.enable = false;
+        talos.api.enable = false;
 
         # : LAB
+        emby.enable = true; # sub=movie
+        freshrss.enable = true; # sub=rss
+        freshrss.authFile = config.sops.secrets."apps/default/auth".path;
+        home-assistant.enable = true; # sub=hass
+        immich.enable = true; # sub=photo
+        karakeep.enable = true; # sub=bookmarks
         kms.enable = true;
-        unifi-controller.enable = true;
-
-        # : Others
-        timemachine.enable = false;
+        moviepilot.enable = true; # sub=pilot
+        moviepilot.authFile = config.sops.secrets."apps/moviepilot/auth".path;
+        n8n.enable = true; # sub=n8n
+        netbox.enable = true; # sub=box
+        qbittorrent.enable = true; # sub=bt
+        unifi-controller.enable = true; # sub=unifi
       };
     };
   };

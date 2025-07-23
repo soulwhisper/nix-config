@@ -11,10 +11,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      podman-compose
-      docker-compose
-    ];
+    # : compose support is disabled, not-used
+    # environment.systemPackages = with pkgs; [
+    #   podman-compose
+    #   docker-compose
+    # ];
 
     # use `extraOptions = ["--pull=newer"];` to keep image new;
     # podman new network-stack `aardvark` only use `53/tcp_udp` on `podman*`;
@@ -24,16 +25,16 @@ in {
       podman = {
         enable = true;
         dockerCompat = true; # Create a `docker` alias for podman
-        dockerSocket.enable = true; # docker compose support
+        # dockerSocket.enable = true; # docker compose support
         autoPrune = {
           enable = true; # Periodically prune Podman Images not in use.
           dates = "weekly";
           flags = ["--all"];
         };
-        defaultNetwork.settings = {
-          # Enable DNS resolution in the podman default network
-          dns_enabled = true;
-        };
+        # : Enable DNS resolution in the podman default network, not used
+        # defaultNetwork.settings = {
+        #   dns_enabled = true;
+        # };
       };
       oci-containers.backend = "podman";
     };

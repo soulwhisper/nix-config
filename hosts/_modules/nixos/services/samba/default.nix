@@ -28,10 +28,10 @@ in {
     networking.firewall.allowedUDPPorts = [5353];
     networking.firewall.allowedUDPPortRanges = [
       {
-        from = 32768;
-        to = 65535;
+        from = 60000;
+        to = 65000;
       }
-    ]; # add random high ports for avahi
+    ]; # shared high ports for avahi
 
     services.samba = {
       enable = true;

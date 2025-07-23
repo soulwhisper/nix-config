@@ -58,11 +58,11 @@ in {
             };
           };
           thinpool = {
-            size = "100G";
+            size = "200G";
             lvm_type = "thin-pool";
           };
           app = {
-            size = "10G";
+            size = "30G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
@@ -84,7 +84,7 @@ in {
             };
           };
           nix = {
-            size = "30G";
+            size = "50G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
