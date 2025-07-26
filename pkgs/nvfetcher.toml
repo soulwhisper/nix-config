@@ -1,12 +1,12 @@
 [caddy-core]
 fetch.github = "caddyserver/caddy"
 src.github = "caddyserver/caddy"
-# pinned = true  # certmagic include libdns v1.0 now
+pinned = true  # pin golang version
 [caddy-plugin-cloudflare]
 fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
-# pinned = true  # certmagic include libdns v1.0 now
+pinned = true  # pin golang version
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
