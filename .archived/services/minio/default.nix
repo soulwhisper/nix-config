@@ -13,11 +13,14 @@ in {
       type = lib.types.str;
       default = "s3.noirprime.com";
     };
-    rootCredentialsFile = lib.mkOption {
+    authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
   };
+
+  # deprecated, use versityGateway instead
+  # last available version = `RELEASE.2025-04-22T22-12-26Z`
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9000 9001];
@@ -49,7 +52,7 @@ in {
         "/var/lib/minio/data"
       ];
       configDir = "/var/lib/minio/config";
-      inherit (cfg) rootCredentialsFile;
+      rootCredentialsFile = cfg.authFile;
     };
     systemd.services.minio.serviceConfig.User = lib.mkForce "appuser";
     systemd.services.minio.serviceConfig.Group = lib.mkForce "appuser";

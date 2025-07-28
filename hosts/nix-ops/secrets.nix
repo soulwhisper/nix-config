@@ -15,9 +15,9 @@
           owner = config.users.users.appuser.name;
           restartUnits = ["podman-moviepilot.service"];
         };
-        "storage/minio/root-credentials" = {
+        "storage/versitygw/auth" = {
           owner = config.users.users.appuser.name;
-          restartUnits = ["minio.service"];
+          restartUnits = ["versitygw.service"];
         };
         "networking/cloudflare/auth" = {
           owner = config.users.users.caddy.name;

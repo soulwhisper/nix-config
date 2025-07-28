@@ -14,7 +14,6 @@
     ./kms
     ./meshcentral
     ./mihomo
-    ./minio
     ./monitoring
     ./moviepilot
     ./n8n
@@ -30,6 +29,7 @@
     ./smartd
     ./talos-api
     ./unifi-controller
+    ./versitygw
     ./zotregistry
     ./zrepl
   ];

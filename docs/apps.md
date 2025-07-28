@@ -17,8 +17,6 @@
 ## K8S-related
 
 - service:adguard is not deprecated until opnsense plugin `os-bind` is stable, [ref1](https://github.com/kubernetes-sigs/external-dns/issues/3721), [ref2](https://github.com/opnsense/plugins/pull/4177);
-- service:minio and service:nfs4 for k8s offsite backups, i.e. volsync;
-- service:samba for macos backups;
 
 ## Netbox
 
@@ -78,6 +76,7 @@ http-proxy: 1080
 AMT-server: 4433
 postgres: 5432
 n8n: 5678
+versitygw: 7070
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001

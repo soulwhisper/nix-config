@@ -21,10 +21,8 @@
       filesystems.xfs.enable = true;
       services = {
         adguard.enable = true;
-        caddy = {
-          enable = true;
-          cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
-        };
+        caddy.enable = true;
+        caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
         # : K8S related
