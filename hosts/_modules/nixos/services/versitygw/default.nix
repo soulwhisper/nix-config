@@ -29,6 +29,7 @@ in {
     '';
 
     # Disable IAM service for simplicity
+    # Backend Performance: xfs/btrfs > ext4/zfs
 
     systemd.tmpfiles.rules = [
       "d /var/lib/versitygw 0755 appuser appuser - -"

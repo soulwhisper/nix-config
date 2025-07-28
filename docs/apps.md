@@ -73,6 +73,7 @@ docker run --rm --privileged \
 # should-not-change
 caddy: 80,443
 http-proxy: 1080
+garage: 3900
 AMT-server: 4433
 postgres: 5432
 n8n: 5678

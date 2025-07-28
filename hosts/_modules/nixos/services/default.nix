@@ -8,6 +8,7 @@
     ./emby
     ./forgejo
     ./freshrss
+    ./garage
     ./home-assistant
     ./immich
     ./karakeep
