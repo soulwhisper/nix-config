@@ -28,9 +28,12 @@ in {
       }
     '';
 
+    # Disable IAM service for simplicity
+
     systemd.tmpfiles.rules = [
       "d /var/lib/versitygw 0755 appuser appuser - -"
       "d /var/lib/versitygw/data 0755 appuser appuser - -"
+      # "d /var/lib/versitygw/users 0755 appuser appuser - -"
     ];
 
     systemd.services.versitygw = {
@@ -44,6 +47,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
+        # ExecStart = "${pkgs.unstable.versitygw}/bin/versitygw --iam-dir /var/lib/versitygw/users posix /var/lib/versitygw/data";
         ExecStart = "${pkgs.unstable.versitygw}/bin/versitygw posix /var/lib/versitygw/data";
         RuntimeDirectory = "versitygw";
         StateDirectory = "versitygw";
