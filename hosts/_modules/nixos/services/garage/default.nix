@@ -26,14 +26,21 @@ in {
 
     environment.systemPackages = [pkgs.unstable.garage];
 
-    # Garage Versioning not implemented;
-    # Garage use key/bucket logic instead of Policy;
-    # Garage Lifecycle supports only `AbortIncompleteMultipartUpload` and `Expiration` (without `ExpiredObjectDeleteMarker`);
+    # : Garage Versioning not implemented;
+    # : Garage use key/bucket logic instead of Policy;
+    # : Garage Lifecycle supports only `AbortIncompleteMultipartUpload` and `Expiration` (without `ExpiredObjectDeleteMarker`);
+
+    # : run below commands to bootstrap this service
+    # garage status
+    # garage layout assign -z main -c 100G node-id/prefix
+    # garage layout apply --version 1
+
+    # : this config setup a local-managed rep1 Garage instance
 
     environment.etc."garage.toml" = {
       user = "appuser";
       group = "appuser";
-      mode = "0600";
+      mode = "0644";
       source = (pkgs.formats.toml {}).generate "garage.toml" {
         # ref:https://garagehq.deuxfleurs.fr/documentation/quick-start/
         # ref:https://garagehq.deuxfleurs.fr/documentation/reference-manual/configuration/
