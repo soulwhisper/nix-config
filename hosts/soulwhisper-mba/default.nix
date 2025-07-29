@@ -43,7 +43,7 @@
         # :: productivity
         "calibre"
         "discord"
-        "wireshark"
+        "wireshark-app"
       ];
       masApps = {
         "DevHub" = 6476452351;

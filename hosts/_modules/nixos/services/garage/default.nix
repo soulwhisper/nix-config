@@ -40,7 +40,7 @@ in {
         metadata_dir = "/var/lib/garage/meta";
         data_dir = "/var/lib/garage/data";
         db_engine = "sqlite";
-        replication_factor = "1";
+        replication_factor = 1;
         rpc_bind_addr = "[::]:3901";
         rpc_public_addr = "127.0.0.1:3901";
         rpc_secret = "180f83ddd22e289bae0cc2ada61abccd667810e9e486469e09f9f2de980b51ad";

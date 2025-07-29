@@ -6,6 +6,17 @@
 }: let
   cfg = config.modules.services.minio;
   reverseProxyCaddy = config.modules.services.caddy;
+  # nix hash convert --hash-algo sha256 --from nix32 $(nix-prefetch-url --unpack https://github.com/minio/minio/archive/refs/tags/RELEASE.2025-04-22T22-12-26Z.tar.gz)
+  minioPackage = pkgs.minio.overrideAttrs (attrs: {
+    version = "2025-04-22T22-12-26Z";
+    src = fetchFromGitHub {
+      owner = "minio";
+      repo = "minio";
+      rev = "RELEASE.2025-04-22T22-12-26Z";
+      hash = "sha256-BC633G27Zuhzk4DCLxtMGyWkQyo/3ObaIod7mDLPAqs=";
+    };
+    vendorHash = "";
+  });
 in {
   options.modules.services.minio = {
     enable = lib.mkEnableOption "minio";
@@ -21,7 +32,6 @@ in {
 
   # deprecated, use versityGateway instead
   # last available version = `RELEASE.2025-04-22T22-12-26Z`
-  # https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/servers/minio/default.nix#L33
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9000 9001];
@@ -48,7 +58,7 @@ in {
 
     services.minio = {
       enable = true;
-      package = pkgs.minio;
+      package = minioPackage;
       dataDir = [
         "/var/lib/minio/data"
       ];

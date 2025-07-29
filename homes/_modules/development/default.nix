@@ -21,7 +21,7 @@ in {
         nixfmt-rfc-style
         unstable.go-task
         unstable.terraform
-        unstable.minio-client
+        unstable.awscli2
       ]
       ++ lib.optionals cfg.vmware.enable [
         unstable.govc
