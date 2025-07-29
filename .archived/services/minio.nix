@@ -21,6 +21,7 @@ in {
 
   # deprecated, use versityGateway instead
   # last available version = `RELEASE.2025-04-22T22-12-26Z`
+  # https://github.com/NixOS/nixpkgs/blob/nixos-25.05/pkgs/servers/minio/default.nix#L33
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9000 9001];
@@ -47,7 +48,7 @@ in {
 
     services.minio = {
       enable = true;
-      package = pkgs.unstable.minio;
+      package = pkgs.minio;
       dataDir = [
         "/var/lib/minio/data"
       ];
