@@ -9,12 +9,6 @@ in {
   config = {
     programs.fish = {
       enable = true;
-      functions = {
-        flushdns = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-          description = "Flush MacOS DNS cache";
-          body = builtins.readFile ./functions/flushdns.fish;
-        };
-      };
       interactiveShellInit = ''
         function remove_path
           if set -l index (contains -i $argv[1] $PATH)

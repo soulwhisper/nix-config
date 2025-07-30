@@ -8,7 +8,6 @@
 in {
   options.modules.development = {
     enable = lib.mkEnableOption "development";
-    mise.enable = lib.mkEnableOption "development-mise";
     vmware.enable = lib.mkEnableOption "development-vmware";
   };
 
@@ -21,13 +20,10 @@ in {
         nixfmt-rfc-style
         unstable.go-task
         unstable.terraform
-        unstable.minio-client
+        unstable.awscli2
       ]
       ++ lib.optionals cfg.vmware.enable [
         unstable.govc
       ];
-
-    programs.direnv.enable = lib.mkIf (!cfg.mise.enable) true;
-    programs.mise.enable = lib.mkIf cfg.mise.enable true;
   };
 }

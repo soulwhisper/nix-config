@@ -35,8 +35,6 @@ _: {
 
       # :: development
       "cursor"
-      "font-jetbrains-mono-nerd-font"
-      "ghostty"
       "orbstack"
       "visual-studio-code"
 
@@ -48,7 +46,7 @@ _: {
       "youtube-music"
 
       # :: productivity
-      "alfred"
+      "alfred" # powerpack still overshine Tahoe and raycast
       "obsidian"
       "thunderbird"
       "ticktick"
@@ -58,7 +56,7 @@ _: {
       "jordanbaird-ice" # bartender replacement
       "karabiner-elements"
       "keyboard-maestro"
-      "pixpin"
+      "pixpin" # cleanshotx replacement
       "swish"
     ];
     masApps = {

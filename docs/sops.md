@@ -50,13 +50,17 @@ networking:
   easytier:
     auth: |
       [network_identity]
-      network_name = "{easytier-network-name}"
-      network_secret = "{easytier-network-secret}"
+      network_name={easytier-network-name}
+      network_secret={easytier-network-secret}
 storage:
   minio:
-    root-credentials: |
+    auth: |
       MINIO_ROOT_USER={minio_root_user}
       MINIO_ROOT_PASSWORD={minio_root_pass}
+  versitygw:
+    auth: |
+      ROOT_ACCESS_KEY={root_user}
+      ROOT_SECRET_KEY={root_pass}
 users:
   soulwhisper:
     password: { hashed-password }

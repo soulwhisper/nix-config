@@ -24,10 +24,8 @@
       filesystems.xfs.enable = true;
       services = {
         adguard.enable = true;
-        caddy = {
-          enable = true;
-          cloudflareToken = config.sops.secrets."networking/cloudflare/auth".path;
-        };
+        caddy.enable = true;
+        caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
         easytier.proxy_networks = ["172.19.80.0/24" "172.19.82.0/24"];
 
         # : System
@@ -36,11 +34,11 @@
 
         # : K8S related
         meshcentral.enable = true; # sub=mesh
-        minio = {
-          enable = true; # sub=s3
-          rootCredentialsFile = config.sops.secrets."storage/minio/root-credentials".path;
-        };
         talos.api.enable = true;
+        garage.enable = true;
+        garage.domain = "bucket.noirprime.com"; # sub=bucket
+        versitygw.enable = true; # sub=s3
+        versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
         zotregistry.enable = true; # sub=zot
 
         # : LAB

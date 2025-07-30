@@ -5,13 +5,13 @@
   ...
 }: {
   config = {
-    # This will enable mise and uv at all hosts
-    environment.systemPackages = [
-      pkgs.bashInteractive
-      pkgs.git
-      pkgs.python3
-      pkgs.mise
-      pkgs.unstable.uv
+    # This will enable python3 and uv at all hosts
+    environment.systemPackages = with pkgs; [
+      bashInteractive
+      git
+      python3
+      nerd-fonts.jetbrains-mono
+      unstable.uv
     ];
   };
 }

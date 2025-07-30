@@ -36,11 +36,6 @@
         # sync_address = "https://atuin.homelab.internal";
         key_path = config.sops.secrets.atuin_key.path;
       };
-      git = {
-        username = "Hekatos Noir";
-        email = "soulwhisper@outlook.com";
-        signingKey = "DF405879732AE5F2";
-      };
     };
   };
 }

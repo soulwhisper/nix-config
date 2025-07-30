@@ -3,15 +3,23 @@
     home.packages = with pkgs; [
       any-nix-shell
       doggo
+      httpie
       jq
       wget
       yq-go
-
       unstable.glances
     ];
 
     # bat
     programs.bat.enable = true;
+
+    # direnv; preferred over 'mise'
+    programs.direnv = {
+      enable = true;
+      silent = true;
+      nix-direnv.enable = true;
+      config.global.warn_timeout = 0;
+    };
 
     # eza
     programs.eza = {
@@ -59,11 +67,28 @@
       ];
     };
 
+    # ripgrep
+    programs.ripgrep = {
+      enable = true;
+      arguments = [
+        "--colors=line:style:bold"
+        "--max-columns-preview"
+      ];
+    };
+
+    # tealdeer
+    programs.tealdeer = {
+      enable = true;
+      enableAutoUpdates = false;
+      settings.display.use_pager = true;
+    };
+
     # fish alias
     programs.fish.shellAliases = {
       cat = "bat";
       dig = "doggo";
       find = "fd";
+      grep = "rg";
       top = "glances";
     };
   };

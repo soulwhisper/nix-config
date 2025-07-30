@@ -29,8 +29,7 @@
     # : test/temp apps list
     # :: not support brew yet
     # animeko: https://myani.org/downloads
-    # :: todo
-    # MS Office (365)
+
     homebrew = {
       taps = [
       ];
@@ -43,7 +42,13 @@
         # :: productivity
         "calibre"
         "discord"
-        "wireshark"
+        "wireshark-app"
+
+        # :: test
+        "ghostty"
+        "iterm2"
+        "mac-mouse-fix"
+        "rectangle-pro"
       ];
       masApps = {
         "DevHub" = 6476452351;
