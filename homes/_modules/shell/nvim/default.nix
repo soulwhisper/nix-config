@@ -18,6 +18,7 @@
         vim-colorschemes
         vim-nix
       ];
+      # more lua check:https://github.com/bjw-s-labs/dotfiles/tree/main/home/dot_config/nvim
       extraConfig = ''
         set nocompatible            " disable compatibility to old-time vi
         set mouse=v                 " middle-click paste with

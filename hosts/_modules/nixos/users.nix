@@ -16,7 +16,7 @@ in {
       home = "/home/soulwhisper";
       group = "soulwhisper";
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = lib.strings.splitString "\n" (builtins.readFile ../../../homes/soulwhisper/config/ssh/ssh.pub);
+      openssh.authorizedKeys.keys = lib.strings.splitString "\n" (builtins.readFile ../../../homes/soulwhisper/ssh.pub);
       hashedPasswordFile = config.sops.secrets."users/soulwhisper/password".path;
       isNormalUser = true;
       extraGroups =

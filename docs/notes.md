@@ -4,9 +4,45 @@
 - atuin-key should be base64 format
 - change terminal theme to "catppuccin-mocha"
 - change terminal font to "Jetbrains Nerd Font Mono Light"
-- all nixos system migrate from linux-on-legacy to linux-on-zfs;
-- zfs-impermanence template is "hosts/\_modules/nixos/filesystems/zfs/disk-config.nix";
-- since git-operations using vscode and workspace, remove gnupg and git-auth from configs;
+
+## Deprecations
+
+### Bind9 / Powerdns
+
+- DNS features better than adguard, external-dns supports also great;
+- Deprecated due to lack of management and UI support;
+- opnsense plugin `os-bind` is not stable, [ref1](https://github.com/kubernetes-sigs/external-dns/issues/3721), [ref2](https://github.com/opnsense/plugins/pull/4177);
+
+### Dae
+
+- Deprecated due to the inability of builtin connectivity check performance;
+
+### GoHarbor
+
+- due to the complexity, goharbor could only be containers;
+- the implementation follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
+- official installer create nine services, with headless podman it needs 6 ports on localhost;
+- however bitnami sunseted its compose configs, it is hard to follow both official environments and bitnami simplicities now;
+- deprecated, use zotregistry instead;
+
+### Minio
+
+- Deprecated due to UI management removal and paid-gate;
+- use Garage (General) or Versity Gateway (NAS) instead;
+
+### Terminals
+
+- `iTerm2` overshines with features and customizability; However, even in 2024, `iTerm2` still not support GPU rendering with ligatures enabled [ref](https://gitlab.com/gnachman/iterm2/-/issues/11382#note_1800562701);
+- for this part, `Ghostty` breaks in;
+
+### Vscode by nix-darwin
+
+- deprecated since profile sync works better;
+
+### Yabai & Skhd
+
+- installed by nix-darwin, without proper uninstallation methods;
+- will break system even after service disabled; appname=org.nixos.yabai/skhd;
 
 ## Useful commands
 

@@ -6,13 +6,14 @@
   imports = [
     inputs.krewfile.homeManagerModules.krewfile
 
+    ./customization
     ./deployment
     ./development
     ./kubernetes
     ./security
     ./shell
-    ./terminal
     ./themes
+    ./tmux
   ];
 
   config = {

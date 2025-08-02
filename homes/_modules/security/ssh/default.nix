@@ -2,27 +2,39 @@
   config,
   lib,
   ...
-}: let
-  cfg = config.modules.security.ssh;
-in {
-  options.modules.security.ssh = {
-    matchBlocks = lib.mkOption {
-      type = lib.types.attrs;
-      default = {};
-    };
-  };
-
+}: {
   config = {
     programs.ssh = {
       enable = true;
-      inherit (cfg) matchBlocks;
-
       controlMaster = "auto";
-      controlPath = "~/.ssh/control/%C";
-
+      controlPath = "~/.ssh/control/ssh-%r@%h:%p";
       includes = [
         "config.d/*"
       ];
+
+      matchBlocks = {
+        "192.168.*.*" = {
+          host = "192.168.*.*";
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+            UserKnownHostsFile = "/dev/null";
+          };
+        };
+        "172.16.*.*" = {
+          host = "172.16.*.*";
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+            UserKnownHostsFile = "/dev/null";
+          };
+        };
+        "10.*.*.*" = {
+          host = "10.*.*.*";
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+            UserKnownHostsFile = "/dev/null";
+          };
+        };
+      };
     };
   };
 }

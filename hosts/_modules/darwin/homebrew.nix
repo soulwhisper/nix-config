@@ -18,8 +18,12 @@ _: {
       "th-ch/youtube-music"
     ];
     brews = [
+      "mas"
     ];
     casks = [
+      # :: fonts
+      "font-jetbrains-mono-nerd-font"
+
       # :: password management
       "1password"
       "1password-cli"
@@ -35,6 +39,7 @@ _: {
 
       # :: development
       "cursor"
+      "ghostty"
       "orbstack"
       "visual-studio-code"
 
@@ -57,7 +62,7 @@ _: {
       "karabiner-elements"
       "keyboard-maestro"
       "pixpin" # cleanshotx replacement
-      "swish"
+      "rectangle-pro" # preferred over swish
     ];
     masApps = {
       "Caffeinated" = 1362171212;

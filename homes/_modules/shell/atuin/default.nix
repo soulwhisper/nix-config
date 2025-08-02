@@ -26,14 +26,13 @@ in {
         "--disable-up-arrow"
       ];
       settings = {
-        sync_address = cfg.sync_address;
-        key_path = cfg.key_path;
         auto_sync = true;
-        sync_frequency = "1m";
+        enter_accept = false;
+        key_path = cfg.key_path;
         search_mode = "fuzzy";
-        sync = {
-          records = true;
-        };
+        sync_address = cfg.sync_address;
+        sync_frequency = "1m";
+        sync.records = true;
       };
     };
   };

@@ -8,58 +8,11 @@
 - OPNSense: firewall/nat/port-forward, Interface=WAN, Protocol=TCP/UDP, Dest=WAN net, Port=11010, Redirect={Server}, Port=11010; clients use `-p tcp://{domain}:11010`;
 - alternatives: tailscale(>2000ms).
 
-## Home-assistant
-
-- main program use nixos version, integrations using podman containers for compatibliaty;
-- during tests, ui-lovelace use storage mode;
-- homebridge dont have random high ports, so cant use with hass-stack;
-
-## K8S-related
-
-- service:adguard is not deprecated until opnsense plugin `os-bind` is stable, [ref1](https://github.com/kubernetes-sigs/external-dns/issues/3721), [ref2](https://github.com/opnsense/plugins/pull/4177);
-
 ## Netbox
 
 - add group `netbox` to caddy-user, disable `ProtectHome` from caddy;
 - run `netbox-manage migrate` after plugins enable / disable, netbox upgrade;
 - run `netbox-manage createsuperuser` to create superuser;
-
-## Goharbor
-
-- due to the complexity, goharbor could only be containers;
-- the implementation follows bitnami compose, [link](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/docker-compose.yml);
-- official installer create nine services, with headless podman it needs 6 ports on localhost;
-- however bitnami sunseted its compose configs, it is hard to follow both official environments and bitnami simplicities now;
-- deprecated, use zotregistry instead;
-
-```shell
-## create/update config and compose files based on installer
-docker run --rm --privileged \
-    -v "$PWD/harbor.yml:/input/harbor.yml" \
-    -v "$PWD/compose:/compose_location" \
-    -v "$PWD/config:/config" \
-    goharbor/prepare:v2.12.2 prepare --with-trivy
-```
-
-## Podman
-
-- with `virtualisation.podman.defaultNetwork.settings.dns_enabled = true;`, default network could resolve containerName;
-- no longer need to create custom networks, or using `host.containers.internal:{port}`, reduce complexity;
-- req: bind local dns service to physical interface and `127.0.0.1`, instead of `0.0.0.0`;
-
-```shell
-# old days with `networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];`
-# related services use `extraOptions = [ "--network={networkName}" ];`;
-# script could also be `podman network create {networkName} --ignore`;
-# after script add `--internal` if network is internal;
-  systemd.services.podman-create-network-{networkName} = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [ "{podman-containerName}.service" ];
-    script = ''
-      podman network exists {networkName} || podman network create {networkName}
-    '';
-  };
-```
 
 ## Systemd
 

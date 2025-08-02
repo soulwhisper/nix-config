@@ -7,11 +7,18 @@
       jq
       wget
       yq-go
+      viddy
       unstable.glances
     ];
 
     # bat
-    programs.bat.enable = true;
+    programs.bat = {
+      enable = true;
+      config = {
+        pager = "never";
+        style = "plain";
+      };
+    };
 
     # direnv; preferred over 'mise'
     programs.direnv = {
@@ -90,6 +97,7 @@
       find = "fd";
       grep = "rg";
       top = "glances";
+      watch = "viddy --disable_auto_save --differences --interval 2 --shell fish";
     };
   };
 }

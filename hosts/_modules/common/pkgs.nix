@@ -10,7 +10,6 @@
       bashInteractive
       git
       python3
-      nerd-fonts.jetbrains-mono
       unstable.uv
     ];
   };
