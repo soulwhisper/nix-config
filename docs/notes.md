@@ -3,7 +3,7 @@
 - networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
 - atuin-key should be base64 format
 - change terminal theme to "catppuccin-mocha"
-- change terminal font to "Jetbrains Nerd Font Mono Light"
+- change terminal font to "Jetbrains Nerd Font Mono Regular"
 
 ## Deprecations
 

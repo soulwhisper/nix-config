@@ -20,7 +20,7 @@
         # Theme config
         theme = catppuccin-mocha
         # Fonts
-        font-size = 12
+        font-size = 13
         font-family = Jetbrains Nerd Font Mono Light
         font-thicken = false
         # macOS specific
