@@ -61,7 +61,7 @@
 
         # : Others
         nfs4 = {
-          enable = false;
+          enable = true; # all_squash = 2000:2000
           exports.default = {
             path = "/var/lib/shared";
             subnet = "172.19.82.0/24";

@@ -29,12 +29,9 @@ in {
       default = {};
       example = {
         default = {
-          path = "/my/default/share";
-        };
-        full = {
-          path = "/my/full/share";
-          subnet = "10.10.0.0/24";
-          args = "rw,async,anonuid=2000,anongid=2000";
+          path = "/var/lib/shared";
+          subnet = "*";
+          args = "rw,async,all_squash,anonuid=2000,anongid=2000";
         };
       };
       description = "NFS export configuration";
@@ -53,9 +50,17 @@ in {
 
     systemd.tmpfiles.rules =
       lib.mapAttrsToList (
-        name: cfg: "d ${cfg.path} 0700 root root - -"
+        name: cfg: "d ${cfg.path} 0700 2000 2000 - -"
       )
       cfg.exports;
+
+    # NFS user 'shared'
+    users.users.shared = {
+      group = "shared";
+      uid = 2000;
+      isSystemUser = true;
+    };
+    users.groups.shared.gid = 2000;
 
     # NFSv4 only
     services.nfs = {
