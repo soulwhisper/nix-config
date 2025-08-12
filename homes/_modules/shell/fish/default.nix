@@ -25,9 +25,11 @@ in {
         end
 
         # Paths are in reverse priority order
+        # sudo must be '/run/wrappers/bin/sudo'
         update_path /opt/homebrew/bin
         update_path ${homeDirectory}/.krew/bin
         update_path /run/current-system/sw/bin
+        update_path /run/wrappers/bin
         update_path ${homeDirectory}/.local/bin
 
         any-nix-shell fish --info-right | source

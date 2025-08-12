@@ -18,10 +18,8 @@
 
     homebrew = {
       taps = [
-        "robusta-dev/homebrew-krr"
       ];
       brews = [
-        "krr"
       ];
       casks = [
         # :: storage

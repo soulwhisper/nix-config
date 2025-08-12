@@ -71,4 +71,6 @@ systemctl list-units | grep failed
 git reset --soft HEAD~3 && git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
 git push --force-with-lease
 
+## 'sudo must be owned by uid 0 and have the setuid bit set'
+/run/wrappers/bin/sudo + cmd
 ```
