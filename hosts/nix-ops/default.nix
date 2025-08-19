@@ -35,9 +35,7 @@
         # : K8S related
         meshcentral.enable = true; # sub=mesh
         talos.api.enable = true;
-        garage.enable = true;
-        garage.domain = "bucket.noirprime.com"; # sub=bucket
-        versitygw.enable = true; # sub=s3
+        versitygw.enable = true; # ep=:7070
         versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
         zotregistry.enable = true; # sub=zot
 
