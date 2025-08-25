@@ -14,7 +14,7 @@ in
 
     src = "${packageData.src}/src";
 
-    nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
+    nativeBuildInputs = [pkgs.makeBinaryWrapper];
 
     dontNpmBuild = true;
     installPhase = ''
