@@ -27,6 +27,7 @@
     ./qbittorrent
     ./restic
     ./samba
+    ./sillytavern
     ./smartd
     ./talos-api
     ./unifi-controller

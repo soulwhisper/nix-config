@@ -17,6 +17,9 @@ src.branch = "main"
 [kubectl-browse-pvc]
 fetch.github = "clbx/kubectl-browse-pvc"
 src.github = "clbx/kubectl-browse-pvc"
+[sillytavern]
+fetch.github = "SillyTavern/SillyTavern"
+src.github = "SillyTavern/SillyTavern"
 [talosctl]
 fetch.github = "siderolabs/talos"
 src.github = "siderolabs/talos"

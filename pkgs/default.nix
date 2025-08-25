@@ -9,6 +9,7 @@
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};
+  sillytavern = pkgs.callPackage ./sillytavern {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};

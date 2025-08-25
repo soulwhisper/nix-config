@@ -32,6 +32,7 @@
           enable = true;
           models = ["deepseek-r1:8b"];
         };
+        sillytavern.enable = true;
 
         # : Apps
       };
