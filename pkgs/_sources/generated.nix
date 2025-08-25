@@ -58,6 +58,17 @@
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
     };
   };
+  sillytavern = {
+    pname = "sillytavern";
+    version = "1.13.2";
+    src = fetchFromGitHub {
+      owner = "SillyTavern";
+      repo = "SillyTavern";
+      rev = "1.13.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-tTBpSXkXzQjp3TW9hksqUpA3sagR2GSY42bHLHEd9oI=";
+    };
+  };
   talos-api = {
     pname = "talos-api";
     version = "v1.0.11";

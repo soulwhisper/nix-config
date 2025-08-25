@@ -6,5 +6,6 @@
   "zotregistry": "sha256-+zIY9fYSAFFxHqEP4NYkAMk42yS0mr1ZkVUlQZrp3Bs=",
   "zotregistry-ui": "sha256-FakW6QwknQoSKqEoooOdCTQYSMymT/7Shj89coAQUp0=",
   "hass-sgcc": "",
-  "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ="
+  "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
+  "sillytavern": ""
 }
