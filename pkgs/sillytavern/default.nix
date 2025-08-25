@@ -8,11 +8,9 @@
   vendorData = lib.importJSON ../vendorhash.json;
 in
   pkgs.unstable.buildNpmPackage rec {
-    inherit (packageData) pname;
+    inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     npmDepsHash = vendorData.sillytavern;
-
-    src = "${packageData.src}/src";
 
     nativeBuildInputs = [pkgs.makeBinaryWrapper];
 
