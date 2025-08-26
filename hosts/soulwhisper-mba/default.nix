@@ -26,17 +26,13 @@
         "transmission"
 
         # :: productivity
-        "calibre"
-        "discord"
         "wireshark-app"
 
         # :: test
-        "iterm2"
       ];
       masApps = {
         "DevHub" = 6476452351;
         "ReadKit" = 1615798039;
-        "Windows App" = 1295203466;
         # "Passepartout" = 1433648537;
         # "StopTheMadness Pro" = 6471380298;
       };

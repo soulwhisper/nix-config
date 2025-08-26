@@ -52,6 +52,7 @@ _: {
 
       # :: productivity
       "alfred" # powerpack still overshine Tahoe and raycast
+      "discord"
       "obsidian"
       "thunderbird"
       "ticktick"
@@ -70,6 +71,7 @@ _: {
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Keynote" = 409183694;
+      "Windows App" = 1295203466;
     };
   };
 }
