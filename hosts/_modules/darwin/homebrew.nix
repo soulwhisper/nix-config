@@ -35,7 +35,7 @@ _: {
 
       # :: storage
       "dropbox"
-      "transmit"
+      "cyberduck" # replace transmit
 
       # :: development
       "cursor"
