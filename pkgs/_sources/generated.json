@@ -118,12 +118,12 @@
             "name": null,
             "owner": "SillyTavern",
             "repo": "SillyTavern",
-            "rev": "1.13.2",
-            "sha256": "sha256-tTBpSXkXzQjp3TW9hksqUpA3sagR2GSY42bHLHEd9oI=",
+            "rev": "1.13.3",
+            "sha256": "sha256-IR2lR6kkjHXIHqCZJ+KK7abxK+oyJzWyEya86e3cEn8=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1.13.2"
+        "version": "1.13.3"
     },
     "talos-api": {
         "cargoLocks": null,
