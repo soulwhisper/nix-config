@@ -24,7 +24,6 @@ in {
       _1password-cli
       _1password-gui
       clash-verge-rev
-      cyberduck
       dropbox
       google-chrome
       obsidian
