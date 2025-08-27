@@ -17,10 +17,10 @@ in {
     # use greetd instead of uwsm
     # niri, hyprland + sway
 
-    security.pam.services.swaylock = { };
+    security.pam.services.swaylock = {};
     xdg.portal = {
       enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+      extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
     };
   };
 }
