@@ -15,6 +15,7 @@
     # : test/temp apps list
     # :: not support brew yet
     # animeko: https://myani.org/downloads
+    # cardforge: https://github.com/Card-Forge/forge/releases
 
     homebrew = {
       taps = [
@@ -29,6 +30,8 @@
         "wireshark-app"
 
         # :: test
+        "bluestacks"
+        "maa"
       ];
       masApps = {
         "DevHub" = 6476452351;

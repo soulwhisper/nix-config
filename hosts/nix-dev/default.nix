@@ -16,8 +16,8 @@
     fileSystems."/home".neededForBoot = true;
 
     modules = {
-      filesystems.zfs.enable = true; # linux-on-zfs
-      desktop.enable = true; # enable KDE desktop
+      filesystems.zfs.enable = true;
+      desktop.enable = true;
 
       hardware = {
         nvidia.enable = true; # llm support
