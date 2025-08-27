@@ -9,6 +9,7 @@
     ./customization
     ./deployment
     ./development
+    ./hyprland
     ./kubernetes
     ./security
     ./shell

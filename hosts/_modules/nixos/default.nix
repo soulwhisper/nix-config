@@ -1,13 +1,13 @@
 {config, ...}: {
   imports = [
     # : folder
+    ./desktop
     ./hardware
     ./filesystems
     ./secrets
     ./services
 
     # : files
-    ./desktop.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
