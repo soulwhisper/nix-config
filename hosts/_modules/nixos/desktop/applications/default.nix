@@ -46,6 +46,7 @@ in {
 
     # : Laptop Support
     services.thermald.enable = true;
+    services.power-profiles-daemon.enable = lib.mkForce false; # override kde, conflict with auto-cpufreq
     services.auto-cpufreq.enable = true; # replace tlp
     services.auto-cpufreq.settings = {
       battery = {
