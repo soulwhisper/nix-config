@@ -26,6 +26,7 @@
         font-thicken = false
         # macOS specific
         macos-auto-secure-input = false
+        macos-option-as-alt = left
         window-colorspace = display-p3
         # Application settings
         auto-update = off
