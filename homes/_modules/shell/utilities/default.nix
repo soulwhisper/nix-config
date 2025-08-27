@@ -90,6 +90,18 @@
       settings.display.use_pager = true;
     };
 
+    # zellij
+    programs.zellij = {
+      enable = true;
+      enableFishIntegration = true;
+      attachExistingSession = true;
+      settings = {
+        default_shell = "fish";
+        show_release_notes = "false";
+        show_startup_tips = "false";
+      };
+    };
+
     # fish alias
     programs.fish.shellAliases = {
       cat = "bat";
