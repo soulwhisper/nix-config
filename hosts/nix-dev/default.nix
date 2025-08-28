@@ -15,9 +15,13 @@
     # This is a must if "/home" is isolated from "/", for sops.
     fileSystems."/home".neededForBoot = true;
 
+    # Bluetooth support
+    hardware.bluetooth.enable = true;
+
     modules = {
-      filesystems.zfs.enable = true; # linux-on-zfs
-      desktop.enable = true; # enable KDE desktop
+      filesystems.zfs.enable = true;
+      desktop.enable = true;
+      desktop.gaming.enable = true;
 
       hardware = {
         nvidia.enable = true; # llm support

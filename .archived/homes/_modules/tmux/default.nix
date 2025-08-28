@@ -29,6 +29,7 @@
     # K/J        up/down scroll
     # ESC/i      exit
 
-    # zellij still have bugs and conflict with tmux, ref:https://github.com/zellij-org/zellij/issues/4024
+    # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
+    # fixed since v0.43.1
   };
 }

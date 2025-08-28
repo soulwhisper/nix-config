@@ -28,8 +28,8 @@ in {
       handle {
         reverse_proxy https://localhost:9808 {
         transport http {
-         tls_insecure_skip_verify
-        }
+          tls_insecure_skip_verify
+          }
         }
       }
     '';

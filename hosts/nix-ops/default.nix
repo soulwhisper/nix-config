@@ -65,6 +65,7 @@
             subnet = "172.19.82.0/24";
           };
         };
+        sftpgo.enable = true;
         timemachine.enable = false;
       };
     };

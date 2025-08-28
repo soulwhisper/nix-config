@@ -26,7 +26,7 @@ in {
         driver = "usbhid-ups";
         port = "auto";
         description = "SANTAK TG-BOX 850";
-        directives = ["default.battery.charge.low = 50"];
+        directives = ["default.battery.charge.low = 75"];
       };
       users."upsmon" = {
         upsmon = "primary";

@@ -30,7 +30,7 @@ in {
           monitoring = [
             {
               type = "prometheus";
-              listen = ":9104";
+              listen = ":9105";
               listen_freebind = true;
             }
           ];
