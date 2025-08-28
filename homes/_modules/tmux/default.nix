@@ -28,8 +28,5 @@
     # y          copy
     # K/J        up/down scroll
     # ESC/i      exit
-
-    # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
-    # fixed since v0.43.1
   };
 }

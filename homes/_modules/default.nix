@@ -13,6 +13,7 @@
     ./security
     ./shell
     ./themes
+    ./tmux
   ];
 
   config = {

@@ -90,18 +90,19 @@
       settings.display.use_pager = true;
     };
 
-    # zellij
-    programs.zellij = {
-      enable = true;
-      enableFishIntegration = true;
-      attachExistingSession = true;
-      settings = {
-        default_shell = "fish";
-        show_release_notes = false;
-        show_startup_tips = false;
-        theme = "catppuccin-mocha";
-      };
-    };
+    # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
+    # still not fixed @ v0.43.1, use tmux instead
+    # programs.zellij = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    #   attachExistingSession = true;
+    #   settings = {
+    #     default_shell = "fish";
+    #     show_release_notes = false;
+    #     show_startup_tips = false;
+    #     theme = "catppuccin-mocha";
+    #   };
+    # };
 
     # fish alias
     programs.fish.shellAliases = {
