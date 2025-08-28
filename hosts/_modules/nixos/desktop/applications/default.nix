@@ -31,9 +31,10 @@ in {
       ticktick
 
       # :: Development
+      code-cursor-fhs
       ghostty
       nerd-fonts.jetbrains-mono
-      # vscode-fhs
+      vscode-fhs
       vmware-workstation
 
       # :: Others
