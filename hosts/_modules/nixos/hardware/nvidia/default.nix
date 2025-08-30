@@ -13,6 +13,8 @@ in {
     };
   };
 
+  # ref:https://wiki.nixos.org/wiki/NVIDIA
+
   # note:
   # nixpkgs.config.cudaSupport = true; would build all packages that offer cuda with CUDA support
   # Unfortunately, this would have some big drawbacks:
@@ -33,8 +35,18 @@ in {
     # if desktop
     services.xserver.videoDrivers = lib.mkIf (cfg.driverType == "desktop") ["nvidia"];
 
+    boot.kernelParams = [
+      # Since NVIDIA does not load kernel mode setting by default,
+      # enabling it is required to make Wayland compositors function properly.
+      "nvidia-drm.fbdev=1"
+    ];
+
     hardware = {
-      graphics.enable = true;
+      graphics = {
+        enable = true;
+        # needed by nvidia-docker
+        enable32Bit = true;
+      };
       nvidia-container-toolkit.enable = true;
       nvidia = {
         # if datacenter

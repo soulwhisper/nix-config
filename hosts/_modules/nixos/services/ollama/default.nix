@@ -5,10 +5,20 @@
   ...
 }: let
   cfg = config.modules.services.ollama;
-  reverseProxyCaddy = config.modules.services.caddy;
+  cfgNvidia = config.modules.hardware.nvidia;
 in {
   options.modules.services.ollama = {
     enable = lib.mkEnableOption "ollama";
+    acceleration = lib.mkOption {
+      type = lib.types.nullOr (
+        lib.types.enum [
+          false
+          "cuda"
+        ]
+      );
+      default = null;
+      description = ''Only support None or Nvidia.'';
+    };
     models = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -24,7 +34,7 @@ in {
 
     services.ollama = {
       enable = true;
-      package = pkgs.unstable.ollama;
+      acceleration = cfg.acceleration;
       host = "0.0.0.0";
       port = 9400;
       models = "/var/lib/ollama";

@@ -15,6 +15,7 @@
     # : test/temp apps list
     # :: not support brew yet
     # animeko: https://myani.org/downloads
+    # cardforge: https://github.com/Card-Forge/forge/releases
 
     homebrew = {
       taps = [
@@ -29,6 +30,11 @@
         "wireshark-app"
 
         # :: test
+        "nikitabobko/tap/aerospace" # test-config-ref:https://github.com/ryan4yin/nix-config/blob/main/home/darwin/aerospace/aerospace.toml
+        "bluestacks"
+        "maa"
+        "squirrel-app"
+        "stats"
       ];
       masApps = {
         "DevHub" = 6476452351;

@@ -25,24 +25,32 @@
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
+        # : System
+        smartd.enable = false;
+        nut.enable = true;
+
         # : K8S related
-        meshcentral.enable = false;
-        talos.api.enable = false;
+        meshcentral.enable = true; # sub=mesh
+        talos.api.enable = true;
+        versitygw.enable = true; # ep=:7070
+        versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
 
         # : LAB
-        emby.enable = true; # sub=movie
-        freshrss.enable = true; # sub=rss
-        freshrss.authFile = config.sops.secrets."apps/default/auth".path;
         home-assistant.enable = true; # sub=hass
-        immich.enable = true; # sub=photo
-        karakeep.enable = true; # sub=bookmarks
         kms.enable = true;
-        moviepilot.enable = true; # sub=pilot
-        moviepilot.authFile = config.sops.secrets."apps/moviepilot/auth".path;
-        n8n.enable = true; # sub=n8n
         netbox.enable = true; # sub=box
-        qbittorrent.enable = true; # sub=bt
         unifi-controller.enable = true; # sub=unifi
+
+        # : Others
+        nfs4 = {
+          enable = true; # all_squash = 2000:2000
+          exports.default = {
+            path = "/var/lib/shared";
+            subnet = "10.10.0.0/24";
+          };
+        };
+        sftpgo.enable = true;
+        timemachine.enable = false;
       };
     };
   };

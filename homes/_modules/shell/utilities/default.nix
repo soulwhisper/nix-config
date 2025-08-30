@@ -2,13 +2,13 @@
   config = {
     home.packages = with pkgs; [
       any-nix-shell
+      btop # replace glances
       doggo
       httpie
       jq
       wget
       yq-go
       viddy
-      unstable.glances
     ];
 
     # bat
@@ -90,13 +90,37 @@
       settings.display.use_pager = true;
     };
 
+    # yazi
+    programs.yazi = {
+      enable = true;
+      enableFishIntegration = true;
+      shellWrapperName = "yy";
+      settings = {
+        manager = {
+          show_hidden = true;
+          sort_dir_first = true;
+        };
+      };
+    };
+
+    # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
+    # fixed since v0.43.1, replace tmux
+    # bindings check:https://github.com/ghostty-org/ghostty/discussions/3740
+    xdg.configFile."zellij/config.kdl".source = ./zellij.kdl;
+    programs.zellij = {
+      enable = true;
+      enableFishIntegration = true;
+      attachExistingSession = true;
+      exitShellOnExit = true;
+    };
+
     # fish alias
     programs.fish.shellAliases = {
       cat = "bat";
       dig = "doggo";
       find = "fd";
       grep = "rg";
-      top = "glances";
+      top = "btop";
       watch = "viddy --disable_auto_save --differences --interval 2 --shell fish";
     };
   };

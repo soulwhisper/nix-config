@@ -25,16 +25,14 @@ in {
       podman = {
         enable = true;
         dockerCompat = true; # Create a `docker` alias for podman
-        # dockerSocket.enable = true; # docker compose support
+        # dockerSocket.enable = true; # docker compose support, not used
         autoPrune = {
           enable = true; # Periodically prune Podman Images not in use.
           dates = "weekly";
           flags = ["--all"];
         };
         # : Enable DNS resolution in the podman default network, not used
-        # defaultNetwork.settings = {
-        #   dns_enabled = true;
-        # };
+        # defaultNetwork.settings.dns_enabled = true;
       };
       oci-containers.backend = "podman";
     };

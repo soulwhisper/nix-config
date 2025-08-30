@@ -1,19 +1,29 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     # : folder
+    ./desktop
     ./hardware
     ./filesystems
     ./secrets
     ./services
 
     # : files
-    ./desktop.nix
     ./nix.nix
     ./sops.nix
     ./users.nix
   ];
 
   config = {
+    # : linux_x86_64 only packages
+    environment.systemPackages = with pkgs; [
+      freefilesync
+    ];
+
     # : increase open file limit for sudoers
     security.pam.loginLimits = [
       {
@@ -44,6 +54,7 @@
     # : systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;
+      systemd-boot.configurationLimit = lib.mkDefault 10;
       efi.canTouchEfiVariables = true;
     };
 

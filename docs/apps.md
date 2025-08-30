@@ -25,6 +25,7 @@
 ```shell
 # should-not-change
 caddy: 80,443
+sftpd: 2022
 http-proxy: 1080
 garage: 3900
 AMT-server: 4433
@@ -49,15 +50,16 @@ zot: 9002
 forgejo: 9003,9004
 
 ## monitor, 9100-9199, internal
-node-exporter: 9100
-zfs-exporter: 9101
-nut-exporter: 9102
-smartctl-exporter: 9103
-zrepl-mon: 9104
+node-exporter: 9101
+zfs-exporter: 9102
+nut-exporter: 9103
+smartctl-exporter: 9104
+zrepl-exporter: 9105
 
 ## system, 9200-9299
 adguard-ui: 9200
 mihomo-ui: 9201
+sftpgo-ui: 9202
 meshcentral: 9203
 
 ## k8s, 9300-9399
@@ -71,6 +73,7 @@ ollama: 9400
 postgrest: 9500
 
 ## app, 9800-9999
+ocis: 9800
 netbox: 9801
 karakeep: 9802
 immich: 9803

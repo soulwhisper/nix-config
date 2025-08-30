@@ -19,7 +19,6 @@ in {
         nixd
         nixfmt-rfc-style
         unstable.go-task
-        unstable.terraform
         unstable.awscli2
       ]
       ++ lib.optionals cfg.vmware.enable [

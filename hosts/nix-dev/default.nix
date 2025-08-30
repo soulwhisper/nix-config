@@ -16,12 +16,11 @@
     fileSystems."/home".neededForBoot = true;
 
     modules = {
-      filesystems.zfs.enable = true; # linux-on-zfs
-      desktop.enable = true; # enable KDE desktop
+      filesystems.zfs.enable = true;
+      # desktop.enable = true;
+      # desktop.gaming.enable = true;
 
-      hardware = {
-        nvidia.enable = true; # llm support
-      };
+      hardware.nvidia.enable = true; # llm support
 
       services = {
         # : System
@@ -30,6 +29,7 @@
         # : LLM
         ollama = {
           enable = true;
+          acceleration = "cuda";
           models = ["deepseek-r1:8b"];
         };
         sillytavern.enable = true;

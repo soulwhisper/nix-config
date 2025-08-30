@@ -19,7 +19,7 @@
     ./moviepilot
     ./n8n
     ./netbox
-    ./nfs
+    ./nfs4
     ./nut
     ./ollama
     ./openssh
@@ -27,6 +27,7 @@
     ./qbittorrent
     ./restic
     ./samba
+    ./sftpgo
     ./sillytavern
     ./smartd
     ./talos-api

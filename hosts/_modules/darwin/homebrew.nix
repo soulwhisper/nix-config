@@ -22,6 +22,7 @@ _: {
     ];
     casks = [
       # :: fonts
+      "font-lxgw-neoxihei"
       "font-jetbrains-mono-nerd-font"
 
       # :: password management
@@ -35,7 +36,7 @@ _: {
 
       # :: storage
       "dropbox"
-      "transmit"
+      "cyberduck" # replace transmit
 
       # :: development
       "cursor"
@@ -48,12 +49,14 @@ _: {
 
       # :: media
       "iina"
+      "neteasemusic"
       "youtube-music"
 
       # :: productivity
       "alfred" # powerpack still overshine Tahoe and raycast
       "discord"
       "obsidian"
+      "telegram"
       "thunderbird"
       "ticktick"
       "vmware-fusion"
@@ -71,6 +74,7 @@ _: {
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Keynote" = 409183694;
+      "Wechat" = 836500024;
       "Windows App" = 1295203466;
     };
   };

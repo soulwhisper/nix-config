@@ -17,6 +17,8 @@ in {
       ports = [22];
       # Don't allow home-directory authorized_keys
       authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
+      # Disable builtin sftp service
+      allowSFTP = false;
       settings = {
         # Harden
         PasswordAuthentication = false;

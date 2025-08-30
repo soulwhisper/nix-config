@@ -58,7 +58,7 @@ in {
             };
           };
           thinpool = {
-            size = "200G";
+            size = "1000G";
             lvm_type = "thin-pool";
           };
           app = {
@@ -73,7 +73,7 @@ in {
             };
           };
           home = {
-            size = "10G";
+            size = "20G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
