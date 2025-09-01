@@ -17,6 +17,10 @@ src.branch = "main"
 [kubectl-browse-pvc]
 fetch.github = "clbx/kubectl-browse-pvc"
 src.github = "clbx/kubectl-browse-pvc"
+[rime-moqi-yinxing]
+fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
+src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
+src.branch = "main"
 [sillytavern]
 fetch.github = "SillyTavern/SillyTavern"
 src.github = "SillyTavern/SillyTavern"

@@ -12,7 +12,7 @@ in {
       default = "kde";
       type = lib.types.enum [
         "kde"
-        "hyperland"
+        "hyprland"
       ];
     };
   };
@@ -50,5 +50,15 @@ in {
       autoStart = true;
     };
     programs.wireshark.enable = true;
+
+    i18n.inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.waylandFrontend = lib.mkIf (cfg.manager == "hyprland") true;
+      fcitx5.addons = with pkgs; [
+        fcitx5-rime
+        (lib.mkIf (cfg.manager == "kde") kdePackages.fcitx5-configtool)
+      ];
+    };
   };
 }

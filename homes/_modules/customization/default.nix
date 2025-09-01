@@ -57,5 +57,21 @@
         window-width = 180
       '';
     };
+    # : Rime Moqi Yinxing
+    # : ref:https://github.com/gaboolic/rime-shuangpin-fuzhuma
+    # :: MacOS
+    xdg.configFile."${config.xdg.configHome}/Library/Rime" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      enable = true;
+      force = true;
+      recursive = true;
+      source = pkgs.rime-moqi-yinxing;
+    };
+    # :: Linux
+    xdg.configFile."${config.xdg.configHome}/.local/share/fcitx5/rime" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      enable = true;
+      force = true;
+      recursive = true;
+      source = pkgs.rime-moqi-yinxing;
+    };
   };
 }

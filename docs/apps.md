@@ -20,6 +20,11 @@
 - if service fails to start more than 5 times within a 10 seconds interval, systemd gives up restarting your service. Forever.
 - set `StartLimitIntervalSec=0` under `unitConfig`;
 
+## Chinese Input
+
+- [rime-shuangpin-fuzhuma](https://github.com/gaboolic/rime-shuangpin-fuzhuma), primary;
+- based on `linux:fcitx5-rime, macos:squirrel-app`;
+
 ## Ports
 
 ```shell

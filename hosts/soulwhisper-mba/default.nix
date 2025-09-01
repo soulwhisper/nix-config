@@ -27,10 +27,11 @@
         "transmission"
 
         # :: productivity
+        "squirrel-app"
         "wireshark-app"
 
         # :: test
-        "nikitabobko/tap/aerospace" # test-config-ref:https://github.com/ryan4yin/nix-config/blob/main/home/darwin/aerospace/aerospace.toml
+        "nikitabobko/tap/aerospace" # ref:https://github.com/ryan4yin/nix-config/blob/main/home/darwin/aerospace/aerospace.toml
         "bluestacks"
         "maa"
         "squirrel-app"

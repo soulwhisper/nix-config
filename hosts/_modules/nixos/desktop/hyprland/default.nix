@@ -6,24 +6,11 @@
 }: let
   cfg = config.modules.desktop;
 in {
-  # : Custom Windows Manager, prefer niri with Hyprland Support
-  # : ref:https://github.com/ryan4yin/nix-config/tree/main/home/linux/gui
-
   # ! not finished yet !
 
-  config = lib.mkIf (cfg.manager == "hyperland") {
-    environment.systemPackages = with pkgs; [
-    ];
-
-    # use greetd instead of uwsm
-    # niri, hyprland + sway
-
-    security.pam.services.swaylock = {};
-
-    # : xdg
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
-    };
+  config = lib.mkIf (cfg.manager == "hyprland") {
+    # : niri
+    # instead of raw-hyprland, scrollable-tiling
+    # ref:https://github.com/ryan4yin/nix-config/tree/main/home/linux/gui/niri
   };
 }
