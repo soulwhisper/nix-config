@@ -58,6 +58,18 @@
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
     };
   };
+  rime-moqi-yinxing = {
+    pname = "rime-moqi-yinxing";
+    version = "1c4750ec9828361fecdee174dac38d26e20ce667";
+    src = fetchFromGitHub {
+      owner = "gaboolic";
+      repo = "rime-shuangpin-fuzhuma";
+      rev = "1c4750ec9828361fecdee174dac38d26e20ce667";
+      fetchSubmodules = false;
+      sha256 = "sha256-tdrYr5AFsc1PFM/1iSLyL/gDTTs5nrslgJ/FSLAm7+Q=";
+    };
+    date = "2025-08-02";
+  };
   sillytavern = {
     pname = "sillytavern";
     version = "1.13.3";
