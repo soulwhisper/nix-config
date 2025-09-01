@@ -2,7 +2,12 @@
   "position": "top",
   "layer": "top",
 
-  "modules-left": ["custom/launcher", "temperature", "backlight", "hyprland/workspaces"],
+  "modules-left": [
+    "custom/launcher",
+    "temperature",
+    "backlight",
+    "hyprland/workspaces",
+  ],
   "modules-center": ["custom/playerctl"],
   "modules-right": [
     "pulseaudio",

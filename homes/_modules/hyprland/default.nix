@@ -60,8 +60,8 @@ in {
     # :: hyprland apps
     programs.mpv = {
       enable = true;
-      defaultProfiles = [ "gpu-hq" ];
-      scripts = [ pkgs.mpvScripts.mpris ];
+      defaultProfiles = ["gpu-hq"];
+      scripts = [pkgs.mpvScripts.mpris];
     };
     services.playerctld.enable = true;
     programs.waybar = {
