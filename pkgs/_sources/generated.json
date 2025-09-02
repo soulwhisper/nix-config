@@ -181,12 +181,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.10.7",
-            "sha256": "sha256-ve10wLoPVvZQKyzJVxtTTPCwDg9s+2Z06g2fwzm46mk=",
+            "rev": "v1.11.0",
+            "sha256": "sha256-MORn1HUerHHI3o0lmXamx5D7JI8y5z7MDn7z5+QmNhs=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.10.7"
+        "version": "v1.11.0"
     },
     "zotregistry": {
         "cargoLocks": null,
@@ -202,12 +202,12 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zot",
-            "rev": "v2.1.7",
-            "sha256": "sha256-5T89PGOLJNLQV+OYa3MSzqlTro56UZvMHr92wunmXow=",
+            "rev": "v2.1.8",
+            "sha256": "sha256-5xSQxrzxk6vJDGP6INdVBppthNlWdNFnStX2yKnT1Dg=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.1.7"
+        "version": "v2.1.8"
     },
     "zotregistry-ui": {
         "cargoLocks": null,
