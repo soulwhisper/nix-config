@@ -60,6 +60,7 @@ _: {
       "thunderbird"
       "ticktick"
       "vmware-fusion"
+      "wechat"
 
       # :: utilities
       "jordanbaird-ice" # bartender replacement
