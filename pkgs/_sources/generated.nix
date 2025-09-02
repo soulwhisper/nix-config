@@ -94,24 +94,24 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.10.7";
+    version = "v1.11.0";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.10.7";
+      rev = "v1.11.0";
       fetchSubmodules = false;
-      sha256 = "sha256-ve10wLoPVvZQKyzJVxtTTPCwDg9s+2Z06g2fwzm46mk=";
+      sha256 = "sha256-MORn1HUerHHI3o0lmXamx5D7JI8y5z7MDn7z5+QmNhs=";
     };
   };
   zotregistry = {
     pname = "zotregistry";
-    version = "v2.1.7";
+    version = "v2.1.8";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zot";
-      rev = "v2.1.7";
+      rev = "v2.1.8";
       fetchSubmodules = false;
-      sha256 = "sha256-5T89PGOLJNLQV+OYa3MSzqlTro56UZvMHr92wunmXow=";
+      sha256 = "sha256-5xSQxrzxk6vJDGP6INdVBppthNlWdNFnStX2yKnT1Dg=";
     };
   };
   zotregistry-ui = {

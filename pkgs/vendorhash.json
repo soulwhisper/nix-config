@@ -1,9 +1,9 @@
 {
   "talos-api": "sha256-DxeHWWAwUfq8RWMIBigFin3ucs2pVZeWZCU8mVSqXuo=",
-  "talosctl": "sha256-Ib99XI9jAVNTOChjRuiF1L194XjQILMDQjv7ugGYQA0=",
+  "talosctl": "sha256-6UVhWh53pHo6xZOXw/uncDL1AvnsFG27G4FX/qPfedU=",
   "caddy-custom": "sha256-x/6nDUO8h0KLWpNfWdGd9MYcHV2ZZjONWds8+Jc9Nxc=",
   "caddy-plugin-cloudflare": "",
-  "zotregistry": "sha256-+zIY9fYSAFFxHqEP4NYkAMk42yS0mr1ZkVUlQZrp3Bs=",
+  "zotregistry": "sha256-3SKUhDn3Z+ekwax0cN+AzyEkMLJTzxegmSA4dE/1ILE=",
   "zotregistry-ui": "sha256-FakW6QwknQoSKqEoooOdCTQYSMymT/7Shj89coAQUp0=",
   "hass-sgcc": "",
   "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
