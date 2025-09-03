@@ -17,8 +17,8 @@
 
     modules = {
       filesystems.zfs.enable = true;
-      desktop.enable = true;
-      desktop.gaming.enable = true;
+      # desktop.enable = true;
+      # desktop.gaming.enable = true;
 
       hardware.nvidia.enable = true; # llm support
 
