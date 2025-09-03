@@ -91,7 +91,7 @@ in {
           } [[["node.name" "matches" "alsa_output.*"]]];
           apply_properties = lib.generators.toLua {} {
             "audio.format" = "S32LE";
-            "audio.rate" = cfg.rate * 2;
+            "audio.rate" = cfg.lowlatency.rate * 2;
             "api.alsa.period-size" = 2;
           };
         in [
