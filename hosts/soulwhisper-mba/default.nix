@@ -27,6 +27,7 @@
         "transmission"
 
         # :: productivity
+        "audacity"
         "squirrel-app"
         "wireshark-app"
 
