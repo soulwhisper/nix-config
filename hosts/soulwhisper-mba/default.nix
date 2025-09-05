@@ -19,6 +19,7 @@
 
     homebrew = {
       taps = [
+        "nikitabobko/tap"
       ];
       brews = [
       ];
@@ -32,7 +33,7 @@
         "wireshark-app"
 
         # :: test
-        "nikitabobko/tap/aerospace" # ref:https://github.com/ryan4yin/nix-config/blob/main/home/darwin/aerospace/aerospace.toml
+        "nikitabobko/tap/aerospace"
         "bluestacks"
         "maa"
         "stats"
