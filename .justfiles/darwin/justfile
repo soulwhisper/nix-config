@@ -1,0 +1,22 @@
+set quiet := true
+set shell := ['bash', '-euo', 'pipefail', '-c']
+
+ROOT_DIR := invocation_directory()
+HOST := env_var_or_default('HOST', 'soulwhisper-mba')
+
+[private]
+default:
+  @just --list darwin
+
+[doc('Initialize nix-darwin configuration if darwin-rebuild not exist')]
+init:
+  sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake "{{ROOT_DIR}}/#{{HOST}}"
+
+[doc('Build nix-darwin configuration')]
+build:
+  sudo darwin-rebuild build --flake "{{ROOT_DIR}}/#{{HOST}}"
+  sudo nvd diff /run/current-system result
+
+[doc('Switch nix-darwin configuration')]
+switch:
+  sudo darwin-rebuild switch --flake "{{ROOT_DIR}}/#{{HOST}}"

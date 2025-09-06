@@ -4,6 +4,7 @@
       any-nix-shell
       btop # replace glances
       doggo
+      gum
       httpie
       jq
       wget
