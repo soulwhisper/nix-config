@@ -4,15 +4,17 @@
   pkgs,
   ...
 }: let
+  # "${config.xdg.configHome}" = "~/.config"
+  # "${config.xdg.dataHome}" = "~/.local/share"
   ghostty-path =
     if pkgs.stdenv.hostPlatform.isDarwin
     then "Library/Application Support/com.mitchellh.ghostty/config"
-    else "${config.xdg.configHome}/.config/ghostty/config";
+    else "${config.xdg.configHome}/ghostty/config";
 
   rime-path =
     if pkgs.stdenv.hostPlatform.isDarwin
-    then "${config.xdg.configHome}/Library/Rime"
-    else "${config.xdg.configHome}/.local/share/fcitx5/rime";
+    then "Library/Rime"
+    else "${config.xdg.dataHome}/fcitx5/rime";
 in {
   config = {
     # : Ghostty

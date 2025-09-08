@@ -16,34 +16,26 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 # if bootstrap, check 'bootstrap/README.md'
 git clone https://github.com/soulwhisper/nix-config
 
-# deps: nix,go-task
+# deps: nix
 curl -L https://nixos.org/nix/install | sh
-brew install go-task
-nix-shell -p go-task
 
 # : darwin
+brew install just
 # :: opt. run set-proxy script
 sudo python3 scripts/darwin_set_proxy.py
 # :: init, if darwin-rebuild not exist
-task darwin:init
+just darwin init
 # :: build & diff
-task darwin:build
+just darwin build
 # :: switch
-task darwin:switch
+just darwin switch
 
-# : nixos, local
+# : nixos
+nix-shell -p just
 # :: build
-task nixos:build HOST=nix-ops
+just nixos build nix-ops
 # :: switch
-task nixos:switch HOST=nix-ops
-
-# : nixos, remote
-# set DNS record then test ssh connections
-# copy machineconfig to "hosts/{HOST}/hardware-configuration.nix"
-# :: build
-task nixos:build BUILDER=nix-dev HOST=nix-ops
-# :: switch
-task nixos:switch BUILDER=nix-dev HOST=nix-ops
+just nixos switch nix-ops
 
 # : build and try pkgs
 nix build nix-config/.#zotregistry --print-out-paths

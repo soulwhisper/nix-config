@@ -18,7 +18,7 @@ in {
         minijinja
         nixd
         nixfmt-rfc-style
-        unstable.go-task
+        unstable.just
         unstable.awscli2
       ]
       ++ lib.optionals cfg.vmware.enable [

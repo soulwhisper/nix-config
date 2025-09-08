@@ -34,15 +34,16 @@ in {
       }
     '';
 
+    # req: group perms set to root
     # admin:pass, cat /var/lib/crafty/config/default-creds.txt
 
     systemd.tmpfiles.rules = [
-      "d /var/lib/crafty 0755 appuser appuser - -"
-      "d /var/lib/crafty/backups 0755 appuser appuser - -"
-      "d /var/lib/crafty/config 0755 appuser appuser - -"
-      "d /var/lib/crafty/import 0755 appuser appuser - -"
-      "d /var/lib/crafty/logs 0755 appuser appuser - -"
-      "d /var/lib/crafty/servers 0755 appuser appuser - -"
+      "d /var/lib/crafty 0755 root root - -"
+      "d /var/lib/crafty/backups 0755 root root - -"
+      "d /var/lib/crafty/config 0755 root root - -"
+      "d /var/lib/crafty/import 0755 root root - -"
+      "d /var/lib/crafty/logs 0755 root root - -"
+      "d /var/lib/crafty/servers 0755 root root - -"
     ];
 
     systemd.services.podman-crafty.serviceConfig.RestartSec = 5;
@@ -57,8 +58,6 @@ in {
         "25500-25600:25500-25600"
       ];
       environment = {
-        UID = "1001";
-        GID = "1001";
         TZ = "Asia/Shanghai";
       };
       volumes = [
