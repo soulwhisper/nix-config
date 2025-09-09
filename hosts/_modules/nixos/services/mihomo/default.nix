@@ -23,8 +23,8 @@ in {
 
     networking.firewall.checkReversePath = "loose";
     networking.proxy = {
-      httpProxy = "socks5://127.0.0.1:1080";
-      httpsProxy = "socks5://127.0.0.1:1080";
+      httpProxy = "http://127.0.0.1:1080";
+      httpsProxy = "http://127.0.0.1:1080";
       noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
     };
 
@@ -34,8 +34,8 @@ in {
     ];
 
     systemd.services.podman.serviceConfig.Environment = lib.mkIf config.modules.services.podman.enable [
-      "HTTP_PROXY=socks5://127.0.0.1:1080"
-      "HTTPS_PROXY=socks5://127.0.0.1:1080"
+      "HTTP_PROXY=http://127.0.0.1:1080"
+      "HTTPS_PROXY=http://127.0.0.1:1080"
     ];
 
     systemd.services.mihomo = {
