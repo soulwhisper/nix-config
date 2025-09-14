@@ -36,6 +36,8 @@
         versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
 
         # : LAB
+        fvtt.enable = true; # sub=fvtt
+        fvtt.authFile = config.sops.secrets."apps/fvtt/auth".path;
         home-assistant.enable = true; # sub=hass
         kms.enable = true;
         netbox.enable = true; # sub=box

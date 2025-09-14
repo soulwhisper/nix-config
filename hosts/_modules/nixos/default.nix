@@ -14,7 +14,6 @@
 
     # : files
     ./nix.nix
-    ./sops.nix
     ./users.nix
   ];
 
