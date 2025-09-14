@@ -44,12 +44,14 @@ in {
       ports = [
         "30000:30000/tcp"
       ];
-      environment = {
-        TZ = "Asia/Shanghai";
-      } // lib.optionalAttrs (reverseProxyCaddy.enable) {
-        FOUNDRY_PROXY_PORT = "443";
-        FOUNDRY_PROXY_SSL = "true";
-      };
+      environment =
+        {
+          TZ = "Asia/Shanghai";
+        }
+        // lib.optionalAttrs (reverseProxyCaddy.enable) {
+          FOUNDRY_PROXY_PORT = "443";
+          FOUNDRY_PROXY_SSL = "true";
+        };
       environmentFiles = [
         "${cfg.authFile}"
       ];
