@@ -22,6 +22,11 @@ cat -p secrets.sops.yaml
 apps:
   default:
     auth: { default-password }
+  fvtt:
+    auth: |
+      FOUNDRY_ADMIN_KEY={fvtt-admin-password}
+      FOUNDRY_USERNAME={fvtt-account-username}
+      FOUNDRY_PASSWORD={fvtt-account-password}
   hass-sgcc:
     auth: |
       PHONE_NUMBER={sgcc-account}

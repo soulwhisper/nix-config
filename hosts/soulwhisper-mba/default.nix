@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  # check first: https://daiderd.com/nix-darwin/manual/index.html
+  # ref:https://daiderd.com/nix-darwin/manual/index.html
   config = {
     networking = {
       computerName = "soulwhisper-mba";
@@ -13,9 +13,10 @@
     };
 
     # : test/temp apps list
-    # :: not support brew yet
-    # animeko: https://myani.org/downloads
-    # cardforge: https://github.com/Card-Forge/forge/releases
+
+    environment.systemPackages = with pkgs; [
+      unstable.forge-mtg # cardforge, https://github.com/Card-Forge/forge/releases
+    ];
 
     homebrew = {
       taps = [

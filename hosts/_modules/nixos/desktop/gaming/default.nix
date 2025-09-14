@@ -26,6 +26,7 @@ in {
   # ref:https://wiki.nixos.org/wiki/Steam
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      unstable.forge-mtg # magic the gathering
       prismlauncher # minecraft
       mangohud # fps monitor
       lutris # launcher

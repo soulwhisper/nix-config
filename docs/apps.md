@@ -40,6 +40,7 @@ versitygw: 7070
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
+fvtt: 30000
 wireguard: 51820
 avahi: 60000-65000
 

@@ -43,6 +43,8 @@
         emby.enable = true; # sub=movie
         freshrss.enable = true; # sub=rss
         freshrss.authFile = config.sops.secrets."apps/default/auth".path;
+        fvtt.enable = true; # sub=fvtt
+        fvtt.authFile = config.sops.secrets."apps/fvtt/auth".path;
         home-assistant.enable = true; # sub=hass
         immich.enable = true; # sub=photo
         karakeep.enable = true; # sub=bookmarks
