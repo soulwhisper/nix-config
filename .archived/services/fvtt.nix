@@ -49,6 +49,7 @@ in {
           TZ = "Asia/Shanghai";
         }
         // lib.optionalAttrs (reverseProxyCaddy.enable) {
+          FOUNDRY_HOSTNAME = "${cfg.domain}";
           FOUNDRY_PROXY_PORT = "443";
           FOUNDRY_PROXY_SSL = "true";
         };
