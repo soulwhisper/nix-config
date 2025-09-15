@@ -27,23 +27,27 @@ in {
       }
     '';
 
-    services.meshcentral = {
-      enable = true;
-      package = pkgs.unstable.meshcentral;
-      settings = {
-        settings = {
-          agentTimeStampServer = "false";
-          aliasPort = 443;
-          cert = "${cfg.domain}";
-          port = 9203;
-          tlsOffload = "127.0.0.1,::1";
-        };
-        domains = {
-          "" = {
-            certUrl = "https://${cfg.domain}/";
-          };
-        };
-      };
+    # nix package is outdated, use container instead
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/meshcentral 0755 root root - -"
+      "C /var/lib/meshcentral/config.json 0644 root root - ${./config.json}"
+    ];
+
+    systemd.services.podman-meshcentral.serviceConfig.RestartSec = 5;
+
+    modules.services.podman.enable = true;
+    virtualisation.oci-containers.containers."meshcentral" = {
+      autoStart = true;
+      image = "ghcr.io/ylianst/meshcentral:latest";
+      extraOptions = ["--pull=newer"];
+      ports = [
+        "4433:4433/tcp"
+        "9203:80/tcp"
+      ];
+      volumes = [
+        "/var/lib/meshcentral:/opt/meshcentral/meshcentral-data"
+      ];
     };
   };
 }

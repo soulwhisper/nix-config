@@ -6,9 +6,6 @@
 }: let
   cfg = config.modules.services.zotregistry;
   reverseProxyCaddy = config.modules.services.caddy;
-
-  # to avoid json lost lines
-  configFile = builtins.toFile "config.json" (builtins.readFile ./config.json);
 in {
   options.modules.services.zotregistry = {
     enable = lib.mkEnableOption "zotregistry";
@@ -29,7 +26,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/zotregistry 0755 appuser appuser - -"
-      "C /var/lib/zotregistry/config.json 0600 appuser appuser - ${configFile}"
+      "C /var/lib/zotregistry/config.json 0600 appuser appuser - ${./config.json}"
     ];
 
     environment.systemPackages = with pkgs; [zotregistry]; # provide zotregistry-cli: zli

@@ -24,6 +24,8 @@ in {
       }
     '';
 
+    # nix package is outdated
+
     services.karakeep = {
       enable = true;
       package = pkgs.unstable.karakeep;

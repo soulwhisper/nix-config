@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.modules.services.mihomo;
-  configFile = ./config.yaml;
 in {
   options.modules.services.mihomo = {
     enable = lib.mkEnableOption "mihomo";
@@ -30,7 +29,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/mihomo 0755 appuser appuser - -"
-      "C /var/lib/mihomo/config.yaml 0644 appuser appuser - ${configFile}"
+      "C /var/lib/mihomo/config.yaml 0644 appuser appuser - ${./config.yaml}"
     ];
 
     systemd.services.podman.serviceConfig.Environment = lib.mkIf config.modules.services.podman.enable [

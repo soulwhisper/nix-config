@@ -5,9 +5,6 @@
   ...
 }: let
   cfg = config.modules.services.bind;
-  configFile = ./named.conf;
-  homeZoneFile = ./homelab.internal.db;
-  labZoneFile = ./noirprime.com.db;
 in {
   options.modules.services.bind = {
     enable = lib.mkEnableOption "bind";
@@ -23,10 +20,10 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/bind 0755 named named - -"
-      "C /var/lib/bind/named.conf 0640 named named - ${configFile}"
+      "C /var/lib/bind/named.conf 0640 named named - ${./named.conf}"
       "d /var/lib/bind/zones 0755 named named - -"
-      "C /var/lib/bind/zones/homelab.internal.db 0640 named named - ${homeZoneFile}"
-      "C /var/lib/bind/zones/noirprime.com.db 0640 named named - ${labZoneFile}"
+      "C /var/lib/bind/zones/homelab.internal.db 0640 named named - ${./homelab.internal.db}"
+      "C /var/lib/bind/zones/noirprime.com.db 0640 named named - ${./noirprime.com.db}"
     ];
 
     services.bind = {

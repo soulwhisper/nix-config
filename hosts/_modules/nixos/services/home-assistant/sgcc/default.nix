@@ -5,12 +5,11 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
-  configFile = builtins.toFile "options.json" (builtins.readFile ./options.json);
 in {
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d /var/lib/hass/sgcc 0755 appuser appuser - -"
-      "C /var/lib/hass/sgcc/options.json 0600 appuser appuser - ${configFile}"
+      "C /var/lib/hass/sgcc/options.json 0600 appuser appuser - ${./options.json}"
     ];
 
     # service has to be root, or specific user has homeDir;

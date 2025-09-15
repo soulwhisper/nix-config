@@ -29,15 +29,13 @@
         smartd.enable = false;
         nut.enable = true;
 
-        # : K8S related
+        # : K8S Prod
         meshcentral.enable = true; # sub=mesh
         talos.api.enable = true;
         versitygw.enable = true; # ep=:7070
         versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
 
         # : LAB
-        fvtt.enable = true; # sub=fvtt
-        fvtt.authFile = config.sops.secrets."apps/fvtt/auth".path;
         home-assistant.enable = true; # sub=hass
         kms.enable = true;
         netbox.enable = true; # sub=box

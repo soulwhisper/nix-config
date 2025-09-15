@@ -10,7 +10,6 @@
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};
   rime-moqi-yinxing = pkgs.callPackage ./rime-moqi-yinxing {};
-  sillytavern = pkgs.callPackage ./sillytavern {};
   talhelper = inputs.talhelper.packages.${pkgs.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};

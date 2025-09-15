@@ -32,32 +32,14 @@
         smartd.enable = false;
         nut.enable = false;
 
-        # : K8S related
-        meshcentral.enable = true; # sub=mesh
+        # : K8S Test
         talos.api.enable = true;
         versitygw.enable = true; # ep=:7070
         versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
-        zotregistry.enable = true; # sub=zot
 
         # : LAB
-        emby.enable = true; # sub=movie
-        freshrss.enable = true; # sub=rss
-        freshrss.authFile = config.sops.secrets."apps/default/auth".path;
-        fvtt.enable = true; # sub=fvtt
-        fvtt.authFile = config.sops.secrets."apps/fvtt/auth".path;
-        home-assistant.enable = true; # sub=hass
-        immich.enable = true; # sub=photo
-        karakeep.enable = true; # sub=bookmarks
         kms.enable = true;
-        moviepilot.enable = true; # sub=pilot
-        moviepilot.authFile = config.sops.secrets."apps/moviepilot/auth".path;
-        n8n.enable = true; # sub=n8n
         netbox.enable = true; # sub=box
-        qbittorrent.enable = true; # sub=bt
-        unifi-controller.enable = true; # sub=unifi
-
-        # : Tests
-        crafty.enable = true; # sub=mc
 
         # : Others
         nfs4 = {
@@ -68,7 +50,6 @@
           };
         };
         sftpgo.enable = true;
-        timemachine.enable = false;
       };
     };
   };

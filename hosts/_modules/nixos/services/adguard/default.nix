@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.modules.services.adguard;
-  configFile = ./AdGuardHome.yaml;
 in {
   options.modules.services.adguard = {
     enable = lib.mkEnableOption "adguard";
@@ -23,7 +22,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/AdGuardHome 0700 appuser appuser - -"
-      "C /var/lib/AdGuardHome/AdGuardHome.yaml 0700 appuser appuser - ${configFile}"
+      "C /var/lib/AdGuardHome/AdGuardHome.yaml 0700 appuser appuser - ${./AdGuardHome.yaml}"
     ];
 
     systemd.services.adguardhome = {

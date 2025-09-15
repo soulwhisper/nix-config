@@ -32,7 +32,6 @@
           acceleration = "cuda";
           models = ["deepseek-r1:8b"];
         };
-        sillytavern.enable = true;
 
         # : Apps
       };

@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.modules.services.dae;
-  configFile = ./config.dae;
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
@@ -24,7 +23,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/dae 0755 root root - -"
-      "C /var/lib/dae/config.dae 0600 root root - ${configFile}"
+      "C /var/lib/dae/config.dae 0600 root root - ${./config.dae}"
     ];
 
     services.tinyproxy = {

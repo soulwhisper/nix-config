@@ -70,17 +70,6 @@
     };
     date = "2025-08-02";
   };
-  sillytavern = {
-    pname = "sillytavern";
-    version = "1.13.4";
-    src = fetchFromGitHub {
-      owner = "SillyTavern";
-      repo = "SillyTavern";
-      rev = "1.13.4";
-      fetchSubmodules = false;
-      sha256 = "sha256-C1VWyowuk4w1F5u88Xcp9m3UgNmcDKEn/NSojuLGAd8=";
-    };
-  };
   talos-api = {
     pname = "talos-api";
     version = "v1.0.11";

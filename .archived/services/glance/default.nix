@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.modules.services.glance;
-  configFile = ./glance.yaml;
   reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.glance = {
@@ -23,7 +22,7 @@ in {
 
     systemd.tmpfiles.rules = [
       "d /var/lib/glance 0755 appuser appuser - -"
-      "C /var/lib/glance/glance.yaml 0755 appuser appuser - ${configFile}"
+      "C /var/lib/glance/glance.yaml 0755 appuser appuser - ${./glance.yaml}"
     ];
 
     systemd.services.glance = {

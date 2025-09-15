@@ -3,33 +3,23 @@
     ./adguard
     ./caddy
     ./chrony
-    ./crafty
     ./easytier
-    ./emby
     ./forgejo
-    ./freshrss
-    ./fvtt
     ./garage
     ./home-assistant
-    ./immich
-    ./karakeep
     ./kms
     ./meshcentral
     ./mihomo
     ./monitoring
-    ./moviepilot
-    ./n8n
     ./netbox
     ./nfs4
     ./nut
     ./ollama
     ./openssh
     ./podman
-    ./qbittorrent
     ./restic
     ./samba
     ./sftpgo
-    ./sillytavern
     ./smartd
     ./talos-api
     ./unifi-controller
