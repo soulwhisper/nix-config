@@ -106,13 +106,13 @@
 
     # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
     # fixed since v0.43.1, replace tmux
-    # disable shellExit for log scrolling
+    # disable autoStart / shellExit for log scrolling
     # bindings check:https://github.com/ghostty-org/ghostty/discussions/3740
     xdg.configFile."zellij/config.kdl".source = ./zellij.kdl;
     programs.zellij = {
       enable = true;
-      enableFishIntegration = true;
-      attachExistingSession = true;
+      enableFishIntegration = false;
+      attachExistingSession = false;
       exitShellOnExit = false;
     };
 

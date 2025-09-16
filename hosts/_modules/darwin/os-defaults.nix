@@ -4,10 +4,10 @@ _: {
 
   system.defaults = {
     CustomSystemPreferences = {
-      # Enable Launchpad in macOS 26 Tahoe
-      "/Library/Preferences/FeatureFlags/Domain/SpotlightUI" = {
-        SpotlightPlus.Enabled = false;
-      };
+      # Enable Launchpad in macOS 26 Tahoe; Dead;
+      #"/Library/Preferences/FeatureFlags/Domain/SpotlightUI" = {
+      #  SpotlightPlus.Enabled = false;
+      #};
     };
 
     CustomUserPreferences = {
