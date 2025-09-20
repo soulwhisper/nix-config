@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # catppuccin - Soothing pastel theme for Nix
+    catppuccin = {
+      url = "github:catppuccin/nix/release-25.05";
+    };
+
     # sops-nix - secrets with mozilla sops
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -40,11 +45,6 @@
     krewfile = {
       url = "github:brumhard/krewfile";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Catppuccin - Soothing pastel theme for Nix
-    catppuccin = {
-      url = "github:catppuccin/nix";
     };
 
     # Talhelper - A tool to help create Talos Kubernetes clusters
