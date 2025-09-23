@@ -42,6 +42,7 @@
       masApps = {
         "DevHub" = 6476452351;
         "ReadKit" = 1615798039;
+        "iCost" = 1484262528;
         # "Passepartout" = 1433648537;
         # "StopTheMadness Pro" = 6471380298;
       };
