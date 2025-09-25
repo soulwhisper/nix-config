@@ -43,6 +43,7 @@ in {
       discord
       vlc
       youtube-music
+      zotero
     ];
 
     programs.clash-verge = {

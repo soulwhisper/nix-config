@@ -61,6 +61,7 @@ _: {
       "ticktick"
       "vmware-fusion"
       "wechat"
+      "zotero"
 
       # :: utilities
       "jordanbaird-ice" # bartender replacement
