@@ -21,7 +21,6 @@ dns {
     }
     routing {
         request {
-            qname(geosite:google@cn) -> alidns
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
             qtype(https) -> reject

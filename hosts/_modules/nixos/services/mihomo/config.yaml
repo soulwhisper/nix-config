@@ -19,7 +19,9 @@ proxy-providers:
 
 # : global
 mixed-port: 1080
-ipv6: false
+tproxy-port: 7890
+routing-mark: 6666
+ipv6: true
 allow-lan: true
 bind-address: "*"
 lan-allowed-ips:
@@ -87,9 +89,9 @@ sniffer:
     - "+.argotunnel.com" # Cloudflare Tunnel
     - "+.api.letsencrypt.org" # ACME
 
-# : tun; disabled
+# : tun
 tun:
-  enable: false
+  enable: true
   stack: system
   dns-hijack:
     - "any:53"

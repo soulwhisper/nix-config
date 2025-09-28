@@ -7,8 +7,8 @@
   imports = [
     # : folder
     ./desktop
-    ./hardware
     ./filesystems
+    ./hardware
     ./secrets
     ./services
 
@@ -48,6 +48,9 @@
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.ipv4.ip_local_port_range" = "60000 65000";
+      # enable IPv4 and IPv6 forwarding on all interfaces
+      "net.ipv4.conf.all.forwarding" = true;
+      "net.ipv6.conf.all.forwarding" = true;
     };
 
     # : systemd-boot EFI boot loader.
