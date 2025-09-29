@@ -3,26 +3,38 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.10.0";
+    version = "v2.10.2";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.10.0";
+      rev = "v2.10.2";
       fetchSubmodules = false;
-      sha256 = "sha256-hzDd2BNTZzjwqhc/STbSAHnNlP7g1cFuMehqU1LumQE=";
+      sha256 = "sha256-KvikafRYPFZ0xCXqDdji1rxlkThEDEOHycK8GP5e8vk=";
     };
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "35fb8474f57d7476329f75d63eebafb95a93022f";
+    version = "a14840b68f2669721e7a0c24d37903b0eb0083f3";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "35fb8474f57d7476329f75d63eebafb95a93022f";
+      rev = "a14840b68f2669721e7a0c24d37903b0eb0083f3";
       fetchSubmodules = false;
-      sha256 = "sha256-6Od+Ho2Tpn8dsm6fH5SxrGBND9Hfly2uZkTltgXzPE8=";
+      sha256 = "sha256-TNUMn69eglmyA5NTt1J3ohofIdiIbuNHYs/IpNUEnAE=";
     };
-    date = "2025-05-06";
+    date = "2025-09-23";
+  };
+  geo-custom = {
+    pname = "geo-custom";
+    version = "50df9a672bbcd124e5191cb5774c9a7bab776982";
+    src = fetchFromGitHub {
+      owner = "soulwhisper";
+      repo = "geo";
+      rev = "50df9a672bbcd124e5191cb5774c9a7bab776982";
+      fetchSubmodules = false;
+      sha256 = "sha256-tXNzCcKRvtc3FdFSp7zscbl115QrbaBEjYG5d1m2K8E=";
+    };
+    date = "2025-09-29";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -56,6 +68,17 @@
       rev = "v1.3.0";
       fetchSubmodules = false;
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
+    };
+  };
+  mosdns-custom = {
+    pname = "mosdns-custom";
+    version = "v5.3.4.1";
+    src = fetchFromGitHub {
+      owner = "yyysuo";
+      repo = "mosdns";
+      rev = "v5.3.4.1";
+      fetchSubmodules = false;
+      sha256 = "sha256-yfjyA2eOrqMSvJXrNHbJCiR8WH/4VqksYhSpPMJ1uvw=";
     };
   };
   rime-moqi-yinxing = {
