@@ -8,5 +8,5 @@
 in {
   config = lib.mkIf cfg.enable {
     # ! not finished yet !
-  }
+  };
 }
