@@ -22,6 +22,7 @@
     ./sftpgo
     ./smartd
     ./talos-api
+    ./tproxy
     ./unifi-controller
     ./versitygw
     ./zotregistry

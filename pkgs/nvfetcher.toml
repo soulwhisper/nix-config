@@ -1,12 +1,16 @@
 [caddy-core]
 fetch.github = "caddyserver/caddy"
 src.github = "caddyserver/caddy"
-pinned = true  # pin golang version
+# pinned = true  # pin golang version
 [caddy-plugin-cloudflare]
 fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
-pinned = true  # pin golang version
+# pinned = true  # pin golang version
+[geo-custom]
+fetch.github = "soulwhisper/geo"
+src.git = "https://github.com/soulwhisper/geo.git"
+src.branch = "main"
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
@@ -17,6 +21,9 @@ src.branch = "main"
 [kubectl-browse-pvc]
 fetch.github = "clbx/kubectl-browse-pvc"
 src.github = "clbx/kubectl-browse-pvc"
+[mosdns-custom]
+fetch.github = "yyysuo/mosdns"
+src.github = "yyysuo/mosdns"
 [rime-moqi-yinxing]
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
@@ -24,7 +31,6 @@ src.branch = "main"
 [talosctl]
 fetch.github = "siderolabs/talos"
 src.github = "siderolabs/talos"
-# pinned = true # until unstable.go >= 1.24.4
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"

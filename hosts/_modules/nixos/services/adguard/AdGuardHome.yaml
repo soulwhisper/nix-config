@@ -25,6 +25,7 @@ dns:
   refuse_any: true
   upstream_dns:
     # quote is necessary for complicated rules
+    - udp://127.0.0.1:5300 # mosdns
     - tls://223.5.5.5
     - tls://223.6.6.6
     - quic://223.5.5.5

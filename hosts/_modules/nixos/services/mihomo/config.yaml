@@ -19,8 +19,8 @@ proxy-providers:
 
 # : global
 mixed-port: 1080
-tproxy-port: 7890
-routing-mark: 6666
+# tproxy-port: 7890
+# routing-mark: 6666
 ipv6: true
 allow-lan: true
 bind-address: "*"
