@@ -26,13 +26,13 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "b4640dafd521ac4a9976f370d84d72000a1b3cc0";
+    version = "4085f844a2f2ff8156719ced435d7b0029257af6";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "b4640dafd521ac4a9976f370d84d72000a1b3cc0";
+      rev = "4085f844a2f2ff8156719ced435d7b0029257af6";
       fetchSubmodules = false;
-      sha256 = "sha256-6qYJj6rlo9MZ797DRGD7VxXUfeX258izUp6VVHNvajs=";
+      sha256 = "sha256-jHC/MMPMpxdu7fq+umpa1olX4u64Zaj/UfHjWlZYT9g=";
     };
     date = "2025-09-30";
   };
