@@ -41,6 +41,9 @@
         netbox.enable = true; # sub=box
         unifi-controller.enable = true; # sub=unifi
 
+        # : TEST
+        tproxy.enable = true;
+
         # : Others
         nfs4 = {
           enable = true; # all_squash = 2000:2000

@@ -3,26 +3,38 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.10.0";
+    version = "v2.10.2";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.10.0";
+      rev = "v2.10.2";
       fetchSubmodules = false;
-      sha256 = "sha256-hzDd2BNTZzjwqhc/STbSAHnNlP7g1cFuMehqU1LumQE=";
+      sha256 = "sha256-KvikafRYPFZ0xCXqDdji1rxlkThEDEOHycK8GP5e8vk=";
     };
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "35fb8474f57d7476329f75d63eebafb95a93022f";
+    version = "a14840b68f2669721e7a0c24d37903b0eb0083f3";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "35fb8474f57d7476329f75d63eebafb95a93022f";
+      rev = "a14840b68f2669721e7a0c24d37903b0eb0083f3";
       fetchSubmodules = false;
-      sha256 = "sha256-6Od+Ho2Tpn8dsm6fH5SxrGBND9Hfly2uZkTltgXzPE8=";
+      sha256 = "sha256-TNUMn69eglmyA5NTt1J3ohofIdiIbuNHYs/IpNUEnAE=";
     };
-    date = "2025-05-06";
+    date = "2025-09-23";
+  };
+  geo-custom = {
+    pname = "geo-custom";
+    version = "b4640dafd521ac4a9976f370d84d72000a1b3cc0";
+    src = fetchFromGitHub {
+      owner = "soulwhisper";
+      repo = "geo";
+      rev = "b4640dafd521ac4a9976f370d84d72000a1b3cc0";
+      fetchSubmodules = false;
+      sha256 = "sha256-6qYJj6rlo9MZ797DRGD7VxXUfeX258izUp6VVHNvajs=";
+    };
+    date = "2025-09-30";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -58,6 +70,17 @@
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
     };
   };
+  mosdns-custom = {
+    pname = "mosdns-custom";
+    version = "v5.3.4.1";
+    src = fetchFromGitHub {
+      owner = "yyysuo";
+      repo = "mosdns";
+      rev = "v5.3.4.1";
+      fetchSubmodules = false;
+      sha256 = "sha256-yfjyA2eOrqMSvJXrNHbJCiR8WH/4VqksYhSpPMJ1uvw=";
+    };
+  };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
     version = "1c4750ec9828361fecdee174dac38d26e20ce667";
@@ -69,6 +92,18 @@
       sha256 = "sha256-tdrYr5AFsc1PFM/1iSLyL/gDTTs5nrslgJ/FSLAm7+Q=";
     };
     date = "2025-08-02";
+  };
+  singbox-custom = {
+    pname = "singbox-custom";
+    version = "6b72775d79d67d964c80ec51759bc9d279046aed";
+    src = fetchFromGitHub {
+      owner = "CHIZI-0618";
+      repo = "sing-box";
+      rev = "6b72775d79d67d964c80ec51759bc9d279046aed";
+      fetchSubmodules = false;
+      sha256 = "sha256-l9rEK3x8f1PW5UU0mAXDXtuljhPJF4gVLzG8YcBk+Nk=";
+    };
+    date = "2025-09-28";
   };
   talos-api = {
     pname = "talos-api";
@@ -105,14 +140,14 @@
   };
   zotregistry-ui = {
     pname = "zotregistry-ui";
-    version = "d25abda17df8ac4e38211b09d5336012ad42b870";
+    version = "731b63943eedb1845ca53741384b5e2a44249959";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zui";
-      rev = "d25abda17df8ac4e38211b09d5336012ad42b870";
+      rev = "731b63943eedb1845ca53741384b5e2a44249959";
       fetchSubmodules = false;
-      sha256 = "sha256-Ikn2Yh/v05lzVkEDtnj3oRowVZ/GhyuSZwfZ8O837sM=";
+      sha256 = "sha256-/5TD1P8uMMZdlBP2HI9qtTQOT77JhaQhKI9KrE/9QHQ=";
     };
-    date = "2025-07-01";
+    date = "2025-09-29";
   };
 }

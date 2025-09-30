@@ -41,6 +41,9 @@
         kms.enable = true;
         netbox.enable = true; # sub=box
 
+        # : TEST
+        tproxy.enable = true;
+
         # : Others
         nfs4 = {
           enable = true; # all_squash = 2000:2000
