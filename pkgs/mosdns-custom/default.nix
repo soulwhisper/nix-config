@@ -18,7 +18,7 @@ in
     ldflags = ["-s" "-w"];
 
     meta = {
-      mainProgram = "mosdns-custom";
+      mainProgram = "mosdns";
       description = "Modular, pluggable DNS forwarder, with `domain_output` plugin.";
       homepage = "https://github.com/yyysuo/mosdns";
       changelog = "https://github.com/yyysuo/mosdns/releases/tag/${packageData.version}";

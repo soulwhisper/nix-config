@@ -23,6 +23,15 @@
       freefilesync
     ];
 
+    # : networking
+    systemd.network.enable = true;
+    networking = {
+      firewall.enable = true;
+      nftables.enable = true;
+      useNetworkd = false;
+      useDHCP = false;
+    };
+
     # : increase open file limit for sudoers
     security.pam.loginLimits = [
       {
