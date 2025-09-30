@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "aa8abfff5e9a144b8376416d4c8b1bc76b99e278",
-            "sha256": "sha256-pOb3zbK7Phy2ETfiGdVcYYnULzQ3nbYyQoP1pJU1UwE=",
+            "rev": "b4640dafd521ac4a9976f370d84d72000a1b3cc0",
+            "sha256": "sha256-6qYJj6rlo9MZ797DRGD7VxXUfeX258izUp6VVHNvajs=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "aa8abfff5e9a144b8376416d4c8b1bc76b99e278"
+        "version": "b4640dafd521ac4a9976f370d84d72000a1b3cc0"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -166,6 +166,27 @@
             "type": "github"
         },
         "version": "1c4750ec9828361fecdee174dac38d26e20ce667"
+    },
+    "singbox-custom": {
+        "cargoLocks": null,
+        "date": "2025-09-28",
+        "extract": null,
+        "name": "singbox-custom",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "CHIZI-0618",
+            "repo": "sing-box",
+            "rev": "6b72775d79d67d964c80ec51759bc9d279046aed",
+            "sha256": "sha256-l9rEK3x8f1PW5UU0mAXDXtuljhPJF4gVLzG8YcBk+Nk=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "6b72775d79d67d964c80ec51759bc9d279046aed"
     },
     "talos-api": {
         "cargoLocks": null,

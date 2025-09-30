@@ -9,5 +9,6 @@
   "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
   "rime-moqi-yinxing": "",
   "mosdns-custom": "sha256-e4fmCC7Di1UeOIBmqmt8GNDeymfhorOZMFM8RsD8nDU=",
-  "geo-custom": ""
+  "geo-custom": "",
+  "singbox-custom": ""
 }
