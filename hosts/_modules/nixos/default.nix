@@ -71,8 +71,9 @@
       chrony.enable = true;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
-      mihomo.enable = true;
-      mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
+      # mihomo.enable = true;
+      # mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
+      tproxy.enable = true;
       monitoring.enable = true;
       openssh.enable = true;
     };

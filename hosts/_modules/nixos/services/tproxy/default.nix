@@ -16,6 +16,8 @@ in {
     enable = lib.mkEnableOption "tproxy-stack";
   };
 
+  # tproxy conflict with mihomo/dae
+
   # dns route: request -> adguard -> mosdns -> upstream
   config = lib.mkIf cfg.enable {
     boot.kernel.sysctl = {
