@@ -24,6 +24,7 @@
 
 - [rime-shuangpin-fuzhuma](https://github.com/gaboolic/rime-shuangpin-fuzhuma), primary;
 - based on `linux:fcitx5-rime, macos:squirrel-app`;
+- when input shows, `Ctrl + ~` to controlPanel;
 
 ## Ports
 

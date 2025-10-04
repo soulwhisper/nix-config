@@ -64,6 +64,7 @@ _: {
       "zotero"
 
       # :: utilities
+      # "nikitabobko/tap/aerospace" # tilling, cant split
       "jordanbaird-ice" # bartender replacement
       "karabiner-elements"
       "keyboard-maestro"

@@ -34,7 +34,6 @@
         "wireshark-app"
 
         # :: test
-        "nikitabobko/tap/aerospace"
         "bluestacks"
         "maa"
         "stats"
