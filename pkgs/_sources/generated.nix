@@ -95,15 +95,15 @@
   };
   singbox-custom = {
     pname = "singbox-custom";
-    version = "6b72775d79d67d964c80ec51759bc9d279046aed";
+    version = "0fa61eea4aa1d416555f9e70b85dc3be49043674";
     src = fetchFromGitHub {
       owner = "CHIZI-0618";
       repo = "sing-box";
-      rev = "6b72775d79d67d964c80ec51759bc9d279046aed";
+      rev = "0fa61eea4aa1d416555f9e70b85dc3be49043674";
       fetchSubmodules = false;
-      sha256 = "sha256-l9rEK3x8f1PW5UU0mAXDXtuljhPJF4gVLzG8YcBk+Nk=";
+      sha256 = "sha256-yKO/07rkGRA/oCU15fxRVtih32wkf5isNZSiPv/09Fs=";
     };
-    date = "2025-09-28";
+    date = "2025-10-07";
   };
   talos-api = {
     pname = "talos-api";
