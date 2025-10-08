@@ -31,6 +31,7 @@
         # :: productivity
         "audacity"
         "squirrel-app"
+        "unity"
         "wireshark-app"
 
         # :: test

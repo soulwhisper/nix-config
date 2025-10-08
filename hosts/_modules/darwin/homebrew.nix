@@ -66,8 +66,8 @@ _: {
       # :: utilities
       # "nikitabobko/tap/aerospace" # tilling, cant split
       "jordanbaird-ice" # bartender replacement
-      "karabiner-elements"
-      "keyboard-maestro"
+      # "karabiner-elements" # not-used
+      # "keyboard-maestro" # not-used
       "pixpin" # cleanshotx replacement
       "rectangle-pro" # preferred over swish
     ];

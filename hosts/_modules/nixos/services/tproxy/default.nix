@@ -17,6 +17,10 @@ in {
   };
 
   # tproxy conflict with mihomo/dae
+  # : reviews:
+  # :: mihomo, tun issues
+  # :: dae, all through dns, internal detection not stable
+  # :: sing-box, better performance
 
   # dns route: request -> adguard -> mosdns -> upstream
   config = lib.mkIf cfg.enable {
