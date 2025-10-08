@@ -169,7 +169,7 @@
     },
     "singbox-custom": {
         "cargoLocks": null,
-        "date": "2025-09-28",
+        "date": "2025-10-07",
         "extract": null,
         "name": "singbox-custom",
         "passthru": null,
@@ -181,12 +181,12 @@
             "name": null,
             "owner": "CHIZI-0618",
             "repo": "sing-box",
-            "rev": "6b72775d79d67d964c80ec51759bc9d279046aed",
-            "sha256": "sha256-l9rEK3x8f1PW5UU0mAXDXtuljhPJF4gVLzG8YcBk+Nk=",
+            "rev": "0fa61eea4aa1d416555f9e70b85dc3be49043674",
+            "sha256": "sha256-yKO/07rkGRA/oCU15fxRVtih32wkf5isNZSiPv/09Fs=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "6b72775d79d67d964c80ec51759bc9d279046aed"
+        "version": "0fa61eea4aa1d416555f9e70b85dc3be49043674"
     },
     "talos-api": {
         "cargoLocks": null,
