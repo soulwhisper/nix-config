@@ -8,7 +8,7 @@
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
-    subscriptionFile = lib.mkOption {
+    subscription = lib.mkOption {
       type = lib.types.str;
       default = null;
       description = "The Shadowsocks links for the dae subscription.";
@@ -72,7 +72,7 @@ in {
       path = [pkgs.unstable.dae pkgs.gawk pkgs.curl pkgs.systemd];
       preStart = ''
         if [ -n "${cfg.subscription}" ] && [ -f "${cfg.subscription}" ]; then
-          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > /var/lib/dae/sublist
+          cat ${cfg.subscription} | awk -F= '{print $2}' > /var/lib/dae/sublist
         else
           echo "CHANGEME" > /var/lib/dae/sublist
         fi
