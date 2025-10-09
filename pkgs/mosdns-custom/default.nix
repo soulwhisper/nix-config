@@ -7,8 +7,7 @@
   packageData = sourceData.mosdns-custom;
   vendorData = lib.importJSON ../vendorhash.json;
 in
-  pkgs.buildGoModule rec {
-    # this package use go stable
+  pkgs.unstable.buildGoModule rec {
     inherit (packageData) pname src;
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.mosdns-custom;
