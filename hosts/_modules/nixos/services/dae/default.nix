@@ -71,24 +71,16 @@ in {
       after = ["network-online.target"];
       path = [pkgs.unstable.dae pkgs.gawk pkgs.curl pkgs.systemd];
       preStart = ''
-        if [ -n "${cfg.subscription}" ] && [ -f "${cfg.subscription}" ]; then
-          cat ${cfg.subscription} | awk -F= '{print $2}' > /var/lib/dae/sublist
-        else
-          echo "CHANGEME" > /var/lib/dae/sublist
-        fi
+        cat ${cfg.subscription} > /var/lib/dae/sublist
       '';
       script = ''
         cd /var/lib/dae
-        sed -e 's/^ *//g' -e 's/ *$//g' -e 's/"//g' sublist > sublist.tmp
         version="$(dae --version | head -n 1 | sed 's/dae version //')"
         UA="dae/$version (like v2rayA/1.0 WebRequestHelper) (like v2rayN/1.0 WebRequestHelper)"
-        line_number=1
-        while IFS= read -r url
+        line=1
+        while read -r url
         do
-          if [[ -z "$url" ]]; then
-            continue
-          fi
-          file_name="subscription_$line_number.sub"
+          file_name="subscription_$line.sub"
           if curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "$file_name.new"; then
             mv "$file_name.new" "$file_name"
             chmod 0600 "$file_name"
@@ -97,10 +89,8 @@ in {
             rm -f "$file_name.new"
             echo "Failed to download $file_name from $url"
           fi
-          line_number=$((line_number + 1))
-        done < sublist.tmp
-        rm -f sublist.tmp
-        dae reload
+          line=$((line + 1))
+        done < sublist
       '';
     };
   };

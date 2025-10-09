@@ -50,8 +50,7 @@ networking:
       CLOUDFLARE_EMAIL={cf-email}
       CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
   proxy:
-    subscription: |
-      SUBSCRIPTION={sub-url}
+    subscription: { sub-url }
   easytier:
     auth: |
       [network_identity]

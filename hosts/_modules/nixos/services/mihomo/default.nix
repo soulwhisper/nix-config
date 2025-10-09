@@ -53,10 +53,6 @@ in {
         StateDirectory = "mihomo";
         Restart = "always";
         RestartSec = 5;
-        # env injection not supported, this file serve as a reminder
-        EnvironmentFile = [
-          "${cfg.subscription}"
-        ];
         # tun configs
         AmbientCapabilities = ["CAP_NET_ADMIN"];
         CapabilityBoundingSet = ["CAP_NET_ADMIN"];

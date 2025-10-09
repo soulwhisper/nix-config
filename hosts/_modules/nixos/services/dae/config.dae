@@ -12,10 +12,12 @@ global {
 }
 
 subscription {
-    default: 'file://subscription.sub'
+    # use ss provider link for compatibility
+    default: 'file://subscription_1.sub'
 }
 
 dns {
+    ipversion_prefer: 4
     upstream {
         googledns: 'tcp+udp://dns.google:53'
         alidns: 'udp://dns.alidns.com:53'
