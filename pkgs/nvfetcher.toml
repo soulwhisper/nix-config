@@ -23,7 +23,8 @@ fetch.github = "clbx/kubectl-browse-pvc"
 src.github = "clbx/kubectl-browse-pvc"
 [mosdns-custom]
 fetch.github = "yyysuo/mosdns"
-src.github = "yyysuo/mosdns"
+src.git = "https://github.com/yyysuo/mosdns.git"
+src.branch = "main"
 [rime-moqi-yinxing]
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"

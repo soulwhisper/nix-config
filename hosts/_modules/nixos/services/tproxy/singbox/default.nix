@@ -7,7 +7,7 @@
   cfg = config.modules.services.tproxy;
 in {
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [1080 9090 11000];
+    networking.firewall.allowedTCPPorts = [1080 9201 11000];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/singbox 0755 appuser appuser - -"
@@ -29,13 +29,19 @@ in {
         StartLimitIntervalSec = 0;
       };
       serviceConfig = {
-        ExecStart = "${pkgs.singbox-custom}/bin/sing-box -D /var/lib/singbox";
+        ExecStart = "${pkgs.singbox-custom}/bin/sing-box run -D /var/lib/singbox";
         RuntimeDirectory = "singbox";
         StateDirectory = "singbox";
         User = "appuser";
         Group = "appuser";
         Restart = "always";
         RestartSec = 5;
+        # tun configs
+        AmbientCapabilities = ["CAP_NET_ADMIN"];
+        CapabilityBoundingSet = ["CAP_NET_ADMIN"];
+        PrivateDevices = false;
+        PrivateUsers = false;
+        RestrictAddressFamilies = "AF_INET AF_INET6 AF_NETLINK";
       };
     };
   };
