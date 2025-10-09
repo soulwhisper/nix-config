@@ -3,6 +3,7 @@
     ./adguard
     ./caddy
     ./chrony
+    ./dae
     ./easytier
     ./forgejo
     ./garage
@@ -22,7 +23,6 @@
     ./sftpgo
     ./smartd
     ./talos-api
-    ./tproxy
     ./unifi-controller
     ./versitygw
     ./zotregistry

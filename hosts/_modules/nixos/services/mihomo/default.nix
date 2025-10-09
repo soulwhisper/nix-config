@@ -8,7 +8,7 @@
 in {
   options.modules.services.mihomo = {
     enable = lib.mkEnableOption "mihomo";
-    subscriptionFile = lib.mkOption {
+    subscription = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
       description = "The Shadowsocks links for the mihomo subscription.";
@@ -55,7 +55,7 @@ in {
         RestartSec = 5;
         # env injection not supported, this file serve as a reminder
         EnvironmentFile = [
-          "${cfg.subscriptionFile}"
+          "${cfg.subscription}"
         ];
         # tun configs
         AmbientCapabilities = ["CAP_NET_ADMIN"];

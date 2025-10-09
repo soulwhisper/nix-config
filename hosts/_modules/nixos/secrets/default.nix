@@ -18,7 +18,6 @@
 
       # :: secrets
       secrets = {
-        # nixos
         "networking/easytier/auth" = {
           owner = config.users.users.appuser.name;
           restartUnits = ["easytier.service"];
@@ -26,7 +25,7 @@
         };
         "networking/proxy/subscription" = {
           owner = config.users.users.appuser.name;
-          restartUnits = ["mihomo.service"];
+          restartUnits = ["dae.service"];
           sopsFile = ./nixos.sops.yaml;
         };
         "users/soulwhisper/password" = {

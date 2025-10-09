@@ -7,7 +7,7 @@
   cfg = config.modules.services.tproxy;
 in {
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [1080 9201 11000];
+    networking.firewall.allowedTCPPorts = [1080 7890 9201 11000];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/singbox 0755 appuser appuser - -"

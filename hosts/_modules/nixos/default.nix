@@ -72,8 +72,9 @@
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
       # mihomo.enable = true;
-      # mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
-      tproxy.enable = true;
+      # mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
+      dae.enable = true;
+      dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;
       openssh.enable = true;
     };

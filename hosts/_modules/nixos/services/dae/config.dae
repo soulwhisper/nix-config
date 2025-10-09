@@ -1,19 +1,21 @@
 global {
     wan_interface: auto
-    # lan_interface: enp6s19 # remove comment if use as tproxy
+    tproxy_port: 7890
+    tproxy_port_protect: true
+    so_mark_from_dae: 1000
     log_level: trace
     dial_mode: domain
     auto_config_kernel_parameter: true
-    # fallback_resolver: '8.8.8.8:53'
+    tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
+    udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
+    check_tolerance: 50ms
 }
 
 subscription {
-    # use ss provider link for compatibility
-    default: 'file://subscription_1.sub'
+    default: 'file://subscription.sub'
 }
 
 dns {
-    ipversion_prefer: 4
     upstream {
         googledns: 'tcp+udp://dns.google:53'
         alidns: 'udp://dns.alidns.com:53'
@@ -22,8 +24,7 @@ dns {
     routing {
         request {
             qname(suffix:homelab.internal) -> internal
-            qname(suffix:noirprime.com) -> internal
-            qtype(https) -> reject
+            qname(geosite:cn) -> alidns
             fallback: googledns
         }
         response {
@@ -51,27 +52,24 @@ routing {
     pname(caddy) -> must_direct
     pname(easytier-core) -> must_direct
     pname(lego) -> must_direct
-    pname(mihomo) -> must_direct
+    # pname(mihomo) -> must_direct
 
     pname(NetworkManager) -> direct
     dip(224.0.0.0/3, 'ff00::/8') -> direct
+    dscp(0x4) -> direct
     dip(geoip:private) -> direct
 
-    l4proto(udp) && dport(443) -> block
-    dscp(0x4) -> direct
+    # l4proto(udp) && dport(443) -> block
+
+    domain(geosite:apple@cn) -> direct
+    domain(geosite:steam@cn) -> direct
+    domain(geosite:tencent) -> direct
 
     dip(geoip:cn) -> direct
     domain(geosite:cn) -> direct
     domain(geosite:category-scholar-cn) -> direct
     domain(geosite:geolocation-cn) -> direct
     domain(geosite:private) -> direct
-
-    domain(full:mirrors.tuna.tsinghua.edu.cn) -> direct
-    domain(suffix:cachix.org) -> direct
-    domain(suffix:nixos.org) -> direct
-    domain(suffix:icloud.com) -> direct
-    domain(suffix:icloud-content.com) -> direct
-    domain(suffix:cdn-apple.com) -> direct
 
     fallback: proxy
 }
