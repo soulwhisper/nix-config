@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "9c67910271b148b3b63db17cb8209045d614d61b";
+    version = "bdba49c5e863ca89e96b4d8e8865355ab5babef9";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "9c67910271b148b3b63db17cb8209045d614d61b";
+      rev = "bdba49c5e863ca89e96b4d8e8865355ab5babef9";
       fetchSubmodules = false;
-      sha256 = "sha256-sExIkZ1x54nDFmgOWfMhXoMIbHF5hsD5YsSi3VZXSNA=";
+      sha256 = "sha256-ttCRzcjE7sBfFypjPW7D99x9Y27HilMwFn7/myGRvvw=";
     };
-    date = "2025-10-05";
+    date = "2025-10-09";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -72,14 +72,15 @@
   };
   mosdns-custom = {
     pname = "mosdns-custom";
-    version = "v5.3.4.1";
+    version = "ab137f2b42142610ece97dd73610458794f15aa1";
     src = fetchFromGitHub {
       owner = "yyysuo";
       repo = "mosdns";
-      rev = "v5.3.4.1";
+      rev = "ab137f2b42142610ece97dd73610458794f15aa1";
       fetchSubmodules = false;
-      sha256 = "sha256-yfjyA2eOrqMSvJXrNHbJCiR8WH/4VqksYhSpPMJ1uvw=";
+      sha256 = "sha256-RTQQ2aCbTQihUYiiSD267IpKDTjJ/Iyiu9seoKNr0bI=";
     };
+    date = "2025-09-12";
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
