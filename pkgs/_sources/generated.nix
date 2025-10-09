@@ -24,6 +24,18 @@
     };
     date = "2025-09-23";
   };
+  geo-custom = {
+    pname = "geo-custom";
+    version = "9a35cb3c36423f9c64fa9e18c1ad8625f1d24ed7";
+    src = fetchFromGitHub {
+      owner = "soulwhisper";
+      repo = "geo";
+      rev = "9a35cb3c36423f9c64fa9e18c1ad8625f1d24ed7";
+      fetchSubmodules = false;
+      sha256 = "sha256-Ngona9DWv+qqkAjjfcJUwbn52b/+Kw3XoKmgtMn2laU=";
+    };
+    date = "2025-10-09";
+  };
   hass-sgcc = {
     pname = "hass-sgcc";
     version = "v1.6.8";
@@ -69,18 +81,6 @@
       sha256 = "sha256-tdrYr5AFsc1PFM/1iSLyL/gDTTs5nrslgJ/FSLAm7+Q=";
     };
     date = "2025-08-02";
-  };
-  singbox-custom = {
-    pname = "singbox-custom";
-    version = "0fa61eea4aa1d416555f9e70b85dc3be49043674";
-    src = fetchFromGitHub {
-      owner = "CHIZI-0618";
-      repo = "sing-box";
-      rev = "0fa61eea4aa1d416555f9e70b85dc3be49043674";
-      fetchSubmodules = false;
-      sha256 = "sha256-yKO/07rkGRA/oCU15fxRVtih32wkf5isNZSiPv/09Fs=";
-    };
-    date = "2025-10-07";
   };
   talos-api = {
     pname = "talos-api";
