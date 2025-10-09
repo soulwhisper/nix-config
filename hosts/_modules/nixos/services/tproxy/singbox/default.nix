@@ -15,7 +15,7 @@ in {
       "C+ /var/lib/singbox/ui 0755 appuser appuser - ${pkgs.zashboard}"
       "C+ /var/lib/singbox/geoip 0755 appuser appuser - ${pkgs.geo-custom}/singbox/geoip"
       "C+ /var/lib/singbox/geosite 0755 appuser appuser - ${pkgs.geo-custom}/singbox/geosite"
-      "C /var/lib/singbox/config.json 0644 appuser appuser - ${pkgs.geo-custom}/singbox/config.exmaple.json"
+      "C /var/lib/singbox/config.json 0644 appuser appuser - ${pkgs.geo-custom}/singbox/config.example.json"
       "f /var/lib/singbox/cache.db 0644 appuser appuser - -"
       "f /var/lib/singbox/providers/sub.txt 0644 appuser appuser - -"
     ];

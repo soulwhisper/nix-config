@@ -15,7 +15,7 @@ in {
       "d /var/lib/mosdns/gen 0755 appuser appuser - -"
       "C+ /var/lib/mosdns/rule 0755 appuser appuser - ${pkgs.geo-custom}/mosdns/rule"
       "C+ /var/lib/mosdns/unpack 0755 appuser appuser - ${pkgs.geo-custom}/mosdns/unpack"
-      "C /var/lib/mosdns/config.yaml 0644 appuser appuser - ${pkgs.geo-custom}/mosdns/config.exmaple.yaml"
+      "C /var/lib/mosdns/config.yaml 0644 appuser appuser - ${pkgs.geo-custom}/mosdns/config.example.yaml"
       "d /var/lib/mosdns/cache_all.dump 0644 appuser appuser - -"
       "d /var/lib/mosdns/cache_direct.dump 0644 appuser appuser - -"
       "d /var/lib/mosdns/cache_proxy.dump 0644 appuser appuser - -"
