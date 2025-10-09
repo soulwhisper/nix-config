@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-10-05",
+        "date": "2025-10-09",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "9c67910271b148b3b63db17cb8209045d614d61b",
-            "sha256": "sha256-sExIkZ1x54nDFmgOWfMhXoMIbHF5hsD5YsSi3VZXSNA=",
+            "rev": "140eaade51a081358a1ab30151809437169af67d",
+            "sha256": "sha256-y6MJrMgKAgq2dfpWB/NWmGNZMgfKufpqVYJqOPOw414=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "9c67910271b148b3b63db17cb8209045d614d61b"
+        "version": "140eaade51a081358a1ab30151809437169af67d"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -127,7 +127,7 @@
     },
     "mosdns-custom": {
         "cargoLocks": null,
-        "date": null,
+        "date": "2025-09-12",
         "extract": null,
         "name": "mosdns-custom",
         "passthru": null,
@@ -139,12 +139,12 @@
             "name": null,
             "owner": "yyysuo",
             "repo": "mosdns",
-            "rev": "v5.3.4.1",
-            "sha256": "sha256-yfjyA2eOrqMSvJXrNHbJCiR8WH/4VqksYhSpPMJ1uvw=",
+            "rev": "ab137f2b42142610ece97dd73610458794f15aa1",
+            "sha256": "sha256-RTQQ2aCbTQihUYiiSD267IpKDTjJ/Iyiu9seoKNr0bI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v5.3.4.1"
+        "version": "ab137f2b42142610ece97dd73610458794f15aa1"
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
