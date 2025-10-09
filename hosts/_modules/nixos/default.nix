@@ -23,6 +23,15 @@
       freefilesync
     ];
 
+    # : networking
+    systemd.network.enable = true;
+    networking = {
+      firewall.enable = true;
+      nftables.enable = true;
+      useNetworkd = false;
+      useDHCP = false;
+    };
+
     # : increase open file limit for sudoers
     security.pam.loginLimits = [
       {
@@ -48,9 +57,6 @@
       "net.core.rmem_max" = 7500000;
       "net.core.wmem_max" = 7500000;
       "net.ipv4.ip_local_port_range" = "60000 65000";
-      # enable IPv4 and IPv6 forwarding on all interfaces
-      "net.ipv4.conf.all.forwarding" = true;
-      "net.ipv6.conf.all.forwarding" = true;
     };
 
     # : systemd-boot EFI boot loader.
@@ -65,8 +71,10 @@
       chrony.enable = true;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
-      mihomo.enable = true;
-      mihomo.subscriptionFile = config.sops.secrets."networking/proxy/subscription".path;
+      # mihomo.enable = true;
+      # mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
+      dae.enable = true;
+      dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;
       openssh.enable = true;
     };

@@ -5,7 +5,7 @@
         "extract": null,
         "name": "caddy-core",
         "passthru": null,
-        "pinned": true,
+        "pinned": false,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
@@ -13,20 +13,20 @@
             "name": null,
             "owner": "caddyserver",
             "repo": "caddy",
-            "rev": "v2.10.0",
-            "sha256": "sha256-hzDd2BNTZzjwqhc/STbSAHnNlP7g1cFuMehqU1LumQE=",
+            "rev": "v2.10.2",
+            "sha256": "sha256-KvikafRYPFZ0xCXqDdji1rxlkThEDEOHycK8GP5e8vk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.10.0"
+        "version": "v2.10.2"
     },
     "caddy-plugin-cloudflare": {
         "cargoLocks": null,
-        "date": "2025-05-06",
+        "date": "2025-09-23",
         "extract": null,
         "name": "caddy-plugin-cloudflare",
         "passthru": null,
-        "pinned": true,
+        "pinned": false,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
@@ -34,12 +34,33 @@
             "name": null,
             "owner": "caddy-dns",
             "repo": "cloudflare",
-            "rev": "35fb8474f57d7476329f75d63eebafb95a93022f",
-            "sha256": "sha256-6Od+Ho2Tpn8dsm6fH5SxrGBND9Hfly2uZkTltgXzPE8=",
+            "rev": "a14840b68f2669721e7a0c24d37903b0eb0083f3",
+            "sha256": "sha256-TNUMn69eglmyA5NTt1J3ohofIdiIbuNHYs/IpNUEnAE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "35fb8474f57d7476329f75d63eebafb95a93022f"
+        "version": "a14840b68f2669721e7a0c24d37903b0eb0083f3"
+    },
+    "geo-custom": {
+        "cargoLocks": null,
+        "date": "2025-10-09",
+        "extract": null,
+        "name": "geo-custom",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "soulwhisper",
+            "repo": "geo",
+            "rev": "9a35cb3c36423f9c64fa9e18c1ad8625f1d24ed7",
+            "sha256": "sha256-Ngona9DWv+qqkAjjfcJUwbn52b/+Kw3XoKmgtMn2laU=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "9a35cb3c36423f9c64fa9e18c1ad8625f1d24ed7"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -190,7 +211,7 @@
     },
     "zotregistry-ui": {
         "cargoLocks": null,
-        "date": "2025-07-01",
+        "date": "2025-09-29",
         "extract": null,
         "name": "zotregistry-ui",
         "passthru": null,
@@ -202,11 +223,11 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zui",
-            "rev": "d25abda17df8ac4e38211b09d5336012ad42b870",
-            "sha256": "sha256-Ikn2Yh/v05lzVkEDtnj3oRowVZ/GhyuSZwfZ8O837sM=",
+            "rev": "731b63943eedb1845ca53741384b5e2a44249959",
+            "sha256": "sha256-/5TD1P8uMMZdlBP2HI9qtTQOT77JhaQhKI9KrE/9QHQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "d25abda17df8ac4e38211b09d5336012ad42b870"
+        "version": "731b63943eedb1845ca53741384b5e2a44249959"
     }
 }

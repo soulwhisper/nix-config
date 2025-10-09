@@ -8,7 +8,7 @@
 in {
   options.modules.services.dae = {
     enable = lib.mkEnableOption "dae";
-    subscriptionFile = lib.mkOption {
+    subscription = lib.mkOption {
       type = lib.types.str;
       default = null;
       description = "The Shadowsocks links for the dae subscription.";
@@ -17,13 +17,17 @@ in {
 
   config = lib.mkIf cfg.enable {
     # : review, https://global.v2ex.co/t/1104684
-    networking.firewall.allowedTCPPorts = [1080];
+    # :: conflict with mihomo/singbox
+    networking.firewall.allowedTCPPorts = [1080 7890];
 
     environment.systemPackages = [pkgs.unstable.dae];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/dae 0755 root root - -"
       "C /var/lib/dae/config.dae 0600 root root - ${./config.dae}"
+      "d /usr/local/share/dae 0755 root root - -"
+      "L+ /usr/local/share/dae/geoip.dat - - - - ${pkgs.geo-custom}/dae/geoip.dat"
+      "L+ /usr/local/share/dae/geosite.dat - - - - ${pkgs.geo-custom}/dae/geosite.dat"
     ];
 
     services.tinyproxy = {
@@ -36,9 +40,8 @@ in {
 
     systemd.services.dae = {
       description = "Dae Service";
-      documentation = ["https://github.com/daeuniverse/dae"];
       wants = ["network-online.target"];
-      after = ["network-online.target" "systemd-sysctl.service" "dbus.service"];
+      after = ["network-online.target"];
       wantedBy = ["multi-user.target"];
       unitConfig = {
         StartLimitIntervalSec = 0;
@@ -68,8 +71,8 @@ in {
       after = ["network-online.target"];
       path = [pkgs.unstable.dae pkgs.gawk pkgs.curl pkgs.systemd];
       preStart = ''
-        if [ -n "${cfg.subscriptionFile}" ] && [ -f "${cfg.subscriptionFile}" ]; then
-          cat ${cfg.subscriptionFile} | awk -F= '{print $2}' > /var/lib/dae/sublist
+        if [ -n "${cfg.subscription}" ] && [ -f "${cfg.subscription}" ]; then
+          cat ${cfg.subscription} | awk -F= '{print $2}' > /var/lib/dae/sublist
         else
           echo "CHANGEME" > /var/lib/dae/sublist
         fi
@@ -97,29 +100,7 @@ in {
           line_number=$((line_number + 1))
         done < sublist.tmp
         rm -f sublist.tmp
-        if curl --retry 3 --retry-delay 5 -fL "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat" -o "geoip.dat.new"; then
-          mv "geoip.dat.new" "geoip.dat"
-          chmod 0600 "geoip.dat"
-          echo "Downloaded latest geoip.dat."
-        else
-          rm -f "geoip.dat.new"
-          echo "Failed to download latest geoip.dat."
-        fi
-        if curl --retry 3 --retry-delay 5 -fL "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat" -o "geosite.dat.new"; then
-          mv "geosite.dat.new" "geosite.dat"
-          chmod 0600 "geosite.dat"
-          echo "Downloaded latest geosite.dat."
-        else
-          rm -f "geosite.dat.new"
-          echo "Failed to download latest geosite.dat."
-        fi
         dae reload
-        if [ $? -ne 0 ]; then
-          echo "Reload failed, restarting dae..."
-          systemctl restart dae
-        else
-          echo "Reload succeeded."
-        fi
       '';
     };
   };

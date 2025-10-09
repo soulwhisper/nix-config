@@ -31,10 +31,10 @@
         # :: productivity
         "audacity"
         "squirrel-app"
+        "unity"
         "wireshark-app"
 
         # :: test
-        "nikitabobko/tap/aerospace"
         "bluestacks"
         "maa"
         "stats"
