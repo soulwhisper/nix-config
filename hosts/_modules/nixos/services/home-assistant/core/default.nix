@@ -5,29 +5,20 @@
   ...
 }: let
   cfg = config.modules.services.home-assistant;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.home-assistant = {
     enable = lib.mkEnableOption "home-assistant";
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "hass.noirprime.com";
-    };
   };
+
+  # not using domain
 
   config = lib.mkIf cfg.enable {
     # 1900,40000 for upnp
     networking.firewall.allowedTCPPorts = [
       40000
-      (lib.mkIf (!reverseProxyCaddy.enable) 8123)
+      8123
     ];
     networking.firewall.allowedUDPPorts = [1900];
-
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-        reverse_proxy localhost:8123
-      }
-    '';
 
     systemd.tmpfiles.rules = [
       "d /var/lib/hass 0755 appuser appuser - -"

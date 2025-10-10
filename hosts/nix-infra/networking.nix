@@ -6,14 +6,9 @@
   config = {
     networking = {
       hostName = hostname;
-      firewall.enable = true;
-      nftables.enable = true;
       nameservers = lib.mkForce ["127.0.0.1"]; # local-dns
-      useNetworkd = false; # experimental
-      useDHCP = false; # cause conflict
     };
 
-    systemd.network.enable = true;
     systemd.network.networks."10-lan" = {
       matchConfig.Name = "enp6s18";
       address = [

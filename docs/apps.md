@@ -24,6 +24,7 @@
 
 - [rime-shuangpin-fuzhuma](https://github.com/gaboolic/rime-shuangpin-fuzhuma), primary;
 - based on `linux:fcitx5-rime, macos:squirrel-app`;
+- when input shows, `Ctrl + ~` to controlPanel;
 
 ## Ports
 
@@ -40,6 +41,7 @@ versitygw: 7070
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
+easytier: 11010
 fvtt: 30000
 wireguard: 51820
 avahi: 60000-65000
@@ -47,8 +49,7 @@ avahi: 60000-65000
 # remap
 ## dns-stack
 adguard: 53
-bind9: 5300
-powerdns: 5301
+mosdns: 5300
 
 ## storage, 9000-9099
 minio: 9000,9001
@@ -64,7 +65,7 @@ zrepl-exporter: 9105
 
 ## system, 9200-9299
 adguard-ui: 9200
-mihomo-ui: 9201
+proxy-ui: 9201
 sftpgo-ui: 9202
 meshcentral: 9203
 
@@ -87,5 +88,8 @@ moviepilot: 9804,9805
 emby: 9806
 qbittorrent: 9807,65000
 crafty: 9808,25500-25600
+
+# special
+singbox-ss: 11000
 
 ```

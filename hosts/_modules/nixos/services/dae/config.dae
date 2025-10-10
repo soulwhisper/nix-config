@@ -1,19 +1,27 @@
 global {
-    wan_interface: auto
-    # lan_interface: enp6s19 # remove comment if use as tproxy
+    tproxy_port: 7890
+    tproxy_port_protect: true
+    so_mark_from_dae: 0
     log_level: trace
-    dial_mode: domain
+    wan_interface: auto
     auto_config_kernel_parameter: true
-    # fallback_resolver: '8.8.8.8:53'
+    tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
+    udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
+    check_interval: 30s
+    check_tolerance: 50ms
+    dial_mode: domain
+    sniffing_timeout: 100ms
+    tls_implementation: utls
+    utls_imitate: chrome_auto
 }
 
 subscription {
-    # use ss provider link for compatibility
-    default: 'file://subscription_1.sub'
+    default: 'file://default.sub'
 }
 
+# ! mosdns is not needed for dae
+
 dns {
-    ipversion_prefer: 4
     upstream {
         googledns: 'tcp+udp://dns.google:53'
         alidns: 'udp://dns.alidns.com:53'
@@ -23,7 +31,7 @@ dns {
         request {
             qname(suffix:homelab.internal) -> internal
             qname(suffix:noirprime.com) -> internal
-            qtype(https) -> reject
+            qname(geosite:cn) -> alidns
             fallback: googledns
         }
         response {
@@ -38,40 +46,31 @@ dns {
 group {
     proxy {
         filter: name(keyword: 'Hong Kong')
-        filter: name(keyword: 'Singapore')
-        filter: name(keyword: 'USA')
-        filter: name(keyword: 'Taiwan')
         filter: name(keyword: 'Japan')
+        filter: name(keyword: 'Singapore')
+        filter: name(keyword: 'Taiwan')
+        filter: name(keyword: 'USA')
         policy: min_moving_avg
     }
 }
 
 routing {
-    pname(AdGuardHome) -> must_direct
-    pname(caddy) -> must_direct
-    pname(easytier-core) -> must_direct
-    pname(lego) -> must_direct
-    pname(mihomo) -> must_direct
+    pname(AdGuardHome) -> direct(must)
+    pname(caddy) -> direct(must)
+    pname(easytier-core) -> direct(must)
+    pname(lego) -> direct(must)
+    dip(geoip:private) -> direct(must)
+    domain(geosite:private) -> direct(must)
 
     pname(NetworkManager) -> direct
     dip(224.0.0.0/3, 'ff00::/8') -> direct
-    dip(geoip:private) -> direct
-
-    l4proto(udp) && dport(443) -> block
     dscp(0x4) -> direct
+
+    # l4proto(udp) && dport(443) -> block
 
     dip(geoip:cn) -> direct
     domain(geosite:cn) -> direct
-    domain(geosite:category-scholar-cn) -> direct
     domain(geosite:geolocation-cn) -> direct
-    domain(geosite:private) -> direct
-
-    domain(full:mirrors.tuna.tsinghua.edu.cn) -> direct
-    domain(suffix:cachix.org) -> direct
-    domain(suffix:nixos.org) -> direct
-    domain(suffix:icloud.com) -> direct
-    domain(suffix:icloud-content.com) -> direct
-    domain(suffix:cdn-apple.com) -> direct
 
     fallback: proxy
 }

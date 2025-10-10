@@ -29,6 +29,8 @@ dns:
     - tls://223.6.6.6
     - quic://223.5.5.5
     - quic://223.6.6.6
+    - https://v.recipes/dns-query
+    - https://v.recipes/dns-ecs
     # - "[/homelab.internal/noirprime.com/]127.0.0.1:5300 127.0.0.1:5301"
     # - "[/opn.noirprime.com/]#"
   upstream_dns_file: ""

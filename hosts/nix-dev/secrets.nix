@@ -7,7 +7,10 @@
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
       secrets = {
-        # placeholder
+        "networking/proxy/subscription" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["dae.service"];
+        };
       };
     };
   };

@@ -4,6 +4,7 @@
       any-nix-shell
       btop # replace glances
       doggo
+      fast-cli # speedtest
       gum
       httpie
       jq

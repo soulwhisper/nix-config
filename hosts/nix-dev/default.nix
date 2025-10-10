@@ -23,6 +23,9 @@
       hardware.nvidia.enable = true; # llm support
 
       services = {
+        dae.enable = true;
+        dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
+
         # : System
         smartd.enable = true;
 

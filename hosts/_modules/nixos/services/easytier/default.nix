@@ -52,7 +52,7 @@
     peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.public_nodes);
     proxy_network = map (proxy_network: {cidr = proxy_network;}) cfg.proxy_networks;
     flags = {
-      enable_quic_proxy = true;
+      enable_kcp_proxy = true;
       latency_first = true;
       private_mode = true;
     };

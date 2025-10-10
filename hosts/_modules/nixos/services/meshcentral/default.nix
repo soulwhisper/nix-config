@@ -5,27 +5,18 @@
   ...
 }: let
   cfg = config.modules.services.meshcentral;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.meshcentral = {
     enable = lib.mkEnableOption "meshcentral";
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "mesh.noirprime.com";
-    };
   };
+
+  # not use domain
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [
       4433
-      (lib.mkIf (!reverseProxyCaddy.enable) 9203)
+      9203
     ];
-
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-        reverse_proxy localhost:9203
-      }
-    '';
 
     # nix package is outdated, use container instead
 

@@ -6,6 +6,7 @@
   ...
 }: {
   caddy-custom = pkgs.callPackage ./caddy-custom {};
+  geo-custom = pkgs.callPackage ./geo-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-browse-pvc = pkgs.callPackage ./kubectl-browse-pvc {};

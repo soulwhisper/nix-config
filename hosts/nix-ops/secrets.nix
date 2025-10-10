@@ -19,6 +19,10 @@
           owner = config.users.users.caddy.name;
           restartUnits = ["caddy.service"];
         };
+        "networking/proxy/subscription" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["mihomo.service"];
+        };
       };
     };
   };

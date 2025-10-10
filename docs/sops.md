@@ -51,7 +51,8 @@ networking:
       CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
   proxy:
     subscription: |
-      SUBSCRIPTION={sub-url}
+      name1:url1
+      name2:url2
   easytier:
     auth: |
       [network_identity]

@@ -20,9 +20,8 @@
     modules = {
       filesystems.xfs.enable = true;
       services = {
-        adguard.enable = true;
-        caddy.enable = true;
-        caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
+        dae.enable = true;
+        dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
         # : System
@@ -30,16 +29,15 @@
         nut.enable = true;
 
         # : K8S Prod
-        meshcentral.enable = true; # sub=mesh
-        talos.api.enable = true;
+        meshcentral.enable = true; # ep=:9203
+        talos.api.enable = true; # ep=:9300
         versitygw.enable = true; # ep=:7070
         versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
 
         # : LAB
-        home-assistant.enable = true; # sub=hass
-        kms.enable = true;
-        netbox.enable = true; # sub=box
-        unifi-controller.enable = true; # sub=unifi
+        home-assistant.enable = true; # ep=:8123
+        kms.enable = true; # ep=:1688
+        unifi-controller.enable = true; # ep=:8443
 
         # : Others
         nfs4 = {

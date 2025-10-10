@@ -3,6 +3,7 @@
     ./adguard
     ./caddy
     ./chrony
+    ./dae
     ./easytier
     ./forgejo
     ./garage

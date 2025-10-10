@@ -55,14 +55,14 @@ in {
     # : Aerospace for MacOS
     # :: MacOS package installed via homebrew
     xdg.configFile."${config.xdg.configHome}/aerospace/aerospace.toml" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      enable = true;
+      enable = false;
       source = ./aerospace.toml;
     };
 
     # : Karabiner for MacOS
     # :: Switch Input Method => HyperCaps - Space
     xdg.configFile."${config.xdg.configHome}/karabiner/karabiner.json" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      enable = true;
+      enable = false;
       source = ./karabiner.json;
     };
   };
