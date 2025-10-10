@@ -1,19 +1,20 @@
 {pkgs, ...}: {
   config = {
-    home.packages = with pkgs; [
-      any-nix-shell
-      btop # replace glances
-      doggo
-      gum
-      httpie
-      jq
-      wget
-      yq-go
-      viddy
-    ]
-    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-      fast-cli # speedtest
-    ];
+    home.packages = with pkgs;
+      [
+        any-nix-shell
+        btop # replace glances
+        doggo
+        gum
+        httpie
+        jq
+        wget
+        yq-go
+        viddy
+      ]
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        fast-cli # speedtest
+      ];
 
     # bat
     programs.bat = {
