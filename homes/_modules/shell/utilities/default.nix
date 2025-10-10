@@ -4,13 +4,15 @@
       any-nix-shell
       btop # replace glances
       doggo
-      fast-cli # speedtest
       gum
       httpie
       jq
       wget
       yq-go
       viddy
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+      fast-cli # speedtest
     ];
 
     # bat

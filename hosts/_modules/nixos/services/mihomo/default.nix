@@ -69,7 +69,3 @@ in {
     };
   };
 }
-
-grep -v '^#' "/run/secrets/networking/proxy/subscription" | grep -v '^$' | head -1 | cut -d':' -f2-
-
-envsubst '$SUBSCRIPTION' < "$CONFIG_FILE" > "$TEMP_FILE"
