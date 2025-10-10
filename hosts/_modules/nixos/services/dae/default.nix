@@ -77,20 +77,19 @@ in {
         cd /var/lib/dae
         version="$(dae --version | head -n 1 | sed 's/dae version //')"
         UA="dae/$version (like v2rayA/1.0 WebRequestHelper) (like v2rayN/1.0 WebRequestHelper)"
-        line=1
-        while read -r url
+        while IFS=':' read -r name url
         do
-          file_name="subscription_$line.sub"
-          if curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "$file_name.new"; then
-            mv "$file_name.new" "$file_name"
-            chmod 0600 "$file_name"
-            echo "Downloaded $file_name from $url"
+          curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "${name}.sub.new"
+          if [[ $? -eq 0 ]]; then
+            mv "${name}.sub.new" "${name}.sub"
+            chmod 0600 "${name}.sub"
+            echo "Downloaded ${name}"
           else
-            rm -f "$file_name.new"
-            echo "Failed to download $file_name from $url"
+            rm -f "${name}.sub"
+            echo "Failed to download ${name}"
           fi
-          line=$((line + 1))
         done < sublist
+        dae reload
       '';
     };
   };
