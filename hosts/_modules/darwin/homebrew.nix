@@ -54,8 +54,10 @@ _: {
 
       # :: productivity
       "alfred" # powerpack still overshine Tahoe and raycast
+      "anki"
       "discord"
       "obsidian"
+      "raindropio"
       "telegram"
       "thunderbird"
       "ticktick"

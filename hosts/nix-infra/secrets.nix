@@ -15,10 +15,6 @@
           owner = config.users.users.appuser.name;
           restartUnits = ["versitygw.service"];
         };
-        "networking/cloudflare/auth" = {
-          owner = config.users.users.caddy.name;
-          restartUnits = ["caddy.service"];
-        };
         "networking/proxy/subscription" = {
           owner = config.users.users.appuser.name;
           restartUnits = ["dae.service"];
