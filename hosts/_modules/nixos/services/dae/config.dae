@@ -12,8 +12,7 @@ global {
 }
 
 subscription {
-    # use ss provider link for compatibility
-    default: 'file://subscription_1.sub'
+    default: 'file://default.sub'
 }
 
 dns {

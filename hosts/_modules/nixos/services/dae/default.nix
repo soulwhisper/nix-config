@@ -79,14 +79,14 @@ in {
         UA="dae/$version (like v2rayA/1.0 WebRequestHelper) (like v2rayN/1.0 WebRequestHelper)"
         while IFS=':' read -r name url
         do
-          curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "${name}.sub.new"
+          curl --retry 3 --retry-delay 5 -fL -A "$UA" "$url" -o "$name.sub.new"
           if [[ $? -eq 0 ]]; then
-            mv "${name}.sub.new" "${name}.sub"
-            chmod 0600 "${name}.sub"
-            echo "Downloaded ${name}"
+            mv "$name.sub.new" "$name.sub"
+            chmod 0600 "$name.sub"
+            echo "Downloaded $name"
           else
-            rm -f "${name}.sub"
-            echo "Failed to download ${name}"
+            rm -f "$name.sub"
+            echo "Failed to download $name"
           fi
         done < sublist
         dae reload
