@@ -14,12 +14,12 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs;
       [
+        awscli2
         grype
         minijinja
         nixd
         nixfmt-rfc-style
         unstable.just
-        unstable.awscli2
       ]
       ++ lib.optionals cfg.vmware.enable [
         unstable.govc
