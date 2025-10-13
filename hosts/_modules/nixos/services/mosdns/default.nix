@@ -10,6 +10,7 @@ in {
     enable = lib.mkEnableOption "mosdns";
   };
   # mosdns should work with singbox
+  # to clean generated learner list, first stop mosdns, then delete files, finally start mosdns
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [5300];
