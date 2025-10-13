@@ -8,5 +8,7 @@
   "hass-sgcc": "",
   "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
   "rime-moqi-yinxing": "",
-  "geo-custom": ""
+  "geo-custom": "",
+  "mosdns-custom": "sha256-lgA0ojf/rGq/pwTojLb+I8y/FPOhFJTVlQFhcuEHLGY=",
+  "singbox-custom": "sha256-MBaxyfEWShRB1w79SMNMLz2WOR4fBbIpfufctMQRF9Q="
 }

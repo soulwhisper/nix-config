@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "e3b9155bf221b4773fa711ef420568f21f9a13f1";
+    version = "f1a20fcee836a22562b5c51fefff1c33ce38bb71";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "e3b9155bf221b4773fa711ef420568f21f9a13f1";
+      rev = "f1a20fcee836a22562b5c51fefff1c33ce38bb71";
       fetchSubmodules = false;
-      sha256 = "sha256-SSMPHSu8ubes3Sl+2IugSJZlCYipPL7d1LRYGW+DDsg=";
+      sha256 = "sha256-B2BarhysVk/zdH7bnqH3uw4DuAlSXkoy2gUleiaP3UM=";
     };
-    date = "2025-10-12";
+    date = "2025-10-13";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -70,6 +70,18 @@
       sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
     };
   };
+  mosdns-custom = {
+    pname = "mosdns-custom";
+    version = "ab137f2b42142610ece97dd73610458794f15aa1";
+    src = fetchFromGitHub {
+      owner = "yyysuo";
+      repo = "mosdns";
+      rev = "ab137f2b42142610ece97dd73610458794f15aa1";
+      fetchSubmodules = false;
+      sha256 = "sha256-RTQQ2aCbTQihUYiiSD267IpKDTjJ/Iyiu9seoKNr0bI=";
+    };
+    date = "2025-09-12";
+  };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
     version = "1c4750ec9828361fecdee174dac38d26e20ce667";
@@ -81,6 +93,18 @@
       sha256 = "sha256-tdrYr5AFsc1PFM/1iSLyL/gDTTs5nrslgJ/FSLAm7+Q=";
     };
     date = "2025-08-02";
+  };
+  singbox-custom = {
+    pname = "singbox-custom";
+    version = "8c39c80a701adf407c2292116be53118c4db56d7";
+    src = fetchFromGitHub {
+      owner = "CHIZI-0618";
+      repo = "sing-box";
+      rev = "8c39c80a701adf407c2292116be53118c4db56d7";
+      fetchSubmodules = false;
+      sha256 = "sha256-rGMp95iZ4IYiSvcEKZEoc7gGR6oWCHejxIMv2mDV0l0=";
+    };
+    date = "2025-10-11";
   };
   talos-api = {
     pname = "talos-api";
