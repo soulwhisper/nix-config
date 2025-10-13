@@ -12,6 +12,7 @@
     ./meshcentral
     ./mihomo
     ./monitoring
+    ./mosdns
     ./netbox
     ./nfs4
     ./nut
@@ -21,6 +22,7 @@
     ./restic
     ./samba
     ./sftpgo
+    ./singbox
     ./smartd
     ./talos-api
     ./unifi-controller

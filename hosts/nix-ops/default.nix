@@ -26,11 +26,14 @@
         adguard.enable = true;
         caddy.enable = true;
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
-        mihomo.enable = true;
-        mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
+
+        # : Networking
+        mosdns.enable = true;
+        singbox.enable = true;
+        singbox.subscription = config.sops.secrets."networking/proxy/subscription".path;
         easytier.proxy_networks = ["172.19.80.0/24" "172.19.82.0/24"];
 
-        # : System
+        # : Monitoring
         smartd.enable = false;
         nut.enable = false;
 

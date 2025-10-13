@@ -4,8 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.services.tproxy;
+  cfg = config.modules.services.mosdns;
 in {
+  options.modules.services.mosdns = {
+    enable = lib.mkEnableOption "mosdns";
+  };
+  # mosdns should work with singbox
+
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [5300];
     networking.firewall.allowedUDPPorts = [5300];

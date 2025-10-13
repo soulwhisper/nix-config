@@ -4,10 +4,36 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.services.tproxy;
+  cfg = config.modules.services.singbox;
 in {
+  options.modules.services.singbox = {
+    enable = lib.mkEnableOption "singbox";
+    subscription = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = "The Shadowsocks links for the singbox subscription.";
+    };
+  };
+
   config = lib.mkIf cfg.enable {
+    # singbox conflict with dae/mihomo
     networking.firewall.allowedTCPPorts = [1080 7890 9201 11000];
+
+    boot.kernel.sysctl = {
+      "net.ipv4.conf.all.forwarding" = true;
+      "net.ipv6.conf.all.forwarding" = true;
+    };
+
+    networking.firewall.checkReversePath = "loose";
+    networking.proxy = {
+      httpProxy = "http://127.0.0.1:1080";
+      httpsProxy = "http://127.0.0.1:1080";
+      noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
+    };
+    systemd.services.podman.serviceConfig.Environment = lib.mkIf config.modules.services.podman.enable [
+      "HTTP_PROXY=http://127.0.0.1:1080"
+      "HTTPS_PROXY=http://127.0.0.1:1080"
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/singbox 0755 appuser appuser - -"
@@ -29,6 +55,12 @@ in {
         StartLimitIntervalSec = 0;
       };
       serviceConfig = {
+        ExecStartPre = pkgs.writeShellScript "update-subscription" ''
+          export SUBSCRIPTION=$(grep -v '^#' "${cfg.subscription}" | grep -v '^$' | head -1 | cut -d':' -f2-)
+          ${pkgs.envsubst}/bin/envsubst '$SUBSCRIPTION' < "config.json" > "config.json.new"
+          mv config.json.new config.json
+          chmod 644 config.json
+        '';
         ExecStart = "${pkgs.singbox-custom}/bin/sing-box run -D /var/lib/singbox";
         RuntimeDirectory = "singbox";
         StateDirectory = "singbox";

@@ -1,8 +1,0 @@
-[mosdns-custom]
-fetch.github = "yyysuo/mosdns"
-src.git = "https://github.com/yyysuo/mosdns.git"
-src.branch = "main"
-[singbox-custom]
-fetch.github = "CHIZI-0618/sing-box"
-src.git = "https://github.com/CHIZI-0618/sing-box.git"
-src.branch = "dev-next"

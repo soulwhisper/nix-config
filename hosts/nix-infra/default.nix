@@ -20,11 +20,12 @@
     modules = {
       filesystems.xfs.enable = true;
       services = {
-        dae.enable = true;
-        dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
+        # : Networking
+        mihomo.enable = true;
+        mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
-        # : System
+        # : Monitoring
         smartd.enable = false;
         nut.enable = true;
 

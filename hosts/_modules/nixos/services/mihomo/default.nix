@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # : mihomo TUN conflicts with dae
+    # : mihomo TUN conflicts with dae/singbox
 
     networking.firewall.allowedTCPPorts = [1080 9201];
 
@@ -26,15 +26,14 @@ in {
       httpsProxy = "http://127.0.0.1:1080";
       noProxy = ".noirprime.com,.homelab.internal,localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16";
     };
+    systemd.services.podman.serviceConfig.Environment = lib.mkIf config.modules.services.podman.enable [
+      "HTTP_PROXY=http://127.0.0.1:1080"
+      "HTTPS_PROXY=http://127.0.0.1:1080"
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/mihomo 0755 appuser appuser - -"
       "C /var/lib/mihomo/config.yaml 0644 appuser appuser - ${./config.yaml}"
-    ];
-
-    systemd.services.podman.serviceConfig.Environment = lib.mkIf config.modules.services.podman.enable [
-      "HTTP_PROXY=http://127.0.0.1:1080"
-      "HTTPS_PROXY=http://127.0.0.1:1080"
     ];
 
     systemd.services.mihomo = {

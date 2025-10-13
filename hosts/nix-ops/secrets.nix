@@ -21,7 +21,7 @@
         };
         "networking/proxy/subscription" = {
           owner = config.users.users.appuser.name;
-          restartUnits = ["mihomo.service"];
+          restartUnits = ["singbox.service"];
         };
       };
     };
