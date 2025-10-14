@@ -43,7 +43,7 @@
         # : Others
         nfs4 = {
           enable = true; # all_squash = 2000:2000
-          exports= {
+          exports = {
             media = {
               path = "/var/lib/shared/media";
               subnet = "10.10.0.0/24";
