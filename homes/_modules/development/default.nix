@@ -16,6 +16,7 @@ in {
       [
         awscli2
         grype
+        kopia
         minijinja
         nixd
         nixfmt-rfc-style
