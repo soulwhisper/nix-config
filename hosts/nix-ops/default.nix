@@ -49,9 +49,15 @@
         # : Others
         nfs4 = {
           enable = true; # all_squash = 2000:2000
-          exports.default = {
-            path = "/var/lib/shared";
-            subnet = "172.19.82.0/24";
+          exports= {
+            media = {
+              path = "/var/lib/shared/media";
+              subnet = "172.19.82.0/24";
+            };
+            volsync = {
+              path = "/var/lib/shared/volsync";
+              subnet = "172.19.82.0/24";
+            };
           };
         };
         sftpgo.enable = true;
