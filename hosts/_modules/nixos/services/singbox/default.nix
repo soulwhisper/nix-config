@@ -35,6 +35,7 @@ in {
       "HTTPS_PROXY=http://127.0.0.1:1080"
     ];
 
+    # if using with mosdns, mode should be global
     systemd.tmpfiles.rules = [
       "d /var/lib/singbox 0755 appuser appuser - -"
       "d /var/lib/providers 0755 appuser appuser - -"
