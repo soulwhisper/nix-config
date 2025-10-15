@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "5d4ce2d8951eaf384a43d958478dfc8920970529",
-            "sha256": "sha256-K2h4L3JktV3W1n0DjXy/49hvKlyyqVGlrabAzy4u8Bk=",
+            "rev": "4ed25eee295d88cfaf71c0c9953adbfc468bbb5d",
+            "sha256": "sha256-jtB5EqRnUMsQvglcAyGxI3ZowrDiTjoyNnUhk19Lp4w=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "5d4ce2d8951eaf384a43d958478dfc8920970529"
+        "version": "4ed25eee295d88cfaf71c0c9953adbfc468bbb5d"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -169,7 +169,7 @@
     },
     "singbox-custom": {
         "cargoLocks": null,
-        "date": "2025-10-11",
+        "date": "2025-10-14",
         "extract": null,
         "name": "singbox-custom",
         "passthru": null,
@@ -181,12 +181,12 @@
             "name": null,
             "owner": "CHIZI-0618",
             "repo": "sing-box",
-            "rev": "8c39c80a701adf407c2292116be53118c4db56d7",
-            "sha256": "sha256-rGMp95iZ4IYiSvcEKZEoc7gGR6oWCHejxIMv2mDV0l0=",
+            "rev": "cfc4219052bcb5b5f0536aef60a2ab4e4ad1e7ea",
+            "sha256": "sha256-I+1fPTq4wg9Ixb2Yp5JHcxUbEAFc452ataNWf/0Q3OI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "8c39c80a701adf407c2292116be53118c4db56d7"
+        "version": "cfc4219052bcb5b5f0536aef60a2ab4e4ad1e7ea"
     },
     "talos-api": {
         "cargoLocks": null,
@@ -244,12 +244,12 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zot",
-            "rev": "v2.1.8",
-            "sha256": "sha256-5xSQxrzxk6vJDGP6INdVBppthNlWdNFnStX2yKnT1Dg=",
+            "rev": "v2.1.9",
+            "sha256": "sha256-vGjng9j3eDmHKK6qAV8Vi9Byi5XzuRov2QWzK/9X44M=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.1.8"
+        "version": "v2.1.9"
     },
     "zotregistry-ui": {
         "cargoLocks": null,

@@ -3,7 +3,7 @@
   "talosctl": "sha256-T8lJjJfCLpQIsmCW/FQk/CJstyH6u/gNZ6R+COH909M=",
   "caddy-custom": "sha256-f6+30+MMqzkg+3UDltw3Q9OpJd9g24t1k8IRbAE3GH4=",
   "caddy-plugin-cloudflare": "",
-  "zotregistry": "sha256-3SKUhDn3Z+ekwax0cN+AzyEkMLJTzxegmSA4dE/1ILE=",
+  "zotregistry": "sha256-PlOyAsKCpwGMnKu6gf+1rtbfPCbAYQ1SqFUbSMlbZ8w=",
   "zotregistry-ui": "sha256-ozWCR8t9rk/EjQAZDNOuQMEh8y4GcFgRbLN/SuX5hGI=",
   "hass-sgcc": "",
   "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
