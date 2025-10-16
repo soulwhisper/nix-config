@@ -131,7 +131,7 @@
         "extract": null,
         "name": "mosdns-custom",
         "passthru": null,
-        "pinned": false,
+        "pinned": true,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
@@ -223,12 +223,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.11.2",
-            "sha256": "sha256-r78O/FdsfD29wM6fcbuwYea/b7J60iAdtrw4CEBM/mo=",
+            "rev": "v1.11.3",
+            "sha256": "sha256-6nm0KgENOHUdyJllvnhBNlxDGL3G8gg4KqhTkTRE32o=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.11.2"
+        "version": "v1.11.3"
     },
     "zotregistry": {
         "cargoLocks": null,
