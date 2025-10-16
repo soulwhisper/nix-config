@@ -25,6 +25,7 @@ src.github = "clbx/kubectl-browse-pvc"
 fetch.github = "yyysuo/mosdns"
 src.git = "https://github.com/yyysuo/mosdns.git"
 src.branch = "main"
+pinned = true  # pin golang version
 [rime-moqi-yinxing]
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
