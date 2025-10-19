@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "4ed25eee295d88cfaf71c0c9953adbfc468bbb5d";
+    version = "0b66e3c7eda7c38d2cfd84ec241b9b53702c2085";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "4ed25eee295d88cfaf71c0c9953adbfc468bbb5d";
+      rev = "0b66e3c7eda7c38d2cfd84ec241b9b53702c2085";
       fetchSubmodules = false;
-      sha256 = "sha256-jtB5EqRnUMsQvglcAyGxI3ZowrDiTjoyNnUhk19Lp4w=";
+      sha256 = "sha256-g+rWRLZ3NdAPPlZS8yrM67uEiaG6niCGtZJrd+UqrRE=";
     };
-    date = "2025-10-14";
+    date = "2025-10-19";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -84,15 +84,15 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "1c4750ec9828361fecdee174dac38d26e20ce667";
+    version = "eb661b5d8d0fa22221466e05536954dbeaff8e56";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "1c4750ec9828361fecdee174dac38d26e20ce667";
+      rev = "eb661b5d8d0fa22221466e05536954dbeaff8e56";
       fetchSubmodules = false;
-      sha256 = "sha256-tdrYr5AFsc1PFM/1iSLyL/gDTTs5nrslgJ/FSLAm7+Q=";
+      sha256 = "sha256-uV0U5eiWwQHP24b6qoQZrfps1Ar9dnFMuwyoOwuLrdo=";
     };
-    date = "2025-08-02";
+    date = "2025-10-18";
   };
   singbox-custom = {
     pname = "singbox-custom";
@@ -130,13 +130,13 @@
   };
   zotregistry = {
     pname = "zotregistry";
-    version = "v2.1.9";
+    version = "v2.1.10";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zot";
-      rev = "v2.1.9";
+      rev = "v2.1.10";
       fetchSubmodules = false;
-      sha256 = "sha256-vGjng9j3eDmHKK6qAV8Vi9Byi5XzuRov2QWzK/9X44M=";
+      sha256 = "sha256-Evf556J2j+qCI4OtFT40yi3fQiZ0ubOTcCL8vsGHKb8=";
     };
   };
   zotregistry-ui = {
