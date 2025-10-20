@@ -19,7 +19,7 @@ in {
       enable = true;
       openFirewall = true;
     };
-    
+
     services.roon-bridge = lib.mkIf cfg.bridge.enable {
       enable = true;
       openFirewall = true;
