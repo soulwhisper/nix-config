@@ -38,6 +38,7 @@
         };
 
         # : Apps
+        roon.bridge.enable = true;
       };
     };
   };

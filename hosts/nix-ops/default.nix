@@ -45,6 +45,7 @@
         # : LAB
         kms.enable = true;
         netbox.enable = true; # sub=box
+        roon.server.enable = true;
 
         # : Others
         nfs4 = {

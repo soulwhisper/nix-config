@@ -37,6 +37,7 @@
         # :: test
         "bluestacks"
         "maa"
+        "roonbridge"
         "stats"
       ];
       masApps = {
