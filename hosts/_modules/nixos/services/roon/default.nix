@@ -12,14 +12,17 @@ in {
   };
 
   # roon-server use TCP 9100-9200,9330-9339,30000-30010; UDP 9003;
+  # roon-bridge use TCP 9100-9200; UDP 9003;
 
-  config =
-    lib.mkIf cfg.server.enable {
-      services.roon-server.enable = true;
-      services.roon-server.openFirewall = true;
-    }
-    // lib.optionalAttrs (cfg.bridge.enable) {
-      services.roon-bridge.enable = true;
-      services.roon-bridge.openFirewall = true;
+  config = {
+    services.roon-server = lib.mkIf cfg.server.enable {
+      enable = true;
+      openFirewall = true;
     };
+    
+    services.roon-bridge = lib.mkIf cfg.bridge.enable {
+      enable = true;
+      openFirewall = true;
+    };
+  };
 }
