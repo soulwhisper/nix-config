@@ -38,7 +38,6 @@
         # : LAB
         home-assistant.enable = true; # ep=:8123
         kms.enable = true; # ep=:1688
-        roon.server.enable = true;
         unifi-controller.enable = true; # ep=:8443
 
         # : Others

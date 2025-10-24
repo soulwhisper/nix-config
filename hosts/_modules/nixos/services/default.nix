@@ -20,7 +20,6 @@
     ./openssh
     ./podman
     ./restic
-    ./roon
     ./samba
     ./sftpgo
     ./singbox

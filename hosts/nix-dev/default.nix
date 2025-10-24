@@ -24,6 +24,7 @@
 
       services = {
         # : Networking
+        # singbox conflict with desktop networking
         dae.enable = true;
         dae.subscription = config.sops.secrets."networking/proxy/subscription".path;
 
@@ -38,7 +39,6 @@
         };
 
         # : Apps
-        roon.bridge.enable = true;
       };
     };
   };
