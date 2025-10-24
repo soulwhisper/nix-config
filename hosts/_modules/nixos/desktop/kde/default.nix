@@ -6,7 +6,7 @@
 }: let
   cfg = config.modules.desktop;
 in {
-  config = lib.mkIf (cfg.manager == "kde") {
+  config = lib.mkIf (cfg.enable && (cfg.manager == "kde")) {
     # KDE Plasma 6, ref:https://wiki.nixos.org/wiki/KDE
     services.xserver.enable = true;
     services.displayManager.sddm = {
