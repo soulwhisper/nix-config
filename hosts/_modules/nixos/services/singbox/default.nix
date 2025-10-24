@@ -38,7 +38,6 @@ in {
     # if using with mosdns, mode should be global
     systemd.tmpfiles.rules = [
       "d /var/lib/singbox 0755 appuser appuser - -"
-      "d /var/lib/providers 0755 appuser appuser - -"
       "C+ /var/lib/singbox/ui 0755 appuser appuser - ${pkgs.zashboard}"
       "C+ /var/lib/singbox/geoip 0755 appuser appuser - ${pkgs.geo-custom}/singbox/geoip"
       "C+ /var/lib/singbox/geosite 0755 appuser appuser - ${pkgs.geo-custom}/singbox/geosite"
