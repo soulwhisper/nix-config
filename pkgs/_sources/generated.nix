@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "0b66e3c7eda7c38d2cfd84ec241b9b53702c2085";
+    version = "b34ac1d2a06a92158f32b6b9cddf15385cde381f";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "0b66e3c7eda7c38d2cfd84ec241b9b53702c2085";
+      rev = "b34ac1d2a06a92158f32b6b9cddf15385cde381f";
       fetchSubmodules = false;
-      sha256 = "sha256-g+rWRLZ3NdAPPlZS8yrM67uEiaG6niCGtZJrd+UqrRE=";
+      sha256 = "sha256-bzX3FFnYVv9F71hFxtZC0D+NtsrQrWnwmpvLfzwIKkM=";
     };
-    date = "2025-10-19";
+    date = "2025-10-26";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -96,15 +96,15 @@
   };
   singbox-custom = {
     pname = "singbox-custom";
-    version = "cfc4219052bcb5b5f0536aef60a2ab4e4ad1e7ea";
+    version = "a45017d498068da78ce17679ad33613d9f99a458";
     src = fetchFromGitHub {
       owner = "CHIZI-0618";
       repo = "sing-box";
-      rev = "cfc4219052bcb5b5f0536aef60a2ab4e4ad1e7ea";
+      rev = "a45017d498068da78ce17679ad33613d9f99a458";
       fetchSubmodules = false;
-      sha256 = "sha256-I+1fPTq4wg9Ixb2Yp5JHcxUbEAFc452ataNWf/0Q3OI=";
+      sha256 = "sha256-GrwuI7Lg4w2y31dE9wH4LBHFbM4++1Q6rT/4n660mIQ=";
     };
-    date = "2025-10-14";
+    date = "2025-10-24";
   };
   talos-api = {
     pname = "talos-api";
