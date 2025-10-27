@@ -26,6 +26,12 @@
 - based on `linux:fcitx5-rime, macos:squirrel-app`;
 - when input shows, `Ctrl + ~` to controlPanel;
 
+## Proxies
+
+- 'mosdns + singbox' best for general usage, especially SOCKS5;
+- 'mihomo' best for k8s image downloading, SOCKS5 sucks;
+- 'dae' not stable, break connections often;
+
 ## Ports
 
 ```shell

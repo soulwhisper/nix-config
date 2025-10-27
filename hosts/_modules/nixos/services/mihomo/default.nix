@@ -48,6 +48,7 @@ in {
         User = "appuser";
         Group = "appuser";
         ExecStartPre = pkgs.writeShellScript "update-subscription" ''
+          cd /var/lib/mihomo
           export SUBSCRIPTION=$(grep -v '^#' "${cfg.subscription}" | grep -v '^$' | head -1 | cut -d':' -f2-)
           ${pkgs.envsubst}/bin/envsubst '$SUBSCRIPTION' < "config.yaml" > "config.yaml.new"
           mv config.yaml.new config.yaml
