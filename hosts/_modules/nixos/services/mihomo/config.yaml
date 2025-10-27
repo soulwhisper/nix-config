@@ -42,7 +42,7 @@ profile:
 # ui = http://{{external-controller}}/ui
 external-controller: 0.0.0.0:9201
 
-# : dns
+# : dns; adguard->mihomo
 dns:
   enable: true
   prefer-h3: true
@@ -64,8 +64,6 @@ dns:
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy:
-    "geosite:private": # private to local adguard
-      - 127.0.0.1
     "geosite:geolocation-!cn":
       - "https://dns.cloudflare.com/dns-query#dns"
       - "https://dns.google/dns-query#dns"

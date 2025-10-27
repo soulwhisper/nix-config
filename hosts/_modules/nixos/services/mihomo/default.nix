@@ -53,7 +53,7 @@ in {
           mv config.yaml.new config.yaml
           chmod 644 config.yaml
         '';
-        ExecStart = "${pkgs.unstable.mihomo}/bin/mihomo -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml -ext-ui ${pkgs.metacubexd}";
+        ExecStart = "${pkgs.unstable.mihomo}/bin/mihomo -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml -ext-ui ${pkgs.zashboard}";
         RuntimeDirectory = "mihomo";
         StateDirectory = "mihomo";
         Restart = "always";

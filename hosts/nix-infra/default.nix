@@ -21,8 +21,9 @@
       filesystems.xfs.enable = true;
       services = {
         # : Networking
-        mihomo.enable = true;
-        mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
+        mosdns.enable = true;
+        singbox.enable = true;
+        singbox.subscription = config.sops.secrets."networking/proxy/subscription".path;
         easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
         # : Monitoring
