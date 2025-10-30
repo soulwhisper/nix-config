@@ -9,5 +9,6 @@
   "rime-moqi-yinxing": "",
   "geo-custom": "",
   "mosdns-custom": "sha256-lgA0ojf/rGq/pwTojLb+I8y/FPOhFJTVlQFhcuEHLGY=",
-  "singbox-custom": "sha256-6Jvjk8VGwetbp9Ql0q7maYNKF+fXtejTxxdB/ARx7+k="
+  "singbox-custom": "sha256-6Jvjk8VGwetbp9Ql0q7maYNKF+fXtejTxxdB/ARx7+k=",
+  "kubectl-switch": ""
 }
