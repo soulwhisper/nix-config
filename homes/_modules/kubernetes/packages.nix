@@ -33,7 +33,6 @@ in {
         kubectl-switch
         talhelper
         talosctl
-        viddy
       ])
       ++ (with pkgs.unstable; [
         cilium-cli
