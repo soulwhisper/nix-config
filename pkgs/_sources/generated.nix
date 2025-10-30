@@ -59,17 +59,6 @@
     };
     date = "2024-05-24";
   };
-  kubectl-browse-pvc = {
-    pname = "kubectl-browse-pvc";
-    version = "v1.3.0";
-    src = fetchFromGitHub {
-      owner = "clbx";
-      repo = "kubectl-browse-pvc";
-      rev = "v1.3.0";
-      fetchSubmodules = false;
-      sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
-    };
-  };
   mosdns-custom = {
     pname = "mosdns-custom";
     version = "ab137f2b42142610ece97dd73610458794f15aa1";

@@ -10,7 +10,6 @@
         jq
         wget
         yq-go
-        viddy
       ]
       ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         fast-cli # speedtest
@@ -127,7 +126,6 @@
       find = "fd";
       grep = "rg";
       top = "btop";
-      watch = "viddy --disable_auto_save --differences --interval 2 --shell fish";
     };
   };
 }
