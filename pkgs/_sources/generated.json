@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-10-29",
+        "date": "2025-10-30",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "73ee461bba1bc53ddc2dab6017aa749b63dd9e3f",
-            "sha256": "sha256-IMwwGjl/K5/D41a4AKLJT8t9504Pfbt/GoFI2f4z1Go=",
+            "rev": "3af64a9c7a76c340f756bbf4870be6c44db20e62",
+            "sha256": "sha256-29NVo47mAnU7Ekt0jknfuiXrCLM5buB9mZLcDx6aQhk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "73ee461bba1bc53ddc2dab6017aa749b63dd9e3f"
+        "version": "3af64a9c7a76c340f756bbf4870be6c44db20e62"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -104,11 +104,11 @@
         },
         "version": "1d4c2888f7de077e1a837a914a1824873d16762d"
     },
-    "kubectl-browse-pvc": {
+    "kubectl-switch": {
         "cargoLocks": null,
         "date": null,
         "extract": null,
-        "name": "kubectl-browse-pvc",
+        "name": "kubectl-switch",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -116,14 +116,14 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "clbx",
-            "repo": "kubectl-browse-pvc",
-            "rev": "v1.3.0",
-            "sha256": "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=",
+            "owner": "mirceanton",
+            "repo": "kubectl-switch",
+            "rev": "v2.3.0",
+            "sha256": "sha256-NoDgCA89C/CrVBQ1yCefH7WuxZd1x5YFcBkbEnctIOU=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.3.0"
+        "version": "v2.3.0"
     },
     "mosdns-custom": {
         "cargoLocks": null,

@@ -6,9 +6,9 @@
   "zotregistry": "sha256-DRbq56mh58DRme8tgxglMtneosfgbM35Z2QH/z5fNhc=",
   "zotregistry-ui": "sha256-ozWCR8t9rk/EjQAZDNOuQMEh8y4GcFgRbLN/SuX5hGI=",
   "hass-sgcc": "",
-  "kubectl-browse-pvc": "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=",
   "rime-moqi-yinxing": "",
   "geo-custom": "",
   "mosdns-custom": "sha256-lgA0ojf/rGq/pwTojLb+I8y/FPOhFJTVlQFhcuEHLGY=",
-  "singbox-custom": "sha256-6Jvjk8VGwetbp9Ql0q7maYNKF+fXtejTxxdB/ARx7+k="
+  "singbox-custom": "sha256-6Jvjk8VGwetbp9Ql0q7maYNKF+fXtejTxxdB/ARx7+k=",
+  "kubectl-switch": "sha256-hDBxDxhVSp3qg60sZdiMRF/zlCQnfGjTCtYw5qmEWjo="
 }

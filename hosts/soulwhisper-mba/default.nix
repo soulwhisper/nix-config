@@ -23,6 +23,7 @@
         "nikitabobko/tap"
       ];
       brews = [
+        "vanilla"
       ];
       casks = [
         # :: storage
@@ -35,9 +36,11 @@
         "wireshark-app"
 
         # :: test
+        "acorn"
+        "betterdisplay"
         "bluestacks"
+        "little-snitch"
         "maa"
-        "roonbridge"
         "stats"
       ];
       masApps = {

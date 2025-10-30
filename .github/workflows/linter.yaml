@@ -21,7 +21,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v20
+        with:
+          extra-args: --prefer-upstream-nix
       - uses: cachix/cachix-action@v16
         with:
           name: devenv

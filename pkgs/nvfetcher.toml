@@ -18,9 +18,9 @@ src.github = "ARC-MX/sgcc_electricity_new"
 fetch.github = "vkhitrin/kubecolor-catppuccin"
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
 src.branch = "main"
-[kubectl-browse-pvc]
-fetch.github = "clbx/kubectl-browse-pvc"
-src.github = "clbx/kubectl-browse-pvc"
+[kubectl-switch]
+fetch.github = "mirceanton/kubectl-switch"
+src.github = "mirceanton/kubectl-switch"
 [mosdns-custom]
 fetch.github = "yyysuo/mosdns"
 src.git = "https://github.com/yyysuo/mosdns.git"

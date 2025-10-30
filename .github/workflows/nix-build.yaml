@@ -53,9 +53,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v17
-        # with:
-        #   source-tag: "v0.32.3"   # bugfixed
+        uses: DeterminateSystems/nix-installer-action@v20
+        with:
+          extra-args: --prefer-upstream-nix
       - name: Set up Cachix
         uses: cachix/cachix-action@v16
         if: ${{ !github.event.pull_request.head.repo.fork }}
