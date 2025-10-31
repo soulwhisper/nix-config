@@ -43,7 +43,6 @@ garage: 3900
 AMT-server: 4433
 postgres: 5432
 n8n: 5678
-versitygw: 7070
 home-assistant: 8123
 prometheus: 9090
 unifi: 8080,8443,8880,8843,6789,3478,10001
@@ -59,6 +58,8 @@ mosdns: 5300
 
 ## storage, 9000-9099
 minio: 9000,9001
+garage: 9000,9001
+versitygw: 9000
 zot: 9002
 forgejo: 9003,9004
 

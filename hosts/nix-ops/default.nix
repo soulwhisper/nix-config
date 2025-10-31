@@ -17,7 +17,6 @@
     # This is a must if "/home" is isolated from "/", for sops.
     fileSystems."/home".neededForBoot = true;
 
-    # services.qemuGuest.enable = true;
     virtualisation.vmware.guest.enable = true;
 
     modules = {
@@ -38,8 +37,7 @@
 
         # : K8S Test
         talos.api.enable = true;
-        versitygw.enable = true; # ep=:7070
-        versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
+        garage.enable = true; # ep=:9000
 
         # : LAB
         kms.enable = true;
@@ -53,7 +51,6 @@
             subnet = "172.19.82.0/24";
           };
         };
-        sftpgo.enable = true;
       };
     };
   };

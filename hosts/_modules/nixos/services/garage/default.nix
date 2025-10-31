@@ -5,24 +5,17 @@
   ...
 }: let
   cfg = config.modules.services.garage;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.garage = {
     enable = lib.mkEnableOption "garage";
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "s3.noirprime.com";
-    };
   };
 
-  config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [3900];
+  # garage disable caddy to keep compatibility with TrueNAS / Synology;
+  # endpoint = http://nas.homelab.internal:9000;
+  # port conflict with minio/versitygw;
 
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-        reverse_proxy localhost:3900
-      }
-    '';
+  config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [9000];
 
     environment.systemPackages = [pkgs.unstable.garage];
 
@@ -48,12 +41,12 @@ in {
         data_dir = "/var/lib/garage/data";
         db_engine = "sqlite";
         replication_factor = 1;
-        rpc_bind_addr = "[::]:3901";
-        rpc_public_addr = "127.0.0.1:3901";
+        rpc_bind_addr = "[::]:9001";
+        rpc_public_addr = "127.0.0.1:9001";
         rpc_secret = "180f83ddd22e289bae0cc2ada61abccd667810e9e486469e09f9f2de980b51ad";
         s3_api.s3_region = "us-east-1";
-        s3_api.api_bind_addr = "[::]:3900";
-        s3_api.root_domain = ".${cfg.domain}";
+        s3_api.api_bind_addr = "[::]:9000";
+        # s3_api.root_domain = ".${cfg.domain}";
       };
     };
 
