@@ -23,7 +23,6 @@
         "nikitabobko/tap"
       ];
       brews = [
-        "vanilla"
       ];
       casks = [
         # :: storage
@@ -32,7 +31,6 @@
         # :: productivity
         "audacity"
         "squirrel-app"
-        "unity"
         "wireshark-app"
 
         # :: test
@@ -42,6 +40,7 @@
         "little-snitch"
         "maa"
         "stats"
+        "vanilla"
       ];
       masApps = {
         "DevHub" = 6476452351;
