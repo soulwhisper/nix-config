@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-10-31",
+        "date": "2025-11-01",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "14026ccdc7da2e306f6786ac4e9318323963cce4",
-            "sha256": "sha256-FaO6yxnkwinmSkv967IIYU+vGab0KbS0qEsY6Yf9t8M=",
+            "rev": "7c529a29c3cfaca240809d883f074e4aa4b349ea",
+            "sha256": "sha256-6s0/zt6F+7FkUv7JcLQVMMJBwzYxOqlE+4Q/SM3qZRY=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "14026ccdc7da2e306f6786ac4e9318323963cce4"
+        "version": "7c529a29c3cfaca240809d883f074e4aa4b349ea"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -169,7 +169,7 @@
     },
     "singbox-custom": {
         "cargoLocks": null,
-        "date": "2025-10-24",
+        "date": "2025-10-31",
         "extract": null,
         "name": "singbox-custom",
         "passthru": null,
@@ -181,12 +181,12 @@
             "name": null,
             "owner": "CHIZI-0618",
             "repo": "sing-box",
-            "rev": "a45017d498068da78ce17679ad33613d9f99a458",
-            "sha256": "sha256-GrwuI7Lg4w2y31dE9wH4LBHFbM4++1Q6rT/4n660mIQ=",
+            "rev": "94a8e7dca9946e30b2ea85e2061aa13b20485a68",
+            "sha256": "sha256-qOe8ErNSSMeOuyVw5jRXFmIfKB90kayp7hl10L4gAA4=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "a45017d498068da78ce17679ad33613d9f99a458"
+        "version": "94a8e7dca9946e30b2ea85e2061aa13b20485a68"
     },
     "talos-api": {
         "cargoLocks": null,
