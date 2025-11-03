@@ -16,7 +16,16 @@
 
     environment.systemPackages = with pkgs; [
       # cardforge, https://github.com/Card-Forge/forge/releases
-      unstable.forge-mtg
+      unstable.forge-mtgoverrideAttrs (oldAttrs: {
+        buildInputs = lib.lists.remove alsa-lib oldAttrs.buildInputs;
+        preFixup = let
+          oldPreFixup = oldAttrs.preFixup;
+          newPreFixup = builtins.replaceStrings
+            [ "lib.makeLibraryPath [ libGL alsa-lib ]" ]
+            [ "lib.makeLibraryPath [ libGL ]" ]
+          oldPreFixup;
+        in newPreFixup;
+      })
     ];
 
     homebrew = {
