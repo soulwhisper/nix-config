@@ -25,22 +25,22 @@
             PREFIX_CMD=""
             if [ "$commandToInstall" = "forge-adventure" ]; then
               PREFIX_CMD="--prefix LD_LIBRARY_PATH : ${
-            super.lib.makeLibraryPath [
-              super.libGL
-            ]
-          }"
+                super.lib.makeLibraryPath [
+                  super.libGL
+                ]
+              }"
             fi
             makeWrapper $out/share/forge/$commandToInstall.sh $out/bin/$commandToInstall \
-              --prefix PATH : ${
-            super.lib.makeBinPath [
-              super.coreutils
-              super.openjdk
-              super.gnused
-            ]
-          } \
-              --set JAVA_HOME ${super.openjdk}/lib/openjdk \
-              --set SENTRY_DSN "" \
-              $PREFIX_CMD
+            --prefix PATH : ${
+              super.lib.makeBinPath [
+                super.coreutils
+                super.openjdk
+                super.gnused
+              ]
+            } \
+            --set JAVA_HOME ${super.openjdk}/lib/openjdk \
+            --set SENTRY_DSN "" \
+            $PREFIX_CMD
           done
         '';
       })
