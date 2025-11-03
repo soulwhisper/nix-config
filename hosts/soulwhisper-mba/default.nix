@@ -16,7 +16,7 @@
 
     environment.systemPackages = with pkgs; [
       # cardforge, https://github.com/Card-Forge/forge/releases
-      unstable.forge-mtgoverrideAttrs (oldAttrs: {
+      unstable.forge-mtg.overrideAttrs (oldAttrs: {
         buildInputs = lib.lists.remove alsa-lib oldAttrs.buildInputs;
         preFixup = let
           oldPreFixup = oldAttrs.preFixup;
