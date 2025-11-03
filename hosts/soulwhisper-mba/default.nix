@@ -15,7 +15,8 @@
     # : test/temp apps list
 
     environment.systemPackages = with pkgs; [
-      unstable.forge-mtg # cardforge, https://github.com/Card-Forge/forge/releases
+      # cardforge, https://github.com/Card-Forge/forge/releases
+      unstable.forge-mtg
     ];
 
     homebrew = {
@@ -23,7 +24,6 @@
         "nikitabobko/tap"
       ];
       brews = [
-        "vanilla"
       ];
       casks = [
         # :: storage
@@ -32,7 +32,6 @@
         # :: productivity
         "audacity"
         "squirrel-app"
-        "unity"
         "wireshark-app"
 
         # :: test
@@ -42,6 +41,7 @@
         "little-snitch"
         "maa"
         "stats"
+        "vanilla"
       ];
       masApps = {
         "DevHub" = 6476452351;
