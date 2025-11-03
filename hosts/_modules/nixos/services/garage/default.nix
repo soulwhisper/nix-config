@@ -25,7 +25,7 @@ in {
 
     # : run below commands to bootstrap this service
     # garage status
-    # garage layout assign -z main -c 100G node-id/prefix
+    # garage layout assign -z main -c 100G <node-id>
     # garage layout apply --version 1
 
     # : this config setup a local-managed rep1 Garage instance

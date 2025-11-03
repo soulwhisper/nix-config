@@ -55,6 +55,10 @@ in {
       KUBECONFIG_DIR = "${config.home.homeDirectory}/.kube/configs";
     };
 
+    systemd.tmpfiles.rules = [
+      "d ${config.home.homeDirectory}/.kube/configs 0755 1000 1000 - -"
+    ];
+
     programs.krewfile = {
       enable = true;
       krewPackage = pkgs.unstable.krew;
