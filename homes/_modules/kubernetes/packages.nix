@@ -37,7 +37,7 @@ in {
       ++ (with pkgs.unstable; [
         cilium-cli
         fluxcd
-        kubecm
+        # kubecm
         kubecolor
         kubectl
         kubescape
@@ -52,12 +52,13 @@ in {
 
     home.sessionVariables = {
       KUBECOLOR_CONFIG = "${pkgs.kubecolor-catppuccin}/catppuccin-${catppuccinCfg.flavor}.yaml";
-      KUBECONFIG_DIR = "${config.home.homeDirectory}/.kube/configs";
+      KUBECONFIG_DIR = "${config.home.homeDirectory}/.kube";
     };
 
-    systemd.tmpfiles.rules = [
-      "d ${config.home.homeDirectory}/.kube/configs 0755 1000 1000 - -"
-    ];
+    home.activation.k8s = lib.hm.dag.entryAfter ["writeboundary"] ''
+      $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.kube
+      $DRY_RUN_CMD chmod 700 -R ${config.home.homeDirectory}/.kube
+    '';
 
     programs.krewfile = {
       enable = true;
@@ -114,9 +115,9 @@ in {
         flux-local = "uvx flux-local";
         kubectl = "kubecolor";
         k = "kubectl";
-        kc = "kubecm";
-        # kc = "kubectl-switch context";
-        # kns = "kubectl-switch ns";
+        # kc = "kubecm";
+        kc = "kubectl-switch context";
+        kns = "kubectl-switch ns";
         ks = "kubescape";
       };
     };
