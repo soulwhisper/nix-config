@@ -42,10 +42,10 @@ profile:
 # ui = http://{{external-controller}}/ui
 external-controller: 0.0.0.0:9201
 
-# : dns; adguard->mihomo
+# : dns; adguard->mihomo; adguard no cache;
 dns:
   enable: true
-  prefer-h3: true
+  prefer-h3: false
   listen: :5300
   ipv6: false
   enhanced-mode: fake-ip
@@ -59,14 +59,9 @@ dns:
     - "+.api.letsencrypt.org" # ACME
   nameserver:
     - system
-    - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   proxy-server-nameserver:
-    - https://doh.pub/dns-query
-  nameserver-policy:
-    "geosite:geolocation-!cn":
-      - "https://dns.cloudflare.com/dns-query#dns"
-      - "https://dns.google/dns-query#dns"
+    - https://dns.alidns.com/dns-query
 
 # : sniffer
 sniffer:
@@ -490,6 +485,8 @@ rule-providers:
 
 # : 分流规则
 rules:
+  # :: Cloudflare
+  - DOMAIN-SUFFIX,argotunnel.com,DIRECT
   # :: 非 IP 类规则
   - RULE-SET,reject_non_ip,REJECT
   - RULE-SET,reject_domainset,REJECT
@@ -511,7 +508,6 @@ rules:
   - RULE-SET,domestic_non_ip,DIRECT
   - RULE-SET,direct_non_ip,DIRECT
   - RULE-SET,lan_non_ip,DIRECT
-
   # :: IP 类规则
   - RULE-SET,reject_ip,REJECT
   - RULE-SET,telegram_ip,电报信息
