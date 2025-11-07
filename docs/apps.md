@@ -39,7 +39,6 @@
 caddy: 80,443
 sftpd: 2022
 http-proxy: 1080
-garage: 3900
 AMT-server: 4433
 postgres: 5432
 n8n: 5678
@@ -80,23 +79,11 @@ meshcentral: 9203
 talos-api: 9300
 talos-pxe: 9301
 
-## llm, 9400-9499
-ollama: 9400
-
 ## app-dev, 9500-9799
 postgrest: 9500
 
 ## app, 9800-9999
-ocis: 9800
-netbox: 9801
-karakeep: 9802
-immich: 9803
-moviepilot: 9804,9805
-emby: 9806
-qbittorrent: 9807,65000
-crafty: 9808,25500-25600
-
-# special
-singbox-ss: 11000
+portainer/dockge: 9800
+ollama: 9801
 
 ```
