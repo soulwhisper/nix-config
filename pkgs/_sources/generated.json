@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-11-12",
+        "date": "2025-11-13",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "f4315a14de9b88a5b2542d126b25845aff20b0bd",
-            "sha256": "sha256-sEUeVs+RutbqQCQgwF1TKIAbQ77JuRxXTW60hmMp6Eg=",
+            "rev": "7b4154976328c93f20ba07f50471150c8da3183f",
+            "sha256": "sha256-D+gT+g7/aaI5NDanOwcqqoWCudfpNCH18et/Lkty/Lg=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "f4315a14de9b88a5b2542d126b25845aff20b0bd"
+        "version": "7b4154976328c93f20ba07f50471150c8da3183f"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.3.0",
-            "sha256": "sha256-NoDgCA89C/CrVBQ1yCefH7WuxZd1x5YFcBkbEnctIOU=",
+            "rev": "v2.3.1",
+            "sha256": "sha256-h8oz+FfPzxZiVtTGICg++caLdr+RbwkJGp9DTbaQtGU=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.3.0"
+        "version": "v2.3.1"
     },
     "mosdns-custom": {
         "cargoLocks": null,
