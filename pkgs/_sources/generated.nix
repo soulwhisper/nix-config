@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "f4315a14de9b88a5b2542d126b25845aff20b0bd";
+    version = "7b4154976328c93f20ba07f50471150c8da3183f";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "f4315a14de9b88a5b2542d126b25845aff20b0bd";
+      rev = "7b4154976328c93f20ba07f50471150c8da3183f";
       fetchSubmodules = false;
-      sha256 = "sha256-sEUeVs+RutbqQCQgwF1TKIAbQ77JuRxXTW60hmMp6Eg=";
+      sha256 = "sha256-D+gT+g7/aaI5NDanOwcqqoWCudfpNCH18et/Lkty/Lg=";
     };
-    date = "2025-11-12";
+    date = "2025-11-13";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -61,13 +61,13 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.3.0";
+    version = "v2.3.1";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.3.0";
+      rev = "v2.3.1";
       fetchSubmodules = false;
-      sha256 = "sha256-NoDgCA89C/CrVBQ1yCefH7WuxZd1x5YFcBkbEnctIOU=";
+      sha256 = "sha256-h8oz+FfPzxZiVtTGICg++caLdr+RbwkJGp9DTbaQtGU=";
     };
   };
   mosdns-custom = {
