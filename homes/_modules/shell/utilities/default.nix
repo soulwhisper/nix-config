@@ -1,17 +1,16 @@
 {pkgs, ...}: {
   config = {
-    home.packages = with pkgs;
-      [
-        any-nix-shell
-        btop # replace glances
-        curlie
-        doggo
-        gum
-        httpie
-        jq
-        wget
-        yq-go
-      ];
+    home.packages = with pkgs; [
+      any-nix-shell
+      btop # replace glances
+      curlie
+      doggo
+      gum
+      httpie
+      jq
+      wget
+      yq-go
+    ];
 
     # bat
     programs.bat = {
