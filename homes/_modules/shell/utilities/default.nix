@@ -4,15 +4,13 @@
       [
         any-nix-shell
         btop # replace glances
+        curlie
         doggo
         gum
         httpie
         jq
         wget
         yq-go
-      ]
-      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-        fast-cli # speedtest
       ];
 
     # bat
@@ -122,6 +120,7 @@
     # fish alias
     programs.fish.shellAliases = {
       cat = "bat";
+      curl = "curlie";
       dig = "doggo";
       find = "fd";
       grep = "rg";
