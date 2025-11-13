@@ -59,7 +59,7 @@ dns:
   enable_dnssec: false
   edns_client_subnet:
     custom_ip: ""
-    enabled: false
+    enabled: true
     use_custom: false
   max_goroutines: 300
   handle_ddr: true
