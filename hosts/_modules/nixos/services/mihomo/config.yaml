@@ -57,6 +57,7 @@ dns:
     - "+.internal"
     - "+.argotunnel.com" # Cloudflare Tunnel
     - "+.api.letsencrypt.org" # ACME
+    - "+.noirprime.com"
   nameserver:
     - system
     - https://dns.alidns.com/dns-query
@@ -81,6 +82,7 @@ sniffer:
     - "+.internal"
     - "+.argotunnel.com" # Cloudflare Tunnel
     - "+.api.letsencrypt.org" # ACME
+    - "+.noirprime.com"
 
 # : tun
 tun:
@@ -487,6 +489,7 @@ rule-providers:
 rules:
   # :: Cloudflare
   - DOMAIN-SUFFIX,argotunnel.com,DIRECT
+  - DOMAIN-SUFFIX,noirprime.com,DIRECT
   # :: 非 IP 类规则
   - RULE-SET,reject_non_ip,REJECT
   - RULE-SET,reject_domainset,REJECT
