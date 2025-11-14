@@ -23,7 +23,7 @@
 in {
   config = lib.mkIf cfg.enable {
     # : archived packages
-    # kubefwd
+    # kubefwd,kubecm
     # : archived krew plugins
     # cnpg,explore,kyverno,mayastor,neat,oidc-login,openebs,pgo,pv-migrate,
 
@@ -36,7 +36,6 @@ in {
       ])
       ++ (with pkgs.unstable; [
         cilium-cli
-        # kubecm
         kubecolor
         kubectl
         kubescape
@@ -86,38 +85,18 @@ in {
 
     programs.fish = {
       interactiveShellInit = ''
-        ${lib.getExe pkgs.unstable.kubecm} completion fish | source
-        ${lib.getExe pkgs.kubectl-switch} completion fish | source
+        # placeholder
       '';
 
-      functions = {
-        kyaml = {
-          description = "Clean up kubectl get yaml output";
-          body = ''
-            kubectl get $argv -o yaml | kubectl neat
-          '';
-        };
-        watch = {
-          description = "Watch with fish alias support";
-          body = ''
-            if test (count $argv) -gt 0
-              if type -q viddy
-                command viddy --disable_auto_save --differences --interval 2 --shell fish $argv[1..-1]
-              else
-                command watch -x fish -c "$argv"
-              end
-            end
-          '';
-        };
-      };
       shellAliases = {
         flux-local = "uvx flux-local";
         kubectl = "kubecolor";
         k = "kubectl";
-        # kc = "kubecm";
         kc = "kubectl-switch context";
         kns = "kubectl-switch ns";
         ks = "kubescape";
+        watch = "viddy --disable_auto_save --differences --interval 2 --shell fish";
+        kyaml = "kubectl $argv -o yaml | kubectl neat";
       };
     };
   };
