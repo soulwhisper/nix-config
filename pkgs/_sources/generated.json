@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-11-15",
+        "date": "2025-11-16",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "fea2e524055b2bb3a108a89bcccf2f3ec9ae0554",
-            "sha256": "sha256-Dgoid7XoxU5TmbAzjPL1sINd1Mndj8N6DTth0An2NDQ=",
+            "rev": "8c6742eef167cc2cba6e8c33e81fdd5d14c01663",
+            "sha256": "sha256-EhO03Po+bxVitEIYPsoJ0NFROa85EwEd74i7D+Mzujs=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "fea2e524055b2bb3a108a89bcccf2f3ec9ae0554"
+        "version": "8c6742eef167cc2cba6e8c33e81fdd5d14c01663"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.3.1",
-            "sha256": "sha256-h8oz+FfPzxZiVtTGICg++caLdr+RbwkJGp9DTbaQtGU=",
+            "rev": "v2.3.2",
+            "sha256": "sha256-YfdQbjP+8UkeYCG0HSWMfXCayO6/ffEv9pT/hQ29sgI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.3.1"
+        "version": "v2.3.2"
     },
     "mosdns-custom": {
         "cargoLocks": null,
@@ -253,7 +253,7 @@
     },
     "zotregistry-ui": {
         "cargoLocks": null,
-        "date": "2025-09-29",
+        "date": "2025-11-15",
         "extract": null,
         "name": "zotregistry-ui",
         "passthru": null,
@@ -265,11 +265,11 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zui",
-            "rev": "731b63943eedb1845ca53741384b5e2a44249959",
-            "sha256": "sha256-/5TD1P8uMMZdlBP2HI9qtTQOT77JhaQhKI9KrE/9QHQ=",
+            "rev": "7e08b6f2c71e293de6b7b4e735b821004caeee98",
+            "sha256": "sha256-S/QnkDDN+N7wOsSMNRPA1b702w8q9p35/BvMu3+Dfhc=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "731b63943eedb1845ca53741384b5e2a44249959"
+        "version": "7e08b6f2c71e293de6b7b4e735b821004caeee98"
     }
 }

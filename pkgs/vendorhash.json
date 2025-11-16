@@ -4,11 +4,11 @@
   "caddy-custom": "sha256-I+mkuXZvSxl4sOGREbUEuxxZuDxrBFBDUU5PmZpUuNk=",
   "caddy-plugin-cloudflare": "",
   "zotregistry": "sha256-DRbq56mh58DRme8tgxglMtneosfgbM35Z2QH/z5fNhc=",
-  "zotregistry-ui": "sha256-ozWCR8t9rk/EjQAZDNOuQMEh8y4GcFgRbLN/SuX5hGI=",
+  "zotregistry-ui": "sha256-ge7etdi1MDYDvvW+iJKJ+BDZj3nSqCCMa5HpQFlwB5E=",
   "hass-sgcc": "",
   "rime-moqi-yinxing": "",
   "geo-custom": "",
   "mosdns-custom": "sha256-lgA0ojf/rGq/pwTojLb+I8y/FPOhFJTVlQFhcuEHLGY=",
   "singbox-custom": "sha256-OxhwP7uYXpnPFkZBFKw+4fw+gkufHNAUV3xZ4VFj2yQ=",
-  "kubectl-switch": "sha256-jy/IrMaN6/xGWx8nhYYR2B7pl1YNjY8T+8HMxizmsGQ="
+  "kubectl-switch": "sha256-5rRl2wUTjovFfjUnP3UdzBbUvr1+Jqh8I9ssV67tRUM="
 }
