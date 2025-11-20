@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-11-19",
+        "date": "2025-11-20",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "6519b38c2459fb11aeca0bd0d927b9c4cccc0b85",
-            "sha256": "sha256-O2AmnWN/fKu0dEuS3tO5AW5FSiAnjoVlRxCqbqZQ7NQ=",
+            "rev": "ff61ca9efeeb3318a907cb6dcf833573d55980a2",
+            "sha256": "sha256-Px4RYoAXsMo8VCK6tQzBXxDxfpWt0sC37v50U4NdxJI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "6519b38c2459fb11aeca0bd0d927b9c4cccc0b85"
+        "version": "ff61ca9efeeb3318a907cb6dcf833573d55980a2"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -265,11 +265,11 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zui",
-            "rev": "04fac87321b090b6a2137db6dfb61d612b9f2f6f",
-            "sha256": "sha256-wOKkYsJXqhyvBJM6nwuy8S5T+4YEyqUPuiVDBIMwTaI=",
+            "rev": "f8702923d190bb60e39f43af4f13aab3f13ebb1e",
+            "sha256": "sha256-ZXw3bzpYqywKiEWLjza7jv7EV/StVqlBKFX4nBgZZus=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "04fac87321b090b6a2137db6dfb61d612b9f2f6f"
+        "version": "f8702923d190bb60e39f43af4f13aab3f13ebb1e"
     }
 }
