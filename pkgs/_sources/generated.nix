@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "ff61ca9efeeb3318a907cb6dcf833573d55980a2";
+    version = "a4c4dc60d0310c5c4232ff887f4a83440b539752";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "ff61ca9efeeb3318a907cb6dcf833573d55980a2";
+      rev = "a4c4dc60d0310c5c4232ff887f4a83440b539752";
       fetchSubmodules = false;
-      sha256 = "sha256-Px4RYoAXsMo8VCK6tQzBXxDxfpWt0sC37v50U4NdxJI=";
+      sha256 = "sha256-XqlS9mXGxLZ7Bz43P3LkQBYk3qzT9M2OYJJJ6a6OKtc=";
     };
-    date = "2025-11-20";
+    date = "2025-11-21";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -130,13 +130,13 @@
   };
   zotregistry = {
     pname = "zotregistry";
-    version = "v2.1.10";
+    version = "v2.1.11";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zot";
-      rev = "v2.1.10";
+      rev = "v2.1.11";
       fetchSubmodules = false;
-      sha256 = "sha256-Evf556J2j+qCI4OtFT40yi3fQiZ0ubOTcCL8vsGHKb8=";
+      sha256 = "sha256-j9iS9qN+L9+vUrW7n5oQ6BZ/ssUasWVHTd/7zYTJNEQ=";
     };
   };
   zotregistry-ui = {
