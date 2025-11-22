@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-11-21",
+        "date": "2025-11-22",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "a4c4dc60d0310c5c4232ff887f4a83440b539752",
-            "sha256": "sha256-XqlS9mXGxLZ7Bz43P3LkQBYk3qzT9M2OYJJJ6a6OKtc=",
+            "rev": "11c1ca41e9adf6948b11aeb99749e0cb369b2f8a",
+            "sha256": "sha256-g5uHTJia6zv2VpE7+uFxKkkWNfvaWEaPnnQsXtEhh3c=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "a4c4dc60d0310c5c4232ff887f4a83440b539752"
+        "version": "11c1ca41e9adf6948b11aeb99749e0cb369b2f8a"
     },
     "hass-sgcc": {
         "cargoLocks": null,
