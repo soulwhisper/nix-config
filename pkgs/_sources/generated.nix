@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "11c1ca41e9adf6948b11aeb99749e0cb369b2f8a";
+    version = "1e03cb707eef8b9937c256de9a01ec0c7dd42440";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "11c1ca41e9adf6948b11aeb99749e0cb369b2f8a";
+      rev = "1e03cb707eef8b9937c256de9a01ec0c7dd42440";
       fetchSubmodules = false;
-      sha256 = "sha256-g5uHTJia6zv2VpE7+uFxKkkWNfvaWEaPnnQsXtEhh3c=";
+      sha256 = "sha256-1CBbrwdaxPPe3lls0VytfNBwEAhVHbg41eXqU6K+6LA=";
     };
-    date = "2025-11-22";
+    date = "2025-11-23";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -119,13 +119,13 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.10.8";
+    version = "v1.11.5";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.10.8";
+      rev = "v1.11.5";
       fetchSubmodules = false;
-      sha256 = "sha256-WON2jQi8so3qZDsXVavGgSqUGBXmAYSYTdqo1o6+olk=";
+      sha256 = "sha256-53WZ1w7+FUhFY9YzfKcVle5Kjng+hlHuNn4klev+pqQ=";
     };
   };
   zotregistry = {
