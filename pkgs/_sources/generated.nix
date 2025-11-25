@@ -26,15 +26,15 @@
   };
   geo-custom = {
     pname = "geo-custom";
-    version = "e2a894ce853da6667e86d4cf4713f4f507a8d3c2";
+    version = "fd41ae91c5945445afb132e7d523d76adfaed526";
     src = fetchFromGitHub {
       owner = "soulwhisper";
       repo = "geo";
-      rev = "e2a894ce853da6667e86d4cf4713f4f507a8d3c2";
+      rev = "fd41ae91c5945445afb132e7d523d76adfaed526";
       fetchSubmodules = false;
-      sha256 = "sha256-y1lKIau0ZQyYp9IogpjpF89Q6+6SnHNpnoZR2Pbf8kM=";
+      sha256 = "sha256-Bo+wIjdvzgxKLyR8tf4of3XBMnAu57zHm79rN6ek/MM=";
     };
-    date = "2025-11-24";
+    date = "2025-11-25";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
