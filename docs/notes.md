@@ -1,9 +1,10 @@
 # Notes
 
-- networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT
-- atuin-key should be base64 format
-- change terminal theme to "catppuccin-mocha"
-- change terminal font to "Jetbrains Nerd Font Mono Regular"
+- networking.cloudflare.auth => CF-API:ZONE:DNS:EDIT;
+- atuin-key should be base64 format;
+- change terminal theme to "catppuccin-mocha";
+- change terminal font to "Jetbrains Nerd Font Mono Regular";
+- nixos use `bash` as default, darwin use `fish`; when ssh into nixos, execute `fish`;
 
 ## Deprecations
 

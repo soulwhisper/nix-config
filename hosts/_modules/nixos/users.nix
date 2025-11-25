@@ -15,7 +15,7 @@ in {
       name = "soulwhisper";
       home = "/home/soulwhisper";
       group = "soulwhisper";
-      shell = pkgs.fish;
+      shell = pkgs.bash; # nixos use bash as default
       openssh.authorizedKeys.keys = lib.strings.splitString "\n" (builtins.readFile ../../../homes/soulwhisper/ssh.pub);
       hashedPasswordFile = config.sops.secrets."users/soulwhisper/password".path;
       isNormalUser = true;
@@ -39,10 +39,10 @@ in {
     };
     users.groups.appuser.gid = 1001;
 
-    # shell for users
+    # shell for users, nixos use bash as default
     system.activationScripts.postActivation.text = ''
       # Must match what is in /etc/shells
-      chsh -s /run/current-system/sw/bin/fish soulwhisper
+      chsh -s /run/current-system/sw/bin/bash soulwhisper
     '';
   };
 }
