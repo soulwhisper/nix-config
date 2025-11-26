@@ -36,6 +36,7 @@ in {
       ])
       ++ (with pkgs.unstable; [
         cilium-cli
+        fluxcd
         kubecolor
         kubectl
         kubescape
