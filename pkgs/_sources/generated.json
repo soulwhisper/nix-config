@@ -43,7 +43,7 @@
     },
     "geo-custom": {
         "cargoLocks": null,
-        "date": "2025-11-25",
+        "date": "2025-11-26",
         "extract": null,
         "name": "geo-custom",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "soulwhisper",
             "repo": "geo",
-            "rev": "fd41ae91c5945445afb132e7d523d76adfaed526",
-            "sha256": "sha256-Bo+wIjdvzgxKLyR8tf4of3XBMnAu57zHm79rN6ek/MM=",
+            "rev": "f6cdae84f5bc7b9c742099cc4b2a42dd33345c9e",
+            "sha256": "sha256-8LlyyAoowcdRNcaeRT1n+QgbycpwUjpXQ6OiI10zBc0=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "fd41ae91c5945445afb132e7d523d76adfaed526"
+        "version": "f6cdae84f5bc7b9c742099cc4b2a42dd33345c9e"
     },
     "hass-sgcc": {
         "cargoLocks": null,
@@ -148,7 +148,7 @@
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
-        "date": "2025-10-18",
+        "date": "2025-11-25",
         "extract": null,
         "name": "rime-moqi-yinxing",
         "passthru": null,
@@ -160,12 +160,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "eb661b5d8d0fa22221466e05536954dbeaff8e56",
-            "sha256": "sha256-uV0U5eiWwQHP24b6qoQZrfps1Ar9dnFMuwyoOwuLrdo=",
+            "rev": "b208a84f4e61cf9d3e0727b63786a23647e171ca",
+            "sha256": "sha256-ICfWVZeKXonDh1ZS6PhFv130i7p+ItNeNCuLWhLmvic=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "eb661b5d8d0fa22221466e05536954dbeaff8e56"
+        "version": "b208a84f4e61cf9d3e0727b63786a23647e171ca"
     },
     "singbox-custom": {
         "cargoLocks": null,
