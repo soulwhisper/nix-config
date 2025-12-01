@@ -20,13 +20,13 @@
 
     # nix-darwin - nix modules for darwin (MacOS)
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.05"; # todo
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # catppuccin - Soothing pastel theme for Nix
     catppuccin = {
-      url = "github:catppuccin/nix/release-25.05"; # todo
+      url = "github:catppuccin/nix/release-25.11";
     };
 
     # sops-nix - secrets with mozilla sops
