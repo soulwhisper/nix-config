@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs and unstable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Flake-parts - Simplify Nix Flakes with the module system
@@ -14,19 +14,19 @@
 
     # home-manager - home user+dotfile manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-darwin - nix modules for darwin (MacOS)
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # catppuccin - Soothing pastel theme for Nix
     catppuccin = {
-      url = "github:catppuccin/nix/release-25.05";
+      url = "github:catppuccin/nix/release-25.11";
     };
 
     # sops-nix - secrets with mozilla sops
