@@ -26,7 +26,7 @@
 
     # catppuccin - Soothing pastel theme for Nix
     catppuccin = {
-      url = "github:catppuccin/nix/release-25.11";
+      url = "github:catppuccin/nix/main";
     };
 
     # sops-nix - secrets with mozilla sops
