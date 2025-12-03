@@ -29,7 +29,7 @@ in {
           };
         };
       };
-      plugin = {
+      plugins = {
         # ref:https://github.com/derailed/k9s/blob/master/plugins/resource-recommendations.yaml
         # in deployments/daemonsets/statefulsets view
         # Shift-K (no confirmation) to get resource recommendations

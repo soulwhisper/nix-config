@@ -6,7 +6,6 @@
 }: {
   imports = [
     # : folder
-    ./desktop
     ./filesystems
     ./hardware
     ./secrets
@@ -71,10 +70,12 @@
       chrony.enable = true;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
+      mihomo.enable = true;
+      mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
       monitoring.enable = true;
       openssh.enable = true;
     };
 
-    system.stateVersion = "25.05";
+    system.stateVersion = "25.11";
   };
 }

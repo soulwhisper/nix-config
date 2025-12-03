@@ -26,7 +26,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9801];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!reverseProxyCaddy.enable) [9802];
 
     services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable (
       (lib.optionalString cfg.internal "tls internal\n")
@@ -37,7 +37,7 @@ in {
           file_server
         }
         handle {
-          reverse_proxy localhost:9801
+          reverse_proxy localhost:9802
         }
       ''
     );
@@ -48,7 +48,7 @@ in {
     # ref:https://github.com/NixOS/nixpkgs/issues/385193
     services.netbox = {
       enable = true;
-      port = 9801;
+      port = 9802;
       listenAddress = "[::]";
       secretKeyFile = saltFile;
       plugins = python3Packages:

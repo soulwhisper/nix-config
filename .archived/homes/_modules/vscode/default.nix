@@ -27,7 +27,7 @@ in {
       package = pkgs.unstable.vscode;
       profiles.default.extensions = let
         pkgs-ext = import inputs.nixpkgs {
-          inherit (pkgs) system;
+          inherit (pkgs.stdenv.hostPlatform) system;
           config.allowUnfree = true;
           overlays = [inputs.nix-vscode-extensions.overlays.default];
         };

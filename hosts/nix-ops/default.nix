@@ -27,20 +27,21 @@
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 
         # : Networking
-        mihomo.enable = true;
-        mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
         easytier.proxy_networks = ["172.19.80.0/24" "172.19.82.0/24"];
 
         # : Monitoring
+        scrutiny.enable = false;
         smartd.enable = false;
         nut.enable = false;
 
-        # : K8S Test
-        talos.api.enable = true;
-        garage.enable = true; # ep=:9000
+        # : Test
+        unifi-server.enable = true; # ep=:9801
+        unifi-server.ip = "172.19.82.10";
 
         # : LAB
+        garage.enable = true; # ep=:9000
         kms.enable = true;
+        talos.api.enable = true;
         netbox.enable = true; # sub=box
 
         # : Others

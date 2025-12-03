@@ -6,14 +6,11 @@
   ...
 }: {
   caddy-custom = pkgs.callPackage ./caddy-custom {};
-  geo-custom = pkgs.callPackage ./geo-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-switch = pkgs.callPackage ./kubectl-switch {};
-  mosdns-custom = pkgs.callPackage ./mosdns-custom {};
   rime-moqi-yinxing = pkgs.callPackage ./rime-moqi-yinxing {};
-  singbox-custom = pkgs.callPackage ./singbox-custom {};
-  talhelper = inputs.talhelper.packages.${pkgs.system}.default;
+  talhelper = inputs.talhelper.packages.${pkgs.stdenv.hostPlatform.system}.default;
   talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};
   zotregistry = pkgs.callPackage ./zotregistry {};

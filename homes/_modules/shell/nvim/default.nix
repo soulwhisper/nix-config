@@ -134,7 +134,7 @@
     };
 
     # Use Neovim as the editor for git commit messages
-    programs.git.extraConfig.core.editor = "nvim";
+    programs.git.settings.core.editor = "nvim";
     # Set Neovim as the default app for manual pages
     home.sessionVariables.MANPAGER = "nvim +Man!";
   };

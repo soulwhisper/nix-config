@@ -39,8 +39,6 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-latest
-          - system: nix-dev
-            os: ubuntu-latest
           - system: nix-infra
             os: ubuntu-latest
           - system: nix-ops

@@ -24,18 +24,6 @@
     };
     date = "2025-10-22";
   };
-  geo-custom = {
-    pname = "geo-custom";
-    version = "8377293d380da3ba55dfd96c3c04fc248714b56c";
-    src = fetchFromGitHub {
-      owner = "soulwhisper";
-      repo = "geo";
-      rev = "8377293d380da3ba55dfd96c3c04fc248714b56c";
-      fetchSubmodules = false;
-      sha256 = "sha256-91z/QN8eH6e9Lg3DPZkUJ+NJE7Zbksx89FzT/srj5dA=";
-    };
-    date = "2025-11-28";
-  };
   hass-sgcc = {
     pname = "hass-sgcc";
     version = "v1.6.8";
@@ -70,18 +58,6 @@
       sha256 = "sha256-YfdQbjP+8UkeYCG0HSWMfXCayO6/ffEv9pT/hQ29sgI=";
     };
   };
-  mosdns-custom = {
-    pname = "mosdns-custom";
-    version = "ab137f2b42142610ece97dd73610458794f15aa1";
-    src = fetchFromGitHub {
-      owner = "yyysuo";
-      repo = "mosdns";
-      rev = "ab137f2b42142610ece97dd73610458794f15aa1";
-      fetchSubmodules = false;
-      sha256 = "sha256-RTQQ2aCbTQihUYiiSD267IpKDTjJ/Iyiu9seoKNr0bI=";
-    };
-    date = "2025-09-12";
-  };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
     version = "b208a84f4e61cf9d3e0727b63786a23647e171ca";
@@ -94,27 +70,15 @@
     };
     date = "2025-11-25";
   };
-  singbox-custom = {
-    pname = "singbox-custom";
-    version = "94a8e7dca9946e30b2ea85e2061aa13b20485a68";
-    src = fetchFromGitHub {
-      owner = "CHIZI-0618";
-      repo = "sing-box";
-      rev = "94a8e7dca9946e30b2ea85e2061aa13b20485a68";
-      fetchSubmodules = false;
-      sha256 = "sha256-qOe8ErNSSMeOuyVw5jRXFmIfKB90kayp7hl10L4gAA4=";
-    };
-    date = "2025-10-31";
-  };
   talos-api = {
     pname = "talos-api";
-    version = "v1.0.11";
+    version = "v1.0.12";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "discovery-service";
-      rev = "v1.0.11";
+      rev = "v1.0.12";
       fetchSubmodules = false;
-      sha256 = "sha256-IM+YRMEDDTWuYeYclIJhsqLmYSR1HZ6dXguc9sXmoDw=";
+      sha256 = "sha256-N2ryrssOO5vTW0w9klF1GiMXB6++4l4F+90QrZmNvV8=";
     };
   };
   talosctl = {
@@ -141,14 +105,14 @@
   };
   zotregistry-ui = {
     pname = "zotregistry-ui";
-    version = "f8702923d190bb60e39f43af4f13aab3f13ebb1e";
+    version = "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zui";
-      rev = "f8702923d190bb60e39f43af4f13aab3f13ebb1e";
+      rev = "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344";
       fetchSubmodules = false;
-      sha256 = "sha256-ZXw3bzpYqywKiEWLjza7jv7EV/StVqlBKFX4nBgZZus=";
+      sha256 = "sha256-ZHSlzPhCd4l3tkvN3uIpjSAajL+XTseJj+qMhnkMrIA=";
     };
-    date = "2025-11-18";
+    date = "2025-11-29";
   };
 }

@@ -44,7 +44,7 @@ postgres: 5432
 n8n: 5678
 home-assistant: 8123
 prometheus: 9090
-unifi: 8080,8443,8880,8843,6789,3478,10001
+unifi-network: 8080,8443,8880,8843,6789,3478,10001
 easytier: 11010
 fvtt: 30000
 wireguard: 51820
@@ -74,16 +74,17 @@ adguard-ui: 9200
 proxy-ui: 9201
 sftpgo-ui: 9202
 meshcentral: 9203
+scrutiny-ui: 9204
 
 ## k8s, 9300-9399
 talos-api: 9300
-talos-pxe: 9301
 
 ## app-dev, 9500-9799
 postgrest: 9500
 
 ## app, 9800-9999
 portainer/dockge: 9800
-ollama: 9801
+unifi-server: 9801
+netbox: 9802
 
 ```

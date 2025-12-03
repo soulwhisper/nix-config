@@ -7,11 +7,6 @@
   config = {
     programs.ssh = {
       enable = true;
-      controlMaster = "auto";
-      controlPath = "~/.ssh/control/ssh-%r@%h:%p";
-      includes = [
-        "config.d/*"
-      ];
 
       matchBlocks = {
         "internal" = {
@@ -19,10 +14,17 @@
           sendEnv = [
             "TERM=xterm-256color"
           ];
-          extraOptions = {
-            StrictHostKeyChecking = "no";
-            UserKnownHostsFile = "/dev/null";
-          };
+          # defaults
+          forwardAgent = false;
+          addKeysToAgent = "no";
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "/dev/null";
+          controlMaster = "auto";
+          controlPath = "~/.ssh/control/ssh-%r@%h:%p";
+          controlPersist = "no";
         };
       };
     };
