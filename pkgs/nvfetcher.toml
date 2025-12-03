@@ -7,10 +7,6 @@ fetch.github = "caddy-dns/cloudflare"
 src.git = "https://github.com/caddy-dns/cloudflare.git"
 src.branch = "master"
 # pinned = true  # pin golang version
-[geo-custom]
-fetch.github = "soulwhisper/geo"
-src.git = "https://github.com/soulwhisper/geo.git"
-src.branch = "main"
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
@@ -21,19 +17,10 @@ src.branch = "main"
 [kubectl-switch]
 fetch.github = "mirceanton/kubectl-switch"
 src.github = "mirceanton/kubectl-switch"
-[mosdns-custom]
-fetch.github = "yyysuo/mosdns"
-src.git = "https://github.com/yyysuo/mosdns.git"
-src.branch = "main"
-pinned = true  # pin golang version
 [rime-moqi-yinxing]
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
 src.branch = "main"
-[singbox-custom]
-fetch.github = "CHIZI-0618/sing-box"
-src.git = "https://github.com/CHIZI-0618/sing-box.git"
-src.branch = "dev-next"
 [talosctl]
 fetch.github = "siderolabs/talos"
 src.github = "siderolabs/talos"

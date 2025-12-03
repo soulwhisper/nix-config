@@ -44,7 +44,7 @@ in {
     virtualisation.oci-containers.containers."moviepilot" = {
       autoStart = true;
       image = "ghcr.io/jxxghp/moviepilot:latest";
-      extraOptions = ["--pull=newer"];
+      pull = "newer";
       ports = [
         "9804:9804/tcp"
         "9805:9805/tcp"

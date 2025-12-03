@@ -4,14 +4,15 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.services.unifi-controller;
+  cfg = config.modules.services.unifi-network;
 in {
-  options.modules.services.unifi-controller = {
-    enable = lib.mkEnableOption "unifi-controller";
+  options.modules.services.unifi-network = {
+    enable = lib.mkEnableOption "unifi-network";
   };
 
   config = lib.mkIf cfg.enable {
-    # use ip:8443 in case network failing.
+    # conflict with unifi-server
+    # use ip:8443 in case network failing
 
     networking.firewall.allowedTCPPorts = [8080 8443];
     networking.firewall.allowedUDPPorts = [3478 10001];

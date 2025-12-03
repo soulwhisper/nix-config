@@ -7,8 +7,5 @@
   "zotregistry-ui": "sha256-ADnZTs57zMhdBbamd6+mA0obsfuqstWSIcBk+P5GJrc=",
   "hass-sgcc": "",
   "rime-moqi-yinxing": "",
-  "geo-custom": "",
-  "mosdns-custom": "sha256-lgA0ojf/rGq/pwTojLb+I8y/FPOhFJTVlQFhcuEHLGY=",
-  "singbox-custom": "sha256-OxhwP7uYXpnPFkZBFKw+4fw+gkufHNAUV3xZ4VFj2yQ=",
   "kubectl-switch": "sha256-5rRl2wUTjovFfjUnP3UdzBbUvr1+Jqh8I9ssV67tRUM="
 }

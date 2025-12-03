@@ -3,29 +3,27 @@
     ./adguard
     ./caddy
     ./chrony
-    ./dae
     ./easytier
     ./forgejo
     ./garage
     ./home-assistant
     ./kms
+    ./lyrion
     ./meshcentral
     ./mihomo
     ./monitoring
-    ./mosdns
     ./netbox
     ./nfs4
     ./nut
-    ./ollama
     ./openssh
     ./podman
     ./restic
     ./samba
+    ./scrutiny
     ./sftpgo
-    ./singbox
     ./smartd
     ./talos-api
-    ./unifi-controller
+    ./unifi-server
     ./versitygw
     ./zotregistry
     ./zrepl

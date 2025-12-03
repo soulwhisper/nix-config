@@ -17,7 +17,7 @@ in {
     #   docker-compose
     # ];
 
-    # use `extraOptions = ["--pull=newer"];` to keep image new;
+    # use `pull = "newer";` to keep image new;
     # podman new network-stack `aardvark` only use `53/tcp_udp` on `podman*`;
     # dns-resolving ref: https://github.com/NixOS/nixpkgs/issues/226365
 

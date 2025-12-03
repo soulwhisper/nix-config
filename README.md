@@ -7,7 +7,6 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - soulwhisper-mba, my macbook configs.
 - nix-infra, production vm, for homelab infrastructure.
 - nix-ops, staging vm, for tests and various operations.
-- nix-dev, laptop llm workstation, with Nvidia GPU. ZFS-Impermanence.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Usage

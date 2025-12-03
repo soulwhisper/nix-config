@@ -20,22 +20,18 @@
       filesystems.xfs.enable = true;
       services = {
         # : Networking
-        mosdns.enable = true;
-        singbox.enable = true;
-        singbox.subscription = config.sops.secrets."networking/proxy/subscription".path;
-        # easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
+        easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
         # : Monitoring
         smartd.enable = false;
         nut.enable = false;
 
-        # : K8S Prod
+        # : LAB
+        garage.enable = true; # ep=:9000
         meshcentral.enable = true; # ep=:9203
         talos.api.enable = true; # ep=:9300
-        garage.enable = true; # ep=:9000
-
-        # : LAB
-        unifi-controller.enable = true; # ep=:8443
+        unifi-server.enable = true; # ep=:9801
+        unifi-server.ip = "10.0.0.200";
 
         # : Others
         nfs4 = {

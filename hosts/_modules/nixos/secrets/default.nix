@@ -23,6 +23,11 @@
           restartUnits = ["easytier.service"];
           sopsFile = ./nixos.sops.yaml;
         };
+        "networking/proxy/subscription" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["mihomo.service"];
+          sopsFile = ./nixos.sops.yaml;
+        };
         "users/soulwhisper/password" = {
           neededForUsers = true;
           sopsFile = ./nixos.sops.yaml;
