@@ -25,7 +25,7 @@ in {
     # : archived packages
     # kubefwd,kubecm
     # : archived krew plugins
-    # cnpg,explore,kyverno,mayastor,neat,oidc-login,openebs,pgo,pv-migrate,
+    # explore,kyverno,mayastor,neat,oidc-login,openebs,pgo,pv-migrate,
 
     home.packages =
       (with pkgs; [
@@ -67,6 +67,7 @@ in {
       };
       plugins = [
         # accessibility
+        "cnpg"
         "browse-pvc"
         "rook-ceph"
         "view-secret"
