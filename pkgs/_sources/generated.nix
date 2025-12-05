@@ -14,15 +14,15 @@
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953";
+    version = "6dc1fbb7e925b0da6736780db2e90f4816b79ab7";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953";
+      rev = "6dc1fbb7e925b0da6736780db2e90f4816b79ab7";
       fetchSubmodules = false;
-      sha256 = "sha256-EMRdRwQLHJXVvnLe1v6WrC9BU2Aawu8mQUpz4NPm1F0=";
+      sha256 = "sha256-/FB0a/Ja4kDSw9SlNiusi6w7r87xHXafzEOQqLbTsyA=";
     };
-    date = "2025-10-22";
+    date = "2025-12-04";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
