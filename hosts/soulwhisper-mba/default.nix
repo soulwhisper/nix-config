@@ -21,7 +21,7 @@
 
     homebrew = {
       taps = [
-        "nikitabobko/tap"
+        # "nikitabobko/tap" # aerospace
       ];
       brews = [
       ];
@@ -30,16 +30,13 @@
         "transmission"
 
         # :: productivity
-        "audacity"
         "squirrel-app"
         "wireshark-app"
 
         # :: test
         "acorn"
         "betterdisplay"
-        "bluestacks"
         "little-snitch"
-        "maa"
         "stats"
         "vanilla"
       ];
@@ -47,8 +44,8 @@
         "DevHub" = 6476452351;
         "ReadKit" = 1615798039;
         "iCost" = 1484262528;
+        "StopTheMadness Pro" = 6471380298;
         # "Passepartout" = 1433648537;
-        # "StopTheMadness Pro" = 6471380298;
       };
     };
   };
