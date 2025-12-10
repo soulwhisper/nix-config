@@ -58,6 +58,9 @@ dns:
     - "+.argotunnel.com" # Cloudflare Tunnel
     - "+.api.letsencrypt.org" # ACME
     - "+.noirprime.com"
+    - "ntp.htsc.ac.cn" # ntp
+    - "ntp.aliyun.com" # ntp
+    - "cn.pool.ntp.org" # ntp
   nameserver:
     - system
     - https://dns.alidns.com/dns-query
