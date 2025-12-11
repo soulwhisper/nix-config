@@ -54,13 +54,16 @@ dns:
     - "*"
     - "+.lan"
     - "+.local"
-    - "+.internal"
-    - "+.argotunnel.com" # Cloudflare Tunnel
-    - "+.api.letsencrypt.org" # ACME
+    - "+.homelab.internal"
     - "+.noirprime.com"
-    - "ntp.htsc.ac.cn" # ntp
-    - "ntp.aliyun.com" # ntp
-    - "cn.pool.ntp.org" # ntp
+    # api
+    - "+.api.letsencrypt.org"
+    - "+.argotunnel.com"
+    - "+.m.daocloud.io"
+    # ntp
+    - "time.*.com"
+    - "ntp.*.com"
+    - "+.pool.ntp.org"
   nameserver:
     - system
     - https://dns.alidns.com/dns-query
@@ -77,15 +80,14 @@ sniffer:
     TLS:
       ports: [443, 8443]
     QUIC:
-      ports: [443, 8443]
+      ports: [443]
   skip-domain:
-    - "*"
-    - "+.lan"
-    - "+.local"
-    - "+.internal"
-    - "+.argotunnel.com" # Cloudflare Tunnel
-    - "+.api.letsencrypt.org" # ACME
-    - "+.noirprime.com"
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - +.apple.com
+    - +.oray.com
+    - +.sunlogin.net
+    - +.push.apple.com
 
 # : tun
 tun:
@@ -490,9 +492,13 @@ rule-providers:
 
 # : 分流规则
 rules:
+  # :: ACME
+  - DOMAIN-SUFFIX,api.letsencrypt.org,DIRECT
   # :: Cloudflare
   - DOMAIN-SUFFIX,argotunnel.com,DIRECT
   - DOMAIN-SUFFIX,noirprime.com,DIRECT
+  # :: Mirrors
+  - DOMAIN-SUFFIX,m.daocloud.io,DIRECT
   # :: 非 IP 类规则
   - RULE-SET,reject_non_ip,REJECT
   - RULE-SET,reject_domainset,REJECT

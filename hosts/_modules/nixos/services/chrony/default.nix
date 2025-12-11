@@ -15,11 +15,10 @@ in {
 
     services.chrony = {
       enable = true;
-      package = pkgs.unstable.chrony;
+      package = pkgs.chrony;
+      enableNTS = true;
       servers = [
-        "ntp.ntsc.ac.cn"
-        "ntp.aliyun.com"
-        "cn.pool.ntp.org"
+        "time.cloudflare.com"
       ];
       extraConfig = ''
         allow all
