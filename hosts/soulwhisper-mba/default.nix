@@ -12,39 +12,24 @@
       localHostName = hostname;
     };
 
-    # : test/temp apps list
-
     environment.systemPackages = with pkgs; [
       # cardforge, https://github.com/Card-Forge/forge/releases
       unstable.forge-mtg
     ];
 
+    # test apps list
     homebrew = {
       taps = [
-        # "nikitabobko/tap" # aerospace
       ];
       brews = [
       ];
       casks = [
-        # :: storage
-        "transmission"
-
-        # :: productivity
-        "squirrel-app"
-        "wireshark-app"
-
-        # :: test
-        "acorn"
-        "betterdisplay"
+        # "betterdisplay"
         "little-snitch"
-        "stats"
-        "vanilla"
+        "wireshark-app"
       ];
       masApps = {
-        "DevHub" = 6476452351;
-        "ReadKit" = 1615798039;
-        "iCost" = 1484262528;
-        "StopTheMadness Pro" = 6471380298;
+        # "StopTheMadness Pro" = 6471380298;
         # "Passepartout" = 1433648537;
       };
     };

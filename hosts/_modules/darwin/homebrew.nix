@@ -37,6 +37,7 @@ _: {
       # :: storage
       "dropbox"
       "cyberduck" # replace transmit
+      "transmission"
 
       # :: development
       "cursor"
@@ -48,16 +49,19 @@ _: {
       "google-chrome"
 
       # :: media
+      "foobar2000"
       "iina"
       "neteasemusic"
       "youtube-music"
 
       # :: productivity
+      "acorn"
       "alfred" # powerpack still overshine Tahoe and raycast
       "anki"
       "discord"
       "obsidian"
-      "raindropio"
+      "stats"
+      "squirrel-app"
       "telegram"
       "thunderbird"
       "ticktick"
@@ -68,6 +72,7 @@ _: {
       # :: utilities
       # "nikitabobko/tap/aerospace" # tilling, cant split
       "jordanbaird-ice" # bartender replacement
+      # "vanilla" # ice replacement
       # "karabiner-elements" # not-used
       # "keyboard-maestro" # not-used
       "pixpin" # cleanshotx replacement
@@ -75,9 +80,12 @@ _: {
     ];
     masApps = {
       "Caffeinated" = 1362171212;
+      "DevHub" = 6476452351;
+      "iCost" = 1484262528;
       "Keka" = 470158793;
       "Numbers" = 409203825;
       "Pages" = 409201541;
+      "ReadKit" = 1615798039;
       "Keynote" = 409183694;
       "Windows App" = 1295203466;
     };
