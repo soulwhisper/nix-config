@@ -97,12 +97,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.3.5",
-            "sha256": "sha256-YtyqcKoU8MLD/CQyxcPzeH2pHFz2oy2SRJoVgBk9sBU=",
+            "rev": "v2.4.0",
+            "sha256": "sha256-bVmUgNGcVXoGn49FczN+cAi+aKWKsl98UmVcmtGm1g0=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.3.5"
+        "version": "v2.4.0"
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
