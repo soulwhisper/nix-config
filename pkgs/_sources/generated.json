@@ -97,12 +97,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.4.1",
-            "sha256": "sha256-gVSv5uosW9UgQEgT680aziPJcwRf3qNrcOzQ879jL9I=",
+            "rev": "v2.4.2",
+            "sha256": "sha256-RTYijK5NZ5iuxFvb/U+PA+KryR1b8pxj6qvTUMGxH7g=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.4.1"
+        "version": "v2.4.2"
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
@@ -181,12 +181,12 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zot",
-            "rev": "v2.1.11",
-            "sha256": "sha256-j9iS9qN+L9+vUrW7n5oQ6BZ/ssUasWVHTd/7zYTJNEQ=",
+            "rev": "v2.1.12",
+            "sha256": "sha256-h8Nx/DwWsF8RCDGEZJQH7W42gGWJ/FmAl1Ae+Fq0DT0=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.1.11"
+        "version": "v2.1.12"
     },
     "zotregistry-ui": {
         "cargoLocks": null,
