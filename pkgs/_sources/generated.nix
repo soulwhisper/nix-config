@@ -49,13 +49,13 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.4.1";
+    version = "v2.4.2";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.4.1";
+      rev = "v2.4.2";
       fetchSubmodules = false;
-      sha256 = "sha256-gVSv5uosW9UgQEgT680aziPJcwRf3qNrcOzQ879jL9I=";
+      sha256 = "sha256-RTYijK5NZ5iuxFvb/U+PA+KryR1b8pxj6qvTUMGxH7g=";
     };
   };
   rime-moqi-yinxing = {
@@ -94,13 +94,13 @@
   };
   zotregistry = {
     pname = "zotregistry";
-    version = "v2.1.11";
+    version = "v2.1.12";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zot";
-      rev = "v2.1.11";
+      rev = "v2.1.12";
       fetchSubmodules = false;
-      sha256 = "sha256-j9iS9qN+L9+vUrW7n5oQ6BZ/ssUasWVHTd/7zYTJNEQ=";
+      sha256 = "sha256-h8Nx/DwWsF8RCDGEZJQH7W42gGWJ/FmAl1Ae+Fq0DT0=";
     };
   };
   zotregistry-ui = {

@@ -3,9 +3,9 @@
   "talosctl": "sha256-tGlGlTMIsBLQGvIYU/zEE0devM0j31ER8L8hacXvTz4=",
   "caddy-custom": "sha256-I+mkuXZvSxl4sOGREbUEuxxZuDxrBFBDUU5PmZpUuNk=",
   "caddy-plugin-cloudflare": "",
-  "zotregistry": "sha256-jDNSAEDkn/Zt8zzDJ7hCy0U86bebv7tpk68aEHJTNYc=",
+  "zotregistry": "sha256-AY/efOaBQPDSDLrSaWL2xTFQn2IM6ZCQ+VNcXd3k58U=",
   "zotregistry-ui": "sha256-ADnZTs57zMhdBbamd6+mA0obsfuqstWSIcBk+P5GJrc=",
   "hass-sgcc": "",
   "rime-moqi-yinxing": "",
-  "kubectl-switch": "sha256-ULJ4ZBIeizk6/USALSzzbg07totqbBd0S8a5DSEYLCA="
+  "kubectl-switch": "sha256-LZ3Qky8HqMWMBzshO3FD2AufJfPbnVtf4jRe9rbs6g0="
 }
