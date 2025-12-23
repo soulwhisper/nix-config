@@ -97,12 +97,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.4.2",
-            "sha256": "sha256-RTYijK5NZ5iuxFvb/U+PA+KryR1b8pxj6qvTUMGxH7g=",
+            "rev": "v2.4.3",
+            "sha256": "sha256-StuRjn0yRbQsOvPGUYBoBY4o0x6w3dkqLNKeTnWqvS4=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.4.2"
+        "version": "v2.4.3"
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
@@ -160,12 +160,12 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "talos",
-            "rev": "v1.11.6",
-            "sha256": "sha256-RPmveQ52PqpD/OG/7SsJbKlZjggRU8uBqJyNmOszWtg=",
+            "rev": "v1.12.0",
+            "sha256": "sha256-u8/T01PWBGH3bJCNoC+FIzp8aH05ci4Kr3eHHWPDRkI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.11.6"
+        "version": "v1.12.0"
     },
     "zotregistry": {
         "cargoLocks": null,

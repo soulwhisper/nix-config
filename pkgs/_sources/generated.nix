@@ -49,13 +49,13 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.4.2";
+    version = "v2.4.3";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.4.2";
+      rev = "v2.4.3";
       fetchSubmodules = false;
-      sha256 = "sha256-RTYijK5NZ5iuxFvb/U+PA+KryR1b8pxj6qvTUMGxH7g=";
+      sha256 = "sha256-StuRjn0yRbQsOvPGUYBoBY4o0x6w3dkqLNKeTnWqvS4=";
     };
   };
   rime-moqi-yinxing = {
@@ -83,13 +83,13 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.11.6";
+    version = "v1.12.0";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.11.6";
+      rev = "v1.12.0";
       fetchSubmodules = false;
-      sha256 = "sha256-RPmveQ52PqpD/OG/7SsJbKlZjggRU8uBqJyNmOszWtg=";
+      sha256 = "sha256-u8/T01PWBGH3bJCNoC+FIzp8aH05ci4Kr3eHHWPDRkI=";
     };
   };
   zotregistry = {
