@@ -94,13 +94,13 @@
   };
   zotregistry = {
     pname = "zotregistry";
-    version = "v2.1.12";
+    version = "v2.1.13";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zot";
-      rev = "v2.1.12";
+      rev = "v2.1.13";
       fetchSubmodules = false;
-      sha256 = "sha256-h8Nx/DwWsF8RCDGEZJQH7W42gGWJ/FmAl1Ae+Fq0DT0=";
+      sha256 = "sha256-1y2nkCAKXfqvxn3KkKUhTgRImm+RNqK42xFsRuYgw+0=";
     };
   };
   zotregistry-ui = {
