@@ -47,11 +47,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Talhelper - A tool to help create Talos Kubernetes clusters
+    # Talhelper - A tool to help create Talos Kubernetes clusters; Deprecated.
     # has flake-parts inputs
-    talhelper = {
-      url = "github:budimanjojo/talhelper";
-    };
+    # talhelper = {
+    #   url = "github:budimanjojo/talhelper";
+    # };
   };
 
   outputs = {flake-parts, ...} @ inputs: let

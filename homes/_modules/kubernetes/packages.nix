@@ -23,7 +23,7 @@
 in {
   config = lib.mkIf cfg.enable {
     # : archived packages
-    # kubefwd,kubecm
+    # kubefwd,kubecm,talhelper
     # : archived krew plugins
     # explore,kyverno,mayastor,neat,oidc-login,openebs,pgo,pv-migrate,
 
@@ -31,7 +31,6 @@ in {
       (with pkgs; [
         kubecolor-catppuccin
         kubectl-switch
-        talhelper
         talosctl
       ])
       ++ (with pkgs.unstable; [
