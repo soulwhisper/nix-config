@@ -52,7 +52,9 @@ in {
     virtualisation.oci-containers.containers."crafty" = {
       autoStart = true;
       image = "registry.gitlab.com/crafty-controller/crafty-4:latest";
-      pull = "newer";
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
       ports = [
         "9808:8443/tcp"
         "25500-25600:25500-25600"

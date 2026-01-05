@@ -37,6 +37,7 @@
 ```shell
 # should-not-change
 caddy: 80,443
+vector: 514
 sftpd: 2022
 http-proxy: 1080
 AMT-server: 4433
@@ -62,7 +63,8 @@ versitygw: 9000
 zot: 9002
 forgejo: 9003,9004
 
-## monitor, 9100-9199, internal
+## exporters, 9100-9199
+prometheus: 9100
 node-exporter: 9101
 zfs-exporter: 9102
 nut-exporter: 9103
@@ -76,14 +78,17 @@ sftpgo-ui: 9202
 meshcentral: 9203
 scrutiny-ui: 9204
 
-## k8s, 9300-9399
+## k8s-infra, 9300-9399
 talos-api: 9300
 
-## app-dev, 9500-9799
-postgrest: 9500
+## k8s-mon, 9400-9499
+gatus: 9400
+
+## app-dev, 9700-9799
+postgrest: 9700
 
 ## app, 9800-9999
-portainer/dockge: 9800
+dockge: 9800
 unifi-server: 9801
 netbox: 9802
 

@@ -40,7 +40,9 @@ in {
     virtualisation.oci-containers.containers."fvtt" = {
       autoStart = true;
       image = "felddy/foundryvtt:release";
-      pull = "newer";
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
       ports = [
         "30000:30000/tcp"
       ];

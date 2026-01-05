@@ -1,8 +1,8 @@
 set quiet := true
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
-mod darwin ".justfiles/darwin"
-mod nixos ".justfiles/nixos"
+mod darwin ".justfiles/darwin.just"
+mod nixos ".justfiles/nixos.just"
 
 [private]
 default:

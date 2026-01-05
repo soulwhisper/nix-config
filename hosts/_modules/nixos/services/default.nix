@@ -3,14 +3,16 @@
     ./adguard
     ./caddy
     ./chrony
+    ./dockge
     ./easytier
+    ./exporters
     ./forgejo
     ./garage
+    ./gatus
     ./home-assistant
     ./kms
     ./meshcentral
     ./mihomo
-    ./monitoring
     ./netbox
     ./nfs4
     ./nut
@@ -23,6 +25,7 @@
     ./smartd
     ./talos-api
     ./unifi-server
+    ./vector
     ./versitygw
     ./zotregistry
     ./zrepl

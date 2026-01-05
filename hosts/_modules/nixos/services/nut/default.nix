@@ -14,7 +14,7 @@ in {
     networking.firewall.allowedTCPPorts = [3493];
 
     environment.etc = {
-      "nut/password".source = pkgs.writeText "password" "sEcr3T!";
+      "nut/password".source = pkgs.writeText "nut-password" "secret";
     };
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -22,13 +22,13 @@ in {
     power.ups = {
       enable = true;
       mode = "netserver";
-      ups."santak-box" = {
+      ups."ups" = {
         driver = "usbhid-ups";
         port = "auto";
         description = "SANTAK TG-BOX 850";
-        directives = ["default.battery.charge.low = 75"];
+        directives = ["default.battery.charge.low = 50"];
       };
-      users."upsmon" = {
+      users."monuser" = {
         upsmon = "primary";
         actions = ["SET" "FSD"];
         instcmds = ["ALL"];
@@ -44,7 +44,7 @@ in {
           port = 3493;
         }
       ];
-      upsmon.monitor."santak-box".user = "upsmon";
+      upsmon.monitor."ups".user = "monuser";
     };
   };
 }
