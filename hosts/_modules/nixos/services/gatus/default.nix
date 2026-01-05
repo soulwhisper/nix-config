@@ -82,11 +82,11 @@ in {
             dns = {
               query-name = "gateway-int.${cfg.endpoints.k8s.domain}";
               query-type = "A";
-              nameservers = [ "${cfg.endpoints.infra.dns}" ];
+              nameservers = ["${cfg.endpoints.infra.dns}"];
             };
-            conditions = [ "[BODY] == ${cfg.endpoints.k8s.internal.ingress}" ];
+            conditions = ["[BODY] == ${cfg.endpoints.k8s.internal.ingress}"];
             interval = "1m";
-            alerts = [ alertCritical ];
+            alerts = [alertCritical];
           }
           {
             name = "Check: External-DNS (Cloudflare)";
@@ -94,11 +94,11 @@ in {
             dns = {
               query-name = "gateway-ext.${cfg.endpoints.k8s.domain}";
               query-type = "A";
-              nameservers = [ "223.5.5.5" "8.8.8.8" "1.1.1.1" "1.0.0.1" ];
+              nameservers = ["223.5.5.5" "8.8.8.8" "1.1.1.1" "1.0.0.1"];
             };
-            conditions = [ "[DNS_RCODE] == NOERROR" ];
+            conditions = ["[DNS_RCODE] == NOERROR"];
             interval = "1m";
-            alerts = [ alertCritical ];
+            alerts = [alertCritical];
           }
           {
             name = "Check: TProxy";
@@ -110,9 +110,9 @@ in {
                 "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
               };
             };
-            conditions = [ "[STATUS] == 200" ];
+            conditions = ["[STATUS] == 200"];
             interval = "1m";
-            alerts = [ alertCritical ];
+            alerts = [alertCritical];
           }
           # ---------------------------------------------------------
           # Infrastructure / Services
@@ -121,17 +121,17 @@ in {
             name = "Infra: Postgres";
             group = "Infrastructure";
             url = "tcp://postgres.${cfg.endpoints.k8s.domain}";
-            conditions = [ "[CONNECTED] == true" ];
+            conditions = ["[CONNECTED] == true"];
             interval = "1m";
-            alerts = [ alertWarning ];
+            alerts = [alertWarning];
           }
           {
             name = "Infra: Ollama";
             group = "Infrastructure";
             url = "http://ollama.${cfg.endpoints.k8s.domain}";
-            conditions = [ "[STATUS] == 200" ];
+            conditions = ["[STATUS] == 200"];
             interval = "1m";
-            alerts = [ alertWarning ];
+            alerts = [alertWarning];
           }
           # ---------------------------------------------------------
           # Connectivity / Apps
@@ -140,13 +140,14 @@ in {
             name = "App: Certificates";
             group = "Connectivity";
             url = "https://grafana.${cfg.endpoints.k8s.domain}";
-            conditions = [ "[CERTIFICATE_EXPIRATION] > 72h" ];
+            conditions = ["[CERTIFICATE_EXPIRATION] > 72h"];
             interval = "24h";
             alerts = [
-              (alertWarning // {
-                failure-threshold = 1;
-                description = "📅 SSL Certificates for ${cfg.endpoints.k8s.domain} expire soon!";
-              })
+              (alertWarning
+                // {
+                  failure-threshold = 1;
+                  description = "📅 SSL Certificates for ${cfg.endpoints.k8s.domain} expire soon!";
+                })
             ];
           }
           {
@@ -157,17 +158,17 @@ in {
               dns-resolver = "tcp://${cfg.endpoints.infra.dns}:53";
               insecure = true;
             };
-            conditions = [ "[STATUS] == 200" ];
+            conditions = ["[STATUS] == 200"];
             interval = "1m";
-            alerts = [ alertWarning ];
+            alerts = [alertWarning];
           }
           {
             name = "App: External (via CF Tunnel)";
             group = "Connectivity";
             url = "https://kromgo.${cfg.endpoints.k8s.domain}";
-            conditions = [ "[STATUS] == 404" ];
+            conditions = ["[STATUS] == 404"];
             interval = "1m";
-            alerts = [ alertWarning ];
+            alerts = [alertWarning];
           }
         ];
       };

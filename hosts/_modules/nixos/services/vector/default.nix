@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "vector";
     sinks.endpoints = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ "http://logs.noirprime.com/insert/elasticsearch/" ];
+      default = ["http://logs.noirprime.com/insert/elasticsearch/"];
       description = ''
         List of Vector sink endpoints to send logs to VictoriaLogs.
       '';
@@ -52,7 +52,7 @@ in {
         transforms = {
           syslog_formatted = {
             type = "remap";
-            inputs = [ "syslog_in_udp" "syslog_in_tcp" ];
+            inputs = ["syslog_in_udp" "syslog_in_tcp"];
             source = ''
               .host = string(.host) ?? "unknown_device"
               let host_lower = downcase(.host)
@@ -64,7 +64,7 @@ in {
         sinks = {
           to_victoria_logs = {
             type = "elasticsearch";
-            inputs = [ "syslog_formatted" ];
+            inputs = ["syslog_formatted"];
             endpoints = cfg.sinks.endpoints;
             mode = "bulk";
             compression = "gzip";

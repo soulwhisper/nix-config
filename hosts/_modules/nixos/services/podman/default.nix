@@ -25,7 +25,7 @@ in {
     # : auto-update containers
     # requires: labels = { "io.containers.autoupdate" = "registry"; };
     systemd.timers.podman-auto-update = {
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
