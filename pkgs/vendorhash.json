@@ -1,6 +1,6 @@
 {
   "talos-api": "sha256-tSkZ1YIUo5DMwiGEPohfHRbKAia0G048DDego7R8Ulc=",
-  "talosctl": "sha256-LLtbdKq028EEs8lMt3uiwMo2KMJ6nJKf6xFyLJlg+oM=",
+  "talosctl": "",
   "caddy-custom": "sha256-I+mkuXZvSxl4sOGREbUEuxxZuDxrBFBDUU5PmZpUuNk=",
   "caddy-plugin-cloudflare": "",
   "zotregistry": "sha256-AY/efOaBQPDSDLrSaWL2xTFQn2IM6ZCQ+VNcXd3k58U=",

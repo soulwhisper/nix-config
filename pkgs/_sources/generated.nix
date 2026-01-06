@@ -60,15 +60,15 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "b208a84f4e61cf9d3e0727b63786a23647e171ca";
+    version = "1edf89df37ea643a65d9b12f2296c454b13fef4c";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "b208a84f4e61cf9d3e0727b63786a23647e171ca";
+      rev = "1edf89df37ea643a65d9b12f2296c454b13fef4c";
       fetchSubmodules = false;
-      sha256 = "sha256-ICfWVZeKXonDh1ZS6PhFv130i7p+ItNeNCuLWhLmvic=";
+      sha256 = "sha256-F2T3PX4/9viup7h7vff6fqo8dIDGdUOrccIsctsaY2s=";
     };
-    date = "2025-11-25";
+    date = "2026-01-06";
   };
   talos-api = {
     pname = "talos-api";
@@ -83,13 +83,13 @@
   };
   talosctl = {
     pname = "talosctl";
-    version = "v1.12.0";
+    version = "v1.12.1";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "talos";
-      rev = "v1.12.0";
+      rev = "v1.12.1";
       fetchSubmodules = false;
-      sha256 = "sha256-u8/T01PWBGH3bJCNoC+FIzp8aH05ci4Kr3eHHWPDRkI=";
+      sha256 = "sha256-N/kqQTlxpwI1vrCjhqtFe0YdyfxTzxIzoMsmPKwtaCM=";
     };
   };
   zotregistry = {
