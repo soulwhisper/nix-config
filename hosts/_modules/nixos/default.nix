@@ -51,6 +51,9 @@
     systemd.network.wait-online.enable = false;
     boot.initrd.systemd.network.wait-online.enable = false;
 
+    # : enable nix-ld
+    programs.nix-ld.enable = true;
+
     # : sysctl
     boot.kernel.sysctl = {
       "net.core.rmem_max" = 7500000;
@@ -68,11 +71,11 @@
     # : default services for all host
     modules.services = {
       chrony.enable = true;
+      exporters.enable = true;
       easytier.enable = true;
       easytier.authFile = config.sops.secrets."networking/easytier/auth".path;
       mihomo.enable = true;
       mihomo.subscription = config.sops.secrets."networking/proxy/subscription".path;
-      monitoring.enable = true;
       openssh.enable = true;
     };
 

@@ -19,6 +19,11 @@ cat -p secrets.sops.yaml
 ```
 
 ```yaml
+alerting:
+  pushover:
+    auth: |
+      PUSHOVER_TOKEN={pushover-application-token}
+      PUSHOVER_KEY={pushover-user-key}
 apps:
   default:
     auth: { default-password }

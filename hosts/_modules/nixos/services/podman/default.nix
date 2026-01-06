@@ -11,30 +11,40 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # : compose support is disabled, not-used
-    # environment.systemPackages = with pkgs; [
-    #   podman-compose
-    #   docker-compose
-    # ];
+    # : compose support
+    environment.systemPackages = with pkgs; [
+      docker-compose
+    ];
 
-    # use `pull = "newer";` to keep image new;
-    # podman new network-stack `aardvark` only use `53/tcp_udp` on `podman*`;
-    # dns-resolving ref: https://github.com/NixOS/nixpkgs/issues/226365
+    # : dns-resolving, needs 53/udp on 'podman*'(nftables)
+    # https://github.com/NixOS/nixpkgs/issues/226365
+    # networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];
+    # networking.dhcpcd.IPv6rs = false;
+    # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+
+    # : auto-update containers
+    # requires: labels = { "io.containers.autoupdate" = "registry"; };
+    systemd.timers.podman-auto-update = {
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnCalendar = "daily";
+        Persistent = true;
+        RandomizedDelaySec = 3600;
+      };
+    };
 
     virtualisation = {
+      oci-containers.backend = "podman";
       podman = {
         enable = true;
-        dockerCompat = true; # Create a `docker` alias for podman
-        # dockerSocket.enable = true; # docker compose support, not used
+        dockerCompat = true;
+        dockerSocket.enable = true;
         autoPrune = {
-          enable = true; # Periodically prune Podman Images not in use.
+          enable = true;
           dates = "weekly";
           flags = ["--all"];
         };
-        # : Enable DNS resolution in the podman default network, not used
-        # defaultNetwork.settings.dns_enabled = true;
       };
-      oci-containers.backend = "podman";
     };
   };
 }

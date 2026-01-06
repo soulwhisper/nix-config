@@ -17,6 +17,7 @@
       };
 
       # :: secrets
+      # services enabled by default
       secrets = {
         "networking/easytier/auth" = {
           owner = config.users.users.appuser.name;

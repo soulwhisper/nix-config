@@ -17,6 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     # conflict with unifi-network
     # use ip:9801 in case network failing
+    # prefer SSD storage
 
     networking.firewall.allowedTCPPorts = [9801 8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882];
     networking.firewall.allowedUDPPorts = [3478 10003 5514];
@@ -37,7 +38,9 @@ in {
     virtualisation.oci-containers.containers."unifi-server" = {
       autoStart = true;
       image = "ghcr.io/lemker/unifi-os-server:latest";
-      pull = "newer";
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
       privileged = true;
       extraOptions = ["--memory=4g"];
       ports = [

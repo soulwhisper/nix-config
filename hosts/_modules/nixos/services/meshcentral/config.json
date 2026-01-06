@@ -1,1 +1,4 @@
-{ "settings": { "agentTimeStampServer": false } }
+{
+  "settings": { "agentTimeStampServer": false },
+  "domains": { "": { "allowedOrigin": true } }
+}

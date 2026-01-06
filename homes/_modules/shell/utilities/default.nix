@@ -4,9 +4,12 @@
       any-nix-shell
       btop # replace glances
       curlie
+      dust # replace du
       doggo
       gum
       httpie
+      procs # modern ps
+      trippy # modern traceroute and ping
       jq
       wget
       yq-go
@@ -104,6 +107,12 @@
       };
     };
 
+    # zoxide
+    programs.zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     # zellij bugs ref:https://github.com/zellij-org/zellij/issues/4024
     # fixed since v0.43.1, replace tmux
     # disable autoStart / shellExit for log scrolling
@@ -111,6 +120,7 @@
     xdg.configFile."zellij/config.kdl".source = ./zellij.kdl;
     programs.zellij = {
       enable = true;
+      enableBashIntegration = false;
       enableFishIntegration = false;
       attachExistingSession = false;
       exitShellOnExit = false;
