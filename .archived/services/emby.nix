@@ -37,7 +37,9 @@ in {
     virtualisation.oci-containers.containers."embyserver" = {
       autoStart = true;
       image = "docker.io/emby/embyserver:latest";
-      pull = "newer";
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
       ports = [
         "9806:8096/tcp"
       ];

@@ -31,7 +31,9 @@ in {
     virtualisation.oci-containers.containers."meshcentral" = {
       autoStart = true;
       image = "ghcr.io/ylianst/meshcentral:latest";
-      pull = "newer";
+      labels = {
+        "io.containers.autoupdate" = "registry";
+      };
       ports = [
         "4433:4433/tcp"
         "9203:80/tcp"

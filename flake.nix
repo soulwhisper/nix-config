@@ -25,8 +25,9 @@
     };
 
     # catppuccin - Soothing pastel theme for Nix
+    # switch to main branch temporarily when upgraded
     catppuccin = {
-      url = "github:catppuccin/nix/main";
+      url = "github:catppuccin/nix/release-25.11";
     };
 
     # sops-nix - secrets with mozilla sops

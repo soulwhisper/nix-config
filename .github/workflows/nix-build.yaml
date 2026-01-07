@@ -3,15 +3,14 @@
 name: Build and diff Nix systems
 
 on:
-  workflow_dispatch:
   pull_request:
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
     paths:
       - "github/workflows/**"
       - "**.nix"
-      - "!devenv.nix"
       - "flake.lock"
 
 # Notice: nix-darwin needs sudo since 25.05
@@ -28,10 +27,12 @@ jobs:
     if: |
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'pull_request' ||
-      (github.event_name == 'push' &&
-       !(github.event.head_commit.committer.username == 'web-flow' &&
-         github.event.head_commit.author.username == 'web-flow'))
+      (github.event_name == 'push'
+        && !startsWith(github.event.head_commit.message, 'Merge pull request')
+        && !contains(github.event.head_commit.message, '[skip ci]')
+      )
     permissions:
+      contents: read
       pull-requests: write
     strategy:
       fail-fast: false
@@ -69,7 +70,7 @@ jobs:
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
-            -v --show-trace --print-build-logs \
+            --show-trace \
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
@@ -81,7 +82,7 @@ jobs:
             --profile ./profile \
             --no-write-lock-file \
             --fallback \
-            -v --show-trace --print-build-logs \
+            --show-trace \
             --log-format raw \
              > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2) | cachix push soulwhisper
 

@@ -89,7 +89,7 @@ in {
       enable = true;
       settings = {
         server-host = "0.0.0.0";
-        server-port = 9500;
+        server-port = 9700;
         server-unix-socket = null;
         db-uri.host = "localhost";
         db-uri.dbname = "postgres";

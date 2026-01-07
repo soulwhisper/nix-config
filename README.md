@@ -21,7 +21,7 @@ curl -L https://nixos.org/nix/install | sh
 # : darwin
 brew install just
 # :: opt. run set-proxy script
-sudo python3 scripts/darwin_set_proxy.py
+sudo python3 bootstrap/darwin_set_proxy.py
 # :: init, if darwin-rebuild not exist
 just darwin init
 # :: build & diff

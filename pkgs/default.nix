@@ -5,15 +5,11 @@
   pkgs ? import <nixpkgs> {},
   ...
 }: {
-  # : deprecated
-  # talhelper = inputs.talhelper.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  # : active
   caddy-custom = pkgs.callPackage ./caddy-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-switch = pkgs.callPackage ./kubectl-switch {};
   rime-moqi-yinxing = pkgs.callPackage ./rime-moqi-yinxing {};
-  talosctl = pkgs.callPackage ./talosctl {};
   talos-api = pkgs.callPackage ./talos-api {};
   zotregistry = pkgs.callPackage ./zotregistry {};
   zotregistry-ui = pkgs.callPackage ./zotregistry-ui {};
