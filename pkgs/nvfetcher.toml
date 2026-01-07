@@ -21,9 +21,6 @@ src.github = "mirceanton/kubectl-switch"
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
 src.branch = "main"
-[talosctl]
-fetch.github = "siderolabs/talos"
-src.github = "siderolabs/talos"
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"

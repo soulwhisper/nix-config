@@ -81,17 +81,6 @@
       sha256 = "sha256-Witazh2Hy2fPDFZ79+r9IdDdzdJzHeemVHWmDIN2RNU=";
     };
   };
-  talosctl = {
-    pname = "talosctl";
-    version = "v1.12.1";
-    src = fetchFromGitHub {
-      owner = "siderolabs";
-      repo = "talos";
-      rev = "v1.12.1";
-      fetchSubmodules = false;
-      sha256 = "sha256-N/kqQTlxpwI1vrCjhqtFe0YdyfxTzxIzoMsmPKwtaCM=";
-    };
-  };
   zotregistry = {
     pname = "zotregistry";
     version = "v2.1.13";

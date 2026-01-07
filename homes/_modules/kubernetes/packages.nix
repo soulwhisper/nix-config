@@ -31,7 +31,6 @@ in {
       (with pkgs; [
         kubecolor-catppuccin
         kubectl-switch
-        talosctl
       ])
       ++ (with pkgs.unstable; [
         cilium-cli
@@ -41,6 +40,7 @@ in {
         kubescape
         kustomize
         popeye
+        talosctl
         viddy
       ])
       ++ [
