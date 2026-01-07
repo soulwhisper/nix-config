@@ -13,19 +13,17 @@ in
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.talosctl;
 
-    preBuild = ''
-      go mod tidy
-    '';
+    subPackages = ["cmd/talosctl"];
 
-    ldflags = ["-s" "-w"];
-
-    # This is needed to deal with workspace issues during the build
+    GOWORK = "off";
     overrideModAttrs = _: {
       GOWORK = "off";
+      preBuild = ''
+        go mod tidy
+      '';
     };
-    GOWORK = "off";
 
-    subPackages = ["cmd/talosctl"];
+    ldflags = ["-s" "-w"];
 
     nativeBuildInputs = [installShellFiles];
 
