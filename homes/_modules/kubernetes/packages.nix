@@ -41,6 +41,7 @@ in {
         kustomize
         popeye
         talosctl
+        vendir
         viddy
       ])
       ++ [
