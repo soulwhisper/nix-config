@@ -13,6 +13,10 @@ in
     version = lib.strings.removePrefix "v" packageData.version;
     vendorHash = vendorData.talosctl;
 
+    preBuild = ''
+      go mod tidy
+    '';
+
     ldflags = ["-s" "-w"];
 
     # This is needed to deal with workspace issues during the build
