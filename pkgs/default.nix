@@ -5,10 +5,6 @@
   pkgs ? import <nixpkgs> {},
   ...
 }: {
-  # : deprecated
-  # talhelper = inputs.talhelper.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  # talosctl = pkgs.callPackage ./talosctl {};
-  # : active
   caddy-custom = pkgs.callPackage ./caddy-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
