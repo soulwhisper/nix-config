@@ -7,7 +7,7 @@
   cfg = config.modules.deployment;
 in {
   options.modules.deployment = {
-    # enable = lib.mkEnableOption "deployment";
+    enable = lib.mkEnableOption "deployment";
   };
 
   config = {
