@@ -6,6 +6,7 @@
       curlie
       dust # replace du
       doggo
+      gemini-cli-bin # gemini
       gum
       httpie
       procs # modern ps
