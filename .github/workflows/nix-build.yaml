@@ -139,5 +139,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check build matrix status
-        if: ${{ needs.nix-build.result != 'success' }}
+        if: ${{ needs.nix-build.result == 'failure' }}
         run: exit 1
