@@ -26,13 +26,13 @@
   };
   hass-sgcc = {
     pname = "hass-sgcc";
-    version = "v1.6.8";
+    version = "v1.6.9";
     src = fetchFromGitHub {
       owner = "ARC-MX";
       repo = "sgcc_electricity_new";
-      rev = "v1.6.8";
+      rev = "v1.6.9";
       fetchSubmodules = false;
-      sha256 = "sha256-UdlFI+txh4GRldjbUUBRPfJsd95Dv/GaB6te07vQe0Y=";
+      sha256 = "sha256-H3wZ0siIFqQLgI3GuGzEOWHFH5Lt3WNA0qlZkSaAGtk=";
     };
   };
   kubecolor-catppuccin = {
@@ -60,15 +60,15 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "1edf89df37ea643a65d9b12f2296c454b13fef4c";
+    version = "a763072fa30005ce2ed77a1d5263f6ca223eaec7";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "1edf89df37ea643a65d9b12f2296c454b13fef4c";
+      rev = "a763072fa30005ce2ed77a1d5263f6ca223eaec7";
       fetchSubmodules = false;
-      sha256 = "sha256-F2T3PX4/9viup7h7vff6fqo8dIDGdUOrccIsctsaY2s=";
+      sha256 = "sha256-nk207AiaTxh/lBLjruoCowfPsrOViidiiVzVT1E6muo=";
     };
-    date = "2026-01-06";
+    date = "2026-01-12";
   };
   talos-api = {
     pname = "talos-api";

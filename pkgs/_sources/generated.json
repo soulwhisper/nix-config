@@ -55,12 +55,12 @@
             "name": null,
             "owner": "ARC-MX",
             "repo": "sgcc_electricity_new",
-            "rev": "v1.6.8",
-            "sha256": "sha256-UdlFI+txh4GRldjbUUBRPfJsd95Dv/GaB6te07vQe0Y=",
+            "rev": "v1.6.9",
+            "sha256": "sha256-H3wZ0siIFqQLgI3GuGzEOWHFH5Lt3WNA0qlZkSaAGtk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.6.8"
+        "version": "v1.6.9"
     },
     "kubecolor-catppuccin": {
         "cargoLocks": null,
@@ -106,7 +106,7 @@
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
-        "date": "2026-01-06",
+        "date": "2026-01-12",
         "extract": null,
         "name": "rime-moqi-yinxing",
         "passthru": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "1edf89df37ea643a65d9b12f2296c454b13fef4c",
-            "sha256": "sha256-F2T3PX4/9viup7h7vff6fqo8dIDGdUOrccIsctsaY2s=",
+            "rev": "a763072fa30005ce2ed77a1d5263f6ca223eaec7",
+            "sha256": "sha256-nk207AiaTxh/lBLjruoCowfPsrOViidiiVzVT1E6muo=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1edf89df37ea643a65d9b12f2296c454b13fef4c"
+        "version": "a763072fa30005ce2ed77a1d5263f6ca223eaec7"
     },
     "talos-api": {
         "cargoLocks": null,
