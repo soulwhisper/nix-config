@@ -9,6 +9,7 @@
       gemini-cli-bin # gemini
       gum
       httpie
+      iperf
       procs # modern ps
       trippy # modern traceroute and ping
       jq
