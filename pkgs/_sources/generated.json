@@ -97,16 +97,16 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.4.3",
-            "sha256": "sha256-StuRjn0yRbQsOvPGUYBoBY4o0x6w3dkqLNKeTnWqvS4=",
+            "rev": "v2.4.4",
+            "sha256": "sha256-JO7aWr+1ahtfERR2P+tN6NTkeXCD4KmDMeJyJyHQiyk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.4.3"
+        "version": "v2.4.4"
     },
     "rime-moqi-yinxing": {
         "cargoLocks": null,
-        "date": "2026-01-14",
+        "date": "2026-01-15",
         "extract": null,
         "name": "rime-moqi-yinxing",
         "passthru": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "0ba562bac72249ef71aea4b1b03541e7dbbae2ae",
-            "sha256": "sha256-3mzLdMUZaZ4bgdmmYqX3NPu6QM2ZKQ0XpS1wbP0EbZM=",
+            "rev": "5545ebb2643ea84e112cef4a71b6038fd6c23151",
+            "sha256": "sha256-+4OkG9Qe9jHelXyPw5mly/qgJhO4U78aHwH49Dc4Kz0=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "0ba562bac72249ef71aea4b1b03541e7dbbae2ae"
+        "version": "5545ebb2643ea84e112cef4a71b6038fd6c23151"
     },
     "talos-api": {
         "cargoLocks": null,

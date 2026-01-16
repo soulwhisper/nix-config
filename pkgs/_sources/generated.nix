@@ -49,26 +49,26 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.4.3";
+    version = "v2.4.4";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.4.3";
+      rev = "v2.4.4";
       fetchSubmodules = false;
-      sha256 = "sha256-StuRjn0yRbQsOvPGUYBoBY4o0x6w3dkqLNKeTnWqvS4=";
+      sha256 = "sha256-JO7aWr+1ahtfERR2P+tN6NTkeXCD4KmDMeJyJyHQiyk=";
     };
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "0ba562bac72249ef71aea4b1b03541e7dbbae2ae";
+    version = "5545ebb2643ea84e112cef4a71b6038fd6c23151";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "0ba562bac72249ef71aea4b1b03541e7dbbae2ae";
+      rev = "5545ebb2643ea84e112cef4a71b6038fd6c23151";
       fetchSubmodules = false;
-      sha256 = "sha256-3mzLdMUZaZ4bgdmmYqX3NPu6QM2ZKQ0XpS1wbP0EbZM=";
+      sha256 = "sha256-+4OkG9Qe9jHelXyPw5mly/qgJhO4U78aHwH49Dc4Kz0=";
     };
-    date = "2026-01-14";
+    date = "2026-01-15";
   };
   talos-api = {
     pname = "talos-api";
