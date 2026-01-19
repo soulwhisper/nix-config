@@ -34,6 +34,7 @@ in {
       ])
       ++ (with pkgs.unstable; [
         cilium-cli
+        dnscontrol
         fluxcd
         kubecolor
         kubectl
