@@ -1,6 +1,6 @@
 {
     "caddy-core": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": null,
         "extract": null,
         "name": "caddy-core",
@@ -21,7 +21,7 @@
         "version": "v2.10.2"
     },
     "caddy-plugin-cloudflare": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": "2025-12-04",
         "extract": null,
         "name": "caddy-plugin-cloudflare",
@@ -42,7 +42,7 @@
         "version": "6dc1fbb7e925b0da6736780db2e90f4816b79ab7"
     },
     "hass-sgcc": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": null,
         "extract": null,
         "name": "hass-sgcc",
@@ -63,7 +63,7 @@
         "version": "v1.6.9"
     },
     "kubecolor-catppuccin": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": "2024-05-24",
         "extract": null,
         "name": "kubecolor-catppuccin",
@@ -84,7 +84,7 @@
         "version": "1d4c2888f7de077e1a837a914a1824873d16762d"
     },
     "kubectl-switch": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": null,
         "extract": null,
         "name": "kubectl-switch",
@@ -105,7 +105,7 @@
         "version": "v2.4.4"
     },
     "rime-moqi-yinxing": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": "2026-01-17",
         "extract": null,
         "name": "rime-moqi-yinxing",
@@ -126,7 +126,7 @@
         "version": "cc3c81e28ccaea12dba397587cad8a3681ed4a9b"
     },
     "talos-api": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": null,
         "extract": null,
         "name": "talos-api",
@@ -147,7 +147,7 @@
         "version": "v1.0.13"
     },
     "zotregistry": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": null,
         "extract": null,
         "name": "zotregistry",
@@ -168,7 +168,7 @@
         "version": "v2.1.13"
     },
     "zotregistry-ui": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": "2025-11-29",
         "extract": null,
         "name": "zotregistry-ui",
