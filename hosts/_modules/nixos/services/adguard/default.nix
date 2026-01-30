@@ -10,7 +10,6 @@ in {
     enable = lib.mkEnableOption "adguard";
   };
 
-  # this service act as recursor, use all dns services as upstream
   config = lib.mkIf cfg.enable {
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
