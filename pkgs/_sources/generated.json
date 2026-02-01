@@ -106,7 +106,7 @@
     },
     "rime-moqi-yinxing": {
         "cargoLock": null,
-        "date": "2026-01-29",
+        "date": "2026-01-31",
         "extract": null,
         "name": "rime-moqi-yinxing",
         "passthru": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "78228321fa9a862c2a959fe0490761d2f8134259",
-            "sha256": "sha256-9zOpXVjI05p1gsVz3RuK35/9YDeTrwiIRqAKbmbjwoA=",
+            "rev": "b90fbbd35e2b6764c5ab7e15272088a6749eecf5",
+            "sha256": "sha256-Gr3pFGjNjazS1e48rcmt+cdcAa9TmbldQt+7k5HqpkQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "78228321fa9a862c2a959fe0490761d2f8134259"
+        "version": "b90fbbd35e2b6764c5ab7e15272088a6749eecf5"
     },
     "talos-api": {
         "cargoLock": null,
