@@ -10,7 +10,7 @@
       gum
       httpie
       iperf
-      net-tools
+      lsof # replace netstat/ss
       procs # modern ps
       trippy # modern traceroute and ping
       jq
