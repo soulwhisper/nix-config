@@ -20,6 +20,10 @@
     modules = {
       filesystems.xfs.enable = true;
       services = {
+        adguard.enable = true;
+        caddy.enable = true;
+        caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
+
         # : Networking
         # easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
 
@@ -31,8 +35,7 @@
         # : Infrastructure
         gatus.enable = true; # ep=:9400
         gatus.pushover.authFile = config.sops.secrets."alerting/pushover/auth".path;
-        unifi-server.enable = true; # ep=:9801
-        unifi-server.ip = "10.0.0.200";
+        unifi-server.enable = true; # sub=unifi
         vector.enable = true; # ep=:514
 
         # : Services migrated to NAS

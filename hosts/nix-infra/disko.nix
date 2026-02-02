@@ -26,13 +26,6 @@ in {
                 mountOptions = ["umask=0077"];
               };
             };
-            swap = {
-              size = "16G";
-              content = {
-                type = "swap";
-                resumeDevice = true;
-              };
-            };
             primary = {
               size = "100%";
               content = {

@@ -10,6 +10,7 @@
       gum
       httpie
       iperf
+      net-tools
       procs # modern ps
       trippy # modern traceroute and ping
       jq

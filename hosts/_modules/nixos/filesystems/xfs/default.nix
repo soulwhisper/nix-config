@@ -21,7 +21,11 @@ in {
     # and thus improve I/O performance when we have a lot of memory.
     #
     #   https://www.kernel.org/doc/Documentation/blockdev/zram.txt
-    # Current, only xfs will use swap; all parameters are defaults.
-    zramSwap.enable = true;
+    # Diable Traditional swap devices to avoid conflicts with zram swap.
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      memoryPercent = 30;
+    };
   };
 }

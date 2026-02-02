@@ -41,9 +41,9 @@ in {
         }
       ''
     );
-
-    # for caddy file_server
-    users.users.caddy.extraGroups = ["netbox"];
+    users.users = lib.mkIf reverseProxyCaddy.enable {
+      caddy.extraGroups = ["netbox"];
+    };
 
     # ref:https://github.com/NixOS/nixpkgs/issues/385193
     services.netbox = {

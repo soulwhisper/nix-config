@@ -34,16 +34,12 @@
         smartd.enable = false;
         nut.enable = false;
 
-        # : Test
-        unifi-server.enable = true; # ep=:9801
-        unifi-server.ip = "172.19.82.10";
-
         # : LAB
-        dockge.enable = true; # ep=:9800
         garage.enable = true; # ep=:9000
         kms.enable = true;
         talos.api.enable = true;
         netbox.enable = true; # sub=box
+        unifi-server.enable = true; # sub=unifi
 
         # : Others
         nfs4 = {

@@ -3,7 +3,6 @@
     ./adguard
     ./caddy
     ./chrony
-    ./dockge
     ./easytier
     ./exporters
     ./forgejo

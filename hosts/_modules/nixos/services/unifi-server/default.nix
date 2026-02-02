@@ -5,22 +5,35 @@
   ...
 }: let
   cfg = config.modules.services.unifi-server;
+  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.unifi-server = {
     enable = lib.mkEnableOption "unifi-server";
-    ip = lib.mkOption {
+    domain = lib.mkOption {
       type = lib.types.str;
-      description = "UOS_SYSTEM_IP";
+      default = "unifi.noirprime.com";
     };
   };
 
   config = lib.mkIf cfg.enable {
     # conflict with unifi-network
-    # use ip:9801 in case network failing
-    # prefer SSD storage
+    # prefer SSD storage and caddy domain
 
-    networking.firewall.allowedTCPPorts = [9801 8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882];
+    networking.firewall.allowedTCPPorts = [
+      8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882
+      (lib.mkIf (!reverseProxyCaddy.enable) 9801)
+    ];
     networking.firewall.allowedUDPPorts = [3478 10003 5514];
+
+    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
+      handle {
+        reverse_proxy localhost:9801 {
+          transport http {
+            tls_insecure_skip_verify
+          }
+        }
+      }
+    '';
 
     systemd.tmpfiles.rules = [
       "d /var/lib/unifi-server/persistent 0755 root root - -"
@@ -61,7 +74,7 @@ in {
         "8882:8882/tcp" # Opt. unifi-os-server-hotspot-redirect-2-svc
       ];
       environment = {
-        UOS_SYSTEM_IP = "${cfg.ip}";
+        UOS_SYSTEM_IP = "${cfg.domain}";
       };
       volumes = [
         "/var/lib/unifi-server/persistent:/persistent"

@@ -1,4 +1,4 @@
-# This file is the general template for 'lvm-thin-xfs,tmpfs-root,swap' disk config.
+# This file is the general template for 'lvm-thin-xfs,tmpfs-root' disk config.
 # Main disk should be at least 16+100 = 116 GB.
 {...}: let
   xfsMountOptions = [
@@ -50,13 +50,6 @@ in {
       main = {
         type = "lvm_vg";
         lvs = {
-          swap = {
-            size = "16G";
-            content = {
-              type = "swap";
-              resumeDevice = true;
-            };
-          };
           thinpool = {
             size = "1000G";
             lvm_type = "thin-pool";

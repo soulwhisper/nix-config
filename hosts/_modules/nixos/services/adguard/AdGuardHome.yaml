@@ -126,6 +126,8 @@ filtering:
       answer: 10.10.0.103
     - domain: nas.homelab.internal
       answer: 10.10.0.10
+    - domain: unifi.noirprime.com
+      answer: 10.0.0.200
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
