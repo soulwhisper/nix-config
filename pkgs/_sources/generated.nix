@@ -31,13 +31,13 @@
   };
   hass-sgcc = {
     pname = "hass-sgcc";
-    version = "v1.7.0";
+    version = "v1.7.1";
     src = fetchFromGitHub {
       owner = "ARC-MX";
       repo = "sgcc_electricity_new";
-      rev = "v1.7.0";
+      rev = "v1.7.1";
       fetchSubmodules = false;
-      sha256 = "sha256-wKB3T6S2iCRmi2WTwLJhIziBbGZV6w1AD+8QP+97Op4=";
+      sha256 = "sha256-dHT24tdFXT5dyv6KSI9fISxCRA7CTgyJJXSHNxHxkSI=";
     };
   };
   kubecolor-catppuccin = {
@@ -54,13 +54,13 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.4.4";
+    version = "v2.4.5";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.4.4";
+      rev = "v2.4.5";
       fetchSubmodules = false;
-      sha256 = "sha256-JO7aWr+1ahtfERR2P+tN6NTkeXCD4KmDMeJyJyHQiyk=";
+      sha256 = "sha256-3uQzgcQWwGLP2CnvMmVRcw+a7xqvK4Kf4FXF8o5n7jE=";
     };
   };
   rime-moqi-yinxing = {
@@ -99,14 +99,14 @@
   };
   zotregistry-ui = {
     pname = "zotregistry-ui";
-    version = "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344";
+    version = "4d28d8813d5c9dc082480cba8ca04de2c5644df7";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zui";
-      rev = "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344";
+      rev = "4d28d8813d5c9dc082480cba8ca04de2c5644df7";
       fetchSubmodules = false;
-      sha256 = "sha256-ZHSlzPhCd4l3tkvN3uIpjSAajL+XTseJj+qMhnkMrIA=";
+      sha256 = "sha256-YmSBP65ypqmmLuGdxIr1VEjNU7eofuG2K5XHSISQL/E=";
     };
-    date = "2025-11-29";
+    date = "2026-02-03";
   };
 }

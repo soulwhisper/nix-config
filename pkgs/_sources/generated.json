@@ -55,12 +55,12 @@
             "name": null,
             "owner": "ARC-MX",
             "repo": "sgcc_electricity_new",
-            "rev": "v1.7.0",
-            "sha256": "sha256-wKB3T6S2iCRmi2WTwLJhIziBbGZV6w1AD+8QP+97Op4=",
+            "rev": "v1.7.1",
+            "sha256": "sha256-dHT24tdFXT5dyv6KSI9fISxCRA7CTgyJJXSHNxHxkSI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.7.0"
+        "version": "v1.7.1"
     },
     "kubecolor-catppuccin": {
         "cargoLock": null,
@@ -97,12 +97,12 @@
             "name": null,
             "owner": "mirceanton",
             "repo": "kubectl-switch",
-            "rev": "v2.4.4",
-            "sha256": "sha256-JO7aWr+1ahtfERR2P+tN6NTkeXCD4KmDMeJyJyHQiyk=",
+            "rev": "v2.4.5",
+            "sha256": "sha256-3uQzgcQWwGLP2CnvMmVRcw+a7xqvK4Kf4FXF8o5n7jE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.4.4"
+        "version": "v2.4.5"
     },
     "rime-moqi-yinxing": {
         "cargoLock": null,
@@ -169,7 +169,7 @@
     },
     "zotregistry-ui": {
         "cargoLock": null,
-        "date": "2025-11-29",
+        "date": "2026-02-03",
         "extract": null,
         "name": "zotregistry-ui",
         "passthru": null,
@@ -181,11 +181,11 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zui",
-            "rev": "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344",
-            "sha256": "sha256-ZHSlzPhCd4l3tkvN3uIpjSAajL+XTseJj+qMhnkMrIA=",
+            "rev": "4d28d8813d5c9dc082480cba8ca04de2c5644df7",
+            "sha256": "sha256-YmSBP65ypqmmLuGdxIr1VEjNU7eofuG2K5XHSISQL/E=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "7dfa6bf8d83a9c3e111ea723dc855a5ef83c6344"
+        "version": "4d28d8813d5c9dc082480cba8ca04de2c5644df7"
     }
 }
