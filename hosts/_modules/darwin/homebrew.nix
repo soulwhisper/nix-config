@@ -63,6 +63,7 @@ _: {
       "stats"
       "squirrel-app"
       "telegram"
+      "tencent-meeting"
       "thunderbird"
       "ticktick"
       "vmware-fusion"

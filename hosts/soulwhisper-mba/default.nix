@@ -25,7 +25,10 @@
       ];
       casks = [
         # "betterdisplay"
+        "calibre"
+        "openclaw"
         "little-snitch"
+        "qlab"
         "wireshark-app"
       ];
       masApps = {
