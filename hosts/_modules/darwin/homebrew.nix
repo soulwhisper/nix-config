@@ -59,6 +59,7 @@ _: {
       "alfred" # powerpack still overshine Tahoe and raycast
       "anki"
       "discord"
+      "ilok-license-manager"
       "obsidian"
       "stats"
       "squirrel-app"
