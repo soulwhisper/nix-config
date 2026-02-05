@@ -15,6 +15,7 @@ _: {
     # : stable apps list
     # * fix damaged error: `/usr/bin/xattr -cr /Applications/appname.app`
     taps = [
+      "pear-devs/pear"
     ];
     brews = [
       "mas"
@@ -51,7 +52,7 @@ _: {
       "foobar2000"
       "iina"
       "neteasemusic"
-      "pear-devs/pear/pear-desktop"
+      "pear-desktop" # youtube-music replacement
 
       # :: productivity
       "acorn"
