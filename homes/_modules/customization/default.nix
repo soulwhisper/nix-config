@@ -11,6 +11,8 @@
     then "Library/Application Support/com.mitchellh.ghostty/config"
     else "${config.xdg.configHome}/ghostty/config";
 
+  opencode-path = "${config.xdg.dataHome}/opencode/opencode.json";
+
   rime-path =
     if pkgs.stdenv.hostPlatform.isDarwin
     then "Library/Rime"
@@ -50,6 +52,21 @@ in {
       force = true;
       recursive = true;
       source = pkgs.rime-moqi-yinxing;
+    };
+
+    # : Opencode
+    # :: https://opencode.ai/docs/config/
+    xdg.configFile.opencode-path = {
+      enable = true;
+      text = ''
+        {
+          "$schema": "https://opencode.ai/config.json",
+          "plugin": [
+            "opencode-antigravity-auth@latest"
+            "opencode-gemini-auth@latest"
+          ]
+        }
+      '';
     };
 
     # : Aerospace for MacOS

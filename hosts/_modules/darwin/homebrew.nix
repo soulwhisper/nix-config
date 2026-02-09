@@ -57,7 +57,7 @@ _: {
       # :: productivity
       "acorn"
       "alfred" # powerpack still overshine Tahoe and raycast
-      "anki"
+      "anomalyco/tap/opencode"
       "discord"
       "ilok-license-manager"
       "obsidian"
