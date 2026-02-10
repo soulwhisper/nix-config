@@ -12,7 +12,7 @@
   ];
 
   # Spec: 4C8G, 100GB, Proxmox VM;
-  # Address: 10.0.0.200;
+  # Address: 10.0.0.200; 'unifi.noirprime.com';
 
   config = {
     services.qemuGuest.enable = true;
@@ -26,6 +26,7 @@
 
         # : Networking
         # easytier.proxy_networks = ["10.0.0.0/24" "10.10.0.0/24" "10.20.0.0/24"];
+        mihomo.enable = lib.mkForce false;
 
         # : Monitoring
         scrutiny.enable = false;

@@ -24,13 +24,17 @@ export https_proxy=http://ip:port
 git clone https://github.com/soulwhisper/nix-config /etc/nix-config
 nixos-generate-config --no-filesystems
 cp /etc/nixos/hardware-configuration.nix /etc/nix-config/bootstrap/
-cp /etc/nix-config/hosts/nix-ops/disko.nix /etc/nix-config/bootstrap/
+# cp /etc/nix-config/hosts/nix-ops/disko.nix /etc/nix-config/bootstrap/
 
-# :: comment './zfs-support.nix' if not needed
+cd /etc/nix-config
+git add .
+
+# :: uncomment './zfs-support.nix' if needed
 vim /etc/nix-config/bootstrap/configuration.nix
 
 # : install
 nix --extra-experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest' -- --mode destroy,format,mount "/etc/nix-config/bootstrap/disko.nix" --yes-wipe-all-disks
+
 sudo nixos-install --flake "/etc/nix-config/bootstrap/.#nixos" --no-root-password
 
 # : check then reboot

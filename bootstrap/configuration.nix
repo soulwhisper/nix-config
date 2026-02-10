@@ -7,7 +7,7 @@
   imports = [
     ./disko.nix
     ./hardware-configuration.nix
-    ./zfs-support.nix
+    # ./zfs-support.nix
   ];
   config = {
     networking.hostName = "nixos";
@@ -39,7 +39,5 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    fileSystems."/home".neededForBoot = true;
   };
 }

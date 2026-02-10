@@ -63,13 +63,13 @@ in {
     networking.firewall.allowedTCPPorts = [9400];
 
     systemd.services.gatus.serviceConfig.DynamicUser = lib.mkForce false;
+    systemd.services.gatus.serviceConfig.EnvironmentFile = ["${cfg.pushover.authFile}"];
     systemd.services.gatus.serviceConfig.User = lib.mkForce "appuser";
     systemd.services.gatus.serviceConfig.Group = lib.mkForce "appuser";
 
     services.gatus = {
       enable = true;
       openFirewall = false;
-      environmentFile = cfg.pushover.authFile;
       settings = {
         web.port = 9400;
         alerting.pushover = {
@@ -83,10 +83,10 @@ in {
           {
             name = "Check: External-DNS (AdGuard)";
             group = "Infrastructure";
+            url = "${cfg.endpoints.infra.dns}";
             dns = {
               query-name = "gateway-int.${cfg.endpoints.k8s.domain}";
               query-type = "A";
-              nameservers = ["${cfg.endpoints.infra.dns}"];
             };
             conditions = ["[BODY] == ${cfg.endpoints.k8s.internal.ingress}"];
             interval = "1m";
@@ -95,10 +95,10 @@ in {
           {
             name = "Check: External-DNS (Cloudflare)";
             group = "Infrastructure";
+            url = "223.5.5.5";
             dns = {
               query-name = "gateway-ext.${cfg.endpoints.k8s.domain}";
               query-type = "A";
-              nameservers = ["223.5.5.5" "8.8.8.8" "1.1.1.1" "1.0.0.1"];
             };
             conditions = ["[DNS_RCODE] == NOERROR"];
             interval = "1m";
@@ -126,14 +126,6 @@ in {
             group = "Infrastructure";
             url = "tcp://postgres.${cfg.endpoints.k8s.domain}";
             conditions = ["[CONNECTED] == true"];
-            interval = "1m";
-            alerts = [alertWarning];
-          }
-          {
-            name = "Infra: Ollama";
-            group = "Infrastructure";
-            url = "http://ollama.${cfg.endpoints.k8s.domain}";
-            conditions = ["[STATUS] == 200"];
             interval = "1m";
             alerts = [alertWarning];
           }

@@ -1,9 +1,8 @@
-# This file is the general template for lvm-thin-xfs and tmpfs-root disk config.
+# This file is the general template for xfs disk config.
 {...}: let
   xfsMountOptions = [
     "defaults"
     "noatime"
-    "ikeep" # become defaults after 2025.09
     "pquota"
   ];
 in {
@@ -29,61 +28,11 @@ in {
             primary = {
               size = "100%";
               content = {
-                type = "lvm_pv";
-                vg = "main";
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/";
+                mountOptions = xfsMountOptions;
               };
-            };
-          };
-        };
-      };
-    };
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "size=10G"
-        "defaults"
-        "mode=755"
-      ];
-    };
-    lvm_vg = {
-      main = {
-        type = "lvm_vg";
-        lvs = {
-          thinpool = {
-            size = "40G";
-            lvm_type = "thin-pool";
-          };
-          app = {
-            size = "10G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/var/lib";
-              mountOptions = xfsMountOptions ++ ["logbsize=64k"];
-            };
-          };
-          home = {
-            size = "5G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/home";
-              mountOptions = xfsMountOptions;
-            };
-          };
-          nix = {
-            size = "20G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/nix";
-              mountOptions = xfsMountOptions;
             };
           };
         };

@@ -3,7 +3,6 @@
   xfsMountOptions = [
     "defaults"
     "noatime"
-    "ikeep" # become defaults after 2025.09
     "pquota"
   ];
 in {

@@ -13,4 +13,4 @@ build HOST:
 
 [doc('Switch nixos configuration, HOST required')]
 switch HOST:
-  nix-shell -p nixos-rebuild --run "nixos-rebuild switch --flake {{ROOT_DIR}}/.#{{HOST}}"
+  nix-shell -p nixos-rebuild --run "sudo nixos-rebuild switch --flake {{ROOT_DIR}}/.#{{HOST}}"

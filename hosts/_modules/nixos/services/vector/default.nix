@@ -49,22 +49,10 @@ in {
             mode = "tcp";
           };
         };
-        transforms = {
-          syslog_formatted = {
-            type = "remap";
-            inputs = ["syslog_in_udp" "syslog_in_tcp"];
-            source = ''
-              .host = string(.host) ?? "unknown_device"
-              let host_lower = downcase(.host)
-              ._stream = host_lower
-              del(.source_type)
-            '';
-          };
-        };
         sinks = {
           to_victoria_logs = {
             type = "elasticsearch";
-            inputs = ["syslog_formatted"];
+            inputs = ["syslog_in_udp" "syslog_in_tcp"];
             endpoints = cfg.sinks.endpoints;
             mode = "bulk";
             compression = "gzip";
