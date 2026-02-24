@@ -9,12 +9,7 @@
 # : boot with nixos-minimal
 sudo -s
 passwd
-ifconfig ens192 down
-ifconfig ens192 172.19.82.10 netmask 255.255.255.0
-ifconfig ens192 up
-ip route del default
-ip route add default via 172.19.82.1
-echo "nameserver 172.19.80.172" >> /etc/resolv.conf
+echo "nameserver 10.0.0.1" >> /etc/resolv.conf
 
 # :: opt, ssh in as root
 
@@ -30,7 +25,7 @@ cd /etc/nix-config
 git add .
 
 # :: uncomment './zfs-support.nix' if needed
-vim /etc/nix-config/bootstrap/configuration.nix
+# vim /etc/nix-config/bootstrap/configuration.nix
 
 # : install
 nix --extra-experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest' -- --mode destroy,format,mount "/etc/nix-config/bootstrap/disko.nix" --yes-wipe-all-disks
@@ -52,12 +47,17 @@ export GOPROXY=https://goproxy.cn,direct
 
 git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
 sudo nixos-generate-config --no-filesystems
-sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-ops/
-sudo -E nixos-rebuild switch --flake nix-config/.#nix-ops
+sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-infra/
+sudo -E nixos-rebuild switch --flake nix-config/.#nix-infra
 
 # :: nix-ops, disk space too small
 sudo mount -o remount,size=30G /
 # :: nix-ops, expand lv
 sudo lvresize -L +10G main/nix
 sudo xfs_growfs /nix
+
+# :: ipv6, disable during bootstrap
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
 ```

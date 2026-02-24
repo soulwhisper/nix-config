@@ -61,6 +61,17 @@
       "net.ipv4.ip_local_port_range" = "60000 65000";
     };
 
+    # : prefer ipv4
+    networking.getaddrinfo.precedence = {
+      # IPv4-mapped IPv6
+      "::ffff:0:0/96" = 100;
+      # defaults
+      "::1/128" = 50;
+      "::/0" = 40;
+      "2002::/16" = 30;
+      "::/96" = 20;
+    };
+
     # : systemd-boot EFI boot loader.
     boot.loader = {
       systemd-boot.enable = true;

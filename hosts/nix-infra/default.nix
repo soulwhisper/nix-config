@@ -11,11 +11,12 @@
     ./secrets.nix
   ];
 
-  # Spec: 4C8G, 100GB, Proxmox VM;
+  # Spec: 4C8G, 100GB, ESXi VM;
   # Address: 10.0.0.200; 'unifi.noirprime.com';
 
   config = {
-    services.qemuGuest.enable = true;
+    # services.qemuGuest.enable = true;
+    virtualisation.vmware.guest.enable = true;
 
     modules = {
       filesystems.xfs.enable = true;

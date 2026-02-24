@@ -10,7 +10,10 @@
 }: {
   imports = [];
 
-  boot.initrd.availableKernelModules = ["uhci_hcd" "ehci_pci" "ahci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"];
+  # proxmox
+  # boot.initrd.availableKernelModules = ["uhci_hcd" "ehci_pci" "ahci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"];
+  # vmare
+  boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ahci" "ata_piix" "vmw_pvscsi" "sd_mod" ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];

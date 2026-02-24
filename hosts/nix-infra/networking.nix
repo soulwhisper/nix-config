@@ -10,7 +10,7 @@
     };
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "ens18";
+      matchConfig.Name = "ens34"; # proxmox is ens18
       address = [
         "10.0.0.200/24"
       ];
