@@ -22,12 +22,12 @@
       taps = [
       ];
       brews = [
+        "node" # openclaw requirement
       ];
       casks = [
         # "betterdisplay"
         "calibre"
         "openclaw"
-        "node@25" # openclaw requirement
         "little-snitch"
         "qlab"
         "wireshark-app"
