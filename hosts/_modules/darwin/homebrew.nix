@@ -1,7 +1,6 @@
 _: {
   homebrew = {
     enable = true;
-    caskArgs.no_quarantine = true; # fix signature verification failed error
     onActivation = {
       autoUpdate = false; # Don't update during rebuild
       cleanup = "zap"; # Uninstall all programs not declared
