@@ -41,6 +41,7 @@ _: {
       # :: development
       "cursor"
       "ghostty"
+      "opencode-desktop"
       "orbstack"
       "visual-studio-code"
 
@@ -56,7 +57,6 @@ _: {
       # :: productivity
       "acorn"
       "alfred" # powerpack still overshine Tahoe and raycast
-      "opencode-desktop"
       "discord"
       "ilok-license-manager"
       "obsidian"

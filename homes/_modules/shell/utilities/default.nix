@@ -3,13 +3,12 @@
     home.packages = with pkgs; [
       any-nix-shell
       btop # replace glances
-      curlie
       dust # replace du
       doggo
       gemini-cli-bin # gemini
       gum
-      httpie
       iperf
+      lnav # less for logfile
       lsof # replace netstat/ss
       procs # modern ps
       trippy # modern traceroute and ping

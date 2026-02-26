@@ -5,6 +5,11 @@
   ...
 }: {
   config = {
+    home.packages = with pkgs; [
+      unstable.difftastic
+      unstable.gitleaks
+    ];
+
     programs.delta.enable = true;
     programs.delta.enableGitIntegration = true;
     programs.gh.enable = true;
