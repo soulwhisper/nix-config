@@ -1,10 +1,10 @@
 {
-  "talos-api": "sha256-56T13c5OPUw3Qr4LGjeEXJupeKXm16LQhEF696pSNp8=",
+  "talos-api": "sha256-B+5akutZNXDb9FyLhfrrtyPlyijUolHZuJw31LNBT0Q=",
   "caddy-custom": "sha256-NVAUEE4Mi1l1/p4vRdDpBcBjfU+E6yuNv9aTpnE4Mps=",
   "caddy-plugin-cloudflare": "",
   "zotregistry": "sha256-Mq6VqZ866xsTyENyajHbgjZv/qvNqxLdo+dU3pcKZOg=",
   "zotregistry-ui": "sha256-TI/e5aDe4Lv5SXbQ/9LCAzwR13z8Wrm7m16+1E3Shp8=",
   "hass-sgcc": "",
   "rime-moqi-yinxing": "",
-  "kubectl-switch": "sha256-X+y85yj+9g4B181+MusGd2hc7igc+9vyMRuVIwmkGkE="
+  "kubectl-switch": "sha256-1RNNDHf1T6XmIRW0l/HjEL0qdy9f55fePFVUvqkL+5A="
 }
