@@ -54,13 +54,13 @@
   };
   kubectl-switch = {
     pname = "kubectl-switch";
-    version = "v2.4.8";
+    version = "v2.4.10";
     src = fetchFromGitHub {
       owner = "mirceanton";
       repo = "kubectl-switch";
-      rev = "v2.4.8";
+      rev = "v2.4.10";
       fetchSubmodules = false;
-      sha256 = "sha256-Nv03pvl0QQJ07bcZ+P4wAAU64XQNsSLPGKYSCsg3VS4=";
+      sha256 = "sha256-GOlyG1HVgJJuZ+84C8q48hCNHAVFx9C1yFE1SVpmAT0=";
     };
   };
   rime-moqi-yinxing = {
