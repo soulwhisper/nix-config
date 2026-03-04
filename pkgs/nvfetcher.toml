@@ -17,6 +17,7 @@ src.branch = "main"
 [kubectl-switch]
 fetch.github = "mirceanton/kubectl-switch"
 src.github = "mirceanton/kubectl-switch"
+pinned = true  # pin golang version
 [rime-moqi-yinxing]
 fetch.github = "gaboolic/rime-shuangpin-fuzhuma"
 src.git = "https://github.com/gaboolic/rime-shuangpin-fuzhuma.git"
