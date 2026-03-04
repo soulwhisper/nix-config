@@ -89,7 +89,7 @@
         "extract": null,
         "name": "kubectl-switch",
         "passthru": null,
-        "pinned": false,
+        "pinned": true,
         "src": {
             "deepClone": false,
             "fetchSubmodules": false,
