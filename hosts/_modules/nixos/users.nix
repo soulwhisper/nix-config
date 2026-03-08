@@ -25,6 +25,7 @@ in {
           "users"
         ]
         ++ ifGroupsExist [
+          "dialout"
           "network"
           "samba-users"
         ];

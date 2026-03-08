@@ -22,6 +22,7 @@ in {
         minijinja
         nixd
         nixfmt-rfc-style
+        tio # serial terminal
         unstable.just
         unstable.mise
         unstable.oha # http load generator
