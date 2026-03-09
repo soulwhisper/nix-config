@@ -92,4 +92,15 @@ jobs:
             ${{ steps.run-nvfetcher.outputs.changes }}
           add-paths: |
             pkgs/**
+          labels: |
+            renovate/nvfetcher
+            automerge
           delete-branch: true
+      - name: automerge
+        id: automerge
+        uses: "pascalgn/automerge-action@v0.16.4"
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          MERGE_LABELS: "automerge,!wip"
+          MERGE_REMOVE_LABELS: "automerge"
+          MERGE_DELETE_BRANCH: "true"
