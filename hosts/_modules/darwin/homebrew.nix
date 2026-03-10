@@ -39,7 +39,6 @@ _: {
       "transmission"
 
       # :: development
-      "cursor"
       "ghostty"
       "opencode-desktop"
       "orbstack"

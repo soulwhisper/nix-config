@@ -30,7 +30,6 @@ in {
       ticktick
 
       # :: Development
-      code-cursor-fhs
       ghostty
       vscode-fhs
       vmware-workstation
