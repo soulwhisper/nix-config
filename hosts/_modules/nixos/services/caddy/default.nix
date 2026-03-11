@@ -17,7 +17,7 @@ in {
   # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [80 443 64646];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/caddy 0755 caddy caddy - -"
@@ -64,6 +64,11 @@ in {
             # https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#referrer-policy
             Referrer-Policy strict-origin-when-cross-origin
           }
+        }
+      '';
+      virtualHosts."http://:64646".extraConfig = ''
+        handle {
+          respond /health "ok:f7k2-xQ9m-Tz3p" 200
         }
       '';
     };
