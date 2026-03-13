@@ -23,13 +23,6 @@
           controlPath = "~/.ssh/control/ssh-%r@%h:%p";
           controlPersist = "no";
         };
-
-        "internal" = {
-          host = "192.168.*.* 172.16.*.* 10.*.*.* *.homelab.internal";
-          sendEnv = [
-            "TERM=xterm-256color"
-          ];
-        };
       };
     };
   };
