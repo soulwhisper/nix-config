@@ -49,8 +49,8 @@
       "udp://0.0.0.0:11010"
     ];
     rpc_portal = "0.0.0.0:15888";
-    peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.public_nodes);
-    proxy_network = map (proxy_network: {cidr = proxy_network;}) cfg.proxy_networks;
+    peer = map (peer: {uri = peer;}) (cfg.peers ++ cfg.nodes);
+    network = map (network: {cidr = network;}) cfg.networks;
     flags = {
       enable_kcp_proxy = true;
       latency_first = true;
@@ -68,11 +68,11 @@ in {
       type = lib.types.listOf lib.types.str;
       default = [];
     };
-    proxy_networks = lib.mkOption {
+    networks = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
     };
-    public_nodes = lib.mkOption {
+    nodes = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
         "tcp://opn.noirprime.com:11010"

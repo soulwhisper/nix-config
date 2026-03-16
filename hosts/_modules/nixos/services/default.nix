@@ -22,6 +22,7 @@
     ./scrutiny
     ./sftpgo
     ./smartd
+    ./tailscale
     ./talos-api
     ./unifi-server
     ./vector
