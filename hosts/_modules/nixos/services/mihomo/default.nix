@@ -20,12 +20,9 @@ in {
 
     networking.firewall.allowedTCPPorts = [1080 9201];
 
-    systemd.network.networks."50-mihomo-tun" = {
-      matchConfig.Name = "Meta";
-      networkConfig = {
-        IPv4ReversePathFilter = "no";
-        KeepConfiguration = "static";
-      };
+    boot.kernel.sysctl = {
+      "net.ipv4.conf.default.rp_filter" = 0;
+      "net.ipv4.conf.Meta.rp_filter" = 0;
     };
 
     networking.proxy = {

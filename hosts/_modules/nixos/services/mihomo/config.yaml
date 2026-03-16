@@ -65,7 +65,6 @@ dns:
     - "ntp.*.com"
     - "+.pool.ntp.org"
   nameserver:
-    - system
     - https://dns.alidns.com/dns-query
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
