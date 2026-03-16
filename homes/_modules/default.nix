@@ -7,7 +7,6 @@
     inputs.krewfile.homeManagerModules.krewfile
 
     ./customization
-    ./deployment
     ./development
     ./kubernetes
     ./security

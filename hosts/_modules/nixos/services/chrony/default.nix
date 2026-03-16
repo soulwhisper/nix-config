@@ -21,7 +21,8 @@ in {
         "time.cloudflare.com"
       ];
       extraConfig = ''
-        allow all
+        allow 10.0.0.0/8
+        allow 172.16.0.0/12
         bindaddress 0.0.0.0
       '';
     };

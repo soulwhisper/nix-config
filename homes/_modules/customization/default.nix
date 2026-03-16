@@ -54,21 +54,6 @@ in {
       source = pkgs.rime-moqi-yinxing;
     };
 
-    # : Opencode
-    # :: https://opencode.ai/docs/config/
-    xdg.configFile.opencode-path = {
-      enable = true;
-      text = ''
-        {
-          "$schema": "https://opencode.ai/config.json",
-          "plugin": [
-            "opencode-antigravity-auth@latest"
-            "opencode-gemini-auth@latest"
-          ]
-        }
-      '';
-    };
-
     # : Aerospace for MacOS
     # :: MacOS package installed via homebrew
     # xdg.configFile."${config.xdg.configHome}/aerospace/aerospace.toml" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {

@@ -10,6 +10,8 @@
       iperf
       lnav # less for logfile
       lsof # replace netstat/ss
+      nixos-rebuild
+      nvd
       procs # modern ps
       trippy # modern traceroute and ping
       jq

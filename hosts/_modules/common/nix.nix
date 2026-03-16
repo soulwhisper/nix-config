@@ -41,9 +41,7 @@
       ];
 
       # Enable goproxy
-      impure-env = ''
-        "GOPROXY=https://goproxy.cn,direct"
-      '';
+      impure-env = [ "GOPROXY=https://goproxy.cn,direct" ];
 
       # The default at 10 is rarely enough.
       log-lines = lib.mkDefault 25;

@@ -21,6 +21,11 @@
         }
       ];
       linkConfig.RequiredForOnline = "routable";
+      networkConfig = {
+        DHCP = false;
+        IPv6AcceptRA = false;
+        LinkLocalAddressing = "ipv4";
+      };
     };
   };
 }

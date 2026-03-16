@@ -20,7 +20,14 @@ in {
 
     networking.firewall.allowedTCPPorts = [1080 9201];
 
-    networking.firewall.checkReversePath = "loose";
+    systemd.network.networks."50-mihomo-tun" = {
+      matchConfig.Name = "Meta";
+      networkConfig = {
+        IPv4ReversePathFilter = "no";
+        KeepConfiguration = "static";
+      };
+    };
+
     networking.proxy = {
       httpProxy = "http://127.0.0.1:1080";
       httpsProxy = "http://127.0.0.1:1080";

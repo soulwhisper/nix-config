@@ -27,9 +27,18 @@
     networking = {
       firewall.enable = true;
       nftables.enable = true;
-      useNetworkd = false;
+      useNetworkd = true;
       useDHCP = false;
     };
+    systemd.network = {
+      enable = true;
+      wait-online = {
+        anyInterface = true;
+        timeout = 30;
+        ignoredInterfaces = [ "EasyTier" "Meta" "tun0" ];
+      };
+    };
+    boot.initrd.systemd.network.wait-online.enable = false;
 
     # : increase open file limit for sudoers
     security.pam.loginLimits = [
@@ -46,10 +55,6 @@
         value = "1048576";
       }
     ];
-
-    # : disable unnecessary services
-    systemd.network.wait-online.enable = false;
-    boot.initrd.systemd.network.wait-online.enable = false;
 
     # : enable nix-ld
     programs.nix-ld.enable = true;

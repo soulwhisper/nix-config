@@ -44,6 +44,7 @@ in {
       ];
       derper = {
         enable = true;
+        domain = cfg.domain;
         configureNginx = false;
         openFirewall = false;
         verifyClients = true;

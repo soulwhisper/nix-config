@@ -88,7 +88,7 @@ in {
           confirm = false;
           description = "Flux reconcile";
           scopes = ["helmreleases"];
-          command = "gitrepositories";
+          command = "bash";
           background = false;
           args = [
             "-c"

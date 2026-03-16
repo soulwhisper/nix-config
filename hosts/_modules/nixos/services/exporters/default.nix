@@ -11,13 +11,12 @@ in {
   };
 
   config = lib.mkIf cfg.exporters.enable {
-    networking.firewall.allowedTCPPorts = [
-      9101
-      (lib.mkIf config.modules.filesystems.zfs.enable 9102)
-      (lib.mkIf cfg.nut.enable 9103)
-      (lib.mkIf cfg.smartd.enable 9104)
-      (lib.mkIf cfg.zrepl.enable 9105)
-    ];
+    networking.firewall.allowedTCPPorts =
+      [ 9101 ]
+      ++ lib.optional config.modules.filesystems.zfs.enable 9102
+      ++ lib.optional cfg.nut.enable 9103
+      ++ lib.optional cfg.smartd.enable 9104
+      ++ lib.optional cfg.zrepl.enable 9105;
 
     services.prometheus.exporters = {
       node = {

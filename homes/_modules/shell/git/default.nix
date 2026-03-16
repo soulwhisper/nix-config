@@ -16,6 +16,5 @@
     programs.gh-dash.enable = true;
     programs.lazygit.enable = true;
     programs.git.enable = true;
-    programs.git.signing.signByDefault = true;
   };
 }

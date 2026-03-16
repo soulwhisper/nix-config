@@ -28,11 +28,12 @@ in {
       settings = {
         auto_sync = true;
         enter_accept = false;
-        key_path = cfg.key_path;
         search_mode = "fuzzy";
         sync_address = cfg.sync_address;
         sync_frequency = "1m";
         sync.records = true;
+      } // lib.optionalAttrs (cfg.key_path != null) {
+        key_path = cfg.key_path;
       };
     };
   };

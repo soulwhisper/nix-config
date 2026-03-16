@@ -11,6 +11,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.network.config.networkConfig.UseDomains = lib.mkDefault false;
     networking.resolvconf.useLocalResolver = lib.mkForce false;
     services.resolved.enable = lib.mkForce false;
 

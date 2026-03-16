@@ -43,7 +43,7 @@ in {
         replication_factor = 1;
         rpc_bind_addr = "[::]:9001";
         rpc_public_addr = "127.0.0.1:9001";
-        rpc_secret = "180f83ddd22e289bae0cc2ada61abccd667810e9e486469e09f9f2de980b51ad";
+        rpc_secret = "YOUR_RPC_SECRET_HERE";
         s3_api.s3_region = "us-east-1";
         s3_api.api_bind_addr = "[::]:9000";
         # s3_api.root_domain = ".${cfg.domain}";
