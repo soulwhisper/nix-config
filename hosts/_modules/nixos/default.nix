@@ -23,7 +23,6 @@
     ];
 
     # : networking
-    systemd.network.enable = true;
     networking = {
       firewall.enable = true;
       nftables.enable = true;
