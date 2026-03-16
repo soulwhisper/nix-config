@@ -7,6 +7,8 @@
   config = {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false; # deprecated soon
+
       matchBlocks = {
         "*" = {
           # defaults
