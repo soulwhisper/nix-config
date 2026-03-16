@@ -35,7 +35,6 @@ in {
       group = "appuser";
       mode = "0644";
       source = (pkgs.formats.toml {}).generate "garage.toml" {
-        # ref:https://garagehq.deuxfleurs.fr/documentation/quick-start/
         # ref:https://garagehq.deuxfleurs.fr/documentation/reference-manual/configuration/
         metadata_dir = "/var/lib/garage/meta";
         data_dir = "/var/lib/garage/data";
@@ -43,10 +42,9 @@ in {
         replication_factor = 1;
         rpc_bind_addr = "0.0.0.0:9001";
         rpc_public_addr = "127.0.0.1:9001";
-        rpc_secret = "YOUR_RPC_SECRET_HERE";
+        rpc_secret = "adbc7a0edaa7e35de527d45762002ee6efa57c07cd870b3dc454c242e4ee99a3";
         s3_api.s3_region = "us-east-1";
         s3_api.api_bind_addr = "0.0.0.0:9000";
-        # s3_api.root_domain = ".${cfg.domain}";
       };
     };
 
