@@ -16,7 +16,10 @@ in {
       }
     ]; # shared high ports for avahi
 
-    networking.enableIPv6 = true;
+    systemd.network.networks."10-lan".networkConfig = lib.mkForce {
+      LinkLocalAddressing = "ipv6";  # only link-local
+      IPv6AcceptRA        = false;
+    };
 
     services.home-assistant.extraComponents = [
       "matter"

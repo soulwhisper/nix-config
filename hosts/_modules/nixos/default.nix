@@ -34,7 +34,7 @@
       wait-online = {
         anyInterface = true;
         timeout = 30;
-        ignoredInterfaces = [ "EasyTier" "Meta" "tun0" ];
+        ignoredInterfaces = [ "EasyTier" "Meta" "tailscale0" "tun0" "podman0" ];
       };
     };
     boot.initrd.systemd.network.wait-online.enable = false;

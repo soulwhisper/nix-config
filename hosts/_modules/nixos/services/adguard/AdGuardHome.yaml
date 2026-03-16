@@ -36,8 +36,8 @@ dns:
   bootstrap_dns:
     - 9.9.9.10
     - 149.112.112.10
-    - 2620:fe::10
-    - 2620:fe::fe:10
+    # - 2620:fe::10
+    # - 2620:fe::fe:10
   fallback_dns: []
   upstream_mode: parallel
   fastest_timeout: 1s

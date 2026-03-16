@@ -49,7 +49,7 @@ in {
     services.netbox = {
       enable = true;
       port = 9802;
-      listenAddress = "[::]";
+      listenAddress = "0.0.0.0";
       secretKeyFile = saltFile;
       plugins = python3Packages:
         with python3Packages; [

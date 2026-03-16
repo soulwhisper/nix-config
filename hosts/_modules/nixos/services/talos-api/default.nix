@@ -27,7 +27,7 @@ in {
         StartLimitIntervalSec = 0;
       };
       serviceConfig = {
-        ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=:9300 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
+        ExecStart = "${pkgs.talos-api}/bin/talos-api -addr=0.0.0.0:9300 -landing-addr= -metrics-addr= -snapshot-path=/var/lib/talos-api/state.binpb";
         User = "appuser";
         Group = "appuser";
         Restart = "always";
