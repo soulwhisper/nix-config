@@ -24,7 +24,6 @@ in {
         nixfmt-rfc-style
         tio # serial terminal
         unstable.just
-        unstable.mise
         unstable.oha # http load generator
       ]
       ++ lib.optionals cfg.vmware.enable [
