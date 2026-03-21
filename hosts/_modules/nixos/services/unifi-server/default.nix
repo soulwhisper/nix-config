@@ -35,10 +35,6 @@ in {
       }
     '';
 
-    networking.hosts = {
-      "127.0.0.1" = ["${cfg.domain}"]; # fallback
-    };
-
     systemd.tmpfiles.rules = [
       "d /var/lib/unifi-server/persistent 0755 root root - -"
       "d /var/lib/unifi-server/log 0755 root root - -"
