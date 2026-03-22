@@ -55,7 +55,10 @@ in {
         "io.containers.autoupdate" = "registry";
       };
       privileged = true;
-      extraOptions = ["--memory=4g"];
+      extraOptions = [
+        "--memory=4g"
+        "--add-host=${cfg.domain}:127.0.0.1" # fallback
+      ];
       ports = [
         "9801:443/tcp" # web-ui
         "8080:8080/tcp" # unifi-os-server-communication-svc
