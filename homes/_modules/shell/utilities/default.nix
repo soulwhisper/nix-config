@@ -12,6 +12,7 @@
       lsof # replace netstat/ss
       nixos-rebuild
       nvd
+      ookla-speedtest # replace speedtest-cli
       procs # modern ps
       trippy # modern traceroute and ping
       jq
@@ -28,12 +29,18 @@
       };
     };
 
-    # direnv; preferred over 'mise'
-    programs.direnv = {
+    # mise; preferred over 'direnv'
+    programs.mise = {
       enable = true;
-      silent = true;
-      nix-direnv.enable = true;
-      config.global.warn_timeout = 0;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      settings = {
+        experimental = true;
+        disable_hints = ["*"];
+        always_keep_download = false;
+        always_keep_install = false;
+        idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
+      };
     };
 
     # eza
