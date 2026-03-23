@@ -4,7 +4,6 @@
   ...
 }: let
   cfg = config.modules.services.tailscale;
-  reverseProxyCaddy = config.modules.services.caddy;
 in {
   options.modules.services.tailscale = {
     enable = lib.mkEnableOption "tailscale";
@@ -24,15 +23,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedUDPPorts = [3478 41641];
+    networking.firewall.allowedTCPPorts = [48484];
+    networking.firewall.allowedUDPPorts = [41641 48484];
 
-    # Internet Router must set 'Port Forwarding' for 443/3478/41641;
-
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-        reverse_proxy localhost:8010
-      }
-    '';
+    # Internet Router must set 'Port Forwarding' for 48484 tcp/udp;
 
     services.tailscale = {
       enable = true;
@@ -45,6 +39,8 @@ in {
       derper = {
         enable = true;
         domain = cfg.domain;
+        port = 48484;
+        stunPort = 48484;
         configureNginx = false;
         openFirewall = false;
         verifyClients = true;
