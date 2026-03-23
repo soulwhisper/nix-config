@@ -37,7 +37,7 @@
         # : Infrastructure
         # gatus.enable = true; # ep=:9400
         # gatus.pushover.authFile = config.sops.secrets."alerting/pushover/auth".path;
-        tailscale.enable = true; # derp=:48484
+        tailscale.enable = true; # derp=:48484;
         tailscale.networks = ["10.0.0.0/24" "10.10.0.0/24"];
         unifi-server.enable = true; # sub=unifi
         vector.enable = true; # ep=:514

@@ -18,6 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     # conflict with unifi-network
     # prefer SSD storage and caddy domain
+    # pass origin header fix wss errors
 
     networking.firewall.allowedTCPPorts = [
       8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882
@@ -28,6 +29,7 @@ in {
     services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
       handle {
         reverse_proxy localhost:9801 {
+          header_up Origin "https://localhost:9801"
           transport http {
             tls_insecure_skip_verify
           }
