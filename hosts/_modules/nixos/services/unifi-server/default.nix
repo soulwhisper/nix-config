@@ -30,7 +30,7 @@ in {
         reverse_proxy localhost:9801 {
           transport http {
             tls_insecure_skip_verify
-            versions h1
+            versions 1.1
           }
         }
       }
