@@ -32,6 +32,8 @@
     # mise; preferred over 'direnv'
     programs.mise = {
       enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
       settings = {
         experimental = true;
         disable_hints = ["*"];
@@ -40,9 +42,6 @@
         idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
       };
     };
-    programs.fish.interactiveShellInit = ''
-      mise activate fish | source
-    '';
 
     # eza
     programs.eza = {
