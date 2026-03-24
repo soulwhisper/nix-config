@@ -25,11 +25,11 @@ dns:
   refuse_any: true
   upstream_dns:
     # quote is necessary for complicated rules
-    - 127.0.0.1:5300
-    # - tls://223.5.5.5
-    # - tls://223.6.6.6
-    # - quic://223.5.5.5
-    # - quic://223.6.6.6
+    # - 127.0.0.1:5300
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+    - quic://223.5.5.5
+    - quic://223.6.6.6
     # - "[/homelab.internal/noirprime.com/]127.0.0.1:5300 127.0.0.1:5301"
     # - "[/opn.noirprime.com/]#"
   upstream_dns_file: ""
@@ -118,16 +118,14 @@ filtering:
   parental_block_host: family-block.dns.adguard.com
   safebrowsing_block_host: standard-block.dns.adguard.com
   rewrites:
+    - domain: nas.homelab.internal
+      answer: 10.10.0.100
     - domain: k8s.homelab.internal
       answer: 10.10.0.101
     - domain: k8s.homelab.internal
       answer: 10.10.0.102
     - domain: k8s.homelab.internal
       answer: 10.10.0.103
-    - domain: nas.homelab.internal
-      answer: 10.10.0.10
-    - domain: unifi.noirprime.com
-      answer: 10.0.0.200
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
