@@ -19,15 +19,15 @@
   };
   caddy-plugin-cloudflare = {
     pname = "caddy-plugin-cloudflare";
-    version = "6dc1fbb7e925b0da6736780db2e90f4816b79ab7";
+    version = "a8737d095ad5a48ca031cea6ab704057dbc2d250";
     src = fetchFromGitHub {
       owner = "caddy-dns";
       repo = "cloudflare";
-      rev = "6dc1fbb7e925b0da6736780db2e90f4816b79ab7";
+      rev = "a8737d095ad5a48ca031cea6ab704057dbc2d250";
       fetchSubmodules = false;
-      sha256 = "sha256-/FB0a/Ja4kDSw9SlNiusi6w7r87xHXafzEOQqLbTsyA=";
+      sha256 = "sha256-0Csi6WmyoGj7bXeo2Lrnwr0SCoV6c/niymtOp5DdiT4=";
     };
-    date = "2025-12-04";
+    date = "2026-03-23";
   };
   hass-sgcc = {
     pname = "hass-sgcc";
@@ -65,25 +65,25 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "bd48675d75f3f9693cc4e5bab7a46edf221b0959";
+    version = "4571dc55f6009c8f8ca07b1948cb48f6cf24777d";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "bd48675d75f3f9693cc4e5bab7a46edf221b0959";
+      rev = "4571dc55f6009c8f8ca07b1948cb48f6cf24777d";
       fetchSubmodules = false;
-      sha256 = "sha256-fkY8FPZm1cxpABonS1oDc+7QUY70yi9BTg8ktK3Kl2w=";
+      sha256 = "sha256-XE92YYrikT1TbfeXMCYiL9a3eo7mt/Dp3s6egiaE0R0=";
     };
-    date = "2026-03-17";
+    date = "2026-03-24";
   };
   talos-api = {
     pname = "talos-api";
-    version = "v1.0.15";
+    version = "v1.0.16";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "discovery-service";
-      rev = "v1.0.15";
+      rev = "v1.0.16";
       fetchSubmodules = false;
-      sha256 = "sha256-AI1jBsS/JuCSsCr69dfwQQpucbEvXpMxFDq+UoRUlJk=";
+      sha256 = "sha256-y8dh1F5oNcoyhPM/F0N/Lhlpz3wXXJ0g+8lQhdgpbaE=";
     };
   };
   zotregistry = {
