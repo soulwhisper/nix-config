@@ -77,13 +77,13 @@
   };
   talos-api = {
     pname = "talos-api";
-    version = "v1.0.16";
+    version = "v1.0.17";
     src = fetchFromGitHub {
       owner = "siderolabs";
       repo = "discovery-service";
-      rev = "v1.0.16";
+      rev = "v1.0.17";
       fetchSubmodules = false;
-      sha256 = "sha256-y8dh1F5oNcoyhPM/F0N/Lhlpz3wXXJ0g+8lQhdgpbaE=";
+      sha256 = "sha256-hW7N3vKqvWlFHizOT6rlzNZyG6q7h0z5Fv8zavH5AQ4=";
     };
   };
   zotregistry = {
