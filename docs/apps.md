@@ -77,6 +77,7 @@ proxy-ui: 9201
 sftpgo-ui: 9202
 meshcentral: 9203
 scrutiny-ui: 9204
+stork-ui: 9205
 
 ## k8s-infra, 9300-9399
 talos-api: 9300
