@@ -9,6 +9,7 @@
     ./garage
     ./gatus
     ./home-assistant
+    ./isc
     ./kms
     ./meshcentral
     ./mihomo

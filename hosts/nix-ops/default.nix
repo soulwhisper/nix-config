@@ -23,7 +23,7 @@
     modules = {
       filesystems.xfs.enable = true;
       services = {
-        adguard.enable = true;
+        # adguard.enable = true;
         caddy.enable = true;
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 
@@ -35,16 +35,19 @@
         smartd.enable = false;
         nut.enable = false;
 
-        # : LAB
-        garage.enable = true; # ep=:9000
+        # : TEST
         kms.enable = true;
-        talos.api.enable = true;
-        netbox.enable = true; # sub=box
-        unifi-server.enable = true; # sub=unifi
+        isc.enable = true;
+        isc.bind.authFile = config.sops.secrets."networking/bind/auth".path;
+
+        garage.enable = false; # ep=:9000
+        talos.api.enable = false;
+        netbox.enable = false; # sub=box
+        unifi-server.enable = false; # sub=unifi
 
         # : Others
         nfs4 = {
-          enable = true; # all_squash = 2000:2000
+          enable = false; # all_squash = 2000:2000
           exports.default = {
             path = "/var/lib/shared";
             subnet = "172.19.82.0/24";

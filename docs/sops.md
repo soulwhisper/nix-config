@@ -50,6 +50,8 @@ backup:
       AWS_ACCESS_KEY_ID={s3-access-key}
       AWS_SECRET_ACCESS_KEY={s3-access-secret}
 networking:
+  bind:
+    auth: { external-key-secret }
   cloudflare:
     auth: |
       CLOUDFLARE_EMAIL={cf-email}

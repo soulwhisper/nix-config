@@ -62,8 +62,7 @@ networking.proxy.default = "http://ip:port";
 networking.proxy.noProxy = "127.0.0.1,localhost,.homelab.internal";
 
 ## fix unfinished tmpfiles
-systemd-tmpfiles --tldr | grep apps
-SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
+sudo SYSTEMD_LOG_LEVEL=debug systemd-tmpfiles --create
 
 ## list failed systemd units
 systemctl list-units | grep failed

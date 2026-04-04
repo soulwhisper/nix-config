@@ -1,0 +1,26 @@
+{
+  "Dhcp4": {
+    <?include "/var/lib/kea/config/dhcp-common.json"?>,
+    "control-socket": {
+      "socket-name": "/run/kea/dhcp4-ctrl",
+      "socket-type": "unix"
+    },
+    "lease-database": {
+      "type": "memfile",
+      "persist": true,
+      "name": "/var/lib/kea/dhcp4.leases"
+    },
+    "loggers": [
+      {
+        "name": "kea-dhcp4",
+        "output_options": [
+          {
+            "output": "stdout"
+          }
+        ],
+        "severity": "INFO"
+      }
+    ],
+    <?include "/var/lib/kea/config/dhcp4-subnets.json"?>
+  }
+}

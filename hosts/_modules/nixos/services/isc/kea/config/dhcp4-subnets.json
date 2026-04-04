@@ -1,0 +1,102 @@
+"subnet4": [
+  {
+    "ddns-qualifying-suffix": "homelab.internal.",
+    "id": 1,
+    "option-data": [
+      {
+        "data": "10.10.0.1",
+        "name": "routers"
+      },
+      {
+        "data": "10.10.0.254",
+        "name": "domain-name-servers"
+      }
+    ],
+    "pools": [
+      {
+        "pool": "10.10.0.101 - 10.10.0.250"
+      }
+    ],
+    "reservations": [
+      {
+        "hostname": "printer-01",
+        "hw-address": "08:00:27:00:00:01",
+        "ip-address": "10.10.0.50"
+      }
+    ],
+    "subnet": "10.10.0.0/24"
+  },
+  {
+    "ddns-qualifying-suffix": "homelab.internal.",
+    "id": 2,
+    "option-data": [
+      {
+        "data": "10.0.10.1",
+        "name": "routers"
+      },
+      {
+        "data": "10.0.10.254",
+        "name": "domain-name-servers"
+      }
+    ],
+    "pools": [
+      {
+        "pool": "10.0.10.101 - 10.0.10.250"
+      }
+    ],
+    "reservations": [
+      {
+        "hostname": "nas-server",
+        "hw-address": "08:00:27:00:00:02",
+        "ip-address": "10.0.10.60"
+      }
+    ],
+    "subnet": "10.0.10.0/24"
+  },
+  {
+    "ddns-qualifying-suffix": "homelab.internal.",
+    "id": 3,
+    "option-data": [
+      {
+        "data": "10.20.0.1",
+        "name": "routers"
+      },
+      {
+        "data": "10.20.0.254",
+        "name": "domain-name-servers"
+      }
+    ],
+    "pools": [
+      {
+        "pool": "10.20.0.101 - 10.20.0.250"
+      }
+    ],
+    "subnet": "10.20.0.0/24"
+  },
+  {
+    "ddns-qualifying-suffix": "homelab.internal.",
+    "id": 4,
+    "option-data": [
+      {
+        "data": "10.20.10.1",
+        "name": "routers"
+      },
+      {
+        "data": "10.20.10.254",
+        "name": "domain-name-servers"
+      }
+    ],
+    "pools": [
+      {
+        "pool": "10.20.10.101 - 10.20.10.250"
+      }
+    ],
+    "reservations": [
+      {
+        "client-id": "01:aa:bb:cc:dd:ee:ff",
+        "ip-address": "10.20.10.99"
+      }
+    ],
+    "subnet": "10.20.10.0/24"
+  }
+]

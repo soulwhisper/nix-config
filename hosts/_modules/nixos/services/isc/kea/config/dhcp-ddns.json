@@ -1,0 +1,39 @@
+{
+  "DhcpDdns": {
+    "dns-server-timeout": 100,
+    "forward-ddns": {
+      "ddns-domains": [
+        {
+          "dns-servers": [
+            {
+              "ip-address": "127.0.0.1",
+              "port": 53
+            }
+          ],
+          "key-name": "isc-key",
+          "name": "homelab.internal."
+        }
+      ]
+    },
+    "ip-address": "127.0.0.1",
+    "loggers": [
+      {
+        "name": "kea-dhcp-ddns",
+        "output_options": [
+          {
+            "output": "stdout"
+          }
+        ],
+        "severity": "INFO"
+      }
+    ],
+    "port": 53001,
+    "tsig-keys": [
+      {
+        "algorithm": "hmac-sha256",
+        "name": "isc-key",
+        "secret-file": "/var/lib/kea/isc.secret"
+      }
+    ]
+  }
+}

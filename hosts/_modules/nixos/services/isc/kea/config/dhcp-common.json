@@ -1,0 +1,39 @@
+"hooks-libraries": [
+  {
+    "library": "/var/lib/kea/hooks/libdhcp_lease_cmds.so"
+  },
+  {
+    "library": "/var/lib/kea/hooks/libdhcp_stat_cmds.so"
+  },
+  {
+    "library": "/var/lib/kea/hooks/libdhcp_pgsql.so"
+  },
+  {
+    "library": "/var/lib/kea/hooks/libdhcp_legal_log.so",
+    "parameters": {
+      "base-name": "kea-legal-log",
+      "path": "/var/log/kea"
+    }
+  }
+],
+"dhcp-ddns": {
+  "enable-updates": true,
+  "ncr-format": "JSON",
+  "ncr-protocol": "UDP",
+  "server-ip": "127.0.0.1",
+  "server-port": 53001
+},
+"interfaces-config": {
+  "interfaces": ["*"]
+},
+"rebind-timer": 120,
+"renew-timer": 90,
+"valid-lifetime": 180,
+"expired-leases-processing": {
+  "flush-reclaimed-timer-wait-time": 25,
+  "hold-reclaimed-time": 3600,
+  "max-reclaim-leases": 100,
+  "max-reclaim-time": 250,
+  "reclaim-timer-wait-time": 10,
+  "unwarned-reclaim-cycles": 5
+}

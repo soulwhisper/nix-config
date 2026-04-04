@@ -1,0 +1,37 @@
+{
+  "Control-agent": {
+    "control-sockets": {
+      "d2": {
+        "socket-name": "/run/kea/ddns-ctrl",
+        "socket-type": "unix"
+      },
+      "dhcp4": {
+        "socket-name": "/run/kea/dhcp4-ctrl",
+        "socket-type": "unix"
+      },
+      "dhcp6": {
+        "socket-name": "/run/kea/dhcp6-ctrl",
+        "socket-type": "unix"
+      }
+    },
+    "hooks-libraries": [],
+    "http-host": "0.0.0.0",
+    "http-port": 53000,
+    "loggers": [
+      {
+        "debuglevel": 0,
+        "name": "kea-ctrl-agent",
+        "output_options": [
+          {
+            "output": "stdout",
+            "pattern": "%-5p %m\n"
+          },
+          {
+            "output": "/var/log/kea/ctrl-agent.log"
+          }
+        ],
+        "severity": "INFO"
+      }
+    ]
+  }
+}
