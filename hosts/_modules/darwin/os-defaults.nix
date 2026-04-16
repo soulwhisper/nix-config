@@ -25,26 +25,28 @@ _: {
     NSGlobalDomain = {
       # Disable automatically switch between light and dark mode.
       AppleInterfaceStyleSwitchesAutomatically = false;
-      # Whether to show all file extensions in Finder
+      # Whether to show all file extensions in Finder.
       AppleShowAllExtensions = true;
-      # Disable automatic capitalization
+      # Disable automatic capitalization.
       NSAutomaticCapitalizationEnabled = false;
-      # Disable smart dash substitution
+      # Disable smart dash substitution.
       NSAutomaticDashSubstitutionEnabled = false;
-      # Disable smart period substitution
+      # Disable smart period substitution.
       NSAutomaticPeriodSubstitutionEnabled = false;
-      # Disable smart quote substitution
+      # Disable smart quote substitution.
       NSAutomaticQuoteSubstitutionEnabled = false;
-      # Disable automatic spelling correction
+      # Disable automatic spelling correction.
       NSAutomaticSpellingCorrectionEnabled = false;
-      # Sets the size of the finder sidebar icons
+      # Sets the size of the finder sidebar icons.
       NSTableViewDefaultSizeMode = 1;
       # Configures the trackpad tap behavior.  Mode 1 enables tap to click.
       "com.apple.mouse.tapBehavior" = 1;
       # Enable trackpad secondary click.
       "com.apple.trackpad.enableSecondaryClick" = true;
-      # Disable autohide the menu bar.
+      # Disable menu bar auto hide.
       _HIHideMenuBar = false;
+      # Disable submenu icons.
+      NSMenuEnableActionImages = false;
     };
 
     WindowManager = {
