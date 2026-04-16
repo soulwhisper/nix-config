@@ -11,15 +11,17 @@ _: {
     };
 
     CustomUserPreferences = {
-      # Limit Ad Tracking
+      # Limit Ad Tracking.
       "com.apple.AdLib".allowApplePersonalizedAdvertising = false;
-      # Prevent .DS_store file creation
+      # Prevent .DS_store file creation.
       "com.apple.desktopservices" = {
         DSDontWriteNetworkStores = true;
         DSDontWriteUSBStores = true;
       };
-      # Disable wallpaper tinting
+      # Disable wallpaper tinting.
       "NSGlobalDomain".AppleReduceDesktopTinting = true;
+      # Disable submenu icons.
+      "NSGlobalDomain".NSMenuEnableActionImages = false;
     };
 
     NSGlobalDomain = {
@@ -45,8 +47,6 @@ _: {
       "com.apple.trackpad.enableSecondaryClick" = true;
       # Disable menu bar auto hide.
       _HIHideMenuBar = false;
-      # Disable submenu icons.
-      NSMenuEnableActionImages = false;
     };
 
     WindowManager = {
