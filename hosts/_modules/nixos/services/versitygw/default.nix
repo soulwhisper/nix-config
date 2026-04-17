@@ -16,10 +16,11 @@ in {
 
   # versitygw disable caddy to keep compatibility with TrueNAS / Synology;
   # endpoint = http://nas.homelab.internal:9000;
+  # webui = http://nas.homelab.internal:9001;
   # port conflict with minio/garage;
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [9000];
+    networking.firewall.allowedTCPPorts = [9000 9001];
 
     # Disable IAM service for simplicity
     # Backend Performance: xfs/btrfs > ext4/zfs
@@ -40,7 +41,7 @@ in {
       serviceConfig = {
         User = "appuser";
         Group = "appuser";
-        ExecStart = "${pkgs.unstable.versitygw}/bin/versitygw --port :9000 posix /var/lib/versitygw/data";
+        ExecStart = "${pkgs.unstable.versitygw}/bin/versitygw --port :9000 --webui :9001 posix /var/lib/versitygw/data";
         RuntimeDirectory = "versitygw";
         StateDirectory = "versitygw";
         Restart = "always";

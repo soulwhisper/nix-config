@@ -40,7 +40,7 @@
         isc.enable = true;
         isc.bind.authFile = config.sops.secrets."networking/bind/auth".path;
 
-        garage.enable = false; # ep=:9000
+        versitygw.enable = false; # ep=:9000,9001
         talos.api.enable = false;
         netbox.enable = false; # sub=box
         unifi-server.enable = false; # sub=unifi

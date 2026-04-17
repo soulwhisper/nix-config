@@ -59,7 +59,7 @@ mosdns: 5300
 ## storage, 9000-9099
 minio: 9000,9001
 garage: 9000,9001
-versitygw: 9000
+versitygw: 9000,9001
 zot: 9002
 forgejo: 9003,9004
 

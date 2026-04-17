@@ -43,7 +43,7 @@
         vector.enable = true; # ep=:514
 
         # : Services migrated to NAS
-        garage.enable = false; # ep=:9000
+        versitygw.enable = false; # ep=:9000,9001
         meshcentral.enable = false; # ep=:9203
         talos.api.enable = false; # ep=:9300
 
