@@ -169,7 +169,7 @@
     },
     "zotregistry-ui": {
         "cargoLock": null,
-        "date": "2026-04-05",
+        "date": "2026-04-16",
         "extract": null,
         "name": "zotregistry-ui",
         "passthru": null,
@@ -181,11 +181,11 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zui",
-            "rev": "1c8e5ef68b2898703f0a937de67ac60aff3e356b",
-            "sha256": "sha256-Kmn/YQz9NroV5oiGvad09s8XDLmDdRCO9o7zWuZZGVE=",
+            "rev": "93334201a195dbe64c3bd1fcc6483b651c729456",
+            "sha256": "sha256-5WeXPecAr4katn+bpnVZuZCzWNiR7GIuvbgkhyWmzns=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1c8e5ef68b2898703f0a937de67ac60aff3e356b"
+        "version": "93334201a195dbe64c3bd1fcc6483b651c729456"
     }
 }
