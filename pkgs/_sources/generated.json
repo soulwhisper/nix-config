@@ -106,7 +106,7 @@
     },
     "rime-moqi-yinxing": {
         "cargoLock": null,
-        "date": "2026-04-17",
+        "date": "2026-04-19",
         "extract": null,
         "name": "rime-moqi-yinxing",
         "passthru": null,
@@ -118,12 +118,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "5dfecccb980a0aba6d509fb36b9f3b3eb7248a9d",
-            "sha256": "sha256-rv30X4Ph04PDzLTS4fiON8fAk6sEHSXGbOztneN0ZaE=",
+            "rev": "f0b1c7ac81b32fcda923f832ab91ed3f7d78b350",
+            "sha256": "sha256-BlznNJviPl3QthKYv8RdL2dTtepfgqCPtbs6kO2QIqA=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "5dfecccb980a0aba6d509fb36b9f3b3eb7248a9d"
+        "version": "f0b1c7ac81b32fcda923f832ab91ed3f7d78b350"
     },
     "talos-api": {
         "cargoLock": null,
@@ -160,12 +160,12 @@
             "name": null,
             "owner": "project-zot",
             "repo": "zot",
-            "rev": "v2.1.15",
-            "sha256": "sha256-PhPhlifLU0kOGPqH1kqKxikt+DtJO+MWEv1w6/7sZ6E=",
+            "rev": "v2.1.16",
+            "sha256": "sha256-eEyaV0PZjqYIWOgof6xejK+6TK5Ubat778ovjGQzNzk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.1.15"
+        "version": "v2.1.16"
     },
     "zotregistry-ui": {
         "cargoLock": null,
