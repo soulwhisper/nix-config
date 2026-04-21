@@ -41,7 +41,7 @@ _: {
       # :: development
       "ghostty"
       "claude-code"
-      "opencode-desktop"
+      "cherry-studio"
       "orbstack"
       "visual-studio-code"
 
