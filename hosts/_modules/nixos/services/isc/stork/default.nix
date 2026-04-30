@@ -40,7 +40,7 @@ in {
       };
       "stork-server" = {
         autoStart = true;
-        image = "ghcr.io/soulwhisper/stork-alpine:latest";
+        image = "ghcr.io/soulwhisper/stork:latest";
         labels = {
           "io.containers.autoupdate" = "registry";
         };
@@ -59,7 +59,7 @@ in {
       };
       "stork-agent" = {
         autoStart = true;
-        image = "ghcr.io/soulwhisper/stork-alpine:latest";
+        image = "ghcr.io/soulwhisper/stork:latest";
         labels = {
           "io.containers.autoupdate" = "registry";
         };
