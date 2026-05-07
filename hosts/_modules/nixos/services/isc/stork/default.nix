@@ -21,11 +21,11 @@ in {
     virtualisation.oci-containers.containers = {
       "stork-database" = {
         autoStart = true;
-        image = "postgres:18-alpine";
+        image = "docker.io/library/postgres:18-alpine";
         labels = {
           "io.containers.autoupdate" = "registry";
         };
-        extraOptions = [ "--user 1001:1001" ];
+        extraOptions = [ "--user=1001:1001" ];
         ports = [
           "15432:5432/tcp"
         ];
