@@ -10,6 +10,9 @@ src.branch = "master"
 [hass-sgcc]
 fetch.github = "ARC-MX/sgcc_electricity_new"
 src.github = "ARC-MX/sgcc_electricity_new"
+[isc-stork]
+fetch.github = "isc-projects/stork"
+src.github = "isc-projects/stork"
 [kubecolor-catppuccin]
 fetch.github = "vkhitrin/kubecolor-catppuccin"
 src.git = "https://github.com/vkhitrin/kubecolor-catppuccin.git"
