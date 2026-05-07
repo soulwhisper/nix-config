@@ -19,7 +19,7 @@
       # :: secrets
       # services enabled by default
       secrets = {
-        "networking/easytier/auth" = {
+        "networking/easytier/config" = {
           owner = config.users.users.appuser.name;
           restartUnits = ["easytier.service"];
           sopsFile = ./nixos.sops.yaml;

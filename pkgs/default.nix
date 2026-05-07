@@ -7,6 +7,7 @@
 }: {
   caddy-custom = pkgs.callPackage ./caddy-custom {};
   hass-sgcc = pkgs.callPackage ./hass-sgcc {};
+  isc-stork = pkgs.callPackage ./isc-stork {};
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin {};
   kubectl-switch = pkgs.callPackage ./kubectl-switch {};
   rime-moqi-yinxing = pkgs.callPackage ./rime-moqi-yinxing {};

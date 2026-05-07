@@ -21,11 +21,11 @@ in {
     virtualisation.oci-containers.containers = {
       "stork-database" = {
         autoStart = true;
-        image = "postgres:18-alpine";
+        image = "docker.io/library/postgres:18-alpine";
         labels = {
           "io.containers.autoupdate" = "registry";
         };
-        extraOptions = [ "--user 1001:1001" ];
+        extraOptions = [ "--user=1001:1001" ];
         ports = [
           "15432:5432/tcp"
         ];
@@ -50,7 +50,8 @@ in {
         environment = {
           STORK_MODE = "server";
           STORK_REST_PORT = "9205";
-          STORK_DATABASE_HOST = "host.containers.internal:15432";
+          STORK_DATABASE_HOST = "host.containers.internal";
+          STORK_DATABASE_PORT = "15432";
           STORK_DATABASE_NAME = "stork";
           STORK_DATABASE_USER_NAME = "stork";
           STORK_DATABASE_PASSWORD = "stork";
@@ -77,6 +78,7 @@ in {
         ];
         environment = {
           STORK_MODE = "agent";
+          STORK_AGENT_HOST = "host.containers.internal";
           STORK_AGENT_PORT = "9206";
           STORK_AGENT_SERVER_URL = "http://host.containers.internal:9205";
         };
