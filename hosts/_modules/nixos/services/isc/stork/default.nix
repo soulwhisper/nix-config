@@ -44,6 +44,7 @@ in {
         labels = {
           "io.containers.autoupdate" = "registry";
         };
+        extraOptions = [ "--add-host=host.containers.internal:host-gateway" ];
         ports = [
           "9205:9205/tcp"
         ];
@@ -63,7 +64,7 @@ in {
         labels = {
           "io.containers.autoupdate" = "registry";
         };
-        extraOptions = [ "--pid=host" ];
+        extraOptions = [ "--pid=host" "--add-host=host.containers.internal:host-gateway" ];
         capabilities = { CAP_SYS_PTRACE = true;};
         ports = [
           "9206:9206/tcp"
