@@ -67,8 +67,8 @@ in {
         capabilities = { CAP_SYS_PTRACE = true;};
         ports = [
           "9206:9206/tcp"
-          "9547:9547/tcp" # kea metrics
-          "9119:9119/tcp" # bind9 metrics
+          # "9547:9547/tcp" # kea metrics
+          # "9119:9119/tcp" # bind9 metrics
         ];
         volumes = [
           "/var/lib/bind:/etc/bind"
