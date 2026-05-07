@@ -77,7 +77,7 @@ in {
         ];
         environment = {
           STORK_MODE = "agent";
-          STORK_AGENT_HOST = "0.0.0.0";
+          STORK_AGENT_HOST = "host.containers.internal";
           STORK_AGENT_PORT = "9206";
           STORK_AGENT_SERVER_URL = "http://host.containers.internal:9205";
         };
