@@ -6,8 +6,23 @@
 }: let
   cfg = config.modules.services.isc;
 in {
+  options.modules.services.isc = {
+    stork.address = lib.mkOption {
+      type = lib.types.str;
+      description = "Non-loopback IP address for localhost";
+      example = "192.168.10.10";
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 9205 ];
+
+    assertions = [
+      {
+        assertion = cfg.stork.address != "";
+        message = "stork address must not be empty.";
+      }
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/stork 0755 appuser appuser - -"
@@ -18,14 +33,16 @@ in {
     systemd.services.podman-stork-server.serviceConfig.RestartSec = 5;
     systemd.services.podman-stork-agent.serviceConfig.RestartSec = 5;
 
+    # default login = admin:admin
+
     virtualisation.oci-containers.containers = {
       "stork-database" = {
         autoStart = true;
-        image = "postgres:18-alpine";
+        image = "docker.io/library/postgres:18-alpine";
         labels = {
           "io.containers.autoupdate" = "registry";
         };
-        extraOptions = [ "--user 1001:1001" ];
+        extraOptions = [ "--user=1001:1001" ];
         ports = [
           "15432:5432/tcp"
         ];
@@ -50,7 +67,8 @@ in {
         environment = {
           STORK_MODE = "server";
           STORK_REST_PORT = "9205";
-          STORK_DATABASE_HOST = "host.containers.internal:15432";
+          STORK_DATABASE_HOST = "host.containers.internal";
+          STORK_DATABASE_PORT = "15432";
           STORK_DATABASE_NAME = "stork";
           STORK_DATABASE_USER_NAME = "stork";
           STORK_DATABASE_PASSWORD = "stork";
@@ -63,22 +81,22 @@ in {
         labels = {
           "io.containers.autoupdate" = "registry";
         };
-        extraOptions = [ "--pid=host" ];
+        # podman dns-resolving conflict with bind9/adguardhome, so using host-network here
+        # therefore, STORK_AGENT_HOST must be set to a non-loopback address
+        extraOptions = [ "--pid=host" "--network=host" ];
         capabilities = { CAP_SYS_PTRACE = true;};
-        ports = [
-          "9206:9206/tcp"
-          "9547:9547/tcp" # kea metrics
-          "9119:9119/tcp" # bind9 metrics
-        ];
+        # port = 9206, 9547/kea_metrics, 9119/bind_metrics
         volumes = [
-          "/var/lib/bind:/etc/bind"
+          "/var/lib/bind:/var/lib/bind"
           "/var/lib/kea:/var/lib/kea"
           "/run/kea:/run/kea"
+          "/nix/store:/nix/store" # nixos only
         ];
         environment = {
           STORK_MODE = "agent";
+          STORK_AGENT_HOST = "${cfg.stork.address}";
           STORK_AGENT_PORT = "9206";
-          STORK_AGENT_SERVER_URL = "http://host.containers.internal:9205";
+          STORK_AGENT_SERVER_URL = "http://localhost:9205";
         };
       };
     };
