@@ -33,6 +33,8 @@ in {
     systemd.services.podman-stork-server.serviceConfig.RestartSec = 5;
     systemd.services.podman-stork-agent.serviceConfig.RestartSec = 5;
 
+    # default login = admin:admin
+
     virtualisation.oci-containers.containers = {
       "stork-database" = {
         autoStart = true;
@@ -88,6 +90,7 @@ in {
           "/var/lib/bind:/etc/bind"
           "/var/lib/kea:/var/lib/kea"
           "/run/kea:/run/kea"
+          "/nix/store:/nix/store" # nixos only
         ];
         environment = {
           STORK_MODE = "agent";
