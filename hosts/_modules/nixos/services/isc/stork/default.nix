@@ -87,7 +87,7 @@ in {
         capabilities = { CAP_SYS_PTRACE = true;};
         # port = 9206, 9547/kea_metrics, 9119/bind_metrics
         volumes = [
-          "/var/lib/bind:/etc/bind"
+          "/var/lib/bind:/var/lib/bind"
           "/var/lib/kea:/var/lib/kea"
           "/run/kea:/run/kea"
           "/nix/store:/nix/store" # nixos only
