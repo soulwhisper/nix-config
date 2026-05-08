@@ -40,17 +40,6 @@
       sha256 = "sha256-ORGQb9TCb/D3p7B7aJjFA4Xc18v0hAg7d63IWuB2dx0=";
     };
   };
-  isc-stork = {
-    pname = "isc-stork";
-    version = "v2.4.0";
-    src = fetchFromGitHub {
-      owner = "isc-projects";
-      repo = "stork";
-      rev = "v2.4.0";
-      fetchSubmodules = false;
-      sha256 = "sha256-n8GQ/yAZXIVjcm5Za8GkAyancEl77ziXvbWKq7pZWXg=";
-    };
-  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";
