@@ -30,6 +30,7 @@ in {
     home.packages =
       (with pkgs; [
         kubecolor-catppuccin
+        kubeconform
         kubectl-switch
       ])
       ++ (with pkgs.unstable; [

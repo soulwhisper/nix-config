@@ -8,26 +8,21 @@
 in {
   options.modules.development = {
     enable = lib.mkEnableOption "development";
-    vmware.enable = lib.mkEnableOption "development-vmware";
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs;
       [
         awscli2
-        curlie # api test like curl
-        grype
-        httpie # api test
-        kopia
         minijinja
         nixd
-        nixfmt-rfc-style
+        nixfmt-tree # treefmt
         tio # serial terminal
         unstable.just
-        unstable.oha # http load generator
+        unstable.prek
       ]
-      ++ lib.optionals cfg.vmware.enable [
-        unstable.govc
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        unstable.claude-code
       ];
   };
 }

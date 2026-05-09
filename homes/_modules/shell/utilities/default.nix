@@ -5,14 +5,12 @@
       btop # replace glances
       dust # replace du
       doggo
-      gemini-cli-bin # gemini
       gum
       iperf
       lnav # less for logfile
       lsof # replace netstat/ss
       nixos-rebuild
       nvd
-      ookla-speedtest # replace speedtest-cli
       procs # modern ps
       trippy # modern traceroute and ping
       jq

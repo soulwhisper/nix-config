@@ -3,7 +3,5 @@
   pkgs,
   ...
 }: {
-  modules = {
-    development.vmware.enable = true;
-  };
+  # placeholder
 }
