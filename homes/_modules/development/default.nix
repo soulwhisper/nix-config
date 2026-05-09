@@ -16,6 +16,7 @@ in {
         awscli2
         minijinja
         nixd
+        nixfmt
         nixfmt-tree # treefmt
         tio # serial terminal
         unstable.just
