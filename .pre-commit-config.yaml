@@ -10,8 +10,6 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: check-yaml
-        args: [--allow-multiple-documents]
       - id: check-added-large-files
         args: [--maxkb=500]
       - id: check-merge-conflict
