@@ -1,4 +1,6 @@
-set quiet := true
+set lazy
+set quiet
+set script-interpreter := ['bash', '-euo', 'pipefail']
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
 ROOT_DIR := invocation_directory()
@@ -8,9 +10,11 @@ default:
   @just --list
 
 [doc('Build nixos configuration, HOST required')]
+[script]
 build HOST:
   nix-shell -p nixos-rebuild --run "nixos-rebuild build --flake {{ROOT_DIR}}/.#{{HOST}}"
 
 [doc('Switch nixos configuration, HOST required')]
+[script]
 switch HOST:
   nix-shell -p nixos-rebuild --run "sudo nixos-rebuild switch --flake {{ROOT_DIR}}/.#{{HOST}}"

@@ -1,4 +1,5 @@
 ---
+# yamllint disable
 # based-on:https://github.com/yyhhyyyyyy/selfproxy/blob/main/Mihomo/mihomo_multi.yaml
 # ref:https://blog.skk.moe/post/i-have-my-unique-surge-setup/
 

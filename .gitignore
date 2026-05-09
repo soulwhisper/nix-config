@@ -8,12 +8,6 @@ Thumbs.db
 # Sops
 .decrypted~*
 
-# mise
-.mise.toml
-mise.toml
-
 # Other files
-.direnv
 .venv
-.pre-commit-config.yaml
 **/.claude/settings.local.json
