@@ -11,7 +11,7 @@ in {
       type = lib.types.str;
       default = "https://api.atuin.sh";
     };
-    key_path = lib.mkOption {
+    authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
@@ -32,8 +32,8 @@ in {
         sync_address = cfg.sync_address;
         sync_frequency = "1m";
         sync.records = true;
-      } // lib.optionalAttrs (cfg.key_path != null) {
-        key_path = cfg.key_path;
+      } // lib.optionalAttrs (cfg.authFile != null) {
+        key_path = cfg.authFile;
       };
     };
   };

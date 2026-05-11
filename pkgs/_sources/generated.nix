@@ -99,14 +99,14 @@
   };
   zotregistry-ui = {
     pname = "zotregistry-ui";
-    version = "c90dd09fe0fa8e0b3d366a38ffa9494d3a970a7e";
+    version = "f6aa31bd19a63857314df3407e8e15de08e8f86b";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zui";
-      rev = "c90dd09fe0fa8e0b3d366a38ffa9494d3a970a7e";
+      rev = "f6aa31bd19a63857314df3407e8e15de08e8f86b";
       fetchSubmodules = false;
-      sha256 = "sha256-jVEKAkrdKnl/641bGhjPEbhJ+dFKgkNntMt5Im2Ag4Q=";
+      sha256 = "sha256-DciSYBuTBom+ssHPCTN61wlhXKPVfzzBsm4XvQAJpas=";
     };
-    date = "2026-04-25";
+    date = "2026-05-10";
   };
 }
