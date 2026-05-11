@@ -13,11 +13,9 @@
 
   modules = {
     development.enable = true;
+    development.claude.authFile = config.sops.secrets."dev/claude/auth".path;
     kubernetes.enable = true;
     security._1password-cli.enable = true;
-
-    shell = {
-      atuin.key_path = config.sops.secrets.atuin_key.path;
-    };
+    shell.atuin.authFile = config.sops.secrets."shell/atuin/auth".path;
   };
 }

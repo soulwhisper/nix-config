@@ -40,7 +40,6 @@ _: {
 
       # :: development
       "ghostty"
-      "claude-code"
       "cherry-studio"
       "orbstack"
       "visual-studio-code"

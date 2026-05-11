@@ -19,6 +19,16 @@ cat -p secrets.sops.yaml
 ```
 
 ```yaml
+# defaults
+dev:
+  claude:
+    auth: { ANTHROPIC_AUTH_TOKEN }
+shell:
+  atuin:
+    auth: { atuin-key }
+```
+
+```yaml
 alerting:
   pushover:
     auth: |
