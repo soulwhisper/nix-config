@@ -41,12 +41,18 @@ claude-bootstrap:
   # marketplace friendly-name -> github source (owner/repo, URL, or local path)
   declare -A MARKETS=(
     [claude-code-plugins]="anthropics/claude-code"
+    [thedotmack]="thedotmack/claude-mem"
+    [karpathy-skills]="forrestchang/andrej-karpathy-skills"
+    [addy-agent-skills]="addyosmani/agent-skills"
   )
   # plugins: "name@marketplace-friendly-name"
   PLUGINS=(
     "commit-commands@claude-code-plugins"
     "code-review@claude-code-plugins"
     "security-guidance@claude-code-plugins"
+    "claude-mem@thedotmack"
+    "andrej-karpathy-skills@karpathy-skills"
+    "agent-skills@addy-agent-skills"
   )
   # ---- 1. marketplaces ----
   echo ":: marketplaces"
