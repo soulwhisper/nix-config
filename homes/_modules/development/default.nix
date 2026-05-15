@@ -1,29 +1,15 @@
 {
-  pkgs,
-  lib,
   config,
+  lib,
+  pkgs,
   ...
-}: let
-  cfg = config.modules.development;
-in {
+}: {
+  imports = [
+    ./claude
+    ./packages.nix
+  ];
+
   options.modules.development = {
     enable = lib.mkEnableOption "development";
-  };
-
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs;
-      [
-        awscli2
-        minijinja
-        nixd
-        nixfmt
-        nixfmt-tree # treefmt
-        tio # serial terminal
-        unstable.just
-        unstable.prek
-      ]
-      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-        unstable.claude-code
-      ];
   };
 }

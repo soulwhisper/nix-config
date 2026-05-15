@@ -8,13 +8,13 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.11.2";
+    version = "v2.11.3";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.11.2";
+      rev = "v2.11.3";
       fetchSubmodules = false;
-      sha256 = "sha256-QoGq8+lhaSQuC1VwIYE8h8N/ZC1ozfmIwmsIPk29Jos=";
+      sha256 = "sha256-7Hgmo7ldDtbwl/acEY/4RNhSGnK/NNcXn+eIm1I8HKg=";
     };
   };
   caddy-plugin-cloudflare = {
@@ -65,15 +65,15 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "b301ce1ef0a8d8dde487b4a634d795e509c2767e";
+    version = "69286b1cbd7fb48ec5585eaefb749786293600ae";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "b301ce1ef0a8d8dde487b4a634d795e509c2767e";
+      rev = "69286b1cbd7fb48ec5585eaefb749786293600ae";
       fetchSubmodules = false;
-      sha256 = "sha256-RotUfQoMhGbnhSMrCdtH4+z1jM1cq4ByLRBvaQifQOw=";
+      sha256 = "sha256-Jj+eSSUtxqilGQmJp51pDViCMGJeZ+9R9WQTUfE8eqY=";
     };
-    date = "2026-04-30";
+    date = "2026-05-14";
   };
   talos-api = {
     pname = "talos-api";
@@ -99,14 +99,14 @@
   };
   zotregistry-ui = {
     pname = "zotregistry-ui";
-    version = "c90dd09fe0fa8e0b3d366a38ffa9494d3a970a7e";
+    version = "f6aa31bd19a63857314df3407e8e15de08e8f86b";
     src = fetchFromGitHub {
       owner = "project-zot";
       repo = "zui";
-      rev = "c90dd09fe0fa8e0b3d366a38ffa9494d3a970a7e";
+      rev = "f6aa31bd19a63857314df3407e8e15de08e8f86b";
       fetchSubmodules = false;
-      sha256 = "sha256-jVEKAkrdKnl/641bGhjPEbhJ+dFKgkNntMt5Im2Ag4Q=";
+      sha256 = "sha256-DciSYBuTBom+ssHPCTN61wlhXKPVfzzBsm4XvQAJpas=";
     };
-    date = "2026-04-25";
+    date = "2026-05-10";
   };
 }

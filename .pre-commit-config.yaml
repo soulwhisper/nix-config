@@ -13,16 +13,18 @@ repos:
       - id: check-added-large-files
         args: [--maxkb=500]
       - id: check-merge-conflict
-      - id: detect-private-key
-        exclude: (^|/)\.pre-commit-config\.ya?ml$
 
-  # GitHub Actions linting
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  # GitHub Actions
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.12
     hooks:
       - id: actionlint
 
-  # GitHub Actions security audit
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.24.1
     hooks:
@@ -33,7 +35,7 @@ repos:
           - "--min-severity=medium"
           - "--min-confidence=medium"
 
-  # YAML lint
+  # YAML
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.38.0
     hooks:
@@ -45,3 +47,22 @@ repos:
     rev: v1.2.0
     hooks:
       - id: nixfmt-nix
+
+  # Python
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.12
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  # Shell
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt

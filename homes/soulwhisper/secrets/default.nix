@@ -2,9 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  ageKeyFile = "${config.xdg.configHome}/age/keys.txt";
-in {
+}: {
   config = {
     home.packages = [
       pkgs.sops
@@ -12,14 +10,26 @@ in {
     ];
 
     sops = {
-      age.keyFile = ageKeyFile;
-      age.generateKey = false;
+      # :: age
+      age = {
+        keyFile = "${config.xdg.configHome}/age/keys.txt";
+        generateKey = false;
+      };
 
-      secrets.atuin_key.sopsFile = ./secrets.sops.yaml;
+      # :: secrets
+      # services enabled by default
+      secrets = {
+        "dev/claude/auth" = {
+          sopsFile = ./secrets.sops.yaml;
+        };
+        "shell/atuin/auth" = {
+          sopsFile = ./secrets.sops.yaml;
+        };
+      };
     };
 
     home.sessionVariables = {
-      SOPS_AGE_KEY_FILE = ageKeyFile;
+      SOPS_AGE_KEY_FILE = "${config.xdg.configHome}/age/keys.txt";
     };
   };
 }
