@@ -114,6 +114,15 @@ in {
       package = claude-code-wrapped;
     };
 
+    home.packages =
+      (with pkgs; [
+        nodejs-slim # claude-mem
+        bun         # claude-mem
+      ])
+      ++ (with pkgs.unstable; [
+        # placeholder
+      ]);
+
     # Static, declarative parts of ~/.claude — these are fine as store
     # symlinks because no CLI ever writes to them at runtime.
     home.file = lib.mkIf cfg.installAssets (
