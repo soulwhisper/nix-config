@@ -55,7 +55,7 @@ in {
     xdg.configFile."mako".source = "${./mako}";
     xdg.configFile."waybar".source = "${./waybar}";
     xdg.configFile."wlogout".source = "${./wlogout}";
-    xdg.configFile."hypr/hypridle.conf".source = "${./hypridle.conf}";
+    xdg.configFile."hypr".source = "${./hypr}";
 
     # :: hyprland apps
     programs.mpv = {
