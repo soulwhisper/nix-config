@@ -14,15 +14,13 @@ in
 
     # https://github.com/ARC-MX/sgcc_electricity_new/blob/master/requirements.txt
     pythonPath = with pkgs.python3Packages; [
-      onnxruntime
       pillow
-      python-dotenv
+      mysql-connector
       numpy
+      openai
       requests
       schedule
       selenium
-      sympy
-      webdriver-manager
     ];
 
     format = "other";
@@ -31,13 +29,13 @@ in
 
     postPatch = ''
       # patch hardcoded path
-      substituteInPlace scripts/data_fetcher.py --replace-warn "./captcha.onnx" "$out/lib/captcha.onnx"
-      substituteInPlace scripts/onnx.py --replace-warn "./captcha.onnx" "$out/lib/captcha.onnx"
-      substituteInPlace scripts/onnx.py --replace-warn "../assets/" "$out/lib/"
+      substituteInPlace scripts/data_fetcher.py \
+        --replace-fail '/usr/bin/chromium'     '${pkgs.chromium}/bin/chromium' \
+        --replace-fail '/usr/bin/chromedriver' '${pkgs.chromedriver}/bin/chromedriver'
       # patch hardcoded workdir
-      substituteInPlace scripts/data_fetcher.py --replace-warn "/usr/bin/geckodriver" "/tmp/geckodriver"
-      substituteInPlace scripts/data_fetcher.py --replace-warn "/data/" ""
-      substituteInPlace scripts/main.py --replace-warn "/data/" ""
+      substituteInPlace scripts/data_fetcher.py --replace-warn '/data/' ""
+      substituteInPlace scripts/main.py         --replace-warn '/data/' ""
+      substituteInPlace scripts/db.py           --replace-warn '/data/' ""
     '';
 
     installPhase = ''
@@ -45,11 +43,11 @@ in
 
       mkdir -p $out/bin
       cp -r scripts $out/lib
-      cp assets/background.png $out/lib/
 
       makeWrapper ${pkgs.python3Packages.python.interpreter} $out/bin/sgcc_fetcher \
+        --set PYTHON_IN_DOCKER 1 \
         --add-flags "$out/lib/main.py" \
-        --prefix PATH : ${lib.makeBinPath [pkgs.firefox-esr pkgs.geckodriver]} \
+        --prefix PATH : ${lib.makeBinPath [pkgs.chromium pkgs.chromedriver]} \
         --prefix PYTHONPATH : "$PYTHONPATH"
 
       runHook postInstall
