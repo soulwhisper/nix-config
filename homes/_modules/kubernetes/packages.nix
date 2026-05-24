@@ -92,7 +92,7 @@ in {
       '';
 
       shellAliases = {
-        flux-local = "uvx flux-local";
+        # flux-local = "uvx flux-local";
         kubectl = "kubecolor";
         k = "kubectl";
         kc = "kubectl-switch context";

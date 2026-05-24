@@ -36,7 +36,7 @@ in {
         Path to a TOML fragment containing
         [peer] (uri, peer_public_key),
         [network_identity] (network_name, network_secret),
-        [secure_mode] (enabled, local_private_key).
+        [secure_mode] (enabled, local_private_key, local_public_key).
         secure_mode requires version >= 2.6.0.
       '';
     };

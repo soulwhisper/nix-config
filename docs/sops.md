@@ -72,9 +72,16 @@ networking:
       name2:url2
   easytier:
     auth: |
+      [[peer]]
+      uri={easytier-peer}
+      peer_public_key={easytier-peer-pubkey}
       [network_identity]
       network_name={easytier-network-name}
       network_secret={easytier-network-secret}
+      [secure_mode]
+      enabled=true
+      local_private_key={easytier-local-prikey}
+      local_public_key={easytier-local-pubkey}
 storage:
   minio:
     auth: |

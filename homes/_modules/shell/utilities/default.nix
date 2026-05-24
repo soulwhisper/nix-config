@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = {
     home.packages = with pkgs; [
       any-nix-shell
@@ -38,6 +43,13 @@
         always_keep_download = false;
         always_keep_install = false;
         idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
+      };
+      globalConfig = {
+        tools = {
+          prek = "latest";
+        } // lib.optionalAttrs (config.modules.kubernetes.enable) {
+          "github:home-operations/flate" = "latest";
+        };
       };
     };
 
