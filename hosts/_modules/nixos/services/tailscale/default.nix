@@ -11,14 +11,17 @@ in {
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "derp.noirprime.com";
-    };
     networks = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
       description = "List of subnets to advertise over Tailscale";
+    };
+    derper = {
+      enable = lib.mkEnableOption "tailscale-derper";
+      domain = lib.mkOption {
+        type = lib.types.str;
+        default = "derp.noirprime.com";
+      };
     };
   };
 
@@ -37,8 +40,8 @@ in {
         "--advertise-routes=${lib.concatStringsSep "," cfg.networks}"
       ];
       derper = {
-        enable = true;
-        domain = cfg.domain;
+        enable = cfg.derper.enable;
+        domain = cfg.derper.domain;
         port = 48484;
         stunPort = 48484;
         configureNginx = false;

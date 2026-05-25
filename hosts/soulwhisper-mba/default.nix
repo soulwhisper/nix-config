@@ -12,9 +12,13 @@
       localHostName = hostname;
     };
 
-    environment.systemPackages = with pkgs; [
+    # prefer unstable for implementing platform-specific fixes
+    environment.systemPackages = with pkgs.unstable; [
       # cardforge, https://github.com/Card-Forge/forge/releases
-      unstable.forge-mtg
+      forge-mtg
+      # music
+      beets # music library manager
+      picard # qt music tagger
     ];
 
     # test apps list

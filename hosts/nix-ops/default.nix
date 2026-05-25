@@ -36,6 +36,7 @@
         nut.enable = false;
 
         # : TEST
+        tailscale.enable = true;
         kms.enable = true;
         isc.enable = true;
         isc.bind.authFile = config.sops.secrets."networking/bind/auth".path;
