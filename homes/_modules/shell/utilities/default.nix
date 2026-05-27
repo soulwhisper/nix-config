@@ -49,6 +49,8 @@
           prek = "latest";
         } // lib.optionalAttrs (config.modules.kubernetes.enable) {
           "github:home-operations/flate" = "latest";
+        } // lib.optionalAttrs (config.modules.development.claude.enable) {
+          "github:rtk-ai/rtk" = "latest"; # init with 'rtk init -g'
         };
       };
     };

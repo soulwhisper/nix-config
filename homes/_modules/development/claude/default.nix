@@ -54,7 +54,8 @@
              ANTHROPIC_DEFAULT_OPUS_MODEL \
              ANTHROPIC_DEFAULT_SONNET_MODEL \
              ANTHROPIC_DEFAULT_HAIKU_MODEL \
-             CLAUDE_CODE_SUBAGENT_MODEL
+             CLAUDE_CODE_SUBAGENT_MODEL \
+             CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
     fi
   '';
   claude-code-wrapped = pkgs.symlinkJoin {
