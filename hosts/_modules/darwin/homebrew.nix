@@ -32,6 +32,7 @@ _: {
       "brewforge/chinese/easytier"
       "clash-verge-rev"
       "switchhosts" # replace adguard container
+      "tailscale-app" # requires a kernel extension to work
 
       # :: storage
       "dropbox"
