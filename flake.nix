@@ -25,7 +25,6 @@
     };
 
     # catppuccin - Soothing pastel theme for Nix
-    # switch to main branch temporarily when upgraded
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
     };
@@ -47,12 +46,6 @@
       url = "github:brumhard/krewfile";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Talhelper - A tool to help create Talos Kubernetes clusters; Deprecated.
-    # has flake-parts inputs
-    # talhelper = {
-    #   url = "github:budimanjojo/talhelper";
-    # };
   };
 
   outputs = {flake-parts, ...} @ inputs: let
