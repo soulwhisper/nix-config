@@ -37,6 +37,7 @@ in {
         cilium-cli
         dnscontrol
         fluxcd
+        hwatch
         kubecolor
         kubectl
         kubescape
@@ -44,7 +45,6 @@ in {
         popeye
         talosctl
         vendir
-        viddy
       ])
       ++ [
         wrappedHelmPkg
@@ -98,7 +98,7 @@ in {
         kc = "kubectl-switch context";
         kns = "kubectl-switch ns";
         ks = "kubescape";
-        watch = "viddy --disable_auto_save --differences --interval 2 --shell fish";
+        watch = "hwatch --color --differences watch --with-scrollbar --no-help-banner --border --use-pty -K ctrl-c=force_cancel";
         kyaml = "kubectl $argv -o yaml | kubectl neat";
       };
     };

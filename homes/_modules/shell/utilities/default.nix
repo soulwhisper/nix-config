@@ -45,6 +45,9 @@
         idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
       };
       globalConfig = {
+        env = {
+          "RTK_TELEMETRY_DISABLED" = "true";
+        };
         tools = {
           prek = "latest";
         } // lib.optionalAttrs (config.modules.kubernetes.enable) {
@@ -59,11 +62,8 @@
     programs.eza = {
       enable = true;
       extraOptions = [
-        "--all"
         "--group"
         "--group-directories-first"
-        "--header"
-        "--long"
         "--total-size"
       ];
     };
