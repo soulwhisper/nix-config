@@ -37,16 +37,16 @@
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
-      settings = {
-        experimental = true;
-        disable_hints = ["*"];
-        always_keep_download = false;
-        always_keep_install = false;
-        idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
-      };
       globalConfig = {
         env = {
           "RTK_TELEMETRY_DISABLED" = "true";
+        };
+        settings = {
+          experimental = true;
+          disable_hints = ["*"];
+          always_keep_download = false;
+          always_keep_install = false;
+          idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
         };
         tools = {
           prek = "latest";
