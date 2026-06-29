@@ -6,6 +6,7 @@
   config = {
     networking = {
       hostName = hostname;
+      nameservers = [ "127.0.0.1" ];
     };
 
     systemd.network.networks."10-lan" = {
@@ -22,7 +23,6 @@
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
         DHCP = "no";
-        DNS = "127.0.0.1"; # adguardhome
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };

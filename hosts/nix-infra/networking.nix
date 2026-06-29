@@ -6,6 +6,7 @@
   config = {
     networking = {
       hostName = hostname;
+      nameservers = [ "10.10.0.254" ];
     };
 
     systemd.network.networks."10-lan" = {
@@ -26,7 +27,6 @@
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
         DHCP = false;
-        DNS = "10.10.0.254";
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };
