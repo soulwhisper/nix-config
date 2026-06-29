@@ -7,10 +7,6 @@
     networking = {
       hostName = hostname;
     };
-    environment.etc."resolvconf/resolv.conf.d/head".text = ''
-      # prefer lan dns
-      nameserver 10.10.0.254
-    '';
 
     systemd.network.networks."10-lan" = {
       matchConfig.Name = "ens34"; # proxmox is ens18
@@ -30,6 +26,7 @@
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
         DHCP = false;
+        DNS = [ "10.10.0.254" ];
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };

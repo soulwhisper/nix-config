@@ -7,10 +7,6 @@
     networking = {
       hostName = hostname;
     };
-    environment.etc."resolvconf/resolv.conf.d/head".text = ''
-      # prefer local dns
-      nameserver 127.0.0.1
-    '';
 
     systemd.network.networks."10-lan" = {
       matchConfig.Name = "ens192";
@@ -26,6 +22,7 @@
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
         DHCP = false;
+        DNS = [ "127.0.0.1" ];
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };
