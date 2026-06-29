@@ -9,7 +9,7 @@
       enable = true;
       enableDefaultConfig = false; # deprecated soon
 
-      matchBlocks = {
+      settings = {
         "*" = {
           # defaults
           forwardAgent = false;
