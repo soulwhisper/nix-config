@@ -38,9 +38,6 @@
         # : TEST
         tailscale.enable = true;
         kms.enable = true;
-        isc.enable = true;
-        isc.bind.authFile = config.sops.secrets."networking/bind/auth".path;
-        isc.stork.address = "172.19.82.10";
 
         versitygw.enable = false; # ep=:9000,9001
         talos.api.enable = false;
