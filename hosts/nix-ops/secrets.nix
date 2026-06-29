@@ -11,10 +11,6 @@
           owner = config.users.users.caddy.name;
           restartUnits = ["caddy.service"];
         };
-        "networking/bind/auth" = {
-          owner = config.users.users.appuser.name;
-          restartUnits = ["bind.service"];
-        };
       };
     };
   };

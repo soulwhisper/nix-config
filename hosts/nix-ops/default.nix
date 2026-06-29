@@ -23,7 +23,7 @@
     modules = {
       filesystems.xfs.enable = true;
       services = {
-        # adguard.enable = true;
+        adguard.enable = true;
         caddy.enable = true;
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 

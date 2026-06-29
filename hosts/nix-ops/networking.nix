@@ -21,8 +21,8 @@
       ];
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
-        DHCP = false;
-        DNS = [ "127.0.0.1" ];
+        DHCP = "no";
+        DNS = "127.0.0.1"; # adguardhome
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };

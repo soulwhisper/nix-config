@@ -26,7 +26,7 @@
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
         DHCP = false;
-        DNS = [ "10.10.0.254" ];
+        DNS = "10.10.0.254";
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };
