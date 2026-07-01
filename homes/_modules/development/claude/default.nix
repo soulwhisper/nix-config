@@ -41,21 +41,25 @@
       fi
     ''}
     fi
-    # (2) Backend routing: default DeepSeek, opt out via CLAUDE_USE_ANTHROPIC=1
+    # (2) Backend routing:
+    #     - CLAUDE_USE_ANTHROPIC=1       -> Official Anthropic (do nothing)
+    #     - ANTHROPIC_BASE_URL is set    -> 3rd-party gateway (respect user env completely)
+    #     - Neither is set               -> Default to Nix-managed DeepSeek backend
     #     `: "''${VAR:=default}"` sets default only when unset — user env wins.
     if [ "''${CLAUDE_USE_ANTHROPIC:-0}" != "1" ]; then
-      : "''${ANTHROPIC_BASE_URL:=${cfg.backend.baseUrl}}"
-      : "''${ANTHROPIC_MODEL:=${cfg.backend.model}}"
-      : "''${ANTHROPIC_DEFAULT_OPUS_MODEL:=${cfg.backend.opusModel}}"
-      : "''${ANTHROPIC_DEFAULT_SONNET_MODEL:=${cfg.backend.sonnetModel}}"
-      : "''${ANTHROPIC_DEFAULT_HAIKU_MODEL:=${cfg.backend.haikuModel}}"
-      : "''${CLAUDE_CODE_SUBAGENT_MODEL:=${cfg.backend.subagentModel}}"
-      export ANTHROPIC_BASE_URL ANTHROPIC_MODEL \
-             ANTHROPIC_DEFAULT_OPUS_MODEL \
-             ANTHROPIC_DEFAULT_SONNET_MODEL \
-             ANTHROPIC_DEFAULT_HAIKU_MODEL \
-             CLAUDE_CODE_SUBAGENT_MODEL \
-             CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+      if [ -z "''${ANTHROPIC_BASE_URL:-}" ]; then
+        # [Case 1] default deepseek backend
+        export ANTHROPIC_BASE_URL="${cfg.backend.baseUrl}"
+        export ANTHROPIC_MODEL="${cfg.backend.model}"
+        export ANTHROPIC_DEFAULT_OPUS_MODEL="${cfg.backend.opusModel}"
+        export ANTHROPIC_DEFAULT_SONNET_MODEL="${cfg.backend.sonnetModel}"
+        export ANTHROPIC_DEFAULT_HAIKU_MODEL="${cfg.backend.haikuModel}"
+        export CLAUDE_CODE_SUBAGENT_MODEL="${cfg.backend.subagentModel}"
+        export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+      else
+        # [Case 2] 3rd-party gateway backend
+        : "''${CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC:=1}"
+      fi
     fi
   '';
   claude-code-wrapped = pkgs.symlinkJoin {
