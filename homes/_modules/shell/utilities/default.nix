@@ -152,7 +152,6 @@
     # fish alias
     programs.fish.shellAliases = {
       cat = "bat";
-      curl = "curlie";
       dig = "doggo";
       find = "fd";
       grep = "rg";
