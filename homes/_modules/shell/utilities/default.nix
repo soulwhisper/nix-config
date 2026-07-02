@@ -50,10 +50,11 @@
         };
         tools = {
           prek = "latest";
+          "github:can1357/oh-my-pi" = "latest";
+          # rtk init with 'rtk init -g --agent pi', or 'rtk init -g' for claude-code
+          "github:rtk-ai/rtk" = "latest";
         } // lib.optionalAttrs (config.modules.kubernetes.enable) {
           "github:home-operations/flate" = "latest";
-        } // lib.optionalAttrs (config.modules.development.claude.enable) {
-          "github:rtk-ai/rtk" = "latest"; # init with 'rtk init -g'
         };
       };
     };
