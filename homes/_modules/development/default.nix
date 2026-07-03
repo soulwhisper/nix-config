@@ -70,5 +70,5 @@ in
         set -gx DEEPSEEK_API_KEY (string trim < "${cfg.agent.authFile}")
       end
     '';
-  }
+  };
 }
