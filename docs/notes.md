@@ -74,6 +74,6 @@ git push --force-with-lease
 ## 'sudo must be owned by uid 0 and have the setuid bit set'
 /run/wrappers/bin/sudo + cmd
 
-## bootstrap/update claude plugins
-just claude-bootstrap
+## verify omp is available
+just omp-bootstrap
 ```

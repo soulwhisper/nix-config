@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   config = {
     home.packages = [
       pkgs.sops
@@ -19,7 +20,7 @@
       # :: secrets
       # services enabled by default
       secrets = {
-        "dev/claude/auth" = {
+        "dev/deepseek/key" = {
           sopsFile = ./secrets.sops.yaml;
         };
         "shell/atuin/auth" = {

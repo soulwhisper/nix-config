@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = {
     home.packages = with pkgs; [
       any-nix-shell
@@ -29,33 +30,6 @@
       config = {
         pager = "never";
         style = "plain";
-      };
-    };
-
-    # mise; preferred over 'direnv'
-    programs.mise = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      globalConfig = {
-        env = {
-          "RTK_TELEMETRY_DISABLED" = "true";
-        };
-        settings = {
-          experimental = true;
-          disable_hints = ["*"];
-          always_keep_download = false;
-          always_keep_install = false;
-          idiomatic_version_file_enable_tools = ["node" "python" "go" "rust"];
-        };
-        tools = {
-          prek = "latest";
-          "github:can1357/oh-my-pi" = "latest";
-          # rtk init with 'rtk init -g --agent pi', or 'rtk init -g' for claude-code
-          "github:rtk-ai/rtk" = "latest";
-        } // lib.optionalAttrs (config.modules.kubernetes.enable) {
-          "github:home-operations/flate" = "latest";
-        };
       };
     };
 

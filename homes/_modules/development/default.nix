@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
-    ./claude
+    ./omp
+    ./mise
     ./packages.nix
   ];
 
