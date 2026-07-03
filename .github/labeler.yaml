@@ -31,7 +31,7 @@ area/github:
       - any-glob-to-any-file:
           - ".github/**/*"
           - ".editorconfig"
-          - ".gitatttributes"
+          - ".gitattributes"
           - ".gitignore"
 area/renovate:
   - changed-files:

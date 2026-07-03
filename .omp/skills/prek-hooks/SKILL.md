@@ -86,11 +86,3 @@ Skipping is **not** appropriate for:
 - "It's a hardcoded test key" — replace with a fixture value that doesn't
   match the gitleaks rule, or allowlist with a path-scoped rule.
 - "I'll fix it in a follow-up PR" — no, follow-up PRs never come.
-
-## Nixfmt conflict
-
-Both `nixfmt-tree` (a pre-commit hook) and the `PostToolUse` hook in
-`settings.json` (per-file `nixfmt` after Claude edits) run `nixfmt`. They
-should converge on the same output. If they don't, one of them is using a
-different binary or version — check `which nixfmt` and the pinned hook
-revision.

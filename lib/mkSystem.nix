@@ -2,8 +2,10 @@
   inputs,
   mkPkgsWithSystem,
   ...
-}: {
-  mkNixosSystem = system: hostname:
+}:
+{
+  mkNixosSystem =
+    system: hostname:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       pkgs = mkPkgsWithSystem system;
@@ -19,6 +21,11 @@
         inputs.disko.nixosModules.disko
         {
           home-manager = {
+            # useGlobalPkgs = true: HM reuses the system-level nixpkgs (which
+            # includes the unstable overlay).  Individual home.packages can
+            # therefore reference `pkgs.unstable.<pkg>` directly.
+            # Trade-off: tight coupling — a home-only package that needs unstable
+            # would require the overlay here; a per-user import would be looser.
             useUserPackages = true;
             useGlobalPkgs = true;
             sharedModules = [
@@ -40,7 +47,8 @@
       };
     };
 
-  mkDarwinSystem = system: hostname:
+  mkDarwinSystem =
+    system: hostname:
     inputs.nix-darwin.lib.darwinSystem {
       inherit system;
       pkgs = mkPkgsWithSystem system;
@@ -54,6 +62,11 @@
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager = {
+            # useGlobalPkgs = true: HM reuses the system-level nixpkgs (which
+            # includes the unstable overlay).  Individual home.packages can
+            # therefore reference `pkgs.unstable.<pkg>` directly.
+            # Trade-off: tight coupling — a home-only package that needs unstable
+            # would require the overlay here; a per-user import would be looser.
             useUserPackages = true;
             useGlobalPkgs = true;
             sharedModules = [

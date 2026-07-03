@@ -15,12 +15,7 @@ the repo and decrypted at activation to tmpfs paths under
    not in `git diff` output, not in a comment "for context".
 2. **Never propose moving a secret out of sops** because it's "easier".
    Easier is the failure mode.
-3. **Files matching `*.sops.*`, `*.age`, `~/.config/{age,sops}/**`, and
-   `/run/user/*/secrets/**` are denied by `settings.json`** at read time.
-   If a tool call fails because of this, that's working as intended — do
-   not ask the user to relax the rule unless the task genuinely requires
-   it, and re-tighten afterwards.
-4. **Bare token files only.** Sops secrets in this repo store *just the
+3. **Bare token files only.** Sops secrets in this repo store *just the
    token*, no `KEY=value` prefix. Wrappers compose env vars. This keeps the
    sops file generic enough to be reusable across providers.
 
@@ -48,13 +43,13 @@ the path at runtime.
 
 ```nix
 # Good — the secret path is the public contract.
-modules.development.claude-code = {
+modules.development.omp = {
   enable   = true;
   authFile = config.sops.secrets.deepseek_api_key.path;
 };
 
 # Bad — leaks the literal token into the Nix store world-readable.
-home.sessionVariables.ANTHROPIC_AUTH_TOKEN =
+home.sessionVariables.DEEPSEEK_API_KEY =
   builtins.readFile config.sops.secrets.deepseek_api_key.path;
 ```
 
@@ -66,8 +61,8 @@ The second writes it to a store path that's globally readable.
 1. `sops <file>` and replace the value.
 2. Activate (`home-manager switch`) on every host that consumes it —
    sops-nix re-decrypts at activation.
-3. If the service caches the value (Claude Code reads it once at startup),
-   restart it. For `claude`, that's exiting and re-launching the CLI.
+3. If the service caches the value (reads it once at startup),
+   restart it. For `omp`, that's exiting and re-launching.
 4. Audit `git log -p <encrypted file>` to confirm only the ciphertext
    changed — never the plaintext.
 

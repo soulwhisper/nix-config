@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = {
     programs.ssh = {
       enable = true;
@@ -20,7 +21,6 @@
           hashKnownHosts = false;
           userKnownHostsFile = "~/.ssh/known_hosts";
           controlMaster = "no";
-          controlPath = "~/.ssh/control/ssh-%r@%h:%p";
           controlPersist = "no";
         };
       };

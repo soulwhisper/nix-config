@@ -15,8 +15,8 @@ usually higher severity.
       anywhere in the diff.
 - [ ] No new file under a path that should be sops-encrypted but isn't
       (e.g. `secrets/foo.yaml` instead of `secrets/foo.sops.yaml`).
-- [ ] No relaxation of the `permissions.deny` list in `settings.json`
-      (sops/age/kubeconfig denies must stay).
+- [ ] No new file writing to `~/.omp/agent/config.yml` or `~/.omp/agent/mcp.json`
+      that would conflict with omp's runtime writes.
 - [ ] No `--no-verify` past pre-commit. If `gitleaks` was triggered,
       investigate, don't bypass.
 
@@ -24,8 +24,7 @@ usually higher severity.
 
 - [ ] No new shell-out to `rm -rf`, `kubectl delete`, `helm uninstall`,
       `talosctl reset`, or `nix-collect-garbage` without being gated by
-      `permissions.ask` (which already covers these — the check is that no
-      one bypassed via `bash -c '…'`).
+      omp's `tools.approval` settings.
 - [ ] Migrations and CRD changes have a documented rollback path.
 - [ ] Anything that runs at activation (NixOS / home-manager activation
       scripts) is idempotent on second run.
@@ -56,8 +55,9 @@ usually higher severity.
 - [ ] No IFD (`builtins.readFile` of a build output, `fetchGit` of a private
       repo) inside `config = …`.
 - [ ] No `home.file` for a file the consuming CLI writes to at runtime
-      (EROFS trap). Use `home.activation` + jq merge instead.
-- [ ] `nixfmt` / `nixfmt-tree` clean. Pre-commit runs this; if the diff
+      (EROFS trap). Use `home.activation` with seed-on-absent or merge
+      instead.
+- [ ] `nixfmt` clean. Pre-commit runs this; if the diff
       isn't formatted, something's broken in the hook chain.
 
 ## 6. Shell-specific

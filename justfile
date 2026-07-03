@@ -25,57 +25,83 @@ cleanup:
   sudo nix-collect-garbage --delete-older-than 7d
   nix-collect-garbage --delete-older-than 7d
 
-[doc('Bootstrap or update Claude Code marketplaces and plugins (idempotent)')]
+[doc('Bootstrap omp: verify, seed local assets to ~/.omp/agent, fetch remote skills')]
 [script]
-claude-bootstrap:
-  if ! command -v claude >/dev/null 2>&1; then
-    echo "error: 'claude' not in PATH — run 'just {darwin,nixos} switch' first" >&2
+omp-bootstrap:
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # ---- 1. verify omp is available ----
+  if ! command -v omp >/dev/null 2>&1; then
+    echo "error: 'omp' not in PATH — run 'just {darwin,nixos} switch' first" >&2
     exit 1
   fi
-  if [ -L "$HOME/.claude/settings.json" ]; then
-    echo "error: ~/.claude/settings.json is still a symlink to /nix/store" >&2
-    echo "       run 'just darwin/nixos switch' to materialize it" >&2
-    exit 1
-  fi
-  # ---- declarative plugin set ----
-  # marketplace friendly-name -> github source (owner/repo, URL, or local path)
-  declare -A MARKETS=(
-    [claude-code-plugins]="anthropics/claude-code"
-    [thedotmack]="thedotmack/claude-mem"
-  )
-  # plugins: "name@marketplace-friendly-name"
-  PLUGINS=(
-    "commit-commands@claude-code-plugins"
-    "code-review@claude-code-plugins"
-    "security-guidance@claude-code-plugins"
-    "claude-mem@thedotmack"
-  )
-  # ---- 1. marketplaces ----
-  echo ":: marketplaces"
-  current_markets=$(claude plugin marketplace list 2>/dev/null || echo "")
-  for name in "${!MARKETS[@]}"; do
-    if grep -qw -- "${name}" <<< "$current_markets"; then
-      echo "  ✓ ${name}"
-    else
-      echo "  + ${name} <- ${MARKETS[$name]}"
-      claude plugin marketplace add "${MARKETS[$name]}"
-    fi
-  done
-  # ---- 2. refresh catalogs (always; cheap git fetch) ----
-  echo ":: refreshing catalogs"
-  claude plugin marketplace update
-  # ---- 3. plugins ----
-  echo ":: plugins"
-  installed=$(claude plugin list 2>/dev/null || echo "")
-  for plugin in "${PLUGINS[@]}"; do
-    if grep -qF -- "${plugin}" <<< "$installed"; then
-      echo "  ↻ ${plugin}"
-      if ! claude plugin update "${plugin}"; then
-        echo "    warn: update returned non-zero (likely already latest or transient)" >&2
+  echo "omp $(omp --version 2>/dev/null || echo 'unknown')"
+  echo ""
+
+  # ---- 2. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
+  AGENT="$HOME/.omp/agent"
+  REPO="{{invocation_directory()}}"
+
+  _seed_dir() {
+    local src="$1" dst="$2" label="$3"
+    [ -d "$src" ] || return
+    mkdir -p "$dst"
+    local added=0 skipped=0
+    while IFS= read -r -d "" file; do
+      rel="${file#$src/}"
+      if [ ! -e "$dst/$rel" ]; then
+        install -D -m 0644 "$file" "$dst/$rel"
+        ((added++))
+      else
+        ((skipped++))
       fi
+    done < <(find "$src" -type f -print0)
+    echo "  ${label}: +${added} new, ${skipped} existing"
+  }
+
+  echo ":: local assets (.omp/ -> ~/.omp/agent/)"
+  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills"
+  _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands"
+  _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"
+  echo ""
+
+  # ---- 3. fetch/update remote skills ----
+  fetch_github_skill() {
+    local spec="$1" name="$2"
+    local owner repo ref subdir
+    owner="${spec%%/*}"; spec="${spec#*/}"
+    repo="${spec%%/*}";  spec="${spec#*/}"
+    subdir="${spec%%@*}"; ref="${spec##*@}"
+
+    local cache="$HOME/.cache/omp-skills/${owner}_${repo}_${ref//\//_}"
+    if [ -d "$cache" ]; then
+      echo "  ↻ ${name}: pulling ${ref}..."
+      git -C "$cache" fetch --depth 1 origin "$ref" 2>/dev/null || true
+      git -C "$cache" checkout -q FETCH_HEAD 2>/dev/null || true
     else
-      echo "  + ${plugin}"
-      claude plugin install "${plugin}"
+      echo "  ↓ ${name}: cloning ${owner}/${repo}@${ref}..."
+      git clone --depth 1 --branch "$ref" \
+        "https://github.com/${owner}/${repo}.git" "$cache" >/dev/null 2>&1
     fi
-  done
-  echo "Done. If a Claude session is open elsewhere, run /reload-plugins to pick up changes."
+
+    local src="$cache/${subdir:-.}"
+    local dst="$AGENT/skills/$name"
+    if [ -d "$src/SKILL.md" ]; then src="$src/SKILL.md"; fi
+    if [ ! -e "$dst" ]; then
+      install -D -m 0644 "$src" "$dst" 2>/dev/null || cp -r "$src" "$dst"
+      echo "    + installed"
+    else
+      echo "    ✓ up to date"
+    fi
+  }
+
+  echo ":: remote skills"
+  # Add remote skill specs below.
+  # Format: fetch_github_skill "owner/repo/subdir@ref" "skill-name"
+  # Example:
+  # fetch_github_skill "anthropics/skills/skills/pdf@b0cbd3df" "pdf"
+
+  echo "  (no remote skills configured)"
+  echo ""
+  echo "Done. Provider config is managed via Nix."

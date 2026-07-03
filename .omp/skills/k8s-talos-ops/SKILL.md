@@ -43,7 +43,7 @@ Every mutation must go through diff → confirm → apply → verify.
 ```bash
 # Manifest changes
 kubectl diff  -f manifest.yaml          # show me the delta
-kubectl apply -f manifest.yaml          # gated by permissions.ask
+kubectl apply -f manifest.yaml          # gated by omp's tool approval
 kubectl rollout status deploy/<name> -n <ns>
 
 # Kustomize
@@ -57,8 +57,8 @@ helm history     <release> -n <ns>
 helm rollback    <release> <revision> -n <ns>   # ← name your rollback path
 ```
 
-`kubectl apply`, `kubectl delete`, `helm upgrade`, `helm uninstall` are all
-in `permissions.ask`. The user will be prompted; don't try to suppress that.
+Mutating commands are gated by omp's `tools.approval` settings.
+The user will be prompted; don't try to suppress that.
 
 ## Talos-specific
 
@@ -91,17 +91,17 @@ thing"). Side effects:
 - PVC deletion: depending on storage class, *deletes the volume*.
 - StatefulSet deletion: pods go, PVCs may stay or may not (cascade policy).
 
-## Read-only access in this config
+## Read-only access
 
-`~/.kube/config` and `~/.talos/config` are in `permissions.deny`. To grant
-read access for the current session, the user has to relax the deny rule
-explicitly. Do not work around this; ask.
+`~/.kube/config` and `~/.talos/config` are sensitive. omp's `tools.approval`
+settings may restrict read access. Do not work around this; ask the user
+to grant access for the current session if needed.
 
 ## Hand-offs
 
 - For a change that's just YAML in git, with no live cluster yet → no
   cluster work needed, treat as ordinary code edit.
 - For helm chart authoring → editing files in git, same as above.
-- For Nix-managed kubeconfig contexts → `nix-flake` skill.
+- For Nix-managed kubeconfig contexts → `secrets-sops` skill.
 - For "I'm scared this is going to break prod" → invoke `infra-operator`
   via `/ship`.

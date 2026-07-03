@@ -1,6 +1,9 @@
 docs/** linguist-vendored
 scripts/** linguist-vendored
 *.sops.* diff=sopsdiffer
+# GitHub linguist: this repo is a Nix configuration repo — suppress all
+# non-Nix languages from stats so the language bar reflects intent, not
+# incidental scripts/tooling.
 * text=auto eol=lf
 *.md -linguist-detectable
 *.css -linguist-detectable

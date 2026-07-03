@@ -4,7 +4,7 @@ description: Invoke the `infra-operator` agent to apply a change to a real host 
 
 # /ship
 
-Invokes the **infra-operator** agent. Use this — not a bare `kubectl apply`
+Invoke the **infra-operator** agent. Use this — not a bare `kubectl apply`
 — whenever a change actually moves: `nixos-rebuild`, `darwin-rebuild`,
 `kubectl apply`, `helm upgrade`, `talosctl upgrade`, etc.
 
@@ -17,4 +17,4 @@ The operator will:
 5. Apply, then verify (`rollout status`, `health`, `journalctl`, `curl`).
 
 If the task has no runtime side effect — you're just editing files in git
-— do not use `/ship`. Either edit directly or call `/plan`.
+— do not use `/ship`. Either edit directly or use omp's built-in plan mode.

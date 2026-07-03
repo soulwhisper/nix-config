@@ -10,4 +10,3 @@ Thumbs.db
 
 # Other files
 .venv
-**/.claude/settings.local.json
