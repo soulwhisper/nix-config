@@ -24,15 +24,3 @@ cleanup:
   echo "Cleanup unused nixpkgs..."
   sudo nix-collect-garbage --delete-older-than 7d
   nix-collect-garbage --delete-older-than 7d
-
-[doc('Verify omp is available (installed declaratively via mise)')]
-[script]
-omp-bootstrap:
-  if ! command -v omp >/dev/null 2>&1; then
-    echo "error: 'omp' not in PATH — run 'just {darwin,nixos} switch' first" >&2
-    exit 1
-  fi
-  omp_ver=$(omp --version 2>/dev/null || echo "unknown")
-  echo "omp ${omp_ver} ready."
-  echo "Provider config is managed via Nix (DEEPSEEK_API_KEY from sops, DEEPSEEK_BASE_URL set)."
-  echo "Skills, commands, and extensions are self-managed by omp under ~/.omp/."
