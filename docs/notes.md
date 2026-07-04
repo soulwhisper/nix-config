@@ -74,6 +74,6 @@ git push --force-with-lease
 ## 'sudo must be owned by uid 0 and have the setuid bit set'
 /run/wrappers/bin/sudo + cmd
 
-## verify omp is available
-just omp-bootstrap
+## bootstrap dev env (mise up, rtk init, omp seed)
+just bootstrap
 ```

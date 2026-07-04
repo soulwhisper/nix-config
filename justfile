@@ -25,21 +25,39 @@ cleanup:
   sudo nix-collect-garbage --delete-older-than 7d
   nix-collect-garbage --delete-older-than 7d
 
-[doc('Bootstrap omp: verify, seed local assets to ~/.omp/agent, fetch remote skills')]
+[doc('Bootstrap dev environment: mise up, rtk init, omp seed')]
 [script]
-omp-bootstrap:
+bootstrap:
   #!/usr/bin/env bash
   set -euo pipefail
 
-  # ---- 1. verify omp is available ----
-  if ! command -v omp >/dev/null 2>&1; then
-    echo "error: 'omp' not in PATH — run 'just {darwin,nixos} switch' first" >&2
+  # ---- 1. verify mise is available ----
+  if ! command -v mise >/dev/null 2>&1; then
+    echo "error: 'mise' not in PATH" >&2
     exit 1
   fi
-  echo "omp $(omp --version 2>/dev/null || echo 'unknown')"
+  echo "mise $(mise --version 2>/dev/null || echo 'unknown')"
   echo ""
 
-  # ---- 2. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
+  # ---- 2. install/update mise tools ----
+  echo ":: mise up"
+  mise up
+  echo ""
+
+  # ---- 3. init rtk ----
+  echo ":: rtk init"
+  mise x -- rtk init -g --agent pi
+  echo ""
+
+  # ---- 4. verify omp is available ----
+  if ! mise x -- omp --version >/dev/null 2>&1; then
+    echo "error: 'omp' not available via mise" >&2
+    exit 1
+  fi
+  echo "omp $(mise x -- omp --version 2>/dev/null || echo 'unknown')"
+  echo ""
+
+  # ---- 5. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
   AGENT="$HOME/.omp/agent"
   REPO="{{invocation_directory()}}"
 
@@ -52,9 +70,9 @@ omp-bootstrap:
       rel="${file#$src/}"
       if [ ! -e "$dst/$rel" ]; then
         install -D -m 0644 "$file" "$dst/$rel"
-        ((added++))
+        ((++added))
       else
-        ((skipped++))
+        ((++skipped))
       fi
     done < <(find "$src" -type f -print0)
     echo "  ${label}: +${added} new, ${skipped} existing"
@@ -66,7 +84,7 @@ omp-bootstrap:
   _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"
   echo ""
 
-  # ---- 3. fetch/update remote skills ----
+  # ---- 6. fetch/update remote skills ----
   fetch_github_skill() {
     local spec="$1" name="$2"
     local owner repo ref subdir
