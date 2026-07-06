@@ -6,16 +6,12 @@ _: {
       cleanup = "zap"; # Uninstall all programs not declared
       upgrade = true;
     };
-    global = {
-      brewfile = true; # Run brew bundle from anywhere
-      lockfiles = false; # Don't save lockfile (since running from anywhere)
-    };
 
     # : stable apps list
     # * fix damaged error: `/usr/bin/xattr -cr /Applications/appname.app`
-    taps = [
-      "pear-devs/pear"
-    ];
+    taps = {
+      "pear-devs/pear".trusted = true;
+    };
     brews = [
       "mas"
     ];
@@ -41,7 +37,6 @@ _: {
 
       # :: development
       "ghostty"
-      "cherry-studio"
       "orbstack"
       "visual-studio-code"
 
@@ -63,7 +58,6 @@ _: {
       "stats"
       "squirrel-app"
       "telegram"
-      "tencent-meeting"
       "thunderbird"
       "ticktick"
       "vmware-fusion"
