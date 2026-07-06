@@ -69,7 +69,8 @@ bootstrap:
     while IFS= read -r -d "" file; do
       rel="${file#$src/}"
       if [ ! -e "$dst/$rel" ]; then
-        install -D -m 0644 "$file" "$dst/$rel"
+        mkdir -p "$(dirname "$dst/$del")"
+        cp -p "$src" "$dst/$del"
         ((++added))
       else
         ((++skipped))
@@ -107,7 +108,12 @@ bootstrap:
     local dst="$AGENT/skills/$name"
     if [ -d "$src/SKILL.md" ]; then src="$src/SKILL.md"; fi
     if [ ! -e "$dst" ]; then
-      install -D -m 0644 "$src" "$dst" 2>/dev/null || cp -r "$src" "$dst"
+      mkdir -p "$(dirname "$dst")"
+      if [ -f "$src" ]; then
+        cp -p "$src" "$dst"
+      else
+        cp -r "$src" "$dst"
+      fi
       echo "    + installed"
     else
       echo "    ✓ up to date"
