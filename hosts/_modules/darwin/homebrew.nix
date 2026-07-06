@@ -9,9 +9,12 @@ _: {
 
     # : stable apps list
     # * fix damaged error: `/usr/bin/xattr -cr /Applications/appname.app`
-    taps = {
-      "pear-devs/pear".trusted = true;
-    };
+    taps = [
+      {
+        name = "pear-devs/pear";
+        trusted = true;
+      }
+    ];
     brews = [
       "mas"
     ];
