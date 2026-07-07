@@ -60,17 +60,21 @@ bootstrap:
   # ---- 5. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
   AGENT="$HOME/.omp/agent"
   REPO="{{invocation_directory()}}"
+  if [ -z "${HOME:-}" ]; then
+    echo "error: HOME is not set" >&2
+    exit 1
+  fi
 
   _seed_dir() {
     local src="$1" dst="$2" label="$3"
-    [ -d "$src" ] || return
+    [ -d "$src" ] || return 0
     mkdir -p "$dst"
     local added=0 skipped=0
     while IFS= read -r -d "" file; do
       rel="${file#$src/}"
       if [ ! -e "$dst/$rel" ]; then
-        mkdir -p "$(dirname "$dst/$del")"
-        cp -p "$src" "$dst/$del"
+        mkdir -p "$(dirname "$dst/$rel")"
+        cp -p "$file" "$dst/$rel"
         ((++added))
       else
         ((++skipped))
@@ -80,9 +84,9 @@ bootstrap:
   }
 
   echo ":: local assets (.omp/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills"
-  _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands"
-  _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"
+  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills" || true
+  _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands" || true
+  _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"   || true
   echo ""
 
   # ---- 6. fetch/update remote skills ----
