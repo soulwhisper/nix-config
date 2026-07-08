@@ -22,7 +22,7 @@ proxy-providers:
 mixed-port: 1080
 # tproxy-port: 7890
 # routing-mark: 6666
-ipv6: true
+ipv6: false
 allow-lan: true
 bind-address: "*"
 lan-allowed-ips:
