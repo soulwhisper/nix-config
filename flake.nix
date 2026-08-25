@@ -47,14 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Quickshell - QtQuick-based desktop shell runtime
-    # Pinned to the rev end-4/dots-hyprland main expects (see their
-    # sdata/dist-nix/home-manager/flake.lock); bump together with dots-hyprland.
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # end-4 illogical-impulse dotfiles (plain file tree, not a flake)
     dots-hyprland = {
       url = "github:end-4/dots-hyprland";

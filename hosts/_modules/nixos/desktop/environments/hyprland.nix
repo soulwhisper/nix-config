@@ -11,8 +11,18 @@ let
   # end-4/dots-hyprland source tree (flake = false input)
   iiDots = "${inputs.dots-hyprland}/dots/.config";
 
-  # Quickshell pinned to the rev ii main expects (see flake.nix)
-  quickshell = inputs.quickshell.packages.${pkgs.system}.default;
+  # Quickshell: follow nixpkgs (v0.3.0 ⊇ ii's supported pin 7511545e,
+  # 2026-03-19; upstream commits since are additive — verified 2026-08-25).
+  # Fallback if ii QML breaks on a nixpkgs bump: flake-input pin 7511545e.
+  # ii QML imports Kirigami (8 files); merge its QML modules into the
+  # quickshell prefix so imports resolve.
+  quickshell = pkgs.symlinkJoin {
+    name = "quickshell-ii-wrapped";
+    paths = [
+      pkgs.quickshell
+      pkgs.kdePackages.kirigami
+    ];
+  };
 
   # Python env standing in for ii's uv venv
   iiPython = pkgs.python3.withPackages (
@@ -124,18 +134,16 @@ lib.mkIf (cfg.enable && cfg.environment == "hyprland") {
       wf-recorder
       hyprshot
 
-      # : toolkit
-      upower
-      wtype
-      ydotool
-
-      # : widgets
+      # : widgets / shell runtime helpers
       fuzzel
       glib
-      imagemagick
+      imagemagick # magick — wallpaper/asset processing in shell
+      kdePackages.kdialog
       libqalculate
       songrec
       translate-shell
+      wtype
+      ydotool
 
       # : media / misc referenced by ii configs
       mpv
@@ -191,7 +199,6 @@ lib.mkIf (cfg.enable && cfg.environment == "hyprland") {
       "konsolerc".source = "${iiDots}/konsolerc";
 
       # : session / media / portals / app flags
-      "wlogout".source = "${iiDots}/wlogout";
       "mpv".source = "${iiDots}/mpv";
       "xdg-desktop-portal/hyprland-portals.conf".source =
         "${iiDots}/xdg-desktop-portal/hyprland-portals.conf";

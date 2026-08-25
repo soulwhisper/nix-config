@@ -252,22 +252,35 @@ Owner decision: adopt end-4/dots-hyprland main (Quickshell generation) as a full
 | Class | Ruling | Examples |
 |---|---|---|
 | Apps conflicting with ours | **ours win** | terminal = ghostty (ii chains rewritten via their own `custom/variables.lua` override point), shell stack (fish/starship/atuin), input method (fcitx5+rime, ours), browser (chrome — already first in ii's launch chain), thorium/dropbox-class apps dropped |
-| Conflicts with heavy ii-look impact | **theirs win** | fuzzel config, matugen + kde-material-you-colors theming pipeline, Kvantum/darkly/kdeglobals Qt theming, bibata cursors, ii font set (rubik, material symbols), wlogout, mpv |
+| Conflicts with heavy ii-look impact | **theirs win** | fuzzel config, matugen + kde-material-you-colors theming pipeline, Kvantum/darkly/kdeglobals Qt theming, bibata cursors, ii font set (rubik, material symbols), mpv |
 | Neutral | theirs, additive | cliphist, swappy, wf-recorder, tesseract, songrec, translate-shell, libqalculate, cava, playerctl, easyeffects, ydotool, ddcutil |
 
 ### Wiring
 
-- Flake inputs: `quickshell` pinned to ii's own supported rev (`db1777c2`, via quickshell-mirror as upstream does), `dots-hyprland` (`flake = false`) as the config source tree — updates = bump both together.
+- Flake input: `dots-hyprland` (`flake = false`) as the config source tree — updates = bump lock together with upstream.
+- Quickshell: **follows nixpkgs** (`pkgs.quickshell` v0.3.0 ⊇ ii's supported pin; see rev audit below) — no flake input.
 - `modules.desktop.environment = "hyprland"` (new default) | `"niri"` (kept).
-- System side: `programs.hyprland` (nixpkgs 0.55.x = ii's target), greetd+tuigreet, polkit (shell ships its own agent UI), `security.pam.services.hyprlock`, `programs.ydotool`, geoclue2 + demo agent, gnome-keyring, dconf, kde/gtk portals.
-- HM side: ~45 packages (mapped from ii's `deps-info.md` via their own dist-nix port), ii config trees deployed via `xdg.configFile` from the flake source (shell `quickshell/ii`, `hypr/` incl. their `custom/` scaffold, fuzzel, matugen, Qt theming, portal conf), python venv replaced by a nix-built `python3.withPackages` env symlinked to ii's expected `~/.local/state/quickshell/.venv` path (no activation-time network).
-- App overrides ride ii's official mechanism: `hypr/custom/variables.lua` (terminal → ghostty, task manager → ghostty+btop). `foot`/`kitty` binaries kept as deep-fallbacks (ii script chains + `swallow_regex`) without being defaults.
 
-### Known gaps (accepted)
+### Quickshell rev audit (2026-08-25)
 
-- `MicroTeX` (LaTeX widget), fonts `space-grotesk`/`readex-pro`, `breeze-plus`: not in nixpkgs — features degrade gracefully or fall back.
+- ii packaging pins two revs that disagree: ARCH PKGBUILD `7511545e` (2026-03-19, actively maintained) vs dist-nix flake.lock `db1777c2` (2025-10, stale lock). Effective upstream support = `7511545e`.
+- nixpkgs `quickshell` v0.3.0 (2026-05-04) strictly contains `7511545e` (0 behind); all 77 upstream commits since the pin are additive/fixes — no breaking QML API changes.
+- Per repo policy (follow upstream unless a hard dependency): **use `pkgs.quickshell`**, no flake input. Fallback documented in-module: re-pin `7511545e` if a nixpkgs bump breaks ii QML.
+- QML ground-truth deps found and wired: Kirigami (8 imports → quickshell wrapped via symlinkJoin with `kdePackages.kirigami`), `magick` (8 refs → imagemagick), `kdialog` (1 ref). `wlogout` has **zero** references in the Quickshell generation (AGS-era leftover) → config deployment dropped. `libdbusmenu-gtk3` not needed (quickshell implements StatusNotifier natively).
+
+### Full ii package disposition (deps-info.md, all 234 lines)
+
+Kept (look/style/taste — complete): matugen + kde-material-you-colors pipeline, Kvantum, darkly, kdeglobals/konsolerc/dolphinrc, fuzzel configs, bibata cursors, adw-gtk3, breeze+breeze-icons, fonts rubik/material-symbols/twemoji/jetbrains-mono (+base lxgw/nerd/emoji), hypr config tree incl. custom scaffold, quickshell/ii shell, mpv, chrome-flags/code-flags.
+
+Kept (new apps — pending owner judgment): easyeffects, songrec, translate-shell, swappy, wf-recorder, hyprshot, slurp, tesseract, cava, playerctl, pavucontrol-qt, cliphist, libqalculate, hypridle/hyprlock/hyprpicker/hyprsunset, ydotool, wtype, ddcutil, brightnessctl, upower, geoclue2(+demo agent), dolphin, systemsettings, bluedevil, plasma-nm, kdialog, btop, imagemagick, glib, jq, bc, wget, xdg-user-dirs, fuzzel, foot+kitty (deep-fallback binaries only).
+
+Dropped (with reason): fish/zshrc.d/starship.toml configs (our shell stack), kitty/foot configs (ghostty default), fontconfig conf (HM owns path), thorium-flags (not our browser), wlogout (unused by shell), cmake/clang/rsync/go-yq (installer/build-time only), uv+venv (replaced by nix python env), gtk4/libadwaita/libsoup/libportal (venv build deps, unneeded), polkit-kde-agent (shell ships its own agent; upstream dist-nix also skips), libdbusmenu-gtk3 (SNI native in quickshell), breeze-plus/space-grotesk/readex-pro/MicroTeX (absent from nixpkgs — accepted gaps), tesseract-data-eng (bundled in nixpkgs tesseract).
+
+### Remaining known gaps
+
+- `MicroTeX` (LaTeX widget), fonts `space-grotesk`/`readex-pro`, `breeze-plus`: absent from nixpkgs — features degrade or fall back.
 - ii's `fontconfig/fonts.conf` not deployed (HM owns `~/.config/fontconfig`); font fallback order may differ slightly.
-- Real-machine smoke pending (eval-verified only; quickshell pinned rev builds as 0.2.0 — matches ii's own pin).
+- Real-machine smoke pending (eval-verified only; nixpkgs quickshell 0.3.0 supersedes ii's 0.2.0-era pin).
 
 ### pfaj/nixos-config — evaluated and dropped
 

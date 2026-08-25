@@ -202,27 +202,6 @@
         "type": "github"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1761821581,
-        "narHash": "sha256-nLuc6jA7z+H/6bHPEBSOYPbz7RtvNCZiTKmYItJuBmM=",
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "db1777c20b936a86528c1095cbcb1ebd92801402",
-        "type": "github"
-      },
-      "original": {
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "db1777c20b936a86528c1095cbcb1ebd92801402",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -234,7 +213,6 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "quickshell": "quickshell",
         "sops-nix": "sops-nix"
       }
     },
