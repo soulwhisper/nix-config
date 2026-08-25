@@ -62,6 +62,27 @@
         },
         "version": "42d0aae17b744a38cd05c9044c189bfc9b13869a"
     },
+    "inir": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "inir",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "snowarch",
+            "repo": "iNiR",
+            "rev": "v2.29.1",
+            "sha256": "sha256-xXv5z6mToAM/Ev09jZMz54R8CKL0uRhtqfq7yzWTnh4=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v2.29.1"
+    },
     "kubecolor-catppuccin": {
         "cargoLock": null,
         "date": "2024-05-24",

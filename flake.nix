@@ -53,8 +53,24 @@
         system:
         import inputs.nixpkgs {
           localSystem = system;
-          overlays = builtins.attrValues (import ./overlays { inherit inputs; });
           config.allowUnfree = true;
+          overlays = [
+            # custom packages from ./pkgs (was overlays/default.nix `additions`)
+            (
+              final: _prev:
+              import ./pkgs {
+                pkgs = final;
+                inherit inputs;
+              }
+            )
+            # `pkgs.unstable` passthrough (was `unstable-packages`)
+            (final: _prev: {
+              unstable = import inputs.nixpkgs-unstable {
+                localSystem = final.stdenv.hostPlatform.system;
+                config.allowUnfree = true;
+              };
+            })
+          ];
         };
       mkSystemLib = import ./lib/mkSystem.nix { inherit inputs mkPkgsWithSystem; };
     in

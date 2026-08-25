@@ -22,8 +22,10 @@ src.branch = "main"
 [talos-api]
 fetch.github = "siderolabs/discovery-service"
 src.github = "siderolabs/discovery-service"
-
 [dots-hyprland]
 fetch.github = "end-4/dots-hyprland"
 src.git = "https://github.com/end-4/dots-hyprland.git"
 src.branch = "main"
+[inir]
+fetch.github = "snowarch/iNiR"
+src.github = "snowarch/iNiR"
