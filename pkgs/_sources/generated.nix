@@ -41,17 +41,6 @@
     };
     date = "2026-08-15";
   };
-  hass-sgcc = {
-    pname = "hass-sgcc";
-    version = "v1.8.1";
-    src = fetchFromGitHub {
-      owner = "ARC-MX";
-      repo = "sgcc_electricity_new";
-      rev = "v1.8.1";
-      fetchSubmodules = false;
-      sha256 = "sha256-CvwzaKvtr7aF1PUo5WVZIUj6SgmMjKb4kUaSQvDkcuE=";
-    };
-  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";
@@ -97,28 +86,5 @@
       fetchSubmodules = false;
       sha256 = "sha256-jvKmpj7lzBqhj8MEFSimHhtoMhPujZJPX1GdZR3clRA=";
     };
-  };
-  zotregistry = {
-    pname = "zotregistry";
-    version = "v2.1.20";
-    src = fetchFromGitHub {
-      owner = "project-zot";
-      repo = "zot";
-      rev = "v2.1.20";
-      fetchSubmodules = false;
-      sha256 = "sha256-lEw2VzPmKPisy6PmqZMf7cv+a19NSHsxJg+nosYMrGY=";
-    };
-  };
-  zotregistry-ui = {
-    pname = "zotregistry-ui";
-    version = "c75f6bd9008444498661abf9d153eceb2913a244";
-    src = fetchFromGitHub {
-      owner = "project-zot";
-      repo = "zui";
-      rev = "c75f6bd9008444498661abf9d153eceb2913a244";
-      fetchSubmodules = false;
-      sha256 = "sha256-4wS850UIiBFOkr/fWtaFNzo4PugRwO++bXt2pGk1rUs=";
-    };
-    date = "2026-08-18";
   };
 }

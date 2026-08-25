@@ -20,7 +20,9 @@ the outcome so the same dead end is not revisited.
 - Only viable as containers due to complexity; official installer creates nine
   services (6 localhost ports with headless podman).
 - The followed bitnami compose layout was sunset, making it unmaintainable.
-- Replaced by zotregistry.
+- ~~Replaced by zotregistry~~ → zotregistry itself moved to a containerized
+  deployment (single-process build could not sustain duplicate-request loads at
+  10G+ bandwidth); its packages and service module were removed here (2026-08-25).
 
 ## Minio — deprecated
 

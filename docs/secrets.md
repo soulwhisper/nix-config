@@ -44,7 +44,7 @@ dev:
     key: { DEEPSEEK_API_TOKEN }
 shell:
   atuin:
-    auth: { atuin-key } # base64-encoded
+    auth: { atuin-key }
 ```
 
 Full example covering all known keys:
@@ -63,10 +63,6 @@ apps:
       FOUNDRY_ADMIN_KEY={fvtt-admin-password}
       FOUNDRY_USERNAME={fvtt-account-username}
       FOUNDRY_PASSWORD={fvtt-account-password}
-  hass-sgcc:
-    auth: |
-      PHONE_NUMBER={sgcc-account}
-      PASSWORD={sgcc-password}
   moviepilot:
     auth: |
       AUTH_SITE="iyuu,haidan"
