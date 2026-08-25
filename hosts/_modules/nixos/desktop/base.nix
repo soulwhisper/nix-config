@@ -12,8 +12,11 @@ in
     enable = lib.mkEnableOption "desktop";
 
     environment = lib.mkOption {
-      type = lib.types.enum [ "niri" ];
-      default = "niri";
+      type = lib.types.enum [
+        "hyprland"
+        "niri"
+      ];
+      default = "hyprland";
       description = "Window-manager / session choice.";
     };
   };

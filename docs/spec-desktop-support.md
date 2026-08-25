@@ -1,6 +1,6 @@
 # Spec: NixOS Desktop Support
 
-Status: **modules implemented and eval-verified** (2026-08-25). Claims grounded against pinned sources (nixpkgs `26.05beta1.705e992` = search.nixos.org index `a9e6d84f`, HM release-26.05). Decisions resolved per owner review — see §7.
+Status: **modules implemented and eval-verified** (2026-08-25). Claims grounded against pinned sources (nixpkgs `26.05beta1.705e992` = search.nixos.org index `a9e6d84f`, HM release-26.05). Decisions resolved per owner review — see §7. **Update 2026-08-25 (2): `hyprland` environment added (end-4 illogical-impulse Quickshell shell) and made the default; niri kept as secondary. See §9.**
 
 ## 1. Current State
 
@@ -222,10 +222,11 @@ Cross-module contracts:
 
 ## 7. Decisions (resolved 2026-08-25)
 
-1. **Environment**: niri (preferred over KDE); KDE dropped from v1. `modules.desktop.environment` enum keeps room for future re-adds.
+1. **Environment**: ~~niri preferred~~ superseded 2026-08-25: `hyprland` (illogical-impulse) is the default; niri kept as secondary — see §9.
 2. **NVIDIA scope**: datacenter/compute mode removed entirely. Module is gaming-focused; local compute will run in containers, so `nvidia-container-toolkit` stays on by default (`containerToolkit` flag).
 3. **Host**: notebook host will be named `hosts/nix-dev` (weak GPU; PRIME offload path ready). Scaffold deferred to a follow-up commit.
 4. **Proxy / gaming / nixos-hardware input**: unchanged from spec defaults (mihomo base kept; gaming included in v1; `nixos-hardware` input added when the host lands).
+
 
 ## 8. Implementation Status
 
@@ -241,3 +242,33 @@ Cross-module contracts:
 | Lint (nixfmt + hooks) on touched files | pass | prek scoped run green |
 
 Deferred to host-scaffold commit: `hosts/nix-dev/` skeleton (disko/zfs or xfs, secrets), `nixos-hardware` flake input, real-machine smoke.
+
+## 9. Hyprland / illogical-impulse Environment (implemented 2026-08-25)
+
+Owner decision: adopt end-4/dots-hyprland main (Quickshell generation) as a full desktop, rewritten into this repo's module style; it replaces niri as the default environment.
+
+### Conflict policy (applied)
+
+| Class | Ruling | Examples |
+|---|---|---|
+| Apps conflicting with ours | **ours win** | terminal = ghostty (ii chains rewritten via their own `custom/variables.lua` override point), shell stack (fish/starship/atuin), input method (fcitx5+rime, ours), browser (chrome — already first in ii's launch chain), thorium/dropbox-class apps dropped |
+| Conflicts with heavy ii-look impact | **theirs win** | fuzzel config, matugen + kde-material-you-colors theming pipeline, Kvantum/darkly/kdeglobals Qt theming, bibata cursors, ii font set (rubik, material symbols), wlogout, mpv |
+| Neutral | theirs, additive | cliphist, swappy, wf-recorder, tesseract, songrec, translate-shell, libqalculate, cava, playerctl, easyeffects, ydotool, ddcutil |
+
+### Wiring
+
+- Flake inputs: `quickshell` pinned to ii's own supported rev (`db1777c2`, via quickshell-mirror as upstream does), `dots-hyprland` (`flake = false`) as the config source tree — updates = bump both together.
+- `modules.desktop.environment = "hyprland"` (new default) | `"niri"` (kept).
+- System side: `programs.hyprland` (nixpkgs 0.55.x = ii's target), greetd+tuigreet, polkit (shell ships its own agent UI), `security.pam.services.hyprlock`, `programs.ydotool`, geoclue2 + demo agent, gnome-keyring, dconf, kde/gtk portals.
+- HM side: ~45 packages (mapped from ii's `deps-info.md` via their own dist-nix port), ii config trees deployed via `xdg.configFile` from the flake source (shell `quickshell/ii`, `hypr/` incl. their `custom/` scaffold, fuzzel, matugen, Qt theming, portal conf), python venv replaced by a nix-built `python3.withPackages` env symlinked to ii's expected `~/.local/state/quickshell/.venv` path (no activation-time network).
+- App overrides ride ii's official mechanism: `hypr/custom/variables.lua` (terminal → ghostty, task manager → ghostty+btop). `foot`/`kitty` binaries kept as deep-fallbacks (ii script chains + `swallow_regex`) without being defaults.
+
+### Known gaps (accepted)
+
+- `MicroTeX` (LaTeX widget), fonts `space-grotesk`/`readex-pro`, `breeze-plus`: not in nixpkgs — features degrade gracefully or fall back.
+- ii's `fontconfig/fonts.conf` not deployed (HM owns `~/.config/fontconfig`); font fallback order may differ slightly.
+- Real-machine smoke pending (eval-verified only; quickshell pinned rev builds as 0.2.0 — matches ii's own pin).
+
+### pfaj/nixos-config — evaluated and dropped
+
+Investigated as a possible niri+Quickshell donor: its macOS-style shell is Hyprland-bound (no QML in repo, all hosts run Hyprland HM config, niri module is a stub faking `XDG_CURRENT_DESKTOP=Hyprland`). Nothing to merge; recorded here so it is not revisited.
