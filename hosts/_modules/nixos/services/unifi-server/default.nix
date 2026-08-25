@@ -19,6 +19,9 @@ in {
     # conflict with unifi-network
     # prefer SSD storage and caddy domain
     # pass origin header fix wss errors
+    # unprivileged layout per upstream compose: `privileged = true` lets the
+    # container's systemd spawn a getty on the host console ("UOS-Server login:"),
+    # see lemker/unifi-os-server#58
 
     networking.firewall.allowedTCPPorts = [
       8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882
@@ -56,8 +59,17 @@ in {
       labels = {
         "io.containers.autoupdate" = "registry";
       };
-      privileged = true;
-      extraOptions = ["--memory=4g"];
+      extraOptions = [
+        "--cgroupns=host"
+        "--cap-add=NET_RAW"
+        "--cap-add=NET_ADMIN"
+        "--memory=4g"
+        "--tmpfs=/run:exec"
+        "--tmpfs=/run/lock"
+        "--tmpfs=/tmp:exec"
+        "--tmpfs=/var/lib/journal"
+        "--tmpfs=/var/opt/unifi/tmp:size=64m"
+      ];
       ports = [
         "9801:443/tcp" # web-ui
         "8080:8080/tcp" # unifi-os-server-communication-svc
@@ -79,6 +91,7 @@ in {
         UOS_SYSTEM_IP = "${cfg.domain}";
       };
       volumes = [
+        "/sys/fs/cgroup:/sys/fs/cgroup:rw"
         "/var/lib/unifi-server/persistent:/persistent"
         "/var/lib/unifi-server/log:/var/log"
         "/var/lib/unifi-server/data:/data"
