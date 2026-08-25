@@ -1,22 +1,41 @@
-# SOPS
+# Secrets & SOPS
 
-## Encrypt / Decrypt
+Secrets are encrypted with [sops-nix](https://github.com/Mic92/sops-nix) using age.
+Encrypted files match `*.sops.yaml`; `.sops.yaml` at the repository root defines
+creation rules and key paths.
+
+## Workflow
 
 ```shell
+# point sops at the age key (adjust path, see "Key placement")
 export SOPS_AGE_KEY_FILE=keys.txt
 
+# decrypt in place
 sops --verbose -i -d secrets.sops.yaml
+
+# encrypt in place
 sops --verbose -i -e secrets.sops.yaml
 ```
 
+## Key placement
+
+age private keys are imported manually per machine:
+
+| State | Path |
+|---|---|
+| macOS before migration | `/Users/<username>/Library/Application Support/sops/age/keys.txt` |
+| macOS after migration | `/Users/<username>/.config/age/keys.txt` |
+
+## Conventions
+
+- Scalar values contain no spaces and no quotes.
+- Multi-line values are env files or tool config fragments; the consuming
+  module reads them via `config.sops.secrets."<path>".path`.
+- Placeholder syntax below: `{placeholder}`.
+
 ## Template
 
-- all values should not have spaces/quotes;
-
-```shell
-sops edit secrets.sops.yaml
-cat -p secrets.sops.yaml
-```
+Structure of `secrets.sops.yaml` per host:
 
 ```yaml
 # defaults
@@ -25,8 +44,10 @@ dev:
     key: { DEEPSEEK_API_TOKEN }
 shell:
   atuin:
-    auth: { atuin-key }
+    auth: { atuin-key } # base64-encoded
 ```
+
+Full example covering all known keys:
 
 ```yaml
 alerting:
@@ -65,7 +86,7 @@ networking:
   cloudflare:
     auth: |
       CLOUDFLARE_EMAIL={cf-email}
-      CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token}
+      CLOUDFLARE_DNS_API_TOKEN={cf-dns-api-token} # permission: CF-API:ZONE:DNS:EDIT
   proxy:
     subscription: |
       name1:url1
