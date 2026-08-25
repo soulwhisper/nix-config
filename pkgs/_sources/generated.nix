@@ -41,6 +41,17 @@
     };
     date = "2026-08-15";
   };
+  inir = {
+    pname = "inir";
+    version = "v2.29.1";
+    src = fetchFromGitHub {
+      owner = "snowarch";
+      repo = "iNiR";
+      rev = "v2.29.1";
+      fetchSubmodules = false;
+      sha256 = "sha256-xXv5z6mToAM/Ev09jZMz54R8CKL0uRhtqfq7yzWTnh4=";
+    };
+  };
   kubecolor-catppuccin = {
     pname = "kubecolor-catppuccin";
     version = "1d4c2888f7de077e1a837a914a1824873d16762d";

@@ -4,10 +4,8 @@ area/nix:
       - any-glob-to-any-file:
           - "hosts/**/*"
           - "lib/**/*"
-          - "overlays/**/*"
           - "flake.nix"
           - "flake.lock"
-          - "nixpkgs.nix"
           - ".sops.yaml"
 area/hm:
   - changed-files:

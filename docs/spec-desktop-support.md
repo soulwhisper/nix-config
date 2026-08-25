@@ -1,6 +1,6 @@
 # Spec: NixOS Desktop Support
 
-Status: **modules implemented and eval-verified** (2026-08-25). Claims grounded against pinned sources (nixpkgs `26.05beta1.705e992` = search.nixos.org index `a9e6d84f`, HM release-26.05). Decisions resolved per owner review — see §7. **Update 2026-08-25 (2): `hyprland` environment added (end-4 illogical-impulse Quickshell shell) and made the default; niri kept as secondary. See §9.**
+Status: **modules implemented and eval-verified** (2026-08-25). Claims grounded against pinned sources (nixpkgs `26.05beta1.705e992` = search.nixos.org index `a9e6d84f`, HM release-26.05). Decisions resolved per owner review — see §7. **Update 2026-08-25 (3): `niri` is the default again, now running the [iNiR](https://github.com/snowarch/iNiR) Quickshell shell (end-4 rewrite, nvfetcher-tracked as `pkgs/inir`); `hyprland` (end-4 main) kept as secondary. See §9.**
 
 ## 1. Current State
 
@@ -222,7 +222,7 @@ Cross-module contracts:
 
 ## 7. Decisions (resolved 2026-08-25)
 
-1. **Environment**: ~~niri preferred~~ superseded 2026-08-25: `hyprland` (illogical-impulse) is the default; niri kept as secondary — see §9.
+1. **Environment**: final state — `niri` default running **iNiR** shell; `hyprland` (end-4 main) secondary — see §9.
 2. **NVIDIA scope**: datacenter/compute mode removed entirely. Module is gaming-focused; local compute will run in containers, so `nvidia-container-toolkit` stays on by default (`containerToolkit` flag).
 3. **Host**: notebook host will be named `hosts/nix-dev` (weak GPU; PRIME offload path ready). Scaffold deferred to a follow-up commit.
 4. **Proxy / gaming / nixos-hardware input**: unchanged from spec defaults (mihomo base kept; gaming included in v1; `nixos-hardware` input added when the host lands).
@@ -245,7 +245,7 @@ Deferred to host-scaffold commit: `hosts/nix-dev/` skeleton (disko/zfs or xfs, s
 
 ## 9. Hyprland / illogical-impulse Environment (implemented 2026-08-25)
 
-Owner decision: adopt end-4/dots-hyprland main (Quickshell generation) as a full desktop, rewritten into this repo's module style; it replaces niri as the default environment.
+Owner decision: adopt end-4/dots-hyprland main (Quickshell generation) as a full desktop, rewritten into this repo's module style. **Superseded 2026-08-25 (3): niri is default again, powered by [iNiR](https://github.com/snowarch/iNiR) — a niri-native Quickshell rewrite of the same shell — tracked as `pkgs/inir` via nvfetcher (release tags); hyprland environment retained as secondary.**
 
 ### Conflict policy (applied)
 

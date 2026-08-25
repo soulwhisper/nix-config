@@ -16,7 +16,7 @@ in
         "hyprland"
         "niri"
       ];
-      default = "hyprland";
+      default = "niri";
       description = "Window-manager / session choice.";
     };
   };
