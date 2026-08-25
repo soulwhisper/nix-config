@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./adguard
     ./caddy
@@ -27,7 +27,6 @@
     ./unifi-server
     ./vector
     ./versitygw
-    ./zotregistry
     ./zrepl
   ];
 }

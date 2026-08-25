@@ -41,11 +41,11 @@
         },
         "version": "a8737d095ad5a48ca031cea6ab704057dbc2d250"
     },
-    "hass-sgcc": {
+    "dots-hyprland": {
         "cargoLock": null,
-        "date": null,
+        "date": "2026-08-15",
         "extract": null,
-        "name": "hass-sgcc",
+        "name": "dots-hyprland",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -53,14 +53,14 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "ARC-MX",
-            "repo": "sgcc_electricity_new",
-            "rev": "v1.8.1",
-            "sha256": "sha256-CvwzaKvtr7aF1PUo5WVZIUj6SgmMjKb4kUaSQvDkcuE=",
+            "owner": "end-4",
+            "repo": "dots-hyprland",
+            "rev": "42d0aae17b744a38cd05c9044c189bfc9b13869a",
+            "sha256": "sha256-Ctd9QPSN7tSkwgi2v3Xc9LXFclIrJAB4OYbahAHkNdI=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.8.1"
+        "version": "42d0aae17b744a38cd05c9044c189bfc9b13869a"
     },
     "kubecolor-catppuccin": {
         "cargoLock": null,
@@ -145,47 +145,5 @@
             "type": "github"
         },
         "version": "v1.1.0"
-    },
-    "zotregistry": {
-        "cargoLock": null,
-        "date": null,
-        "extract": null,
-        "name": "zotregistry",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "project-zot",
-            "repo": "zot",
-            "rev": "v2.1.20",
-            "sha256": "sha256-lEw2VzPmKPisy6PmqZMf7cv+a19NSHsxJg+nosYMrGY=",
-            "sparseCheckout": [],
-            "type": "github"
-        },
-        "version": "v2.1.20"
-    },
-    "zotregistry-ui": {
-        "cargoLock": null,
-        "date": "2026-08-18",
-        "extract": null,
-        "name": "zotregistry-ui",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "project-zot",
-            "repo": "zui",
-            "rev": "c75f6bd9008444498661abf9d153eceb2913a244",
-            "sha256": "sha256-4wS850UIiBFOkr/fWtaFNzo4PugRwO++bXt2pGk1rUs=",
-            "sparseCheckout": [],
-            "type": "github"
-        },
-        "version": "c75f6bd9008444498661abf9d153eceb2913a244"
     }
 }

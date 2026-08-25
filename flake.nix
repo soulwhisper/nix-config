@@ -27,8 +27,8 @@
     # catppuccin - Soothing pastel theme for Nix
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
     # sops-nix - secrets with mozilla sops
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -46,14 +46,8 @@
       url = "github:brumhard/krewfile";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # end-4 illogical-impulse dotfiles (plain file tree, not a flake)
-    dots-hyprland = {
-      url = "github:end-4/dots-hyprland";
-      flake = false;
-    };
-
   };
+
   outputs =
     { flake-parts, ... }@inputs:
     let

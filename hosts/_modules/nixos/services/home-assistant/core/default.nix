@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.services.home-assistant;
-in {
+in
+{
   options.modules.services.home-assistant = {
     enable = lib.mkEnableOption "home-assistant";
   };
@@ -18,7 +20,7 @@ in {
       40000
       8123
     ];
-    networking.firewall.allowedUDPPorts = [1900];
+    networking.firewall.allowedUDPPorts = [ 1900 ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/hass 0755 appuser appuser - -"
@@ -35,18 +37,18 @@ in {
       package =
         (pkgs.unstable.home-assistant.overrideAttrs (old: {
           doInstallCheck = false;
-        }))
-        .override {
-          extraComponents = [
-            "default_config"
-            "ffmpeg"
-            "homekit"
-            "homekit_controller"
-            "met"
-          ];
-        };
-      extraPackages = python3Packages:
-        with python3Packages; [
+        })).override
+          {
+            extraComponents = [
+              "default_config"
+              "ffmpeg"
+              "homekit"
+              "homekit_controller"
+              "met"
+            ];
+          };
+      extraPackages =
+        python3Packages: with python3Packages; [
           aiohomekit
           gtts
           isal
@@ -73,7 +75,7 @@ in {
 
       configWritable = true;
       config = {
-        default_config = {};
+        default_config = { };
         frontend = {
           themes = "!include_dir_merge_named themes";
         };
@@ -84,134 +86,6 @@ in {
             "::1"
           ];
         };
-        template = [
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.electricity_charge_balance_xxxx"; # todo, correct xxx after hass-sgcc deployment
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "electricity_charge_balance_xxxx";
-                unique_id = "electricity_charge_balance_xxxx";
-                state = "{{ states('sensor.electricity_charge_balance_xxxx') }}";
-                state_class = "total";
-                unit_of_measurement = "CNY";
-                device_class = "monetary";
-              }
-            ];
-          }
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.last_electricity_usage_xxxx";
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "last_electricity_usage_xxxx";
-                unique_id = "last_electricity_usage_xxxx";
-                state = "{{ states('sensor.last_electricity_usage_xxxx') }}";
-                state_class = "measurement";
-                unit_of_measurement = "kWh";
-                device_class = "energy";
-              }
-            ];
-          }
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.month_electricity_usage_xxxx";
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "month_electricity_usage_xxxx";
-                unique_id = "month_electricity_usage_xxxx";
-                state = "{{ states('sensor.month_electricity_usage_xxxx') }}";
-                state_class = "measurement";
-                unit_of_measurement = "kWh";
-                device_class = "energy";
-              }
-            ];
-          }
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.month_electricity_charge_xxxx";
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "month_electricity_charge_xxxx";
-                unique_id = "month_electricity_charge_xxxx";
-                state = "{{ states('sensor.month_electricity_charge_xxxx') }}";
-                state_class = "measurement";
-                unit_of_measurement = "CNY";
-                device_class = "monetary";
-              }
-            ];
-          }
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.yearly_electricity_usage_xxxx";
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "yearly_electricity_usage_xxxx";
-                unique_id = "yearly_electricity_usage_xxxx";
-                state = "{{ states('sensor.yearly_electricity_usage_xxxx') }}";
-                state_class = "total_increasing";
-                unit_of_measurement = "kWh";
-                device_class = "energy";
-              }
-            ];
-          }
-          {
-            trigger = [
-              {
-                platform = "event";
-                event_type = "state_changed";
-                event_data = {
-                  entity_id = "sensor.yearly_electricity_charge_xxxx";
-                };
-              }
-            ];
-            sensor = [
-              {
-                name = "yearly_electricity_charge_xxxx";
-                unique_id = "yearly_electricity_charge_xxxx";
-                state = "{{ states('sensor.yearly_electricity_charge_xxxx') }}";
-                state_class = "total_increasing";
-                unit_of_measurement = "CNY";
-                device_class = "monetary";
-              }
-            ];
-          }
-        ];
       };
     };
   };

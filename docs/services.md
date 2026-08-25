@@ -63,7 +63,6 @@ Fixed allocations should not change; ranges group services by function.
 | Port | Service |
 |---|---|
 | 9000, 9001 | minio / garage / versitygw |
-| 9002 | zot (zotregistry) |
 | 9003, 9004 | forgejo |
 
 ### Exporters (9100–9199)
