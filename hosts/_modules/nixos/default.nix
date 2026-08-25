@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # : folder
+    ./desktop
     ./filesystems
     ./hardware
     ./secrets
@@ -26,15 +28,21 @@
     networking = {
       firewall.enable = true;
       nftables.enable = true;
-      useNetworkd = true;
+      useNetworkd = lib.mkDefault true;
       useDHCP = false;
     };
     systemd.network = {
-      enable = true;
+      enable = lib.mkDefault true;
       wait-online = {
         anyInterface = true;
         timeout = 30;
-        ignoredInterfaces = [ "EasyTier" "Meta" "tailscale0" "tun0" "podman0" ];
+        ignoredInterfaces = [
+          "EasyTier"
+          "Meta"
+          "tailscale0"
+          "tun0"
+          "podman0"
+        ];
       };
     };
     boot.initrd.systemd.network.wait-online.enable = false;
