@@ -7,12 +7,15 @@
 let
   cfg = config.modules.desktop;
 
-  # python runtime for iNiR's Material You theming scripts
-  # (their nix package ships python3 without the module)
+  # python runtime for iNiR's Material You theming + feature scripts
+  # (their nix package ships python3 without the modules)
   inirPython = pkgs.python3.withPackages (
     ps: with ps; [
       materialyoucolor
       pygobject3
+      ytmusicapi # YT Music sidebar
+      evdev # super-tap overview daemon
+      pillow
     ]
   );
 in
@@ -23,6 +26,12 @@ in
     # gnome-keyring, and systemd units.
     programs.niri.enable = true;
 
+    # : iNiR runtime requirements that live outside their package wrapper
+    security.polkit.enable = true; # daemon for iNiR's own polkit agent UI
+    programs.ydotool.enable = true; # synthetic input (shell IPC actions)
+    programs.dconf.enable = true; # gsettings desktop defaults below
+    boot.kernelModules = [ "i2c-dev" ]; # ddcutil external-monitor brightness
+    users.groups.i2c = { };
     # : iNiR — full Quickshell shell for niri (end-4 rewrite)
     # replaces waybar/fuzzel/mako/swaylock/swaybg companions
     # NOTE: their nixos-module.nix is NOT imported — NixOS module-arg `pkgs`
@@ -71,6 +80,23 @@ in
       };
     };
 
+    # : Super-tap daemon — Super key tap toggles the overview
+    # (scripts/daemon ships inside the package; Arch setup enables it,
+    # upstream nix module does not)
+    systemd.user.services.inir-super-overview = {
+      description = "iNiR super-tap overview daemon";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      environment.PATH = lib.mkForce "${inirPython}/bin:${lib.makeBinPath [ pkgs.inir ]}";
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.inir}/share/quickshell/inir/scripts/daemon/inir_super_overview_daemon.py";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+    };
+
     # : Login manager
     services.greetd = {
       enable = true;
@@ -86,5 +112,40 @@ in
 
     # fcitx5 talks to Wayland directly under niri
     i18n.inputMethod.fcitx5.waylandFrontend = true;
+
+    # : Home-manager side — desktop defaults + iNiR feature deps
+    home-manager.users.soulwhisper = {
+      home.packages = with pkgs; [
+        # : desktop defaults (dconf below)
+        adw-gtk3 # GTK3 theme referenced by dconf settings
+        papirus-icon-theme
+
+        # : Qt theming (Material You propagation)
+        qt6Packages.qt6ct
+        qt6Packages.qtstyleplugin-kvantum
+        darkly
+        kdePackages.plasma-browser-integration
+        kdePackages.kde-cli-tools
+        kdePackages.kconfig # kwriteconfig6
+        kdePackages.syntax-highlighting # AiChat code blocks
+
+        # : media / tools (iNiR feature set)
+        pavucontrol
+        socat
+        yt-dlp
+        cava
+        easyeffects
+        songrec
+        translate-shell
+        hyprpicker
+        mpv
+      ];
+
+      dconf.settings."org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "adw-gtk3-dark";
+        icon-theme = "Papirus-dark";
+      };
+    };
   };
 }

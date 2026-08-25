@@ -67,6 +67,7 @@ in
       "audio"
       "input"
       "networkmanager"
+      "i2c" # ddcutil external-monitor brightness
     ];
   };
 }
