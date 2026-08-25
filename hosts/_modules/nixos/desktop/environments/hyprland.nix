@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -8,8 +7,8 @@
 let
   cfg = config.modules.desktop;
 
-  # end-4/dots-hyprland source tree (flake = false input)
-  iiDots = "${inputs.dots-hyprland}/dots/.config";
+  # end-4/dots-hyprland config set, tracked via nvfetcher (pkgs/ii-dots)
+  iiDots = "${pkgs.ii-dots}/.config";
 
   # Quickshell: follow nixpkgs (v0.3.0 ⊇ ii's supported pin 7511545e,
   # 2026-03-19; upstream commits since are additive — verified 2026-08-25).

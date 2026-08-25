@@ -32,3 +32,8 @@ src.github = "project-zot/zot"
 fetch.github = "project-zot/zui"
 src.git = "https://github.com/project-zot/zui.git"
 src.branch = "main"
+
+[dots-hyprland]
+fetch.github = "end-4/dots-hyprland"
+src.git = "https://github.com/end-4/dots-hyprland.git"
+src.branch = "main"

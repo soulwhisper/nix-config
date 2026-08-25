@@ -29,6 +29,18 @@
     };
     date = "2026-03-23";
   };
+  dots-hyprland = {
+    pname = "dots-hyprland";
+    version = "42d0aae17b744a38cd05c9044c189bfc9b13869a";
+    src = fetchFromGitHub {
+      owner = "end-4";
+      repo = "dots-hyprland";
+      rev = "42d0aae17b744a38cd05c9044c189bfc9b13869a";
+      fetchSubmodules = false;
+      sha256 = "sha256-Ctd9QPSN7tSkwgi2v3Xc9LXFclIrJAB4OYbahAHkNdI=";
+    };
+    date = "2026-08-15";
+  };
   hass-sgcc = {
     pname = "hass-sgcc";
     version = "v1.8.1";
