@@ -2,14 +2,50 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.hardware.nvidia;
-in {
+in
+{
   options.modules.hardware.nvidia = {
     enable = lib.mkEnableOption "nvidia";
-    driverType = lib.mkOption {
-      type = lib.types.enum ["desktop" "datacenter"];
-      default = "desktop";
+
+    # Turing or newer: open kernel modules recommended (RTX, GTX 16xx).
+    # Upstream asserts an explicit choice on driver >= 560.
+    openKernelModules = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Use the open source NVIDIA kernel modules (Turing+).";
+    };
+
+    prime = {
+      offload.enable = lib.mkEnableOption "PRIME render offload (hybrid notebook)";
+      sync.enable = lib.mkEnableOption "PRIME sync (output driven by NVIDIA GPU)";
+      intelBusId = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Bus ID of the Intel iGPU, e.g. \"PCI:0:2:0\".";
+      };
+      amdgpuBusId = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Bus ID of the AMD iGPU, e.g. \"PCI:5:0:0\".";
+      };
+      nvidiaBusId = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Bus ID of the NVIDIA dGPU, e.g. \"PCI:1:0:0\".";
+      };
+    };
+
+    dynamicBoost = lib.mkEnableOption "nvidia-powerd dynamic CPU/GPU power balancing (supported laptops)";
+
+    # Local compute is planned to run in containers; keep the toolkit even on
+    # gaming hosts so CUDA containers work out of the box.
+    containerToolkit = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable nvidia-container-toolkit for CUDA containers.";
     };
   };
 
@@ -20,20 +56,26 @@ in {
   # Unfortunately, this would have some big drawbacks:
   # - CUDA stuff is not in cache.nixos.org (since unfree)
   # - would have to build everything from source, or from 'nix-community', take 2-3 hours
-  # - CUDA stuff is not build by Hydra -> builds tend to fail more often since it's not tested
-  # - packages like webkitgtk receive a lot of updates, and take a long time to build
-  # -> CUDA support enabled for the whole system is neither practical nor necessary
-  # -> we should enable CUDA support for specific packages only
+  # -> enable CUDA support for specific packages only
   # example: pkgs.cuda-app.override { cudaSupport = true; };
 
-  ## desktop-version: https://github.com/NixOS/nixpkgs/blob/nixos-26.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L58
-  ## datacenter-version: https://github.com/NixOS/nixpkgs/blob/nixos-26.05/pkgs/os-specific/linux/nvidia-x11/default.nix#L94
   config = lib.mkIf cfg.enable {
-    # LACT for Nvidia GPU
+    assertions = [
+      {
+        assertion = !(cfg.prime.offload.enable && cfg.prime.sync.enable);
+        message = "modules.hardware.nvidia.prime: offload and sync are mutually exclusive.";
+      }
+      {
+        assertion =
+          !(cfg.prime.offload.enable || cfg.prime.sync.enable)
+          || (cfg.prime.nvidiaBusId != "" && (cfg.prime.intelBusId != "" || cfg.prime.amdgpuBusId != ""));
+        message = "modules.hardware.nvidia.prime: nvidiaBusId and one of intelBusId/amdgpuBusId are required when PRIME is enabled.";
+      }
+    ];
+
     services.lact.enable = true;
 
-    # if desktop
-    services.xserver.videoDrivers = lib.mkIf (cfg.driverType == "desktop") ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     boot.kernelParams = [
       # Since NVIDIA does not load kernel mode setting by default,
@@ -42,46 +84,44 @@ in {
     ];
 
     hardware = {
-      graphics = {
-        enable = true;
-        # needed by nvidia-docker
-        enable32Bit = true;
-      };
-      nvidia-container-toolkit.enable = true;
-      nvidia = {
-        # if datacenter
-        datacenter.enable = lib.mkIf (cfg.driverType == "datacenter") true;
+      graphics.enable = true;
 
-        # Modesetting is required.
+      nvidia-container-toolkit.enable = cfg.containerToolkit;
+
+      nvidia = {
+        open = cfg.openKernelModules;
+
         modesetting.enable = true;
 
-        # This ensures all GPUs stay awake even during headless mode
-        nvidiaPersistenced = true;
+        # RTD3 power management: only meaningful (and safe) for hybrid
+        # offload laptops; on desktops it can break suspend/resume.
+        powerManagement.enable = lib.mkDefault cfg.prime.offload.enable;
+        powerManagement.finegrained = lib.mkDefault cfg.prime.offload.enable;
 
-        # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-        # Enable this if you have graphical corruption issues or application crashes after waking
-        # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-        # of just the bare essentials.
-        powerManagement.enable = false;
-
-        # Fine-grained power management. Turns off GPU when not in use.
-        # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-        powerManagement.finegrained = false;
-
-        # Use the NVidia open source kernel module (not to be confused with the
-        # independent third-party "nouveau" open source driver).
-        # Support is limited to the Turing and later architectures. Full list of
-        # supported GPUs is at:
-        # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-        # Only available from driver 515.43.04+
-        open = false;
-
-        # Enable the Nvidia settings menu,
-        # accessible via `nvidia-settings`.
         nvidiaSettings = true;
+        dynamicBoost.enable = cfg.dynamicBoost;
 
-        # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        # package = config.boot.kernelPackages.nvidiaPackages.stable; # if datacenter then `dc`
+        prime = lib.mkMerge [
+          (lib.mkIf cfg.prime.offload.enable {
+            offload.enable = true;
+            offload.enableOffloadCmd = true;
+          })
+          (lib.mkIf cfg.prime.sync.enable {
+            sync.enable = true;
+          })
+          (lib.mkIf (cfg.prime.intelBusId != "") {
+            intelBusId = cfg.prime.intelBusId;
+          })
+          (lib.mkIf (cfg.prime.amdgpuBusId != "") {
+            amdgpuBusId = cfg.prime.amdgpuBusId;
+          })
+          (lib.mkIf (cfg.prime.nvidiaBusId != "") {
+            nvidiaBusId = cfg.prime.nvidiaBusId;
+          })
+        ];
+
+        # Driver branch/package selection: upstream defaults to `stable`;
+        # override `hardware.nvidia.package` at host level if ever needed.
       };
     };
   };

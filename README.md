@@ -9,6 +9,10 @@ This repository holds my NixOS configuration. It is fully reproducible and flake
 - nix-ops, staging vm, for tests and various operations.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
+## Documentation
+
+See [docs/README.md](docs/README.md) — secrets workflow, service notes, port registry, runbook, and decision log.
+
 ## Usage
 
 ```shell

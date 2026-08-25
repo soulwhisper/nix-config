@@ -46,36 +46,47 @@
       url = "github:brumhard/krewfile";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = {flake-parts, ...} @ inputs: let
-    mkPkgsWithSystem = system:
-      import inputs.nixpkgs {
-        localSystem = system;
-        overlays = builtins.attrValues (import ./overlays {inherit inputs;});
-        config.allowUnfree = true;
-      };
-    mkSystemLib = import ./lib/mkSystem.nix {inherit inputs mkPkgsWithSystem;};
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
+    # end-4 illogical-impulse dotfiles (plain file tree, not a flake)
+    dots-hyprland = {
+      url = "github:end-4/dots-hyprland";
+      flake = false;
+    };
+
+  };
+  outputs =
+    { flake-parts, ... }@inputs:
+    let
+      mkPkgsWithSystem =
+        system:
+        import inputs.nixpkgs {
+          localSystem = system;
+          overlays = builtins.attrValues (import ./overlays { inherit inputs; });
+          config.allowUnfree = true;
+        };
+      mkSystemLib = import ./lib/mkSystem.nix { inherit inputs mkPkgsWithSystem; };
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-darwin"
         "x86_64-linux"
       ];
 
-      perSystem = {
-        system,
-        inputs',
-        pkgs,
-        ...
-      }: {
-        # override pkgs used by everything in `perSystem` to have my overlays
-        _module.args.pkgs = mkPkgsWithSystem system;
-        # accessible via `nix build .#<name>`
-        packages = import ./pkgs {inherit pkgs inputs;};
-      };
+      perSystem =
+        {
+          system,
+          inputs',
+          pkgs,
+          ...
+        }:
+        {
+          # override pkgs used by everything in `perSystem` to have my overlays
+          _module.args.pkgs = mkPkgsWithSystem system;
+          # accessible via `nix build .#<name>`
+          packages = import ./pkgs { inherit pkgs inputs; };
+        };
 
-      imports = [];
+      imports = [ ];
 
       flake = {
         nixosConfigurations = {
@@ -91,16 +102,15 @@
 
         # Convenience output that aggregates the outputs for home, nixos.
         # Also used in ci to build targets generally.
-        ciSystems = let
-          nixos =
-            inputs.nixpkgs.lib.genAttrs
-            (builtins.attrNames inputs.self.nixosConfigurations)
-            (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
-          darwin =
-            inputs.nixpkgs.lib.genAttrs
-            (builtins.attrNames inputs.self.darwinConfigurations)
-            (attr: inputs.self.darwinConfigurations.${attr}.system);
-        in
+        ciSystems =
+          let
+            nixos = inputs.nixpkgs.lib.genAttrs (builtins.attrNames inputs.self.nixosConfigurations) (
+              attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel
+            );
+            darwin = inputs.nixpkgs.lib.genAttrs (builtins.attrNames inputs.self.darwinConfigurations) (
+              attr: inputs.self.darwinConfigurations.${attr}.system
+            );
+          in
           nixos // darwin;
       };
     };

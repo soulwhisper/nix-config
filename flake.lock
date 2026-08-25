@@ -40,6 +40,22 @@
         "type": "github"
       }
     },
+    "dots-hyprland": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786764882,
+        "narHash": "sha256-Ctd9QPSN7tSkwgi2v3Xc9LXFclIrJAB4OYbahAHkNdI=",
+        "owner": "end-4",
+        "repo": "dots-hyprland",
+        "rev": "42d0aae17b744a38cd05c9044c189bfc9b13869a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "end-4",
+        "repo": "dots-hyprland",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -190,6 +206,7 @@
       "inputs": {
         "catppuccin": "catppuccin",
         "disko": "disko",
+        "dots-hyprland": "dots-hyprland",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "krewfile": "krewfile",
