@@ -40,6 +40,8 @@ jobs:
         include:
           - system: soulwhisper-mba
             os: macos-latest
+          - system: soulwhisper-studio
+            os: macos-latest
           - system: nix-infra
             os: ubuntu-latest
           - system: nix-ops
@@ -66,6 +68,13 @@ jobs:
 
       - name: Build previous ${{ matrix.system }} system
         run: |
+          # New hosts have no previous build on main; skip instead of failing.
+          if ! ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) eval \
+            "github:soulwhisper/nix-config#ciSystems" --apply builtins.attrNames --json \
+            | grep -q '"${{ matrix.system }}"'; then
+            echo "::notice::no previous ${{ matrix.system }} system on main; skipping"
+            exit 0
+          fi
           ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) build \
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
