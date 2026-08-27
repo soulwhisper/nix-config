@@ -6,7 +6,13 @@
   config = {
     sops = {
       defaultSopsFile = ./secrets.sops.yaml;
+
+      # services enabled by optional modules
       secrets = {
+        "alerting/pushover/auth" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["gatus.service"];
+        };
         "networking/cloudflare/auth" = {
           owner = config.users.users.caddy.name;
           restartUnits = ["caddy.service"];

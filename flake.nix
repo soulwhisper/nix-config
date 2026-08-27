@@ -88,13 +88,14 @@
 
       nixosConfigurations = {
         # nixos builds
-        nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
+        nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
         nix-ops = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-ops";
       };
 
       darwinConfigurations = {
         # darwin builds
         soulwhisper-mba = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-mba";
+        soulwhisper-studio = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-studio";
       };
 
       # Convenience output that aggregates the outputs for home, nixos.

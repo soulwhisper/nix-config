@@ -11,10 +11,12 @@
     ./secrets.nix
   ];
 
-  # Spec: 4C8G, 100GB, ESXi VM;
-  # Address: 10.0.0.200; 'unifi.noirprime.com';
+  # spec: 4C8G, 1TB, ESXi VM;
 
   config = {
+    # This is a must if "/home" is isolated from "/", for sops.
+    fileSystems."/home".neededForBoot = true;
+
     # services.qemuGuest.enable = true;
     virtualisation.vmware.guest.enable = true;
 
@@ -26,35 +28,30 @@
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 
         # : Networking
-        mihomo.enable = lib.mkForce false;
+        easytier.networks = ["172.19.80.0/24" "172.19.82.0/24"];
 
         # : Monitoring
         scrutiny.enable = false;
         smartd.enable = false;
         nut.enable = false;
 
-        # : Infrastructure
-        # gatus.enable = true; # ep=:9400
-        # gatus.pushover.authFile = config.sops.secrets."alerting/pushover/auth".path;
+        # : TEST
         tailscale.enable = true;
-        tailscale.derper.enable = true;
-        unifi-server.enable = true; # sub=unifi
-        vector.enable = true; # ep=:514
+        kms.enable = true;
 
-        # : Services migrated to NAS
         versitygw.enable = false; # ep=:9000,9001
-        meshcentral.enable = false; # ep=:9203
-        talos.api.enable = false; # ep=:9300
+        talos.api.enable = false;
+        netbox.enable = false; # sub=box
+        unifi-server.enable = false; # sub=unifi
 
+        # : Others
         nfs4 = {
           enable = false; # all_squash = 2000:2000
           exports.default = {
             path = "/var/lib/shared";
-            subnet = "10.10.0.0/24";
+            subnet = "172.19.82.0/24";
           };
         };
-        sftpgo.enable = false;
-        timemachine.enable = false;
       };
     };
   };

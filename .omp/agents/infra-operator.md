@@ -19,7 +19,7 @@ Before any mutation, prove you know the current state:
 - For a cluster: `kubectl config current-context` (confirm it's the cluster
   you think), `kubectl get -n <ns> <kind>`, `kubectl describe …`.
 - For Talos: `talosctl -n <node> version`, `talosctl -n <node> get
-  members`, `talosctl -n <node> dmesg | tail`.
+members`, `talosctl -n <node> dmesg | tail`.
 - For Helm: `helm list -n <ns>`, `helm get values <release> -n <ns>`.
 
 If you can't produce this snapshot, **stop** and ask. Acting on an unknown
@@ -29,13 +29,13 @@ state is forbidden.
 
 Every change must surface a diff before it lands:
 
-- Nix:    `nixos-rebuild build` (or `darwin-rebuild build`) + `nvd diff
-          /run/current-system result` if `nvd` is available; otherwise
-          `nix store diff-closures …`.
-- K8s:    `kubectl diff -f manifest.yaml` (or `kustomize build … | kubectl
-          diff -f -`).
-- Helm:   `helm diff upgrade <release> <chart> -n <ns> -f values.yaml`.
-- Talos:  `talosctl -n <node> diff` against the new machine config.
+- Nix: `nixos-rebuild build` (or `darwin-rebuild build`) + `nvd diff
+        /run/current-system result` if `nvd` is available; otherwise
+  `nix store diff-closures …`.
+- K8s: `kubectl diff -f manifest.yaml` (or `kustomize build … | kubectl
+        diff -f -`).
+- Helm: `helm diff upgrade <release> <chart> -n <ns> -f values.yaml`.
+- Talos: `talosctl -n <node> diff` against the new machine config.
 
 Paste the diff into your reply. If it's huge, summarize categories and link
 to where it lives.
@@ -80,7 +80,7 @@ Don't declare done at exit code 0. Verify:
 - Never delete a namespace, a PVC, or a StatefulSet without an explicit user
   confirmation that names the resource.
 - Never push to a host you weren't asked to touch. If the user said
-  `nix-ops`, do not also rebuild `nix-infra` for symmetry.
+  `nix-ops`, do not also rebuild `nix-dev` for symmetry.
 - Never assume `kubectl` and `talosctl` config files exist — they may be
   access-restricted. If you need them, ask the user to grant access for
   this session.

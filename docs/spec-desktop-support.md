@@ -17,10 +17,10 @@ mkNixosSystem (lib/mkSystem.nix)
 └── hosts/<hostname>
 ```
 
-Current hosts `nix-infra`, `nix-ops`: headless ESXi VMs. Baseline health proven by eval:
+Current hosts `nix-ops`, `nix-dev`: headless ESXi VMs. Baseline health proven by eval:
 
-- `nix-infra` → `g39iwgp2h9aq5xq03fmw3xp8abjla9iq-nixos-system-nix-infra-26.05....drv`
-- `nix-ops` → `n3hl7n28c72mmqbpk9v95hd7dd53js87-nixos-system-nix-ops-26.05....drv`
+- `nix-ops` → `g39iwgp2h9aq5xq03fmw3xp8abjla9iq-nixos-system-nix-ops-26.05....drv`
+- `nix-dev` → `n3hl7n28c72mmqbpk9v95hd7dd53js87-nixos-system-nix-dev-26.05....drv`
 
 (Both emit a pre-existing HM warning: `programs.gemini-cli` renamed to `programs.antigravity-cli`. Out of scope here.)
 
@@ -28,14 +28,14 @@ Current hosts `nix-infra`, `nix-ops`: headless ESXi VMs. Baseline health proven 
 
 Enabled by zero hosts; last real consumer was deleted host `nix-dev`. Problems:
 
-| # | Issue | Why wrong |
-|---|-------|-----------|
-| 1 | `services.lact.enable = true` unconditional | LACT is a GUI GPU-control daemon; dead weight under `driverType = "datacenter"` |
-| 2 | `hardware.graphics.enable32Bit = true` unconditional | pulls i686 driver stack on compute nodes; only Steam/Wine-class apps need it |
-| 3 | `nvidia-container-toolkit.enable = true` unconditional | only meaningful with podman/docker CUDA containers; should be policy, not axiom |
-| 4 | `boot.kernelParams = ["nvidia-drm.fbdev=1"]` unconditional | fbdev/modeset is a Wayland-desktop concern; noise on headless |
-| 5 | `open = false` hardcoded | upstream asserts explicit choice for driver ≥ 560; open modules recommended for Turing+ |
-| 6 | No passthrough for PRIME offload / dynamic boost | blocks any future hybrid laptop |
+| #   | Issue                                                      | Why wrong                                                                               |
+| --- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| 1   | `services.lact.enable = true` unconditional                | LACT is a GUI GPU-control daemon; dead weight under `driverType = "datacenter"`         |
+| 2   | `hardware.graphics.enable32Bit = true` unconditional       | pulls i686 driver stack on compute nodes; only Steam/Wine-class apps need it            |
+| 3   | `nvidia-container-toolkit.enable = true` unconditional     | only meaningful with podman/docker CUDA containers; should be policy, not axiom         |
+| 4   | `boot.kernelParams = ["nvidia-drm.fbdev=1"]` unconditional | fbdev/modeset is a Wayland-desktop concern; noise on headless                           |
+| 5   | `open = false` hardcoded                                   | upstream asserts explicit choice for driver ≥ 560; open modules recommended for Turing+ |
+| 6   | No passthrough for PRIME offload / dynamic boost           | blocks any future hybrid laptop                                                         |
 
 ### Left work #2: desktop module
 
@@ -75,17 +75,17 @@ Base-module conflicts discovered:
 
 Method: three identical-base `lib.eval-config` systems differing only in the DE stack (`/tmp/de-bench`, eval-only — nothing built). Closure diff via `.drv` requisites (`nix-store -qR`); system-package diff via `config.environment.systemPackages`.
 
-| Metric | KDE Plasma 6 + SDDM | Hyprland 0.55.4 | niri 26.04 |
-|---|---|---|---|
-| toplevel drv closure | **8110** drvs | 6140 drvs | 6127 drvs |
-| `environment.systemPackages` | **199** | 86 | 86 |
-| unique adds over bare base | full Plasma/KDE Gear stack | exactly `hyprland` + `xdg-desktop-portal-hyprland` | compositor set incl. xwayland |
+| Metric                       | KDE Plasma 6 + SDDM        | Hyprland 0.55.4                                    | niri 26.04                    |
+| ---------------------------- | -------------------------- | -------------------------------------------------- | ----------------------------- |
+| toplevel drv closure         | **8110** drvs              | 6140 drvs                                          | 6127 drvs                     |
+| `environment.systemPackages` | **199**                    | 86                                                 | 86                            |
+| unique adds over bare base   | full Plasma/KDE Gear stack | exactly `hyprland` + `xdg-desktop-portal-hyprland` | compositor set incl. xwayland |
 
 Reading:
 
 - **KDE is a complete DE as an option value.** One flag pulls kwin/plasma-workspace/dolphin/konsole/spectacle/kwallet(+pam)/powerdevil/portals/polkit agent, **plus laptop-relevant pieces for free**: `fwupd`, `udisks`, `upower`, `geoclue2`, `power-profiles-daemon`. Cost: ~32% more derivations than the compositors.
 - **Hyprland/niri are compositors only.** The NixOS modules wire portal + session; bar/launcher/idle/lock/wallpaper/notification daemon are all user-supplied (waybar, fuzzel, hypridle/hyprlock or swayidle/swaylock, mako...). Expect ~5 extra components to choose, wire, and maintain per environment module.
-- **NVIDIA dimension:** KWin Wayland on proprietary driver is mature/boring. Hyprland's own wiki (updated 2026‑08‑22): *"should run just fine on Nvidia"* but with a dedicated caveat page and mandatory env setup (`GBM_BACKEND=nvidia`, `__GLX_VENDOR_LIBRARY_NAME=nvidia`, `LIBVA_DRIVER_NAME=nvidia`, cursor/flicker caveats). niri (smithay-based) works but is less battle-tested on proprietary driver. Our target hardware class includes NVIDIA GPUs → this matters.
+- **NVIDIA dimension:** KWin Wayland on proprietary driver is mature/boring. Hyprland's own wiki (updated 2026‑08‑22): _"should run just fine on Nvidia"_ but with a dedicated caveat page and mandatory env setup (`GBM_BACKEND=nvidia`, `__GLX_VENDOR_LIBRARY_NAME=nvidia`, `LIBVA_DRIVER_NAME=nvidia`, cursor/flicker caveats). niri (smithay-based) works but is less battle-tested on proprietary driver. Our target hardware class includes NVIDIA GPUs → this matters.
 - **NixOS module maturity:** plasma6 module = whole-DE integration maintained in-tree; hyprland/niri modules = thin wrappers. On NixOS specifically, KDE has fewer moving parts to pin.
 
 Verdict at spec time: KDE default on reliability/NVIDIA grounds. **Owner decision overrode this: niri chosen** (see §7) — accepted trade-off: more session-companion wiring, thinner NVIDIA track record.
@@ -98,11 +98,11 @@ Verdict at spec time: KDE default on reliability/NVIDIA grounds. **Owner decisio
 
 Verified upstream facts that make this non-optional:
 
-| Option | Default in pinned tree | Consequence if unset |
-|---|---|---|
-| `hardware.enableRedistributableFirmware` | **false** (follows `enableAllFirmware=false`) | no linux-firmware → Wi-Fi/BT dead on most laptops |
-| `hardware.cpu.intel.updateMicrocode` / `amd.updateMicrocode` | **false** | no CPU microcode updates |
-| `hardware.sensor.iio.enable` | false | no auto screen rotation/tablet mode |
+| Option                                                       | Default in pinned tree                        | Consequence if unset                              |
+| ------------------------------------------------------------ | --------------------------------------------- | ------------------------------------------------- |
+| `hardware.enableRedistributableFirmware`                     | **false** (follows `enableAllFirmware=false`) | no linux-firmware → Wi-Fi/BT dead on most laptops |
+| `hardware.cpu.intel.updateMicrocode` / `amd.updateMicrocode` | **false**                                     | no CPU microcode updates                          |
+| `hardware.sensor.iio.enable`                                 | false                                         | no auto screen rotation/tablet mode               |
 
 Proposed surface (hardware concern → lives under `hardware/`, not `desktop/`):
 
@@ -154,15 +154,15 @@ modules.hardware.nvidia = {
 
 Mode matrix:
 
-| Setting | `graphics` | `compute` |
-|---|---|---|
-| `services.xserver.videoDrivers += nvidia` | yes | no |
-| `hardware.nvidia.datacenter.enable` | no | yes |
-| modesetting / `nvidia-drm.fbdev=1` kernelParam | yes | no |
-| `services.lact` | `mkDefault true` (opt-out flag) | no |
-| `graphics.enable32Bit` | exposed as `graphics32Bit` flag, default false | no |
-| `nvidiaPersistenced` | false | true |
-| container toolkit | per flag | per flag |
+| Setting                                        | `graphics`                                     | `compute` |
+| ---------------------------------------------- | ---------------------------------------------- | --------- |
+| `services.xserver.videoDrivers += nvidia`      | yes                                            | no        |
+| `hardware.nvidia.datacenter.enable`            | no                                             | yes       |
+| modesetting / `nvidia-drm.fbdev=1` kernelParam | yes                                            | no        |
+| `services.lact`                                | `mkDefault true` (opt-out flag)                | no        |
+| `graphics.enable32Bit`                         | exposed as `graphics32Bit` flag, default false | no        |
+| `nvidiaPersistenced`                           | false                                          | true      |
+| container toolkit                              | per flag                                       | per flag  |
 
 Kept as direct passthrough (no re-exposure): `powerManagement.*`, `nvidiaSettings`, `package`/`branch` (upstream auto-selects). `openKernelModules` maps onto `hardware.nvidia.open`.
 
@@ -215,7 +215,7 @@ Cross-module contracts:
 
 ## 6. Verification Plan
 
-1. Regression: `nix eval` toplevel drv of `nix-infra`, `nix-ops` — must stay byte-identical class (no new derivations pulled into server closures).
+1. Regression: `nix eval` toplevel drv of `nix-ops`, `nix-dev` — must stay byte-identical class (no new derivations pulled into server closures).
 2. Integration: throwaway `lib.nixosSystem` harness (not committed) enabling `desktop+niri+nvidia+gaming`, plus a prime-offload variant and a bad-prime negative — proves assertions (prime exclusivity, busId requirements, 32-bit x86_64 check) and the option graph merge.
 3. `just lint` (prek) on touched files.
 4. Smoke on real surface: `nixos-rebuild build-vm --flake .#<host>` for a graphical boot check (greetd→niri session); compositor interaction itself is eval-verified only until real hardware exists.
@@ -227,19 +227,18 @@ Cross-module contracts:
 3. **Host**: notebook host will be named `hosts/nix-dev` (weak GPU; PRIME offload path ready). Scaffold deferred to a follow-up commit.
 4. **Proxy / gaming / nixos-hardware input**: unchanged from spec defaults (mihomo base kept; gaming included in v1; `nixos-hardware` input added when the host lands).
 
-
 ## 8. Implementation Status
 
-| Piece | State | Proof |
-|---|---|---|
-| `hardware/nvidia/default.nix` rewrite | done | eval passes; bad-prime variant fails with expected assertions |
-| `_modules/nixos/default.nix`: `mkDefault` networkd layering + desktop import | done | server regression drvs byte-identical |
-| `desktop/{base,environments/niri,input-method,applications,fhs,gaming}` | done | full-graph harness evals clean incl. HM/sops/catppuccin |
-| Regression `nix-infra`/`nix-ops` | pass | drv hashes unchanged: `g39iwgp2…`, `n3hl7n28c…` |
-| Feature harness (desktop+niri+gaming+nvidia) | pass | `rhwqp86f…`; prime offload variant `8gnrw3p7…` |
-| Negative test (offload+sync together) | pass | fails with module + upstream assertions as designed |
-| Networking override | verified | `useNetworkd=false`, NetworkManager=true, groups merged |
-| Lint (nixfmt + hooks) on touched files | pass | prek scoped run green |
+| Piece                                                                        | State    | Proof                                                         |
+| ---------------------------------------------------------------------------- | -------- | ------------------------------------------------------------- |
+| `hardware/nvidia/default.nix` rewrite                                        | done     | eval passes; bad-prime variant fails with expected assertions |
+| `_modules/nixos/default.nix`: `mkDefault` networkd layering + desktop import | done     | server regression drvs byte-identical                         |
+| `desktop/{base,environments/niri,input-method,applications,fhs,gaming}`      | done     | full-graph harness evals clean incl. HM/sops/catppuccin       |
+| Regression `nix-ops`/`nix-dev`                                               | pass     | drv hashes unchanged: `g39iwgp2…`, `n3hl7n28c…`               |
+| Feature harness (desktop+niri+gaming+nvidia)                                 | pass     | `rhwqp86f…`; prime offload variant `8gnrw3p7…`                |
+| Negative test (offload+sync together)                                        | pass     | fails with module + upstream assertions as designed           |
+| Networking override                                                          | verified | `useNetworkd=false`, NetworkManager=true, groups merged       |
+| Lint (nixfmt + hooks) on touched files                                       | pass     | prek scoped run green                                         |
 
 Deferred to host-scaffold commit: `hosts/nix-dev/` skeleton (disko/zfs or xfs, secrets), `nixos-hardware` flake input, real-machine smoke.
 
@@ -249,11 +248,11 @@ Owner decision: adopt end-4/dots-hyprland main (Quickshell generation) as a full
 
 ### Conflict policy (applied)
 
-| Class | Ruling | Examples |
-|---|---|---|
-| Apps conflicting with ours | **ours win** | terminal = ghostty (ii chains rewritten via their own `custom/variables.lua` override point), shell stack (fish/starship/atuin), input method (fcitx5+rime, ours), browser (chrome — already first in ii's launch chain), thorium/dropbox-class apps dropped |
-| Conflicts with heavy ii-look impact | **theirs win** | fuzzel config, matugen + kde-material-you-colors theming pipeline, Kvantum/darkly/kdeglobals Qt theming, bibata cursors, ii font set (rubik, material symbols), mpv |
-| Neutral | theirs, additive | cliphist, swappy, wf-recorder, tesseract, songrec, translate-shell, libqalculate, cava, playerctl, easyeffects, ydotool, ddcutil |
+| Class                               | Ruling           | Examples                                                                                                                                                                                                                                                     |
+| ----------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Apps conflicting with ours          | **ours win**     | terminal = ghostty (ii chains rewritten via their own `custom/variables.lua` override point), shell stack (fish/starship/atuin), input method (fcitx5+rime, ours), browser (chrome — already first in ii's launch chain), thorium/dropbox-class apps dropped |
+| Conflicts with heavy ii-look impact | **theirs win**   | fuzzel config, matugen + kde-material-you-colors theming pipeline, Kvantum/darkly/kdeglobals Qt theming, bibata cursors, ii font set (rubik, material symbols), mpv                                                                                          |
+| Neutral                             | theirs, additive | cliphist, swappy, wf-recorder, tesseract, songrec, translate-shell, libqalculate, cava, playerctl, easyeffects, ydotool, ddcutil                                                                                                                             |
 
 ### Wiring
 

@@ -13,13 +13,13 @@ echo "nameserver 10.0.0.1" >> /etc/resolv.conf
 
 # :: opt, ssh in as root
 
-# : init using bootstrap config, assuming target host is 'nix-ops';
+# : init using bootstrap config, assuming target host is 'nix-dev';
 export https_proxy=http://ip:port
 
 git clone https://github.com/soulwhisper/nix-config /etc/nix-config
 nixos-generate-config --no-filesystems
 cp /etc/nixos/hardware-configuration.nix /etc/nix-config/bootstrap/
-# cp /etc/nix-config/hosts/nix-ops/disko.nix /etc/nix-config/bootstrap/
+# cp /etc/nix-config/hosts/nix-dev/disko.nix /etc/nix-config/bootstrap/
 
 cd /etc/nix-config
 git add .
@@ -50,9 +50,9 @@ sudo nixos-generate-config --no-filesystems
 sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-infra/
 sudo -E nixos-rebuild switch --flake nix-config/.#nix-infra
 
-# :: nix-ops, disk space too small
+# :: nix-dev, disk space too small
 sudo mount -o remount,size=30G /
-# :: nix-ops, expand lv
+# :: nix-dev, expand lv
 sudo lvresize -L +10G main/nix
 sudo xfs_growfs /nix
 

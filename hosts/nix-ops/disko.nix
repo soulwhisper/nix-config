@@ -1,5 +1,4 @@
-# This file is the general template for 'lvm-thin-xfs,tmpfs-root' disk config.
-# Main disk should be at least 16+100 = 116 GB.
+# This file is the general template for xfs disk config.
 {...}: let
   xfsMountOptions = [
     "defaults"
@@ -29,61 +28,11 @@ in {
             primary = {
               size = "100%";
               content = {
-                type = "lvm_pv";
-                vg = "main";
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/";
+                mountOptions = xfsMountOptions;
               };
-            };
-          };
-        };
-      };
-    };
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "size=10G"
-        "defaults"
-        "mode=755"
-      ];
-    };
-    lvm_vg = {
-      main = {
-        type = "lvm_vg";
-        lvs = {
-          thinpool = {
-            size = "1000G";
-            lvm_type = "thin-pool";
-          };
-          app = {
-            size = "30G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/var/lib";
-              mountOptions = xfsMountOptions ++ ["logbsize=64k"];
-            };
-          };
-          home = {
-            size = "20G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/home";
-              mountOptions = xfsMountOptions;
-            };
-          };
-          nix = {
-            size = "50G";
-            lvm_type = "thinlv";
-            pool = "thinpool";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/nix";
-              mountOptions = xfsMountOptions;
             };
           };
         };

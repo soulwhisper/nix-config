@@ -5,8 +5,9 @@
 This repository holds my NixOS configuration. It is fully reproducible and flakes based.
 
 - soulwhisper-mba, my macbook configs.
-- nix-infra, production vm, for homelab infrastructure.
-- nix-ops, staging vm, for tests and various operations.
+- soulwhisper-studio, my macstudio configs.
+- nix-dev, vm for production development.
+- nix-ops, vm for homelab infrastructure.
 - renovate configs and ci, managed by [soulwhisper/renovate-config](https://github.com/soulwhisper/renovate-config).
 
 ## Documentation
@@ -27,11 +28,11 @@ brew install just
 # :: opt. run set-proxy script
 sudo python3 bootstrap/darwin_set_proxy.py
 # :: init, if darwin-rebuild not exist
-just darwin init
+just darwin init soulwhisper-mba
 # :: build & diff
-just darwin build
+just darwin build soulwhisper-mba
 # :: switch
-just darwin switch
+just darwin switch soulwhisper-mba
 
 # : nixos
 nix-shell -p just

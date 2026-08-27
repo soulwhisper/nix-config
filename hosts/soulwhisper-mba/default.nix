@@ -16,27 +16,82 @@
     environment.systemPackages = with pkgs.unstable; [
       # cardforge, https://github.com/Card-Forge/forge/releases
       forge-mtg
-      # music
-      beets # music library manager
-      picard # qt music tagger
     ];
 
     # test apps list
     homebrew = {
       taps = [
+        {
+          name = "pear-devs/pear";
+          trusted = true;
+        }
       ];
       brews = [
       ];
       casks = [
+        # :: password management
+        "1password"
+        "1password-cli"
+
+        # :: networking
+        "brewforge/chinese/easytier"
+        "clash-verge-rev"
+        "switchhosts" # replace adguard container
+        "tailscale-app" # requires a kernel extension to work
+
+        # :: storage
+        "dropbox"
+        "cyberduck" # replace transmit
+        "transmission"
+
+        # :: development
+        "orbstack"
+
+        # :: media
+        "foobar2000"
+        "iina"
+        "neteasemusic"
+        "pear-desktop" # youtube-music replacement
+
+        # :: productivity
+        "acorn"
+        "alfred" # powerpack still overshine Tahoe and raycast
+        "discord"
+        "ilok-license-manager"
+        "obsidian"
+        "stats"
+        "squirrel-app"
+        "telegram"
+        "thunderbird"
+        "ticktick"
+        "vmware-fusion"
+        "wechat"
+        "zotero"
+
+        # :: utilities
+        # "nikitabobko/tap/aerospace" # tilling, cant split
+        "jordanbaird-ice" # bartender replacement
+        # "vanilla" # ice replacement
+        # "karabiner-elements" # not-used
+        # "keyboard-maestro" # not-used
+        "pixpin" # cleanshotx replacement
+        "rectangle-pro" # preferred over swish
+
+        # :: test
         # "betterdisplay"
-        "calibre"
         "little-snitch"
         "qlab"
         "wireshark-app"
       ];
       masApps = {
-        # "StopTheMadness Pro" = 6471380298;
-        # "Passepartout" = 1433648537;
+        "DevHub" = 6476452351;
+        "iCost" = 1484262528;
+        "Keka" = 470158793;
+        "Numbers" = 409203825;
+        "Pages" = 409201541;
+        "ReadKit" = 1615798039;
+        "Keynote" = 409183694;
+        "Windows App" = 1295203466;
       };
     };
   };

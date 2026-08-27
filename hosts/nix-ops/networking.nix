@@ -6,23 +6,27 @@
   config = {
     networking = {
       hostName = hostname;
-      nameservers = [ "127.0.0.1" ];
+      nameservers = [ "10.10.0.254" ];
     };
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "ens192";
+      matchConfig.Name = "ens34"; # proxmox is ens18
       address = [
-        "172.19.82.10/24"
+        "10.10.0.200/24"
       ];
       routes = [
         {
-          Gateway = "172.19.82.1";
+          Gateway = "10.10.0.1";
           GatewayOnLink = true;
+        }
+        {
+          Destination = "10.0.0.0/24";
+          Gateway = "10.10.0.1";
         }
       ];
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
-        DHCP = "no";
+        DHCP = false;
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };

@@ -10,11 +10,6 @@ in
 {
   options.modules.development = {
     enable = lib.mkEnableOption "development";
-    agent.authFile = lib.mkOption {
-      type = lib.types.nullOr lib.types.path;
-      default = null;
-      description = "Path to a file containing the DeepSeek API key (sops-managed).";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -62,12 +57,5 @@ in
         };
       };
     };
-
-    # omp - current coding agent, replace claude-code
-    programs.fish.interactiveShellInit = lib.mkIf (cfg.agent.authFile != null) ''
-      if test -r "${cfg.agent.authFile}"
-        set -gx DEEPSEEK_API_KEY (string trim < "${cfg.agent.authFile}")
-      end
-    '';
   };
 }
