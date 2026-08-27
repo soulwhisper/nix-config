@@ -62,12 +62,5 @@ in
         };
       };
     };
-
-    # omp - current coding agent, replace claude-code
-    programs.fish.interactiveShellInit = lib.mkIf (cfg.agent.authFile != null) ''
-      if test -r "${cfg.agent.authFile}"
-        set -gx DEEPSEEK_API_KEY (string trim < "${cfg.agent.authFile}")
-      end
-    '';
   };
 }

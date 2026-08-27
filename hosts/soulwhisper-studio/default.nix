@@ -4,7 +4,6 @@
   ...
 }: {
   # Mac Studio · M5 Max · 64GB unified memory · local AI inference appliance.
-  # Model stack, memory budget and rationale: ./README.md
   config = {
     networking = {
       computerName = "soulwhisper-studio";
@@ -30,25 +29,20 @@
       /usr/bin/pmset -a sleep 0 displaysleep 15 powernap 0 tcpkeepalive 1 autorestart 1
     '';
 
-    environment.systemPackages = with pkgs; [
-      uv # python envs for the JoyAI MLX rewrite (vllm-omni adapter, streaming pipeline)
-    ];
-
     homebrew = {
       taps = [
         {
           name = "jundot/omlx";
-          clone_target = "https://github.com/jundot/omlx";
           trusted = true;
         }
       ];
       brews = [
-        # oMLX inference server (CLI only; menu-bar app is a one-time DMG install).
-        # Lifecycle: `omlx start|stop|restart` (delegates to brew services).
-        "jundot/omlx/omlx"
+        "omlx"
       ];
       casks = [
       ];
+      masApps = {
+      };
     };
   };
 }

@@ -1,3 +1,8 @@
-_: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # placeholder
 }
