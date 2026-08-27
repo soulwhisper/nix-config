@@ -10,11 +10,6 @@ in
 {
   options.modules.development = {
     enable = lib.mkEnableOption "development";
-    agent.authFile = lib.mkOption {
-      type = lib.types.nullOr lib.types.path;
-      default = null;
-      description = "Path to a file containing the DeepSeek API key (sops-managed).";
-    };
   };
 
   config = lib.mkIf cfg.enable {

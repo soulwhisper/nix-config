@@ -20,9 +20,6 @@
       # :: secrets
       # services enabled by default
       secrets = {
-        "dev/deepseek/key" = {
-          sopsFile = ./secrets.sops.yaml;
-        };
         "shell/atuin/auth" = {
           sopsFile = ./secrets.sops.yaml;
         };
