@@ -95,6 +95,7 @@
       darwinConfigurations = {
         # darwin builds
         soulwhisper-mba = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-mba";
+        soulwhisper-studio = mkSystemLib.mkDarwinSystem "aarch64-darwin" "soulwhisper-studio";
       };
 
       # Convenience output that aggregates the outputs for home, nixos.
