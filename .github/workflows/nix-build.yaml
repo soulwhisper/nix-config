@@ -42,9 +42,9 @@ jobs:
             os: macos-latest
           - system: soulwhisper-studio
             os: macos-latest
-          - system: nix-infra
-            os: ubuntu-latest
           - system: nix-ops
+            os: ubuntu-latest
+          - system: nix-dev
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:

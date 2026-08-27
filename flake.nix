@@ -88,7 +88,7 @@
 
       nixosConfigurations = {
         # nixos builds
-        nix-infra = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-infra";
+        nix-dev = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-dev";
         nix-ops = mkSystemLib.mkNixosSystem "x86_64-linux" "nix-ops";
       };
 

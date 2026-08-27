@@ -8,6 +8,7 @@
     ./disko.nix
     ./hardware-configuration.nix
     # ./zfs-support.nix
+    # ./zfs-impermanence.nix # replace disko if enable zfs
   ];
   config = {
     networking.hostName = "nixos";
