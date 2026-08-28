@@ -41,6 +41,7 @@ Fixed allocations should not change; ranges group services by function.
 | 514 | vector |
 | 2022 | sftpgo (SSH) |
 | 1080 | http proxy |
+| 8000 | omlx (soulwhisper-studio) |
 | 4433 | AMT server |
 | 5432 | postgres |
 | 5678 | n8n |
