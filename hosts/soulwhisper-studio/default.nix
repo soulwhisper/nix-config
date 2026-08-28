@@ -26,8 +26,57 @@
 
     # Always-on inference server: never sleep, restart after power failure.
     system.activationScripts.postActivation.text = ''
-      /usr/bin/pmset -a sleep 0 displaysleep 15 powernap 0 tcpkeepalive 1 autorestart 1
+      /usr/bin/pmset -a sleep 0 displaysleep 15 powernap 0 tcpkeepalive 1 autorestart 1 standby 0 hibernatemode 0
+      # macOS updates must never reboot an inference box mid-session; updates
+      # are attended events via the KVM console.
+      /usr/sbin/softwareupdate --schedule off
     '';
+
+    # NUT client config for the infra UPS (NUT server on the Synology NAS).
+    # Written imperatively (root:wheel 0600) instead of environment.etc so the
+    # credential never lands in the world-readable nix store.
+    # TODO: migrate to sops once the studio host age key is enrolled.
+    system.activationScripts.upsmonConf.text = ''
+      /usr/bin/install -d -m 0755 /opt/homebrew/etc
+      /bin/cat > /opt/homebrew/etc/upsmon.conf <<'EOF'
+MONITOR ups@10.10.0.254 1 monuser secret secondary
+SHUTDOWNCMD "/sbin/shutdown -h +0"
+NOCOMMWARNTIME 300
+FINALDELAY 5
+EOF
+      /usr/sbin/chown root:wheel /opt/homebrew/etc/upsmon.conf
+      /bin/chmod 0600 /opt/homebrew/etc/upsmon.conf
+    '';
+
+    launchd.daemons = {
+      # UPS monitor: shuts the Mac down cleanly on NUT FSD/low-battery.
+      # Prereq: NUT server must cut outlet power after client halt
+      # (offdelay/shutdown.return) so autorestart=1 can fire on mains return.
+      upsmon = {
+        script = ''
+          exec /opt/homebrew/sbin/upsmon -F
+        '';
+        serviceConfig = {
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardOutPath = "/opt/homebrew/var/log/upsmon.log";
+          StandardErrorPath = "/opt/homebrew/var/log/upsmon.log";
+        };
+      };
+      # Prometheus node exporter; scrape target lives in the cluster
+      # prometheus, port per docs/services.md registry.
+      node-exporter = {
+        script = ''
+          exec /opt/homebrew/opt/node_exporter/bin/node_exporter --web.listen-address=":9101"
+        '';
+        serviceConfig = {
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardOutPath = "/opt/homebrew/var/log/node_exporter.log";
+          StandardErrorPath = "/opt/homebrew/var/log/node_exporter.log";
+        };
+      };
+    };
 
     homebrew = {
       taps = [
@@ -38,6 +87,8 @@
       ];
       brews = [
         "omlx"
+        "nut" # NUT client (upsmon); server is the infra UPS at 10.10.0.254
+        "node_exporter" # prometheus metrics, listens on :9101
       ];
       casks = [
       ];

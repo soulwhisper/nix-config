@@ -27,8 +27,21 @@
         }
       ];
       brews = [
+        "mas"
       ];
       casks = [
+        # :: fonts
+        "font-lxgw-neoxihei"
+        "font-jetbrains-mono-nerd-font"
+
+        # :: development
+        "ghostty"
+        "orbstack"
+        "visual-studio-code"
+
+        # :: web
+        "google-chrome"
+
         # :: password management
         "1password"
         "1password-cli"
@@ -43,9 +56,6 @@
         "dropbox"
         "cyberduck" # replace transmit
         "transmission"
-
-        # :: development
-        "orbstack"
 
         # :: media
         "foobar2000"
@@ -84,6 +94,7 @@
         "wireshark-app"
       ];
       masApps = {
+        "Caffeinated" = 1362171212;
         "DevHub" = 6476452351;
         "iCost" = 1484262528;
         "Keka" = 470158793;

@@ -1,3 +1,6 @@
+# Core homebrew wiring shared by every darwin host. Desktop apps live in
+# hosts/soulwhisper-mba; headless hosts (soulwhisper-studio) declare only
+# what they serve with.
 _: {
   homebrew = {
     enable = true;
@@ -12,22 +15,10 @@ _: {
     taps = [
     ];
     brews = [
-      "mas"
     ];
     casks = [
-      # :: fonts
-      "font-lxgw-neoxihei"
-      "font-jetbrains-mono-nerd-font"
-
-      # :: development
-      "ghostty"
-      "visual-studio-code"
-
-      # :: web
-      "google-chrome"
     ];
     masApps = {
-      "Caffeinated" = 1362171212;
     };
   };
 }
