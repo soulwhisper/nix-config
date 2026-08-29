@@ -13,7 +13,7 @@
 
     # Raise the GPU wired memory ceiling to 56GB (leaves ~8GB for macOS).
     # sysctl does not persist across reboots; this launchd daemon re-applies it
-    # at every boot. See README.md §memory-budget.
+    # at every boot.
     launchd.daemons.iogpu-wired-limit = {
       script = ''
         /usr/sbin/sysctl iogpu.wired_limit_mb=57344
@@ -49,6 +49,27 @@ EOF
     '';
 
     launchd.daemons = {
+      # oMLX inference server. Runs at boot with no login session — the brew
+      # formula's service block (user LaunchAgent) dies at the login window,
+      # which is unusable on a headless box. Mirrors Formula/omlx.rb:
+      #   run [opt_bin/"omlx", "serve"], keep_alive, working_dir var
+      # Do NOT also `brew services start omlx` — that registers a second
+      # instance on the same port.
+      omlx = {
+        script = ''
+          export HOME=/Users/soulwhisper
+          export PATH=/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin
+          exec /opt/homebrew/bin/omlx serve
+        '';
+        serviceConfig = {
+          UserName = "soulwhisper";
+          WorkingDirectory = "/opt/homebrew/var";
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardOutPath = "/opt/homebrew/var/log/omlx.log";
+          StandardErrorPath = "/opt/homebrew/var/log/omlx.log";
+        };
+      };
       # UPS monitor: shuts the Mac down cleanly on NUT FSD/low-battery.
       # Prereq: NUT server must cut outlet power after client halt
       # (offdelay/shutdown.return) so autorestart=1 can fire on mains return.
