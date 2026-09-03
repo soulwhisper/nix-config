@@ -5,6 +5,7 @@ this directory explains how to operate and reason about it.
 
 | Document | Scope |
 |---|---|
+| [architecture.md](architecture.md) | Interactive flake architecture diagram and regeneration notes |
 | [secrets.md](secrets.md) | SOPS workflow, age-key placement, secret template conventions |
 | [services.md](services.md) | Per-service operational notes and the port registry |
 | [runbook.md](runbook.md) | Commands for deploy, troubleshooting, and maintenance |

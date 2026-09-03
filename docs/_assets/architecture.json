@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "nix-config Flake Architecture",
+    "output": "architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/soulwhisper/nix-config",
+      "revision": "11392a569a6c27f8538e29fd0f47e6f794e767f1"
+    },
+    "viewBox": [1200, 600],
+    "views": [
+      { "id": "build-spine", "label": "Build spine", "focus": ["inputs", "flake", "mkSystem", "nixosHosts", "darwinHosts"], "note": "Follow flake.nix from locked inputs through lib/mkSystem.nix to the four host configurations." },
+      { "id": "user-environment", "label": "User environment", "focus": ["mkSystem", "home", "homeModules"], "note": "home-manager is integrated in every system build; feature modules under homes/_modules shape the user session." },
+      { "id": "secrets-and-automation", "label": "Secrets and automation", "focus": ["sops", "flake", "ci", "renovate"], "note": "sops-nix decrypts age secrets at activation; CI builds every host and automation keeps inputs fresh." }
+    ]
+  },
+  "components": [
+    { "id": "inputs", "type": "external", "label": "Flake Inputs", "sublabel": "nixpkgs 26.05 + unstable", "pos": [40, 60], "size": [170, 64], "sources": [{ "path": "flake.nix", "line": 4, "end_line": 43, "label": "inputs" }] },
+    { "id": "renovate", "type": "external", "label": "Renovate", "sublabel": "dependency automation", "pos": [40, 220], "size": [170, 64], "sources": [{ "path": "renovate.json5", "label": "config" }, { "path": ".github/workflows/update-flake.yaml", "label": "update-flake" }] },
+    { "id": "ci", "type": "external", "label": "GitHub Actions", "sublabel": "ciSystems matrix build", "pos": [40, 360], "size": [170, 64], "sources": [{ "path": ".github/workflows/nix-build.yaml", "label": "nix-build" }] },
+    { "id": "flake", "type": "backend", "label": "flake.nix", "sublabel": "outputs & overlays", "pos": [270, 260], "size": [170, 70], "sources": [{ "path": "flake.nix", "line": 77, "end_line": 112, "label": "outputs" }] },
+    { "id": "pkgs", "type": "backend", "label": "pkgs/", "sublabel": "custom packages, nvfetcher", "pos": [270, 460], "size": [170, 64], "sources": [{ "path": "pkgs/default.nix", "label": "callPackage set" }] },
+    { "id": "hostModules", "type": "backend", "label": "hosts/_modules", "sublabel": "common / nixos / darwin", "pos": [500, 60], "size": [180, 64], "sources": [{ "path": "hosts/_modules/common/default.nix", "label": "common" }, { "path": "hosts/_modules/nixos/default.nix", "label": "nixos" }] },
+    { "id": "mkSystem", "type": "backend", "label": "lib/mkSystem.nix", "sublabel": "system builders", "pos": [500, 260], "size": [180, 70], "sources": [{ "path": "lib/mkSystem.nix", "label": "mkNixosSystem / mkDarwinSystem" }] },
+    { "id": "home", "type": "backend", "label": "homes/soulwhisper", "sublabel": "home-manager config", "pos": [500, 460], "size": [180, 64], "sources": [{ "path": "homes/soulwhisper/default.nix", "label": "user entrypoint" }] },
+    { "id": "homeModules", "type": "backend", "label": "homes/_modules", "sublabel": "shell / dev / kubernetes", "pos": [730, 460], "size": [180, 64], "sources": [{ "path": "homes/_modules/default.nix", "label": "module index" }] },
+    { "id": "nixosHosts", "type": "cloud", "label": "NixOS Hosts", "sublabel": "nix-dev / nix-ops VMs", "pos": [730, 190], "size": [180, 70], "sources": [{ "path": "hosts/nix-ops/default.nix", "label": "nix-ops" }, { "path": "hosts/nix-dev/default.nix", "label": "nix-dev" }] },
+    { "id": "darwinHosts", "type": "cloud", "label": "Darwin Hosts", "sublabel": "soulwhisper-mba / -studio", "pos": [730, 340], "size": [180, 70], "sources": [{ "path": "hosts/soulwhisper-mba/default.nix", "label": "mba" }, { "path": "hosts/soulwhisper-studio/default.nix", "label": "studio" }] },
+    { "id": "sops", "type": "security", "label": "sops-nix Secrets", "sublabel": "age-encrypted, per host", "pos": [960, 260], "size": [180, 64], "sources": [{ "path": "hosts/nix-ops/secrets.nix", "label": "host wiring" }, { "path": "homes/soulwhisper/secrets/default.nix", "label": "home wiring" }] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "soulwhisper/nix-config flake", "wraps": ["flake", "pkgs", "hostModules", "mkSystem", "home", "homeModules", "nixosHosts", "darwinHosts", "sops"] }
+  ],
+  "connections": [
+    { "id": "inputs-to-flake", "from": "inputs", "to": "flake", "label": "locked by flake.lock", "fromSide": "bottom", "toSide": "top", "via": [[125, 180], [355, 180]] },
+    { "id": "renovate-to-inputs", "from": "renovate", "to": "inputs", "label": "bumps flake.lock + nvfetcher", "variant": "dashed" },
+    { "id": "ci-to-flake", "from": "ci", "to": "flake", "label": "nix build ciSystems", "variant": "dashed", "fromSide": "top", "toSide": "left", "via": [[125, 295]], "labelAt": [150, 330] },
+    { "id": "pkgs-to-flake", "from": "pkgs", "to": "flake", "label": "overlay additions" },
+    { "id": "flake-to-mkSystem", "from": "flake", "to": "mkSystem", "label": "import ./lib/mkSystem.nix", "variant": "emphasis", "labelDy": 59 },
+    { "id": "hostModules-to-mkSystem", "from": "hostModules", "to": "mkSystem", "label": "shared module sets", "labelAt": [590, 192] },
+    { "id": "mkSystem-to-nixos", "from": "mkSystem", "to": "nixosHosts", "label": "mkNixosSystem", "variant": "emphasis", "labelAt": [685, 245] },
+    { "id": "mkSystem-to-darwin", "from": "mkSystem", "to": "darwinHosts", "label": "mkDarwinSystem", "variant": "emphasis", "labelAt": [690, 350] },
+    { "id": "mkSystem-to-home", "from": "mkSystem", "to": "home", "label": "home-manager integration", "labelAt": [590, 395] },
+    { "id": "homeModules-to-home", "from": "homeModules", "to": "home", "label": "feature modules", "labelAt": [705, 445] },
+    { "id": "sops-to-mkSystem", "from": "sops", "to": "mkSystem", "label": "sops-nix system + home modules", "variant": "security" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Build spine", "items": ["flake.nix wires inputs into lib/mkSystem.nix builders", "mkNixosSystem builds nix-dev and nix-ops; mkDarwinSystem builds soulwhisper-mba and soulwhisper-studio", "Every host shares hosts/_modules/common plus its OS module set"] },
+    { "dot": "emerald", "title": "User environment", "items": ["home-manager integrated with useGlobalPkgs on both NixOS and Darwin", "homes/_modules provides shell, development, kubernetes, themes", "Per-host home files under homes/soulwhisper/hosts/"] },
+    { "dot": "rose", "title": "Secrets & automation", "items": ["sops-nix decrypts age secrets at system and home level", "GitHub Actions builds the ciSystems matrix on every change", "Renovate and update-flake keep flake.lock and pkgs/ sources current"] }
+  ]
+}
