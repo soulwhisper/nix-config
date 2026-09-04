@@ -47,8 +47,8 @@ export GOPROXY=https://goproxy.cn,direct
 
 git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
 sudo nixos-generate-config --no-filesystems
-sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-infra/
-sudo -E nixos-rebuild switch --flake nix-config/.#nix-infra
+sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-ops/
+sudo -E nixos-rebuild switch --flake nix-config/.#nix-ops
 
 # :: nix-dev, disk space too small
 sudo mount -o remount,size=30G /
