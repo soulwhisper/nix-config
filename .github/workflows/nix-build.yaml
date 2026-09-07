@@ -4,11 +4,8 @@
 name: Build and diff Nix systems
 
 on:
-  # Manual trigger; also serves as escape hatch when paths filtering skips a run.
-  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
-    # Only run for changes that can affect the build. Keep in sync with push below.
     paths:
       - "**.nix"
       - "flake.lock"
