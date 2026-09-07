@@ -85,6 +85,7 @@
         # :: utilities
         # "nikitabobko/tap/aerospace" # tilling, cant split
         # "jordanbaird-ice" # bartender replacement; check:https://github.com/jordanbaird/Ice/releases/download/0.11.13-dev.2/Ice.zip
+        "vanilla" # ice replacement
         # "karabiner-elements" # not-used
         # "keyboard-maestro" # not-used
         "pixpin" # cleanshotx replacement
