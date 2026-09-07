@@ -25,7 +25,7 @@
         {
           name = "brewforge/chinese";
           trusted = true;
-        },
+        }
         {
           name = "pear-devs/pear";
           trusted = true;
