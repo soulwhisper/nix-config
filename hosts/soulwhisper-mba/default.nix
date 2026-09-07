@@ -17,11 +17,20 @@
     environment.systemPackages = with pkgs.unstable; [
       # cardforge, https://github.com/Card-Forge/forge/releases
       forge-mtg
-      pear-desktop # youtube-music; brew tap cask does a flaky load-time GitHub request
     ];
 
     # test apps list
     homebrew = {
+      taps = [
+        {
+          name = "brewforge/chinese";
+          trusted = true;
+        },
+        {
+          name = "pear-devs/pear";
+          trusted = true;
+        }
+      ];
       brews = [
         "mas"
       ];
@@ -43,7 +52,7 @@
         "1password-cli"
 
         # :: networking
-        "brewforge/chinese/easytier"
+        "brewforge/chinese/easytier-gui"
         "clash-verge-rev"
         "switchhosts" # replace adguard container
         "tailscale-app" # requires a kernel extension to work
@@ -57,6 +66,7 @@
         "foobar2000"
         "iina"
         # "neteasemusic" # vendor HFS+ DMG unmountable via hdiutil on macOS 26.6; installed manually
+        "pear-devs/pear/pear-desktop" # youtube-music replacement
 
         # :: productivity
         "acorn"
@@ -71,12 +81,10 @@
         "ticktick"
         "vmware-fusion"
         "wechat"
-        "zotero"
 
         # :: utilities
         # "nikitabobko/tap/aerospace" # tilling, cant split
         "jordanbaird-ice" # bartender replacement
-        # "vanilla" # ice replacement
         # "karabiner-elements" # not-used
         # "keyboard-maestro" # not-used
         "pixpin" # cleanshotx replacement
