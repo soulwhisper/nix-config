@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.kubernetes;
   catppuccinCfg = config.modules.themes.catppuccin;
 
@@ -20,7 +21,8 @@
   wrappedHelmfilePkg = pkgs.unstable.helmfile-wrapped.override {
     inherit (wrappedHelmPkg) pluginsDir;
   };
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     # : archived packages
     # kubefwd,kubecm,talhelper
@@ -42,6 +44,7 @@ in {
         kubectl
         kubescape
         kustomize
+        pluto # deprecated k8s API detection in files/helm; complements kubeconform
         popeye
         talosctl
         vendir
@@ -56,7 +59,7 @@ in {
       KUBECONFIG_DIR = "${config.home.homeDirectory}/.kube";
     };
 
-    home.activation.k8s = lib.hm.dag.entryAfter ["writeboundary"] ''
+    home.activation.k8s = lib.hm.dag.entryAfter [ "writeboundary" ] ''
       $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.kube
       $DRY_RUN_CMD chmod 700 -R ${config.home.homeDirectory}/.kube
     '';

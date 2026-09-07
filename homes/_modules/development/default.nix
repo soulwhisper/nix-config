@@ -19,11 +19,22 @@ in
         minijinja
         nixd
         nixfmt
+        ssh-to-age # convert ssh keys for sops age recipients
         tio # serial terminal
       ])
       ++ (with pkgs.unstable; [
         just
+        k6 # load testing
+        minio-client # mc: homelab object storage (ports 9000-9001)
+        nix-output-monitor # nom: readable nix builds, pairs with nvd
+        nix-tree # closure size inspection
+        nmap
+        opentofu
+        postgresql # psql/pg_dump for cnpg clusters
         prek
+        rclone
+        trivy # image/fs/iac vulnerability and misconfig scanning
+        xh # http client
       ]);
 
     # mise — runtime version manager; preferred over direnv.
