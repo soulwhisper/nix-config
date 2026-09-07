@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # ref:https://daiderd.com/nix-darwin/manual/index.html
   config = {
     networking = {
@@ -21,6 +22,10 @@
     # test apps list
     homebrew = {
       taps = [
+        {
+          name = "brewforge/chinese";
+          trusted = true;
+        }
         {
           name = "pear-devs/pear";
           trusted = true;
@@ -47,7 +52,7 @@
         "1password-cli"
 
         # :: networking
-        "brewforge/chinese/easytier"
+        "brewforge/chinese/easytier-gui"
         "clash-verge-rev"
         "switchhosts" # replace adguard container
         "tailscale-app" # requires a kernel extension to work
@@ -60,8 +65,8 @@
         # :: media
         "foobar2000"
         "iina"
-        "neteasemusic"
-        "pear-desktop" # youtube-music replacement
+        # "neteasemusic" # vendor HFS+ DMG unmountable via hdiutil on macOS 26.6; installed manually
+        "pear-devs/pear/pear-desktop" # youtube-music replacement
 
         # :: productivity
         "acorn"
@@ -76,12 +81,10 @@
         "ticktick"
         "vmware-fusion"
         "wechat"
-        "zotero"
 
         # :: utilities
         # "nikitabobko/tap/aerospace" # tilling, cant split
-        "jordanbaird-ice" # bartender replacement
-        # "vanilla" # ice replacement
+        # "jordanbaird-ice" # bartender replacement; check:https://github.com/jordanbaird/Ice/releases/download/0.11.13-dev.2/Ice.zip
         # "karabiner-elements" # not-used
         # "keyboard-maestro" # not-used
         "pixpin" # cleanshotx replacement

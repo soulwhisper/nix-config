@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (config.home) username homeDirectory;
-in {
+in
+{
   config = {
     programs.fish = {
       enable = true;
@@ -37,5 +39,9 @@ in {
       '';
     };
     home.sessionVariables.fish_greeting = "";
+
+    # fish enables generateCaches for apropos completions, but on darwin
+    # programs.man.package is null (stateVersion >= 26.05), making it a no-op
+    programs.man.generateCaches = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin false;
   };
 }

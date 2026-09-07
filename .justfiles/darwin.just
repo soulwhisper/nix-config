@@ -12,7 +12,7 @@ default:
 [doc('Initialize nix-darwin configuration, HOST required')]
 [script]
 init HOST:
-  sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake "{{ROOT_DIR}}/#{{HOST}}"
+  sudo --preserve-env=http_proxy,https_proxy,no_proxy nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake "{{ROOT_DIR}}/#{{HOST}}"
 
 [doc('Build nix-darwin configuration, HOST required')]
 [script]
@@ -23,4 +23,4 @@ build HOST:
 [doc('Switch nix-darwin configuration, HOST required')]
 [script]
 switch HOST:
-  sudo darwin-rebuild switch --flake "{{ROOT_DIR}}/#{{HOST}}"
+  sudo --preserve-env=http_proxy,https_proxy,no_proxy darwin-rebuild switch --flake "{{ROOT_DIR}}/#{{HOST}}"

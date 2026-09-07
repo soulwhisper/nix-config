@@ -49,12 +49,15 @@ Unrecoverable remotely: recoveryOS (physical power-button hold) and DFU
 
 ### macOS (after deploy, if needed)
 
-Append to `/Users/soulwhisper/.config/fish/conf.d/set_proxy.fish`:
+Proxy env vars are managed declaratively for hosts behind clash
+(`home.sessionVariables` in `homes/soulwhisper/hosts/<host>.nix`), since
+clash-verge has no admin privileges: no TUN, no system proxy — only
+env-var proxy reaches shells. For ad-hoc use:
 
 ```fish
-export "http_proxy=http://127.0.0.1:1080"
-export "https_proxy=http://127.0.0.1:1080"
-export "no_proxy=.homelab.internal,localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+set -gx http_proxy http://127.0.0.1:1080
+set -gx https_proxy http://127.0.0.1:1080
+set -gx no_proxy .homelab.internal,localhost,127.0.0.0/8,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 ```
 
 ### NixOS (before first deploy, if needed)
