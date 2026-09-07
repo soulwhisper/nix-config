@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # ref:https://daiderd.com/nix-darwin/manual/index.html
   config = {
     networking = {
@@ -16,16 +17,11 @@
     environment.systemPackages = with pkgs.unstable; [
       # cardforge, https://github.com/Card-Forge/forge/releases
       forge-mtg
+      pear-desktop # youtube-music; brew tap cask does a flaky load-time GitHub request
     ];
 
     # test apps list
     homebrew = {
-      taps = [
-        {
-          name = "pear-devs/pear";
-          trusted = true;
-        }
-      ];
       brews = [
         "mas"
       ];
@@ -60,8 +56,7 @@
         # :: media
         "foobar2000"
         "iina"
-        "neteasemusic"
-        "pear-desktop" # youtube-music replacement
+        # "neteasemusic" # vendor HFS+ DMG unmountable via hdiutil on macOS 26.6; installed manually
 
         # :: productivity
         "acorn"
