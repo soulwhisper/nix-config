@@ -6,12 +6,23 @@ name: Build and diff Nix systems
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - "**.nix"
+      - "flake.lock"
+      - "**.sops.yaml"
+      - "pkgs/**"
+      - "homes/soulwhisper/ssh.pub"
+      - ".github/workflows/nix-build.yaml"
   push:
     branches:
       - main
     paths:
       - "**.nix"
       - "flake.lock"
+      - "**.sops.yaml"
+      - "pkgs/**"
+      - "homes/soulwhisper/ssh.pub"
+      - ".github/workflows/nix-build.yaml"
 
 # Notice: nix-darwin needs sudo since 25.05
 # current work around with:
