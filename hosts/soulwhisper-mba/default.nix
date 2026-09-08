@@ -39,6 +39,7 @@
         }
       ];
       brews = [
+        "FelixKratz/formulae/borders"
         "mas"
         "mole" # mo clean --dry-run / mo analyze / mo purge
         "gopeed" # replace transmission
@@ -95,7 +96,6 @@
 
         # :: utilities
         # https://github.com/jordanbaird/Ice/releases/download/0.11.13-dev.2/Ice.zip
-        "FelixKratz/formulae/borders"
         "nikitabobko/tap/aerospace" # replace rectangle-pro and swish
         # "betterdisplay" # not-used
         # "karabiner-elements" # not-used
