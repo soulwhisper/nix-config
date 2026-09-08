@@ -91,13 +91,18 @@ jobs:
             echo "::notice::no previous ${{ matrix.system }} system on main; skipping"
             exit 0
           fi
-          ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) build \
+          # A broken main (e.g. the one this PR fixes) must not block the new
+          # build below; skip the previous build and the diff instead.
+          if ! ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) build \
             "github:soulwhisper/nix-config#ciSystems.${{ matrix.system }}" \
             --profile ./profile \
             --no-write-lock-file \
             --show-trace \
             --log-format raw \
-             > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
+             > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2); then
+            echo "::notice::previous ${{ matrix.system }} build failed; skipping diff baseline"
+            exit 0
+          fi
 
       - name: Build new ${{ matrix.system }} system
         run: |
