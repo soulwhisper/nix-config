@@ -80,9 +80,14 @@ jobs:
       - name: Build previous ${{ matrix.system }} system
         run: |
           # New hosts have no previous build on main; skip instead of failing.
-          if ! ${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) eval \
-            "github:soulwhisper/nix-config#ciSystems" --apply builtins.attrNames --json \
-            | grep -q '"${{ matrix.system }}"'; then
+          # Main itself may also fail to evaluate (e.g. when this PR is the fix
+          # for a breakage on main); skip as well so the new build still runs.
+          if ! prev_attrs=$(${{ runner.os == 'macOS' && 'sudo ' || '' }}$(which nix) eval \
+            "github:soulwhisper/nix-config#ciSystems" --apply builtins.attrNames --json 2>/dev/null); then
+            echo "::notice::main does not evaluate; skipping previous build"
+            exit 0
+          fi
+          if ! grep -q '"${{ matrix.system }}"' <<<"$prev_attrs"; then
             echo "::notice::no previous ${{ matrix.system }} system on main; skipping"
             exit 0
           fi
