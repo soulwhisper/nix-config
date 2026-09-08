@@ -67,10 +67,21 @@ in
 
     # : Aerospace for MacOS
     # :: MacOS package installed via homebrew
-    # xdg.configFile."${config.xdg.configHome}/aerospace/aerospace.toml" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-    #   enable = false;
-    #   source = ./aerospace.toml;
-    # };
+    # :: create-if-absent deploy: nix installs the file only when no config
+    #    exists, then leaves it alone — manual edits and `aerospace reload-config`
+    #    workflows survive every rebuild/switch. To restore the repo version:
+    #      rm ~/.config/aerospace/aerospace.toml && <home-manager switch>
+    home.activation.aerospaceConfig = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
+      lib.hm.dag.entryAfter ["writeBoundary"] ''
+        target="${config.xdg.configHome}/aerospace/aerospace.toml"
+        if [ ! -e "$target" ]; then
+          run mkdir -p "$(dirname "$target")"
+          run install -m 0644 ${./aerospace.toml} "$target"
+        else
+          run echo "aerospace.toml exists, leaving untouched: $target"
+        fi
+      ''
+    );
 
     # : Karabiner for MacOS
     # :: Switch Input Method => HyperCaps - Space
