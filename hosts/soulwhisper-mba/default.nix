@@ -13,17 +13,24 @@
       localHostName = hostname;
     };
 
-    # prefer unstable for implementing platform-specific fixes
     environment.systemPackages = with pkgs.unstable; [
       # cardforge, https://github.com/Card-Forge/forge/releases
       forge-mtg
     ];
 
-    # test apps list
+    # apps list
     homebrew = {
       taps = [
         {
           name = "brewforge/chinese";
+          trusted = true;
+        }
+        {
+          name = "FelixKratz/formulae";
+          trusted = true;
+        }
+        {
+          name = "nikitabobko/tap";
           trusted = true;
         }
         {
@@ -33,6 +40,8 @@
       ];
       brews = [
         "mas"
+        "mole" # mo clean --dry-run / mo analyze / mo purge
+        "gopeed" # replace transmission
       ];
       casks = [
         # :: fonts
@@ -54,26 +63,28 @@
         # :: networking
         "brewforge/chinese/easytier-gui"
         "clash-verge-rev"
+        "little-snitch"
         "switchhosts" # replace adguard container
         "tailscale-app" # requires a kernel extension to work
+        "wireshark-app"
 
         # :: storage
         "dropbox"
         "cyberduck" # replace transmit
-        "transmission"
 
         # :: media
         "foobar2000"
         "iina"
-        # "neteasemusic" # vendor HFS+ DMG unmountable via hdiutil on macOS 26.6; installed manually
-        "pear-devs/pear/pear-desktop" # youtube-music replacement
+        "pear-devs/pear/pear-desktop" # replace youtube-music
 
         # :: productivity
         "acorn"
-        "alfred" # powerpack still overshine Tahoe and raycast
+        "alfred" # powerpack replace tahoe and raycast
+        "cherry-studio"
         "discord"
         "ilok-license-manager"
         "obsidian"
+        "qlab"
         "stats"
         "squirrel-app"
         "telegram"
@@ -83,18 +94,16 @@
         "wechat"
 
         # :: utilities
-        # "nikitabobko/tap/aerospace" # tilling, cant split
-        # "jordanbaird-ice" # bartender replacement; check:https://github.com/jordanbaird/Ice/releases/download/0.11.13-dev.2/Ice.zip
+        # https://github.com/jordanbaird/Ice/releases/download/0.11.13-dev.2/Ice.zip
+        "FelixKratz/formulae/borders"
+        "nikitabobko/tap/aerospace" # replace rectangle-pro and swish
+        # "betterdisplay" # not-used
         # "karabiner-elements" # not-used
         # "keyboard-maestro" # not-used
-        "pixpin" # cleanshotx replacement
-        "rectangle-pro" # preferred over swish
+        "pixpin" # replace cleanshotx
 
         # :: test
-        # "betterdisplay"
-        "little-snitch"
-        "qlab"
-        "wireshark-app"
+
       ];
       masApps = {
         "Caffeinated" = 1362171212;
