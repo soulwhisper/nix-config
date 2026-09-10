@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./disko.nix
     ./hardware-configuration.nix
@@ -28,7 +29,10 @@
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 
         # : Networking
-        easytier.networks = ["172.19.80.0/24" "172.19.82.0/24"];
+        easytier.networks = [
+          "172.19.80.0/24"
+          "172.19.82.0/24"
+        ];
 
         # : Monitoring
         scrutiny.enable = false;
@@ -42,7 +46,7 @@
         versitygw.enable = false; # ep=:9000,9001
         talos.api.enable = false;
         netbox.enable = false; # sub=box
-        unifi-server.enable = false; # sub=unifi
+        unifi-server.enable = false; # ep=:9801
 
         # : Others
         nfs4 = {

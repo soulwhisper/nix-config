@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./disko.nix
     ./hardware-configuration.nix
@@ -12,7 +13,7 @@
   ];
 
   # Spec: 4C8G, 100GB, ESXi VM;
-  # Address: 10.0.0.200; 'unifi.noirprime.com';
+  # Address: 10.10.0.200; unifi portal: https://10.10.0.200:9801
 
   config = {
     # services.qemuGuest.enable = true;
@@ -22,8 +23,6 @@
       filesystems.xfs.enable = true;
       services = {
         adguard.enable = true;
-        caddy.enable = true;
-        caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
 
         # : Networking
         mihomo.enable = lib.mkForce false;
@@ -38,7 +37,7 @@
         # gatus.pushover.authFile = config.sops.secrets."alerting/pushover/auth".path;
         # tailscale.enable = true;
         # tailscale.derper.enable = true;
-        unifi-server.enable = true; # sub=unifi
+        unifi-server.enable = true; # ep=:9801
         vector.enable = true; # ep=:514
 
         # : Services migrated to NAS
