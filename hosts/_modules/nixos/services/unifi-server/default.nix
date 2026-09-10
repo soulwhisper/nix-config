@@ -3,42 +3,51 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.services.unifi-server;
-  reverseProxyCaddy = config.modules.services.caddy;
-in {
+in
+{
   options.modules.services.unifi-server = {
     enable = lib.mkEnableOption "unifi-server";
-    domain = lib.mkOption {
+    systemIp = lib.mkOption {
       type = lib.types.str;
-      default = "unifi.noirprime.com";
+      default = "10.10.0.200";
+      description = ''
+        Inform host (UOS_SYSTEM_IP) advertised to devices for adoption:
+        `set-inform http://<systemIp>:8080/inform`.
+      '';
     };
   };
 
   config = lib.mkIf cfg.enable {
     # conflict with unifi-network
-    # prefer SSD storage and caddy domain
-    # pass origin header fix wss errors
+    # prefer SSD storage; admin portal directly on https://<host>:9801
+    # (self-signed) - no caddy vhost: devices inform on :8080 and the WSS
+    # origin-header fix is only needed when proxying under another hostname.
     # unprivileged layout per upstream compose: `privileged = true` lets the
     # container's systemd spawn a getty on the host console ("UOS-Server login:"),
     # see lemker/unifi-os-server#58
 
     networking.firewall.allowedTCPPorts = [
-      8080 8443 8444 5005 9543 6789 11084 5671 8880 8881 8882
-      (lib.mkIf (!reverseProxyCaddy.enable) 9801)
+      8080
+      8443
+      8444
+      5005
+      9543
+      6789
+      11084
+      5671
+      8880
+      8881
+      8882
+      9801
     ];
-    networking.firewall.allowedUDPPorts = [3478 10003 5514];
-
-    services.caddy.virtualHosts."${cfg.domain}".extraConfig = lib.mkIf reverseProxyCaddy.enable ''
-      handle {
-        reverse_proxy localhost:9801 {
-          header_up Origin "https://localhost:9801"
-          transport http {
-            tls_insecure_skip_verify
-          }
-        }
-      }
-    '';
+    networking.firewall.allowedUDPPorts = [
+      3478
+      10003
+      5514
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/unifi-server/persistent 0755 root root - -"
@@ -88,7 +97,7 @@ in {
         "8882:8882/tcp" # Opt. unifi-os-server-hotspot-redirect-2-svc
       ];
       environment = {
-        UOS_SYSTEM_IP = "${cfg.domain}";
+        UOS_SYSTEM_IP = "${cfg.systemIp}";
       };
       volumes = [
         "/sys/fs/cgroup:/sys/fs/cgroup:rw"
