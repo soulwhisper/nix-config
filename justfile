@@ -88,9 +88,6 @@ bootstrap:
 
   echo ":: user-global assets (.omp-global/ -> ~/.omp/agent/)"
   _seed_dir "$REPO/.omp-global/skills" "$AGENT/skills" "skills" || true
-  echo ":: infra assets (.omp/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands" || true
-  _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"   || true
   echo ""
 
   # ---- 6. fetch/update remote skills ----

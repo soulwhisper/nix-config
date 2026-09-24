@@ -60,6 +60,22 @@ Pin a release tag, scope with `files:`, then `prek autoupdate` +
 `prek run --all-files <hook-id>`. Commit as `chore(pre-commit): add <hook>`.
 Check CI workflows first so the hook doesn't duplicate or contradict CI.
 
+## Reviewing a diff or PR
+
+Procedure (from the retired `/review` command):
+
+1. `git diff` / `git diff --cached` to see the changed range — know exactly
+   what you're approving.
+2. Read each touched file in full; the bug is often outside the hunk.
+3. Run the repo's check entrypoint if one exists (`just --list` → lint /
+   check recipe, or `prek run --all-files`).
+4. Walk the checklist below, section by section.
+5. Report findings Critical / High / Medium / Low with file:line and a
+   suggested fix.
+
+Hard floor: never approve a diff that adds a credential, loosens sops/age
+protection, or weakens destructive-command gating.
+
 ## Review checklist
 
 Ordered by severity ceiling — earlier violations are usually higher
