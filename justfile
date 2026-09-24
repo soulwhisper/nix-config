@@ -57,7 +57,10 @@ bootstrap:
   echo "omp $(mise x -- omp --version 2>/dev/null || echo 'unknown')"
   echo ""
 
-  # ---- 5. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
+  # ---- 5. seed user-global omp assets -> ~/.omp/agent/ (idempotent) ----
+  # Source split: .omp-global/ holds USER-GLOBAL assets (seeded here);
+  # .omp/ holds PROJECT-scoped assets (omp discovers them natively per-repo,
+  # never seed). Copy-if-absent: updates and deletions are synced manually.
   AGENT="$HOME/.omp/agent"
   REPO="{{invocation_directory()}}"
   if [ -z "${HOME:-}" ]; then
@@ -83,10 +86,8 @@ bootstrap:
     echo "  ${label}: +${added} new, ${skipped} existing"
   }
 
-  echo ":: local assets (.omp/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills" || true
-  _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands" || true
-  _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"   || true
+  echo ":: user-global assets (.omp-global/ -> ~/.omp/agent/)"
+  _seed_dir "$REPO/.omp-global/skills" "$AGENT/skills" "skills" || true
   echo ""
 
   # ---- 6. fetch/update remote skills ----
