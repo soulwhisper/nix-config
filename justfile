@@ -57,7 +57,10 @@ bootstrap:
   echo "omp $(mise x -- omp --version 2>/dev/null || echo 'unknown')"
   echo ""
 
-  # ---- 5. seed local .omp/ -> ~/.omp/agent/ (idempotent) ----
+  # ---- 5. seed user-global omp assets -> ~/.omp/agent/ (idempotent) ----
+  # Source split: .omp-global/ holds USER-GLOBAL assets (seeded here);
+  # .omp/ holds PROJECT-scoped assets (omp discovers them natively per-repo,
+  # never seed). Copy-if-absent: updates and deletions are synced manually.
   AGENT="$HOME/.omp/agent"
   REPO="{{invocation_directory()}}"
   if [ -z "${HOME:-}" ]; then
@@ -66,18 +69,12 @@ bootstrap:
   fi
 
   _seed_dir() {
-    # $4 (optional): top-level entry to skip — for repo/project-scoped assets
-    # that must NOT become user-global (nix-config-only skills like
-    # secrets-sops stay discoverable project-locally via .omp/ in this repo).
-    local src="$1" dst="$2" label="$3" exclude="${4:-}"
+    local src="$1" dst="$2" label="$3"
     [ -d "$src" ] || return 0
     mkdir -p "$dst"
     local added=0 skipped=0
     while IFS= read -r -d "" file; do
       rel="${file#$src/}"
-      if [ -n "$exclude" ] && [ "${rel%%/*}" = "$exclude" ]; then
-        continue
-      fi
       if [ ! -e "$dst/$rel" ]; then
         mkdir -p "$(dirname "$dst/$rel")"
         cp -p "$file" "$dst/$rel"
@@ -89,8 +86,9 @@ bootstrap:
     echo "  ${label}: +${added} new, ${skipped} existing"
   }
 
-  echo ":: local assets (.omp/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills" "secrets-sops" || true
+  echo ":: user-global assets (.omp-global/ -> ~/.omp/agent/)"
+  _seed_dir "$REPO/.omp-global/skills" "$AGENT/skills" "skills" || true
+  echo ":: infra assets (.omp/ -> ~/.omp/agent/)"
   _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands" || true
   _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"   || true
   echo ""
