@@ -66,12 +66,18 @@ bootstrap:
   fi
 
   _seed_dir() {
-    local src="$1" dst="$2" label="$3"
+    # $4 (optional): top-level entry to skip — for repo/project-scoped assets
+    # that must NOT become user-global (nix-config-only skills like
+    # secrets-sops stay discoverable project-locally via .omp/ in this repo).
+    local src="$1" dst="$2" label="$3" exclude="${4:-}"
     [ -d "$src" ] || return 0
     mkdir -p "$dst"
     local added=0 skipped=0
     while IFS= read -r -d "" file; do
       rel="${file#$src/}"
+      if [ -n "$exclude" ] && [ "${rel%%/*}" = "$exclude" ]; then
+        continue
+      fi
       if [ ! -e "$dst/$rel" ]; then
         mkdir -p "$(dirname "$dst/$rel")"
         cp -p "$file" "$dst/$rel"
@@ -84,7 +90,7 @@ bootstrap:
   }
 
   echo ":: local assets (.omp/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills" || true
+  _seed_dir "$REPO/.omp/skills"   "$AGENT/skills"   "skills" "secrets-sops" || true
   _seed_dir "$REPO/.omp/commands" "$AGENT/commands" "commands" || true
   _seed_dir "$REPO/.omp/agents"   "$AGENT/agents"   "agents"   || true
   echo ""

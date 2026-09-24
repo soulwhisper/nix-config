@@ -1,12 +1,27 @@
 ---
 name: prek-hooks
-description: Use whenever pre-commit, prek, lint config, or any of the hooks (gitleaks, statix, deadnix, shellcheck, shfmt, ruff, markdownlint, nixfmt) come up — installing, debugging a hook failure, adding a new hook, or skipping one safely. `prek` is the Rust-based pre-commit runner used in this repo.
+description: Use whenever pre-commit, prek, lint config, or a hook failure comes up — installing, debugging a hook failure, adding a new hook, or skipping one safely. `prek` is the Rust-based drop-in replacement for pre-commit.
 ---
 
 # Pre-commit via `prek`
 
 `prek` is a drop-in Rust reimplementation of `pre-commit` — same
 `.pre-commit-config.yaml`, faster and statically-linked, no Python.
+
+## Discover the repo's hooks — don't assume
+
+Hook sets differ per repo. Before diagnosing or advising, read the actual
+config:
+
+```bash
+# The inventory: hook ids, args, file scoping, and pinned revs
+cat .pre-commit-config.yaml
+
+# Repo-specific tuning (allowlists, excludes) often lives beside it
+ls .gitleaks.toml .yamllint.yaml .markdownlint* 2>/dev/null
+```
+
+Never quote a hook inventory from memory — the config file is the truth.
 
 ## Daily commands
 
@@ -18,23 +33,10 @@ prek install           # install the git hook (one-time per clone)
 prek autoupdate        # bump hook versions in config
 ```
 
-## Hook inventory in this repo
-
-| ID                  | What it does                                           | When it fires |
-|---------------------|--------------------------------------------------------|---------------|
-| `gitleaks`          | Scans staged content for secret-shaped strings         | commit-msg / pre-commit |
-| `statix-check`      | Nix anti-pattern lint                                  | `*.nix` |
-| `deadnix`           | Unused bindings / imports in Nix                       | `*.nix` |
-| `nixfmt-tree`       | Format Nix in directory-tree mode                      | `*.nix` |
-| `shellcheck`        | Bash lint                                              | `*.sh`, executable shebangs |
-| `shfmt`             | Bash formatter                                         | `*.sh` |
-| `ruff`              | Python lint + format                                   | `*.py` |
-| `markdownlint-cli2` | Markdown lint                                          | `*.md` |
-
 ## Diagnosing failures
 
 ```bash
-prek run --verbose <hook-id>   # see what the hook is actually doing
+prek run --verbose <hook-id>        # see what the hook is actually doing
 prek run <hook-id> --files <one-file>   # narrow to a single file
 ```
 
@@ -42,12 +44,12 @@ If the hook reports something you don't understand:
 
 1. Read the error line carefully — the file:line:col is almost always
    precise.
-2. For `gitleaks`, check the matched rule name and the literal that
-   triggered it. False positives are usually example values that look
-   real; either replace with `REDACTED`/`xxx` or extend
-   `.gitleaks.toml` with a targeted allowlist (path scope, not blanket).
-3. For `statix`/`deadnix`, the suggested fix is often correct. Apply with
-   `statix fix <file>` or by hand.
+2. Secret scanners (gitleaks, detect-private-key): check the matched rule
+   and the literal that triggered it. False positives are usually example
+   values that look real; either replace with `REDACTED`/`xxx` or extend
+   the scanner's allowlist with a targeted path scope, not a blanket rule.
+3. Linters with autofix (statix, ruff, shfmt): the suggested fix is often
+   correct. Apply the tool's fix mode or fix by hand.
 
 ## Adding a new hook
 
@@ -65,11 +67,13 @@ Edit `.pre-commit-config.yaml`:
 Then:
 
 ```bash
-prek autoupdate            # let prek normalize the rev format
-prek run --all-files <hook-id>   # smoke-test
+prek autoupdate                    # let prek normalize the rev format
+prek run --all-files <hook-id>     # smoke-test
 ```
 
-Commit with a `chore(pre-commit): add <hook>` message.
+Commit with a `chore(pre-commit): add <hook>` message. If the repo has CI
+lint workflows (check `.github/workflows/` / `.woodpecker/`), make sure the
+new hook doesn't duplicate or contradict a CI check.
 
 ## When NOT to skip
 
@@ -84,5 +88,5 @@ Skipping is **not** appropriate for:
 
 - "It's just a lint nit" — fix it.
 - "It's a hardcoded test key" — replace with a fixture value that doesn't
-  match the gitleaks rule, or allowlist with a path-scoped rule.
+  match the scanner rule, or allowlist with a path-scoped rule.
 - "I'll fix it in a follow-up PR" — no, follow-up PRs never come.

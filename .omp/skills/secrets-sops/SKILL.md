@@ -5,9 +5,14 @@ description: Use whenever the work touches secrets, tokens, API keys, sops, age,
 
 # Secrets & sops-nix
 
-This config uses **sops-nix** with **age** keys. Secrets are encrypted in
-the repo and decrypted at activation to tmpfs paths under
-`/run/user/<uid>/secrets/<name>`.
+Scope: this skill describes the **nix-config model** — **sops-nix** with
+**age** keys, secrets encrypted in the repo and decrypted at activation to
+tmpfs paths under `/run/user/<uid>/secrets/<name>`. Kubernetes/flux repos
+(e.g. home-ops) use a different sops model (in-git `*.sops.yaml` decrypted
+by flux with a cluster age key) — in those repos, read that repo's own
+conventions instead of applying the paths and activation steps below.
+
+The iron rules below apply everywhere.
 
 ## Iron rules
 
