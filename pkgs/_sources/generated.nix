@@ -31,25 +31,25 @@
   };
   dots-hyprland = {
     pname = "dots-hyprland";
-    version = "2f0c8bf42b803f4d597572f2a014d4e78d7d9f26";
+    version = "547836f1b01a45445cfbbcd92b206d1b5ceee4d9";
     src = fetchFromGitHub {
       owner = "end-4";
       repo = "dots-hyprland";
-      rev = "2f0c8bf42b803f4d597572f2a014d4e78d7d9f26";
+      rev = "547836f1b01a45445cfbbcd92b206d1b5ceee4d9";
       fetchSubmodules = false;
-      sha256 = "sha256-JRDhxNjnX6IN5BFLhrnVO6xHGdDmb4GMGxtgttTeVM0=";
+      sha256 = "sha256-++80waGoDrql8s4iS4E3HCf5dZORy0GSLVyJNsI7+9Y=";
     };
-    date = "2026-09-14";
+    date = "2026-09-28";
   };
   inir = {
     pname = "inir";
-    version = "v2.31.0";
+    version = "v2.32.0";
     src = fetchFromGitHub {
       owner = "snowarch";
       repo = "iNiR";
-      rev = "v2.31.0";
+      rev = "v2.32.0";
       fetchSubmodules = false;
-      sha256 = "sha256-Zu4FrR/vn+Pq81hLkR5n3XXt+ja7m0my6ml+4IJotn4=";
+      sha256 = "sha256-y9J2hr4w58FSDxo4XPN71/PhhcWlqbJaU7LQWVAoCnc=";
     };
   };
   kubecolor-catppuccin = {
