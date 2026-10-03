@@ -41,6 +41,7 @@
 
         # : Main
         versitygw.enable = true; # ep=:9000,9001
+        versitygw.authFile = config.sops.secrets."storage/versitygw/auth".path;
 
         # : TEST
         netbox.enable = false; # sub=box

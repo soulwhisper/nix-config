@@ -11,6 +11,10 @@
           owner = config.users.users.caddy.name;
           restartUnits = ["caddy.service"];
         };
+        "storage/versitygw/auth" = {
+          owner = config.users.users.appuser.name;
+          restartUnits = ["versitygw.service"];
+        };
       };
     };
   };
