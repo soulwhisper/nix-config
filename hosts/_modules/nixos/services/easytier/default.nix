@@ -24,7 +24,7 @@
     }
     // lib.optionalAttrs (cfg.networks != []) {
       dhcp = true;
-      network = map (cidr: {inherit cidr;}) cfg.networks;
+      proxy_network = map (cidr: {inherit cidr;}) cfg.networks;
     };
   baseConfigFile = toml.generate "easytier-config.toml" baseSettings;
 in {
