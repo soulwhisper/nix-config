@@ -30,25 +30,23 @@
 
         # : Networking
         easytier.networks = [
-          "172.19.80.0/24"
           "172.19.82.0/24"
         ];
+        tailscale.enable = true;
 
         # : Monitoring
         scrutiny.enable = false;
         smartd.enable = false;
         nut.enable = false;
 
-        # : TEST
-        tailscale.enable = true;
-        kms.enable = true;
+        # : Main
+        versitygw.enable = true; # ep=:9000,9001
 
-        versitygw.enable = false; # ep=:9000,9001
-        talos.api.enable = false;
+        # : TEST
         netbox.enable = false; # sub=box
-        unifi-server.enable = false; # ep=:9801
 
         # : Others
+        kms.enable = true;
         nfs4 = {
           enable = false; # all_squash = 2000:2000
           exports.default = {

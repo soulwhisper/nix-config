@@ -19,10 +19,6 @@
           Gateway = "10.10.0.1";
           GatewayOnLink = true;
         }
-        {
-          Destination = "10.0.0.0/24";
-          Gateway = "10.10.0.1";
-        }
       ];
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {

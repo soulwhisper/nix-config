@@ -22,7 +22,7 @@
       ];
       linkConfig.RequiredForOnline = "routable";
       networkConfig = {
-        DHCP = "no";
+        DHCP = false;
         IPv6AcceptRA = false;
         LinkLocalAddressing = "ipv4";
       };
