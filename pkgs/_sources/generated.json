@@ -13,12 +13,12 @@
             "name": null,
             "owner": "caddyserver",
             "repo": "caddy",
-            "rev": "v2.11.6",
-            "sha256": "sha256-AvItXV37XL+chgubNpfv9kvfbcQ8UzxcvS5rIrATXDw=",
+            "rev": "v2.11.7",
+            "sha256": "sha256-6+USPwF6LzDWUjrNRL2ncxSz5KmqJM0L/6o03Lh8YD8=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.11.6"
+        "version": "v2.11.7"
     },
     "caddy-plugin-cloudflare": {
         "cargoLock": null,
