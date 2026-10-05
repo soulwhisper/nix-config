@@ -1,6 +1,28 @@
-## Bootstrap NixOS
+# Bootstrap
 
-- disko-install has issues; iso nix-store using 8GB tmpfs;
+## Darwin
+
+```shell
+# : install nix
+curl -L https://nixos.org/nix/install | sh
+
+# : install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# : clone
+git clone https://github.com/soulwhisper/nix-config
+cd nix-config
+
+# :: opt. run set-proxy script
+sudo python3 bootstrap/darwin_set_proxy.py
+
+# :: init, first switch installs darwin-rebuild
+sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin#darwin-rebuild -- switch --flake .#soulwhisper-mba
+```
+
+## NixOS
+
+disko-install has issues; iso nix-store using 8GB tmpfs;
 - 1, disko format with assuming host `disko.nix`;
 - 2, nix-install with minimal bootstrap config;
 - 3, switch to target host;
@@ -9,7 +31,7 @@
 # : boot with nixos-minimal
 sudo -s
 passwd
-echo "nameserver 10.0.0.1" >> /etc/resolv.conf
+echo "nameserver 223.5.5.5" >> /etc/resolv.conf
 
 # :: opt, ssh in as root
 

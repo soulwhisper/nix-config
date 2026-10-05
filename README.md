@@ -17,18 +17,10 @@ See [docs/README.md](docs/README.md) — secrets workflow, service notes, port r
 ## Usage
 
 ```shell
-# if bootstrap, check 'bootstrap/README.md'
 git clone https://github.com/soulwhisper/nix-config
-
-# deps: nix
-curl -L https://nixos.org/nix/install | sh
 
 # : darwin
 brew install just
-# :: opt. run set-proxy script
-sudo python3 bootstrap/darwin_set_proxy.py
-# :: init, if darwin-rebuild not exist
-just darwin init soulwhisper-mba
 # :: build & diff
 just darwin build soulwhisper-mba
 # :: switch
