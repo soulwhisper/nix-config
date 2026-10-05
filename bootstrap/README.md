@@ -1,4 +1,32 @@
-## Bootstrap NixOS
+# Bootstrap
+
+## darwin (nix-darwin)
+
+deps: `nix` + `homebrew`. nix-darwin manages brews declaratively but does
+NOT install Homebrew itself — both are manual prereqs.
+
+```shell
+# : install nix
+curl -L https://nixos.org/nix/install | sh
+
+# : install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# : clone
+git clone https://github.com/soulwhisper/nix-config
+cd nix-config
+
+# :: opt. run set-proxy script; skip if the router already does transparent proxy
+sudo python3 bootstrap/darwin_set_proxy.py
+
+# :: init, first switch installs darwin-rebuild; just via nix, no brew dep
+nix --extra-experimental-features 'nix-command flakes' run nixpkgs#just -- darwin init <host>
+```
+
+If init fails with a github api rate limit (HTTP 403), see docs/runbook.md
+→ "GitHub API rate limit during bootstrap".
+
+## NixOS
 
 - disko-install has issues; iso nix-store using 8GB tmpfs;
 - 1, disko format with assuming host `disko.nix`;
