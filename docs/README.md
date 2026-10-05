@@ -8,7 +8,6 @@ this directory explains how to operate and reason about it.
 | [architecture.md](architecture.md) | Interactive flake architecture diagram and regeneration notes |
 | [secrets.md](secrets.md) | SOPS workflow, age-key placement, secret template conventions |
 | [services.md](services.md) | Per-service operational notes and the port registry |
-| [runbook.md](runbook.md) | Commands for deploy, troubleshooting, and maintenance |
 | [decisions.md](decisions.md) | Rejected/deprecated components and chosen alternatives |
 | [terminal.md](terminal.md) | Terminal environment: zellij, Ghostty, fonts, input method |
 | [spec-desktop-support.md](spec-desktop-support.md) | Design spec for NixOS desktop support |
