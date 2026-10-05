@@ -21,10 +21,6 @@ git clone https://github.com/soulwhisper/nix-config
 
 # : darwin
 brew install just
-# :: opt. run set-proxy script
-sudo python3 bootstrap/darwin_set_proxy.py
-# :: init, if darwin-rebuild not exist
-just darwin init soulwhisper-mba
 # :: build & diff
 just darwin build soulwhisper-mba
 # :: switch
