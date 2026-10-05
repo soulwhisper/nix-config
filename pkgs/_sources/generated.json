@@ -43,7 +43,7 @@
     },
     "dots-hyprland": {
         "cargoLock": null,
-        "date": "2026-09-28",
+        "date": "2026-10-03",
         "extract": null,
         "name": "dots-hyprland",
         "passthru": null,
@@ -55,12 +55,12 @@
             "name": null,
             "owner": "end-4",
             "repo": "dots-hyprland",
-            "rev": "547836f1b01a45445cfbbcd92b206d1b5ceee4d9",
-            "sha256": "sha256-++80waGoDrql8s4iS4E3HCf5dZORy0GSLVyJNsI7+9Y=",
+            "rev": "33f31a08caddd41422a2d97670adeeb52b4f1e7c",
+            "sha256": "sha256-CMUdZDiHyWgp62qzFLIGBhjm7YPcRg/B6emSTM7572o=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "547836f1b01a45445cfbbcd92b206d1b5ceee4d9"
+        "version": "33f31a08caddd41422a2d97670adeeb52b4f1e7c"
     },
     "inir": {
         "cargoLock": null,
