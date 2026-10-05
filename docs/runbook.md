@@ -69,6 +69,33 @@ networking.proxy.default = "http://ip:port";
 networking.proxy.noProxy = "127.0.0.1,localhost,.homelab.internal";
 ```
 
+### GitHub API rate limit during bootstrap
+
+Symptom: `just darwin init` (or any flake fetch) fails with
+`unable to download 'https://api.github.com/...': HTTP error 403` /
+`API rate limit exceeded for <ip>`.
+
+Cause: unauthenticated `api.github.com` is capped at 60 req/h **per egress
+IP**; a shared proxy egress exhausts it before you start. `gh auth login`
+does NOT help — nix never reads gh's credential store.
+
+Remedy 1 (preferred): **switch egress IP — change the proxy node**
+(router TProxy group / clash node) and retry. The init step resolves
+unpinned refs (`nix-darwin#darwin-rebuild` hits `commits/HEAD`) and pulls
+locked-input tarballs, all via `api.github.com`.
+
+Remedy 2 (no node switch available): authenticate nix's GitHub calls
+inline; nothing is written to disk:
+
+```shell
+sudo NIX_CONFIG="access-tokens = github.com = $(gh auth token)" \
+  nix --extra-experimental-features 'nix-command flakes' \
+  run nix-darwin#darwin-rebuild -- switch --flake .#<host>
+```
+
+After the first successful switch the locked inputs live in `/nix/store`;
+later rebuilds make no GitHub API calls until `flake.lock` changes.
+
 ## Systemd troubleshooting
 
 ```shell
