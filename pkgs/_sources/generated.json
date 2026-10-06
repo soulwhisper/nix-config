@@ -160,11 +160,11 @@
             "name": null,
             "owner": "siderolabs",
             "repo": "discovery-service",
-            "rev": "v1.1.2",
-            "sha256": "sha256-kL6OUmlhDZSoVWHnnT+vewcnAdFlGLxADpNkfEmSBRI=",
+            "rev": "v1.1.3",
+            "sha256": "sha256-wwo55xbd1wOBjAiIIqcKu4Q+RtSTz8rkFa65ByLae1E=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v1.1.2"
+        "version": "v1.1.3"
     }
 }
