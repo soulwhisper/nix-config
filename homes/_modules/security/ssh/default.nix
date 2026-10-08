@@ -6,6 +6,10 @@
 }:
 {
   config = {
+    home.packages = [
+      pkgs.sshpass
+    ];
+
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false; # deprecated soon
