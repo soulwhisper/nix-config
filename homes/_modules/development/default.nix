@@ -19,6 +19,7 @@ in
         minijinja
         nixd
         nixfmt
+        openssl
         tio # serial terminal
       ])
       ++ (with pkgs.unstable; [
