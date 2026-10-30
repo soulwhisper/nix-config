@@ -55,7 +55,7 @@ jobs:
             os: macos-latest
           - system: nix-ops
             os: ubuntu-latest
-          - system: nix-dev
+          - system: nix-act
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:

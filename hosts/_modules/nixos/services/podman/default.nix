@@ -11,16 +11,14 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # : compose support
     environment.systemPackages = with pkgs; [
       docker-compose
     ];
 
-    # : dns-resolving, needs 53/udp on 'podman*'(nftables)
-    # https://github.com/NixOS/nixpkgs/issues/226365
-    # networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];
-    # networking.dhcpcd.IPv6rs = false;
-    # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+    virtualisation.podman.defaultNetwork.settings = {
+      dns_enabled = true;
+      subnets = [ { subnet = "192.168.10.0/24"; gateway = "192.168.10.1"; } ];
+    };
 
     # : auto-update containers
     # requires: labels = { "io.containers.autoupdate" = "registry"; };

@@ -23,6 +23,7 @@ sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin#darwi
 ## NixOS
 
 disko-install has issues; iso nix-store using 8GB tmpfs;
+
 - 1, disko format with assuming host `disko.nix`;
 - 2, nix-install with minimal bootstrap config;
 - 3, switch to target host;
@@ -35,13 +36,13 @@ echo "nameserver 223.5.5.5" >> /etc/resolv.conf
 
 # :: opt, ssh in as root
 
-# : init using bootstrap config, assuming target host is 'nix-dev';
+# : init using bootstrap config, assuming target host is 'nix-act';
 export https_proxy=http://ip:port
 
 git clone https://github.com/soulwhisper/nix-config /etc/nix-config
 nixos-generate-config --no-filesystems
 cp /etc/nixos/hardware-configuration.nix /etc/nix-config/bootstrap/
-# cp /etc/nix-config/hosts/nix-dev/disko.nix /etc/nix-config/bootstrap/
+# cp /etc/nix-config/hosts/nix-act/disko.nix /etc/nix-config/bootstrap/
 
 cd /etc/nix-config
 git add .
@@ -71,12 +72,6 @@ git clone https://github.com/soulwhisper/nix-config /home/soulwhisper/nix-config
 sudo nixos-generate-config --no-filesystems
 sudo cp /etc/nixos/hardware-configuration.nix nix-config/hosts/nix-ops/
 sudo -E nixos-rebuild switch --flake nix-config/.#nix-ops
-
-# :: nix-dev, disk space too small
-sudo mount -o remount,size=30G /
-# :: nix-dev, expand lv
-sudo lvresize -L +10G main/nix
-sudo xfs_growfs /nix
 
 # :: ipv6, disable during bootstrap
 sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
