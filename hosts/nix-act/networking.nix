@@ -2,21 +2,23 @@
   hostname,
   lib,
   ...
-}: {
+}:
+{
   config = {
     networking = {
       hostName = hostname;
-      nameservers = [ "127.0.0.1" ];
+      nameservers = [ "10.10.0.254" ];
     };
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "ens192";
+      # N100 mini-PCs expose enp*/eno* or eth0 depending on firmware.
+      matchConfig.Name = "en* eth*";
       address = [
-        "172.19.82.10/24"
+        "10.10.0.220/24"
       ];
       routes = [
         {
-          Gateway = "172.19.82.1";
+          Gateway = "10.10.0.1";
           GatewayOnLink = true;
         }
       ];

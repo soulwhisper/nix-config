@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.services.podman;
-in {
+in
+{
   options.modules.services.podman = {
     enable = lib.mkEnableOption "podman";
   };
@@ -25,7 +27,7 @@ in {
     # : auto-update containers
     # requires: labels = { "io.containers.autoupdate" = "registry"; };
     systemd.timers.podman-auto-update = {
-      wantedBy = ["timers.target"];
+      wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
@@ -42,7 +44,7 @@ in {
         autoPrune = {
           enable = true;
           dates = "weekly";
-          flags = ["--all"];
+          flags = [ "--all" ];
         };
       };
     };

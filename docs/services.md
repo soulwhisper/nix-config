@@ -34,77 +34,79 @@ Fixed allocations should not change; ranges group services by function.
 
 ### Fixed
 
-| Port | Service |
-|---|---|
-| 80, 443 | caddy |
-| 53 | adguard |
-| 514 | vector |
-| 2022 | sftpgo (SSH) |
-| 1080 | http proxy |
-| 8000 | omlx (soulwhisper-studio) |
-| 4433 | AMT server |
-| 5432 | postgres |
-| 5678 | n8n |
-| 8123 | home-assistant |
-| 9090 | prometheus |
-| 11010 | easytier |
-| 30000 | fvtt |
-| 51820 | wireguard |
-| 60000–65000 | avahi |
+| Port        | Service                   |
+| ----------- | ------------------------- |
+| 80, 443     | caddy                     |
+| 53          | adguard                   |
+| 514         | vector                    |
+| 2022        | sftpgo (SSH)              |
+| 1080        | http proxy                |
+| 8000        | omlx (soulwhisper-studio) |
+| 4433        | AMT server                |
+| 5432        | postgres                  |
+| 5678        | n8n                       |
+| 8123        | home-assistant            |
+| 9090        | prometheus                |
+| 11010       | easytier                  |
+| 30000       | fvtt                      |
+| 51820       | wireguard                 |
+| 60000–65000 | avahi                     |
 
 ### DNS stack
 
 | Port | Service |
-|---|---|
-| 53 | adguard |
-| 5300 | mosdns |
+| ---- | ------- |
+| 53   | adguard |
+| 5300 | mosdns  |
 
 ### Storage (9000–9099)
 
-| Port | Service |
-|---|---|
+| Port       | Service                    |
+| ---------- | -------------------------- |
 | 9000, 9001 | minio / garage / versitygw |
-| 9003, 9004 | forgejo |
+| 9003, 9004 | forgejo                    |
 
 ### Exporters (9100–9199)
 
-| Port | Service |
-|---|---|
+| Port | Service           |
+| ---- | ----------------- |
 | 9100 | prometheus (node) |
-| 9101 | node-exporter |
-| 9102 | zfs-exporter |
-| 9103 | nut-exporter |
+| 9101 | node-exporter     |
+| 9102 | zfs-exporter      |
+| 9103 | nut-exporter      |
 | 9104 | smartctl-exporter |
-| 9105 | zrepl-exporter |
+| 9105 | zrepl-exporter    |
 
 ### System UIs (9200–9299)
 
-| Port | Service |
-|---|---|
-| 9200 | adguard-ui |
-| 9201 | proxy-ui |
-| 9202 | sftpgo-ui |
+| Port | Service     |
+| ---- | ----------- |
+| 9200 | adguard-ui  |
+| 9201 | proxy-ui    |
+| 9202 | sftpgo-ui   |
 | 9203 | meshcentral |
 | 9204 | scrutiny-ui |
-| 9205 | stork-ui |
+
+`dsh-web` publishes no host port. It listens on `192.168.10.3:3080` inside
+the Podman network and is exposed by Caddy on `443` at `dsh.noirprime.com`.
 
 ### Kubernetes infrastructure (9300–9499)
 
-| Port | Service |
-|---|---|
+| Port | Service   |
+| ---- | --------- |
 | 9300 | talos-api |
-| 9400 | gatus |
+| 9400 | gatus     |
 
 ### Application development (9700–9799)
 
-| Port | Service |
-|---|---|
+| Port | Service   |
+| ---- | --------- |
 | 9700 | postgrest |
 
 ### Applications (9800–9999)
 
-| Port | Service |
-|---|---|
-| 9800 | dockge |
+| Port | Service      |
+| ---- | ------------ |
+| 9800 | dockge       |
 | 9801 | unifi-server |
-| 9802 | netbox |
+| 9802 | netbox       |

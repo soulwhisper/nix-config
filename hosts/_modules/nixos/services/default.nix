@@ -3,6 +3,7 @@
     ./adguard
     ./caddy
     ./chrony
+    ./dsh
     ./easytier
     ./exporters
     ./forgejo

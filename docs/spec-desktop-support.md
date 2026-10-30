@@ -17,13 +17,6 @@ mkNixosSystem (lib/mkSystem.nix)
 └── hosts/<hostname>
 ```
 
-Current hosts `nix-ops`, `nix-dev`: headless ESXi VMs. Baseline health proven by eval:
-
-- `nix-ops` → `g39iwgp2h9aq5xq03fmw3xp8abjla9iq-nixos-system-nix-ops-26.05....drv`
-- `nix-dev` → `n3hl7n28c72mmqbpk9v95hd7dd53js87-nixos-system-nix-dev-26.05....drv`
-
-(Both emit a pre-existing HM warning: `programs.gemini-cli` renamed to `programs.antigravity-cli`. Out of scope here.)
-
 ### Left work #1: `hosts/_modules/nixos/hardware/nvidia/default.nix`
 
 Enabled by zero hosts; last real consumer was deleted host `nix-dev`. Problems:
@@ -215,7 +208,7 @@ Cross-module contracts:
 
 ## 6. Verification Plan
 
-1. Regression: `nix eval` toplevel drv of `nix-ops`, `nix-dev` — must stay byte-identical class (no new derivations pulled into server closures).
+1. Regression: `nix eval` toplevel drv of `nix-ops`, `nix-act` — must stay byte-identical class (no new derivations pulled into server closures).
 2. Integration: throwaway `lib.nixosSystem` harness (not committed) enabling `desktop+niri+nvidia+gaming`, plus a prime-offload variant and a bad-prime negative — proves assertions (prime exclusivity, busId requirements, 32-bit x86_64 check) and the option graph merge.
 3. `just lint` (prek) on touched files.
 4. Smoke on real surface: `nixos-rebuild build-vm --flake .#<host>` for a graphical boot check (greetd→niri session); compositor interaction itself is eval-verified only until real hardware exists.
@@ -224,7 +217,7 @@ Cross-module contracts:
 
 1. **Environment**: final state — `niri` default running **iNiR** shell; `hyprland` (end-4 main) secondary — see §9.
 2. **NVIDIA scope**: datacenter/compute mode removed entirely. Module is gaming-focused; local compute will run in containers, so `nvidia-container-toolkit` stays on by default (`containerToolkit` flag).
-3. **Host**: notebook host will be named `hosts/nix-dev` (weak GPU; PRIME offload path ready). Scaffold deferred to a follow-up commit.
+3. **Host**: N100 bare-metal host `hosts/nix-act` (Intel iGPU; no NVIDIA). Real-machine smoke pending.
 4. **Proxy / gaming / nixos-hardware input**: unchanged from spec defaults (mihomo base kept; gaming included in v1; `nixos-hardware` input added when the host lands).
 
 ## 8. Implementation Status
@@ -234,13 +227,14 @@ Cross-module contracts:
 | `hardware/nvidia/default.nix` rewrite                                        | done     | eval passes; bad-prime variant fails with expected assertions |
 | `_modules/nixos/default.nix`: `mkDefault` networkd layering + desktop import | done     | server regression drvs byte-identical                         |
 | `desktop/{base,environments/niri,input-method,applications,fhs,gaming}`      | done     | full-graph harness evals clean incl. HM/sops/catppuccin       |
-| Regression `nix-ops`/`nix-dev`                                               | pass     | drv hashes unchanged: `g39iwgp2…`, `n3hl7n28c…`               |
+| Regression `nix-ops`                                                         | pass     | drv unchanged after nix-act scaffold                           |
+| `nix-act` desktop scaffold                                                   | pending  | eval/build green; real-machine smoke pending                   |
 | Feature harness (desktop+niri+gaming+nvidia)                                 | pass     | `rhwqp86f…`; prime offload variant `8gnrw3p7…`                |
 | Negative test (offload+sync together)                                        | pass     | fails with module + upstream assertions as designed           |
-| Networking override                                                          | verified | `useNetworkd=false`, NetworkManager=true, groups merged       |
+| Networking override                                                          | verified | desktop defaults to NetworkManager; nix-act keeps networkd    |
 | Lint (nixfmt + hooks) on touched files                                       | pass     | prek scoped run green                                         |
 
-Deferred to host-scaffold commit: `hosts/nix-dev/` skeleton (disko/zfs or xfs, secrets), `nixos-hardware` flake input, real-machine smoke.
+Host scaffold landed in `hosts/nix-act/`; real-machine smoke and the `nixos-hardware` flake input remain deferred.
 
 ## 9. Hyprland / illogical-impulse Environment (implemented 2026-08-25)
 

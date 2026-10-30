@@ -36,7 +36,7 @@ are gated by omp's approval settings.
 
 - `nixos.just` has only `build`/`switch`, local-only. There is **no
   `initialize`/bootstrap recipe** (darwin has one), **no remote deploy**
-  (`--target-host` to e.g. nix-dev), and **no rollback/dry-run recipe**.
+  (`--target-host` to e.g. nix-act), and **no rollback/dry-run recipe**.
 - If a task needs one of those, name the gap and propose extending
   `nixos.just` as its own change — do not hand-run ad-hoc equivalents
   against a host without surfacing it.

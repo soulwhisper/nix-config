@@ -1,16 +1,19 @@
 # This file is the general template for 'lvm-thin-xfs,tmpfs-root' disk config.
-# Main disk should be at least 16+100 = 116 GB.
-{...}: let
+# Main disk should be at least 500 GB for the default LV sizes.
+{ ... }:
+let
   xfsMountOptions = [
     "defaults"
     "noatime"
     "pquota"
   ];
-in {
+in
+{
   disko.devices = {
     disk = {
       main = {
         type = "disk";
+        # N100: confirm the target with `lsblk` (nvme0n1 vs sda).
         # when using disko-install, device value will be overwritten
         device = "/dev/sda";
         content = {
@@ -23,7 +26,7 @@ in {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                mountOptions = [ "umask=0077" ];
               };
             };
             primary = {
@@ -50,22 +53,24 @@ in {
         type = "lvm_vg";
         lvs = {
           thinpool = {
-            size = "1000G";
+            # Do not hardcode a size larger than the target PV. 90% leaves
+            # room for LVM metadata and later lvextend on a 1TB disk.
+            size = "90%";
             lvm_type = "thin-pool";
           };
           app = {
-            size = "30G";
+            size = "250G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
               type = "filesystem";
               format = "xfs";
               mountpoint = "/var/lib";
-              mountOptions = xfsMountOptions ++ ["logbsize=64k"];
+              mountOptions = xfsMountOptions ++ [ "logbsize=64k" ];
             };
           };
           home = {
-            size = "20G";
+            size = "100G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
@@ -76,7 +81,7 @@ in {
             };
           };
           nix = {
-            size = "50G";
+            size = "150G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
