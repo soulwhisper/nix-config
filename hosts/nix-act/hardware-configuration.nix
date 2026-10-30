@@ -7,13 +7,26 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [];
+}:
+{
+  imports = [ ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "vmw_pvscsi" "sd_mod" "sr_mod"];
-  boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  # Placeholder superset for the N100 mini-PC; regenerate on the target with
+  # `nixos-generate-config --no-filesystems` and commit the real result.
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "sdhci"
+    "sdhci_pci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

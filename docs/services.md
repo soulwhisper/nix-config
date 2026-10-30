@@ -86,7 +86,9 @@ Fixed allocations should not change; ranges group services by function.
 | 9202 | sftpgo-ui   |
 | 9203 | meshcentral |
 | 9204 | scrutiny-ui |
-| 9205 | dsh-ui      |
+
+`dsh-web` publishes no host port. It listens on `192.168.10.3:3080` inside
+the Podman network and is exposed by Caddy on `443` at `dsh.noirprime.com`.
 
 ### Kubernetes infrastructure (9300–9499)
 

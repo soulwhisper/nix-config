@@ -2,7 +2,8 @@
   hostname,
   lib,
   ...
-}: {
+}:
+{
   config = {
     networking = {
       hostName = hostname;
@@ -10,7 +11,8 @@
     };
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "eth0";
+      # N100 mini-PCs expose enp*/eno* or eth0 depending on firmware.
+      matchConfig.Name = "en* eth*";
       address = [
         "10.10.0.220/24"
       ];

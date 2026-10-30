@@ -3,27 +3,31 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.services.podman;
-in {
+in
+{
   options.modules.services.podman = {
     enable = lib.mkEnableOption "podman";
   };
 
   config = lib.mkIf cfg.enable {
+    # : compose support
     environment.systemPackages = with pkgs; [
       docker-compose
     ];
 
-    virtualisation.podman.defaultNetwork.settings = {
-      dns_enabled = true;
-      subnets = [ { subnet = "192.168.10.0/24"; gateway = "192.168.10.1"; } ];
-    };
+    # : dns-resolving, needs 53/udp on 'podman*'(nftables)
+    # https://github.com/NixOS/nixpkgs/issues/226365
+    # networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];
+    # networking.dhcpcd.IPv6rs = false;
+    # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
 
     # : auto-update containers
     # requires: labels = { "io.containers.autoupdate" = "registry"; };
     systemd.timers.podman-auto-update = {
-      wantedBy = ["timers.target"];
+      wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
@@ -40,7 +44,7 @@ in {
         autoPrune = {
           enable = true;
           dates = "weekly";
-          flags = ["--all"];
+          flags = [ "--all" ];
         };
       };
     };
