@@ -17,7 +17,7 @@ in
     };
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "act.noirprime.com";
+      default = "dsh.noirprime.com";
     };
   };
 
