@@ -110,5 +110,11 @@
           );
         in
         nixos // darwin;
+
+      checks.x86_64-linux.forgejo =
+        let
+          pkgs = mkPkgsWithSystem "x86_64-linux";
+        in
+        pkgs.testers.runNixOSTest (import ./tests/forgejo.nix { inherit pkgs; });
     };
 }

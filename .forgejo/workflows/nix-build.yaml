@@ -1,0 +1,30 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Nix
+permissions:
+  contents: read
+"on":
+  workflow_dispatch: {}
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+
+jobs:
+  nix-dev:
+    runs-on: nix
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, resolved through DEFAULT_ACTIONS_URL
+        with:
+          persist-credentials: false
+      - name: Check Nix formatting
+        run: nixfmt --check .
+      - name: Build nix-dev
+        run: |
+          nix build \
+            ".#ciSystems.nix-dev" \
+            --no-write-lock-file \
+            --show-trace

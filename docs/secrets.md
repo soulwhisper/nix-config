@@ -72,10 +72,10 @@ apps:
 backup:
   restic:
     encryption: { restic-encryption-password }
-    endpoint: { restic-repository-s3 }
+    repository: { restic-rest-or-sftp-url }
     auth: |
-      AWS_ACCESS_KEY_ID={s3-access-key}
-      AWS_SECRET_ACCESS_KEY={s3-access-secret}
+      RESTIC_REST_USERNAME={rest-username}
+      RESTIC_REST_PASSWORD={rest-password}
 networking:
   bind:
     auth: { external-key-secret }

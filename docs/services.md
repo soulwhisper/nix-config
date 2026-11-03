@@ -22,6 +22,16 @@ Module sources live in `hosts/_modules/nixos/services/`.
 - Run `netbox-manage migrate` after enabling/disabling plugins and after upgrades.
 - Create the admin account with `netbox-manage createsuperuser`.
 
+## Forgejo
+
+- HTTPS uses the configurable internal `domain`; Caddy proxies to 9003 and the
+  built-in Git SSH server listens on 9004.
+- SQLite and Git LFS are enabled. Self-registration and anonymous repository
+  viewing are disabled.
+- The same-host `nix:host` runner is restricted to reviewed, trusted private
+  repositories. It has no Docker socket and must not hold production secrets.
+- See [forgejo.md](forgejo.md) for migration, backup, recovery and administration.
+
 ## Proxy stacks
 
 - `mosdns + sing-box`: best general-purpose stack, especially SOCKS5.

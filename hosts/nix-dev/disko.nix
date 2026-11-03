@@ -1,12 +1,14 @@
 # This file is the general template for 'lvm-thin-xfs,tmpfs-root' disk config.
 # Main disk should be at least 16+100 = 116 GB.
-{...}: let
+{ ... }:
+let
   xfsMountOptions = [
     "defaults"
     "noatime"
     "pquota"
   ];
-in {
+in
+{
   disko.devices = {
     disk = {
       main = {
@@ -23,7 +25,7 @@ in {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                mountOptions = [ "umask=0077" ];
               };
             };
             primary = {
@@ -54,14 +56,14 @@ in {
             lvm_type = "thin-pool";
           };
           app = {
-            size = "30G";
+            size = "200G";
             lvm_type = "thinlv";
             pool = "thinpool";
             content = {
               type = "filesystem";
               format = "xfs";
               mountpoint = "/var/lib";
-              mountOptions = xfsMountOptions ++ ["logbsize=64k"];
+              mountOptions = xfsMountOptions ++ [ "logbsize=64k" ];
             };
           };
           home = {
