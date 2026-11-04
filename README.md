@@ -39,7 +39,7 @@ just nixos diff "$PLAN"
 just nixos deploy "$PLAN" "$REVIEWED_DEPLOY_APPROVAL"
 
 # : build and try pkgs
-nix build nix-config/.#zotregistry --print-out-paths
+nix build .#deployment-tools --print-out-paths
 ```
 
 NixOS deployment requires a verified SSH target and a reviewed approval printed
