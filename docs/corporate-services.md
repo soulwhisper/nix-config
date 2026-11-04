@@ -107,6 +107,11 @@ Kubernetes, NixOS service options, or Home Manager's SOPS module. Enabling it do
 not unlock keys, generate a CA, or deploy a system. It remains disabled on
 `nix-dev`.
 
+Each function references its packaged executable's store path. When this feature
+is enabled, the normal Home Manager or host build recursively builds the tools
+and their dependencies; no separate CI package-build step is needed. Overlay
+registration alone does not add an otherwise unused package to a system closure.
+
 The tool packages are also available directly:
 
 ```shell
