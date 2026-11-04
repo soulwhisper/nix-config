@@ -29,24 +29,14 @@ just darwin switch soulwhisper-mba
 
 # : nixos
 nix-shell -p just
-# :: build the clean pinned revision on the controller
-REVISION=$(git rev-parse HEAD)
-SYSTEM=$(just nixos build nix-ops "$REVISION")
-# :: plan and inspect before explicitly approving remote activation
-PLAN="$HOME/nix-ops-deploy.json"
-just nixos plan nix-ops "$SSH_TARGET" "$REVISION" "$SYSTEM" "$PLAN"
-just nixos diff "$PLAN"
-just nixos deploy "$PLAN" "$REVIEWED_DEPLOY_APPROVAL"
+# :: build
+just nixos build nix-ops
+# :: switch
+just nixos switch nix-ops
 
 # : build and try pkgs
-nix build .#corp-deployment-tools --print-out-paths
+nix build nix-config/.#zotregistry --print-out-paths
 ```
-
-NixOS deployment requires a verified SSH target and a reviewed approval printed
-by `plan`; plan files stay outside the clean checkout. Darwin controllers need an
-explicit Linux builder or a CI-built closure. See
-[corporate services](docs/corporate-services.md) before enabling `nix-dev`'s
-PKI/Forgejo deployment: production issuer material must be filled in SOPS first.
 
 ## Inspiration
 
