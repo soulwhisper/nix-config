@@ -10,7 +10,6 @@
   nvd,
   age,
   sops,
-  root-ca,
 }:
 let
   python = python3.withPackages (ps: [
@@ -19,7 +18,7 @@ let
   ]);
 in
 stdenvNoCC.mkDerivation {
-  pname = "deployment-tools";
+  pname = "corp-deployment-tools";
   version = "1.0.0";
   src = ./.;
   nativeBuildInputs = [ makeWrapper ];
@@ -56,11 +55,9 @@ stdenvNoCC.mkDerivation {
             nvd
             age
             sops
-            root-ca
           ]
         }
     done
-    ln -s ${root-ca}/bin/root-ca "$out/bin/root-ca"
     runHook postInstall
   '';
   passthru = { inherit python; };

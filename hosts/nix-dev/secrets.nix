@@ -21,7 +21,7 @@
           restartUnits = [ "step-ca.service" ];
         };
         "pki/intermediate-key" = {
-          owner = config.users.users.step-ca.name;
+          owner = config.users.users.appuser.name;
           mode = "0400";
           restartUnits = [ "step-ca.service" ];
         };

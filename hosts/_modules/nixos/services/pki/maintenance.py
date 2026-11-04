@@ -88,10 +88,6 @@ class Executor:
 
     def pg(self, executable, *args):
         return [
-            self.tools["runuser"],
-            "-u",
-            "postgres-forgejo",
-            "--",
             self.tools["pgBin"] + "/" + executable,
             "--no-password",
             "-h",
@@ -144,15 +140,9 @@ class Executor:
             [
                 self.tools["runuser"],
                 "-u",
-                "forgejo",
+                "appuser",
                 "--",
                 cfg["binary"],
-                "--work-path",
-                cfg["stateDir"],
-                "--custom-path",
-                cfg["customDir"],
-                "--config",
-                cfg["customDir"] + "/conf/app.ini",
                 "doctor",
                 "check",
                 "--all",
@@ -176,7 +166,7 @@ class Executor:
     def manifest(self, service):
         cfg = self.config[service]
         return {
-            "format": 1,
+            "format": 2,
             "service": service,
             "hostname": self.config["hostname"],
             "domain": cfg["domain"],
@@ -240,16 +230,6 @@ class Executor:
                         command, stdout=output, stderr=subprocess.DEVNULL, check=True
                     )
                 manifest["dump_sha256"] = digest(dump)
-                snapshot = work / "external-secrets"
-                snapshot.mkdir(mode=0o700)
-                manifest["external_secrets"] = {}
-                for index, path in enumerate(cfg["externalSecrets"]):
-                    name = str(index)
-                    shutil.copyfile(path, snapshot / name)
-                    manifest["external_secrets"][name] = {
-                        "path": path,
-                        "sha256": digest(snapshot / name),
-                    }
             manifest_path = work / "manifest.json"
             manifest_path.write_text(json.dumps(manifest, sort_keys=True))
             try:
@@ -285,9 +265,6 @@ class Executor:
                             else:
                                 archive.add(
                                     dump, arcname="database.dump", recursive=False
-                                )
-                                archive.add(
-                                    snapshot, arcname="external-secrets", recursive=True
                                 )
                         encryption.stdin.close()
                         require(encryption.wait() == 0, "age encryption failed")
@@ -335,7 +312,6 @@ class Executor:
                         "manifest.json",
                         "materials",
                         "database.dump",
-                        "external-secrets",
                     },
                     "Unexpected archive member",
                 )
@@ -407,16 +383,16 @@ class Executor:
             os.path.isabs(backup_path) and os.path.isabs(approval_path),
             "Restore paths must be absolute",
         )
-        backup_fd = private_file(backup_path, "Encrypted backup")
-        approval_fd = private_file(approval_path, "Restore approval")
-        try:
-            with os.fdopen(approval_fd, "r") as source:
-                approval = json.load(source)
-                approval_stat = os.fstat(source.fileno())
+        with (
+            os.fdopen(private_file(backup_path, "Encrypted backup"), "rb") as backup,
+            os.fdopen(private_file(approval_path, "Restore approval"), "r") as source,
+        ):
+            approval = json.load(source)
+            approval_stat = os.fstat(source.fileno())
             # Pin encrypted bytes before hashing/decrypting, avoiding path replacement races.
             encrypted = work / "input.age"
-            with os.fdopen(backup_fd, "rb") as source, encrypted.open("xb") as output:
-                shutil.copyfileobj(source, output, 1024 * 1024)
+            with encrypted.open("xb") as output:
+                shutil.copyfileobj(backup, output, 1024 * 1024)
             require(
                 approval
                 == {
@@ -478,26 +454,6 @@ class Executor:
                     digest(extracted / "database.dump") == manifest.get("dump_sha256"),
                     "Database dump digest mismatch",
                 )
-                expected_paths = set(cfg["externalSecrets"])
-                archived_paths = set()
-                for key, item in manifest.get("external_secrets", {}).items():
-                    require(key.isdecimal(), "Invalid secret inventory")
-                    require(
-                        item["path"] in expected_paths,
-                        "Unexpected external secret path",
-                    )
-                    archived = extracted / "external-secrets" / key
-                    archived_paths.add(item["path"])
-                    require(
-                        archived.is_file()
-                        and not archived.is_symlink()
-                        and digest(archived) == item["sha256"] == digest(item["path"]),
-                        "Install matching external Forgejo SOPS secrets before restore",
-                    )
-                require(
-                    archived_paths == expected_paths,
-                    "External secret inventory mismatch",
-                )
                 self.run(
                     [
                         self.tools["pgBin"] + "/pg_restore",
@@ -516,11 +472,6 @@ class Executor:
             # issuer or app automatically against an uncertain database/state pair.
             with self.stopped(service, restart_on_error=False):
                 self.install_restore(service, extracted)
-        finally:
-            # Descriptors may already have been closed by fdopen; close only if needed.
-            for fd in (backup_fd, approval_fd):
-                with contextlib.suppress(OSError):
-                    os.close(fd)
         print(
             "Restore completed; previous state retained in a root-private pre-restore directory"
         )
@@ -539,7 +490,7 @@ class Executor:
         )
         saved = state.with_name(state.name + ".pre-restore-" + suffix)
         staged = state.with_name(state.name + ".restore-" + suffix)
-        account = pwd.getpwnam("step-ca" if service == "pki" else "forgejo")
+        account = pwd.getpwnam("appuser")
         shutil.copytree(extracted / "state", staged, symlinks=True)
         for root, dirs, files in os.walk(staged, followlinks=False):
             os.chown(root, account.pw_uid, account.pw_gid, follow_symlinks=False)
@@ -550,7 +501,7 @@ class Executor:
                     account.pw_gid,
                     follow_symlinks=False,
                 )
-        staged.chmod(0o700 if service == "pki" else 0o750)
+        staged.chmod(0o700)
         renamed_db = False
         replaced_state = False
         old_database = "forgejo_pre_restore_" + suffix
@@ -598,7 +549,7 @@ class Executor:
                 failed = state.with_name(state.name + ".failed-restore-" + suffix)
                 state.rename(failed)
                 os.chown(saved, account.pw_uid, account.pw_gid)
-                saved.chmod(0o700 if service == "pki" else 0o750)
+                saved.chmod(0o700)
                 saved.rename(state)
             if renamed_db:
                 self.sql("DROP DATABASE IF EXISTS forgejo WITH (FORCE)")

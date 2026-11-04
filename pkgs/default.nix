@@ -7,12 +7,13 @@
 }:
 {
   caddy-custom = pkgs.callPackage ./caddy-custom { };
-  deployment-tools = pkgs.callPackage ./deployment-tools { };
+  corp-deployment-tools = pkgs.callPackage ./deployment-tools { };
+  corp-forgejo = pkgs.callPackage ./corp-forgejo { };
+  corp-root-ca = pkgs.callPackage ./root-ca { };
   ii-dots = pkgs.callPackage ./ii-dots { };
   inir = pkgs.callPackage ./inir { };
   kubecolor-catppuccin = pkgs.callPackage ./kubecolor-catppuccin { };
   kubectl-switch = pkgs.callPackage ./kubectl-switch { };
   rime-moqi-yinxing = pkgs.callPackage ./rime-moqi-yinxing { };
-  root-ca = pkgs.callPackage ./root-ca { };
   talos-api = pkgs.callPackage ./talos-api { };
 }

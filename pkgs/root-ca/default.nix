@@ -5,10 +5,9 @@
   python3,
   openssl,
   age,
-  sops,
 }:
 stdenvNoCC.mkDerivation {
-  pname = "root-ca";
+  pname = "corp-root-ca";
   version = "1.0.0";
   src = ./.;
   nativeBuildInputs = [ makeWrapper ];
@@ -33,7 +32,6 @@ stdenvNoCC.mkDerivation {
         lib.makeBinPath [
           openssl
           age
-          sops
         ]
       }
     runHook postInstall

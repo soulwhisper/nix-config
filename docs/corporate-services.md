@@ -25,18 +25,21 @@ one has already been approved; importing it must not silently create a new root.
 | `nix-dev` | Decrypt approved runtime secrets, validate them, run services and execute approved maintenance |
 
 `nix-dev` is not a controller or an offline root. The online intermediate key is
-necessarily available to step-ca. Host-root compromise therefore compromises
-that intermediate. The root key and an identity capable of decrypting it must
-not be deployed there, including through the repository's blanket age recipient
+necessarily available to step-ca. The online daemons use the repository's shared
+`appuser` (UID/GID1001): this avoids running them as root, but does not isolate
+services from a hostile process with the same UID. Root or appuser compromise can
+therefore compromise the intermediate. The root key and its decryption identity
+must stay off this host, including outside the blanket repository age recipient
 rule. Root state stays outside the repository and outside `/nix/store`.
 
 The services are native NixOS/systemd services, not the archive's Docker stacks:
 
-- `services.pki` wraps upstream `services.step-ca`, using
-  `pkgs.unstable.step-ca` and a persistent Badger database.
-- `services.forgejo` is the native Forgejo module, using `pkgs.forgejo`, not the
-  older default LTS package. There is no `modules.services.forgejo` alias.
-- Forgejo uses its own PostgreSQL 18 cluster and non-superuser application role.
+- `services.pki` defines local systemd units using `pkgs.unstable.step-ca` and a
+  persistent Badger database; it does not adapt upstream `services.step-ca`.
+- `services.forgejo` is a minimal local module, not the upstream service option
+  tree. `pkgs.corp-forgejo` wraps the official Forgejo binary with service paths
+  and dependencies; configure the hostname with `services.forgejo.domain`.
+- Forgejo uses its own PostgreSQL 18 cluster and restricted application role.
 - All Caddy instances retain `pkgs.caddy-custom`. The Cloudflare provider is a
   configuration choice, not a different package variant.
 
@@ -74,7 +77,7 @@ or SOPS directory. `tls internal` is not used for these corporate sites.
 |---|---|
 | `pki/root-ca-crt` | Approved public root PEM; readable by Caddy and step-ca |
 | `pki/intermediate-crt` | Root-signed intermediate PEM; public |
-| `pki/intermediate-key` | Matching encrypted intermediate private-key PEM; step-ca only |
+| `pki/intermediate-key` | Matching encrypted intermediate private-key PEM; owned by appuser, passed to step-ca as a credential |
 | `pki/intermediate-password` | Bare unlock password; systemd passes it through `LoadCredential` |
 
 All four service file options use `lib.types.path`. The host supplies
@@ -102,10 +105,13 @@ modules.deployment.enable = true;
 ```
 
 It registers fish functions `rca`, `pki`, `deploy`, and `fjo`, backed by the same
-CLI implementations used outside fish. It does not require development, mise,
-Kubernetes, NixOS service options, or Home Manager's SOPS module. Enabling it does
-not unlock keys, generate a CA, or deploy a system. It remains disabled on
-`nix-dev`.
+CLI implementations used outside fish. The repository overlay supplies
+`pkgs.corp-root-ca` and `pkgs.corp-deployment-tools`; the Home module references
+those packages directly, without `callPackage` or another packaging path.
+It does not require development, mise, Kubernetes, NixOS service options, or
+Home Manager's SOPS module. Enabling it does not unlock keys, generate a CA,
+or deploy a system. The feature is off by default; `nix-dev` has no explicit
+enable/disable override.
 
 Each function references its packaged executable's store path. When this feature
 is enabled, the normal Home Manager or host build recursively builds the tools
@@ -115,8 +121,8 @@ registration alone does not add an otherwise unused package to a system closure.
 The tool packages are also available directly:
 
 ```shell
-nix run .#root-ca -- --help
-nix run .#deployment-tools -- --help
+nix run .#corp-root-ca -- --help
+nix run .#corp-deployment-tools -- --help
 ```
 
 Linux controllers can build locally. Darwin controllers need an explicitly
@@ -284,16 +290,21 @@ systemctl status step-ca.service caddy.service forgejo.service postgresql-forgej
 
 ## Database isolation and upgrades
 
-`postgresql-forgejo.service` owns `/var/lib/postgresql-forgejo/18` as
-`postgres-forgejo`, with mode0700. Its runtime socket directory has group
-`forgejo`; the native Forgejo sandbox keeps its primary UID/GID mapping and does
-not need another service's group. Caddy and unrelated accounts are not members.
+Forgejo, `postgresql-forgejo.service`, and step-ca all run as the existing
+`appuser:appuser` (1001:1001); no service-specific OS users are created. The
+private PG18 state is `/var/lib/postgresql-forgejo/18` and its socket directory
+is `/run/postgresql-forgejo`, both restricted to appuser and root.
 
-The complete HBA policy uses peer maps for the application and its dedicated
-administrator, then rejects other users/databases and replication. The app role
-has no superuser, database-creation or role-creation privileges. The cluster has
-`listen_addresses = ''`; setting only NixOS `enableTCPIP=false` would not disable
-localhost TCP.
+The HBA policy maps appuser to the non-superuser SQL role `forgejo` only for the
+`forgejo` database. The SQL administrator `forgejo-db-admin` maps **OS root only**;
+root provisioning runs after PostgreSQL reports readiness. Other roles/databases
+and replication are rejected. The cluster has `listen_addresses = ''`.
+
+This separates PostgreSQL instances and prevents accidental use of the shared
+cluster; it is not a boundary against another hostile appuser process, which
+shares filesystem access and the application peer identity. Do not describe the
+shared UID as per-service isolation. Different OS UIDs or another security
+boundary would be required for that.
 
 The global `services.postgresql` instance, its roles, data and socket are not
 modified. All administration and dump commands use the pinned PG18 tools and an
@@ -317,6 +328,8 @@ its own whole-state recovery procedure.
   deployed issuer/configuration. Keep CA, account and revocation state together.
 - Forgejo backup quiesces application writes, captures a PG18 logical dump plus
   repositories, LFS, attachments and application secrets, then restores service.
+  Its generated INI, persistent secret files, repositories, and LFS remain under
+  `/var/lib/forgejo`; the local bootstrap preserves secrets across restarts.
 - Do not ordinary-copy live PostgreSQL data as a backup. If using the generic
   Restic `/var/lib` backup, exclude live PGDATA and include finished logical
   backups instead.
@@ -324,6 +337,15 @@ its own whole-state recovery procedure.
   issuer is not a reason to overwrite unrelated Caddy state.
 - Copy encrypted archives off-host and periodically restore into an isolated
   environment. Local encryption alone is not off-host disaster recovery.
+
+Setting `services.<service>.backup.recipient` enables the fixed daily timer and
+encrypted output under `/var/backup/corp/<service>`. Only the public recipient
+and optional runtime `backup.identityFile` are configuration inputs; addresses,
+ports, state paths, timer calendar and backup directories are service constants.
+The host-service archive format is version2 for the local-unit/appuser layout;
+older draft-format archives are rejected rather than silently restoring a
+different secret/state contract. The separate offline Root CA archive format is
+unchanged.
 
 Restore requires explicit approval bound to the service, action and archive
 SHA-256, plus a real root-owned age identity with restrictive permissions. The
@@ -339,6 +361,11 @@ the service stopped rather than automatically restarting against uncertain state
 Root-authority restore also requires an independently retained ciphertext SHA-256
 and generation/CRL publication records. Age encryption alone does not authenticate
 the backup sender: anyone who knows the public recipient can encrypt a file.
+
+Service restoration reinstalls state as appuser (UID/GID1001) and retains the
+pre-restore directory as root-private recovery state. Before accepting recovery,
+run the PKI check and Forgejo doctor, then verify trusted HTTPS and a Git/LFS
+round trip; a successful archive extraction alone is not recovery evidence.
 
 On the root machine, retain the backup command's public JSON record separately
 from the ciphertext. It includes the ciphertext digest, generation and root
@@ -434,8 +461,8 @@ cannot erase remote trust stores, cached chains or historical backups.
   renewal; match normal DNS, hostname and trust, without `-k`.
 - Git login, HTTPS clone/push and LFS; no externally reachable HTTP backend or
   database listener.
-- Peer authentication inside the actual Forgejo sandbox; reject an unrelated OS
-  identity, wrong SQL role and wrong database.
+- Peer authentication with UID1001: allow only the Forgejo application role and
+  database, reject appuser administrative login, and allow the root-only admin map.
 - Cold start waits for completed DB provisioning; restart preserves data and
   wrong-major initialization fails safely.
 - Full encrypted backup/restore of both services and root authority, including

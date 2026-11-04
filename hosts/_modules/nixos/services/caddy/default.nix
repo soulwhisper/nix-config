@@ -24,13 +24,6 @@ in
   # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = !cfg.cloudflare.enable || cfg.authFile != null;
-        message = "Caddy Cloudflare DNS challenges require modules.services.caddy.authFile.";
-      }
-    ];
-
     networking.firewall.allowedTCPPorts = [
       80
       443

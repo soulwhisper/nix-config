@@ -6,32 +6,33 @@
 }:
 let
   cfg = config.modules.deployment;
-  rootCA = pkgs.callPackage ../../../pkgs/root-ca { };
-  tools = pkgs.callPackage ../../../pkgs/deployment-tools { root-ca = rootCA; };
 in
 {
   options.modules.deployment.enable = lib.mkEnableOption "portable controller deployment and offline PKI tools";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ tools ];
+    home.packages = [
+      pkgs.corp-root-ca
+      pkgs.corp-deployment-tools
+    ];
     programs.fish = {
       enable = true;
       functions = {
         rca = {
           description = "Offline root authority (explicit state and approval)";
-          body = "command ${tools}/bin/root-ca $argv";
+          body = "command ${pkgs.corp-root-ca}/bin/root-ca $argv";
         };
         pki = {
           description = "Controller intermediate preparation and PKI maintenance";
-          body = "command ${tools}/bin/pki-admin $argv";
+          body = "command ${pkgs.corp-deployment-tools}/bin/pki-admin $argv";
         };
         deploy = {
           description = "Pinned and explicitly approved NixOS deployment";
-          body = "command ${tools}/bin/deploymentctl $argv";
+          body = "command ${pkgs.corp-deployment-tools}/bin/deploymentctl $argv";
         };
         fjo = {
           description = "Forgejo maintenance through the target executor";
-          body = "command ${tools}/bin/forgejo-admin $argv";
+          body = "command ${pkgs.corp-deployment-tools}/bin/forgejo-admin $argv";
         };
       };
       interactiveShellInit = lib.mkAfter ''

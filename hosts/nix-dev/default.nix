@@ -24,24 +24,19 @@
     services = {
       pki = {
         enable = true;
-        address = "127.0.0.1";
-        port = 9700;
-        domain = "pki.internal.htkrail.com";
         rootCertificateFile = config.sops.secrets."pki/root-ca-crt".path;
         intermediateCertificateFile = config.sops.secrets."pki/intermediate-crt".path;
         intermediateKeyFile = config.sops.secrets."pki/intermediate-key".path;
         intermediatePasswordFile = config.sops.secrets."pki/intermediate-password".path;
         backup = {
-          enable = true;
           recipient = "age1qlugfu60vrhgqtuw0kqqtks9p7nz9npnwa255j7w27t3gapcdv6qjptd7d";
           identityFile = "/run/corp-service-backup/identity.txt";
         };
       };
       forgejo = {
         enable = true;
-        settings.server.DOMAIN = "git.internal.htkrail.com";
+        domain = "git.internal.htkrail.com";
         backup = {
-          enable = true;
           recipient = "age1qlugfu60vrhgqtuw0kqqtks9p7nz9npnwa255j7w27t3gapcdv6qjptd7d";
           identityFile = "/run/corp-service-backup/identity.txt";
         };

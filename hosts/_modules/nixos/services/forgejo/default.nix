@@ -7,38 +7,33 @@
 let
   cfg = config.services.forgejo;
   pg = pkgs.postgresql_18;
+  forgejo = pkgs.corp-forgejo;
   pgData = "/var/lib/postgresql-forgejo/18";
   socket = "/run/postgresql-forgejo";
-  domain = cfg.settings.server.DOMAIN or "git.internal.htkrail.com";
   hba = pkgs.writeText "forgejo-pg_hba.conf" ''
-    local forgejo forgejo peer
+    local forgejo forgejo peer map=forgejo-app
     local all forgejo-db-admin peer map=forgejo-admin
-    local replication all reject
     local all all reject
-    host replication all 0.0.0.0/0 reject
-    host replication all ::0/0 reject
-    host all all 0.0.0.0/0 reject
-    host all all ::0/0 reject
   '';
   ident = pkgs.writeText "forgejo-pg_ident.conf" ''
-    forgejo-admin postgres-forgejo forgejo-db-admin
+    forgejo-app appuser forgejo
+    forgejo-admin root forgejo-db-admin
   '';
-  pgConfig = pkgs.writeText "forgejo-postgresql.conf" ''
-    data_directory = '${pgData}'
-    hba_file = '${hba}'
-    ident_file = '${ident}'
-    listen_addresses = '${""}'
-    port = 5432
-    unix_socket_directories = '${socket}'
-    unix_socket_group = 'forgejo'
-    unix_socket_permissions = 0660
-    password_encryption = 'scram-sha-256'
-    logging_collector = off
-  '';
+  pgConfig = (pkgs.formats.keyValue { }).generate "forgejo-postgresql.conf" {
+    data_directory = "'${pgData}'";
+    hba_file = "'${hba}'";
+    ident_file = "'${ident}'";
+    listen_addresses = "''";
+    port = 5432;
+    unix_socket_directories = "'${socket}'";
+    unix_socket_permissions = "0700";
+    password_encryption = "'scram-sha-256'";
+    logging_collector = "off";
+  };
   provision = pkgs.writeText "forgejo-database.sql" ''
     SELECT 'CREATE ROLE forgejo LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS'
       WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'forgejo') \gexec
-    ALTER ROLE forgejo LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+    ALTER ROLE forgejo LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD NULL;
     SELECT 'CREATE DATABASE forgejo OWNER forgejo'
       WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'forgejo') \gexec
     ALTER DATABASE forgejo OWNER TO forgejo;
@@ -48,108 +43,99 @@ let
     REVOKE CREATE ON SCHEMA public FROM PUBLIC;
     ALTER SCHEMA public OWNER TO forgejo;
   '';
-  beneathState = path: path == cfg.stateDir || lib.hasPrefix "${cfg.stateDir}/" path;
+  appConfig = (pkgs.formats.ini { }).generate "forgejo-app.ini" {
+    DEFAULT = {
+      RUN_MODE = "prod";
+      RUN_USER = "appuser";
+      WORK_PATH = "/var/lib/forgejo";
+    };
+    database = {
+      DB_TYPE = "postgres";
+      HOST = "${socket}:5432";
+      NAME = "forgejo";
+      USER = "forgejo";
+      SSL_MODE = "disable";
+    };
+    repository.ROOT = "/var/lib/forgejo/repositories";
+    server = {
+      DOMAIN = cfg.domain;
+      ROOT_URL = "https://${cfg.domain}/";
+      PROTOCOL = "http";
+      HTTP_ADDR = "127.0.0.1";
+      HTTP_PORT = 9003;
+      DISABLE_SSH = true;
+      START_SSH_SERVER = false;
+      APP_DATA_PATH = "/var/lib/forgejo/data";
+      STATIC_ROOT_PATH = "${forgejo.data}";
+      LFS_START_SERVER = true;
+    };
+    lfs.PATH = "/var/lib/forgejo/data/lfs";
+    service = {
+      DISABLE_REGISTRATION = true;
+      ALLOW_ONLY_EXTERNAL_REGISTRATION = false;
+      SHOW_REGISTRATION_BUTTON = false;
+    };
+    security = {
+      INSTALL_LOCK = true;
+      REVERSE_PROXY_LIMIT = 1;
+      REVERSE_PROXY_TRUSTED_PROXIES = "127.0.0.1/32,::1/128";
+    };
+    session = {
+      COOKIE_SECURE = true;
+      SAME_SITE = "lax";
+      PROVIDER = "file";
+      PROVIDER_CONFIG = "/var/lib/forgejo/data/sessions";
+    };
+    migrations = {
+      ALLOW_LOCALNETWORKS = false;
+      SKIP_TLS_VERIFY = false;
+    };
+    log = {
+      MODE = "console";
+      ROOT_PATH = "/var/lib/forgejo/log";
+    };
+  };
 in
 {
+  disabledModules = [ "services/misc/forgejo.nix" ];
   imports = [ ../pki/maintenance.nix ];
+  meta.doc = ./forgejo.md;
+
+  options.services.forgejo = {
+    enable = lib.mkEnableOption "the corporate Forgejo service";
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "git.internal.htkrail.com";
+      description = "DNS hostname used by Forgejo and its Caddy virtual host.";
+    };
+  };
+
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = cfg.user == "forgejo" && cfg.group == "forgejo";
-        message = "Corporate Forgejo requires its dedicated forgejo user/group.";
-      }
-      {
-        assertion =
-          builtins.match "([a-z0-9]([a-z0-9-]*[a-z0-9])?\\.)+[a-z]([a-z0-9-]*[a-z0-9])?" domain != null
-          && builtins.stringLength domain <= 253
-          && lib.all (label: builtins.stringLength label <= 63) (lib.splitString "." domain);
-        message = "Forgejo server.DOMAIN must be a canonical lowercase DNS hostname, not an IP literal.";
-      }
-      {
-        assertion = lib.all beneathState [
-          cfg.customDir
-          cfg.repositoryRoot
-          cfg.lfs.contentDir
-        ];
-        message = "Forgejo custom, repository and LFS directories must remain inside stateDir for consistent backups/restores.";
-      }
-      {
-        assertion = !cfg.useWizard && !cfg.dump.enable;
-        message = "Corporate Forgejo uses declarative installation and encrypted corp-service-maintenance backups, not native unencrypted dump jobs.";
-      }
-      {
-        assertion =
-          cfg.database.type == "postgres"
-          && !cfg.database.createDatabase
-          && cfg.database.socket == socket
-          && cfg.database.port == 5432
-          && cfg.database.name == "forgejo"
-          && cfg.database.user == "forgejo";
-        message = "Forgejo must use only its dedicated PostgreSQL18 cluster and peer-authenticated application role.";
-      }
+    environment.systemPackages = [ forgejo ];
+    systemd.tmpfiles.rules = [
+      "d /var/lib/forgejo 0700 appuser appuser - -"
+      "d /var/lib/forgejo/custom 0700 appuser appuser - -"
+      "d /var/lib/forgejo/custom/conf 0700 appuser appuser - -"
+      "d /var/lib/forgejo/repositories 0700 appuser appuser - -"
+      "d /var/lib/forgejo/data 0700 appuser appuser - -"
+      "d /var/lib/forgejo/data/lfs 0700 appuser appuser - -"
+      "d /var/lib/postgresql-forgejo 0700 appuser appuser - -"
     ];
-    services.forgejo = {
-      package = lib.mkDefault pkgs.forgejo;
-      user = lib.mkDefault "forgejo";
-      group = lib.mkDefault "forgejo";
-      stateDir = lib.mkDefault "/var/lib/forgejo";
-      database = {
-        type = lib.mkDefault "postgres";
-        createDatabase = false;
-        socket = socket;
-        port = 5432;
-        name = "forgejo";
-        user = "forgejo";
-      };
-      lfs.enable = true;
-      settings = {
-        server = {
-          DOMAIN = lib.mkDefault "git.internal.htkrail.com";
-          ROOT_URL = "https://${domain}/";
-          PROTOCOL = "http";
-          HTTP_ADDR = "127.0.0.1";
-          HTTP_PORT = 9003;
-          DISABLE_SSH = true;
-          START_SSH_SERVER = false;
-        };
-        service = {
-          DISABLE_REGISTRATION = true;
-          ALLOW_ONLY_EXTERNAL_REGISTRATION = false;
-          SHOW_REGISTRATION_BUTTON = false;
-        };
-        security = {
-          INSTALL_LOCK = true;
-          REVERSE_PROXY_LIMIT = 1;
-          REVERSE_PROXY_TRUSTED_PROXIES = "127.0.0.1/32,::1/128";
-        };
-        session = {
-          COOKIE_SECURE = true;
-          SAME_SITE = "lax";
-        };
-        migrations = {
-          ALLOW_LOCALNETWORKS = false;
-          SKIP_TLS_VERIFY = false;
-        };
-      };
-    };
-    users.users.postgres-forgejo = {
-      isSystemUser = true;
-      group = "forgejo";
-      home = "/var/lib/postgresql-forgejo";
-    };
-    systemd.tmpfiles.rules = [ "d /var/lib/postgresql-forgejo 0700 postgres-forgejo forgejo - -" ];
+
     systemd.services.postgresql-forgejo = {
-      description = "Dedicated PostgreSQL 18 cluster for Forgejo";
+      description = "Private PostgreSQL 18 cluster for Forgejo";
       wantedBy = [ "multi-user.target" ];
       before = [ "forgejo.service" ];
       serviceConfig = {
         Type = "notify";
-        User = "postgres-forgejo";
-        Group = "forgejo";
+        User = "appuser";
+        Group = "appuser";
         RuntimeDirectory = "postgresql-forgejo";
-        RuntimeDirectoryMode = "0750";
+        RuntimeDirectoryMode = "0700";
         UMask = "0077";
         ExecStart = "${pg}/bin/postgres -D ${pgData} -c config_file=${pgConfig}";
+        # Provisioning connects through the root-only peer map, never appuser.
+        ExecStartPost = "+${pg}/bin/psql --no-psqlrc --no-password -h ${socket} -p 5432 -U forgejo-db-admin -d postgres -v ON_ERROR_STOP=1 -f ${provision}";
         ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
         KillSignal = "SIGINT";
         TimeoutSec = 300;
@@ -182,35 +168,68 @@ in
           exit 1
         fi
       '';
-      postStart = ''
-        set -euo pipefail
-        ${pg}/bin/psql --no-psqlrc --no-password -h ${socket} -p 5432 -U forgejo-db-admin -d postgres -v ON_ERROR_STOP=1 -f ${provision}
-      '';
     };
+
     systemd.services.forgejo = {
-      # Native module adds postgresql.target even with createDatabase=false.
-      # Replace that dependency, retaining its secret bootstrap dependency.
-      after = lib.mkForce [
+      description = "Forgejo corporate software forge";
+      wantedBy = [ "multi-user.target" ];
+      after = [
         "network.target"
         "postgresql-forgejo.service"
-        "forgejo-secrets.service"
       ];
       requires = [ "postgresql-forgejo.service" ];
-      serviceConfig.PrivateUsers = true;
+      environment = {
+        USER = "appuser";
+        HOME = "/var/lib/forgejo";
+        FORGEJO__security__SECRET_KEY__FILE = "/var/lib/forgejo/custom/conf/secret_key";
+        FORGEJO__security__INTERNAL_TOKEN__FILE = "/var/lib/forgejo/custom/conf/internal_token";
+        FORGEJO__oauth2__JWT_SECRET__FILE = "/var/lib/forgejo/custom/conf/oauth2_jwt_secret";
+        FORGEJO__server__LFS_JWT_SECRET__FILE = "/var/lib/forgejo/custom/conf/lfs_jwt_secret";
+      };
+      preStart = ''
+        set -euo pipefail
+        umask 077
+        ensureSecret() {
+          if [ ! -s "$2" ]; then
+            ${lib.getExe forgejo} generate secret "$1" > "$2"
+          fi
+        }
+        ensureSecret SECRET_KEY /var/lib/forgejo/custom/conf/secret_key
+        ensureSecret INTERNAL_TOKEN /var/lib/forgejo/custom/conf/internal_token
+        ensureSecret JWT_SECRET /var/lib/forgejo/custom/conf/oauth2_jwt_secret
+        ensureSecret JWT_SECRET /var/lib/forgejo/custom/conf/lfs_jwt_secret
+        ${pkgs.coreutils}/bin/install -m 0600 ${appConfig} /var/lib/forgejo/custom/conf/app.ini
+        ${forgejo}/bin/environment-to-ini --work-path=/var/lib/forgejo --custom-path=/var/lib/forgejo/custom --config=/var/lib/forgejo/custom/conf/app.ini
+        ${lib.getExe forgejo} migrate
+        ${lib.getExe forgejo} admin regenerate hooks
+      '';
+      serviceConfig = {
+        Type = "notify";
+        User = "appuser";
+        Group = "appuser";
+        WorkingDirectory = "/var/lib/forgejo";
+        ExecStart = "${lib.getExe forgejo} web";
+        UMask = "0077";
+        Restart = "on-failure";
+        RestartSec = 5;
+        TimeoutStartSec = 300;
+        ProtectSystem = "strict";
+        ReadWritePaths = [ "/var/lib/forgejo" ];
+        ProtectHome = true;
+        PrivateTmp = true;
+        PrivateDevices = true;
+        NoNewPrivileges = true;
+        RestrictAddressFamilies = [
+          "AF_UNIX"
+          "AF_INET"
+          "AF_INET6"
+        ];
+      };
     };
-    services.caddy.virtualHosts.${domain}.extraConfig = lib.mkIf config.services.caddy.enable ''
+
+    services.caddy.virtualHosts.${cfg.domain}.extraConfig = lib.mkIf config.services.caddy.enable ''
       ${lib.optionalString config.services.pki.enable "import corp_pki_tls"}
       reverse_proxy 127.0.0.1:9003
     '';
-    services.corpServiceMaintenance.forgejo = {
-      enable = true;
-      inherit domain;
-      stateDir = cfg.stateDir;
-      customDir = cfg.customDir;
-      package = cfg.package;
-      externalSecrets = lib.filter (path: !(beneathState path)) (
-        lib.flatten (lib.mapAttrsToList (_: values: lib.attrValues values) cfg.secrets)
-      );
-    };
   };
 }

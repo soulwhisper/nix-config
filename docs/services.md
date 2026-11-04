@@ -19,6 +19,11 @@ Module sources live in `hosts/_modules/nixos/services/`.
 - CA API: `https://localhost:9700/acme/acme/directory`, loopback only.
 - Forgejo HTTP uses `127.0.0.1:9003`; Git SSH is disabled. Its PostgreSQL cluster
   uses `/run/postgresql-forgejo`, not the host's shared PostgreSQL instance.
+- PKI, Forgejo, and its PG18 unit use the existing appuser (UID/GID1001), with local
+  systemd units and native JSON/INI/config generators. Shared UID ownership is not
+  isolation between applications. Database administration uses a root-only peer map.
+- Controller fish functions use overlay packages `corp-root-ca` and
+  `corp-deployment-tools`; `corp-forgejo` wraps the official server binary.
 - See [the corporate services runbook](corporate-services.md) for provisioning,
   controller commands, rotation, backups, recovery, and activation requirements.
 
