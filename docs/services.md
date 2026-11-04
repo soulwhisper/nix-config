@@ -7,26 +7,6 @@ Module sources live in `hosts/_modules/nixos/services/`.
 
 - All `pip3`-installed Python tooling is replaced by `pkgs.unstable.uv`.
 
-## Corporate PKI and Forgejo
-
-- `nix-dev` runs the online intermediate CA, Caddy, Forgejo, and its private
-  PostgreSQL 18 cluster. It is not the root authority or deployment controller.
-- Production CA material must be supplied through SOPS before activating the
-  enabled host configuration. No root, certificate, or password is generated
-  automatically to replace missing material.
-- Git URL: `https://git.internal.htkrail.com/`; PKI public artifacts:
-  `https://pki.internal.htkrail.com/`.
-- CA API: `https://localhost:9700/acme/acme/directory`, loopback only.
-- Forgejo HTTP uses `127.0.0.1:9003`; Git SSH is disabled. Its PostgreSQL cluster
-  uses `/run/postgresql-forgejo`, not the host's shared PostgreSQL instance.
-- PKI, Forgejo, and its PG18 unit use the existing appuser (UID/GID1001), with local
-  systemd units and native JSON/INI/config generators. Shared UID ownership is not
-  isolation between applications. Database administration uses a root-only peer map.
-- Controller fish functions use overlay packages `corp-root-ca` and
-  `corp-deployment-tools`; `corp-forgejo` wraps the official server binary.
-- See [the corporate services runbook](corporate-services.md) for provisioning,
-  controller commands, rotation, backups, recovery, and activation requirements.
-
 ## Caddy
 
 - All hosts retain `pkgs.caddy-custom`; disabling a provider does not change the
@@ -94,8 +74,7 @@ Fixed allocations should not change; ranges group services by function.
 | Port | Service |
 |---|---|
 | 9000, 9001 | minio / garage / versitygw |
-| 9003 | forgejo HTTP (loopback only) |
-| 9004 | forgejo SSH (reserved; disabled) |
+| 9003 | forgejo loopback |
 
 ### Exporters (9100–9199)
 
@@ -124,13 +103,12 @@ Fixed allocations should not change; ranges group services by function.
 | Port | Service |
 |---|---|
 | 9300 | talos-api |
-| 9400 | gatus |
 
 ### Application development (9700–9799)
 
 | Port | Service |
 |---|---|
-| 9700 | pki / step-ca (loopback only) |
+| 9700 | step-ca loopback |
 
 ### Applications (9800–9999)
 
