@@ -16,6 +16,7 @@
     ./nfs4
     ./nut
     ./openssh
+    ./pki
     ./podman
     ./restic
     ./samba

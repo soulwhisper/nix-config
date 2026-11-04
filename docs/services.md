@@ -7,6 +7,31 @@ Module sources live in `hosts/_modules/nixos/services/`.
 
 - All `pip3`-installed Python tooling is replaced by `pkgs.unstable.uv`.
 
+## Corporate PKI and Forgejo
+
+- `nix-dev` runs the online intermediate CA, Caddy, Forgejo, and its private
+  PostgreSQL 18 cluster. It is not the root authority or deployment controller.
+- Production CA material must be supplied through SOPS before activating the
+  enabled host configuration. No root, certificate, or password is generated
+  automatically to replace missing material.
+- Git URL: `https://git.internal.htkrail.com/`; PKI public artifacts:
+  `https://pki.internal.htkrail.com/`.
+- CA API: `https://localhost:9700/acme/acme/directory`, loopback only.
+- Forgejo HTTP uses `127.0.0.1:9003`; Git SSH is disabled. Its PostgreSQL cluster
+  uses `/run/postgresql-forgejo`, not the host's shared PostgreSQL instance.
+- See [the corporate services runbook](corporate-services.md) for provisioning,
+  controller commands, rotation, backups, recovery, and activation requirements.
+
+## Caddy
+
+- All hosts retain `pkgs.caddy-custom`; disabling a provider does not change the
+  binary or remove its compiled plugin.
+- `modules.services.caddy.cloudflare.enable` defaults to `true`. When disabled,
+  no Cloudflare DNS challenge, email variable, or environment file is configured.
+- `nix-dev` disables Cloudflare and has no Cloudflare SOPS credential. Its PKI and
+  Git sites use the private ACME issuer instead.
+- When Cloudflare is enabled, `modules.services.caddy.authFile` is required.
+
 ## EasyTier
 
 - Servers run via systemd with a sops-provided config file; clients use the GUI.
@@ -64,7 +89,8 @@ Fixed allocations should not change; ranges group services by function.
 | Port | Service |
 |---|---|
 | 9000, 9001 | minio / garage / versitygw |
-| 9003, 9004 | forgejo |
+| 9003 | forgejo HTTP (loopback only) |
+| 9004 | forgejo SSH (reserved; disabled) |
 
 ### Exporters (9100–9199)
 
@@ -99,7 +125,7 @@ Fixed allocations should not change; ranges group services by function.
 
 | Port | Service |
 |---|---|
-| 9700 | postgrest |
+| 9700 | pki / step-ca (loopback only) |
 
 ### Applications (9800–9999)
 

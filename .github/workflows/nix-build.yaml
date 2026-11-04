@@ -77,6 +77,17 @@ jobs:
       - name: Garbage collect build dependencies
         run: nix-collect-garbage
 
+      - name: Check controller tool packages
+        if: matrix.system == 'nix-dev' || matrix.system == 'soulwhisper-studio'
+        env:
+          NIX_SYSTEM: ${{ runner.os == 'macOS' && 'aarch64-darwin' || 'x86_64-linux' }}
+        run: |
+          set -euo pipefail
+          nix build --no-link \
+            ".#packages.${NIX_SYSTEM}.root-ca" \
+            ".#packages.${NIX_SYSTEM}.deployment-tools" \
+            --no-write-lock-file --print-build-logs
+
       - name: Build previous ${{ matrix.system }} system
         run: |
           # New hosts have no previous build on main; skip instead of failing.

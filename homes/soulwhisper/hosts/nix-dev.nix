@@ -3,6 +3,7 @@
   lib,
   pkgs,
   ...
-}: {
-  # placeholder
+}:
+{
+  modules.deployment.enable = false;
 }

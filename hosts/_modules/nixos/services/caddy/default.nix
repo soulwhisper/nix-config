@@ -3,11 +3,18 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.services.caddy;
-in {
+in
+{
   options.modules.services.caddy = {
     enable = lib.mkEnableOption "caddy";
+    cloudflare.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Configure the Cloudflare ACME DNS challenge and its credentials.";
+    };
     authFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -17,7 +24,18 @@ in {
   # certs: /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [80 443 64646];
+    assertions = [
+      {
+        assertion = !cfg.cloudflare.enable || cfg.authFile != null;
+        message = "Caddy Cloudflare DNS challenges require modules.services.caddy.authFile.";
+      }
+    ];
+
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+      64646
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/caddy 0755 caddy caddy - -"
@@ -29,9 +47,11 @@ in {
       dataDir = "/var/lib/caddy";
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
       globalConfig = ''
+        storage file_system /var/lib/caddy
+      ''
+      + lib.optionalString cfg.cloudflare.enable ''
         email {$CLOUDFLARE_EMAIL}
         acme_dns cloudflare {$CLOUDFLARE_DNS_API_TOKEN}
-        storage file_system /var/lib/caddy
       '';
       extraConfig = ''
         (security_headers) {
@@ -53,8 +73,10 @@ in {
     };
 
     systemd.services.caddy.serviceConfig.ProtectHome = lib.mkForce false; # avoid file_server 403
-    systemd.services.caddy.serviceConfig.EnvironmentFile = ["${cfg.authFile}"];
-    systemd.services.caddy.serviceConfig.AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
-    systemd.services.caddy.serviceConfig.CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
+    systemd.services.caddy.serviceConfig.EnvironmentFile = lib.optionals (
+      cfg.cloudflare.enable && cfg.authFile != null
+    ) [ cfg.authFile ];
+    systemd.services.caddy.serviceConfig.AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+    systemd.services.caddy.serviceConfig.CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
   };
 }

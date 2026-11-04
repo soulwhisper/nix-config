@@ -7,15 +7,21 @@ creation rules and key paths.
 ## Workflow
 
 ```shell
-# point sops at the age key (adjust path, see "Key placement")
-export SOPS_AGE_KEY_FILE=keys.txt
+# Point SOPS at the existing age identity; never print its contents.
+export SOPS_AGE_KEY_FILE="$HOME/.config/age/keys.txt"
 
-# decrypt in place
-sops --verbose -i -d secrets.sops.yaml
-
-# encrypt in place
-sops --verbose -i -e secrets.sops.yaml
+# Edit through SOPS; only encrypted content is written back to the repository.
+sops hosts/nix-dev/secrets.sops.yaml
 ```
+
+Do not decrypt repository files in place or commit plaintext staging files.
+Pass secret paths to services, not `builtins.readFile` results.
+
+Corporate CA material is provisioned as one validated issuer set through the
+controller tools. The enabled `nix-dev` configuration deliberately has no dummy
+PKI values: populate the four declared `pki/*` values before activation.
+See [the corporate services runbook](corporate-services.md). Root signing keys
+and root-CA state must not be encrypted to the deployed host's age identity.
 
 ## Key placement
 

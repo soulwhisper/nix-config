@@ -23,23 +23,31 @@ and `homes/_modules/`. Don't hardcode host names from memory — read them.
 
 Use the just recipes (`.justfiles/nixos.just`, `.justfiles/darwin.just`):
 
-- `just nixos build|switch <HOST>`
+- `just nixos build <HOST> <FULL_REVISION> [--builder ssh://user@builder]`
+- `just nixos plan <HOST> <TARGET> <FULL_REVISION> <SYSTEM> <PLAN>`
+- `just nixos diff <PLAN>` then `just nixos deploy <PLAN> <REVIEWED_DEPLOY_APPROVAL>`
+- `just nixos rollback <PLAN> <REVIEWED_ROLLBACK_APPROVAL>`
 - `just darwin initialize|build|switch <HOST>`
 - `just lint` — prek across the repo
 
-Mutation discipline: build + diff before switch (`nvd diff
-/run/current-system result`), state the rollback (`nixos-rebuild
---rollback` / generation select), confirm, then apply. Activation commands
-are gated by omp's approval settings.
+Mutation discipline: build the exact clean Git revision and inspect the closure
+diff before activation. NixOS plans bind target, revision, system path and previous
+profile, with distinct deploy/rollback approvals. Darwin retains its existing
+generation rollback workflow. Activation remains gated by omp's approval settings.
 
-## Known gaps in the current NixOS tooling — say so, don't improvise
+## Deployment boundaries
 
-- `nixos.just` has only `build`/`switch`, local-only. There is **no
-  `initialize`/bootstrap recipe** (darwin has one), **no remote deploy**
-  (`--target-host` to e.g. nix-dev), and **no rollback/dry-run recipe**.
-- If a task needs one of those, name the gap and propose extending
-  `nixos.just` as its own change — do not hand-run ad-hoc equivalents
-  against a host without surfacing it.
+- NixOS recipes delegate to `deploymentctl`; there is no old local-only switch
+  signature. Keep plans outside the clean checkout and never select `nix-dev` as
+  an implicit builder. Darwin controllers need an explicit Linux builder or an
+  exact prebuilt closure.
+- There is still no NixOS `initialize`/bootstrap recipe. Do not improvise remote
+  bootstrap commands without a separately reviewed process.
+- A generation rollback does not reverse database migrations or CA revocations.
+  Use the separately approved recovery workflow when persistent state is involved.
+- `nix-dev` enables PKI/Forgejo but requires real issuer SOPS values before any
+  production build/switch. See `docs/corporate-services.md`; never bypass the
+  missing-secret guard or generate a substitute production authority.
 
 ## Secrets (sops-nix)
 

@@ -2,11 +2,13 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.krewfile.homeManagerModules.krewfile
 
     ./customization
+    ./deployment
     ./development
     ./kubernetes
     ./security
