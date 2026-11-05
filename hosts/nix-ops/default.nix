@@ -40,6 +40,9 @@
         unifi-server.enable = true; # ep=:9801
         vector.enable = true; # ep=:514
 
+        # : Agents
+        hermes-agent.enable = true; # native, package pinned v0.22.7
+
         # : Services migrated to NAS
         versitygw.enable = false; # ep=:9000,9001
         meshcentral.enable = false; # ep=:9203

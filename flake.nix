@@ -12,6 +12,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # hermes-agent - native agent package, pinned to the upstream v0.22.7 tag.
+    # Keep upstream's locked nixpkgs: its package carries a patched patchelf
+    # that does not apply to the older patchelf in nixos-26.05.
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent/v0.22.7";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     # nix-darwin - nix modules for darwin (MacOS)
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-26.05";
