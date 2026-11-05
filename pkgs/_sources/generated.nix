@@ -8,13 +8,13 @@
 {
   caddy-core = {
     pname = "caddy-core";
-    version = "v2.11.8";
+    version = "v2.11.9";
     src = fetchFromGitHub {
       owner = "caddyserver";
       repo = "caddy";
-      rev = "v2.11.8";
+      rev = "v2.11.9";
       fetchSubmodules = false;
-      sha256 = "sha256-6xwOnB9NBgvhusYUGm5HXz7t+d2duF/Bzb6nY54AIBA=";
+      sha256 = "sha256-K7irjePU998bcbKANXpTf0npirSh+tkc8D3x4JmRdbg=";
     };
   };
   caddy-plugin-cloudflare = {
