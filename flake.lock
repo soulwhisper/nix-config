@@ -95,17 +95,13 @@
       },
       "locked": {
         "lastModified": 1793735355,
-        "narHash": "sha256-g7ZPmqVIYx9tOcUdkZ0OylmeKuw2HrCgu1Kq5fEOrs4=",
-        "owner": "NousResearch",
-        "repo": "hermes-agent",
-        "rev": "b200f5bc60e31588ba2cb60e288029c4a54ba5fa",
-        "type": "github"
+        "narHash": "sha256-VK0GdSkklak3sGoxcxsbj0HxXuepkpFFe/2i8aV4xRA=",
+        "type": "tarball",
+        "url": "https://github.com/NousResearch/hermes-agent/archive/b200f5bc60e31588ba2cb60e288029c4a54ba5fa.tar.gz"
       },
       "original": {
-        "owner": "NousResearch",
-        "ref": "v0.22.7",
-        "repo": "hermes-agent",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://github.com/NousResearch/hermes-agent/archive/b200f5bc60e31588ba2cb60e288029c4a54ba5fa.tar.gz"
       }
     },
     "home-manager": {

@@ -16,7 +16,8 @@
     # Keep upstream's locked nixpkgs: its package carries a patched patchelf
     # that does not apply to the older patchelf in nixos-26.05.
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/v0.22.7";
+      # v0.22.7 tag commit; tarball input keeps CI and local hashes identical.
+      url = "tarball+https://github.com/NousResearch/hermes-agent/archive/b200f5bc60e31588ba2cb60e288029c4a54ba5fa.tar.gz";
       inputs.home-manager.follows = "home-manager";
     };
 

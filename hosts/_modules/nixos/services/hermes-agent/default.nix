@@ -16,6 +16,9 @@ let
   defaultPackage = hermesPackages.minimal.override {
     extraDependencyGroups = cfg.extraDependencyGroups;
     version = "0.22.7";
+    # The tarball input carries no git metadata; keep the release stamp intact.
+    rev = "b200f5bc60e31588ba2cb60e288029c4a54ba5fa";
+    lastModified = 1793735355;
   };
 in
 {
