@@ -58,7 +58,11 @@ in
           "dashboard"
         ];
         default = "none";
-        description = "Run `hermes serve` or `hermes dashboard` next to the gateway.";
+        description = ''
+          `serve` runs the headless JSON-RPC/WebSocket backend used by Hermes
+          Desktop and remote clients. `dashboard` includes the same backend
+          plus the browser admin UI on the same port.
+        '';
       };
 
       host = lib.mkOption {
@@ -118,6 +122,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Same plaintext firewall style as the other service modules.
+    networking.firewall.allowedTCPPorts = [
+      8642
+    ]
+    ++ lib.optional (cfg.backend.mode != "none") cfg.backend.port;
+
     services.hermes-agent = {
       enable = true;
       package = cfg.package;
