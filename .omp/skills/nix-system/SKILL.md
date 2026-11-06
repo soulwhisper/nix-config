@@ -1,6 +1,6 @@
 ---
 name: nix-system
-description: Use whenever the request involves NixOS or nix-darwin hosts, home-manager, nix flakes, rebuilding/switching a system, generations, or secrets via sops-nix/age (*.sops.*, *.age, ~/.config/{sops,age}). Trigger for casual mentions like "rebuild", "switch", "update the flake", "add a module", "add an env var/secret", or naming a host.
+description: Use whenever the request involves NixOS or nix-darwin hosts, home-manager, nix flakes, rebuilding/switching a system, generations, secrets via sops-nix/age (*.sops.*, *.age, ~/.config/{sops,age}), or Chinese/GBK filename and encoding issues. Trigger for casual mentions like "rebuild", "switch", "update the flake", "add a module", "add an env var/secret", "GBK/Chinese filename", or naming a host.
 ---
 
 # Nix system operations (nix-config)
@@ -78,6 +78,45 @@ Rules:
   hash with the package venv's Python, `sops set` the hash, then restart
   `hermes-backend.service`. The soulwhisper PAM secret is a yescrypt hash and
   cannot be used as the dashboard credential.
+
+## Chinese / GBK filenames (agent hint)
+
+NixOS hosts here use a UTF-8 locale (`en_US.UTF-8`). Files from Chinese
+Windows or legacy zip/tar downloads often carry **GBK/GB18030 filename
+bytes**, which are not valid UTF-8. Symptoms: `ls` shows `M-...`/`\xNN`
+escapes, tools say `illegal byte sequence`, or an agent sees replacement
+characters and cannot open the path.
+
+Do not "fix" this with a host-wide `zh_CN` locale, CJK fonts, or SSH
+`AcceptEnv`/`SendEnv`:
+
+- `zh_CN.UTF-8` still rejects GBK filename bytes;
+- `zh_CN.GB18030` decodes them but emits GB18030, which breaks UTF-8
+  terminals and JSON;
+- fonts only affect glyph rendering, and terminal fonts are client-side;
+- SSH locale propagation does not convert filename bytes.
+
+Normalize at the ingestion boundary instead:
+
+```python
+python3 - <<'PY'
+import os
+for b in os.listdir(b'.'):
+    if b.lower().endswith(b'.docx'):
+        try:
+            b.decode('utf-8')
+        except UnicodeDecodeError:
+            os.rename(b, b.decode('gbk').encode('utf-8'))
+PY
+```
+
+For transfers, `rsync --iconv=GB18030,UTF-8` converts names; `scp`/`sftp`
+preserve bytes, so convert after download or at the source. DOCX contents
+are UTF-8 inside the zip/XML; usually only the filename is GBK.
+
+**Agent hint:** when a path has escaped/invalid bytes, decode/rename it to
+UTF-8 before reading or passing it to a tool. Do not propose a NixOS
+locale/font change as the fix; the host already runs UTF-8.
 
 ## Secrets (sops-nix)
 
