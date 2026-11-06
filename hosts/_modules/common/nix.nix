@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   nix = {
     registry = {
       stable.flake = inputs.nixpkgs;
@@ -14,18 +15,15 @@
     optimise.automatic = true;
 
     settings = {
-      substituters =
-        [
-          "https://soulwhisper.cachix.org"
-          "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-        ]
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-          "https://nix-community.cachix.org"
-          "https://numtide.cachix.org"
-        ];
+      substituters = [
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      ]
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        "https://nix-community.cachix.org"
+        "https://numtide.cachix.org"
+      ];
 
       trusted-public-keys = [
-        "soulwhisper.cachix.org-1:GWSDjQwU45RQZwMmxiHKT/IDXsCoadlig+7CNCeocT4="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       ];
@@ -61,7 +59,7 @@
     };
 
     # Add nixpkgs input to NIX_PATH
-    nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
 
     # garbage collection
     gc = {

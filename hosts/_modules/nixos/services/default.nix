@@ -8,6 +8,7 @@
     ./forgejo
     ./garage
     ./gatus
+    ./hermes-agent
     ./home-assistant
     ./kms
     ./meshcentral

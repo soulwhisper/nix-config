@@ -74,6 +74,16 @@ jobs:
         with:
           name: soulwhisper
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      # Cachix writes a user nix.conf whose `substituters` replaces the
+      # installer default. Keep cache.nixos.org as a fallback so a new
+      # package (e.g. a hermes-agent bump) can fetch stdenv/bootstrap paths
+      # instead of building them from GNU mirrors.
+      - name: Add cache.nixos.org fallback
+        run: |
+          mkdir -p ~/.config/nix
+          touch ~/.config/nix/nix.conf
+          echo 'extra-substituters = https://cache.nixos.org' >> ~/.config/nix/nix.conf
+          echo 'extra-trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=' >> ~/.config/nix/nix.conf
       - name: Garbage collect build dependencies
         run: nix-collect-garbage
 

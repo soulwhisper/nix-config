@@ -1,8 +1,10 @@
 {
   config,
+  lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = {
     environment.systemPackages = [
       pkgs.sops
@@ -21,18 +23,44 @@
       secrets = {
         "networking/easytier/config" = {
           owner = config.users.users.appuser.name;
-          restartUnits = ["easytier.service"];
+          restartUnits = [ "easytier.service" ];
           sopsFile = ./nixos.sops.yaml;
         };
         "networking/proxy/subscription" = {
           owner = config.users.users.appuser.name;
-          restartUnits = ["mihomo.service"];
+          restartUnits = [ "mihomo.service" ];
           sopsFile = ./nixos.sops.yaml;
         };
         "users/soulwhisper/password" = {
           neededForUsers = true;
           sopsFile = ./nixos.sops.yaml;
         };
+        # Dashboard basic auth keeps only a scrypt hash generated from
+        # temp/admin.pass; the plaintext never enters sops or the store.
+        "services/hermes/dashboard_password_hash" =
+          lib.mkIf (config.modules.services.hermes-agent.enable or false)
+            {
+              sopsFile = ./nixos.sops.yaml;
+            };
+        "services/hermes/dashboard_secret" =
+          lib.mkIf (config.modules.services.hermes-agent.enable or false)
+            {
+              sopsFile = ./nixos.sops.yaml;
+            };
+      };
+
+      # The module merges environmentFiles into $HERMES_HOME/.env at
+      # activation; the basic-auth provider reads these at startup.
+      templates."hermes-dashboard-env" = lib.mkIf (config.modules.services.hermes-agent.enable or false) {
+        content = ''
+          HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH=${
+            config.sops.placeholder."services/hermes/dashboard_password_hash"
+          }
+          HERMES_DASHBOARD_BASIC_AUTH_SECRET=${config.sops.placeholder."services/hermes/dashboard_secret"}
+        '';
+        restartUnits = lib.optional (
+          config.modules.services.hermes-agent.backend.mode != "none"
+        ) "hermes-backend.service";
       };
     };
   };
