@@ -41,6 +41,39 @@ are gated by omp's approval settings.
   `nixos.just` as its own change — do not hand-run ad-hoc equivalents
   against a host without surfacing it.
 
+## Bumping hermes-agent
+
+`hermes-agent` is pinned by a tarball input at an exact tag commit, plus a
+display stamp in the wrapper module. Both must move together:
+
+- `flake.nix` → `inputs.hermes-agent.url` (`archive/<sha>.tar.gz`)
+- `hosts/_modules/nixos/services/hermes-agent/default.nix` → `version`,
+  `rev`, `lastModified`
+- `flake.lock` → regenerate, never hand-edit
+
+```bash
+tag=$(gh api repos/NousResearch/hermes-agent/releases/latest --jq .tag_name)
+sha=$(git ls-remote https://github.com/NousResearch/hermes-agent "refs/tags/$tag^{}" | cut -f1)
+epoch=$(date -u -d "$(gh api "repos/NousResearch/hermes-agent/commits/$sha" --jq .commit.committer.date)" +%s)
+# edit flake.nix URL and the three module constants with $tag/${tag#v}, $sha, $epoch
+nix flake update hermes-agent
+nix build .#nixosConfigurations.nix-ops.config.services.hermes-agent.package
+./result/bin/hermes --version
+```
+
+Rules:
+
+- Keep upstream's locked nixpkgs. Its `pm-packages.nix` patches patchelf
+  0.19.2; nixos-26.05 has 0.15.2 and the patch does not apply.
+- The existing `update-flake-lock` workflow cannot chase tags; this pin is
+  manual unless a tag-bump workflow is added.
+- Dashboard basic auth uses the bundled `dashboard_auth/basic` provider:
+  `services.hermes-agent.settings.dashboard.basic_auth.username = "admin"`
+  and the password + signing secret come from the sops template
+  `hermes-dashboard-env` (`services/hermes/dashboard_password`,
+  `services/hermes/dashboard_secret`). The soulwhisper password secret is a
+  yescrypt PAM hash and cannot be reused as a plaintext password.
+
 ## Secrets (sops-nix)
 
 This repo uses **sops-nix** with **age** keys. Secrets are encrypted in
