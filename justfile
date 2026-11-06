@@ -25,7 +25,7 @@ cleanup:
   sudo nix-collect-garbage --delete-older-than 7d
   nix-collect-garbage --delete-older-than 7d
 
-[doc('Bootstrap dev environment: mise up, rtk init, omp seed')]
+[doc('Bootstrap dev environment: mise up, rtk init')]
 [script]
 bootstrap:
   #!/usr/bin/env bash
@@ -57,80 +57,4 @@ bootstrap:
   echo "omp $(mise x -- omp --version 2>/dev/null || echo 'unknown')"
   echo ""
 
-  # ---- 5. seed user-global omp assets -> ~/.omp/agent/ (idempotent) ----
-  # Source split: .omp-global/ holds USER-GLOBAL assets (seeded here);
-  # .omp/ holds PROJECT-scoped assets (omp discovers them natively per-repo,
-  # never seed). Copy-if-absent: updates and deletions are synced manually.
-  AGENT="$HOME/.omp/agent"
-  REPO="{{invocation_directory()}}"
-  if [ -z "${HOME:-}" ]; then
-    echo "error: HOME is not set" >&2
-    exit 1
-  fi
-
-  _seed_dir() {
-    local src="$1" dst="$2" label="$3"
-    [ -d "$src" ] || return 0
-    mkdir -p "$dst"
-    local added=0 skipped=0
-    while IFS= read -r -d "" file; do
-      rel="${file#$src/}"
-      if [ ! -e "$dst/$rel" ]; then
-        mkdir -p "$(dirname "$dst/$rel")"
-        cp -p "$file" "$dst/$rel"
-        ((++added))
-      else
-        ((++skipped))
-      fi
-    done < <(find "$src" -type f -print0)
-    echo "  ${label}: +${added} new, ${skipped} existing"
-  }
-
-  echo ":: user-global assets (.omp-global/ -> ~/.omp/agent/)"
-  _seed_dir "$REPO/.omp-global/skills" "$AGENT/skills" "skills" || true
-  echo ""
-
-  # ---- 6. fetch/update remote skills ----
-  fetch_github_skill() {
-    local spec="$1" name="$2"
-    local owner repo ref subdir
-    owner="${spec%%/*}"; spec="${spec#*/}"
-    repo="${spec%%/*}";  spec="${spec#*/}"
-    subdir="${spec%%@*}"; ref="${spec##*@}"
-
-    local cache="$HOME/.cache/omp-skills/${owner}_${repo}_${ref//\//_}"
-    if [ -d "$cache" ]; then
-      echo "  ↻ ${name}: pulling ${ref}..."
-      git -C "$cache" fetch --depth 1 origin "$ref" 2>/dev/null || true
-      git -C "$cache" checkout -q FETCH_HEAD 2>/dev/null || true
-    else
-      echo "  ↓ ${name}: cloning ${owner}/${repo}@${ref}..."
-      git clone --depth 1 --branch "$ref" \
-        "https://github.com/${owner}/${repo}.git" "$cache" >/dev/null 2>&1
-    fi
-
-    local src="$cache/${subdir:-.}"
-    local dst="$AGENT/skills/$name"
-    if [ -d "$src/SKILL.md" ]; then src="$src/SKILL.md"; fi
-    if [ ! -e "$dst" ]; then
-      mkdir -p "$(dirname "$dst")"
-      if [ -f "$src" ]; then
-        cp -p "$src" "$dst"
-      else
-        cp -r "$src" "$dst"
-      fi
-      echo "    + installed"
-    else
-      echo "    ✓ up to date"
-    fi
-  }
-
-  echo ":: remote skills"
-  # Add remote skill specs below.
-  # Format: fetch_github_skill "owner/repo/subdir@ref" "skill-name"
-  # Example:
-  # fetch_github_skill "anthropics/skills/skills/pdf@b0cbd3df" "pdf"
-
-  echo "  (no remote skills configured)"
-  echo ""
   echo "Done. Provider config is managed via Nix."

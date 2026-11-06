@@ -202,7 +202,7 @@ home.sessionVariables.DEEPSEEK_API_KEY =
 
 ### Pre-commit safety net
 
-`prek` runs a secret scanner at pre-commit (see the `code-review` skill).
+`prek` runs a secret scanner at pre-commit (see the `code-review` skill in soulwhisper/skills).
 Never bypass with `--no-verify`; investigate. False positives are usually
 example values — replace with `REDACTED` or allowlist with a path scope.
 
