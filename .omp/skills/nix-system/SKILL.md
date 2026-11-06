@@ -1,6 +1,6 @@
 ---
 name: nix-system
-description: Use whenever the request involves NixOS or nix-darwin hosts, home-manager, nix flakes, rebuilding/switching a system, generations, or secrets via sops-nix/age (*.sops.*, *.age, ~/.config/{sops,age}). Trigger for casual mentions like "rebuild", "switch", "update the flake", "add a module", "add an env var/secret", or naming a host.
+description: Use whenever the request involves NixOS or nix-darwin hosts, home-manager, nix flakes, rebuilding/switching a system, generations, secrets via sops-nix/age (*.sops.*, *.age, ~/.config/{sops,age}), or Chinese/GBK filename and encoding issues. Trigger for casual mentions like "rebuild", "switch", "update the flake", "add a module", "add an env var/secret", "GBK/Chinese filename", or naming a host.
 ---
 
 # Nix system operations (nix-config)
@@ -78,6 +78,68 @@ Rules:
   hash with the package venv's Python, `sops set` the hash, then restart
   `hermes-backend.service`. The soulwhisper PAM secret is a yescrypt hash and
   cannot be used as the dashboard credential.
+
+## Chinese / GBK filenames (agent requirement)
+
+NixOS hosts here use a UTF-8 locale (`en_US.UTF-8`). Files from Chinese
+Windows or legacy zip/tar downloads often carry **GBK/GB18030 filename
+bytes**, which are not valid UTF-8. Symptoms: `ls` shows `M-...`/`\xNN`
+escapes, tools say `illegal byte sequence`, or an agent sees replacement
+characters and cannot open the path.
+
+Do not "fix" this with a host-wide `zh_CN` locale, CJK fonts, or SSH
+`AcceptEnv`/`SendEnv`:
+
+- `zh_CN.UTF-8` still rejects GBK filename bytes;
+- `zh_CN.GB18030` decodes them but emits GB18030, which breaks UTF-8
+  terminals and JSON;
+- fonts only affect glyph rendering, and terminal fonts are client-side;
+- SSH locale propagation does not convert filename bytes.
+
+**Agent requirement:** when you detect a GBK/GB18030 filename (escaped
+bytes, `illegal byte sequence`, replacement characters, or a name that is
+not valid UTF-8), you MUST rename it to UTF-8 **in place** in the directory
+where it lives — not only use a temporary decoded path for reading. Rename
+every affected file/dir in that directory (bottom-up) so `ls`, git, later
+agents and human review all see the same UTF-8 names. Only the name changes;
+the file content is not re-encoded.
+
+```python
+python3 - <<'PY'
+import os
+for dirpath, dirnames, filenames in os.walk(b'.', topdown=False):
+    for name in filenames + dirnames:
+        path = os.path.join(dirpath, name)
+        try:
+            name.decode('utf-8')
+        except UnicodeDecodeError:
+            target = os.path.join(dirpath, name.decode('gb18030').encode('utf-8'))
+            if os.path.lexists(target):
+                raise SystemExit(f"target exists, refusing to overwrite: {target!r}")
+            os.rename(path, target)
+            print(f"{path!r} -> {target!r}")
+PY
+```
+
+- **Read**: after the rename, use the UTF-8 path. Do not pass a GBK path to
+  Python/Node/Hermes or any tool that expects UTF-8.
+- **Output**: when you create or rename a file from Chinese titles/metadata,
+  write the name as UTF-8. If a tool returns a GBK name, normalize it before
+  writing, committing or handing it off; never emit GBK filename bytes.
+- **Human review**: the rename must be visible in `ls`, `git status` and the
+  PR diff. Do not keep a hidden copy or only an in-memory mapping; a review
+  later must see the UTF-8 name.
+- **Safety**: check the target with `os.path.lexists`; do not overwrite.
+  Apply to the containing directory, not only the single file, so mixed
+  directories do not keep stale GBK names. If a target exists, stop and
+  report it instead of guessing.
+- **Transfers**: `rsync --iconv=GB18030,UTF-8` converts names; `scp`/`sftp`
+  preserve bytes, so convert after download or at the source.
+- **Do not** propose a host-wide `zh_CN` locale, CJK font, or SSH locale
+  change as the fix; the host already runs UTF-8.
+
+DOCX contents are UTF-8 inside the zip/XML; usually only the filename is
+GBK.
 
 ## Secrets (sops-nix)
 
