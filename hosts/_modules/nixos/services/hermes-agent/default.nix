@@ -15,10 +15,10 @@ let
   # pulls many optional integrations that are not needed here.
   defaultPackage = hermesPackages.minimal.override {
     extraDependencyGroups = cfg.extraDependencyGroups;
-    version = "0.22.7";
+    version = "0.23.0";
     # The tarball input carries no git metadata; keep the release stamp intact.
-    rev = "b200f5bc60e31588ba2cb60e288029c4a54ba5fa";
-    lastModified = 1793735355;
+    rev = "2bd378ed1b8d6bf2192cb26e0a55ff3091e6bd19";
+    lastModified = 1793908658;
   };
 in
 {
@@ -35,7 +35,7 @@ in
       defaultText = lib.literalExpression ''
         inputs.hermes-agent.packages.<system>.minimal.override {
           extraDependencyGroups = [ "feishu" ];
-          version = "0.22.7";
+          version = "0.23.0";
         }
       '';
       description = "Hermes Agent package. Defaults to the upstream minimal variant plus the configured extras.";
@@ -145,6 +145,13 @@ in
         inherit (cfg.backend) mode host port;
       };
     };
+
+    # Dashboard basic auth: the username is non-secret, while the password
+    # and session-signing secret arrive through the sops template above.
+    services.hermes-agent.settings.dashboard.basic_auth.username = "admin";
+    services.hermes-agent.environmentFiles = [
+      config.sops.templates."hermes-dashboard-env".path
+    ];
 
     # Keep config.yaml/.env editable at runtime. Nix-managed keys still
     # override on activation, but CLI writes are not blocked.
