@@ -68,11 +68,16 @@ Rules:
 - The existing `update-flake-lock` workflow cannot chase tags; this pin is
   manual unless a tag-bump workflow is added.
 - Dashboard basic auth uses the bundled `dashboard_auth/basic` provider:
-  `services.hermes-agent.settings.dashboard.basic_auth.username = "admin"`
-  and the password + signing secret come from the sops template
-  `hermes-dashboard-env` (`services/hermes/dashboard_password`,
-  `services/hermes/dashboard_secret`). The soulwhisper password secret is a
-  yescrypt PAM hash and cannot be reused as a plaintext password.
+  username `admin`; the password is read from the gitignored
+  `temp/admin.pass`, hashed with the package's `hash_password`, and stored as
+  the sops secret `services/hermes/dashboard_password_hash`. The signing
+  secret is `services/hermes/dashboard_secret`. Both are rendered through
+  `hermes-dashboard-env` into `HERMES_HOME/.env`. The plaintext never enters
+  sops or the Nix store.
+- To rotate: write the new password to `temp/admin.pass`, compute the scrypt
+  hash with the package venv's Python, `sops set` the hash, then restart
+  `hermes-backend.service`. The soulwhisper PAM secret is a yescrypt hash and
+  cannot be used as the dashboard credential.
 
 ## Secrets (sops-nix)
 

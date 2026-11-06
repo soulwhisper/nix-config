@@ -35,10 +35,9 @@
           neededForUsers = true;
           sopsFile = ./nixos.sops.yaml;
         };
-        # Dashboard basic auth is a separate generated password: the
-        # soulwhisper password above is a yescrypt hash for PAM and cannot be
-        # used as the plaintext credential the dashboard hashes.
-        "services/hermes/dashboard_password" =
+        # Dashboard basic auth keeps only a scrypt hash generated from
+        # temp/admin.pass; the plaintext never enters sops or the store.
+        "services/hermes/dashboard_password_hash" =
           lib.mkIf (config.modules.services.hermes-agent.enable or false)
             {
               sopsFile = ./nixos.sops.yaml;
@@ -54,7 +53,9 @@
       # activation; the basic-auth provider reads these at startup.
       templates."hermes-dashboard-env" = lib.mkIf (config.modules.services.hermes-agent.enable or false) {
         content = ''
-          HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=${config.sops.placeholder."services/hermes/dashboard_password"}
+          HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH=${
+            config.sops.placeholder."services/hermes/dashboard_password_hash"
+          }
           HERMES_DASHBOARD_BASIC_AUTH_SECRET=${config.sops.placeholder."services/hermes/dashboard_secret"}
         '';
         restartUnits = lib.optional (
