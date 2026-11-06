@@ -79,7 +79,7 @@ Rules:
   `hermes-backend.service`. The soulwhisper PAM secret is a yescrypt hash and
   cannot be used as the dashboard credential.
 
-## Chinese / GBK filenames (agent hint)
+## Chinese / GBK filenames (agent requirement)
 
 NixOS hosts here use a UTF-8 locale (`en_US.UTF-8`). Files from Chinese
 Windows or legacy zip/tar downloads often carry **GBK/GB18030 filename
@@ -96,27 +96,50 @@ Do not "fix" this with a host-wide `zh_CN` locale, CJK fonts, or SSH
 - fonts only affect glyph rendering, and terminal fonts are client-side;
 - SSH locale propagation does not convert filename bytes.
 
-Normalize at the ingestion boundary instead:
+**Agent requirement:** when you detect a GBK/GB18030 filename (escaped
+bytes, `illegal byte sequence`, replacement characters, or a name that is
+not valid UTF-8), you MUST rename it to UTF-8 **in place** in the directory
+where it lives — not only use a temporary decoded path for reading. Rename
+every affected file/dir in that directory (bottom-up) so `ls`, git, later
+agents and human review all see the same UTF-8 names. Only the name changes;
+the file content is not re-encoded.
 
 ```python
 python3 - <<'PY'
 import os
-for b in os.listdir(b'.'):
-    if b.lower().endswith(b'.docx'):
+for dirpath, dirnames, filenames in os.walk(b'.', topdown=False):
+    for name in filenames + dirnames:
+        path = os.path.join(dirpath, name)
         try:
-            b.decode('utf-8')
+            name.decode('utf-8')
         except UnicodeDecodeError:
-            os.rename(b, b.decode('gbk').encode('utf-8'))
+            target = os.path.join(dirpath, name.decode('gb18030').encode('utf-8'))
+            if os.path.lexists(target):
+                raise SystemExit(f"target exists, refusing to overwrite: {target!r}")
+            os.rename(path, target)
+            print(f"{path!r} -> {target!r}")
 PY
 ```
 
-For transfers, `rsync --iconv=GB18030,UTF-8` converts names; `scp`/`sftp`
-preserve bytes, so convert after download or at the source. DOCX contents
-are UTF-8 inside the zip/XML; usually only the filename is GBK.
+- **Read**: after the rename, use the UTF-8 path. Do not pass a GBK path to
+  Python/Node/Hermes or any tool that expects UTF-8.
+- **Output**: when you create or rename a file from Chinese titles/metadata,
+  write the name as UTF-8. If a tool returns a GBK name, normalize it before
+  writing, committing or handing it off; never emit GBK filename bytes.
+- **Human review**: the rename must be visible in `ls`, `git status` and the
+  PR diff. Do not keep a hidden copy or only an in-memory mapping; a review
+  later must see the UTF-8 name.
+- **Safety**: check the target with `os.path.lexists`; do not overwrite.
+  Apply to the containing directory, not only the single file, so mixed
+  directories do not keep stale GBK names. If a target exists, stop and
+  report it instead of guessing.
+- **Transfers**: `rsync --iconv=GB18030,UTF-8` converts names; `scp`/`sftp`
+  preserve bytes, so convert after download or at the source.
+- **Do not** propose a host-wide `zh_CN` locale, CJK font, or SSH locale
+  change as the fix; the host already runs UTF-8.
 
-**Agent hint:** when a path has escaped/invalid bytes, decode/rename it to
-UTF-8 before reading or passing it to a tool. Do not propose a NixOS
-locale/font change as the fix; the host already runs UTF-8.
+DOCX contents are UTF-8 inside the zip/XML; usually only the filename is
+GBK.
 
 ## Secrets (sops-nix)
 
