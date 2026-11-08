@@ -43,13 +43,13 @@
   };
   inir = {
     pname = "inir";
-    version = "v2.33.0";
+    version = "v3.0.1";
     src = fetchFromGitHub {
       owner = "snowarch";
       repo = "iNiR";
-      rev = "v2.33.0";
+      rev = "v3.0.1";
       fetchSubmodules = false;
-      sha256 = "sha256-+0rQz1y6wAIv1T4xAG3udY6bZSpTZ2nhdS9nzTCijkw=";
+      sha256 = "sha256-MtTvqFGsPDncRYO5JJddJkPKOqKBDpTDcBfrfMSzZnk=";
     };
   };
   kubecolor-catppuccin = {

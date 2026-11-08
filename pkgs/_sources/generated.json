@@ -76,12 +76,12 @@
             "name": null,
             "owner": "snowarch",
             "repo": "iNiR",
-            "rev": "v2.33.0",
-            "sha256": "sha256-+0rQz1y6wAIv1T4xAG3udY6bZSpTZ2nhdS9nzTCijkw=",
+            "rev": "v3.0.1",
+            "sha256": "sha256-MtTvqFGsPDncRYO5JJddJkPKOqKBDpTDcBfrfMSzZnk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v2.33.0"
+        "version": "v3.0.1"
     },
     "kubecolor-catppuccin": {
         "cargoLock": null,
