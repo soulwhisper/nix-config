@@ -146,6 +146,7 @@ in
       };
       path = [
         cfg.package
+        pkgs.unstable.rtk
         pkgs.bash
         pkgs.coreutils
         pkgs.git
