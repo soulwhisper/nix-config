@@ -12,12 +12,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hermes-agent - native agent package, pinned to the upstream v0.23.0 tag.
+    # hermes-agent - native agent package, pinned to the upstream v0.23.1 tag.
     # Keep upstream's locked nixpkgs: its package carries a patched patchelf
     # that does not apply to the older patchelf in nixos-26.05.
     hermes-agent = {
-      # v0.23.0 tag commit; tarball input keeps CI and local hashes identical.
-      url = "tarball+https://github.com/NousResearch/hermes-agent/archive/2bd378ed1b8d6bf2192cb26e0a55ff3091e6bd19.tar.gz";
+      # v0.23.1 tag commit; tarball input keeps CI and local hashes identical.
+      url = "tarball+https://github.com/NousResearch/hermes-agent/archive/3b421578588243f920886e6fe79a6faa87ea026e.tar.gz";
       inputs.home-manager.follows = "home-manager";
     };
 
