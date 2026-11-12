@@ -21,53 +21,18 @@ let
     lastModified = 1794270273;
   };
 
-  user = "hermes";
-  group = "hermes";
-  stateDir = "/var/lib/hermes";
-  hermesHome = "${stateDir}/.hermes";
-  workingDirectory = "${stateDir}/workspace";
-  backendPort = 9119;
-
-  # Hermes owns $HERMES_HOME/config.yaml and $HERMES_HOME/.env at runtime.
-  # This module never writes either file: it supplies the units, the
-  # directories and the package. The dashboard credentials arrive as a
-  # systemd EnvironmentFile= from a host secret, so nothing is copied into
-  # HERMES_HOME.
-
-  unitEnvironment = {
-    HOME = stateDir;
-    HERMES_HOME = hermesHome;
-    HERMES_MANAGED = "false";
-  };
-
-  # rtk backs the rtk-rewrite plugin; git and coreutils cover the terminal tool.
-  unitPath = [
-    cfg.package
-    pkgs.unstable.rtk
-    pkgs.bash
-    pkgs.coreutils
-    pkgs.git
-  ];
-
   serviceConfig = {
-    User = user;
-    Group = group;
-    WorkingDirectory = workingDirectory;
+    User = hermes;
+    Group = hermes;
+    WorkingDirectory = "/var/lib/hermes/workspace";
     Restart = "always";
     RestartSec = 5;
-
-    # Shared state: files created by the service stay group-writable so
-    # interactive users in the hermes group can read and edit them.
     UMask = "0007";
-
     NoNewPrivileges = true;
     ProtectSystem = "strict";
     ProtectHome = "read-only";
     PrivateTmp = true;
-    ReadWritePaths = [
-      stateDir
-      workingDirectory
-    ];
+    ReadWritePaths = [ "/var/lib/hermes" ];
   };
 
   gatewayArgv = [
@@ -79,17 +44,15 @@ let
     "${cfg.package}/bin/hermes"
     "dashboard"
     "--host"
-    cfg.backendHost
+    cfg.address
     "--port"
-    (toString backendPort)
-    # CAUTION: a service must not try to open a browser when it starts.
+    "9119"
     "--no-open"
   ];
 in
 {
   options.modules.services.hermes-agent = {
     enable = lib.mkEnableOption "hermes-agent";
-
     package = lib.mkOption {
       type = lib.types.package;
       default = defaultPackage;
@@ -101,83 +64,45 @@ in
       '';
       description = "Hermes Agent package. Defaults to the upstream minimal variant plus the configured extras.";
     };
-
     extraDependencyGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ "feishu" ];
       description = "Optional pyproject dependency groups added to the minimal package.";
     };
-
-    backendHost = lib.mkOption {
+    address = lib.mkOption {
       type = lib.types.str;
       default = "127.0.0.1";
-      description = ''
-        Address the dashboard unit binds to. This is deployment state and
-        belongs in the host file; the module keeps only the shape. A
-        non-loopback address requires dashboard basic auth.
-      '';
     };
-
     authFile = lib.mkOption {
-      type = lib.types.str;
-      description = ''
-        Dotenv file with the dashboard credentials —
-        HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH and
-        HERMES_DASHBOARD_BASIC_AUTH_SECRET — handed to the backend as a
-        systemd EnvironmentFile=. Required: without it the dashboard cannot
-        authenticate. The host file points this at a sops-nix secret path;
-        `str`, not `path`, so nothing is copied into the store.
-      '';
-      example = lib.literalExpression ''config.sops.secrets."services/hermes/auth".path'';
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # Same plaintext firewall style as the other service modules.
-    networking.firewall.allowedTCPPorts = [
-      8642
-      backendPort
-    ];
+    networking.firewall.allowedTCPPorts = [ 8642 9119 ];
 
-    users.groups.${group} = { };
-    users.users.${user} = {
+    users.groups.hermes = { };
+    users.users.hermes = {
       isSystemUser = true;
       group = group;
-      home = stateDir;
+      home = /var/lib/hermes;
       createHome = true;
       shell = pkgs.bashInteractive;
-
-      # The cron scheduler launches jobs in a transient `systemd-run --user
-      # --scope`, which needs a systemd user manager for this uid. Without
-      # linger there is no /run/user/<uid> and dispatch fails closed.
       linger = true;
-
       extraGroups = [ "systemd-journal" ];
-      packages = [ pkgs.unstable.rtk ];
     };
 
     systemd.tmpfiles.rules = [
-      "d ${stateDir} 2770 ${user} ${group} - -"
-      "d ${hermesHome} 2770 ${user} ${group} - -"
-      "d ${workingDirectory} 2770 ${user} ${group} - -"
-    ]
-    ++ map (d: "d ${hermesHome}/${d} 2770 ${user} ${group} - -") [
-      "cron"
-      "sessions"
-      "logs"
-      "memories"
-      "plugins"
+      "d /var/lib/hermes 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/cron 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/sessions 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/logs 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/memories 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/plugins 2770 hermes hermes - -"
+      "d /var/lib/hermes/workspace 2770 hermes hermes - -"
     ];
-
-    # Migration only: earlier revisions wrote .managed, config.yaml and .env
-    # from the activation script. Drop the marker so the CLI and the WebUI
-    # treat the home as runtime-owned; config.yaml and .env are left alone.
-    system.activationScripts."hermes-agent-setup" = lib.stringAfter [ "users" ] ''
-      mkdir -p ${hermesHome} ${workingDirectory}
-      chown ${user}:${group} ${stateDir} ${hermesHome} ${workingDirectory}
-      chmod 2770 ${stateDir} ${hermesHome} ${workingDirectory}
-      rm -f ${hermesHome}/.managed
-    '';
 
     systemd.services.hermes-agent = {
       description = "Hermes Agent Gateway";
@@ -190,11 +115,6 @@ in
         "network-online.target"
         "linger-users.service"
       ];
-
-      # The cron scheduler launches jobs in a transient `systemd-run --user
-      # --scope`; the gateway resolves the user bus once at startup, so a bus
-      # that appears later is a bus this process never sees. Bounded and
-      # non-fatal: a gateway without cron beats no gateway.
       preStart = ''
         for _ in $(seq 1 50); do
           [ -S "/run/user/$(id -u)/bus" ] && break
@@ -205,9 +125,17 @@ in
                "restart-safe cron dispatch will fail for the life of this process" >&2
         fi
       '';
-
-      environment = unitEnvironment;
-      path = unitPath;
+      environment = {
+        HOME = "/var/lib/hermes";
+        HERMES_HOME = "/var/lib/hermes/.hermes"e;
+        HERMES_MANAGED = "false";
+      };
+      path = [
+        cfg.package
+        pkgs.bash
+        pkgs.coreutils
+        pkgs.git
+      ];
       serviceConfig = serviceConfig // {
         ExecStart = lib.escapeShellArgs gatewayArgv;
       };
