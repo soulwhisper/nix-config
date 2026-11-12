@@ -10,11 +10,21 @@ let
 
   hermesPackages = inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system};
 
+  # Upstream keeps its own locked nixpkgs, so its Python is a different build
+  # from ours. Plugin packages must be built with that interpreter or
+  # requiredPythonModules drops them silently (it compares pythonModule).
+  hermesPythonPackages =
+    inputs.hermes-agent.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.python314.pkgs;
+  hindsight-client = hermesPythonPackages.callPackage ./hindsight-client.nix {
+    aiohttp-retry = hermesPythonPackages.callPackage ./aiohttp-retry.nix { };
+  };
+
   # Upstream publishes the package only in its own flake (not nixpkgs).
   # Stay on the minimal variant and add Feishu deps explicitly: `full`
   # pulls many optional integrations that are not needed here.
   defaultPackage = hermesPackages.minimal.override {
     extraDependencyGroups = cfg.extraDependencyGroups;
+    extraPythonPackages = [ hindsight-client ];
     version = "0.23.1";
     # The tarball input carries no git metadata; keep the release stamp intact.
     rev = "3b421578588243f920886e6fe79a6faa87ea026e";
@@ -107,7 +117,7 @@ in
       "d /var/lib/hermes/workspace 2770 hermes hermes - -"
     ];
 
-    systemd.services.hermes-agent = {
+    systemd.services.hermes-gateway = {
       description = "Hermes Agent Gateway";
       wantedBy = [ "multi-user.target" ];
       after = [
@@ -132,6 +142,7 @@ in
         HOME = "/var/lib/hermes";
         HERMES_HOME = "/var/lib/hermes/.hermes";
         HERMES_MANAGED = "false";
+        HERMES_SUPERVISED_CHILD = "1";
       };
       path = [
         cfg.package
@@ -141,6 +152,10 @@ in
       ];
       serviceConfig = serviceConfig // {
         ExecStart = lib.escapeShellArgs gatewayArgv;
+        # 75 = EX_TEMPFAIL (restart), 78 = EX_CONFIG (park), as in upstream's `gateway install`.
+        RestartForceExitStatus = [ 75 ];
+        SuccessExitStatus = [ 75 ];
+        RestartPreventExitStatus = [ 78 ];
       };
     };
 
