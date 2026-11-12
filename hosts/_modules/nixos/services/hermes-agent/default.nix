@@ -26,14 +26,13 @@ let
   stateDir = "/var/lib/hermes";
   hermesHome = "${stateDir}/.hermes";
   workingDirectory = "${stateDir}/workspace";
-  backendHost = "10.10.0.200";
   backendPort = 9119;
 
   # Hermes owns $HERMES_HOME/config.yaml and $HERMES_HOME/.env at runtime.
   # This module never writes either file: it supplies the units, the
-  # directories and the package. Secrets arrive as systemd EnvironmentFile=
-  # paths, which keeps them out of the store and out of HERMES_HOME.
-  envFiles = map toString cfg.environmentFiles;
+  # directories and the package. The dashboard credentials arrive as a
+  # systemd EnvironmentFile= from a host secret, so nothing is copied into
+  # HERMES_HOME.
 
   unitEnvironment = {
     HOME = stateDir;
@@ -69,8 +68,7 @@ let
       stateDir
       workingDirectory
     ];
-  }
-  // lib.optionalAttrs (envFiles != [ ]) { EnvironmentFile = envFiles; };
+  };
 
   gatewayArgv = [
     "${cfg.package}/bin/hermes"
@@ -81,7 +79,7 @@ let
     "${cfg.package}/bin/hermes"
     "dashboard"
     "--host"
-    backendHost
+    cfg.backendHost
     "--port"
     (toString backendPort)
     # CAUTION: a service must not try to open a browser when it starts.
@@ -110,18 +108,27 @@ in
       description = "Optional pyproject dependency groups added to the minimal package.";
     };
 
-    environmentFiles = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
+    backendHost = lib.mkOption {
+      type = lib.types.str;
+      default = "127.0.0.1";
       description = ''
-        Runtime env files passed to the units as systemd EnvironmentFile=.
-        Use runtime paths only (sops-nix, agenix); a Nix path literal would
-        copy the secret into the world-readable store.
-
-        This is not $HERMES_HOME/.env. Hermes owns that file, and anything
-        `hermes config` or the WebUI writes there survives a rebuild.
+        Address the dashboard unit binds to. This is deployment state and
+        belongs in the host file; the module keeps only the shape. A
+        non-loopback address requires dashboard basic auth.
       '';
-      example = lib.literalExpression ''[ config.sops.templates."hermes-dashboard-env".path ]'';
+    };
+
+    authFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = ''
+        Dotenv file with the dashboard credentials —
+        HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH and
+        HERMES_DASHBOARD_BASIC_AUTH_SECRET — handed to the backend as a
+        systemd EnvironmentFile=. The host file points this at a sops-nix
+        secret path. `str`, not `path`, so nothing is copied into the store.
+      '';
+      example = lib.literalExpression ''config.sops.secrets."services/hermes/auth".path'';
     };
   };
 
@@ -213,9 +220,14 @@ in
       wants = [ "network-online.target" ];
       environment = unitEnvironment;
       path = unitPath;
-      serviceConfig = serviceConfig // {
-        ExecStart = lib.escapeShellArgs backendArgv;
-      };
+      serviceConfig =
+        serviceConfig
+        // {
+          ExecStart = lib.escapeShellArgs backendArgv;
+        }
+        // lib.optionalAttrs (cfg.authFile != null) {
+          EnvironmentFile = [ cfg.authFile ];
+        };
     };
   };
 }

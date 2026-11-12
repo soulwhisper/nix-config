@@ -41,7 +41,11 @@
         vector.enable = true; # ep=:514
 
         # : Agents
-        hermes-agent.enable = true; # native, package pinned v0.23.1
+        hermes-agent = {
+          enable = true; # native, package pinned v0.23.1
+          backendHost = "10.10.0.200"; # deployment: LAN bind for the dashboard
+          authFile = config.sops.secrets."services/hermes/auth".path;
+        };
 
         # : Services migrated to NAS
         versitygw.enable = false; # ep=:9000,9001
