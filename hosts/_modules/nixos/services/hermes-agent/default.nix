@@ -74,7 +74,8 @@ in
       default = "127.0.0.1";
     };
     authFile = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 
