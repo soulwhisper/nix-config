@@ -9,19 +9,7 @@ on:
     paths:
       - "**.nix"
       - "flake.lock"
-      - "**.sops.yaml"
       - "pkgs/**"
-      - "homes/soulwhisper/ssh.pub"
-      - ".github/workflows/nix-build.yaml"
-  push:
-    branches:
-      - main
-    paths:
-      - "**.nix"
-      - "flake.lock"
-      - "**.sops.yaml"
-      - "pkgs/**"
-      - "homes/soulwhisper/ssh.pub"
       - ".github/workflows/nix-build.yaml"
 
 # Notice: nix-darwin needs sudo since 25.05
@@ -35,13 +23,6 @@ concurrency:
 
 jobs:
   nix-build:
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'push'
-        && !startsWith(github.event.head_commit.message, 'Merge pull request')
-        && !contains(github.event.head_commit.message, '[skip ci]')
-      )
     permissions:
       contents: read
       pull-requests: write
