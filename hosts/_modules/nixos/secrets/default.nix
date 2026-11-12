@@ -49,8 +49,9 @@
             };
       };
 
-      # The module merges environmentFiles into $HERMES_HOME/.env at
-      # activation; the basic-auth provider reads these at startup.
+      # The basic-auth provider reads these from the unit environment. The
+      # template is handed to the service as a systemd EnvironmentFile=; it is
+      # never copied into $HERMES_HOME/.env, which Hermes owns at runtime.
       templates."hermes-dashboard-env" = lib.mkIf (config.modules.services.hermes-agent.enable or false) {
         content = ''
           HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH=${
@@ -63,5 +64,13 @@
         ) "hermes-backend.service";
       };
     };
+
+    modules.services.hermes-agent.environmentFiles =
+      lib.mkIf (config.modules.services.hermes-agent.enable or false)
+        (
+          lib.optional (
+            config.modules.services.hermes-agent.backend.mode != "none"
+          ) config.sops.templates."hermes-dashboard-env".path
+        );
   };
 }

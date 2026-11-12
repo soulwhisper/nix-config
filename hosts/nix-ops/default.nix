@@ -42,7 +42,7 @@
 
         # : Agents
         hermes-agent = {
-          enable = true; # native, package pinned v0.22.7
+          enable = true; # native, package pinned v0.23.1
           backend = {
             mode = "dashboard";
             host = "10.10.0.200";
