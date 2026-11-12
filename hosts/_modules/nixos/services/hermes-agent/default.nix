@@ -117,7 +117,7 @@ in
       "d /var/lib/hermes/workspace 2770 hermes hermes - -"
     ];
 
-    systemd.services.hermes-agent = {
+    systemd.services.hermes-gateway = {
       description = "Hermes Agent Gateway";
       wantedBy = [ "multi-user.target" ];
       after = [
@@ -142,6 +142,7 @@ in
         HOME = "/var/lib/hermes";
         HERMES_HOME = "/var/lib/hermes/.hermes";
         HERMES_MANAGED = "false";
+        HERMES_SUPERVISED_CHILD = "1";
       };
       path = [
         cfg.package
@@ -151,6 +152,10 @@ in
       ];
       serviceConfig = serviceConfig // {
         ExecStart = lib.escapeShellArgs gatewayArgv;
+        # 75 = EX_TEMPFAIL (restart), 78 = EX_CONFIG (park), as in upstream's `gateway install`.
+        RestartForceExitStatus = [ 75 ];
+        SuccessExitStatus = [ 75 ];
+        RestartPreventExitStatus = [ 78 ];
       };
     };
 
