@@ -15,10 +15,10 @@ let
   # pulls many optional integrations that are not needed here.
   defaultPackage = hermesPackages.minimal.override {
     extraDependencyGroups = cfg.extraDependencyGroups;
-    version = "0.23.0";
+    version = "0.23.1";
     # The tarball input carries no git metadata; keep the release stamp intact.
-    rev = "2bd378ed1b8d6bf2192cb26e0a55ff3091e6bd19";
-    lastModified = 1793908658;
+    rev = "3b421578588243f920886e6fe79a6faa87ea026e";
+    lastModified = 1794270273;
   };
 in
 {
@@ -35,7 +35,7 @@ in
       defaultText = lib.literalExpression ''
         inputs.hermes-agent.packages.<system>.minimal.override {
           extraDependencyGroups = [ "feishu" ];
-          version = "0.23.0";
+          version = "0.23.1";
         }
       '';
       description = "Hermes Agent package. Defaults to the upstream minimal variant plus the configured extras.";
