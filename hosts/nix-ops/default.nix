@@ -44,7 +44,7 @@
         hermes-agent = {
           enable = true;
           address = "10.10.0.200";
-          authFile = config.sops.secrets."services/hermes/auth".path;
+          authFile = config.sops.secrets."apps/default/auth".path;
         };
 
         # : Services migrated to NAS
