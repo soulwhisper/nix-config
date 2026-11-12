@@ -22,8 +22,8 @@ let
   };
 
   serviceConfig = {
-    User = hermes;
-    Group = hermes;
+    User = "hermes";
+    Group = "hermes";
     WorkingDirectory = "/var/lib/hermes/workspace";
     Restart = "always";
     RestartSec = 5;
@@ -74,19 +74,21 @@ in
       default = "127.0.0.1";
     };
     authFile = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
+      type = lib.types.str;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 8642 9119 ];
+    networking.firewall.allowedTCPPorts = [
+      8642
+      9119
+    ];
 
     users.groups.hermes = { };
     users.users.hermes = {
       isSystemUser = true;
-      group = group;
-      home = /var/lib/hermes;
+      group = "hermes";
+      home = "/var/lib/hermes";
       createHome = true;
       shell = pkgs.bashInteractive;
       linger = true;
@@ -127,7 +129,7 @@ in
       '';
       environment = {
         HOME = "/var/lib/hermes";
-        HERMES_HOME = "/var/lib/hermes/.hermes"e;
+        HERMES_HOME = "/var/lib/hermes/.hermes";
         HERMES_MANAGED = "false";
       };
       path = [
@@ -146,8 +148,17 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
-      environment = unitEnvironment;
-      path = unitPath;
+      environment = {
+        HOME = "/var/lib/hermes";
+        HERMES_HOME = "/var/lib/hermes/.hermes";
+        HERMES_MANAGED = "false";
+      };
+      path = [
+        cfg.package
+        pkgs.bash
+        pkgs.coreutils
+        pkgs.git
+      ];
       serviceConfig = serviceConfig // {
         ExecStart = lib.escapeShellArgs backendArgv;
         EnvironmentFile = [ cfg.authFile ];
