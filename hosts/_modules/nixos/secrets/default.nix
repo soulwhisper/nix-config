@@ -59,18 +59,12 @@
           }
           HERMES_DASHBOARD_BASIC_AUTH_SECRET=${config.sops.placeholder."services/hermes/dashboard_secret"}
         '';
-        restartUnits = lib.optional (
-          config.modules.services.hermes-agent.backend.mode != "none"
-        ) "hermes-backend.service";
+        restartUnits = [ "hermes-backend.service" ];
       };
     };
 
     modules.services.hermes-agent.environmentFiles =
       lib.mkIf (config.modules.services.hermes-agent.enable or false)
-        (
-          lib.optional (
-            config.modules.services.hermes-agent.backend.mode != "none"
-          ) config.sops.templates."hermes-dashboard-env".path
-        );
+        [ config.sops.templates."hermes-dashboard-env".path ];
   };
 }

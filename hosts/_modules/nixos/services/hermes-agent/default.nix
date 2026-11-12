@@ -21,7 +21,13 @@ let
     lastModified = 1794270273;
   };
 
-  hermesHome = "${cfg.stateDir}/.hermes";
+  user = "hermes";
+  group = "hermes";
+  stateDir = "/var/lib/hermes";
+  hermesHome = "${stateDir}/.hermes";
+  workingDirectory = "${stateDir}/workspace";
+  backendHost = "10.10.0.200";
+  backendPort = 9119;
 
   # Hermes owns $HERMES_HOME/config.yaml and $HERMES_HOME/.env at runtime.
   # This module never writes either file: it supplies the units, the
@@ -30,25 +36,26 @@ let
   envFiles = map toString cfg.environmentFiles;
 
   unitEnvironment = {
-    HOME = cfg.stateDir;
+    HOME = stateDir;
     HERMES_HOME = hermesHome;
     HERMES_MANAGED = "false";
   };
 
+  # rtk backs the rtk-rewrite plugin; git and coreutils cover the terminal tool.
   unitPath = [
     cfg.package
+    pkgs.unstable.rtk
     pkgs.bash
     pkgs.coreutils
     pkgs.git
-  ]
-  ++ cfg.extraPackages;
+  ];
 
   serviceConfig = {
-    User = cfg.user;
-    Group = cfg.group;
-    WorkingDirectory = cfg.workingDirectory;
-    Restart = cfg.restart;
-    RestartSec = cfg.restartSec;
+    User = user;
+    Group = group;
+    WorkingDirectory = workingDirectory;
+    Restart = "always";
+    RestartSec = 5;
 
     # Shared state: files created by the service stay group-writable so
     # interactive users in the hermes group can read and edit them.
@@ -56,22 +63,27 @@ let
 
     NoNewPrivileges = true;
     ProtectSystem = "strict";
-    ProtectHome = if cfg.readOnlyHome then "read-only" else false;
+    ProtectHome = "read-only";
     PrivateTmp = true;
     ReadWritePaths = [
-      cfg.stateDir
-      cfg.workingDirectory
+      stateDir
+      workingDirectory
     ];
   }
   // lib.optionalAttrs (envFiles != [ ]) { EnvironmentFile = envFiles; };
 
+  gatewayArgv = [
+    "${cfg.package}/bin/hermes"
+    "gateway"
+  ];
+
   backendArgv = [
     "${cfg.package}/bin/hermes"
-    cfg.backend.mode
+    "dashboard"
     "--host"
-    cfg.backend.host
+    backendHost
     "--port"
-    (toString cfg.backend.port)
+    (toString backendPort)
     # CAUTION: a service must not try to open a browser when it starts.
     "--no-open"
   ];
@@ -98,52 +110,6 @@ in
       description = "Optional pyproject dependency groups added to the minimal package.";
     };
 
-    extraPackages = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      default = [ pkgs.unstable.rtk ];
-      description = "Extra tools on the agent PATH. Defaults to the unstable rtk release.";
-    };
-
-    backend = {
-      mode = lib.mkOption {
-        type = lib.types.enum [
-          "none"
-          "serve"
-          "dashboard"
-        ];
-        default = "none";
-        description = ''
-          `serve` runs the headless JSON-RPC/WebSocket backend used by Hermes
-          Desktop and remote clients. `dashboard` includes the same backend
-          plus the browser admin UI on the same port.
-        '';
-      };
-
-      host = lib.mkOption {
-        type = lib.types.str;
-        default = "127.0.0.1";
-        description = "Backend bind address. Non-loopback requires dashboard auth.";
-      };
-
-      port = lib.mkOption {
-        type = lib.types.port;
-        default = 9119;
-        description = "Backend port.";
-      };
-    };
-
-    stateDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/hermes";
-      description = "Hermes state directory. Contains .hermes/ subdir (HERMES_HOME).";
-    };
-
-    workingDirectory = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/hermes/workspace";
-      description = "Agent working directory and the units' WorkingDirectory.";
-    };
-
     environmentFiles = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -157,56 +123,20 @@ in
       '';
       example = lib.literalExpression ''[ config.sops.templates."hermes-dashboard-env".path ]'';
     };
-
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = "hermes";
-      description = "System user running the units.";
-    };
-
-    group = lib.mkOption {
-      type = lib.types.str;
-      default = "hermes";
-      description = "System group for the state directory and the units.";
-    };
-
-    readOnlyHome = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Expose /home to the services read-only.";
-    };
-
-    extraGroups = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "systemd-journal" ];
-      description = "Extra groups for the hermes user; systemd-journal allows read-only log inspection.";
-    };
-
-    restart = lib.mkOption {
-      type = lib.types.str;
-      default = "always";
-      description = "systemd Restart policy for the Hermes units.";
-    };
-
-    restartSec = lib.mkOption {
-      type = lib.types.int;
-      default = 5;
-      description = "systemd RestartSec for the Hermes units.";
-    };
   };
 
   config = lib.mkIf cfg.enable {
     # Same plaintext firewall style as the other service modules.
     networking.firewall.allowedTCPPorts = [
       8642
-    ]
-    ++ lib.optional (cfg.backend.mode != "none") cfg.backend.port;
+      backendPort
+    ];
 
-    users.groups.${cfg.group} = { };
-    users.users.${cfg.user} = {
+    users.groups.${group} = { };
+    users.users.${user} = {
       isSystemUser = true;
-      group = cfg.group;
-      home = cfg.stateDir;
+      group = group;
+      home = stateDir;
       createHome = true;
       shell = pkgs.bashInteractive;
 
@@ -215,16 +145,16 @@ in
       # linger there is no /run/user/<uid> and dispatch fails closed.
       linger = true;
 
-      extraGroups = cfg.extraGroups;
-      packages = cfg.extraPackages;
+      extraGroups = [ "systemd-journal" ];
+      packages = [ pkgs.unstable.rtk ];
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.stateDir} 2770 ${cfg.user} ${cfg.group} - -"
-      "d ${hermesHome} 2770 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.workingDirectory} 2770 ${cfg.user} ${cfg.group} - -"
+      "d ${stateDir} 2770 ${user} ${group} - -"
+      "d ${hermesHome} 2770 ${user} ${group} - -"
+      "d ${workingDirectory} 2770 ${user} ${group} - -"
     ]
-    ++ map (d: "d ${hermesHome}/${d} 2770 ${cfg.user} ${cfg.group} - -") [
+    ++ map (d: "d ${hermesHome}/${d} 2770 ${user} ${group} - -") [
       "cron"
       "sessions"
       "logs"
@@ -236,9 +166,9 @@ in
     # from the activation script. Drop the marker so the CLI and the WebUI
     # treat the home as runtime-owned; config.yaml and .env are left alone.
     system.activationScripts."hermes-agent-setup" = lib.stringAfter [ "users" ] ''
-      mkdir -p ${hermesHome} ${cfg.workingDirectory}
-      chown ${cfg.user}:${cfg.group} ${cfg.stateDir} ${hermesHome} ${cfg.workingDirectory}
-      chmod 2770 ${cfg.stateDir} ${hermesHome} ${cfg.workingDirectory}
+      mkdir -p ${hermesHome} ${workingDirectory}
+      chown ${user}:${group} ${stateDir} ${hermesHome} ${workingDirectory}
+      chmod 2770 ${stateDir} ${hermesHome} ${workingDirectory}
       rm -f ${hermesHome}/.managed
     '';
 
@@ -272,19 +202,12 @@ in
       environment = unitEnvironment;
       path = unitPath;
       serviceConfig = serviceConfig // {
-        ExecStart = lib.escapeShellArgs [
-          "${cfg.package}/bin/hermes"
-          "gateway"
-        ];
+        ExecStart = lib.escapeShellArgs gatewayArgv;
       };
     };
 
-    systemd.services.hermes-backend = lib.mkIf (cfg.backend.mode != "none") {
-      description =
-        if cfg.backend.mode == "dashboard" then
-          "Hermes Agent web dashboard and desktop backend"
-        else
-          "Hermes Agent backend for Hermes Desktop";
+    systemd.services.hermes-backend = {
+      description = "Hermes Agent web dashboard and desktop backend";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];

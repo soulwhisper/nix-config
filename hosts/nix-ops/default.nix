@@ -41,14 +41,7 @@
         vector.enable = true; # ep=:514
 
         # : Agents
-        hermes-agent = {
-          enable = true; # native, package pinned v0.23.1
-          backend = {
-            mode = "dashboard";
-            host = "10.10.0.200";
-            port = 9119;
-          };
-        };
+        hermes-agent.enable = true; # native, package pinned v0.23.1
 
         # : Services migrated to NAS
         versitygw.enable = false; # ep=:9000,9001
