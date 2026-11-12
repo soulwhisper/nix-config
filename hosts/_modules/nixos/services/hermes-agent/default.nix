@@ -119,14 +119,14 @@ in
     };
 
     authFile = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
+      type = lib.types.str;
       description = ''
         Dotenv file with the dashboard credentials —
         HERMES_DASHBOARD_BASIC_AUTH_PASSWORD_HASH and
         HERMES_DASHBOARD_BASIC_AUTH_SECRET — handed to the backend as a
-        systemd EnvironmentFile=. The host file points this at a sops-nix
-        secret path. `str`, not `path`, so nothing is copied into the store.
+        systemd EnvironmentFile=. Required: without it the dashboard cannot
+        authenticate. The host file points this at a sops-nix secret path;
+        `str`, not `path`, so nothing is copied into the store.
       '';
       example = lib.literalExpression ''config.sops.secrets."services/hermes/auth".path'';
     };
@@ -220,14 +220,10 @@ in
       wants = [ "network-online.target" ];
       environment = unitEnvironment;
       path = unitPath;
-      serviceConfig =
-        serviceConfig
-        // {
-          ExecStart = lib.escapeShellArgs backendArgv;
-        }
-        // lib.optionalAttrs (cfg.authFile != null) {
-          EnvironmentFile = [ cfg.authFile ];
-        };
+      serviceConfig = serviceConfig // {
+        ExecStart = lib.escapeShellArgs backendArgv;
+        EnvironmentFile = [ cfg.authFile ];
+      };
     };
   };
 }
