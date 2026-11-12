@@ -20,15 +20,39 @@ let
     rev = "3b421578588243f920886e6fe79a6faa87ea026e";
     lastModified = 1794270273;
   };
-in
-{
-  imports = [
-    inputs.hermes-agent.nixosModules.default
+
+  serviceConfig = {
+    User = "hermes";
+    Group = "hermes";
+    WorkingDirectory = "/var/lib/hermes/workspace";
+    Restart = "always";
+    RestartSec = 5;
+    UMask = "0007";
+    NoNewPrivileges = true;
+    ProtectSystem = "strict";
+    ProtectHome = "read-only";
+    PrivateTmp = true;
+    ReadWritePaths = [ "/var/lib/hermes" ];
+  };
+
+  gatewayArgv = [
+    "${cfg.package}/bin/hermes"
+    "gateway"
   ];
 
+  backendArgv = [
+    "${cfg.package}/bin/hermes"
+    "dashboard"
+    "--host"
+    cfg.address
+    "--port"
+    "9119"
+    "--no-open"
+  ];
+in
+{
   options.modules.services.hermes-agent = {
     enable = lib.mkEnableOption "hermes-agent";
-
     package = lib.mkOption {
       type = lib.types.package;
       default = defaultPackage;
@@ -40,138 +64,106 @@ in
       '';
       description = "Hermes Agent package. Defaults to the upstream minimal variant plus the configured extras.";
     };
-
     extraDependencyGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ "feishu" ];
       description = "Optional pyproject dependency groups added to the minimal package.";
     };
-
-    extraPackages = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      default = [ pkgs.unstable.rtk ];
-      description = "Extra tools on the agent PATH. Defaults to the unstable rtk release.";
-    };
-
-    backend = {
-      mode = lib.mkOption {
-        type = lib.types.enum [
-          "none"
-          "serve"
-          "dashboard"
-        ];
-        default = "none";
-        description = ''
-          `serve` runs the headless JSON-RPC/WebSocket backend used by Hermes
-          Desktop and remote clients. `dashboard` includes the same backend
-          plus the browser admin UI on the same port.
-        '';
-      };
-
-      host = lib.mkOption {
-        type = lib.types.str;
-        default = "127.0.0.1";
-        description = "Backend bind address. Non-loopback requires dashboard auth.";
-      };
-
-      port = lib.mkOption {
-        type = lib.types.port;
-        default = 9119;
-        description = "Backend port.";
-      };
-    };
-
-    stateDir = lib.mkOption {
+    address = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/hermes";
-      description = "Hermes state directory.";
+      default = "127.0.0.1";
     };
-
-    workingDirectory = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/hermes/workspace";
-      description = "Agent working directory, written to config.yaml as terminal.cwd.";
-    };
-
-    managed = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Set HERMES_MANAGED. False keeps config/env writable for runtime edits.";
-    };
-
-    readOnlyHome = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Expose the home directory read-only to the service.";
-    };
-
-    extraGroups = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "systemd-journal" ];
-      description = "Extra groups for the hermes user; systemd-journal allows read-only log inspection.";
-    };
-
-    restart = lib.mkOption {
-      type = lib.types.str;
-      default = "always";
-      description = "systemd Restart policy for the Hermes units.";
-    };
-
-    restartSec = lib.mkOption {
-      type = lib.types.int;
-      default = 5;
-      description = "systemd RestartSec for the Hermes units.";
+    authFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # Same plaintext firewall style as the other service modules.
     networking.firewall.allowedTCPPorts = [
       8642
-    ]
-    ++ lib.optional (cfg.backend.mode != "none") cfg.backend.port;
+      9119
+    ];
 
-    services.hermes-agent = {
-      enable = true;
-      package = cfg.package;
-      inherit (cfg)
-        extraPackages
-        stateDir
-        workingDirectory
-        restart
-        restartSec
-        ;
-      backend = {
-        inherit (cfg.backend) mode host port;
+    users.groups.hermes = { };
+    users.users.hermes = {
+      isSystemUser = true;
+      group = "hermes";
+      home = "/var/lib/hermes";
+      createHome = true;
+      shell = pkgs.bashInteractive;
+      linger = true;
+      extraGroups = [ "systemd-journal" ];
+    };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/hermes 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/cron 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/sessions 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/logs 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/memories 2770 hermes hermes - -"
+      "d /var/lib/hermes/.hermes/plugins 2770 hermes hermes - -"
+      "d /var/lib/hermes/workspace 2770 hermes hermes - -"
+    ];
+
+    systemd.services.hermes-agent = {
+      description = "Hermes Agent Gateway";
+      wantedBy = [ "multi-user.target" ];
+      after = [
+        "network-online.target"
+        "linger-users.service"
+      ];
+      wants = [
+        "network-online.target"
+        "linger-users.service"
+      ];
+      preStart = ''
+        for _ in $(seq 1 50); do
+          [ -S "/run/user/$(id -u)/bus" ] && break
+          sleep 0.2
+        done
+        if [ ! -S "/run/user/$(id -u)/bus" ]; then
+          echo "hermes-agent: no user bus at /run/user/$(id -u)/bus after 10s;" \
+               "restart-safe cron dispatch will fail for the life of this process" >&2
+        fi
+      '';
+      environment = {
+        HOME = "/var/lib/hermes";
+        HERMES_HOME = "/var/lib/hermes/.hermes";
+        HERMES_MANAGED = "false";
+      };
+      path = [
+        cfg.package
+        pkgs.bash
+        pkgs.coreutils
+        pkgs.git
+      ];
+      serviceConfig = serviceConfig // {
+        ExecStart = lib.escapeShellArgs gatewayArgv;
       };
     };
 
-    # Dashboard basic auth: the username is non-secret, while the password
-    # and session-signing secret arrive through the sops template above.
-    services.hermes-agent.settings.dashboard.basic_auth.username = "admin";
-    services.hermes-agent.environmentFiles = [
-      config.sops.templates."hermes-dashboard-env".path
-    ];
-
-    # Keep config.yaml/.env editable at runtime. Nix-managed keys still
-    # override on activation, but CLI writes are not blocked.
-    systemd.services = lib.mkMerge [
-      {
-        hermes-agent = {
-          environment.HERMES_MANAGED = lib.mkForce (if cfg.managed then "true" else "false");
-          serviceConfig.ProtectHome = lib.mkForce (if cfg.readOnlyHome then "read-only" else false);
-        };
-      }
-      (lib.mkIf (cfg.backend.mode != "none") {
-        hermes-backend = {
-          environment.HERMES_MANAGED = lib.mkForce (if cfg.managed then "true" else "false");
-          serviceConfig.ProtectHome = lib.mkForce (if cfg.readOnlyHome then "read-only" else false);
-        };
-      })
-    ];
-
-    users.users.hermes = lib.mkIf config.services.hermes-agent.createUser {
-      extraGroups = cfg.extraGroups;
+    systemd.services.hermes-backend = {
+      description = "Hermes Agent web dashboard and desktop backend";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      environment = {
+        HOME = "/var/lib/hermes";
+        HERMES_HOME = "/var/lib/hermes/.hermes";
+        HERMES_MANAGED = "false";
+      };
+      path = [
+        cfg.package
+        pkgs.bash
+        pkgs.coreutils
+        pkgs.git
+      ];
+      serviceConfig = serviceConfig // {
+        ExecStart = lib.escapeShellArgs backendArgv;
+        EnvironmentFile = [ cfg.authFile ];
+      };
     };
   };
 }

@@ -14,6 +14,10 @@
           owner = config.users.users.appuser.name;
           restartUnits = [ "gatus.service" ];
         };
+        "apps/default/auth" = {
+          owner = config.users.users.hermes.name;
+          restartUnits = [ "hermes-backend.service" ];
+        };
       };
     };
   };

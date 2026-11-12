@@ -42,12 +42,9 @@
 
         # : Agents
         hermes-agent = {
-          enable = true; # native, package pinned v0.22.7
-          backend = {
-            mode = "dashboard";
-            host = "10.10.0.200";
-            port = 9119;
-          };
+          enable = true;
+          address = "10.10.0.200";
+          authFile = config.sops.secrets."apps/default/auth".path;
         };
 
         # : Services migrated to NAS
