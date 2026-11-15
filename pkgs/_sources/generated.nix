@@ -31,15 +31,15 @@
   };
   dots-hyprland = {
     pname = "dots-hyprland";
-    version = "cb1c428bf841dabccff1b126904047c28e89ba8c";
+    version = "21733c3ca7f4edc20faafedea844dc96002c6f7f";
     src = fetchFromGitHub {
       owner = "end-4";
       repo = "dots-hyprland";
-      rev = "cb1c428bf841dabccff1b126904047c28e89ba8c";
+      rev = "21733c3ca7f4edc20faafedea844dc96002c6f7f";
       fetchSubmodules = false;
-      sha256 = "sha256-Yt87f7uf2qz1ZTRhWvqZ6h6ACvHagkzlm5EuNK00gnE=";
+      sha256 = "sha256-MgzaxrJ4TdnOJUchx2Txfe8PuItx82KVSn5ojyq6fxY=";
     };
-    date = "2026-11-08";
+    date = "2026-11-15";
   };
   inir = {
     pname = "inir";
