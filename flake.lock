@@ -93,14 +93,14 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1794270273,
-        "narHash": "sha256-wGv+kNpiOGa1k/QxN7njXSF3wmlwPGtQ02Frnp6hP18=",
+        "lastModified": 1794857325,
+        "narHash": "sha256-IgtyKYVzRbDmeyMuRqSkyV9ev+4tx2Qcg8QRvJkoSS8=",
         "type": "tarball",
-        "url": "https://github.com/NousResearch/hermes-agent/archive/3b421578588243f920886e6fe79a6faa87ea026e.tar.gz"
+        "url": "https://github.com/NousResearch/hermes-agent/archive/ae2a81ccc00e9b7c06301523e5bb09608397149c.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/NousResearch/hermes-agent/archive/3b421578588243f920886e6fe79a6faa87ea026e.tar.gz"
+        "url": "https://github.com/NousResearch/hermes-agent/archive/ae2a81ccc00e9b7c06301523e5bb09608397149c.tar.gz"
       }
     },
     "home-manager": {
