@@ -12,7 +12,7 @@
     ./secrets.nix
   ];
 
-  # spec: 4C8G, 1TB, ESXi VM;
+  # spec: 4C8G, 1TB, SmartX VM;
 
   config = {
     # This is a must if "/home" is isolated from "/", for sops.
