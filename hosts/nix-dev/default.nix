@@ -30,7 +30,11 @@
 
         # : Networking
         easytier.networks = [
-          "172.19.82.0/24"
+          "172.19.161.0/24"
+          "172.19.162.0/24"
+          "172.19.163.0/24"
+          "172.19.164.0/24"
+          "172.19.165.0/24"
         ];
         tailscale.enable = true;
 
@@ -52,7 +56,7 @@
           enable = false; # all_squash = 2000:2000
           exports.default = {
             path = "/var/lib/shared";
-            subnet = "172.19.82.0/24";
+            subnet = "172.19.162.0/24";
           };
         };
       };
