@@ -2,7 +2,8 @@
   hostname,
   lib,
   ...
-}: {
+}:
+{
   config = {
     networking = {
       hostName = hostname;
@@ -10,13 +11,14 @@
     };
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "ens192";
+      # SmartX virtio NICs enumerate as enp*/ens*; ens192 was the ESXi vmxnet3.
+      matchConfig.Name = "en*";
       address = [
-        "172.19.82.10/24"
+        "172.19.162.10/24"
       ];
       routes = [
         {
-          Gateway = "172.19.82.1";
+          Gateway = "172.19.162.1";
           GatewayOnLink = true;
         }
       ];
