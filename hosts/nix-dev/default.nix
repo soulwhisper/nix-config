@@ -19,15 +19,13 @@
     fileSystems."/home".neededForBoot = true;
 
     # Replaced by the vendor SMTX VMTools agent below.
-    services.qemuGuest.enable = false;
+    # mkdir -p /mnt/iso && mount -o loop /dev/sr0 /mnt/iso
+    # services.qemuGuest.enable = true;
     # virtualisation.vmware.guest.enable = true;
 
     modules = {
       filesystems.xfs.enable = true;
       services = {
-        # : Virtualization
-        "smartx-agent".enable = true;
-
         adguard.enable = true;
         caddy.enable = true;
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
@@ -46,6 +44,9 @@
         scrutiny.enable = false;
         smartd.enable = false;
         nut.enable = false;
+
+        # : Virtualization
+        smartx-agent.enable = true;
 
         # : Main
         versitygw.enable = true; # ep=:9000,9001
