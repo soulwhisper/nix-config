@@ -18,8 +18,8 @@
     # This is a must if "/home" is isolated from "/", for sops.
     fileSystems."/home".neededForBoot = true;
 
-    # services.qemuGuest.enable = true;
-    virtualisation.vmware.guest.enable = true;
+    services.qemuGuest.enable = true;
+    # virtualisation.vmware.guest.enable = true;
 
     modules = {
       filesystems.xfs.enable = true;
