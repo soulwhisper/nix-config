@@ -7,6 +7,16 @@ Module sources live in `hosts/_modules/nixos/services/`.
 
 - All `pip3`-installed Python tooling is replaced by `pkgs.unstable.uv`.
 
+## SmartX agent
+
+- `modules.services."smartx-agent"` replaces `qemu-guest-agent` on SmartX VMs;
+  `services.qemuGuest` must stay disabled (the module asserts this).
+- The SMTX VMTools ISO must be mounted at `/mnt/iso`. The warmup step extracts
+  the Linux payload into `/var/lib/smartx-agent` and exposes it at `/opt/svt`,
+  which is where HCI reads `VERSION` and checks the agent process.
+- `ip-manager` links against libnm and expects NetworkManager. This host uses
+  systemd-networkd, so platform-driven network changes may not work.
+
 ## EasyTier
 
 - Servers run via systemd with a sops-provided config file; clients use the GUI.

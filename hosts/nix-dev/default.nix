@@ -18,7 +18,9 @@
     # This is a must if "/home" is isolated from "/", for sops.
     fileSystems."/home".neededForBoot = true;
 
-    services.qemuGuest.enable = true;
+    # Replaced by the vendor SMTX VMTools agent below.
+    # mkdir -p /mnt/iso && mount -o loop /dev/sr0 /mnt/iso
+    # services.qemuGuest.enable = true;
     # virtualisation.vmware.guest.enable = true;
 
     modules = {
@@ -42,6 +44,9 @@
         scrutiny.enable = false;
         smartd.enable = false;
         nut.enable = false;
+
+        # : Virtualization
+        smartx-agent.enable = true;
 
         # : Main
         versitygw.enable = true; # ep=:9000,9001
