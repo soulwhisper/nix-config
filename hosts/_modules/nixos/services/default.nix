@@ -23,6 +23,7 @@
     ./scrutiny
     ./sftpgo
     ./smartd
+    ./smartx-agent
     ./tailscale
     ./talos-api
     ./unifi-server

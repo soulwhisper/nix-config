@@ -18,12 +18,16 @@
     # This is a must if "/home" is isolated from "/", for sops.
     fileSystems."/home".neededForBoot = true;
 
-    services.qemuGuest.enable = true;
+    # Replaced by the vendor SMTX VMTools agent below.
+    services.qemuGuest.enable = false;
     # virtualisation.vmware.guest.enable = true;
 
     modules = {
       filesystems.xfs.enable = true;
       services = {
+        # : Virtualization
+        "smartx-agent".enable = true;
+
         adguard.enable = true;
         caddy.enable = true;
         caddy.authFile = config.sops.secrets."networking/cloudflare/auth".path;
