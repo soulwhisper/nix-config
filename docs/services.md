@@ -14,8 +14,16 @@ Module sources live in `hosts/_modules/nixos/services/`.
 - The SMTX VMTools ISO must be mounted at `/mnt/iso`. The warmup step extracts
   the Linux payload into `/var/lib/smartx-agent` and exposes it at `/opt/svt`,
   which is where HCI reads `VERSION` and checks the agent process.
+- HCI uploads and executes `guest_utils.1.0.0.sh` /
+  `guest_get_static_data.1.0.0.sh` as `/bin/bash -c ...`. NixOS only provides
+  `/bin/sh`; without a `/bin/bash` symlink every probe fails with ENOENT and
+  HCI cannot collect the VM address. The module creates that symlink via
+  tmpfiles. Its probes also expect the usual `ip`, `ifconfig`, `ps`, `lsblk`
+  commands, which the unit PATH now provides.
 - `ip-manager` links against libnm and expects NetworkManager. This host uses
-  systemd-networkd, so platform-driven network changes may not work.
+  systemd-networkd, so platform-driven network changes may not work. The
+  qemu-ga interface report still carries the addresses, but their config
+  method is reported as `unknown`.
 
 ## EasyTier
 

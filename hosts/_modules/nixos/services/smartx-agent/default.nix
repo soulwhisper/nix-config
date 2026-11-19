@@ -26,6 +26,13 @@ in
       }
     ];
 
+    # HCI runs its guest-side probes as `/bin/bash -c ...`. NixOS only
+    # creates /bin/sh, so every guest-exec fails with ENOENT and HCI never
+    # receives the static VM data (address, gateway, DNS, ...).
+    systemd.tmpfiles.rules = [
+      "L+ /bin/bash - - - - ${pkgs.bashInteractive}/bin/bash"
+    ];
+
     systemd.services."smartx-agent" = {
       description = "SMTX VMTools guest agent";
       aliases = [ "SVT.service" ];
@@ -35,6 +42,8 @@ in
       ];
       bindsTo = [ "dev-virtio\\x2dports-org.qemu.guest_agent.0.device" ];
       after = [ "dev-virtio\\x2dports-org.qemu.guest_agent.0.device" ];
+      # HCI's probes are ordinary distro shell scripts; give them the
+      # same network/process/disk commands a stock Linux would provide.
       path = with pkgs; [
         bash
         coreutils
@@ -44,6 +53,11 @@ in
         gnused
         gnutar
         gzip
+        iproute2
+        net-tools
+        procps
+        systemd
+        util-linux
         which
       ];
       unitConfig = {
