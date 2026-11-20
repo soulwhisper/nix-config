@@ -30,6 +30,7 @@ in
     # mise — runtime version manager; preferred over direnv.
     programs.mise = {
       enable = true;
+      package = pkgs.unstable.mise;
       enableBashIntegration = true;
       enableFishIntegration = true;
       globalConfig = {
@@ -55,6 +56,7 @@ in
         }
         // lib.optionalAttrs (config.modules.kubernetes.enable) {
           "github:home-operations/flate" = "latest";
+          "github:DNSControl/dnscontrol" = "latest";
         };
       };
     };
