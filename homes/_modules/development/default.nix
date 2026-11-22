@@ -53,6 +53,7 @@ in
           prek = "latest";
           "github:can1357/oh-my-pi" = "latest";
           "github:rtk-ai/rtk" = "latest";
+          "aqua:google-antigravity/antigravity-cli" = "latest";
         }
         // lib.optionalAttrs (config.modules.kubernetes.enable) {
           "github:home-operations/flate" = "latest";
