@@ -136,48 +136,48 @@ Filter1xDE: &Filter1xDE '^(?=.*1[xX])(?=.*((?i)🇩🇪|德国|\b(DE|Germany)(\d
 Select:
   &Select {
     type: select,
-    url: "http://connectivitycheck.platform.hicloud.com/generate_204",
+    url: "https://www.gstatic.com/generate_204",
     disable-udp: false,
     hidden: false,
     include-all: true,
   }
-# :: 自动选择 [每 300 秒一次惰性健康检查，容差 50ms，时延超过 2 秒判定为失败，失败 3 次自动触发健康检查]
+# :: 自动选择 [每 300 秒一次惰性健康检查，容差 50ms，时延超过 5 秒判定为失败，失败 3 次自动触发健康检查]
 UrlTest:
   &UrlTest {
     type: url-test,
-    url: "http://connectivitycheck.platform.hicloud.com/generate_204",
+    url: "https://www.gstatic.com/generate_204",
     interval: 300,
     lazy: true,
     tolerance: 50,
-    timeout: 2000,
+    timeout: 5000,
     disable-udp: false,
     max-failed-times: 3,
     hidden: true,
     include-all: true,
   }
-# :: 自动回退 [每 300 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次自动触发健康检查]
+# :: 自动回退 [每 300 秒一次惰性健康检查，时延超过 5 秒判定为失败，失败 3 次自动触发健康检查]
 FallBack:
   &FallBack {
     type: fallback,
-    url: "http://connectivitycheck.platform.hicloud.com/generate_204",
+    url: "https://www.gstatic.com/generate_204",
     interval: 300,
     lazy: true,
-    timeout: 2000,
+    timeout: 5000,
     disable-udp: false,
     max-failed-times: 3,
     hidden: true,
     include-all: true,
   }
-# :: 负载均衡 [每 300 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+# :: 负载均衡 [每 300 秒一次惰性健康检查，时延超过 5 秒判定为失败，失败 3 次则自动触发健康检查]
 LoadBalance:
   &LoadBalance {
     type: load-balance,
-    url: "http://connectivitycheck.platform.hicloud.com/generate_204",
+    url: "https://www.gstatic.com/generate_204",
     interval: 300,
     lazy: true,
     disable-udp: false,
     strategy: consistent-hashing,
-    timeout: 2000,
+    timeout: 5000,
     max-failed-times: 3,
     hidden: true,
     include-all: true,
@@ -190,7 +190,7 @@ proxy-groups:
       name: 节点选择,
       type: select,
       proxies: [智能选择, 手动选择, DIRECT],
-      url: http://connectivitycheck.platform.hicloud.com/generate_204,
+      url: https://www.gstatic.com/generate_204,
       icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png,
     }
 
@@ -211,7 +211,7 @@ proxy-groups:
           🇹🇼 - 手动选择,
           Others - 手动选择,
         ],
-      url: http://connectivitycheck.platform.hicloud.com/generate_204,
+      url: https://www.gstatic.com/generate_204,
       icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Cylink.png,
     }
   - {
@@ -229,7 +229,7 @@ proxy-groups:
           🇩🇪 - Auto,
           🇹🇼 - Auto,
         ],
-      url: http://connectivitycheck.platform.hicloud.com/generate_204,
+      url: https://www.gstatic.com/generate_204,
       icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Urltest.png,
     }
 
