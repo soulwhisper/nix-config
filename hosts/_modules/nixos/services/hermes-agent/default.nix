@@ -25,10 +25,10 @@ let
   defaultPackage = hermesPackages.minimal.override {
     extraDependencyGroups = cfg.extraDependencyGroups;
     extraPythonPackages = [ hindsight-client ];
-    version = "0.23.3";
+    version = "0.23.4";
     # The tarball input carries no git metadata; keep the release stamp intact.
-    rev = "caafe5389ae585ef77387a962aee05b1bcf17029";
-    lastModified = 1795121475;
+    rev = "8fc0374447313e276f6b9a2764bfc750190c966a";
+    lastModified = 1795503854;
   };
 
   serviceConfig = {
@@ -69,7 +69,7 @@ in
       defaultText = lib.literalExpression ''
         inputs.hermes-agent.packages.<system>.minimal.override {
           extraDependencyGroups = [ "feishu" ];
-          version = "0.23.3";
+          version = "0.23.4";
         }
       '';
       description = "Hermes Agent package. Defaults to the upstream minimal variant plus the configured extras.";
