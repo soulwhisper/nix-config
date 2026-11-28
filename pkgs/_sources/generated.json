@@ -139,12 +139,12 @@
             "name": null,
             "owner": "gaboolic",
             "repo": "rime-shuangpin-fuzhuma",
-            "rev": "e2de1d52913325539262951c6784c0ce0611a562",
-            "sha256": "sha256-NS9/JH6e8Jm52rK2ksJ/ElKw/9s3fHKIw4CMRccyGcU=",
+            "rev": "77945a3f4e43b9eb810561041da63fe92930f0b4",
+            "sha256": "sha256-Ii6iRup59uT+SxoLJaCDQmZpZVn3uDFGDmgQZJwaa+w=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "e2de1d52913325539262951c6784c0ce0611a562"
+        "version": "77945a3f4e43b9eb810561041da63fe92930f0b4"
     },
     "talos-api": {
         "cargoLock": null,

@@ -77,13 +77,13 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "e2de1d52913325539262951c6784c0ce0611a562";
+    version = "77945a3f4e43b9eb810561041da63fe92930f0b4";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "e2de1d52913325539262951c6784c0ce0611a562";
+      rev = "77945a3f4e43b9eb810561041da63fe92930f0b4";
       fetchSubmodules = false;
-      sha256 = "sha256-NS9/JH6e8Jm52rK2ksJ/ElKw/9s3fHKIw4CMRccyGcU=";
+      sha256 = "sha256-Ii6iRup59uT+SxoLJaCDQmZpZVn3uDFGDmgQZJwaa+w=";
     };
     date = "2026-11-27";
   };
