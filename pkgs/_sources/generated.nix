@@ -77,15 +77,15 @@
   };
   rime-moqi-yinxing = {
     pname = "rime-moqi-yinxing";
-    version = "48ff71deb9f9626f802ee90e0a2713ed8618c1a4";
+    version = "e2de1d52913325539262951c6784c0ce0611a562";
     src = fetchFromGitHub {
       owner = "gaboolic";
       repo = "rime-shuangpin-fuzhuma";
-      rev = "48ff71deb9f9626f802ee90e0a2713ed8618c1a4";
+      rev = "e2de1d52913325539262951c6784c0ce0611a562";
       fetchSubmodules = false;
-      sha256 = "sha256-deY1gr6fZmQT0acvunDAFM2yehF0rwRUl3H5m+ePgxg=";
+      sha256 = "sha256-NS9/JH6e8Jm52rK2ksJ/ElKw/9s3fHKIw4CMRccyGcU=";
     };
-    date = "2026-11-25";
+    date = "2026-11-27";
   };
   talos-api = {
     pname = "talos-api";
